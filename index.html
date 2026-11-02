@@ -2147,6 +2147,7 @@ body.cloud #aicard{display:none!important}
   .foot .sp{display:none}
   main:has(#foot:not([style*="none"])) #page{padding-bottom:12px}
 }
+.ab-facts .ab-dash{font-style:normal;margin:0 .22em}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -3965,7 +3966,7 @@ R.home=()=>{
   const cta=session?'dashboard':'auth-register',ctaT=session?'Open my page':'Register';
   const kinds=[['Predictable','Clear and predictable','Same layout every time.','check','--brand'],['Paced','Short and quick','Small steps, visible timer.','flame','--coral'],['Readable','Easy to read','Big text, wide spacing.','book','--sky'],['Visual','See everything','Hand signs and captions.','hand','--sun']];
   const steps=[['A short set-up','A grown-up answers about 12 gentle questions. Fonts, sounds, motion and lesson length adjust to match.'],['Learn in calm bursts','Three to five minutes, three choices at most, and only kind feedback.'],['Share progress','The Care Circle turns daily activity into goals that parents, teachers and therapists all see.']];
-  const facts=[['3 – 8','Ages we design for'],['3 – 5','Minutes per lesson'],['3','Choices on screen, at most'],['0','Failure screens or red crosses']];
+  const facts=[['3–8','Ages we design for'],['3–5','Minutes per lesson'],['3','Choices on screen, at most'],['0','Failure screens or red crosses']];
   const pr=[['Calm','Soft colours, quiet sound.'],['Clear','One idea on each screen.'],['Kind','Praise for effort. No red crosses.']];
   const flip=[['01','Set-up',tr('A short set-up'),'About 12 gentle questions.','hello','#1f5c3f','#eafaf1'],['02','Learn',tr('Learn in calm bursts'),'Three to five minutes. Kind feedback only.','read','#17697a','#e8fbff'],['03','Together',tr('Share progress'),'Everyone sees the same goals.','cheer','#a4521f','#fff4e8']];
   const logo=LOGO_SRC?`<img class="ab-logo" src="${LOGO_SRC}" alt="LahLahLearn: three friendly characters" width="520" height="326">`:'';
@@ -3973,7 +3974,7 @@ R.home=()=>{
    <section class="ab-hero"><div class="ab-hc"><span class="ab-chip">For parents, teachers and therapists</span><h1>${sp('Made for the way')} <em>${sp('your child learns.')}</em></h1><p>Calm lessons that adapt to your child.</p>
      <div class="row"><button class="btn sun lg" data-go="${cta}">${ctaT} ${ic('arrow',18)}</button><button class="btn ghost lg" data-go="pricing">See plans</button></div></div>
      <div class="ab-hv">${logo}<span class="ab-fl a">${ic('star',16)} Stars, never scores</span></div></section>
-   <section class="ab-facts rv" aria-label="At a glance">${facts.map(f=>`<div><b>${f[0].split('–').map(n=>`<span data-count="${n}">${n}</span>`).join('–')}</b><span>${f[1]}</span></div>`).join('')}</section>
+   <section class="ab-facts rv" aria-label="At a glance">${facts.map(f=>`<div><b>${f[0].split(/\s*–\s*/).map(n=>`<span data-count="${n}">${n}</span>`).join('<i class="ab-dash" aria-hidden="true">–</i>')}</b><span>${f[1]}</span></div>`).join('')}</section>
    <section class="ab-sec ab-sech"><div class="ab-hd"><span class="ab-ey">A look inside</span><h2 class="kx" data-notr>${tr('Little moments, every day')}</h2></div></section>
    <section class="ab-spiral" id="abspiral" role="region" aria-label="Pictures from inside LahLahLearn"><ul class="sr-only">${spiralCards().map(c=>`<li>${esc(c[1])}: ${esc(c[2])}</li>`).join('')}</ul><p class="ab-sph2">Scroll or drag to turn</p></section>
    <section class="ab-sec ab-sech"><div class="ab-hd"><span class="ab-ey">How it works</span><h2 class="kx" data-notr>${tr('Three simple steps')}</h2></div></section>
