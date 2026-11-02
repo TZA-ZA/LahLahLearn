@@ -2049,6 +2049,90 @@ body.carepro .cc-main{min-width:0}
 body.carepro .cc-body .dh-m{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
 @media (max-width:640px){body.carepro .cc-who{flex-wrap:wrap!important;gap:12px!important}body.carepro .cc-who>.stack{flex:1 1 calc(100% - 70px)}body.carepro .cc-who>.btn{flex:0 0 auto}body.carepro #page[data-r=care] .cc-hero h2{font-size:1.45rem!important;line-height:1.15}body.carepro .cc-hero .cc-av{width:48px!important;height:48px!important}}
 @media (max-width:900px){body.carepro .cc-body{grid-template-columns:minmax(0,1fr)!important}body.carepro .cc-body>.cc-nav{position:static;min-width:0}.cc-list{flex-direction:row;overflow-x:auto;scrollbar-width:none}.cc-list button{width:auto;white-space:nowrap;padding:9px 14px}}
+/* ===== Care Circle: quiet luxury. Ivory paper, pine and brass, Lexend throughout, hairlines instead of boxes and colour tiles ===== */
+body.carepro{--cx-bg:#f4f2ec;--cx-surf:#fffdf9;--cx-line:#e3dfd3;--cx-ink:#1c2520;--cx-mut:#6c746d;--cx-pine:#1e3a2f;--cx-pine-t:#cfdcd2;--cx-brass:#a8843f;background:var(--cx-bg)!important}
+@media (prefers-color-scheme:dark){html:not([data-theme="light"]) body.carepro{--cx-bg:var(--bg);--cx-surf:var(--surf);--cx-line:var(--line);--cx-ink:var(--ink);--cx-mut:var(--muted);--cx-pine:#a9d4ba;--cx-pine-t:#3b5247;--cx-brass:#d6b675}}
+html[data-theme=dark] body.carepro{--cx-bg:var(--bg);--cx-surf:var(--surf);--cx-line:var(--line);--cx-ink:var(--ink);--cx-mut:var(--muted);--cx-pine:#a9d4ba;--cx-pine-t:#3b5247;--cx-brass:#d6b675}
+body.carepro .cc,body.carepro .cc *:not(svg):not(path):not(text){font-family:'Lexend',system-ui,sans-serif!important}
+body.carepro .cc{color:var(--cx-ink)}
+body.carepro .cc .muted,body.carepro .cc small{color:var(--cx-mut)!important}
+/* header: type only, closed by a hairline */
+body.carepro #page[data-r=care] .cc-hero{background:transparent!important;border:0!important;border-bottom:1px solid var(--cx-line)!important;border-radius:0!important;padding:12px 0 30px!important;box-shadow:none!important}
+body.carepro .cc-hero .cc-av{display:none!important}
+body.carepro #page[data-r=care] .cc-hero .muted{font-size:.86rem;letter-spacing:.01em}
+body.carepro #page[data-r=care] .cc-hero h2{font-weight:500!important;font-size:clamp(1.9rem,3.6vw,2.8rem)!important;letter-spacing:-.03em;line-height:1.08;color:var(--cx-ink)!important}
+body.carepro #page[data-r=care] .cc-hero .chip,body.carepro #page[data-r=care] .cc-hero [class*=chip]{background:transparent!important;border:1px solid var(--cx-line)!important;color:var(--cx-mut)!important;font-weight:400!important;font-size:.8rem!important;padding:4px 12px!important}
+body.carepro #page[data-r=care] .cc-hero .btn{border:1px solid var(--cx-line)!important;font-weight:500!important;box-shadow:none!important;color:var(--cx-ink)!important;background:transparent!important}
+body.carepro #page[data-r=care] .cc-hero .btn:hover{border-color:var(--cx-ink)!important}
+/* section list: text with a brass rule on the open one */
+body.carepro .cc-body{margin-top:18px!important;gap:clamp(24px,4vw,56px)!important}
+body.carepro .cc-list{background:transparent;border:0;padding:4px 0;gap:0}
+body.carepro .cc-list button{border-radius:0;padding:12px 16px;font-weight:400;font-size:.95rem;color:var(--cx-mut);box-shadow:inset 1px 0 0 var(--cx-line)}
+body.carepro .cc-list button svg{stroke-width:1.5;opacity:.6}
+body.carepro .cc-list button:hover{background:transparent;color:var(--cx-ink)}
+body.carepro .cc-list button.on{background:transparent;color:var(--cx-ink);font-weight:500;box-shadow:inset 2px 0 0 var(--cx-brass)}
+body.carepro .cc-list button.on svg{color:var(--cx-brass);opacity:1}
+/* greeting */
+body.carepro .dh-top h1{font-weight:500!important;font-size:clamp(1.5rem,2.6vw,2rem)!important;letter-spacing:-.02em}
+body.carepro .dh-top .btn{box-shadow:none!important;font-weight:500!important;border-radius:999px}
+body.carepro .dh-top .btn:not(.pri){background:transparent!important;border:1px solid var(--cx-line)!important;color:var(--cx-ink)!important}
+body.carepro .dh-top .btn.pri{background:var(--cx-pine)!important;color:var(--cx-bg)!important;border-color:var(--cx-pine)!important}
+/* stat cards and panels: paper, hairline, no colour tiles */
+body.carepro .dm,body.carepro .dc,body.carepro .gr-sec{background:var(--cx-surf)!important;border:1px solid var(--cx-line)!important;border-radius:18px!important;box-shadow:none!important}
+body.carepro .dm{padding:22px 22px 20px!important;min-height:0!important}
+body.carepro .dm-h{font-weight:400!important;color:var(--cx-mut)!important;font-size:.88rem}
+body.carepro .dm-h b{font-weight:400!important}
+body.carepro .dm-h span{background:none!important;width:auto!important;height:auto!important;color:var(--cx-brass)!important}
+body.carepro .dm-h span svg{stroke-width:1.5}
+body.carepro .dm-v{font-weight:400!important;font-size:2.7rem!important;letter-spacing:-.04em!important}
+body.carepro .dm-v small{font-weight:400!important}
+body.carepro .dm-s{font-size:.8rem!important}
+body.carepro .dc{padding:22px 24px!important}
+body.carepro .dc.nopad{padding:0!important}
+body.carepro .dc-h h2,body.carepro .dh .dc-h h2{font-weight:500!important;font-size:1.02rem!important;letter-spacing:-.005em}
+body.carepro .dc-h h2::before{display:none!important}
+body.carepro .dc-lg{font-weight:400;color:var(--cx-mut)}
+body.carepro .dc-lg i{background:var(--cx-pine-t)!important;border-radius:2px}body.carepro .dc-lg i.dash{background:none!important;border-top:1.5px dashed var(--cx-brass)!important;border-color:var(--cx-brass)!important}
+body.carepro .dc-st p{font-weight:400!important;font-size:1.9rem!important;letter-spacing:-.03em}
+/* chart in pine, today in brass */
+body.carepro .chart rect{fill:var(--cx-pine-t)}
+body.carepro .chart rect:last-of-type{fill:var(--cx-brass)}
+body.carepro .chart line[stroke-dasharray]{stroke:var(--cx-brass);stroke-width:1.2}
+body.carepro .chart line{stroke:var(--cx-line)}
+body.carepro .chart text{fill:var(--cx-mut)}
+/* skill balance and goals: thin lines */
+body.carepro .dl-bar{height:6px!important;gap:3px!important;border-radius:6px!important}
+body.carepro .dl-bar i{border-radius:3px!important;opacity:.75}
+body.carepro .dl-n{font-weight:400!important;opacity:1!important}
+body.carepro .dl-n i{width:7px!important;height:7px!important;border-radius:50%!important}
+body.carepro .dl-d{border-top:1px solid var(--cx-line)!important}
+body.carepro .dl-r b{font-weight:500}
+body.carepro .dg-t{font-weight:400!important}
+body.carepro .dg-m{height:3px!important;background:var(--cx-line)!important}
+body.carepro .dg-m u{top:-4px;bottom:-4px;width:1px}
+body.carepro .dt-a{background:transparent!important;border:1px solid var(--cx-line);border-radius:50%!important;color:var(--cx-brass)}
+body.carepro .dt-r b{font-weight:500}
+body.carepro .dt-n{background:transparent!important}
+body.carepro .dtab td{font-weight:400!important}
+body.carepro .dp{background:transparent!important;border:1px solid var(--cx-line);font-weight:400!important}
+body.carepro .cc-ttl{font-weight:500!important;letter-spacing:-.02em}
+body.carepro .cc-ttl{font-size:clamp(1.6rem,2.6vw,2.2rem)!important}
+body.carepro .cc h3{font-weight:500!important}
+body.carepro .cc label b,body.carepro .cc b.small{font-weight:500!important}
+body.carepro .cc .btn{box-shadow:none!important;font-weight:500!important}
+body.carepro .cc .btn.pri{background:var(--cx-pine)!important;border-color:var(--cx-pine)!important;color:var(--cx-bg)!important}
+body.carepro .cc .btn:not(.pri){background:transparent!important;border:1px solid var(--cx-line)!important;color:var(--cx-ink)!important}
+body.carepro .cc .in{border:1px solid var(--cx-line)!important;border-radius:12px!important;background:transparent!important;box-shadow:none!important}
+body.carepro .cc .in:focus{border-color:var(--cx-pine)!important;outline:none}
+body.carepro .vs-d{background:transparent!important;border:1px solid var(--cx-line);border-radius:50%!important;color:var(--cx-brass)!important;font-weight:400!important}
+body.carepro .vs-r{border-bottom-color:var(--cx-line)!important}
+body.carepro .cg-a{border:1px solid var(--cx-line)!important;border-radius:14px!important;background:transparent!important;font-weight:400}
+body.carepro .cg-a b{font-weight:500}
+body.carepro .cg-a.on{border-color:var(--cx-pine)!important;box-shadow:inset 0 0 0 1px var(--cx-pine)}
+body.carepro .cg-a span{background:transparent!important;border:1px solid var(--cx-line);color:var(--cx-mut)!important}
+body.carepro .cg-a.on span{border-color:var(--cx-brass);color:var(--cx-brass)!important}
+body.carepro .gr-tip{border-radius:12px}
+@media (max-width:900px){body.carepro .cc-list button{box-shadow:inset 0 -1px 0 var(--cx-line)}body.carepro .cc-list button.on{box-shadow:inset 0 -2px 0 var(--cx-brass)}}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
