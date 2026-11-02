@@ -2022,6 +2022,33 @@ body:not(.noanim) .pkcard.on .pkart{animation:pkb 2.4s ease-in-out infinite}@key
 .obsat-pv i{flex:none;width:30px;height:30px;border-radius:50%;align-self:center}
 .obsat-pre{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .obsat-pre .tile{text-align:center;justify-content:center}
+
+/* ===== Care Circle, calmer: plain background, light header, a simple section list instead of the wheel ===== */
+body.carepro #scenefx,body.carepro #bgfx{display:none!important}
+body.carepro .cc-tabs{display:none!important}
+body.carepro #page[data-r=care] .cc-hero{background:var(--surf)!important;color:var(--ink)!important;border:1px solid var(--line)!important;box-shadow:none!important;padding:20px 24px!important}
+body.carepro #page[data-r=care] .cc-hero::after,body.carepro #page[data-r=care] .cc-hero::before{display:none!important}
+body.carepro #page[data-r=care] .cc-hero h2,body.carepro #page[data-r=care] .cc-hero .stack{color:var(--ink)!important}
+body.carepro #page[data-r=care] .cc-hero .muted{color:var(--muted)!important}
+body.carepro #page[data-r=care] .cc-hero .btn{background:transparent!important;color:var(--ink)!important;border:1px solid var(--line)!important;backdrop-filter:none!important}
+body.carepro #page[data-r=care] .cc-hero .btn:hover{background:var(--surf2)!important}
+body.carepro #page[data-r=care] .cc-hero .chip,body.carepro #page[data-r=care] .cc-hero [class*=chip]{background:var(--surf2)!important;color:var(--ink)!important;border:0!important}
+body.carepro .cc-body>.cc-nav{display:block!important;position:sticky;top:92px}
+.cc-list{display:flex;flex-direction:column;gap:2px;padding:8px;border-radius:20px;background:var(--surf);border:1px solid var(--line)}
+.cc-list button{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;border:0;border-radius:12px;background:none;color:var(--muted);font:600 .95rem var(--f-b);text-align:left;cursor:pointer;transition:background .2s,color .2s}
+.cc-list button svg{flex:none;opacity:.75}
+.cc-list button:hover{background:var(--surf2);color:var(--ink)}
+.cc-list button.on{background:color-mix(in srgb,var(--brand) 13%,var(--surf));color:var(--brand)}
+.cc-list button.on svg{opacity:1}
+.cc-list button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+body.carepro .dm::before,body.carepro .dm::after{display:none!important}
+body.carepro .dm{border:1px solid var(--line)!important;box-shadow:none!important;border-radius:20px!important}
+body.carepro .dm-b{display:none!important}
+body.carepro .dc{box-shadow:none!important}
+body.carepro .cc-main{min-width:0}
+body.carepro .cc-body .dh-m{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+@media (max-width:640px){body.carepro .cc-who{flex-wrap:wrap!important;gap:12px!important}body.carepro .cc-who>.stack{flex:1 1 calc(100% - 70px)}body.carepro .cc-who>.btn{flex:0 0 auto}body.carepro #page[data-r=care] .cc-hero h2{font-size:1.45rem!important;line-height:1.15}body.carepro .cc-hero .cc-av{width:48px!important;height:48px!important}}
+@media (max-width:900px){body.carepro .cc-body{grid-template-columns:minmax(0,1fr)!important}body.carepro .cc-body>.cc-nav{position:static;min-width:0}.cc-list{flex-direction:row;overflow-x:auto;scrollbar-width:none}.cc-list button{width:auto;white-space:nowrap;padding:9px 14px}}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -3291,7 +3318,8 @@ function careLayout(cc,hero,tb){
   const tabs=$$('button',tb).map(b=>[b.dataset.k,b.textContent.trim()]);
   const body=document.createElement('div');body.className='cc-body';
   const nav=document.createElement('aside');nav.className='cc-nav';
-  nav.innerHTML=`<div class="cc-navin"><span class="cc-navk">Sections</span><div class="cc-wheel" id="ccwheel"></div><span class="cc-navh">${ic('arrow',13)} Scroll, drag or tap</span></div>`;
+  const NI={overview:'home',strengths:'star',report:'chart',visits:'clock',team:'users',settings:'gear'};
+  nav.innerHTML=`<nav class="cc-list" aria-label="Care Circle sections">${tabs.map(([k,l])=>`<button data-k="${k}" class="${k===careTab?'on':''}" ${k===careTab?'aria-current="page"':''}>${ic(NI[k]||'arrow',18)}<span>${l}</span></button>`).join('')}</nav>`;
   const main=document.createElement('div');main.className='cc-main';
   [...cc.children].forEach(c=>{if(c!==hero&&c!==tb)main.appendChild(c)});
   body.append(nav,main);cc.appendChild(body);cc.dataset.tab=careTab;
@@ -3299,10 +3327,8 @@ function careLayout(cc,hero,tb){
   $$('p',main).forEach(q=>{if(/stays on this device/.test(q.textContent))q.textContent='The portal locks itself after 15 minutes.'});
   const tt={overview:'Overview',strengths:'Strengths',report:'Weekly report',visits:'Check-ups',team:'Care team',settings:'Settings'};
   if(careTab!=='overview'){const h=document.createElement('h2');h.className='cc-ttl';h.textContent=tt[careTab]||'';main.prepend(h);const f=$('.gr-sh h3',main);if(f&&f.textContent.trim()===h.textContent){const sh=f.closest('.gr-sh');if(sh)sh.remove()}}
-  if(careWheel){try{careWheel.destroy()}catch(e){}}
-  const idx=Math.max(0,tabs.findIndex(t=>t[0]===careTab));
-  careWheel=optionWheel($('#ccwheel',nav),{items:tabs.map(t=>t[1]),defaultSelected:idx,textColor:'#8b958f',activeColor:'#ffffff',side:'left',fontSize:1.45,spacing:1.7,curve:.6,tilt:4,blur:.35,fade:.13,smoothing:340,inset:26,loop:true,draggable:true,soundVolume:.5,label:'Care Circle sections',
-    onChange:i=>{clearTimeout(careWheelT);careWheelT=setTimeout(()=>{const k=tabs[i][0];if(k!==careTab){careTab=k;const y=scrollY;careDraw();try{scrollTo(0,y)}catch(e){}}},320)}});
+  if(careWheel){try{careWheel.destroy()}catch(e){}careWheel=null}
+  $$('.cc-list button',nav).forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(k===careTab)return;careTab=k;const y=scrollY;careDraw();try{scrollTo(0,Math.min(y,($('.cc-body')||{}).offsetTop||0))}catch(e){}});
 }
 function careUnpro(){document.body.classList.remove('carepro');if(careWheel){try{careWheel.destroy()}catch(e){}careWheel=null}}
 function lpScene(){
@@ -3690,9 +3716,9 @@ function obDraw(){
   if((q.type==='toggles'||q.type==='sat')&&!a.prefs)a.prefs=defaultPrefs(a);
   $('#page').innerHTML=`<div class="ob"><div class="obtop"><i style="width:${(OB.i/n)*100}%"></i></div>
    <div class="wrap obbody"><div class="obq ${OB.back?'back':''}">
-    <div class="row between"><span class="chip">Question ${OB.i+1} of ${n}</span>${OB.i?`<button class="btn sm ghost" id="obPrev">Back</button>`:''}</div>
+    <div class="row between"><span class="chip">Question ${OB.i+1} of ${n}</span><button class="btn sm ghost" id="obSkip" ${(q.type==='text'||q.type==='name3')?'style="visibility:hidden"':''}>Skip</button></div>
     <h2>${esc(q.q)}</h2>${q.h?`<p class="muted" style="margin-top:-8px">${esc(q.h)}</p>`:''}<div id="obin"></div></div></div>
-   <div class="wrap obfoot"><div class="row between" style="width:min(780px,100%);margin-inline:auto"><button class="btn ghost" id="obSkip" ${(q.type==='text'||q.type==='name3')?'style="visibility:hidden"':''}>Skip</button><button class="btn pri lg" id="obNext">${OB.i===n-1?'Finish':'Next'} ${ic('arrow',18)}</button></div></div></div>`;
+   <div class="wrap obfoot"><div class="row between" style="width:min(780px,100%);margin-inline:auto"><button class="btn ghost" id="obPrev" ${OB.i?'':'style="visibility:hidden"'}>Back</button><button class="btn pri lg" id="obNext">${OB.i===n-1?'Finish':'Next'} ${ic('arrow',18)}</button></div></div></div>`;
   const box=$('#obin');
   if(q.type==='text'){box.innerHTML=`<input class="in" id="obt" placeholder="Type a name" value="${esc(a.name||'')}" autocomplete="off" aria-label="Child's name">`;const i=$('#obt');i.oninput=()=>{a.name=i.value;$('#obNext').disabled=!obValid(q)};setTimeout(()=>i.focus(),400)}
   if(q.type==='name3'){
