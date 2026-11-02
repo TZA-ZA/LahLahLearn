@@ -1153,7 +1153,7 @@ body.carepro .cc-tabs{display:none}
 .lp-end h2{color:inherit;max-width:14ch;font-size:clamp(2.2rem,6vw,4.8rem);line-height:1}
 .lp-end .pp2{position:absolute;bottom:-4%;width:clamp(120px,15vw,190px);aspect-ratio:320/392}
 .lp-end .pp2.l{left:clamp(4px,5vw,80px)}.lp-end .pp2.r{right:clamp(4px,5vw,80px);transform:scaleX(-1)}
-.lp-end .pp2 svg{width:100%;height:100%;overflow:visible}
+.lp-end .pp2 svg{width:100%;height:100%;overflow:visible}.pp2 img{width:100%;height:100%;object-fit:contain;object-position:50% 100%;display:block;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))}
 .lp-end::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 50% 120%,rgba(255,255,255,.25),transparent 55%);pointer-events:none}
 .lp-foot{display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:space-between;align-items:center;padding-block:40px;color:var(--muted);font-size:.92rem}
 .lp-foot nav{display:flex;gap:24px;flex-wrap:wrap}.lp-foot button{color:inherit;font-weight:700}.lp-foot button:hover{color:var(--brand)}
@@ -1958,6 +1958,62 @@ body:not(.noanim) .pkcard.on .pkart{animation:pkb 2.4s ease-in-out infinite}@key
 .lgred{background:#d63a3a!important;color:#fff!important;border-color:#b32626!important;box-shadow:0 3px 0 #a12020}
 .lgred:hover{background:#e24848!important}.lgred:active{transform:translateY(2px);box-shadow:0 1px 0 #a12020}
 .lgico{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:rgba(214,58,58,.14);color:#d63a3a}
+
+.lp-end .pp2.l2,.lp-end .pp2.r2{aspect-ratio:308/227;width:clamp(110px,12vw,160px);bottom:-1px}
+/* ===== Plans page: one quiet price sheet, Family as the single pine panel ===== */
+.px{--px-pine:#1e3a2f;--px-pine2:#264a3c;--px-brass:#b8924a;--px-ivory:#f4efe2;max-width:1060px;margin:0 auto;padding:clamp(28px,6vw,72px) clamp(16px,4vw,32px) 40px;display:flex;flex-direction:column;align-items:center;gap:clamp(28px,4vw,44px)}
+.px-head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.px-head h1{font:500 clamp(2.4rem,6vw,4.1rem)/1.02 var(--f-d);letter-spacing:-.025em;margin:0;color:var(--ink)}
+.px-head>p{margin:0;color:var(--muted);font-size:1.05rem}
+.px-cyc{display:inline-flex;margin-top:10px;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--surf)}
+.px-cyc button{border:0;background:none;color:var(--muted);font:600 .92rem var(--f-b);padding:9px 20px;border-radius:999px;cursor:pointer;display:inline-flex;gap:8px;align-items:baseline;transition:background .25s,color .25s}
+.px-cyc button small{font-size:.78rem;font-weight:600;color:var(--px-brass)}
+.px-cyc button.on{background:var(--px-pine);color:#fff}.px-cyc button.on small{color:#e3c88f}
+.px-sheet{width:100%;display:grid;grid-template-columns:1fr 1.12fr 1fr;align-items:stretch;border:1px solid var(--line);border-radius:30px;background:var(--surf)}
+.px-col{position:relative;display:flex;flex-direction:column;gap:14px;padding:clamp(26px,3.2vw,40px) clamp(22px,2.8vw,34px)}
+.px-col+.px-col{border-left:1px solid var(--line)}
+.px-col.is-fam{margin:-14px 0;border:0;border-radius:30px;background:linear-gradient(170deg,var(--px-pine2),var(--px-pine) 60%);color:#f1f5ef;box-shadow:0 30px 60px -30px rgba(18,40,30,.55),inset 0 0 0 1px rgba(232,206,150,.35)}
+.px-col.is-fam+.px-col{border-left:0}
+.px-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.px-top h2{font:500 1.45rem var(--f-d);margin:0;letter-spacing:-.01em}
+.px-mark{font:600 .8rem var(--f-b);color:var(--px-brass);border:1px solid color-mix(in srgb,var(--px-brass) 55%,transparent);padding:4px 11px;border-radius:999px}
+.is-fam .px-mark{color:#e3c88f;border-color:rgba(227,200,143,.45)}
+.px-d{margin:0;color:var(--muted);font-size:.95rem;min-height:2.6em}
+.is-fam .px-d,.is-fam .px-sub,.is-fam .px-note{color:#bcd0c3}
+.px-price{display:flex;align-items:flex-start;gap:4px;margin-top:8px}
+.px-price b{font:500 clamp(3.2rem,5.4vw,4.4rem)/.9 var(--f-d);letter-spacing:-.04em}
+.px-rm{font:600 1rem var(--f-d);margin-top:.45em;opacity:.8}
+.px-was{font:500 1rem var(--f-d);margin:.55em 8px 0 0;opacity:.5}
+.px-sub{margin:-4px 0 0;color:var(--muted);font-size:.88rem}
+.px .px-kids.pl-calc{display:flex;align-items:center;gap:6px;padding:0;border:0;border-radius:0;background:none;grid-template-columns:none}
+.px-kids span{font-size:.86rem;color:#bcd0c3;margin-right:auto}
+.px .px-kids .pl-cb{width:38px;height:38px;border-radius:50%;border:1px solid rgba(232,206,150,.4);background:transparent;color:#f1f5ef;font:600 .98rem var(--f-d)}
+.px .px-kids .pl-cb.on{background:#e3c88f;color:var(--px-pine);border-color:#e3c88f}
+.px-btn{margin-top:6px;width:100%;padding:15px 18px;border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:600 1rem var(--f-b);cursor:pointer;transition:background .25s,color .25s}
+.px-btn:hover:not(:disabled){background:var(--ink);color:var(--bg)}
+.px-btn:disabled{opacity:.45;cursor:default}
+.is-fam .px-btn{background:#e3c88f;border-color:#e3c88f;color:#1b2f25}
+.is-fam .px-btn:hover{background:#f0d9a4;color:#1b2f25}
+.px-btn:focus-visible,.px-cyc button:focus-visible,.pl-cb:focus-visible,.px-q summary:focus-visible{outline:2px solid var(--px-brass);outline-offset:3px}
+.px-note{margin:-6px 0 0;text-align:center;font-size:.82rem;color:var(--muted)}
+.px-f{list-style:none;margin:10px 0 0;padding:18px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:11px}
+.is-fam .px-f{border-top-color:rgba(232,206,150,.25)}
+.px-f li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;line-height:1.4}
+.px-f svg{flex:none;margin-top:3px;color:var(--px-brass)}.is-fam .px-f svg{color:#e3c88f}
+.px-sure{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;color:var(--muted);font-size:.95rem}
+.px-sure li{display:flex;align-items:center;gap:10px}.px-sure li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--px-brass)}
+.px-demo{margin:-24px 0 0;font-size:.8rem;color:var(--muted);opacity:.8}
+.px-faq{width:100%;max-width:680px}
+.px-faq h2{font:500 1.8rem var(--f-d);margin:0 0 12px;text-align:center}
+.px-q{border-bottom:1px solid var(--line)}
+.px-q summary{list-style:none;cursor:pointer;padding:18px 34px 18px 0;font-weight:600;position:relative}
+.px-q summary::-webkit-details-marker{display:none}
+.px-q summary::after{content:"";position:absolute;right:6px;top:50%;width:10px;height:10px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:translateY(-70%) rotate(45deg);transition:transform .25s}
+.px-q[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.px-q p{margin:0 0 18px;color:var(--muted);max-width:60ch}
+@media(min-width:861px){.px-col.is-fam{padding-top:calc(clamp(26px,3.2vw,40px) + 14px);padding-bottom:calc(clamp(26px,3.2vw,40px) + 14px)}}
+@media(max-width:860px){.px-sheet{grid-template-columns:1fr;border:0;background:none;gap:14px}.px-col{border:1px solid var(--line)!important;border-radius:26px;background:var(--surf)}.px-col.is-fam{margin:0;order:-1;background:linear-gradient(170deg,var(--px-pine2),var(--px-pine) 60%)}.px-d{min-height:0}}
+@media(prefers-reduced-motion:reduce){.px-cyc button,.px-btn,.px-q summary::after{transition:none}}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -3411,7 +3467,7 @@ R.welcome=()=>{
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-k">Meet the crew</div><h2 class="lp-h2 rv" style="margin-bottom:clamp(28px,5vw,52px)">Friends who learn beside you.</h2>
     <div class="lp-crew"><div class="lp-cm rv"><div class="im" id="lpcpip">${pipSVG()}</div><h3>Pip</h3><p>Our leafy guide, always by your side.</p></div><div class="lp-cm rv" style="--d:1"><div class="im" id="lpcfox">${buddySVG('fox',380,'hello')}</div><h3>Fox</h3><p>A cosy little fox who loves a good story.</p></div><div class="lp-cm rv" style="--d:2"><div class="im" id="lpccld">${buddySVG('cloud',380,'hello')}</div><h3>Cloud</h3><p>A sleepy cloud bunny who is great at calm breaks.</p></div></div></div></section>
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-two"><div><div class="lp-k">For grown-ups</div><h2 class="lp-h2 rv">One calm view for everyone who cares.</h2></div><div class="stack" style="gap:22px"><p class="lp-p rv">The Care Circle turns daily play into clear goals that parents, teachers and therapists can all see. No tests. No scores. Just progress.</p><div class="row rv"><button class="btn pri lg mag" data-go="home">How it works ${ic('arrow',18)}</button><button class="btn lg mag" data-go="pricing">Plans</button></div></div></div></div></section>
-   <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-end rv" id="lpend"><svg class="le-rb" viewBox="0 0 800 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="26"><path d="M50 400a350 350 0 0 1 700 0" stroke="#ff9f8f"/><path d="M84 400a316 316 0 0 1 632 0" stroke="#ffd36b"/><path d="M118 400a282 282 0 0 1 564 0" stroke="#9fe3b2"/><path d="M152 400a248 248 0 0 1 496 0" stroke="#9ccdf2"/><path d="M186 400a214 214 0 0 1 428 0" stroke="#c9b6f2"/></g></svg><svg class="le-sp" viewBox="0 0 100 100" aria-hidden="true">${[[10,20,1],[88,16,.8],[22,62,.7],[78,56,.9],[40,10,.6],[62,12,.7],[50,38,.5]].map(([x,y,k],i)=>`<path class="sk" style="--d:${i*.6}s" transform="translate(${x} ${y}) scale(${k*.13})" d="M0-10L2.6-3.2 10 0 2.6 3.2 0 10-2.6 3.2-10 0-2.6-3.2z"/>`).join('')}</svg><h2 class="le-h"><span>Every child</span> <span>can do this.</span></h2><p style="margin:0;opacity:.92;max-width:38ch">Start free. Learn at a calm, kind pace.</p><button class="btn sun lg mag" data-go="auth-register">Register ${ic('arrow',18)}</button><div class="pp2 l" id="lpe1">${pipSVG('fox')}</div><div class="pp2 l2" id="lpe3">${pipSVG()}</div><div class="pp2 r2" id="lpe4">${pipSVG()}</div><div class="pp2 r" id="lpe2">${pipSVG('cloud')}</div></div>
+   <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-end rv" id="lpend"><svg class="le-rb" viewBox="0 0 800 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="26"><path d="M50 400a350 350 0 0 1 700 0" stroke="#ff9f8f"/><path d="M84 400a316 316 0 0 1 632 0" stroke="#ffd36b"/><path d="M118 400a282 282 0 0 1 564 0" stroke="#9fe3b2"/><path d="M152 400a248 248 0 0 1 496 0" stroke="#9ccdf2"/><path d="M186 400a214 214 0 0 1 428 0" stroke="#c9b6f2"/></g></svg><svg class="le-sp" viewBox="0 0 100 100" aria-hidden="true">${[[10,20,1],[88,16,.8],[22,62,.7],[78,56,.9],[40,10,.6],[62,12,.7],[50,38,.5]].map(([x,y,k],i)=>`<path class="sk" style="--d:${i*.6}s" transform="translate(${x} ${y}) scale(${k*.13})" d="M0-10L2.6-3.2 10 0 2.6 3.2 0 10-2.6 3.2-10 0-2.6-3.2z"/>`).join('')}</svg><h2 class="le-h"><span>Every child</span> <span>can do this.</span></h2><p style="margin:0;opacity:.92;max-width:38ch">Start free. Learn at a calm, kind pace.</p><button class="btn sun lg mag" data-go="auth-register">Register ${ic('arrow',18)}</button><div class="pp2 l" id="lpe1"><img src="assets/img/fox-hello.webp" alt="" draggable="false"></div><div class="pp2 l2" id="lpe3"><img src="assets/img/pip-hello.webp" alt="" draggable="false"></div><div class="pp2 r2" id="lpe4"><img src="assets/img/pip-hello.webp" alt="" draggable="false"></div><div class="pp2 r" id="lpe2"><img src="assets/img/cloud-hello.webp" alt="" draggable="false"></div></div>
     <div class="lp-foot"><span>© LahLahLearn. Calm learning for every child.</span><nav><button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="auth-login">Log in</button></nav></div></div></section></div>`;
   lpArtBake();
   const hero=$('#lphero'),bub=$('#lpbub'),yay=$('#lpyay'),pp=$('#lppip');
@@ -6207,7 +6263,7 @@ function islandBuild(T){
   
   const clock=new T.Clock();let t=0,raf=0,lastNear='',stepAcc=0,stepSide=0;
   let jh=0,jvv=0,air=false;
-  const landPuffs=()=>{if(calmMotion())return;const cl=buddy()==='cloud';for(let i=0;i<4;i++){const pf=puffs[puffI++%puffs.length],a=i/4*6.283+Math.random()*.6;pf.age=0;pf.cl=cl;pf.vx=Math.cos(a)*.9;pf.vz=Math.sin(a)*.9;pf.sp.position.set(me.position.x+Math.cos(a)*.3,.12,me.position.z+Math.sin(a)*.3);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}};
+  const landPuffs=()=>{if(calmMotion())return;const cl=buddy()==='cloud';for(let i=0;i<4;i++){const pf=puffs[puffI++%puffs.length],a=i/4*6.283+Math.random()*.6;pf.age=0;pf.cl=cl;pf.trail=0;pf.vx=Math.cos(a)*.9;pf.vz=Math.sin(a)*.9;pf.sp.position.set(me.position.x+Math.cos(a)*.3,.12,me.position.z+Math.sin(a)*.3);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}};
   S.jump=()=>{jumpReq=true};
   const loop=()=>{
     if(S.dead)return;raf=requestAnimationFrame(loop);if(document.hidden)return;
@@ -6216,7 +6272,7 @@ function islandBuild(T){
     let dx=-Math.sin(yaw)*f+Math.cos(yaw)*r,dz=-Math.cos(yaw)*f-Math.sin(yaw)*r,moving=false;
     if(!f&&!r&&tgt){const ex=tgt.x-me.position.x,ez=tgt.z-me.position.z,d=Math.hypot(ex,ez);if(d<.35)tgt=null;else{dx=ex/d;dz=ez/d}}
     const l=Math.hypot(dx,dz);
-    if(l>.05){const k=Math.min(1,l),sp=(NEW?7:5.2)*dt*k;dx/=l;dz/=l;me.position.x+=dx*sp;me.position.z+=dz*sp;face=Math.atan2(dx,dz);moving=true;stepAcc+=sp;puffAcc+=sp;if(puffAcc>.7&&!calm){puffAcc=0;const pf=puffs[puffI++%puffs.length],cl=buddy()==='cloud';pf.age=0;pf.cl=cl;pf.vx=-dx*.25+(Math.random()-.5)*.3;pf.vz=-dz*.25+(Math.random()-.5)*.3;pf.sp.position.set(me.position.x-dx*.35+(Math.random()-.5)*.35,.12,me.position.z-dz*.35+(Math.random()-.5)*.35);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}if(stepAcc>1.7){stepAcc-=1.7;if(!air)(buddy()==='cloud'?sfxWind():sfxStep(stepSide^=1))}if(!f&&!r){let dy=face+Math.PI-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));if(!down||!down.moved)yaw+=dy*Math.min(1,dt*2.2)}}
+    if(l>.05){const k=Math.min(1,l),sp=(NEW?7:5.2)*dt*k;dx/=l;dz/=l;me.position.x+=dx*sp;me.position.z+=dz*sp;face=Math.atan2(dx,dz);moving=true;stepAcc+=sp;puffAcc+=sp;if(puffAcc>.7&&!calm){puffAcc=0;const pf=puffs[puffI++%puffs.length],cl=buddy()==='cloud';pf.age=0;pf.cl=cl;pf.trail=1;pf.vx=-dx*.45+(Math.random()-.5)*.2;pf.vz=-dz*.45+(Math.random()-.5)*.2;pf.sp.position.set(me.position.x-dx*1.05+(Math.random()-.5)*.25,.08,me.position.z-dz*1.05+(Math.random()-.5)*.25);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}if(stepAcc>1.7){stepAcc-=1.7;if(!air)(buddy()==='cloud'?sfxWind():sfxStep(stepSide^=1))}if(!f&&!r){let dy=face+Math.PI-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));if(!down||!down.moved)yaw+=dy*Math.min(1,dt*2.2)}}
     LM.forEach(m=>{const ex=me.position.x-m.x,ez=me.position.z-m.z,d=Math.hypot(ex,ez);if(d<2.6){me.position.x=m.x+ex/d*2.6;me.position.z=m.z+ez/d*2.6}});
     if(S.tcol)for(let k=0;k<2;k++)S.tcol.forEach(([tx,tz,tr])=>{const ex=me.position.x-tx,ez=me.position.z-tz,d=Math.hypot(ex,ez);if(d<tr){const q=d<.001?1:d;me.position.x=tx+(d<.001?tr:ex/q*tr);me.position.z=tz+(d<.001?0:ez/q*tr)}});
     const R0=Math.hypot(me.position.x,me.position.z);if(R0>33){me.position.x*=33/R0;me.position.z*=33/R0}
@@ -6238,7 +6294,7 @@ function islandBuild(T){
     if(mmDraw)mmDraw(me,face);
     let nn=null,best=5.6;LM.forEach(m=>{const d=Math.hypot(m.x-me.position.x,m.z-me.position.z);if(d<best){best=d;nn=m}});
     const key=nn?nn.L.id:'';if(key!==lastNear){lastNear=key;near=nn;setP(nn);if(nn)sfxNear()}
-    puffs.forEach(pf=>{if(!pf.sp.visible)return;pf.age+=dt;const k=pf.age/1;if(k>=1){pf.sp.visible=false;return}const e=1-Math.pow(1-k,2);pf.sp.position.x+=pf.vx*dt;pf.sp.position.z+=pf.vz*dt;pf.sp.position.y=.12+e*.28;const sz=(pf.cl?.38:.22)+e*(pf.cl?.34:.2);pf.sp.scale.set(sz,sz,1);pf.sp.material.opacity=(pf.cl?.55:.8)*(1-k)});
+    puffs.forEach(pf=>{if(!pf.sp.visible)return;pf.age+=dt;const k=pf.age/1;if(k>=1){pf.sp.visible=false;return}const e=1-Math.pow(1-k,2);pf.sp.position.x+=pf.vx*dt;pf.sp.position.z+=pf.vz*dt;pf.sp.position.y=pf.trail?.08+e*.12:.12+e*.28;const sz=(pf.cl?.38:.22)+e*(pf.cl?.34:.2);pf.sp.scale.set(sz,sz,1);pf.sp.material.opacity=(pf.cl?.55:.8)*(1-k)});
     LM.forEach(m=>{const tgt=(near&&near===m)?1:0;m.h+=(tgt-m.h)*Math.min(1,dt*5);const h=m.h;m.gl.material.opacity=.09*h;m.hm.forEach(q=>{q.m.emissive.copy(q.e0).lerp(warm,.08*h);q.m.emissiveIntensity=q.i0+.1*h})});
     if(near){selL.position.set(near.x,5,near.z)}selL.intensity+=(((near?.55:0))-selL.intensity)*Math.min(1,dt*5);
     S.rt.forEach(fn=>fn(dt,t));
@@ -7051,42 +7107,39 @@ function cancelFlow(){
   document.addEventListener('keydown',esc2,true);draw();
 }
 R.pricing=()=>{
-  const cp=P&&P.plan||'free',on=session,kn=Math.min(KID_MAX,Math.max(1,(KIDS&&KIDS.list.length)||1));
+  const cp=P&&P.plan||'free',on=session;let kn=Math.min(KID_MAX,Math.max(1,(KIDS&&KIDS.list.length)||1));
   const yr=m=>Math.round(m*10); // 2 months free when billed yearly
   const cycAmt=m=>billCycle==='year'?Math.round(yr(m)/12):m;
-  const SCHOOL_M=199;
-  const plans=[{id:'free',n:'Free',d:'Try it at home. No card needed.',amt:'0',u:'forever',f:['10-minute daily lessons','Drawing, stories and letter writing','Calming Corner','Picture cards and Memory'],no:['Parent portal and reports','Check-up booking']},
-   {id:'family',n:'Family',hot:1,d:'Everything your child needs, at their own pace.',amt:String(cycAmt(FAM[kn])),was:billCycle==='year'?String(FAM[kn]):'40',
-    u:billCycle==='year'?`a month, billed ${rmTxt(yr(FAM[kn]))} yearly`:'a month for 1 child',
-    pk:billCycle==='year'?`2 kids ${rmTxt(cycAmt(FAM[2]))}/mo &middot; 3 kids ${rmTxt(cycAmt(FAM[3]))}/mo`:'2 kids RM35 · 3 kids RM45',
-    day:1,saveLine:billCycle==='year'?`Save RM${FAM[kn]*2} a year`:'Save RM20/mo',
-    dayLine:billCycle==='year'?`${rmTxt(yr(FAM[kn]))} billed yearly`:`About RM${(FAM[kn]/30).toFixed(2)}/day each`,
-    f:['Up to 3 children, each with their own profile','Unlimited lessons, songs and dancing','Camera focus and feelings helper','Parent portal with weekly reports','Therapist check-up booking'],no:[]},
-   {id:'school',n:'School or clinic',d:'For special education teams and clinics.',amt:String(cycAmt(SCHOOL_M)),was:billCycle==='year'?String(SCHOOL_M):'',
-    u:billCycle==='year'?`a month, billed ${rmTxt(yr(SCHOOL_M))} yearly &middot; up to 30 children`:'per month, up to 30 children',
-    f:['Everything in Family','Care Circle for teachers and therapists','Automatic weekly reports','Custom lessons'],no:[]}];
-  const btn=p=>p.id==='free'?(cp==='free'&&on?'Your plan':'Use Free'):p.id==='family'?(cp==='family'&&on?'Cancel plan':'Try free for 7 days'):'Contact us';
-  const tick='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".16"/><path d="M5.6 10.4l3 3 5.8-6.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',cross='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".1"/><path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-  const faq=[['Can I add more than one child?','Yes — up to 3, on one account. RM20 for 1, RM35 for 2, RM45 for 3.'],['Can I cancel any time?','Yes. Pip gets a little dramatic about it, but she gets over it.'],['Is progress kept?','Always, on every plan.'],['Do I need a card for the trial?','No — the 7-day trial needs no payment details.'],['Monthly or yearly?','Yearly gives 2 months free. Switch back anytime.']];
-  $('#page').innerHTML=`<div class="pl">
-   <header class="pl-hero"><span class="ab-chip">Plans</span><h1>${sp('Start free.')} <em>${sp('Grow when ready.')}</em></h1><p>Simple pricing for families, schools and clinics. Progress is always kept.</p><span class="pl-offer">${ic('star',15)} Launch offer: Family is RM20 a month, or RM45 for up to 3 children</span>${[[8,24,1],[90,18,.8],[18,70,.7],[84,64,1],[50,10,.6]].map(([x,y,k],i)=>`<svg class="pl-sk" style="left:${x}%;top:${y}%;--d:${i*.7}s;width:${k*22}px" viewBox="-12 -12 24 24" aria-hidden="true"><path d="M0-10L2.6-3.2 10 0 2.6 3.2 0 10-2.6 3.2-10 0-2.6-3.2z"/></svg>`).join('')}
-    <div class="pl-cyc mini-seg" role="group" aria-label="Billing cycle"><button data-cyc="month" class="${billCycle==='month'?'on':''}" aria-pressed="${billCycle==='month'}">Monthly</button><button data-cyc="year" class="${billCycle==='year'?'on':''}" aria-pressed="${billCycle==='year'}">Yearly <span class="pl-cyctag">Save 2 months</span></button></div>
+  const SCHOOL_M=199,Y=billCycle==='year';
+  const famWas=n=>Y?FAM[n]:FAMW[n];
+  const famSub=n=>Y?`a month, billed ${rmTxt(yr(FAM[n]))} a year`:'a month';
+  const tick='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3.5 8.4l2.8 2.8 6.2-6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const fam=cp==='family'&&on;
+  const plans=[
+   {id:'free',n:'Free',d:'For trying at home.',amt:0,sub:'forever',cta:cp==='free'&&on?'Your plan':'Start free',f:['10-minute daily lessons','Drawing, stories and letters','Calming Corner','Picture cards and Memory']},
+   {id:'family',n:'Family',d:'Everything, for up to 3 children.',amt:cycAmt(FAM[kn]),was:famWas(kn),sub:famSub(kn),cta:fam?'Cancel plan':'Start 7-day free trial',note:fam?'':'No card needed',f:['Every lesson and activity','Singing, dancing and acting','Focus and feelings helpers','Weekly parent reports','Therapist check-ups']},
+   {id:'school',n:'School or clinic',d:'For teams, up to 30 children.',amt:cycAmt(SCHOOL_M),was:Y?SCHOOL_M:0,sub:Y?`a month, billed ${rmTxt(yr(SCHOOL_M))} a year`:'a month',cta:'Contact us',f:['Everything in Family','Care Circle for your team','Automatic weekly reports','Custom lessons']}];
+  const faq=[['Can I add more than one child?','Yes, up to 3 on one account: RM20 for 1, RM35 for 2, RM45 for 3.'],['Can I cancel any time?','Yes. Pip gets a little dramatic about it, but she gets over it.'],['Is progress kept?','Always, on every plan.'],['Do I need a card for the trial?','No. The 7-day trial needs no payment details.'],['Monthly or yearly?','Yearly gives you 2 months free. You can switch back any time.']];
+  const price=(p)=>`<div class="px-price">${p.was?`<s class="px-was" id="${p.id==='family'?'plW':''}">RM${p.was}</s>`:''}<span class="px-rm">RM</span><b class="tn" ${p.id==='family'?'id="plT"':''}>${p.amt}</b></div><p class="px-sub" ${p.id==='family'?'id="plS"':''}>${p.sub}</p>`;
+  $('#page').innerHTML=`<div class="px">
+   <header class="px-head">
+    <h1>${sp('Choose a plan')}</h1>
+    <p>Every plan keeps your child's progress.</p>
+    <div class="px-cyc" role="group" aria-label="Billing"><button data-cyc="month" class="${Y?'':'on'}" aria-pressed="${!Y}">Monthly</button><button data-cyc="year" class="${Y?'on':''}" aria-pressed="${Y}">Yearly <small>2 months free</small></button></div>
    </header>
-   <div class="pl-grid">${plans.map((p,i)=>`<article class="plan pl-c rv ${p.hot?'hot':''}" style="--d:${i}">
-     ${p.hot?'<span class="pl-rb">Most popular</span>':''}
-     <div class="pl-top"><h3>${p.n}</h3>${cp===p.id&&on&&p.id!=='school'?'<span class="pl-you">Your plan</span>':''}</div>
-     <p class="pl-d">${p.d}</p>
-     <div class="pl-amt tn">${p.was?`<span class="pl-was">RM${p.was}</span>`:''}<span class="pl-cur">RM</span><b data-count="${p.amt}">0</b></div><span class="pl-u">${p.u}${p.pk?`<span class="pl-pk">${p.pk}</span>`:''}</span>${p.day?`<span class="pl-save">${p.saveLine}</span><span class="pl-day">${p.dayLine}</span>`:''}
-     <button class="btn ${p.hot?'sun':''} lg pl-btn" data-plan="${p.id}" ${p.id==='free'&&cp==='free'&&on?'disabled':''}>${btn(p)}</button>
-     ${p.hot?'<span class="pl-mc">Free for 7 days. No card. Cancel any time.</span>':''}<ul class="pl-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}${p.no.map(x=>`<li class="no">${cross}<span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
-   <section class="pl-calc rv" aria-label="Work out your price"><div><h3>How many children?</h3><p class="muted">Up to 3 children on one account. The more you add, the less each costs.</p></div><div class="pl-cn" role="group" aria-label="Number of children">${[1,2,3].map(n=>`<button class="pl-cb ${n===kn?'on':''}" data-n="${n}" aria-pressed="${n===kn}">${n}</button>`).join('')}</div><div class="pl-cr" aria-live="polite"><b id="plT">RM${cycAmt(FAM[kn])}</b><span id="plS">${billCycle==='year'?`a month, billed ${rmTxt(yr(FAM[kn]))} yearly &middot; 2 months free (about ${rmTxt(cycAmt(FAM[kn])/kn)} each)`:famLine(kn)}</span></div></section>
-   <section class="pl-why rv"><h3>Why families choose Family</h3><div class="pl-wg">${[['star','Keep everything','Stars and progress carry over from Free.'],['heart','Try free','7 days, no card needed.'],['check','Good value','Under RM1 a day, per child.'],['hand','Keeps growing','New lessons added often.']].map(([i,t,d])=>`<div>${ic(i,24)}<b>${t}</b><span>${d}</span></div>`).join('')}</div></section>
-   <div class="pl-trust rv"><div>${ic('check',20)}<b>7-day free trial</b><span>No card needed</span></div><div>${ic('heart',20)}<b>Cancel any time</b><span>No questions asked</span></div><div>${ic('star',20)}<b>Progress is kept</b><span>On every plan</span></div></div>
-   <p class="muted small" style="text-align:center">Demo: no payment is taken.</p>
-   <section class="ab-sec ab-faq"><div class="ab-hd rv"><span class="ab-ey">FAQ</span><h2>Questions</h2></div><div class="rv">${faq.map(f=>`<details class="acc"><summary>${f[0]}</summary><div class="accb"><p class="muted">${f[1]}</p></div></details>`).join('')}</div></section></div>`;
-  countUp($('.pl'),true);
+   <div class="px-sheet">${plans.map(p=>`<article class="px-col ${p.id==='family'?'is-fam':''}" aria-label="${p.n} plan">
+     <div class="px-top"><h2>${p.n}</h2>${p.id==='family'?'<span class="px-mark">Most chosen</span>':cp===p.id&&on&&p.id==='free'?'<span class="px-mark">Current</span>':''}</div>
+     <p class="px-d">${p.d}</p>
+     ${price(p)}
+     ${p.id==='family'?`<div class="px-kids pl-calc" role="group" aria-label="Number of children"><span>Children</span>${[1,2,3].map(n=>`<button class="pl-cb ${n===kn?'on':''}" data-n="${n}" aria-pressed="${n===kn}">${n}</button>`).join('')}</div>`:''}
+     <button class="px-btn" data-plan="${p.id}" ${p.id==='free'&&cp==='free'&&on?'disabled':''}>${p.cta}</button>
+     ${p.note?`<p class="px-note">${p.note}</p>`:''}
+     <ul class="px-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
+   <ul class="px-sure"><li>Cancel any time</li><li>Progress always kept</li><li>Made with therapists and teachers</li></ul>
+   <p class="px-demo">Demo: no payment is taken.</p>
+   <section class="px-faq" aria-label="Questions"><h2>Questions</h2>${faq.map(f=>`<details class="px-q"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</section></div>`;
   $$('[data-cyc]').forEach(b=>b.onclick=()=>{if(b.dataset.cyc===billCycle)return;billCycle=b.dataset.cyc;R.pricing();reveal($('#page'))});
-  $$('.pl-cb').forEach(b=>b.onclick=()=>{const n=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$('#plT').textContent='RM'+cycAmt(FAM[n]);$('#plS').textContent=billCycle==='year'?`a month, billed ${rmTxt(yr(FAM[n]))} yearly &middot; 2 months free (about ${rmTxt(cycAmt(FAM[n])/n)} each)`:famLine(n)});
+  $$('.pl-cb').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$('#plT').textContent=cycAmt(FAM[kn]);$('#plW').textContent='RM'+famWas(kn);$('#plS').textContent=famSub(kn)});
   $$('[data-plan]').forEach(b=>b.onclick=()=>{
     if(!session){go('auth-register');return}
     const id=b.dataset.plan;
