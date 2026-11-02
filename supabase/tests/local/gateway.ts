@@ -81,7 +81,26 @@ async function session(u: any) {
   return { access_token, token_type: "bearer", expires_in: 3600, expires_at: exp, refresh_token: "r_" + u.id, user: userObj(u) };
 }
 
+const passwords: Record<string, string> = {}; // email -> password (test only)
+const confirmed = new Set<string>();
 async function authRoute(req: Request, path: string): Promise<Response> {
+  if (path === "/signup" && req.method === "POST") {
+    const b = await req.json(); const email = String(b.email).toLowerCase();
+    if (String(b.password ?? "").length < 6) return J({ code: 422, error_code: "weak_password", msg: "Password should be at least 6 characters." }, 422);
+    const [ex] = await sql`select * from auth.users where email=${email}`;
+    if (ex && passwords[email]) return J({ ...userObj(ex), identities: [] }); // like Supabase: existing email, no new identity
+    const [u] = ex ? [ex] : await sql`insert into auth.users(email, raw_user_meta_data) values (${email}, ${sql.json(b.data ?? {})}) returning *`;
+    passwords[email] = b.password; codes[email] = "123456";
+    return J({ ...userObj(u), identities: [{ provider: "email" }] });
+  }
+  if (path === "/resend" && req.method === "POST") { const b = await req.json(); codes[String(b.email).toLowerCase()] = "123456"; return J({}); }
+  if (path.startsWith("/token") && new URL(req.url).searchParams.get("grant_type") === "password") {
+    const b = await req.json(); const email = String(b.email).toLowerCase();
+    if (!passwords[email] || passwords[email] !== b.password) return J({ code: 400, error_code: "invalid_credentials", msg: "Invalid login credentials" }, 400);
+    if (!confirmed.has(email)) return J({ code: 400, error_code: "email_not_confirmed", msg: "Email not confirmed" }, 400);
+    const [u] = await sql`select * from auth.users where email=${email}`;
+    return J(await session(u));
+  }
   if (path === "/otp" && req.method === "POST") {
     const b = await req.json(); const email = String(b.email).toLowerCase();
     codes[email] = "123456";
@@ -94,6 +113,7 @@ async function authRoute(req: Request, path: string): Promise<Response> {
   if (path === "/verify" && req.method === "POST") {
     const b = await req.json(); const email = String(b.email ?? "").toLowerCase();
     if (codes[email] !== b.token) return J({ code: 403, error_code: "otp_expired", msg: "Token has expired or is invalid" }, 403);
+    confirmed.add(email);
     const [u] = await sql`select * from auth.users where email=${email}`;
     return J(await session(u));
   }
@@ -109,6 +129,12 @@ async function authRoute(req: Request, path: string): Promise<Response> {
     if (!claims?.sub) return J({ msg: "invalid JWT" }, 401);
     const [u] = await sql`select * from auth.users where id=${claims.sub}::uuid`;
     return u ? J(userObj(u)) : J({ msg: "User not found" }, 404);
+  }
+  if (path === "/user" && req.method === "PUT") {
+    if (!claims?.sub) return J({ msg: "invalid JWT" }, 401);
+    const b = await req.json(); const [u] = await sql`select * from auth.users where id=${claims.sub}::uuid`;
+    if (b.password) { if (passwords[u.email] === b.password) return J({ code: 422, error_code: "same_password", msg: "New password should be different from the old password." }, 422); passwords[u.email] = b.password; }
+    return J(userObj(u));
   }
   if (path === "/logout") return new Response(null, { status: 204, headers: cors });
   const m = path.match(/^\/admin\/users\/([0-9a-f-]{36})$/);

@@ -2153,6 +2153,10 @@ body.cloud #aicard{display:none!important}
 .au2-steps li{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font:600 .74rem/1.2 var(--f-b);color:var(--muted)}
 .au2-steps i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);background:var(--surf);font-size:.8rem;position:relative}
 .au2-steps li.on{color:var(--ink)}.au2-steps li.on i{background:var(--brand);border-color:var(--brand);color:#fff}
+.au2-pw{position:relative;display:block}.au2-pw .au2-in{padding-right:76px;width:100%}
+.au2-eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font:600 .85rem var(--f-b);padding:8px 10px;border-radius:99px;cursor:pointer}
+.au2-eye:hover{color:var(--ink);background:var(--surf2,rgba(0,0,0,.04))}
+.au2-forgot{margin:-4px 0 0;text-align:right;font-size:.88rem}.au2-forgot a{color:var(--brand);font-weight:600}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -2971,33 +2975,92 @@ function cloudAuthUI(reg){
     if(!on){let n=$('#aSocNote',card);if(!n){n=document.createElement('p');n.id='aSocNote';n.className='em-err';n.setAttribute('role','status');$('.au2-soc',card).after(n)}n.hidden=false;n.textContent=(pv==='google'?'Google':'Apple')+' '+tr('sign-in is almost ready. For now, please use your email below. It only takes a moment.');return}
     b.disabled=true;const {error}=await CLOUD.sb.auth.signInWithOAuth({provider:pv,options:{redirectTo:location.origin+location.pathname}});
     if(error){b.disabled=false;toast(tr('Could not open sign-in. Please try again.'))}});
+  // ---- Email + password. Passwords are stored by Supabase Auth (bcrypt-hashed), never in the app.
+  const emErr=$('#aEmErr');
+  emErr.insertAdjacentHTML('afterend',`<label class="au2-f"><span>${tr('Password')}</span><span class="au2-pw"><input class="au2-in" id="aPw" type="password" autocomplete="${reg?'new-password':'current-password'}" placeholder="${reg?tr('At least 8 characters'):''}" aria-describedby="aPwErr"><button type="button" class="au2-eye" id="aEye" aria-label="${tr('Show password')}">${tr('Show')}</button></span></label>
+    ${reg?`<label class="au2-f"><span>${tr('Type the password again')}</span><input class="au2-in" id="aPw2" type="password" autocomplete="new-password" aria-describedby="aPwErr"></label>`:''}
+    <p class="em-err" id="aPwErr" role="alert" hidden></p>${reg?'':`<p class="au2-forgot"><a href="#" id="aForgot">${tr('Forgot password?')}</a></p>`}`);
+  const pw=$('#aPw'),pw2=$('#aPw2'),pwErr=$('#aPwErr');
+  const say=(el,t)=>{el.hidden=!t;el.textContent=t||''};
+  $('#aEye').onclick=()=>{const show=pw.type==='password';[pw,pw2].forEach(x=>{if(x)x.type=show?'text':'password'});$('#aEye').textContent=show?tr('Hide'):tr('Show');$('#aEye').setAttribute('aria-label',show?tr('Hide password'):tr('Show password'))};
+  [pw,pw2].forEach(x=>x&&x.addEventListener('input',()=>say(pwErr,'')));
+  const redirect=location.origin+location.pathname;
+  const done=async em=>{lsSet('ll.email',em);try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}};
   const send=async()=>{
-    const em=await emailGate($('#aEm'),$('#aEmErr'),$('#aGo'));if(!em)return;
+    say(pwErr,'');
+    const em=await emailGate($('#aEm'),emErr,$('#aGo'));if(!em)return;
+    const p=pw.value;
+    if(reg){
+      if(p.length<8)return say(pwErr,tr('Please use at least 8 characters for your password.'));
+      if(pw2&&pw2.value!==p)return say(pwErr,tr('The two passwords are not the same.'));
+    }else if(!p)return say(pwErr,tr('Please type your password.'));
     const btn=$('#aGo');btn.disabled=true;
-    const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:reg||!!lsGet('lll.join'),emailRedirectTo:location.origin+location.pathname}});
-    btn.disabled=false;
-    if(error){const e=$('#aEmErr');e.hidden=false;e.textContent=/signups not allowed|not found|otp_disabled/i.test(error.message+(error.code||''))?tr('There is no account with this email yet. Choose Register to create one.'):/rate|security purposes|seconds/i.test(error.message)?tr('Please wait a minute before asking for another code.'):tr('We could not send the code. Please check your connection and try again.');return}
-    codeStep(em);
+    try{
+      if(reg){
+        const {data,error}=await CLOUD.sb.auth.signUp({email:em,password:p,options:{emailRedirectTo:redirect}});
+        if(error){
+          if(/already|registered|exists/i.test(error.message))return say(emErr,tr('There is already an account with this email. Choose Log in instead.'));
+          if(/weak|password/i.test(error.message))return say(pwErr,tr('Please choose a stronger password: at least 8 characters with letters and numbers.'));
+          if(/rate|seconds/i.test(error.message))return say(emErr,tr('Please wait a minute and try again.'));
+          return say(emErr,tr('We could not create the account. Please check your connection and try again.'));
+        }
+        if(data.user&&Array.isArray(data.user.identities)&&!data.user.identities.length)return say(emErr,tr('There is already an account with this email. Choose Log in instead.'));
+        if(data.session)return done(em);
+        return codeStep(em,'signup');
+      }
+      const {error}=await CLOUD.sb.auth.signInWithPassword({email:em,password:p});
+      if(error){
+        if(/not confirmed/i.test(error.message)){await CLOUD.sb.auth.resend({type:'signup',email:em,options:{emailRedirectTo:redirect}});return codeStep(em,'signup')}
+        if(/invalid|credentials/i.test(error.message))return say(pwErr,tr('The email or password is not right. If you made your account with an email code, choose Forgot password to set one.'));
+        if(/rate|seconds/i.test(error.message))return say(pwErr,tr('Too many tries. Please wait a minute.'));
+        return say(pwErr,tr('We could not log you in. Please check your connection and try again.'));
+      }
+      return done(em);
+    }finally{btn.disabled=false}
   };
-  const codeStep=em=>{
-    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent an email to')} <b>${esc(em)}</b>. ${tr('Type the 6-digit code from it here.')}</p></div>
+  const forgot=async e=>{e.preventDefault();
+    const em=await emailGate($('#aEm'),emErr,$('#aGo'));if(!em)return;
+    const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:false,emailRedirectTo:redirect}});
+    if(error)return say(emErr,/signups not allowed|not found|otp_disabled/i.test(error.message+(error.code||''))?tr('There is no account with this email yet. Choose Register to create one.'):tr('Please wait a minute before asking for another code.'));
+    codeStep(em,'reset');
+  };
+  if($('#aForgot'))$('#aForgot').onclick=forgot;
+  // kind: 'signup' confirms a new account, 'reset' signs in with a code and then sets a new password
+  const codeStep=(em,kind)=>{
+    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent a 6-digit code to')} <b>${esc(em)}</b>. ${kind==='signup'?tr('Type it here to confirm your email.'):tr('Type it here, then choose a new password.')}</p></div>
      <label class="au2-f"><span>${tr('Code')}</span><input class="au2-in" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" aria-describedby="aCodeErr"></label><p class="em-err" id="aCodeErr" role="alert" hidden></p>
      <button class="au2-go" id="aVerify" type="button"><span>${tr('Continue')}</span>${ic('arrow',18)}</button>
      <p class="au2-sw"><a href="#" id="aResend">${tr('Send a new code')}</a> · <a href="#" id="aBack">${tr('Use a different email')}</a></p>`;
-    const inp=$('#aCode'),err=$('#aCodeErr');setTimeout(()=>inp.focus(),50);
-    const verify=async()=>{const code=inp.value.replace(/\D/g,'');if(code.length<6){err.hidden=false;err.textContent=tr('The code has 6 numbers.');return}
-      $('#aVerify').disabled=true;const {error}=await CLOUD.sb.auth.verifyOtp({email:em,token:code,type:'email'});
-      if(error){$('#aVerify').disabled=false;err.hidden=false;err.textContent=/expired|invalid/i.test(error.message)?tr('That code is not right or has expired. Try again or send a new code.'):tr('We could not check the code. Please try again.');return}
-      lsSet('ll.email',em);try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}};
-    $('#aVerify').onclick=verify;inp.addEventListener('keydown',e=>{if(e.key==='Enter')verify()});inp.addEventListener('input',()=>{err.hidden=true;if(inp.value.replace(/\D/g,'').length>=6&&/^\d+$/.test(inp.value))verify()});
-    $('#aResend').onclick=async e=>{e.preventDefault();const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:reg||!!lsGet('lll.join'),emailRedirectTo:location.origin+location.pathname}});err.hidden=false;err.textContent=error?tr('Please wait a minute before asking for another code.'):tr('A new code is on its way.')};
+    const inp=$('#aCode'),err=$('#aCodeErr');setTimeout(()=>inp.focus(),50);let busy=false;
+    const verify=async()=>{if(busy)return;const code=inp.value.replace(/\D/g,'');if(code.length<6)return say(err,tr('The code has 6 numbers.'));
+      busy=true;$('#aVerify').disabled=true;
+      let r=await CLOUD.sb.auth.verifyOtp({email:em,token:code,type:'email'});
+      if(r.error&&kind==='signup')r=await CLOUD.sb.auth.verifyOtp({email:em,token:code,type:'signup'});
+      busy=false;
+      if(r.error){$('#aVerify').disabled=false;return say(err,/expired|invalid/i.test(r.error.message)?tr('That code is not right or has expired. Try again or send a new code.'):tr('We could not check the code. Please try again.'))}
+      if(kind==='reset')return newPassword(em);
+      done(em)};
+    $('#aVerify').onclick=verify;inp.addEventListener('keydown',e=>{if(e.key==='Enter')verify()});inp.addEventListener('input',()=>{err.hidden=true;if(/^\d{6}$/.test(inp.value.trim()))verify()});
+    $('#aResend').onclick=async e=>{e.preventDefault();const {error}=kind==='signup'?await CLOUD.sb.auth.resend({type:'signup',email:em,options:{emailRedirectTo:redirect}}):await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:false,emailRedirectTo:redirect}});say(err,error?tr('Please wait a minute before asking for another code.'):tr('A new code is on its way.'))};
     $('#aBack').onclick=e=>{e.preventDefault();R.auth(reg?'register':'login')};
   };
+  const newPassword=em=>{
+    card.innerHTML=`<div class="au2-hd"><h1>${tr('Choose a new password')}</h1><p>${tr('You will use it with')} <b>${esc(em)}</b> ${tr('next time you log in.')}</p></div>
+     <label class="au2-f"><span>${tr('New password')}</span><input class="au2-in" id="aNp" type="password" autocomplete="new-password" placeholder="${tr('At least 8 characters')}"></label>
+     <label class="au2-f"><span>${tr('Type it again')}</span><input class="au2-in" id="aNp2" type="password" autocomplete="new-password"></label><p class="em-err" id="aNpErr" role="alert" hidden></p>
+     <button class="au2-go" id="aNpGo" type="button"><span>${tr('Save password')}</span>${ic('arrow',18)}</button>`;
+    const e1=$('#aNpErr');setTimeout(()=>$('#aNp').focus(),50);
+    $('#aNpGo').onclick=async()=>{const a=$('#aNp').value,b=$('#aNp2').value;
+      if(a.length<8)return say(e1,tr('Please use at least 8 characters for your password.'));if(a!==b)return say(e1,tr('The two passwords are not the same.'));
+      $('#aNpGo').disabled=true;const {error}=await CLOUD.sb.auth.updateUser({password:a});$('#aNpGo').disabled=false;
+      if(error)return say(e1,/same|different/i.test(error.message)?tr('Please choose a password you have not used before.'):/weak/i.test(error.message)?tr('Please choose a stronger password.'):tr('We could not save the password. Please try again.'));
+      toast(tr('Password saved.'));done(em)};
+  };
   $('#aGo').onclick=send;
-  const em=$('#aEm');em.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopImmediatePropagation();e.preventDefault();send()}},true);
+  const em=$('#aEm');[em,pw,pw2].forEach(x=>x&&x.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopImmediatePropagation();e.preventDefault();send()}},true));
   if(lsGet('ll.email')&&!em.value)em.value=lsGet('ll.email');
-  const lab=$('#aGo span');if(lab)lab.textContent=tr('Email me a code');
-  const note=$('.au2-note',card);if(note)note.textContent=tr('No password needed. We email you a short code each time you sign in.');
+  const lab=$('#aGo span');if(lab)lab.textContent=reg?tr('Create account'):tr('Log in');
+  const note=$('.au2-note',card);if(note)note.textContent=reg?tr('We email you a code once to confirm your address. One account holds up to 3 children.'):tr('One parent account holds up to 3 children.');
 }
 
 /* ---- Care Circle data */

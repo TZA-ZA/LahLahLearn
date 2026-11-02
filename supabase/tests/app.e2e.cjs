@@ -1,7 +1,6 @@
 // End-to-end: the real app against the local Supabase stack.
 const {chromium}=require('playwright');
 const {execSync}=require('child_process');
-// Serve the repo on http://127.0.0.1:8768 with assets/config.js pointing at the local stack, then: node supabase/tests/app.e2e.cjs
 const SHOT=require('os').tmpdir()+'/lll-';
 const URL='http://127.0.0.1:8768/index.html';
 const GW='http://127.0.0.1:54321';
@@ -9,11 +8,13 @@ const sql=q=>execSync(`psql -h /tmp -p 54329 -U postgres -d lll_e2e -At -c "${q.
 const calls=async()=>(await (await fetch(GW+'/__calls')).json()).map(c=>({...c,service:/stripe/.test(c.url)?'stripe':/resend/.test(c.url)?'resend':/anthropic/.test(c.url)?'anthropic':'other',path:c.url}));
 let ok=0,fail=0;const check=(n,c,extra='')=>{if(c){ok++;console.log('ok  ',n)}else{fail++;console.log('FAIL',n,extra)}};
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
-async function login(p,email,reg,hash){
+const PW='Calm-pass-2026';
+async function login(p,email,reg,hash,pw=PW){
   await p.goto(URL+(hash||('#auth-'+(reg?'register':'login'))));await p.waitForTimeout(1800);
-  await p.fill('#aEm',email);await p.$eval('#aGo',e=>e.click());
-  await p.waitForSelector('#aCode',{timeout:15000});
-  await p.fill('#aCode','123456');await p.waitForTimeout(4000);
+  await p.fill('#aEm',email);await p.fill('#aPw',pw);if(reg)await p.fill('#aPw2',pw);
+  await p.$eval('#aGo',e=>e.click());
+  if(reg){await p.waitForSelector('#aCode',{timeout:15000});await p.fill('#aCode','123456')}
+  await p.waitForTimeout(4000);
 }
 async function onboard(p,first){
   if(await p.$('#pkGo')){await p.$eval('#pkGo',e=>e.click());await p.waitForTimeout(900)}
@@ -61,6 +62,28 @@ const tab=async(p,k)=>{await p.evaluate(k=>document.querySelector(`.cc-tabs [dat
   check('profile restored on new device',lp.pr&&/Aisha/.test(lp.pr.name),JSON.stringify(lp.pr&&lp.pr.name));
   check('progress restored (pts=7)',lp.pg&&lp.pg.pts===7,JSON.stringify(lp.pg&&lp.pg.pts));
   await p2.screenshot({path:SHOT+'2_relogin.png'});
+  console.log('--- 2b. password checks');
+  {const [cx,px]=await mk();
+   await px.goto(URL+'#auth-login');await px.waitForTimeout(1500);
+   await px.fill('#aEm','amina.e2e@gmail.com');await px.fill('#aPw','wrong-password');await px.$eval('#aGo',e=>e.click());await px.waitForTimeout(1500);
+   check('wrong password is refused',/not right/i.test(await px.textContent('#aPwErr'))&&/auth-login/.test(px.url()),await px.textContent('#aPwErr'));
+   await px.$eval('#aForgot',e=>e.click());await px.waitForSelector('#aCode');await px.fill('#aCode','123456');await px.waitForSelector('#aNp');
+   await px.fill('#aNp','New-calm-2026');await px.fill('#aNp2','New-calm-2026');await px.$eval('#aNpGo',e=>e.click());await px.waitForTimeout(3500);
+   check('forgot password: new password saved and signed in',/dashboard|who/.test(px.url()),px.url());
+   await cx.close();
+   const [cy,py]=await mk();await login(py,'amina.e2e@gmail.com',false,null,'New-calm-2026');
+   check('logs in with the new password',/dashboard|who/.test(py.url()),py.url());
+   const [cz,pz]=await mk();await login(pz,'amina.e2e@gmail.com',false,null,PW);
+   check('old password no longer works',/auth-login/.test(pz.url()),pz.url());
+   await cy.close();await cz.close();
+   const [cr,pr]=await mk();await pr.goto(URL+'#auth-register');await pr.waitForTimeout(1500);
+   await pr.fill('#aEm','amina.e2e@gmail.com');await pr.fill('#aPw','Another-2026');await pr.fill('#aPw2','Another-2026');await pr.$eval('#aGo',e=>e.click());await pr.waitForTimeout(1500);
+   check('registering an existing email is refused',/already an account/i.test(await pr.textContent('#aEmErr')),await pr.textContent('#aEmErr'));
+   await pr.fill('#aEm','new.person.e2e@gmail.com');await pr.fill('#aPw','short');await pr.fill('#aPw2','short');await pr.$eval('#aGo',e=>e.click());await pr.waitForTimeout(800);
+   check('short password refused',/at least 8/i.test(await pr.textContent('#aPwErr')));
+   await pr.fill('#aPw','Calm-pass-2026');await pr.fill('#aPw2','Calm-pass-2027');await pr.$eval('#aGo',e=>e.click());await pr.waitForTimeout(800);
+   check('mismatched passwords refused',/not the same/i.test(await pr.textContent('#aPwErr')));
+   await cr.close();}
 
   console.log('--- 3. invite a teacher and a therapist');
   await unlockCare(p2,'Amina');
@@ -86,7 +109,7 @@ const tab=async(p,k)=>{await p.evaluate(k=>document.querySelector(`.cc-tabs [dat
   const [c3,t]=await mk();
   await t.goto(URL+'#join-'+tTok);await t.waitForTimeout(2000);
   console.log('teacher hash after link:',await t.evaluate(()=>location.hash));
-  await t.fill('#aEm','lim.teacher.e2e@gmail.com');await t.$eval('#aGo',e=>e.click());await t.waitForSelector('#aCode');await t.fill('#aCode','123456');await t.waitForTimeout(5000);
+  await t.fill('#aEm','lim.teacher.e2e@gmail.com');await t.fill('#aPw',PW);await t.fill('#aPw2',PW);await t.$eval('#aGo',e=>e.click());await t.waitForSelector('#aCode');await t.fill('#aCode','123456');await t.waitForTimeout(5000);
   console.log('teacher hash after login:',await t.evaluate(()=>location.hash));
   check('teacher is a member',sql(`select role from family_members where family_id='${fam}' and email='lim.teacher.e2e@gmail.com'`)==='teacher');
   await t.screenshot({path:SHOT+'5_teacher.png'});
