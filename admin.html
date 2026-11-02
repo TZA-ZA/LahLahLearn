@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>LahLahLearn Admin</title>
+<link rel="icon" type="image/webp" href="assets/img/logo.webp">
+<script src="assets/config.js"></script>
+<style>
+@font-face{font-family:Lexend;src:url(assets/fonts/lexend-latin-400.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Lexend;src:url(assets/fonts/lexend-latin-500.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:Lexend;src:url(assets/fonts/lexend-latin-600.woff2) format('woff2');font-weight:600;font-display:swap}
+:root{--bg:#f6f4ee;--surf:#fffefb;--ink:#17231c;--ink2:#4c5a52;--mute:#86918a;--line:#e6e2d8;--brand:#1d6b4a;--bar:#2f8a62;--bar2:#a9d3bd;--warn:#a5631b;--radius:18px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111714;--surf:#18201b;--ink:#eef3ef;--ink2:#b7c2bb;--mute:#7f8b84;--line:#26302a;--brand:#7cd3a5;--bar:#5fc092;--bar2:#2b5a43;--warn:#e0a35e}}
+:root[data-theme="dark"]{--bg:#111714;--surf:#18201b;--ink:#eef3ef;--ink2:#b7c2bb;--mute:#7f8b84;--line:#26302a;--brand:#7cd3a5;--bar:#5fc092;--bar2:#2b5a43;--warn:#e0a35e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.55 Lexend,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:40px 16px 80px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:40px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:.2px}
+.brand img{width:40px;height:40px;object-fit:contain}
+.brand small{display:block;font-weight:400;color:var(--mute);font-size:12px;letter-spacing:1.6px;text-transform:uppercase}
+button,.btn{font:inherit;cursor:pointer;border-radius:999px;border:1px solid var(--line);background:var(--surf);color:var(--ink);padding:10px 18px;font-weight:500}
+button.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+input{font:inherit;width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--surf);color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.login{max-width:400px;margin:12vh auto 0;display:flex;flex-direction:column;gap:14px}
+.login h1{font-size:26px;font-weight:600;margin:0}
+.muted{color:var(--mute)}.small{font-size:13px}
+.err{color:var(--warn);font-size:14px;min-height:1.2em;margin:0}
+h2{font-size:13px;font-weight:500;letter-spacing:1.6px;text-transform:uppercase;color:var(--mute);margin:48px 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.kpi{background:var(--surf);padding:22px 24px}
+.kpi dt{font-size:13px;color:var(--ink2)}
+.kpi dd{margin:6px 0 0;font-size:34px;font-weight:500;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.chart-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surf)}
+.seg button{border:0;padding:6px 14px;font-size:13px;background:transparent;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.chart{position:relative;height:220px}
+.chart svg{width:100%;height:100%;display:block;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);opacity:0;transition:opacity .12s}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.plans .card{padding:18px 20px}.plans b{display:block;font-size:26px;font-weight:500;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-weight:500;color:var(--mute);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.6px;text-transform:uppercase}
+td{padding:12px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+td.n,th.n{text-align:right}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line);color:var(--ink2)}
+.tag.family{border-color:var(--brand);color:var(--brand)}
+.tw{overflow-x:auto}
+.tools{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.tools input{max-width:320px;padding:10px 14px}
+@media (max-width:760px){.kpis,.plans{grid-template-columns:repeat(2,1fr)}.kpi dd{font-size:28px}header{margin-bottom:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><img src="assets/img/logo.webp" alt=""><div>LahLahLearn<small>Admin</small></div></div>
+    <div id="hdr"></div>
+  </header>
+  <main id="app"><p class="muted">Loading…</p></main>
+</div>
+<script src="assets/vendor/supabase-2.117.3.js"></script>
+<script>
+(()=>{
+const CFG=window.LLL_CONFIG||{},app=document.getElementById('app'),hdr=document.getElementById('hdr');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number(n||0).toLocaleString('en-GB');
+const dshort=d=>new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+if(!CFG.supabaseUrl||!CFG.supabaseAnonKey){app.innerHTML='<div class="card login"><h1>Not connected</h1><p class="muted">Add supabaseUrl and supabaseAnonKey to assets/config.js first.</p></div>';return}
+const sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:{persistSession:true,flowType:'pkce',storageKey:'lll.admin'}});
+
+function loginView(){
+  hdr.innerHTML='';
+  app.innerHTML=`<form class="login" id="f"><h1>Sign in</h1><p class="muted" style="margin:0">For the LahLahLearn team. We email you a 6-digit code.</p>
+    <input id="em" type="email" autocomplete="email" placeholder="you@example.com" required aria-label="Email">
+    <p class="err" id="er" role="alert"></p><button class="pri" id="go">Email me a code</button></form>`;
+  const f=document.getElementById('f'),er=document.getElementById('er');
+  f.onsubmit=async e=>{e.preventDefault();const em=document.getElementById('em').value.trim();document.getElementById('go').disabled=true;
+    const {error}=await sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:false}});document.getElementById('go').disabled=false;
+    if(error){er.textContent=error.message;return}codeView(em)};
+}
+function codeView(em){
+  app.innerHTML=`<form class="login" id="f"><h1>Check your email</h1><p class="muted" style="margin:0">Code sent to <b>${esc(em)}</b>.</p>
+    <input id="cd" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" aria-label="Code">
+    <p class="err" id="er" role="alert"></p><button class="pri" id="go">Continue</button><button type="button" id="bk">Use a different email</button></form>`;
+  document.getElementById('bk').onclick=loginView;
+  document.getElementById('f').onsubmit=async e=>{e.preventDefault();const {error}=await sb.auth.verifyOtp({email:em,token:document.getElementById('cd').value.replace(/\D/g,''),type:'email'});
+    if(error){document.getElementById('er').textContent='That code is not right or has expired.';return}load()};
+}
+async function load(){
+  const {data:{session}}=await sb.auth.getSession();if(!session)return loginView();
+  hdr.innerHTML=`<span class="muted small" style="margin-right:12px">${esc(session.user.email)}</span><button id="out">Sign out</button>`;
+  document.getElementById('out').onclick=async()=>{await sb.auth.signOut();loginView()};
+  app.innerHTML='<p class="muted">Loading…</p>';
+  const {data,error}=await sb.functions.invoke('admin-stats',{method:'GET'});
+  if(error){let m=error.message;try{m=(await error.context.json()).error||m}catch(e){}app.innerHTML=`<div class="card login"><h1>No access</h1><p class="muted">${esc(m)}</p></div>`;return}
+  render(data);
+}
+let metric='active_children';
+function render(d){
+  const t=d.totals,p=d.plans||{};
+  app.innerHTML=`
+  <dl class="kpis">
+    ${[['Families',t.families],['Children',t.children],['Active today',t.active_today],['Active this week',t.active_7d],
+       ['Minutes this week',t.minutes_7d],['Teachers',t.teachers],['Therapists',t.therapists],['Invites waiting',t.invites_pending]]
+      .map(([l,v])=>`<div class="kpi"><dt>${l}</dt><dd>${fmt(v)}</dd></div>`).join('')}
+  </dl>
+  <h2>Last 30 days</h2>
+  <div class="card"><div class="chart-h"><b id="ct"></b><div class="seg" role="group" aria-label="Measure">
+    ${[['active_children','Active children'],['minutes','Minutes'],['signups','New families']].map(([k,l])=>`<button data-m="${k}" aria-pressed="${k===metric}">${l}</button>`).join('')}</div></div>
+    <div class="chart" id="ch"></div></div>
+  <h2>Plans</h2>
+  <div class="plans">${[['free','Free'],['trial','On trial'],['family','Family'],['school','School']].map(([k,l])=>`<div class="card"><span class="muted small">${l}</span><b>${fmt(p[k])}</b></div>`).join('')}</div>
+  <h2>Families</h2>
+  <div class="tools"><input id="q" placeholder="Search name or email" aria-label="Search families"><span class="muted small" id="cnt"></span></div>
+  <div class="card tw" style="padding:4px 8px"><table><thead><tr><th>Family</th><th>Email</th><th class="n">Children</th><th>Plan</th><th class="n">Min. this week</th><th>Last active</th><th>Joined</th></tr></thead><tbody id="tb"></tbody></table></div>
+  <p class="muted small" style="margin-top:24px">Weekly reports on: ${fmt(t.weekly_reports_on)} · Emails in the last 7 days: ${Object.entries(d.emails_7d||{}).map(([k,v])=>esc(k)+' '+v).join(', ')||'none'} · Updated ${new Date(d.generated_at).toLocaleString('en-GB')}</p>`;
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{metric=b.dataset.m;document.querySelectorAll('[data-m]').forEach(x=>x.setAttribute('aria-pressed',x===b));chart(d.daily)});
+  chart(d.daily);
+  const q=document.getElementById('q');const rows=()=>{const s=q.value.trim().toLowerCase(),list=d.families.filter(f=>!s||(f.name||'').toLowerCase().includes(s)||(f.email||'').toLowerCase().includes(s));
+    document.getElementById('cnt').textContent=list.length+' shown';
+    document.getElementById('tb').innerHTML=list.map(f=>`<tr><td>${esc(f.name||'—')}</td><td>${esc(f.email)}</td><td class="n">${f.children}</td><td><span class="tag ${esc(f.plan)}">${esc(f.plan)}</span></td><td class="n">${fmt(f.minutes_7d)}</td><td>${f.last_active?dshort(f.last_active):'—'}</td><td>${new Date(f.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</td></tr>`).join('')||'<tr><td colspan="7" class="muted">No families yet.</td></tr>'};
+  q.oninput=rows;rows();
+}
+function chart(daily){last=daily;
+  const box=document.getElementById('ch'),lab={active_children:'Active children per day',minutes:'Learning minutes per day',signups:'New families per day'}[metric];
+  document.getElementById('ct').textContent=lab;
+  const W=Math.max(320,box.clientWidth),H=220,pl=36,pb=26,pt=8,vals=daily.map(x=>x[metric]||0),mx=Math.max(1,...vals);
+  const nice=(()=>{const s=Math.pow(10,Math.floor(Math.log10(mx)));for(const m of [1,2,5,10])if(m*s>=mx)return m*s;return mx})();
+  const bw=(W-pl)/daily.length,y=v=>pt+(H-pt-pb)*(1-v/nice);
+  const grid=(nice>=2?[0,.5,1]:[0,1]).map(f=>{const v=nice*f;return `<line x1="${pl}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${pl-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--mute)">${fmt(Math.round(v))}</text>`}).join('');
+  const bars=daily.map((x,i)=>{const v=vals[i],h=Math.max(v?2:0,(H-pt-pb)*v/nice),bx=pl+i*bw+2,w=Math.max(2,bw-4),r=Math.min(4,w/2,h);
+    const path=h?`M${bx},${H-pb} V${H-pb-h+r} Q${bx},${H-pb-h} ${bx+r},${H-pb-h} H${bx+w-r} Q${bx+w},${H-pb-h} ${bx+w},${H-pb-h+r} V${H-pb} Z`:'';
+    return `<g data-i="${i}"><rect x="${pl+i*bw}" y="0" width="${bw}" height="${H-pb}" fill="transparent"/>${path?`<path d="${path}" fill="var(--bar)"/>`:''}</g>`}).join('');
+  const ticks=daily.map((x,i)=>i%5===4||i===0?`<text x="${pl+i*bw+bw/2}" y="${H-6}" text-anchor="middle" font-size="11" fill="var(--mute)">${dshort(x.day)}</text>`:'').join('');
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${lab}, last 30 days">${grid}${bars}${ticks}</svg><div class="tip" id="tip"></div>`;
+  const tip=document.getElementById('tip');
+  box.querySelectorAll('g[data-i]').forEach(g=>{g.onmouseenter=()=>{const i=+g.dataset.i;tip.textContent=dshort(daily[i].day)+': '+fmt(vals[i]);tip.style.left=(pl+i*bw+bw/2)+'px';tip.style.top=y(vals[i])+'px';tip.style.opacity=1;
+    g.querySelector('path')&&g.querySelector('path').setAttribute('fill','var(--brand)')};
+    g.onmouseleave=()=>{tip.style.opacity=0;g.querySelector('path')&&g.querySelector('path').setAttribute('fill','var(--bar)')}});
+}
+let rt=0,last=null;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(last&&document.getElementById('ch'))chart(last)},150)});
+sb.auth.getSession().then(({data})=>data.session?load():loginView());
+})();
+</script>
+</body>
+</html>

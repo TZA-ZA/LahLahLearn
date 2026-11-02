@@ -1,0 +1,7 @@
+{
+  "name": "lahlahlearn-backend-tests",
+  "private": true,
+  "type": "module",
+  "scripts": { "test:functions": "node functions.test.mjs", "test:rls": "python3 test_rls.py" },
+  "devDependencies": { "@supabase/supabase-js": "2.117.3" }
+}

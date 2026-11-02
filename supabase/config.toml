@@ -1,0 +1,8 @@
+# Supabase CLI settings used by the deploy workflow (.github/workflows/supabase.yml).
+project_id = "lahlahlearn"
+
+[functions.stripe-webhook]
+verify_jwt = false   # Stripe signs requests instead; the function checks the signature.
+
+[functions.weekly-report]
+verify_jwt = false   # Called by the daily scheduler with a secret header; parent calls are checked inside.

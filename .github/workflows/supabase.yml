@@ -1,0 +1,80 @@
+# Deploys the LahLahLearn backend to Supabase and sends the weekly reports.
+#
+# Repository secrets (Settings > Secrets and variables > Actions):
+#   SUPABASE_ACCESS_TOKEN   personal access token from supabase.com/dashboard/account/tokens
+#   SUPABASE_PROJECT_REF    the project id, e.g. abcdefghijklmnop
+#   SUPABASE_DB_PASSWORD    the database password chosen when the project was made
+#   CRON_SECRET             any long random text; protects the weekly report trigger
+#   SITE_URL                where the app lives, e.g. https://tza-za.github.io/LahLahLearn/
+#   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET   from Stripe (run scripts/stripe-setup.mjs)
+#   RESEND_API_KEY, EMAIL_FROM                 from resend.com, e.g. LahLahLearn <hello@yourdomain.com>
+#   ANTHROPIC_API_KEY                          for Pip's answers
+#   ADMIN_EMAILS                               who may open admin.html (comma separated)
+# Optional: ALLOWED_ORIGINS, AI_DAILY_LIMIT, PIP_MODEL, APP_TIMEZONE
+name: Backend
+
+on:
+  push:
+    branches: [main]
+    paths: ["supabase/**", ".github/workflows/supabase.yml"]
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "deploy or weekly-report"
+        default: deploy
+  schedule:
+    - cron: "0 1 * * *" # 09:00 in Malaysia, every day; families pick their own weekday
+
+concurrency: { group: backend-${{ github.event_name }}, cancel-in-progress: false }
+
+jobs:
+  deploy:
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.task != 'weekly-report')
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with: { version: latest }
+      - name: Link project
+        run: supabase link --project-ref "$REF" -p "$SUPABASE_DB_PASSWORD"
+      - name: Database changes
+        run: supabase db push -p "$SUPABASE_DB_PASSWORD"
+      - name: Secrets for the functions
+        env:
+          S_CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          S_SITE_URL: ${{ secrets.SITE_URL }}
+          S_STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          S_STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          S_RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          S_EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          S_ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          S_ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+          S_ALLOWED_ORIGINS: ${{ secrets.ALLOWED_ORIGINS }}
+          S_AI_DAILY_LIMIT: ${{ secrets.AI_DAILY_LIMIT }}
+          S_PIP_MODEL: ${{ secrets.PIP_MODEL }}
+          S_APP_TIMEZONE: ${{ secrets.APP_TIMEZONE }}
+        run: |
+          : > .env.functions
+          for v in $(env | grep -o '^S_[A-Z_]*'); do
+            val="${!v}"; [ -n "$val" ] && printf '%s=%s\n' "${v#S_}" "$val" >> .env.functions
+          done
+          supabase secrets set --project-ref "$REF" --env-file .env.functions
+          rm .env.functions
+      - name: Functions
+        run: supabase functions deploy --project-ref "$REF" --use-api
+
+  weekly-report:
+    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.task == 'weekly-report')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send this week's reports
+        env:
+          REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          curl -fsS -X POST "https://$REF.supabase.co/functions/v1/weekly-report" \
+            -H "x-cron-secret: $CRON_SECRET" -H "Content-Type: application/json" -d '{"mode":"cron"}'
