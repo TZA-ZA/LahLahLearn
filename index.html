@@ -6224,8 +6224,8 @@ function islandBuild(T){
     if(jumpReq){jumpReq=false;if(!air){air=true;jvv=9.4;sfxJump()}}
     if(air){jvv-=26*dt;jh+=jvv*dt;if(jh<=0){jh=0;jvv=0;air=false;sfxLand();landPuffs()}}
     me.position.y=jh;
-    const u=me.userData;{const wk=moving&&!calm&&!air,W=t*12;u.wa=(u.wa||0)+((wk?1:0)-(u.wa||0))*Math.min(1,dt*12);const a=u.wa;
-      if(wk){const b=Math.abs(Math.sin(W));u.body.position.y=.8+b*.1;u.ears.forEach((e,i)=>{e.rotation.x=Math.sin(W+i)*.18-.12})}else{u.body.position.y=.8;u.ears.forEach(e=>{e.rotation.x=0})}
+    const u=me.userData;{/* the legs always walk while moving - even with reduced motion (OS setting or Calm motion) the buddy used to just glide, which looked like floating. Calm mode keeps a smaller, slower step with no bounce */const wk=moving&&!air,W=t*(calm?10:12);u.wa=(u.wa||0)+((wk?(calm?.85:1):0)-(u.wa||0))*Math.min(1,dt*12);const a=u.wa;
+      if(wk){const b=Math.abs(Math.sin(W));u.body.position.y=.8+(calm?0:b*.1);u.ears.forEach((e,i)=>{e.rotation.x=Math.sin(W+i)*.18-.12})}else{u.body.position.y=.8;u.ears.forEach(e=>{e.rotation.x=0})}
       u.body.rotation.z=Math.sin(W)*.07*a;u.body.rotation.x=.09*a;
       (u.walk||[]).forEach(w=>{const ph=w.s>0?0:Math.PI,sw=Math.sin(W+ph),lift=Math.max(0,Math.cos(W+ph));
         if(w.k==='arm'){w.m.position.z=w.z-sw*.22*a;w.m.position.y=w.y+lift*.08*a}
