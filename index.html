@@ -2014,6 +2014,14 @@ body:not(.noanim) .pkcard.on .pkart{animation:pkb 2.4s ease-in-out infinite}@key
 @media(min-width:861px){.px-col.is-fam{padding-top:calc(clamp(26px,3.2vw,40px) + 14px);padding-bottom:calc(clamp(26px,3.2vw,40px) + 14px)}}
 @media(max-width:860px){.px-sheet{grid-template-columns:1fr;border:0;background:none;gap:14px}.px-col{border:1px solid var(--line)!important;border-radius:26px;background:var(--surf)}.px-col.is-fam{margin:0;order:-1;background:linear-gradient(170deg,var(--px-pine2),var(--px-pine) 60%)}.px-d{min-height:0}}
 @media(prefers-reduced-motion:reduce){.px-cyc button,.px-btn,.px-q summary::after{transition:none}}
+
+/* onboarding: colour intensity step */
+.obsat{display:flex;flex-direction:column;gap:16px}
+.obsat-pv{display:flex;align-items:flex-end;justify-content:center;flex-wrap:wrap;gap:10px 14px;padding:20px 16px 18px;border-radius:24px;background:var(--surf);border:1px solid var(--line)}
+.obsat-pv span{width:96px;height:96px;display:grid;place-items:end center}.obsat-pv span img,.obsat-pv span svg{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.obsat-pv i{flex:none;width:30px;height:30px;border-radius:50%;align-self:center}
+.obsat-pre{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.obsat-pre .tile{text-align:center;justify-content:center}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -3635,7 +3643,8 @@ const QN=[
  {id:'time',type:'one',q:'When does learning usually go best?',opts:[['morning','Morning'],['afternoon','Afternoon'],['evening','Evening'],['any','It varies']]},
  {id:'interests',type:'many',max:5,q:'What does your child love?',h:'We use these in counting and pictures. Pick up to 5.',opts:[['animals','Animals'],['dinosaurs','Dinosaurs'],['space','Space'],['vehicles','Vehicles'],['sea','The sea'],['music','Music'],['trains','Trains'],['robots','Robots'],['art','Drawing'],['building','Building'],['football','Football'],['cooking','Cooking']]},
  {id:'tone',type:'one',q:'How should Pip talk?',opts:[['gentle','Soft and quiet'],['cheerful','Warm and playful'],['simple','Short and simple']]},
- {id:'prefs',type:'toggles',q:'Choose comfort settings',h:'We pre-selected these from your answers. Change anything you like, now or later.'}
+ {id:'prefs',type:'toggles',q:'Choose comfort settings',h:'We pre-selected these from your answers. Change anything you like, now or later.'},
+ {id:'sat',type:'sat',q:'How strong should colours be?',h:'Slide until it feels comfortable for your child. You can change this later in Settings.'}
 ];
 const PREFS=[['dys','Easy-read font','Wider spacing and a clearer typeface.'],['big','Larger text','Bigger letters everywhere.'],['calm','Calm motion','No animation or moving effects.'],['contrast','Stronger contrast','Darker text and clearer outlines.'],['voice','Read questions aloud','Uses your device voice. Every question also shows on screen.'],['greet','Spoken and written greeting','A welcome message such as Good night when the app opens. Off by default.'],['first','Show First-Then schedule','A visual plan for the day on the home page.'],['lb','Hall of Fame','Show a nickname, stars and streak to other children. Off by default.']];
 const OB={live:false,i:0,a:{},back:false,done:false,addKid:false,
@@ -3678,7 +3687,7 @@ const ageLvlCap=()=>AGE_LVL_CAP[P&&P.age]||4;
 function obValid(q){const v=OB.a[q.id];if(q.type==='text')return!!(v&&v.trim());if(q.type==='name3')return!!(OB.a.firstName&&OB.a.firstName.trim())&&!!(OB.a.lastName&&OB.a.lastName.trim());return true}
 function obDraw(){
   const q=QN[OB.i],a=OB.a,n=QN.length;
-  if(q.type==='toggles'&&!a.prefs)a.prefs=defaultPrefs(a);
+  if((q.type==='toggles'||q.type==='sat')&&!a.prefs)a.prefs=defaultPrefs(a);
   $('#page').innerHTML=`<div class="ob"><div class="obtop"><i style="width:${(OB.i/n)*100}%"></i></div>
    <div class="wrap obbody"><div class="obq ${OB.back?'back':''}">
     <div class="row between"><span class="chip">Question ${OB.i+1} of ${n}</span>${OB.i?`<button class="btn sm ghost" id="obPrev">Back</button>`:''}</div>
@@ -3708,6 +3717,19 @@ function obDraw(){
     box.innerHTML=`<div class="stack" style="gap:12px">${PREFS.map(([k,l,d])=>`<button class="card flat row" style="flex-wrap:nowrap;justify-content:space-between;text-align:left;padding:16px 18px" data-k="${k}" role="switch" aria-checked="${!!a.prefs[k]}"><span class="stack"><b>${l}</b><span class="muted small">${d}</span></span><i class="sw ${a.prefs[k]?'on':''}"></i></button>`).join('')}</div>`;
     $$('button',box).forEach(b=>b.onclick=()=>{const k=b.dataset.k;a.prefs[k]=!a.prefs[k];$('.sw',b).classList.toggle('on',a.prefs[k]);b.setAttribute('aria-checked',a.prefs[k]);
       document.body.classList.toggle('dys',!!a.prefs.dys);document.body.classList.toggle('big',!!a.prefs.big);document.body.classList.toggle('noanim',!!a.prefs.calm);applySat(a.prefs);document.documentElement.dataset.contrast=a.prefs.contrast?'1':'0'});
+  }
+  if(q.type==='sat'){
+    const PRE=[[55,'Calmer'],[100,'Normal'],[150,'Brighter']],v0=satVal(a.prefs);
+    box.innerHTML=`<div class="obsat">
+     <div class="obsat-pv" aria-hidden="true"><span>${buddySVG('fox',120,'hello')}</span><span><img src="assets/img/pip-hello.webp" alt=""></span><span>${buddySVG('cloud',120,'hello')}</span><i style="background:#e8604f"></i><i style="background:#f2b84a"></i><i style="background:#4fa565"></i><i style="background:#5c8fd0"></i><i style="background:#c08ad6"></i></div>
+     <div class="obsat-pre" role="group" aria-label="Quick choices">${PRE.map(([v,l])=>`<button class="tile" data-sv="${v}"><b>${l}</b></button>`).join('')}</div>
+     <div class="row between"><b>Colour intensity</b><span class="tn" id="obsv" style="font-weight:700">${v0}%</span></div>
+     <input type="range" id="obsr" min="20" max="200" step="5" value="${v0}" aria-label="Colour intensity" style="width:100%;accent-color:var(--brand)">
+     <div class="row between muted small"><span>Calmer</span><span>Brighter</span></div></div>`;
+    const set=v=>{v=+v;a.prefs.sat=v;delete a.prefs.soft;applySat(a.prefs);$('#obsv').textContent=v+'%';$('#obsr').value=v;$$('[data-sv]',box).forEach(b=>b.classList.toggle('on',+b.dataset.sv===v))};
+    $$('[data-sv]',box).forEach(b=>{b.classList.toggle('on',+b.dataset.sv===v0);b.onclick=()=>set(b.dataset.sv)});
+    $('#obsr').oninput=e=>set(e.target.value);
+    applySat(a.prefs);
   }
   $('#obNext').disabled=!obValid(q);$('#obNext').onclick=obNext;
   const pv=$('#obPrev');if(pv)pv.onclick=()=>{OB.i--;OB.back=true;obDraw()};
