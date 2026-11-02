@@ -2148,6 +2148,11 @@ body.cloud #aicard{display:none!important}
   main:has(#foot:not([style*="none"])) #page{padding-bottom:12px}
 }
 .ab-facts .ab-dash{font-style:normal;margin:0 .22em}
+
+.au2-steps{list-style:none;margin:2px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.au2-steps li{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font:600 .74rem/1.2 var(--f-b);color:var(--muted)}
+.au2-steps i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);background:var(--surf);font-size:.8rem;position:relative}
+.au2-steps li.on{color:var(--ink)}.au2-steps li.on i{background:var(--brand);border-color:var(--brand);color:#fff}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -2956,12 +2961,16 @@ let cProv=null;
 function cloudProviders(){return cProv||(cProv=fetch(CFG.supabaseUrl.replace(/\/$/,'')+'/auth/v1/settings',{headers:{apikey:CFG.supabaseAnonKey}}).then(r=>r.ok?r.json():{}).then(s=>(s&&s.external)||{}).catch(()=>({}))) }
 function cloudAuthUI(reg){
   const card=$('.au2-card');if(!card)return;
-  if(!CFG.google)$$('[data-am="google"]',card).forEach(b=>b.remove());
-  if(!CFG.apple)$$('[data-am="apple"]',card).forEach(b=>b.remove());
+  if(CFG.google===false)$$('[data-am="google"]',card).forEach(b=>b.remove());
+  if(CFG.apple===false)$$('[data-am="apple"]',card).forEach(b=>b.remove());
   const tidy=()=>{if(!$$('[data-am]',card).length){const s=$('.au2-soc',card),o=$('.au2-or',card);if(s)s.remove();if(o)o.remove()}};tidy();
-  // Only show Google / Apple when they are switched on in Supabase Auth, so a half-set-up provider never shows a broken button.
-  if($$('[data-am]',card).length)cloudProviders().then(p=>{$$('[data-am]',card).forEach(b=>{if(!p[b.dataset.am])b.remove()});tidy()});
-  $$('[data-am]',card).forEach(b=>b.onclick=async()=>{const {error}=await CLOUD.sb.auth.signInWithOAuth({provider:b.dataset.am,options:{redirectTo:location.origin+location.pathname}});if(error)toast(error.message)});
+  const apl=$('[data-am="apple"] span',card);if(apl)apl.textContent=tr('Continue with Apple (iCloud)');
+  // Google and Apple always show. Until a provider is switched on in Supabase Auth, the button explains instead of failing.
+  $$('[data-am]',card).forEach(b=>b.onclick=async()=>{
+    const pv=b.dataset.am,on=(await cloudProviders())[pv];
+    if(!on){let n=$('#aSocNote',card);if(!n){n=document.createElement('p');n.id='aSocNote';n.className='em-err';n.setAttribute('role','status');$('.au2-soc',card).after(n)}n.hidden=false;n.textContent=(pv==='google'?'Google':'Apple')+' '+tr('sign-in is almost ready. For now, please use your email below. It only takes a moment.');return}
+    b.disabled=true;const {error}=await CLOUD.sb.auth.signInWithOAuth({provider:pv,options:{redirectTo:location.origin+location.pathname}});
+    if(error){b.disabled=false;toast(tr('Could not open sign-in. Please try again.'))}});
   const send=async()=>{
     const em=await emailGate($('#aEm'),$('#aEmErr'),$('#aGo'));if(!em)return;
     const btn=$('#aGo');btn.disabled=true;
@@ -4007,6 +4016,7 @@ R.auth=arg=>{
    <section class="au2-r"><div class="au2-card">
     ${mkSeg('aseg',[['login','Log in'],['register','Register']],reg?'register':'login')}
     <div class="au2-hd"><h1>${reg?'Create your account':'Welcome back!'}</h1><p>${reg?'Start free. It takes about three minutes.':(has?'Continue where '+esc(P.name)+' left off.':'Log in to continue.')}</p></div>
+    ${reg?`<ol class="au2-steps" aria-label="How set-up works"><li class="on"><i>1</i><span>Account</span></li><li><i>2</i><span>Your child</span></li><li><i>3</i><span>How they learn</span></li><li><i>4</i><span>Colours and sound</span></li></ol>`:''}
     <div class="au2-soc"><button type="button" class="au2-b" data-am="google">${gG}<span>Continue with Google</span></button><button type="button" class="au2-b" data-am="apple">${gA}<span>Continue with Apple</span></button></div>
     <div class="au2-or"><i></i><b>OR</b><i></i></div>
     <label class="au2-f"><span>Email</span><input class="au2-in" id="aEm" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" aria-label="Email address" aria-describedby="aEmErr"></label><p class="em-err" id="aEmErr" role="alert" hidden></p>
