@@ -7158,7 +7158,6 @@ R.pricing=()=>{
      ${p.note?`<p class="px-note">${p.note}</p>`:''}
      <ul class="px-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
    <ul class="px-sure"><li>Cancel any time</li><li>Progress always kept</li><li>Made with therapists and teachers</li></ul>
-   <p class="px-demo">Demo: no payment is taken.</p>
    <section class="px-faq" aria-label="Questions"><h2>Questions</h2>${faq.map(f=>`<details class="px-q"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</section></div>`;
   $$('[data-cyc]').forEach(b=>b.onclick=()=>{if(b.dataset.cyc===billCycle)return;billCycle=b.dataset.cyc;R.pricing();reveal($('#page'))});
   $$('.pl-cb').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$('#plT').textContent=cycAmt(FAM[kn]);$('#plW').textContent='RM'+famWas(kn);$('#plS').textContent=famSub(kn)});
