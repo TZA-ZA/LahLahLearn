@@ -1,5 +1,45 @@
 # LahLahLearn backend
 
+## Live setup (November 2026)
+
+| Piece | Where |
+|---|---|
+| Supabase project | `lahlahlearn`, ref `vuhvvzmmnndrgxoywfem`, region Singapore (`ap-southeast-1`). Supabase has no Malaysia region, and Singapore is the closest. |
+| Database | Migrations from `supabase/migrations/` are applied, with row-level security on every table. |
+| Edge functions | `billing`, `stripe-webhook`, `invite`, `checkup`, `weekly-report`, `pip-chat`, `admin-stats`, `delete-account` are deployed. |
+| Server settings | In Supabase Vault as `app.<NAME>`: Stripe keys, webhook secret, cron secret, site URL, allowed origins, admin emails. A function secret with the same name overrides one. |
+| Weekly reports | pg_cron job `lll-weekly-report` runs every day at 01:00 UTC (09:00 Malaysia) and calls `weekly-report`. |
+| Stripe (test mode) | Products "LahLahLearn Family · 1/2/3 children", each with a monthly and a yearly MYR price (lookup keys `family_<n>_<month|year>`). The webhook points at `stripe-webhook`. The customer portal lets families switch plans or cancel at the end of the period. |
+| App config | `assets/config.js` points at the project with the publishable key. |
+
+### Still to do in dashboards (needs your logins)
+1. **Supabase → Authentication → URL Configuration.**
+   - Set Site URL to `https://lahlahlearn.netlify.app/`.
+   - Add these Redirect URLs: `https://lahlahlearn.netlify.app/**` and `https://tza-za.github.io/LahLahLearn/**`.
+2. **Supabase → Authentication → Emails (templates).**
+   - In **Magic link** and **Confirm signup**, add `{{ .Token }}` so people get a 6-digit code.
+   - The link in the email also works on its own.
+3. **Email sending.**
+   - Supabase's built-in mailer only sends a few emails an hour, which is too few for 20 pilot families.
+   - In Authentication → SMTP, connect Resend: host `smtp.resend.com`, port 465, user `resend`, password = your Resend API key.
+   - Add `RESEND_API_KEY` and `EMAIL_FROM` as Edge Function secrets so invites, check-ups and reports send.
+4. **Pip's AI.** Add `ANTHROPIC_API_KEY` as an Edge Function secret. Until then Pip uses its built-in practice answers.
+5. **Google sign-in.**
+   - Create an OAuth client (Web) in Google Cloud Console.
+   - Use `https://vuhvvzmmnndrgxoywfem.supabase.co/auth/v1/callback` as the redirect URI.
+   - Paste the client ID and secret into Supabase → Authentication → Sign In / Providers → Google.
+   - The button appears in the app by itself once Google is enabled.
+6. **Apple sign-in.**
+   - This needs a paid Apple Developer account. Create a Services ID and a key, using the same callback URL as Google.
+   - Enter them under Providers → Apple. The button appears by itself once Apple is enabled.
+7. **Going live with payments.**
+   - Activate the Stripe account and recreate the products in live mode, or copy them over.
+   - Replace `app.STRIPE_SECRET_KEY` and `app.STRIPE_WEBHOOK_SECRET` in Vault with the live values. You can do this from the SQL editor:
+     ```sql
+     select vault.update_secret((select id from vault.secrets where name='app.STRIPE_SECRET_KEY'), 'sk_live_...');
+     ```
+
+
 The app works on its own with no backend: everything stays on the device. When
 `assets/config.js` has a Supabase URL and key, it switches on:
 

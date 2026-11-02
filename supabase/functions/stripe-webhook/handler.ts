@@ -1,6 +1,6 @@
 // Stripe -> database. Deployed without JWT checks; every request must carry a valid Stripe signature.
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.117.3";
-import { env, json } from "../_shared/http.ts";
+import { env, json, loadSettings } from "../_shared/http.ts";
 import { adminClient } from "../_shared/clients.ts";
 import { stripe, verifyStripeSignature } from "../_shared/stripe.ts";
 
@@ -55,6 +55,12 @@ export async function handleEvent(admin: SupabaseClient, evt: any, fetchSub = (i
     case "customer.subscription.deleted":
       await applySubscription(admin, o, null, true);
       break;
+    case "invoice.paid": {
+      // Renewal went through: re-read the subscription so access and the period end stay current.
+      const sid = o.subscription ?? o.parent?.subscription_details?.subscription ?? null;
+      if (sid) await applySubscription(admin, await fetchSub(typeof sid === "string" ? sid : sid.id));
+      break;
+    }
     case "invoice.payment_failed":
       if (o.customer) await admin.from("families").update({ plan_status: "past_due" }).eq("stripe_customer_id", o.customer).in("plan_status", ["active", "trialing"]);
       break;
@@ -63,6 +69,7 @@ export async function handleEvent(admin: SupabaseClient, evt: any, fetchSub = (i
 
 export async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") return new Response("Use POST", { status: 405 });
+  await loadSettings();
   const payload = await req.text();
   if (!(await verifyStripeSignature(payload, req.headers.get("stripe-signature"), env("STRIPE_WEBHOOK_SECRET")))) {
     return new Response("Bad signature", { status: 400 });

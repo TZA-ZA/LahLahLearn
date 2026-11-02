@@ -41,6 +41,8 @@ export const handler = serveJson(async (req) => {
     customer = c.id;
     await admin.from("families").update({ stripe_customer_id: customer }).eq("id", fid);
   }
+  const te = fam.trial_ends_at ? Math.floor(new Date(fam.trial_ends_at).getTime() / 1000) : 0;
+  const trialEnd = te > Date.now() / 1000 + 48 * 3600 ? te : 0; // Stripe needs at least 48 hours
   const session = await stripe("checkout/sessions", {
     mode: "subscription",
     customer,
@@ -50,7 +52,11 @@ export const handler = serveJson(async (req) => {
     success_url: `${base}#billing-success`,
     cancel_url: `${base}#pricing`,
     metadata: { family_id: fid },
-    subscription_data: { metadata: { family_id: fid, children: String(children) } },
+    subscription_data: {
+      metadata: { family_id: fid, children: String(children) },
+      // Someone who subscribes during the free week keeps the rest of it: the first charge waits until it ends.
+      ...(trialEnd ? { trial_end: trialEnd } : {}),
+    },
   });
   return json({ url: session.url });
 });

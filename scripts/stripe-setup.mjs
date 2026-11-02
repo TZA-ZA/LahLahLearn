@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // One-time Stripe setup for LahLahLearn.
-// Creates the Family product, six MYR prices (1, 2 or 3 children; monthly or yearly) with the
+// Creates three Family products (1, 2, 3 children), six MYR prices (1, 2 or 3 children; monthly or yearly) with the
 // lookup keys the billing function expects, and the webhook endpoint. Safe to run again:
 // anything that already exists is reused.
 //
@@ -27,6 +27,7 @@ const EVENTS = [
   "customer.subscription.deleted",
   "customer.subscription.paused",
   "customer.subscription.resumed",
+  "invoice.paid",
   "invoice.payment_failed",
 ];
 
@@ -52,14 +53,17 @@ async function stripe(method, path, body) {
 const mode = KEY.startsWith("sk_live") ? "LIVE" : "test";
 console.log(`Stripe ${mode} mode`);
 
-// Product
+// Products: one per child count (the customer portal needs one price per interval per product)
+const products = {};
 const found = await stripe("GET", "products/search?query=" + encodeURIComponent("metadata['app']:'lahlahlearn' AND active:'true'"));
-const product = found.data[0] || await stripe("POST", "products", {
-  name: "LahLahLearn Family",
-  description: "Everything in LahLahLearn, for up to 3 children.",
-  metadata: { app: "lahlahlearn" },
-});
-console.log("product", product.id);
+for (const n of [1, 2, 3]) {
+  products[n] = found.data.find((p) => p.metadata?.children === String(n)) || await stripe("POST", "products", {
+    name: `LahLahLearn Family · ${n} ${n === 1 ? "child" : "children"}`,
+    description: `Everything in LahLahLearn for ${["one", "two", "three"][n - 1]} ${n === 1 ? "child" : "children"}.`,
+    metadata: { app: "lahlahlearn", children: n }, tax_code: "txcd_10103001",
+  });
+  console.log("product", n, products[n].id);
+}
 
 // Prices
 const keys = PRICES.map(([n, c]) => `family_${n}_${c}`);
@@ -67,11 +71,11 @@ const existing = await stripe("GET", "prices?active=true&limit=20&" + keys.map((
 for (const [n, cycle, amount] of PRICES) {
   const key = `family_${n}_${cycle}`;
   const have = existing.data.find((p) => p.lookup_key === key);
-  if (have && have.unit_amount === amount && have.currency === "myr") { console.log("price", key, have.id, "(exists)"); continue; }
+  if (have && have.unit_amount === amount && have.currency === "myr" && have.product === products[n].id) { console.log("price", key, have.id, "(exists)"); continue; }
   const p = await stripe("POST", "prices", {
-    product: product.id, currency: "myr", unit_amount: amount,
+    product: products[n].id, currency: "myr", unit_amount: amount,
     recurring: { interval: cycle }, lookup_key: key, transfer_lookup_key: "true",
-    nickname: `Family, ${n} ${n === 1 ? "child" : "children"}, ${cycle}ly`,
+    nickname: `${n} ${n === 1 ? "child" : "children"}, ${cycle}ly`,
     metadata: { children: n, cycle },
   });
   console.log("price", key, p.id, "(created)");
@@ -105,7 +109,7 @@ const portal = {
     subscription_cancel: { enabled: "true", mode: "at_period_end" },
     subscription_update: {
       enabled: "true", default_allowed_updates: { 0: "price" }, proration_behavior: "create_prorations",
-      products: { 0: { product: product.id, prices: Object.fromEntries(prices.map((p, i) => [i, p.id])) } },
+      products: Object.fromEntries([1, 2, 3].map((n, i) => [i, { product: products[n].id, prices: Object.fromEntries(prices.filter((p) => p.product === products[n].id).map((p, j) => [j, p.id])) }])),
     },
   },
 };

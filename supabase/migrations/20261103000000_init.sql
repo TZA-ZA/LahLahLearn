@@ -188,7 +188,7 @@ $$;
 
 -- What the app is allowed to use right now: 'family' during a trial or a paid subscription.
 create or replace function public.effective_plan(f public.families) returns text
-language sql stable as $$
+language sql stable set search_path = public as $$
   select case
     when f.plan = 'school' and f.plan_status in ('active','trialing','past_due') then 'school'
     when f.plan = 'family' and f.plan_status in ('active','trialing','past_due') then 'family'
@@ -198,7 +198,7 @@ $$;
 
 -- ---------------------------------------------------------------- triggers
 
-create or replace function public.touch_updated_at() returns trigger language plpgsql as $$
+create or replace function public.touch_updated_at() returns trigger language plpgsql set search_path = public as $$
 begin new.updated_at := now(); return new; end $$;
 
 create trigger profiles_touch before update on public.profiles for each row execute function public.touch_updated_at();
@@ -402,7 +402,7 @@ end $$;
 -- ---------------------------------------------------------------- privileges
 
 revoke all on all tables in schema public from anon;
-revoke all on all functions in schema public from anon;
+revoke all on all functions in schema public from anon, public;
 
 revoke all on public.ai_usage, public.stripe_events, public.email_log from authenticated;
 
@@ -492,3 +492,6 @@ grant execute on function public.accept_invite(uuid, text) to authenticated;
 grant execute on function public.remove_member(uuid, uuid) to authenticated;
 grant execute on function public.is_member(uuid), public.is_parent(uuid), public.member_role(uuid), public.child_family(text) to authenticated;
 grant execute on function public.effective_plan(public.families) to authenticated;
+grant execute on all functions in schema public to service_role;
+grant all on all tables in schema public to service_role;
+grant all on all sequences in schema public to service_role;

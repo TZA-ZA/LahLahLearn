@@ -2939,22 +2939,26 @@ async function cloudSignOut(){
   cloudClearLocal();CLOUD.user=null;CLOUD.ctx=null;CLOUD.fam=null;CLOUD.readonly=false;CLOUD.view=null;CLOUD.care=null;CLOUD.helperOnly=false;
   P=null;G=null;KIDS=null;session=false;mode='local';DB=null;UID=null;CU=null;
 }
+let cProv=null;
+function cloudProviders(){return cProv||(cProv=fetch(CFG.supabaseUrl.replace(/\/$/,'')+'/auth/v1/settings',{headers:{apikey:CFG.supabaseAnonKey}}).then(r=>r.ok?r.json():{}).then(s=>(s&&s.external)||{}).catch(()=>({}))) }
 function cloudAuthUI(reg){
   const card=$('.au2-card');if(!card)return;
   if(!CFG.google)$$('[data-am="google"]',card).forEach(b=>b.remove());
   if(!CFG.apple)$$('[data-am="apple"]',card).forEach(b=>b.remove());
-  if(!$$('[data-am]',card).length){const s=$('.au2-soc',card),o=$('.au2-or',card);if(s)s.remove();if(o)o.remove()}
+  const tidy=()=>{if(!$$('[data-am]',card).length){const s=$('.au2-soc',card),o=$('.au2-or',card);if(s)s.remove();if(o)o.remove()}};tidy();
+  // Only show Google / Apple when they are switched on in Supabase Auth, so a half-set-up provider never shows a broken button.
+  if($$('[data-am]',card).length)cloudProviders().then(p=>{$$('[data-am]',card).forEach(b=>{if(!p[b.dataset.am])b.remove()});tidy()});
   $$('[data-am]',card).forEach(b=>b.onclick=async()=>{const {error}=await CLOUD.sb.auth.signInWithOAuth({provider:b.dataset.am,options:{redirectTo:location.origin+location.pathname}});if(error)toast(error.message)});
   const send=async()=>{
     const em=await emailGate($('#aEm'),$('#aEmErr'),$('#aGo'));if(!em)return;
     const btn=$('#aGo');btn.disabled=true;
-    const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:reg||!!lsGet('lll.join')}});
+    const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:reg||!!lsGet('lll.join'),emailRedirectTo:location.origin+location.pathname}});
     btn.disabled=false;
     if(error){const e=$('#aEmErr');e.hidden=false;e.textContent=/signups not allowed|not found|otp_disabled/i.test(error.message+(error.code||''))?tr('There is no account with this email yet. Choose Register to create one.'):/rate|security purposes|seconds/i.test(error.message)?tr('Please wait a minute before asking for another code.'):tr('We could not send the code. Please check your connection and try again.');return}
     codeStep(em);
   };
   const codeStep=em=>{
-    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent a code to')} <b>${esc(em)}</b>. ${tr('Type it here.')}</p></div>
+    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent a code to')} <b>${esc(em)}</b>. ${tr('Type it here, or tap the link in the email.')}</p></div>
      <label class="au2-f"><span>${tr('Code')}</span><input class="au2-in" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" aria-describedby="aCodeErr"></label><p class="em-err" id="aCodeErr" role="alert" hidden></p>
      <button class="au2-go" id="aVerify" type="button"><span>${tr('Continue')}</span>${ic('arrow',18)}</button>
      <p class="au2-sw"><a href="#" id="aResend">${tr('Send a new code')}</a> · <a href="#" id="aBack">${tr('Use a different email')}</a></p>`;
@@ -2964,7 +2968,7 @@ function cloudAuthUI(reg){
       if(error){$('#aVerify').disabled=false;err.hidden=false;err.textContent=/expired|invalid/i.test(error.message)?tr('That code is not right or has expired. Try again or send a new code.'):tr('We could not check the code. Please try again.');return}
       lsSet('ll.email',em);try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}};
     $('#aVerify').onclick=verify;inp.addEventListener('keydown',e=>{if(e.key==='Enter')verify()});inp.addEventListener('input',()=>{err.hidden=true;if(inp.value.replace(/\D/g,'').length>=6&&/^\d+$/.test(inp.value))verify()});
-    $('#aResend').onclick=async e=>{e.preventDefault();const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:reg||!!lsGet('lll.join')}});err.hidden=false;err.textContent=error?tr('Please wait a minute before asking for another code.'):tr('A new code is on its way.')};
+    $('#aResend').onclick=async e=>{e.preventDefault();const {error}=await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:reg||!!lsGet('lll.join'),emailRedirectTo:location.origin+location.pathname}});err.hidden=false;err.textContent=error?tr('Please wait a minute before asking for another code.'):tr('A new code is on its way.')};
     $('#aBack').onclick=e=>{e.preventDefault();R.auth(reg?'register':'login')};
   };
   $('#aGo').onclick=send;
