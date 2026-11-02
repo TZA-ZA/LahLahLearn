@@ -2970,7 +2970,7 @@ function cloudAuthUI(reg){
     codeStep(em);
   };
   const codeStep=em=>{
-    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent an email to')} <b>${esc(em)}</b>. ${tr('Tap the link in it on this device, or type the code if the email has one.')}</p></div>
+    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent an email to')} <b>${esc(em)}</b>. ${tr('Type the 6-digit code from it here.')}</p></div>
      <label class="au2-f"><span>${tr('Code')}</span><input class="au2-in" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" aria-describedby="aCodeErr"></label><p class="em-err" id="aCodeErr" role="alert" hidden></p>
      <button class="au2-go" id="aVerify" type="button"><span>${tr('Continue')}</span>${ic('arrow',18)}</button>
      <p class="au2-sw"><a href="#" id="aResend">${tr('Send a new code')}</a> · <a href="#" id="aBack">${tr('Use a different email')}</a></p>`;
