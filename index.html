@@ -5132,7 +5132,7 @@ function x3Sprite(T,txt,{w=128,h=128,size=84,bg='#f2c14e',fg='#3a2a00'}={}){
   const sp=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),transparent:true,depthWrite:false,fog:false}));return sp;
 }
 function x3Blob(T){
-  const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),g=x.createRadialGradient(32,32,2,32,32,32);g.addColorStop(0,'rgba(20,50,30,.32)');g.addColorStop(1,'rgba(20,50,30,0)');x.fillStyle=g;x.fillRect(0,0,64,64);
+  const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),g=x.createRadialGradient(32,32,2,32,32,32);g.addColorStop(0,'rgba(20,45,30,.5)');g.addColorStop(.45,'rgba(20,45,30,.28)');g.addColorStop(1,'rgba(20,45,30,0)');x.fillStyle=g;x.fillRect(0,0,64,64);
   return new T.CanvasTexture(c);
 }
 
@@ -6114,7 +6114,7 @@ function islandBuild(T){
   cv.setAttribute('role','img');cv.setAttribute('aria-label','A small island you can walk around. Use the buttons to go to a place.');box.appendChild(cv);
   const scene=new T.Scene(),camera=new T.PerspectiveCamera(52,w0/h0,.1,260);
   scene.background=x3SkyTex(T,p);scene.fog=new T.Fog(p.fog,34,125);
-  scene.add(new T.AmbientLight(p.ambC,p.amb));const sun=new T.DirectionalLight(p.sunC,p.sun);sun.position.set(14,32,22);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);const sc0=sun.shadow.camera;sc0.left=-38;sc0.right=38;sc0.top=38;sc0.bottom=-38;sc0.near=1;sc0.far=120;sun.shadow.bias=-.0004;sun.shadow.normalBias=.04;scene.add(sun,sun.target);scene.add(new T.HemisphereLight(p.hemiS,p.hemiG,p.hemi));const fl=new T.DirectionalLight(p.fillC,p.fill);fl.position.set(-14,8,-12);scene.add(fl);
+  scene.add(new T.AmbientLight(p.ambC,p.amb));const sun=new T.DirectionalLight(p.sunC,p.sun);sun.position.set(14,32,22);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);const sc0=sun.shadow.camera;sc0.left=-20;sc0.right=20;sc0.top=20;sc0.bottom=-20;sc0.near=1;sc0.far=90;sun.shadow.bias=-.0004;sun.shadow.normalBias=.015;/* the shadow box follows the player (see the loop), so feet get sharp shadows that touch the ground instead of a blurry island-wide map that made characters look like they were floating */const SUN_OFF=[14,32,22],SUN_TX=40/1024;scene.add(sun,sun.target);scene.add(new T.HemisphereLight(p.hemiS,p.hemiG,p.hemi));const fl=new T.DirectionalLight(p.fillC,p.fill);fl.position.set(-14,8,-12);scene.add(fl);
   const S={T,p,scene,camera,rt:[],dead:false,blob:x3Blob(T)};
   const NEW=islNew();let pitch=Math.atan2(9,14),fcs=0,fm=null,baseFov=52;
   
@@ -6174,7 +6174,7 @@ function islandBuild(T){
   const me=new T.Group();scene.add(me);
   const setBuddy=k=>{[...me.children].forEach(c=>{me.remove(c);c.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose())})});const ch=buddyMesh(T,k);me.add(ch);me.userData=ch.userData;x3Shade(me)};
   setBuddy(buddy());S.setBuddy=setBuddy;
-  const sh=new T.Mesh(new T.PlaneGeometry(1.8,1.8),new T.MeshBasicMaterial({map:S.blob,transparent:true,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.y=.02;scene.add(sh);
+  const sh=new T.Mesh(new T.PlaneGeometry(2.3,2.3),new T.MeshBasicMaterial({map:S.blob,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));sh.rotation.x=-Math.PI/2;sh.position.y=.025;sh.renderOrder=1;scene.add(sh);
   const st0=ISLPOS||{x:0,z:5.5,yaw:0};me.position.set(st0.x,0,st0.z);if(st0.face!=null)me.rotation.y=st0.face;let jumpReq=false,yaw=st0.yaw,zoom=1,face=st0.face!=null?st0.face:Math.PI,tgt=null,near=null,found=stars.filter(s=>!s.on).length;const keys={};let joy={x:0,y:0};
   S.snap=()=>({x:me.position.x,z:me.position.z,yaw});
   const st=$('#islst');if(st)st.textContent=found;
@@ -6230,7 +6230,7 @@ function islandBuild(T){
       (u.walk||[]).forEach(w=>{const ph=w.s>0?0:Math.PI,sw=Math.sin(W+ph),lift=Math.max(0,Math.cos(W+ph));
         if(w.k==='arm'){w.m.position.z=w.z-sw*.22*a;w.m.position.y=w.y+lift*.08*a}
         else{w.m.position.z=w.z+sw*.34*a;w.m.position.y=w.y+lift*.24*a;w.m.rotation.x=-sw*.6*a}})}
-    if(u.fx)u.fx(t,moving,calm);sh.position.x=me.position.x;sh.position.z=me.position.z;{const ss=Math.max(.45,1-jh*.18);sh.scale.set(ss,ss,1);sh.material.opacity=Math.max(.4,1-jh*.2)}
+    if(u.fx)u.fx(t,moving,calm);sh.position.x=me.position.x;sh.position.z=me.position.z;{const sx=Math.round(me.position.x/SUN_TX)*SUN_TX,sz=Math.round(me.position.z/SUN_TX)*SUN_TX;sun.target.position.set(sx,0,sz);sun.position.set(sx+SUN_OFF[0],SUN_OFF[1],sz+SUN_OFF[2])}{const ss=Math.max(.45,1-jh*.18);sh.scale.set(ss,ss,1);sh.material.opacity=Math.max(.4,1-jh*.2)}
     stars.forEach(s=>{if(!s.on)return;if(!calm){s.m.rotation.y+=dt*1.4;s.m.position.y=1.1+Math.sin(t*1.6+s.ph)*.15}
       if(Math.hypot(s.m.position.x-me.position.x,s.m.position.z-me.position.z)<1.3){s.on=false;scene.remove(s.m);found++;if(st){st.textContent=found;const sw=$('#islstw');if(sw){sw.classList.remove('bump');void sw.offsetWidth;sw.classList.add('bump')}}sfxStar(found,found===5);
         if(G){const d=todayStr();if(!G.isl||G.isl.d!==d)G.isl={d,n:0,got:[]};if(!G.isl.got)G.isl.got=[];if(!G.isl.got.includes(s.i)){G.isl.got.push(s.i);G.isl.n=G.isl.got.length;award(1);touchDay();save()}}
