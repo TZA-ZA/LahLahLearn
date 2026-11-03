@@ -2157,6 +2157,52 @@ body.cloud #aicard{display:none!important}
 .au2-eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);font:600 .85rem var(--f-b);padding:8px 10px;border-radius:99px;cursor:pointer}
 .au2-eye:hover{color:var(--ink);background:var(--surf2,rgba(0,0,0,.04))}
 .au2-forgot{margin:-4px 0 0;text-align:right;font-size:.88rem}.au2-forgot a{color:var(--brand);font-weight:600}
+
+/* ===== Care Circle: luxe layer ===== */
+body.carepro{--lx-serif:"Iowan Old Style","Palatino Linotype",Palatino,"URW Palladio L","Book Antiqua",Georgia,serif;--lx-gold:#c7a46a;--lx-gold-t:rgba(199,164,106,.38)}
+body.carepro #page .cc .cc-hero{position:relative;overflow:hidden;isolation:isolate;margin-bottom:34px!important;padding:44px 48px 40px!important;border:0!important;border-radius:32px!important;color:#f6f1e6;
+  background:radial-gradient(520px 320px at 96% -18%,rgba(214,182,117,.30),transparent 62%),radial-gradient(420px 260px at -6% 120%,rgba(120,180,150,.18),transparent 60%),linear-gradient(140deg,#132d24 0%,#1d4234 52%,#285847 100%)!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 36px 70px -40px rgba(12,34,26,.75)!important}
+body.carepro #page .cc .cc-hero::before{content:"";position:absolute;z-index:-1;right:-110px;top:-120px;width:360px;height:360px;border-radius:50%;border:1px solid var(--lx-gold-t);box-shadow:0 0 0 34px rgba(214,182,117,.05),0 0 0 70px rgba(214,182,117,.03);pointer-events:none}
+body.carepro #page .cc .cc-hero::after{content:"";position:absolute;left:48px;right:48px;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--lx-gold-t),transparent)}
+body.carepro #page .cc .cc-hero .muted{color:rgba(246,241,230,.66)!important;letter-spacing:.16em;text-transform:uppercase;font-size:.72rem!important;font-weight:600}
+body.carepro #page .cc .cc-hero h2{font-family:var(--lx-serif)!important;font-weight:400!important;color:#fbf6ea!important;font-size:clamp(2.2rem,4.4vw,3.5rem)!important;letter-spacing:-.015em;line-height:1.04}
+body.carepro #page .cc .cc-hero h2 *{font-family:inherit!important}
+body.carepro #page .cc .cc-hero .chip,body.carepro #page .cc .cc-hero [class*=chip]{border:1px solid var(--lx-gold-t)!important;color:#ead9b2!important;background:rgba(255,255,255,.03)!important;letter-spacing:.04em}
+body.carepro #page .cc .cc-hero .btn{color:#f6f1e6!important;border:1px solid rgba(246,241,230,.28)!important;background:rgba(255,255,255,.04)!important;backdrop-filter:blur(6px)}
+body.carepro #page .cc .cc-hero .btn:hover{border-color:var(--lx-gold)!important;background:rgba(255,255,255,.09)!important}
+body.carepro #page .cc .cc-hero .btn svg{color:var(--lx-gold)}
+/* section titles + greetings in serif */
+body.carepro #page .cc .dh-top h1,body.carepro #page .cc .cc-ttl{font-family:var(--lx-serif)!important;font-weight:400!important;letter-spacing:-.01em}
+body.carepro #page .cc .dh-top h1{font-size:clamp(1.8rem,3vw,2.4rem)!important}
+body.carepro #page .cc .dh-d{letter-spacing:.02em}
+body.carepro #page .cc .dc h2,body.carepro #page .cc .dc-h h2,body.carepro #page .cc .gr-sec h3{font-family:var(--lx-serif)!important;font-weight:500!important;font-size:1.28rem!important;letter-spacing:-.005em}
+/* KPI tiles */
+body.carepro #page .cc .dm{border-radius:24px!important;border:1px solid var(--cx-line)!important;background:linear-gradient(180deg,var(--cx-surf),color-mix(in srgb,var(--cx-surf) 94%,var(--lx-gold)))!important;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 22px 40px -34px rgba(30,40,30,.35)!important;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+body.carepro #page .cc .dm:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 28px 46px -32px rgba(30,40,30,.42)!important}
+body.carepro #page .cc .dm-h b{font-size:.68rem!important;letter-spacing:.16em;text-transform:uppercase;font-weight:600!important;color:var(--cx-mut)!important}
+body.carepro #page .cc .dm-h span{color:var(--lx-gold)!important}
+body.carepro #page .cc .dm-v{font-family:var(--lx-serif)!important;font-weight:400!important;font-size:2.9rem!important;letter-spacing:-.02em;color:var(--cx-ink)!important}
+body.carepro #page .cc .dm-v small{font-family:var(--f-b);font-size:.82rem!important;color:var(--cx-mut)!important;letter-spacing:0}
+/* cards */
+body.carepro #page .cc .dc,body.carepro #page .cc .gr-sec,body.carepro #page .cc .card{border-radius:26px!important;border:1px solid var(--cx-line)!important;background:var(--cx-surf)!important;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 26px 50px -42px rgba(30,40,30,.4)!important}
+body.carepro #page .cc .dc-st p{font-family:var(--lx-serif)!important;font-weight:400!important}
+body.carepro #page .cc .dl-bar i{height:5px}
+body.carepro #page .cc .dg-m{height:4px!important;border-radius:4px}
+body.carepro #page .cc .dg-m u{background:var(--lx-gold)!important}
+body.carepro #page .cc .dc-l{color:var(--cx-brass)!important;letter-spacing:.02em}
+/* side navigation */
+body.carepro #page .cc .cc-list button{letter-spacing:.01em}
+body.carepro #page .cc .cc-list button.on{font-weight:600}
+body.carepro #page .cc .cc-list button.on svg{color:var(--lx-gold)}
+/* primary buttons: deep pine with a fine gold edge */
+body.carepro #page .cc .btn.pri{background:linear-gradient(180deg,#1f4436,#163328)!important;color:#fbf6ea!important;border:1px solid rgba(199,164,106,.5)!important;box-shadow:0 14px 26px -18px rgba(14,40,30,.8)!important}
+body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
+@media (max-width:640px){
+  body.carepro #page .cc .cc-hero{padding:30px 22px 26px!important;border-radius:26px!important;margin-bottom:22px!important}
+  body.carepro #page .cc .cc-hero::after{left:22px;right:22px}
+  body.carepro #page .cc .dm-v{font-size:2.3rem!important}
+}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -6754,6 +6800,14 @@ function islandBuild(T){
   const puffTex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),r=g.createRadialGradient(32,32,10,32,32,31);r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(.78,'rgba(255,255,255,.95)');r.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=r;g.beginPath();g.arc(32,32,31,0,6.2832);g.fill();return new T.CanvasTexture(c)})();
   const puffs=[];for(let i=0;i<30;i++){const sp=new T.Sprite(new T.SpriteMaterial({map:puffTex,transparent:true,depthWrite:false,opacity:0}));sp.visible=false;scene.add(sp);puffs.push({sp,age:9,vx:0,vz:0})}
   let puffI=0,puffAcc=0;
+  /* footprints: little paw prints that appear under each step and fade away */
+  const fpTex=(()=>{const c=document.createElement('canvas');c.width=64;c.height=96;const g=c.getContext('2d');g.fillStyle='#fff';
+    g.beginPath();g.ellipse(32,62,17,21,0,0,6.2832);g.fill();[[13,30,7,9],[26,20,7,9.5],[39,20,7,9.5],[51,30,7,9]].forEach(([x,y,rx,ry])=>{g.beginPath();g.ellipse(x,y,rx,ry,0,0,6.2832);g.fill()});
+    const tx=new T.CanvasTexture(c);tx.anisotropy=4;return tx})();
+  const fpGeo=new T.PlaneGeometry(.42,.6),fps=[];
+  for(let i=0;i<26;i++){const m=new T.Mesh(fpGeo,new T.MeshBasicMaterial({map:fpTex,color:p.dark?'#2b2a33':'#7a5a3a',transparent:true,opacity:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));m.rotation.x=-Math.PI/2;m.rotation.order='YXZ';m.visible=false;m.renderOrder=1;scene.add(m);fps.push({m,age:99})}
+  let fpI=0,fpAcc=0,fpSide=0;
+  const footprint=(x,z,ang)=>{const f=fps[fpI++%fps.length];fpSide^=1;const s=fpSide?1:-1,ox=Math.cos(ang)*.17*s,oz=-Math.sin(ang)*.17*s;f.m.position.set(x+ox,.035,z+oz);f.m.rotation.set(-Math.PI/2,ang+Math.PI,0);f.age=0;f.m.visible=true};
   const ringM=new T.Mesh(new T.TorusGeometry(3.5,.09,8,64),new T.MeshBasicMaterial({color:0xffd36b,transparent:true,opacity:.0,depthWrite:false}));ringM.rotation.x=Math.PI/2;ringM.position.y=.12;ringM.visible=false;scene.add(ringM);
   const me=new T.Group();scene.add(me);
   const setBuddy=k=>{[...me.children].forEach(c=>{me.remove(c);c.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose())})});const ch=buddyMesh(T,k);me.add(ch);me.userData=ch.userData;x3Shade(me)};
@@ -6800,7 +6854,7 @@ function islandBuild(T){
     let dx=-Math.sin(yaw)*f+Math.cos(yaw)*r,dz=-Math.cos(yaw)*f-Math.sin(yaw)*r,moving=false;
     if(!f&&!r&&tgt){const ex=tgt.x-me.position.x,ez=tgt.z-me.position.z,d=Math.hypot(ex,ez);if(d<.35)tgt=null;else{dx=ex/d;dz=ez/d}}
     const l=Math.hypot(dx,dz);
-    if(l>.05){const k=Math.min(1,l),sp=(NEW?7:5.2)*dt*k;dx/=l;dz/=l;me.position.x+=dx*sp;me.position.z+=dz*sp;face=Math.atan2(dx,dz);moving=true;stepAcc+=sp;puffAcc+=sp;if(puffAcc>.7&&!calm){puffAcc=0;const pf=puffs[puffI++%puffs.length],cl=buddy()==='cloud';pf.age=0;pf.cl=cl;pf.trail=1;pf.vx=-dx*.45+(Math.random()-.5)*.2;pf.vz=-dz*.45+(Math.random()-.5)*.2;pf.sp.position.set(me.position.x-dx*1.05+(Math.random()-.5)*.25,.08,me.position.z-dz*1.05+(Math.random()-.5)*.25);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}if(stepAcc>1.7){stepAcc-=1.7;if(!air)(buddy()==='cloud'?sfxWind():sfxStep(stepSide^=1))}if(!f&&!r){let dy=face+Math.PI-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));if(!down||!down.moved)yaw+=dy*Math.min(1,dt*2.2)}}
+    if(l>.05){const k=Math.min(1,l),sp=(NEW?7:5.2)*dt*k;dx/=l;dz/=l;me.position.x+=dx*sp;me.position.z+=dz*sp;face=Math.atan2(dx,dz);moving=true;stepAcc+=sp;puffAcc+=sp;fpAcc+=sp;if(fpAcc>.62&&!air&&buddy()!=='cloud'){fpAcc=0;footprint(me.position.x-dx*.25,me.position.z-dz*.25,face)}if(puffAcc>.7&&!calm){puffAcc=0;const pf=puffs[puffI++%puffs.length],cl=buddy()==='cloud';pf.age=0;pf.cl=cl;pf.trail=1;pf.vx=-dx*.45+(Math.random()-.5)*.2;pf.vz=-dz*.45+(Math.random()-.5)*.2;pf.sp.position.set(me.position.x-dx*1.05+(Math.random()-.5)*.25,.08,me.position.z-dz*1.05+(Math.random()-.5)*.25);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}if(stepAcc>1.7){stepAcc-=1.7;if(!air)(buddy()==='cloud'?sfxWind():sfxStep(stepSide^=1))}if(!f&&!r){let dy=face+Math.PI-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));if(!down||!down.moved)yaw+=dy*Math.min(1,dt*2.2)}}
     LM.forEach(m=>{const ex=me.position.x-m.x,ez=me.position.z-m.z,d=Math.hypot(ex,ez);if(d<2.6){me.position.x=m.x+ex/d*2.6;me.position.z=m.z+ez/d*2.6}});
     if(S.tcol)for(let k=0;k<2;k++)S.tcol.forEach(([tx,tz,tr])=>{const ex=me.position.x-tx,ez=me.position.z-tz,d=Math.hypot(ex,ez);if(d<tr){const q=d<.001?1:d;me.position.x=tx+(d<.001?tr:ex/q*tr);me.position.z=tz+(d<.001?0:ez/q*tr)}});
     const R0=Math.hypot(me.position.x,me.position.z);if(R0>33){me.position.x*=33/R0;me.position.z*=33/R0}
@@ -6822,6 +6876,7 @@ function islandBuild(T){
     if(mmDraw)mmDraw(me,face);
     let nn=null,best=5.6;LM.forEach(m=>{const d=Math.hypot(m.x-me.position.x,m.z-me.position.z);if(d<best){best=d;nn=m}});
     const key=nn?nn.L.id:'';if(key!==lastNear){lastNear=key;near=nn;setP(nn);if(nn)sfxNear()}
+    fps.forEach(f=>{if(!f.m.visible)return;f.age+=dt;const k=f.age/4.5;if(k>=1){f.m.visible=false;f.m.material.opacity=0;return}f.m.material.opacity=(p.dark?.6:.5)*Math.min(1,f.age*6)*(1-k*k)});
     puffs.forEach(pf=>{if(!pf.sp.visible)return;pf.age+=dt;const k=pf.age/1;if(k>=1){pf.sp.visible=false;return}const e=1-Math.pow(1-k,2);pf.sp.position.x+=pf.vx*dt;pf.sp.position.z+=pf.vz*dt;pf.sp.position.y=pf.trail?.08+e*.12:.12+e*.28;const sz=(pf.cl?.38:.22)+e*(pf.cl?.34:.2);pf.sp.scale.set(sz,sz,1);pf.sp.material.opacity=(pf.cl?.55:.8)*(1-k)});
     LM.forEach(m=>{const tgt=(near&&near===m)?1:0;m.h+=(tgt-m.h)*Math.min(1,dt*5);const h=m.h;m.gl.material.opacity=.09*h;m.hm.forEach(q=>{q.m.emissive.copy(q.e0).lerp(warm,.08*h);q.m.emissiveIntensity=q.i0+.1*h})});
     if(near){selL.position.set(near.x,5,near.z)}selL.intensity+=(((near?.55:0))-selL.intensity)*Math.min(1,dt*5);
