@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "npm:@supabase/supabase-js@2.117.3": "2.117.3",
+    "npm:nodemailer@6.9.16": "6.9.16",
     "npm:postgres@3.4.4": "3.4.4"
   },
   "npm": {
@@ -52,6 +53,9 @@
     },
     "iceberg-js@0.8.1": {
       "integrity": "sha512-1dhVQZXhcHje7798IVM+xoo/1ZdVfzOMIc8/rgVSijRK38EDqOJoGula9N/8ZI5RD8QTxNQtK/Gozpr+qUqRRA=="
+    },
+    "nodemailer@6.9.16": {
+      "integrity": "sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ=="
     },
     "postgres@3.4.4": {
       "integrity": "sha512-IbyN+9KslkqcXa8AO9fxpk97PA4pzewvpi2B3Dwy9u4zpV32QicaEdgmF3eSQUzdRk7ttDHQejNgAEr4XoeH4A=="

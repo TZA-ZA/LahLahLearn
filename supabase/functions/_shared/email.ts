@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.117.3";
+import nodemailer from "npm:nodemailer@6.9.16";
 import { esc, optionalEnv } from "./http.ts";
 
 export interface Attachment { filename: string; content: string /* base64 */; content_type?: string }
@@ -7,14 +8,32 @@ export interface Mail {
   kind: string; familyId?: string | null; attachments?: Attachment[]; replyTo?: string;
 }
 
-/** Sends through Resend (https://resend.com). Without RESEND_API_KEY it logs and skips, so nothing breaks in testing. */
+/** Sends through Resend (RESEND_API_KEY) or, failing that, SMTP such as Gmail (SMTP_USER + SMTP_PASS). With neither it logs and skips. */
 export async function sendMail(admin: SupabaseClient | null, m: Mail): Promise<{ sent: boolean; id?: string; error?: string }> {
   const key = optionalEnv("RESEND_API_KEY");
   const from = optionalEnv("EMAIL_FROM") ?? "LahLahLearn <onboarding@resend.dev>";
   const to = Array.isArray(m.to) ? m.to : [m.to];
   let result: { sent: boolean; id?: string; error?: string };
-  if (!key) {
-    result = { sent: false, error: "RESEND_API_KEY not set" };
+  const smtpPass = optionalEnv("SMTP_PASS");
+  if (!key && smtpPass) {
+    // Gmail (or any SMTP server) on port 465. Supabase blocks ports 25 and 587 for functions, so 465 it is.
+    try {
+      const user = optionalEnv("SMTP_USER") ?? "";
+      const tx = nodemailer.createTransport({
+        host: optionalEnv("SMTP_HOST") ?? "smtp.gmail.com", port: Number(optionalEnv("SMTP_PORT") ?? 465), secure: true,
+        auth: { user, pass: smtpPass.replace(/\s+/g, "") },
+      });
+      const info = await tx.sendMail({
+        from: optionalEnv("EMAIL_FROM") ?? `LahLahLearn <${user}>`, to: to.join(", "), subject: m.subject, html: m.html, text: m.text, replyTo: m.replyTo,
+        attachments: (m.attachments ?? []).map((a) => ({ filename: a.filename, content: a.content, encoding: "base64", contentType: a.content_type })),
+      });
+      result = { sent: true, id: String(info.messageId ?? "") };
+    } catch (e) {
+      console.error("smtp", e);
+      result = { sent: false, error: e instanceof Error ? e.message : String(e) };
+    }
+  } else if (!key) {
+    result = { sent: false, error: "No email sender set (RESEND_API_KEY or SMTP_PASS)" };
   } else {
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST",

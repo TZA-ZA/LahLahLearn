@@ -2203,6 +2203,32 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
   body.carepro #page .cc .cc-hero::after{left:22px;right:22px}
   body.carepro #page .cc .dm-v{font-size:2.3rem!important}
 }
+
+/* privacy page */
+.pv{max-width:860px;padding-top:28px;padding-bottom:60px}
+.pv-hd{padding:42px 44px 36px;border-radius:30px;color:#f6f1e6;background:radial-gradient(480px 260px at 100% -10%,rgba(214,182,117,.28),transparent 60%),linear-gradient(140deg,#132d24,#1d4234 55%,#285847);box-shadow:0 30px 60px -40px rgba(12,34,26,.7)}
+.pv-eb{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:#e3cf9f}
+.pv-hd h1{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;font-size:clamp(2rem,4.4vw,3.1rem);margin:8px 0 6px;color:#fbf6ea;letter-spacing:-.01em}
+.pv-hd p{margin:0;color:rgba(246,241,230,.75)}
+.pv-toc{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 8px}
+.pv-toc a{font-size:.85rem;padding:7px 14px;border-radius:99px;border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--surf)}
+.pv-toc a:hover{border-color:var(--brand)}
+.pv-body{margin-top:12px;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:8px 34px}
+.pv-s{padding:26px 0;border-bottom:1px solid var(--line);scroll-margin-top:90px}.pv-s:last-child{border-bottom:0}
+.pv-s h2{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:500;font-size:1.35rem;margin:0 0 10px;display:flex;gap:14px;align-items:baseline}
+.pv-s h2 span{font-family:var(--f-b);font-size:.75rem;color:#a8843f;letter-spacing:.1em}
+.pv-s div{line-height:1.7;color:var(--ink2,var(--ink))}.pv-s ul{margin:6px 0 0;padding-left:20px}.pv-s li{margin:6px 0}
+.pv-s a,.pv-link{color:var(--brand);font-weight:600}
+.pv-link{background:none;border:0;padding:0;font:inherit;font-weight:600;cursor:pointer;text-decoration:underline}
+.pv-note{margin-top:16px;text-align:center}
+@media (max-width:640px){.pv-hd{padding:30px 22px;border-radius:24px}.pv-body{padding:4px 20px;border-radius:22px}}
+/* cookie banner */
+.ckb{position:fixed;z-index:120;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translate(-50%,24px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s;width:min(760px,calc(100% - 32px));display:flex;gap:16px 22px;align-items:center;padding:18px 22px;border-radius:22px;background:var(--surf);border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(0,0,0,.35)}
+.ckb.on{transform:translate(-50%,0);opacity:1}
+.ckb-t{flex:1;min-width:0}.ckb-t b{display:block;margin-bottom:4px}.ckb-t p{margin:0;font-size:.9rem;line-height:1.5;color:var(--muted)}.ckb-t small{display:block;margin-top:6px;color:var(--muted)}
+.ckb-l{color:var(--brand);font-weight:600}
+.ckb-b{display:flex;gap:8px;flex-shrink:0}
+@media (max-width:640px){.ckb{flex-direction:column;align-items:stretch;bottom:12px}.ckb-b{justify-content:stretch}.ckb-b .btn{flex:1}}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -2226,7 +2252,7 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 <main id="main"><section class="page" id="page"></section>
 <footer class="foot" id="foot"><div class="wrap row" style="gap:14px 26px">
   <b style="color:var(--ink);font-family:var(--f-d);font-size:1.05rem">LahLahLearn</b><span>Empowering a brighter future for every child</span><span class="sp"></span>
-  <button data-go="home">About</button><button data-go="pricing">Plans</button><span id="syncState" style="font-weight:600"></span>
+  <button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="privacy">Privacy</button><button data-cookies>Cookies</button><span id="syncState" style="font-weight:600"></span>
 </div></footer></main>
 <nav class="dock" id="dock" aria-label="App"></nav><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="sgpf" x="-12%" y="-12%" width="124%" height="124%"><feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/><feSpecularLighting in="b" surfaceScale="5" specularConstant=".8" specularExponent="22" lighting-color="#fff" result="s"><fePointLight x="20" y="-20" z="120"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/><feComposite in="SourceGraphic" in2="s2" operator="arithmetic" k1="0" k2="1" k3=".55" k4="0" result="lit"/><feGaussianBlur in="SourceAlpha" stdDeviation="2" result="sb"/><feOffset in="sb" dy="3" result="so"/><feComponentTransfer in="so" result="sh"><feFuncA type="linear" slope=".26"/></feComponentTransfer><feMerge><feMergeNode in="sh"/><feMergeNode in="lit"/></feMerge></filter></defs></svg>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -2264,7 +2290,7 @@ function pipOrig(s=96){return pipSVG('pip').replace('<svg class="pip"','<svg cla
 
 const BUDDIES=[['pip','Pip','Leafy bunny'],['cloud','Cloud','Sleepy cloud bunny'],['fox','Fox','Cosy little fox']];
 const BUD_IMG={fox:{hello:'assets/img/fox-hello.webp',read:'assets/img/fox-read.webp',teach:'assets/img/fox-teach.webp',calm:'assets/img/fox-calm.webp',cheer:'assets/img/fox-cheer.webp'},cloud:{hello:'assets/img/cloud-hello.webp',read:'assets/img/cloud-read.webp',teach:'assets/img/cloud-teach.webp',calm:'assets/img/cloud-calm.webp',cheer:'assets/img/cloud-cheer.webp'}};
-const BUD_NEED={pip:0,cloud:60,fox:100};
+const BUD_NEED={pip:0,cloud:15,fox:30};
 const budStars=()=>{try{return(G&&G.pts)||0}catch(e){return 0}};
 function budOpen(k){const n=BUD_NEED[k]||0;if(!n)return true;try{if(!G)return false;if(!G.ub)G.ub=['pip'];return G.ub.includes(k)||G.pts>=n}catch(e){return false}}
 function budCheck(){try{if(!G)return;budOpen('fox');BUDDIES.forEach(([k,n])=>{if(BUD_NEED[k]&&!G.ub.includes(k)&&G.pts>=BUD_NEED[k]){G.ub.push(k);setTimeout(()=>{try{toast('New friend unlocked: '+n+'!');sfxStar(3)}catch(e){}},900)}})}catch(e){}}
@@ -2523,7 +2549,7 @@ function studyView(box){
     $('#st',box).textContent=fmt(left);$('#sr',box).setAttribute('stroke-dashoffset',(C*(1-left/total)).toFixed(1));
     $('#sgo',box).hidden=STUDY.run;$('#sgo',box).innerHTML=STUDY.done?'Start another':`${ic('clock',16)} Start focus timer`;
     $('#spz',box).hidden=!STUDY.run;$('#spz',box).textContent=STUDY.pause?'I am ready again':'I need a stretch';
-    $('#sdone',box).innerHTML=STUDY.done?'<b>Well done!</b> +15 stars':'';
+    $('#sdone',box).innerHTML=STUDY.done?'<b>Well done!</b> '+starTxt():'';
     const wait=Math.ceil((STUDY.coolUntil-Date.now())/1000),rb=$('#srst',box);rb.disabled=wait>0;rb.textContent=wait>0?'Reset ('+wait+')':'Reset';
   };
   studyRefresh=paint;paint();
@@ -2729,17 +2755,27 @@ function lbRows(kind){
 function gmAdd(p){if(!G.gm||G.gm.m!==monthStr())G.gm={m:monthStr(),pts:0};G.gm.pts+=p}
 const gamePts=()=>G&&G.gm&&G.gm.m===monthStr()?G.gm.pts:0;
 function awardGame(p){award(p);gmAdd(p)}
-function award(pts){G.pts+=pts;budCheck();if(!G.month||G.month.m!==monthStr())G.month={m:monthStr(),pts:0};G.month.pts+=pts}
+/* Stars: one per reward, at most 5 a day from everything (lessons, games, 3D world, chests). */
+const STAR_DAY=5;let lastStar=0;
+const starsToday=()=>G&&G.sd&&G.sd.d===todayStr()?G.sd.n:0;
+function award(pts){lastStar=0;if(!(pts>0))return 0;const d=todayStr();if(!G.sd||G.sd.d!==d)G.sd={d,n:0};if(G.sd.n>=STAR_DAY)return 0;G.sd.n++;lastStar=1;G.pts+=1;budCheck();if(!G.month||G.month.m!==monthStr())G.month={m:monthStr(),pts:0};G.month.pts+=1;return 1}
+const starTxt=()=>lastStar?tr('+1 star')+' · '+starsToday()+'/'+STAR_DAY+' '+tr('today'):starsToday()>=STAR_DAY?tr('All 5 stars found today. More tomorrow!'):tr('Well done.');
+/* Streak: a day only counts once the child has learned for at least 5 minutes in total that day. */
+const STREAK_SEC=300;
+function streakCheck(){
+  const d=todayStr();if(G.last===d||(G.mins[d]||0)<STREAK_SEC)return false;
+  G.streak=G.last===yesterStr()?(G.streak||0)+1:1;G.last=d;G.best=Math.max(G.best||0,G.streak);return true;
+}
 function touchDay(){
-  const d=todayStr();if(G.last!==d){G.streak=G.last===yesterStr()?G.streak+1:1;G.last=d}
-  G.best=Math.max(G.best,G.streak);if(!G.days.includes(d)){G.days.push(d);if(G.days.length>60)G.days.shift()}
+  const d=todayStr();if(!G.days.includes(d)){G.days.push(d);if(G.days.length>60)G.days.shift()}
+  streakCheck();
 }
 function recordAnswer(skill,ok){
   const m=G.mastery[skill],s=G.st[skill]||(G.st[skill]=[0,0]);s[0]++;if(ok)s[1]++;
   G.mastery[skill]=clamp(ok?m+(100-m)*.12:m-m*.04,5,99);
   if(ok){award(10);wrongRun=0}else if(++wrongRun>=(TF().big?2:3))setTimeout(autoCalm,1400);touchDay();save();try{comboHit(ok)}catch(e){}
 }
-const plantCount=()=>Math.floor(G.pts/40);
+const plantCount=()=>Math.floor(G.pts/5);
 const PLANTS=['\u{1F331}','\u{1F33C}','\u{1F33B}','\u{1F344}','\u{1F337}','\u{1F333}','\u{1F34E}','\u{1F98B}','\u{1F41D}','\u{1F308}','\u{1F41E}','\u{1F33A}'];
 
 
@@ -3106,7 +3142,7 @@ function cloudAuthUI(reg){
   const em=$('#aEm');[em,pw,pw2].forEach(x=>x&&x.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopImmediatePropagation();e.preventDefault();send()}},true));
   if(lsGet('ll.email')&&!em.value)em.value=lsGet('ll.email');
   const lab=$('#aGo span');if(lab)lab.textContent=reg?tr('Create account'):tr('Log in');
-  const note=$('.au2-note',card);if(note)note.textContent=reg?tr('We email you a code once to confirm your address. One account holds up to 3 children.'):tr('One parent account holds up to 3 children.');
+  const note=$('.au2-note',card);if(note){if(reg)note.innerHTML=esc(tr('We email you a code once to confirm your address.'))+' '+esc(tr('By creating an account you agree to our'))+' <a href="#privacy">'+esc(tr('Privacy policy'))+'</a>.';else note.textContent=tr('One parent account holds up to 3 children.')}
 }
 
 /* ---- Care Circle data */
@@ -3173,6 +3209,44 @@ R.helping=()=>{
   $$('[data-hk]').forEach(b=>b.onclick=()=>{const [f,c]=b.dataset.hk.split('|');helperOpen(f,c)});
   $('#hlOut').onclick=async()=>{await cloudSignOut();go('welcome')};
 };
+
+/* ---------- Privacy policy ---------- */
+R.privacy=()=>{
+  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'hello@lahlahlearn.com');
+  const S=[
+   ['Who we are','LahLahLearn is a calm learning website for young children, run from Malaysia. We follow the Personal Data Protection Act 2010 (PDPA). Questions or requests: <a href="mailto:'+mail+'">'+mail+'</a>.'],
+   ['What we collect','<ul><li><b>Your account:</b> your email address and password. Passwords are stored by our sign-in provider as a secure one-way hash. We never see them.</li><li><b>Your child&rsquo;s profile:</b> the first name, age range and learning preferences you choose in set-up, and the colours and sounds you pick.</li><li><b>Learning progress:</b> stars, minutes, streaks, lessons and skill levels, so the app can adapt and parents can see progress.</li><li><b>Care Circle:</b> names and emails of teachers or therapists you invite, shared notes and booked check-ups.</li><li><b>Billing:</b> if you subscribe, payment is handled by Stripe. We only keep your plan and its status, never your card number.</li></ul>'],
+   ['What stays on the device','<ul><li><b>Camera (focus helper):</b> only when a parent turns it on. Pictures are processed on the device to notice tiredness or upset. They are never recorded or uploaded.</li><li><b>Microphone (talk practice):</b> only when your child taps the microphone. Speech-to-text is done by the browser, which may use its maker&rsquo;s service (for example Google in Chrome).</li></ul>'],
+   ['Who helps us','<ul><li><b>Supabase</b> (Singapore): accounts and the database.</li><li><b>Stripe</b>: payments.</li><li><b>Anthropic</b>: Pip&rsquo;s chat answers. Only what your child types to Pip is sent. We do not add their name, and Pip is told not to ask for personal details.</li><li><b>Gmail / Google</b>: sending sign-in codes and Care Circle emails.</li><li><b>Netlify</b>: hosting the website.</li></ul>We do not sell data and we do not show adverts.'],
+   ['Cookies and storage','We use essential storage to keep you signed in, save progress and remember settings. Optional anonymous usage statistics are only used if you choose <i>Accept all</i>. You can change this any time with <button class="pv-link" data-cookies>Cookie settings</button>.'],
+   ['Children','Accounts are made and managed by a parent or carer. Children do not need an email address and are not asked for personal details. Pip is told never to ask for them.'],
+   ['How long we keep data','We keep data while the account is open. When a parent deletes the account (Settings, then Delete everything), we remove the family, children, progress and Care Circle data, cancel any subscription and delete the sign-in. Payment records Stripe must keep by law are held by Stripe.'],
+   ['Your rights','You can see, correct or delete your family&rsquo;s data in the Care Circle and Settings. For a copy of your data or anything else, email <a href="mailto:'+mail+'">'+mail+'</a> and we will reply within 21 days.'],
+   ['Changes','If this policy changes in an important way, we will show a notice in the app before it takes effect.']];
+  $('#page').innerHTML=`<div class="pv wrap"><header class="pv-hd"><span class="pv-eb">${tr('Privacy policy')}</span><h1>${tr('Your family’s privacy')}</h1><p>${tr('Plain words, no surprises. Last updated 6 November 2026.')}</p></header>
+   <nav class="pv-toc" aria-label="${tr('On this page')}">${S.map((s,i)=>`<a href="#" data-pv="${i}">${tr(s[0])}</a>`).join('')}</nav>
+   <div class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2><span class="tn">${String(i+1).padStart(2,'0')}</span>${tr(s[0])}</h2><div>${s[1]}</div></section>`).join('')}</div>
+   <p class="pv-note muted small">${tr('This policy explains how LahLahLearn handles data. It is not legal advice.')}</p></div>`;
+  $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
+};
+
+/* ---------- Cookie consent: Accept all / Essential only ---------- */
+const CONSENT_KEY='lll.consent';
+const consentGet=()=>{try{return localStorage.getItem(CONSENT_KEY)}catch(e){return null}};
+window.LLL_CONSENT=()=>consentGet()==='all';
+function cookieBanner(force){
+  if(!force&&consentGet())return;
+  const old=$('#ckb');if(old)old.remove();
+  const b=document.createElement('div');b.id='ckb';b.className='ckb';b.setAttribute('role','dialog');b.setAttribute('aria-label',tr('Cookie choices'));
+  const c=consentGet();
+  b.innerHTML=`<div class="ckb-t"><b>${tr('Cookies and storage')}</b><p>${tr('We use essential storage to keep you signed in and save progress. With your OK, we also collect anonymous usage statistics to improve lessons. No adverts, ever.')} <a href="#privacy" class="ckb-l">${tr('Privacy policy')}</a></p>${c?`<small>${tr('Current choice')}: ${c==='all'?tr('Accept all'):tr('Essential only')}</small>`:''}</div>
+   <div class="ckb-b"><button class="btn ghost sm" data-ck="essential">${tr('Essential only')}</button><button class="btn pri sm" data-ck="all">${tr('Accept all')}</button></div>`;
+  document.body.appendChild(b);requestAnimationFrame(()=>b.classList.add('on'));
+  $$('[data-ck]',b).forEach(x=>x.onclick=()=>{try{localStorage.setItem(CONSENT_KEY,x.dataset.ck);localStorage.setItem(CONSENT_KEY+'.at',new Date().toISOString())}catch(e){}b.classList.remove('on');setTimeout(()=>b.remove(),300);toast(x.dataset.ck==='all'?tr('Thank you. Saved.'):tr('Only essential storage will be used.'))});
+  $('.ckb-l',b).onclick=()=>{b.classList.remove('on');setTimeout(()=>b.remove(),300);setTimeout(()=>{if(!consentGet())cookieBanner()},1500)};
+}
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-cookies]');if(t){e.preventDefault();cookieBanner(true)}});
+setTimeout(()=>cookieBanner(),1200);
 R.join=arg=>{
   if(!CLOUD.on){go('welcome');return}
   if(/^[0-9a-f-]{36}$/i.test(arg||''))lsSet('lll.join',arg);
@@ -3224,7 +3298,7 @@ function greetShow(){
   el.onclick=shut;$('button',el).focus();setTimeout(shut,6500);
   try{if(typeof say==='function'&&!calmOpen)say('Hi '+P.name+', welcome to LahLahLearn. '+w+'!')}catch(e){}
 }
-const PUBLIC=['welcome','auth','home','pricing','join'],FULL=['welcome','onboard','pick','who'];
+const PUBLIC=['welcome','auth','home','pricing','join','privacy'],FULL=['welcome','onboard','pick','who'];
 const DOCK=[['dashboard','Home','home'],['learn','Learn','book'],['explore-island','3D World','globe'],['together','Leaderboard','trophy'],['care','Care Circle','chart']];
 const parseHash=()=>{const h=(location.hash||'').slice(1),i=h.indexOf('-');return i<0?{base:h,arg:''}:{base:h.slice(0,i),arg:h.slice(i+1)}};
 const go=r=>{if(('#'+r)===location.hash)route();else location.hash=r};
@@ -3260,7 +3334,7 @@ function chrome(){
   $('#foot').style.display=FULL.includes(cur)||(cur==='explore'&&parseHash().arg)?'none':'';setSync();updateClock();musSync();if(!session&&(HS.cam.on||HS.mic.on)){camStop();micStop()}hsUpdate();
 }
 function resolve(){
-  if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
+  if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
   let{base,arg}=parseHash();
   if(!R[base])base=session?'dashboard':'welcome';
   if(!session&&!PUBLIC.includes(base)&&base!=='onboard'&&base!=='pick')base='auth';
@@ -3450,7 +3524,7 @@ studyUI();
 
 setInterval(()=>{
   if(document.hidden||calmOpen||!session||!G||!['learn','play','together','talk','explore','world'].includes(cur))return;
-  const d=todayStr();G.mins[d]=(G.mins[d]||0)+1;
+  const d=todayStr();G.mins[d]=(G.mins[d]||0)+1;if(G.mins[d]===STREAK_SEC&&streakCheck()){save();try{toast(tr('5 minutes today! Your streak is now')+' '+G.streak+'.')}catch(e){}}
   if(Date.now()-calmLast>Math.max(8,P.att*3+6)*60000)autoCalm();
   if(G.mins[d]%10===0)save();
   updateClock();
@@ -4026,7 +4100,7 @@ R.welcome=()=>{
     <div class="lp-crew"><div class="lp-cm rv"><div class="im" id="lpcpip">${pipSVG()}</div><h3>Pip</h3><p>Our leafy guide, always by your side.</p></div><div class="lp-cm rv" style="--d:1"><div class="im" id="lpcfox">${buddySVG('fox',380,'hello')}</div><h3>Fox</h3><p>A cosy little fox who loves a good story.</p></div><div class="lp-cm rv" style="--d:2"><div class="im" id="lpccld">${buddySVG('cloud',380,'hello')}</div><h3>Cloud</h3><p>A sleepy cloud bunny who is great at calm breaks.</p></div></div></div></section>
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-two"><div><div class="lp-k">For grown-ups</div><h2 class="lp-h2 rv">One calm view for everyone who cares.</h2></div><div class="stack" style="gap:22px"><p class="lp-p rv">The Care Circle turns daily play into clear goals that parents, teachers and therapists can all see. No tests. No scores. Just progress.</p><div class="row rv"><button class="btn pri lg mag" data-go="home">How it works ${ic('arrow',18)}</button><button class="btn lg mag" data-go="pricing">Plans</button></div></div></div></div></section>
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-end rv" id="lpend"><svg class="le-rb" viewBox="0 0 800 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="26"><path d="M50 400a350 350 0 0 1 700 0" stroke="#ff9f8f"/><path d="M84 400a316 316 0 0 1 632 0" stroke="#ffd36b"/><path d="M118 400a282 282 0 0 1 564 0" stroke="#9fe3b2"/><path d="M152 400a248 248 0 0 1 496 0" stroke="#9ccdf2"/><path d="M186 400a214 214 0 0 1 428 0" stroke="#c9b6f2"/></g></svg><svg class="le-sp" viewBox="0 0 100 100" aria-hidden="true">${[[10,20,1],[88,16,.8],[22,62,.7],[78,56,.9],[40,10,.6],[62,12,.7],[50,38,.5]].map(([x,y,k],i)=>`<path class="sk" style="--d:${i*.6}s" transform="translate(${x} ${y}) scale(${k*.13})" d="M0-10L2.6-3.2 10 0 2.6 3.2 0 10-2.6 3.2-10 0-2.6-3.2z"/>`).join('')}</svg><h2 class="le-h"><span>Every child</span> <span>can do this.</span></h2><p style="margin:0;opacity:.92;max-width:38ch">Start free. Learn at a calm, kind pace.</p><button class="btn sun lg mag" data-go="auth-register">Register ${ic('arrow',18)}</button><div class="pp2 l" id="lpe1"><img src="assets/img/fox-hello.webp" alt="" draggable="false"></div><div class="pp2 l2" id="lpe3"><img src="assets/img/pip-hello.webp" alt="" draggable="false"></div><div class="pp2 r2" id="lpe4"><img src="assets/img/pip-hello.webp" alt="" draggable="false"></div><div class="pp2 r" id="lpe2"><img src="assets/img/cloud-hello.webp" alt="" draggable="false"></div></div>
-    <div class="lp-foot"><span>© LahLahLearn. Calm learning for every child.</span><nav><button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="auth-login">Log in</button></nav></div></div></section></div>`;
+    <div class="lp-foot"><span>© LahLahLearn. Calm learning for every child.</span><nav><button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="privacy">Privacy</button><button data-go="auth-login">Log in</button></nav></div></div></section></div>`;
   lpArtBake();
   const hero=$('#lphero'),bub=$('#lpbub'),yay=$('#lpyay'),pp=$('#lppip');
   /* the 4 small Pip/Fox/Cloud figures in the closing banner (lpe1-4) are purely decorative - giving each its own cursor-tracking animation loop just for a background flourish was a big chunk of the page's idle CPU cost, so they stay as still illustrations */
@@ -4373,9 +4447,9 @@ R.dashboard=()=>{
   const wk=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);return{on:G.days.includes(dstr(d)),today:i===6,l:d.toLocaleDateString('en-GB',{weekday:'narrow'})}});
   const weak=TOP.slice().sort((a,b)=>topM(a.id)-topM(b.id))[0];
   const bn=BUDDIES.find(b=>b[0]===buddy())[1],goalOk=mt>=goalMin,SAYS={num:'Shall we count something?',read:'Want to find a new word?',pat:'Can you spot the pattern?',feel:'Let’s talk about feelings!'};
-  const HI=goalOk?'You did it! Want to play more?':SAYS[weak.id],stk=effStreak(G),into=G.pts%40,plants=plantCount();
+  const HI=goalOk?'You did it! Want to play more?':SAYS[weak.id],stk=effStreak(G),into=starsToday(),plants=plantCount();
   const _mon=new Date();_mon.setDate(_mon.getDate()-((_mon.getDay()+6)%7));const monK=dstr(_mon);
-  const cwk=[...Array(7)].map((_,i)=>{const d=new Date(_mon);d.setDate(_mon.getDate()+i);return{on:G.days.includes(dstr(d)),l:d.toLocaleDateString('en-GB',{weekday:'narrow'}),today:dstr(d)===todayStr()}}),cn=cwk.filter(d=>d.on).length,cOpen=cn>=5&&G.chest!==monK,cDone=G.chest===monK;
+  const cwk=[...Array(7)].map((_,i)=>{const d=new Date(_mon);d.setDate(_mon.getDate()+i);return{on:(G.mins[dstr(d)]||0)>=STREAK_SEC,l:d.toLocaleDateString('en-GB',{weekday:'narrow'}),today:dstr(d)===todayStr()}}),cn=cwk.filter(d=>d.on).length,cOpen=cn>=5&&G.chest!==monK,cDone=G.chest===monK;
   const sched=[['First','book','Learn','learn',td.lessons>0],['Then','game','Play','play',td.games>0],['Then','heart','Calm break','calm',td.breaks>0||G.calm>0&&false]];
   $('#page').innerHTML=`<div class="wrap stack" style="gap:22px">
    <section class="dsky" aria-label="Welcome"><i class="dsky-orb" aria-hidden="true"></i><div class="dsky-sky" aria-hidden="true"><i class="c1"></i><i class="c2"></i><i class="c3"></i></div><i class="dsky-hill h1" aria-hidden="true"></i><i class="dsky-hill h2" aria-hidden="true"></i><i class="kp-sp s1" aria-hidden="true"></i><i class="kp-sp s2" aria-hidden="true"></i><i class="kp-sp s3" aria-hidden="true"></i>
@@ -4385,7 +4459,7 @@ R.dashboard=()=>{
     <div class="dsky-buddy"><div class="bub"><button class="kp-spk" id="kpSay" aria-label="Hear ${esc(bn)}">${ic('vol',18)}</button><span>${esc(HI)}</span></div><button class="bd" id="kpBuddy" aria-label="Say hi to ${esc(bn)}">${buddySVG(buddy(),230,goalOk?'cheer':'hello')}</button></div></div></section>
    <section class="stk card" aria-label="Activity streak: ${stk} day${stk===1?'':'s'} in a row">
     <div class="stk-art" aria-hidden="true">${streakArt(stk)}</div>
-    <div class="stk-main"><h3>${stk>0?stk+'-day streak!':'Start a streak today'}</h3><p class="muted">${stk>0?(td0>0?'You learned today. See you tomorrow!':'Play a little today to keep it going.'):'Play for a few minutes to light your first flame.'}</p>
+    <div class="stk-main"><h3>${stk>0?stk+'-day streak!':'Start a streak today'}</h3><p class="muted">${G.last===todayStr()?'You learned 5 minutes today. See you tomorrow!':stk>0?'Learn for 5 minutes today to keep it going. '+Math.min(5,Math.floor(td0/60))+' of 5 done.':'Learn for 5 minutes today to light your first flame.'}</p>
      <ol class="stk-wk">${cwk.map(d=>`<li class="${d.on?'on':''}${d.today?' now':''}"><i>${d.on?'<svg viewBox="0 0 20 20" width="14" height="14"><path d="M5 10.5l3.2 3L15 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>':''}</i><span>${d.l}</span></li>`).join('')}</ol>
      <p class="stk-note">Missed a day? That is okay. Rest days are part of learning.</p></div>
     <div class="stk-side"><div class="stk-best"><b>${Math.max(G.best||0,stk)}</b><span>best streak</span></div>
@@ -4398,7 +4472,7 @@ R.dashboard=()=>{
   $$('.kt,.kc').forEach(b=>b.addEventListener('click',()=>sfxStar(1+Math.floor(Math.random()*4))));
   const ks=$('#kpSay');if(ks)ks.onclick=e=>{e.stopPropagation();say(HI)};
   const kb=$('#kpBuddy');if(kb)kb.onclick=()=>{kb.classList.remove('hop');void kb.offsetWidth;kb.classList.add('hop');sfxStar(1+Math.floor(Math.random()*5))};
-  const cb=$('#chestBtn');if(cb)cb.onclick=()=>{G.chest=monK;award(20);save();sfxStar(5,true);toast('Chest opened! +20 stars');R.dashboard()};
+  const cb=$('#chestBtn');if(cb)cb.onclick=()=>{G.chest=monK;award(20);save();sfxStar(5,true);toast(tr('Chest opened!')+' '+starTxt());R.dashboard()};
   const sc=$('#stepCalm');if(sc)sc.onclick=()=>{today().breaks++;save();openCalm()};
   const pc=$('#prizeCard');if(pc)pc.onclick=()=>{togTab='fame';go('together')};
 };
@@ -4801,7 +4875,7 @@ function discoverStart(id){
     $$('.dv-chip',box).forEach((b,k)=>{b.classList.toggle('on',k===i);b.classList.toggle('seen',seen.has(k)&&k!==i)});
     $('#dvd').textContent='';
     $$('.dv-o',box).forEach(b=>b.onclick=()=>{const n=+b.dataset.o;b.classList.add('on');b.querySelector('i').textContent=n;say(NUMW[n]);sfxPop&&sfxPop()});
-    if(seen.size===items.length&&G&&session){const d=todayStr();G.disc=G.disc||{};if(G.disc[id]!==d){G.disc[id]=d;award(5);touchDay();save();toast('You learned them all! +5 stars')}}
+    if(seen.size===items.length&&G&&session){const d=todayStr();G.disc=G.disc||{};if(G.disc[id]!==d){G.disc[id]=d;award(5);touchDay();save();toast(tr('You learned them all!')+' '+starTxt())}}
   };
   const box=$('#page');
   const go2=n=>{i=(n+items.length)%items.length;draw()};
@@ -4860,7 +4934,7 @@ function comboHit(ok){
   combo++;rushN++;
   confettiAt(lastPtr[0],lastPtr[1],combo>=5?30:16);
   if(combo===3||combo%5===0){const t=combo>=10?'Super star!':combo>=5?'Amazing!':'Nice run!';const b=document.createElement('div');b.className='combo-pop';b.setAttribute('data-notr','');b.textContent=tr(t)+' ×'+combo;document.body.appendChild(b);setTimeout(()=>b.remove(),1400);if(P&&P.prefs.voice)say(tr(t))}
-  if(rushN>=10){rushN=0;award(5);save();confettiAt(innerWidth/2,innerHeight/3,60);toast(tr('Star Rush! +5 stars'));sfxStar(8,true)}
+  if(rushN>=10){rushN=0;award(5);save();confettiAt(innerWidth/2,innerHeight/3,60);toast(tr('Star Rush!')+' '+starTxt());sfxStar(8,true)}
   rushSync();
 }
 
@@ -4977,7 +5051,7 @@ function emoScene(id){
       const ok=b.dataset.g==='1';recordAnswer('feel',ok);
       if(ok){$$('.qopt',$('#grbox')).forEach(x=>x.disabled=true);b.classList.add('right');const f=growMark('emo',S.id,5);
         const ni=EMO_SC[(EMO_SC.findIndex(x=>x.id===S.id)+1)%EMO_SC.length];
-        $('#grfb').innerHTML=`<div class="fb"><strong>Great choice!</strong><span>${f?'+5 stars':'Well done.'}</span></div><div class="row"><button class="btn pri" data-go="learn-grow-emo-${ni.id}">Next story ${ic('arrow',17)}</button><button class="btn" data-go="learn-grow-emo">All stories</button><button class="btn ghost" id="grre">Watch again</button></div>`;
+        $('#grfb').innerHTML=`<div class="fb"><strong>Great choice!</strong><span>${f?starTxt():'Well done.'}</span></div><div class="row"><button class="btn pri" data-go="learn-grow-emo-${ni.id}">Next story ${ic('arrow',17)}</button><button class="btn" data-go="learn-grow-emo">All stories</button><button class="btn ghost" id="grre">Watch again</button></div>`;
         $('#grre').onclick=()=>emoScene(id);sfxStar(4,true)}
       else{b.classList.add('soft');b.disabled=true;$('#grfb').innerHTML='<div class="fb"><span>That could make things harder. Try another.</span></div>'}
     });
@@ -5035,7 +5109,7 @@ function talkChat(id){
   let n=0,good=0;const fill=s=>s.replace('{me}',P.name).replace('{int}',intWord());
   const turn=()=>{
     if(n>=S.turns.length){const f=growMark('talk',S.id,5),ni=TALK_SC[(TALK_SC.findIndex(x=>x.id===S.id)+1)%TALK_SC.length];
-      $('#grchat').insertAdjacentHTML('beforeend',`<div class="fb"><strong>You did it!</strong><span>${f?'+5 stars':'Nice practice.'}</span></div><div class="row"><button class="btn pri" data-go="learn-grow-talk-${ni.id}">Next ${ic('arrow',17)}</button><button class="btn" data-go="learn-grow-talk">All chats</button></div>`);sfxStar(5,true);return}
+      $('#grchat').insertAdjacentHTML('beforeend',`<div class="fb"><strong>You did it!</strong><span>${f?starTxt():'Nice practice.'}</span></div><div class="row"><button class="btn pri" data-go="learn-grow-talk-${ni.id}">Next ${ic('arrow',17)}</button><button class="btn" data-go="learn-grow-talk">All chats</button></div>`);sfxStar(5,true);return}
     const [fr,ops]=S.turns[n];
     $('#grchat').insertAdjacentHTML('beforeend',`<div class="gr-b fr"><span class="gr-av" aria-hidden="true">🧒</span><p>${esc(fill(fr))}</p></div><div class="gr-ans" id="gra${n}">${shuffle(ops.slice()).map(o=>`<button class="gr-o" data-g="${o[1]}" data-fb="${esc(o[2])}">${esc(fill(o[0]))}</button>`).join('')}</div>`);
     say(fill(fr));
@@ -5065,7 +5139,7 @@ function lifeRoutine(id){
      ${f?`<div class="gr-win"><span aria-hidden="true">${pip(70)}</span><div class="stack" style="gap:2px"><strong>All done! Great job.</strong><span id="grpts"></span></div><div class="row" style="margin-left:auto"><button class="btn pri" data-go="learn-grow-life">More routines</button><button class="btn ghost" id="grre">Do it again</button></div></div>`:''}`,{e:S.e,sub:done.size+' of '+S.steps.length+' steps done',c:'--kb',done:done.size,total:S.steps.length});
     $$('.gr-s').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;if(done.has(k))done.delete(k);else{done.add(k);sfxPop&&sfxPop();say(S.steps[k][1])}const y=scrollY;draw();scrollTo(0,y)});
     $('#grhear').onclick=()=>say(S.steps.map((s,k)=>(k+1)+'. '+s[1]).join('. '));
-    if(f){const first=growMark('life',S.id,3);$('#grpts').textContent=first?'+3 stars':'Well done.';if(first){sfxStar(5,true);confettiAt(innerWidth/2,innerHeight/3)}const r=$('#grre');r.onclick=()=>{done.clear();draw()}}
+    if(f){const first=growMark('life',S.id,3);$('#grpts').textContent=first?starTxt():'Well done.';if(first){sfxStar(5,true);confettiAt(innerWidth/2,innerHeight/3)}const r=$('#grre');r.onclick=()=>{done.clear();draw()}}
   };
   draw();
 }
@@ -5136,7 +5210,7 @@ function mkShow(k,id){
     sing:k==='sing',tune:k==='sing'?TUNES[id]:null,steps:k==='sport'||k==='dance',
     after(box){
       const first=growMark('mk',k+id,4);
-      const fin=(ok,msg)=>`<div class="fb"><strong>${msg}</strong><span>${first?'+4 stars':'Well done.'}</span></div>`;
+      const fin=(ok,msg)=>`<div class="fb"><strong>${msg}</strong><span>${first?starTxt():'Well done.'}</span></div>`;
       if(S.q){const [q,ops,ci]=S.q;box.innerHTML=`<div class="card stack" style="gap:14px"><h3>${esc(q)}</h3><div class="gr-opts">${shuffle(ops.map((o,i)=>[o,i===ci])).map(([o,g])=>`<button class="qopt" data-g="${g?1:0}">${esc(o)}</button>`).join('')}</div><div id="mkfb" aria-live="polite"></div></div>`;say(q);
         $$('.qopt',box).forEach(b=>b.onclick=()=>{const ok=b.dataset.g==='1';recordAnswer('know',ok);if(ok){$$('.qopt',box).forEach(x=>x.disabled=true);b.classList.add('right');$('#mkfb').innerHTML=fin(1,'Yes! Great reading.')+`<div class="row"><button class="btn pri" data-go="learn-make-${k}-${nxt.id}">Next ${ic('arrow',17)}</button><button class="btn" data-go="learn-make-${k}">All</button></div>`;sfxStar(4,true);confettiAt(innerWidth/2,innerHeight/2)}else{b.classList.add('soft');b.disabled=true;$('#mkfb').innerHTML='<div class="fb"><span>Think about the story. Try another.</span></div>'}})}
       else{box.innerHTML=`<div class="card stack" style="gap:14px">${fin(1,k==='sing'?'Lovely singing!':k==='dance'?'What a great dancer!':'Nice learning!')}<div class="row"><button class="btn pri" data-go="learn-make-${k}-${nxt.id}">Next ${ic('arrow',17)}</button><button class="btn" data-go="learn-make-${k}">All</button><button class="btn ghost" id="mkre">Again</button></div></div>`;$('#mkre').onclick=()=>mkShow(k,id);sfxStar(4,true);confettiAt(innerWidth/2,innerHeight/2)}
@@ -5215,7 +5289,7 @@ function actStart(){
     $('#page').innerHTML=growShell('Act it out','learn',`<div class="gr-act"><div class="gr-ae" aria-hidden="true">${a[0]}</div><h3>${esc(a[1])}</h3><p>${esc(a[2])}</p><div class="gr-tm" id="actt" aria-live="polite"></div><div class="row" style="justify-content:center"><button class="btn sun lg" id="actgo">Start (10 seconds)</button><button class="btn lg" id="actnx">Another</button></div></div>`,{e:'🎭',sub:'Pretend and play. Take your time.',c:'--sun',done:Math.min(dn,12),total:12});
     say(a[1]+'. '+a[2]);
     $('#actnx').onclick=()=>{clearInterval(tm);i++;draw()};
-    $('#actgo').onclick=()=>{clearInterval(tm);left=10;const b=$('#actgo');b.disabled=true;const tick=()=>{$('#actt').textContent=left>0?left:'';if(left<=0){clearInterval(tm);b.disabled=false;b.textContent='Again';$('#actt').innerHTML='<span class="gr-tip ok">Great acting! Pip claps.</span>';sfxStar(4);confettiAt(innerWidth/2,innerHeight/2);const g=growG();g.mk.act=(g.mk.act||0)+1;if(g.mk.act%3===0){award(3);toast('+3 stars')}touchDay();save();return}left--};tick();tm=setInterval(tick,1000)};
+    $('#actgo').onclick=()=>{clearInterval(tm);left=10;const b=$('#actgo');b.disabled=true;const tick=()=>{$('#actt').textContent=left>0?left:'';if(left<=0){clearInterval(tm);b.disabled=false;b.textContent='Again';$('#actt').innerHTML='<span class="gr-tip ok">Great acting! Pip claps.</span>';sfxStar(4);confettiAt(innerWidth/2,innerHeight/2);const g=growG();g.mk.act=(g.mk.act||0)+1;if(g.mk.act%3===0){award(3);toast(starTxt())}touchDay();save();return}left--};tick();tm=setInterval(tick,1000)};
   };
   teardowns.push(()=>clearInterval(tm));draw();
 }
@@ -5525,7 +5599,7 @@ function questEnd(hits,bad){
   const r=Q.read.filter(Boolean).length/2*100,p=Q.pat.filter(Boolean).length/2*100,a=clamp((hits-bad)/7,0,1)*100;
   G.mastery.read=Math.round((G.mastery.read+Math.max(15,r))/2);G.mastery.pat=Math.round((G.mastery.pat+Math.max(15,p))/2);G.mastery.att=Math.round((G.mastery.att+Math.max(15,a))/2);
   awardGame(20);touchDay();save();
-  $('#page').innerHTML=`<div class="wrap stack" style="gap:18px;max-width:760px"><div class="card stack" style="gap:18px;align-items:flex-start"><div class="pipline">${pip(110)}<p class="say">You found it! Thank you!</p></div><p><b>+20 stars</b></p><div class="row"><button class="btn pri" data-go="learn">More lessons</button><button class="btn" data-go="dashboard">Home</button></div></div></div>`;
+  $('#page').innerHTML=`<div class="wrap stack" style="gap:18px;max-width:760px"><div class="card stack" style="gap:18px;align-items:flex-start"><div class="pipline">${pip(110)}<p class="say">You found it! Thank you!</p></div><p><b>${starTxt()}</b></p><div class="row"><button class="btn pri" data-go="learn">More lessons</button><button class="btn" data-go="dashboard">Home</button></div></div></div>`;
 }
 
 
@@ -5582,7 +5656,7 @@ function memoryView(box){
       if(up.length===2){
         const[a,b]=up;
         if(deck[+a.dataset.i]===deck[+b.dataset.i]){a.classList.add('ok');b.classList.add('ok');up=[];found++;try{comboHit(true)}catch(e){}$('#mst').textContent='Found '+found+' of '+pairs;
-          if(found===pairs){awardGame(20);G.mastery.att=clamp(G.mastery.att+2,5,99);bump('att');today().games++;touchDay();save();$('#mwin').innerHTML=`<div class="fb"><strong>You found them all!</strong><span>+20 stars.</span><div class="row"><button class="btn pri" id="again">Play again</button><button class="btn" data-go="explore-island">Back to 3D world</button><button class="btn ghost" data-go="dashboard">Home</button></div></div>`;$('#again').onclick=start}}
+          if(found===pairs){awardGame(20);G.mastery.att=clamp(G.mastery.att+2,5,99);bump('att');today().games++;touchDay();save();$('#mwin').innerHTML=`<div class="fb"><strong>You found them all!</strong><span>${starTxt()}</span><div class="row"><button class="btn pri" id="again">Play again</button><button class="btn" data-go="explore-island">Back to 3D world</button><button class="btn ghost" data-go="dashboard">Home</button></div></div>`;$('#again').onclick=start}}
         else{lock=true;try{comboHit(false)}catch(e){}setTimeout(()=>{[a,b].forEach(x=>{x.classList.remove('up');x.innerHTML='<span class="back">?</span>';x.setAttribute('aria-label','Card '+(+x.dataset.i+1)+', face down')});up=[];lock=false},calmMotion()?700:950)}
       }
     });
@@ -5617,7 +5691,7 @@ function studyUI(){
 function studyBegin(){STUDY.total=studyTotal();STUDY.left=STUDY.total;STUDY.run=true;STUDY.pause=false;STUDY.done=false;clearInterval(STUDY.iv);STUDY.iv=setInterval(studyTick,1000);studyUI()}
 function studyTick(){
   if(!STUDY.run||STUDY.pause)return;STUDY.left--;
-  if(STUDY.left<=0){STUDY.left=0;clearInterval(STUDY.iv);STUDY.iv=0;STUDY.run=false;STUDY.done=true;try{award(15);G.mastery.att=clamp(G.mastery.att+2,5,99);bump('att');today().sprints++;touchDay();save()}catch(e){}toast('Well done! +15 stars')}
+  if(STUDY.left<=0){STUDY.left=0;clearInterval(STUDY.iv);STUDY.iv=0;STUDY.run=false;STUDY.done=true;try{award(15);G.mastery.att=clamp(G.mastery.att+2,5,99);bump('att');today().sprints++;touchDay();save()}catch(e){}toast(tr('Well done!')+' '+starTxt())}
   studyUI();
 }
 function studyReset(){clearInterval(STUDY.iv);STUDY.iv=0;STUDY.run=false;STUDY.pause=false;STUDY.done=false;STUDY.total=studyTotal();STUDY.left=STUDY.total;STUDY.coolUntil=Date.now()+5000;studyUI()}
@@ -7833,7 +7907,7 @@ function setKids(box){
    <p class="muted small" style="margin-top:-6px">Each child has their own level, stars, buddy and comfort settings. The plan is shared.</p>
    <div class="stack" style="gap:10px">${L.map(k=>`<div class="card flat row kid-row" style="flex-wrap:nowrap;gap:14px;padding:12px 16px"><span class="kid-av">${buddySVG(kidBud(k.buddy),54)}</span><div class="stack" style="gap:2px;flex:1;min-width:0"><b>${esc(k.name)}${k.id===P.kid?' <span class="chip">Learning now</span>':''}</b><span class="muted small">${AGEL[k.age]||''} · ${k.pts||0} stars</span></div>${k.id!==P.kid?`<button class="btn sm" data-ksw="${k.id}">Switch</button>`:''}${n>1?`<button class="btn sm ghost" data-krm="${k.id}" style="color:var(--warn)">${CONFIRM==='k'+k.id?'Press again to remove':'Remove'}</button>`:''}</div>`).join('')}</div>
    ${n<KID_MAX?`<div class="row"><button class="btn pri" id="kAdd">${ic('plus',18)} Add a child</button>${n>1?'<button class="btn ghost" data-go="who">Open the profile picker</button>':''}</div>`:'<p class="muted small">This account has 3 children, the most one account can hold.</p><div class="row"><button class="btn ghost" data-go="who">Open the profile picker</button></div>'}</div>
-   <div class="card flat stack" style="gap:6px"><b>Family plan price</b><p class="muted">RM${FAM[Math.max(1,n)]} ${famLine(Math.max(1,n))} Launch offer.</p><div class="row"><button class="btn sm" data-go="pricing">See plans</button></div></div>`;
+   <div class="card flat row" style="justify-content:space-between;gap:10px"><b>Family plan</b><button class="btn sm" data-go="pricing">See plans</button></div>`;
   $$('[data-ksw]',box).forEach(b=>b.onclick=async()=>{CONFIRM='';if(await kidSwitch(b.dataset.ksw,true)){toast(P.name+' is learning now');R.profile()}});
   $$('[data-krm]',box).forEach(b=>b.onclick=async()=>{const id=b.dataset.krm;if(CONFIRM!=='k'+id){CONFIRM='k'+id;R.profile();return}CONFIRM='';await kidRemove(id);R.profile()});
   const a=$('#kAdd',box);if(a)a.onclick=kidAdd;

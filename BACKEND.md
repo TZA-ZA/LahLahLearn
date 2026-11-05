@@ -12,6 +12,12 @@
 | Stripe (test mode) | Products "LahLahLearn Family · 1/2/3 children", each with a monthly and a yearly MYR price (lookup keys `family_<n>_<month|year>`). The webhook points at `stripe-webhook`. The customer portal lets families switch plans or cancel at the end of the period. |
 | App config | `assets/config.js` points at the project with the publishable key. |
 
+### Care Circle emails
+Invites, check-up emails and weekly reports go out through Gmail (SMTP, port 465):
+- `app.SMTP_USER` and `app.EMAIL_FROM` are stored in Vault.
+- The Gmail app password goes in the Edge Function secret `SMTP_PASS` (Supabase → Edge Functions → Secrets).
+- A `RESEND_API_KEY`, if set, takes priority.
+
 ### Still to do in dashboards (needs your logins)
 1. **Supabase → Authentication → URL Configuration.**
    - Set Site URL to `https://lahlahlearn.netlify.app/`.
