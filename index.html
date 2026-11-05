@@ -3117,12 +3117,12 @@ function cloudAuthUI(reg){
   if($('#aForgot'))$('#aForgot').onclick=forgot;
   // kind: 'signup' confirms a new account, 'reset' signs in with a code and then sets a new password
   const codeStep=(em,kind)=>{
-    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent a 6-digit code to')} <b>${esc(em)}</b>. ${kind==='signup'?tr('Type it here to confirm your email.'):tr('Type it here, then choose a new password.')}</p></div>
-     <label class="au2-f"><span>${tr('Code')}</span><input class="au2-in" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" aria-describedby="aCodeErr"></label><p class="em-err" id="aCodeErr" role="alert" hidden></p>
+    card.innerHTML=`<div class="au2-hd"><h1>${tr('Check your email')}</h1><p>${tr('We sent a verification code to')} <b>${esc(em)}</b>. ${kind==='signup'?tr('Type it here to confirm your email.'):tr('Type it here, then choose a new password.')}</p></div>
+     <label class="au2-f"><span>${tr('Code')}</span><input class="au2-in" id="aCode" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="12345678" aria-describedby="aCodeErr"></label><p class="em-err" id="aCodeErr" role="alert" hidden></p>
      <button class="au2-go" id="aVerify" type="button"><span>${tr('Continue')}</span>${ic('arrow',18)}</button>
      <p class="au2-sw"><a href="#" id="aResend">${tr('Send a new code')}</a> · <a href="#" id="aBack">${tr('Use a different email')}</a></p>`;
     const inp=$('#aCode'),err=$('#aCodeErr');setTimeout(()=>inp.focus(),50);let busy=false;
-    const verify=async()=>{if(busy)return;const code=inp.value.replace(/\D/g,'');if(code.length<6)return say(err,tr('The code has 6 numbers.'));
+    const verify=async()=>{if(busy)return;const code=inp.value.replace(/\D/g,'');if(code.length<6)return say(err,tr('Please type the full code from the email.'));
       busy=true;$('#aVerify').disabled=true;
       let r=await CLOUD.sb.auth.verifyOtp({email:em,token:code,type:'email'});
       if(r.error&&kind==='signup')r=await CLOUD.sb.auth.verifyOtp({email:em,token:code,type:'signup'});
@@ -3130,7 +3130,7 @@ function cloudAuthUI(reg){
       if(r.error){$('#aVerify').disabled=false;return say(err,/expired|invalid/i.test(r.error.message)?tr('That code is not right or has expired. Try again or send a new code.'):tr('We could not check the code. Please try again.'))}
       if(kind==='reset')return newPassword(em);
       done(em)};
-    $('#aVerify').onclick=verify;inp.addEventListener('keydown',e=>{if(e.key==='Enter')verify()});inp.addEventListener('input',()=>{err.hidden=true;if(/^\d{6}$/.test(inp.value.trim()))verify()});
+    $('#aVerify').onclick=verify;inp.addEventListener('keydown',e=>{if(e.key==='Enter')verify()});inp.addEventListener('input',()=>{err.hidden=true;if(/^\d{8}$/.test(inp.value.trim()))verify()});
     $('#aResend').onclick=async e=>{e.preventDefault();const {error}=kind==='signup'?await CLOUD.sb.auth.resend({type:'signup',email:em,options:{emailRedirectTo:redirect}}):await CLOUD.sb.auth.signInWithOtp({email:em,options:{shouldCreateUser:false,emailRedirectTo:redirect}});say(err,error?tr('Please wait a minute before asking for another code.'):tr('A new code is on its way.'))};
     $('#aBack').onclick=e=>{e.preventDefault();R.auth(reg?'register':'login')};
   };

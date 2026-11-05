@@ -1,6 +1,6 @@
 // Local stand-in for a Supabase project, for tests only.
 //   /rest/v1/*      -> PostgREST (real, against the real migration)
-//   /auth/v1/*      -> a tiny fake auth server (email + 6-digit code "123456", JWTs signed with the test secret)
+//   /auth/v1/*      -> a tiny fake auth server (email + 6-digit code "12345678", JWTs signed with the test secret)
 //   /functions/v1/* -> our real edge function handlers, in-process
 // Outbound calls to Stripe, Resend and Anthropic are intercepted and recorded at GET /__calls.
 import postgres from "npm:postgres@3.4.4";
@@ -90,10 +90,10 @@ async function authRoute(req: Request, path: string): Promise<Response> {
     const [ex] = await sql`select * from auth.users where email=${email}`;
     if (ex && passwords[email]) return J({ ...userObj(ex), identities: [] }); // like Supabase: existing email, no new identity
     const [u] = ex ? [ex] : await sql`insert into auth.users(email, raw_user_meta_data) values (${email}, ${sql.json(b.data ?? {})}) returning *`;
-    passwords[email] = b.password; codes[email] = "123456";
+    passwords[email] = b.password; codes[email] = "12345678";
     return J({ ...userObj(u), identities: [{ provider: "email" }] });
   }
-  if (path === "/resend" && req.method === "POST") { const b = await req.json(); codes[String(b.email).toLowerCase()] = "123456"; return J({}); }
+  if (path === "/resend" && req.method === "POST") { const b = await req.json(); codes[String(b.email).toLowerCase()] = "12345678"; return J({}); }
   if (path.startsWith("/token") && new URL(req.url).searchParams.get("grant_type") === "password") {
     const b = await req.json(); const email = String(b.email).toLowerCase();
     if (!passwords[email] || passwords[email] !== b.password) return J({ code: 400, error_code: "invalid_credentials", msg: "Invalid login credentials" }, 400);
@@ -103,7 +103,7 @@ async function authRoute(req: Request, path: string): Promise<Response> {
   }
   if (path === "/otp" && req.method === "POST") {
     const b = await req.json(); const email = String(b.email).toLowerCase();
-    codes[email] = "123456";
+    codes[email] = "12345678";
     if (!(await sql`select 1 from auth.users where email=${email}`).length) {
       if (b.create_user === false) return J({ msg: "Signups not allowed for otp", error_code: "otp_disabled" }, 422);
       await sql`insert into auth.users(email, raw_user_meta_data) values (${email}, ${sql.json(b.data ?? {})})`;

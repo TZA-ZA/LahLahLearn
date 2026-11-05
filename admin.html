@@ -77,7 +77,7 @@ const sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey,{auth:
 
 function loginView(){
   hdr.innerHTML='';
-  app.innerHTML=`<form class="login" id="f"><h1>Sign in</h1><p class="muted" style="margin:0">For the LahLahLearn team. We email you a 6-digit code.</p>
+  app.innerHTML=`<form class="login" id="f"><h1>Sign in</h1><p class="muted" style="margin:0">For the LahLahLearn team. We email you a sign-in code.</p>
     <input id="em" type="email" autocomplete="email" placeholder="you@example.com" required aria-label="Email">
     <p class="err" id="er" role="alert"></p><button class="pri" id="go">Email me a code</button></form>`;
   const f=document.getElementById('f'),er=document.getElementById('er');
@@ -87,7 +87,7 @@ function loginView(){
 }
 function codeView(em){
   app.innerHTML=`<form class="login" id="f"><h1>Check your email</h1><p class="muted" style="margin:0">Code sent to <b>${esc(em)}</b>.</p>
-    <input id="cd" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" aria-label="Code">
+    <input id="cd" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="12345678" aria-label="Code">
     <p class="err" id="er" role="alert"></p><button class="pri" id="go">Continue</button><button type="button" id="bk">Use a different email</button></form>`;
   document.getElementById('bk').onclick=loginView;
   document.getElementById('f').onsubmit=async e=>{e.preventDefault();const {error}=await sb.auth.verifyOtp({email:em,token:document.getElementById('cd').value.replace(/\D/g,''),type:'email'});

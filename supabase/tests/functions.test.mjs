@@ -13,7 +13,7 @@ const resetCalls = () => fetch(`${URL}/__reset_calls`);
 async function login(email) {
   const sb = createClient(URL, anon, { auth: { persistSession: false, autoRefreshToken: false } });
   await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
-  const { data, error } = await sb.auth.verifyOtp({ email, token: "123456", type: "email" });
+  const { data, error } = await sb.auth.verifyOtp({ email, token: "12345678", type: "email" });
   if (error) throw error;
   return { sb, user: data.user };
 }

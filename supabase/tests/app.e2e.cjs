@@ -13,7 +13,7 @@ async function login(p,email,reg,hash,pw=PW){
   await p.goto(URL+(hash||('#auth-'+(reg?'register':'login'))));await p.waitForTimeout(1800);
   await p.fill('#aEm',email);await p.fill('#aPw',pw);if(reg)await p.fill('#aPw2',pw);
   await p.$eval('#aGo',e=>e.click());
-  if(reg){await p.waitForSelector('#aCode',{timeout:15000});await p.fill('#aCode','123456')}
+  if(reg){await p.waitForSelector('#aCode',{timeout:15000});await p.fill('#aCode','12345678')}
   await p.waitForTimeout(4000);
 }
 async function onboard(p,first){
@@ -67,7 +67,7 @@ const tab=async(p,k)=>{await p.evaluate(k=>document.querySelector(`.cc-tabs [dat
    await px.goto(URL+'#auth-login');await px.waitForTimeout(1500);
    await px.fill('#aEm','amina.e2e@gmail.com');await px.fill('#aPw','wrong-password');await px.$eval('#aGo',e=>e.click());await px.waitForTimeout(1500);
    check('wrong password is refused',/not right/i.test(await px.textContent('#aPwErr'))&&/auth-login/.test(px.url()),await px.textContent('#aPwErr'));
-   await px.$eval('#aForgot',e=>e.click());await px.waitForSelector('#aCode');await px.fill('#aCode','123456');await px.waitForSelector('#aNp');
+   await px.$eval('#aForgot',e=>e.click());await px.waitForSelector('#aCode');await px.fill('#aCode','12345678');await px.waitForSelector('#aNp');
    await px.fill('#aNp','New-calm-2026');await px.fill('#aNp2','New-calm-2026');await px.$eval('#aNpGo',e=>e.click());await px.waitForTimeout(3500);
    check('forgot password: new password saved and signed in',/dashboard|who/.test(px.url()),px.url());
    await cx.close();
@@ -109,7 +109,7 @@ const tab=async(p,k)=>{await p.evaluate(k=>document.querySelector(`.cc-tabs [dat
   const [c3,t]=await mk();
   await t.goto(URL+'#join-'+tTok);await t.waitForTimeout(2000);
   console.log('teacher hash after link:',await t.evaluate(()=>location.hash));
-  await t.fill('#aEm','lim.teacher.e2e@gmail.com');await t.fill('#aPw',PW);await t.fill('#aPw2',PW);await t.$eval('#aGo',e=>e.click());await t.waitForSelector('#aCode');await t.fill('#aCode','123456');await t.waitForTimeout(5000);
+  await t.fill('#aEm','lim.teacher.e2e@gmail.com');await t.fill('#aPw',PW);await t.fill('#aPw2',PW);await t.$eval('#aGo',e=>e.click());await t.waitForSelector('#aCode');await t.fill('#aCode','12345678');await t.waitForTimeout(5000);
   console.log('teacher hash after login:',await t.evaluate(()=>location.hash));
   check('teacher is a member',sql(`select role from family_members where family_id='${fam}' and email='lim.teacher.e2e@gmail.com'`)==='teacher');
   await t.screenshot({path:SHOT+'5_teacher.png'});
