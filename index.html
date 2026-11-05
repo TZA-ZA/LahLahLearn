@@ -2205,23 +2205,31 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 }
 
 /* privacy page */
-.pv{max-width:860px;padding-top:28px;padding-bottom:60px}
-.pv-hd{padding:42px 44px 36px;border-radius:30px;color:#f6f1e6;background:radial-gradient(480px 260px at 100% -10%,rgba(214,182,117,.28),transparent 60%),linear-gradient(140deg,#132d24,#1d4234 55%,#285847);box-shadow:0 30px 60px -40px rgba(12,34,26,.7)}
-.pv-eb{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:#e3cf9f}
-.pv-hd h1{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;font-size:clamp(2rem,4.4vw,3.1rem);margin:8px 0 6px;color:#fbf6ea;letter-spacing:-.01em}
-.pv-hd p{margin:0;color:rgba(246,241,230,.75)}
-.pv-toc{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 8px}
-.pv-toc a{font-size:.85rem;padding:7px 14px;border-radius:99px;border:1px solid var(--line);color:var(--ink);text-decoration:none;background:var(--surf)}
-.pv-toc a:hover{border-color:var(--brand)}
-.pv-body{margin-top:12px;background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:8px 34px}
-.pv-s{padding:26px 0;border-bottom:1px solid var(--line);scroll-margin-top:90px}.pv-s:last-child{border-bottom:0}
-.pv-s h2{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:500;font-size:1.35rem;margin:0 0 10px;display:flex;gap:14px;align-items:baseline}
-.pv-s h2 span{font-family:var(--f-b);font-size:.75rem;color:#a8843f;letter-spacing:.1em}
-.pv-s div{line-height:1.7;color:var(--ink2,var(--ink))}.pv-s ul{margin:6px 0 0;padding-left:20px}.pv-s li{margin:6px 0}
-.pv-s a,.pv-link{color:var(--brand);font-weight:600}
-.pv-link{background:none;border:0;padding:0;font:inherit;font-weight:600;cursor:pointer;text-decoration:underline}
-.pv-note{margin-top:16px;text-align:center}
-@media (max-width:640px){.pv-hd{padding:30px 22px;border-radius:24px}.pv-body{padding:4px 20px;border-radius:22px}}
+.pv{max-width:1080px;padding-top:36px;padding-bottom:72px}
+.pv-hd{padding:0 0 28px;border-bottom:1px solid var(--line);margin-bottom:36px}
+.pv-eb{margin:0 0 10px;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.pv-hd h1{margin:0;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;font-size:clamp(2.2rem,4.6vw,3.2rem);letter-spacing:-.015em;color:var(--ink)}
+.pv-dt{margin:10px 0 0;color:var(--muted);font-size:.92rem}
+.pv-grid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:56px;align-items:start}
+.pv-toc{position:sticky;top:96px}
+.pv-toc p{margin:0 0 12px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.pv-toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.pv-toc li a{display:block;padding:6px 0 6px 16px;margin-left:-1px;border-left:1px solid transparent;font-size:.9rem;color:var(--muted);text-decoration:none;line-height:1.35}
+.pv-toc li a:hover{color:var(--ink);border-left-color:var(--ink)}
+.pv-body{max-width:680px;color:var(--ink);font-size:1rem;line-height:1.75}
+.pv-s{padding:0 0 30px;margin:0 0 30px;border-bottom:1px solid var(--line);scroll-margin-top:96px}.pv-s:last-child{border-bottom:0}
+.pv-s h2{margin:0 0 14px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:500;font-size:1.45rem;letter-spacing:-.005em}
+.pv-s h3{margin:20px 0 4px;font-size:.98rem;font-weight:600}
+.pv-s p{margin:0 0 12px}.pv-s ul{margin:0 0 12px;padding-left:20px}.pv-s li{margin:6px 0}
+.pv-s a,.pv-link{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.pv-link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.pv-t{width:100%;border-collapse:collapse;margin:6px 0 14px;font-size:.94rem}
+.pv-t th,.pv-t td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.pv-t th{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.pv-t td:first-child{font-weight:600;white-space:nowrap}
+.pv-ad{line-height:1.6}
+@media (max-width:820px){.pv-grid{grid-template-columns:1fr;gap:24px}.pv-toc{position:static}.pv-toc ol{columns:2;column-gap:18px}}
+@media (max-width:520px){.pv-toc ol{columns:1}.pv-t td:first-child{white-space:normal}}
 /* cookie banner */
 .ckb{position:fixed;z-index:120;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translate(-50%,24px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s;width:min(760px,calc(100% - 32px));display:flex;gap:16px 22px;align-items:center;padding:18px 22px;border-radius:22px;background:var(--surf);border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(0,0,0,.35)}
 .ckb.on{transform:translate(-50%,0);opacity:1}
@@ -3212,21 +3220,24 @@ R.helping=()=>{
 
 /* ---------- Privacy policy ---------- */
 R.privacy=()=>{
-  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'hello@lahlahlearn.com');
+  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'hello@lahlahlearn.com'),ml=`<a href="mailto:${mail}">${mail}</a>`;
   const S=[
-   ['Who we are','LahLahLearn is a calm learning website for young children, run from Malaysia. We follow the Personal Data Protection Act 2010 (PDPA). Questions or requests: <a href="mailto:'+mail+'">'+mail+'</a>.'],
-   ['What we collect','<ul><li><b>Your account:</b> your email address and password. Passwords are stored by our sign-in provider as a secure one-way hash. We never see them.</li><li><b>Your child&rsquo;s profile:</b> the first name, age range and learning preferences you choose in set-up, and the colours and sounds you pick.</li><li><b>Learning progress:</b> stars, minutes, streaks, lessons and skill levels, so the app can adapt and parents can see progress.</li><li><b>Care Circle:</b> names and emails of teachers or therapists you invite, shared notes and booked check-ups.</li><li><b>Billing:</b> if you subscribe, payment is handled by Stripe. We only keep your plan and its status, never your card number.</li></ul>'],
-   ['What stays on the device','<ul><li><b>Camera (focus helper):</b> only when a parent turns it on. Pictures are processed on the device to notice tiredness or upset. They are never recorded or uploaded.</li><li><b>Microphone (talk practice):</b> only when your child taps the microphone. Speech-to-text is done by the browser, which may use its maker&rsquo;s service (for example Google in Chrome).</li></ul>'],
-   ['Who helps us','<ul><li><b>Supabase</b> (Singapore): accounts and the database.</li><li><b>Stripe</b>: payments.</li><li><b>Anthropic</b>: Pip&rsquo;s chat answers. Only what your child types to Pip is sent. We do not add their name, and Pip is told not to ask for personal details.</li><li><b>Gmail / Google</b>: sending sign-in codes and Care Circle emails.</li><li><b>Netlify</b>: hosting the website.</li></ul>We do not sell data and we do not show adverts.'],
-   ['Cookies and storage','We use essential storage to keep you signed in, save progress and remember settings. Optional anonymous usage statistics are only used if you choose <i>Accept all</i>. You can change this any time with <button class="pv-link" data-cookies>Cookie settings</button>.'],
-   ['Children','Accounts are made and managed by a parent or carer. Children do not need an email address and are not asked for personal details. Pip is told never to ask for them.'],
-   ['How long we keep data','We keep data while the account is open. When a parent deletes the account (Settings, then Delete everything), we remove the family, children, progress and Care Circle data, cancel any subscription and delete the sign-in. Payment records Stripe must keep by law are held by Stripe.'],
-   ['Your rights','You can see, correct or delete your family&rsquo;s data in the Care Circle and Settings. For a copy of your data or anything else, email <a href="mailto:'+mail+'">'+mail+'</a> and we will reply within 21 days.'],
-   ['Changes','If this policy changes in an important way, we will show a notice in the app before it takes effect.']];
-  $('#page').innerHTML=`<div class="pv wrap"><header class="pv-hd"><span class="pv-eb">${tr('Privacy policy')}</span><h1>${tr('Your family’s privacy')}</h1><p>${tr('Plain words, no surprises. Last updated 6 November 2026.')}</p></header>
-   <nav class="pv-toc" aria-label="${tr('On this page')}">${S.map((s,i)=>`<a href="#" data-pv="${i}">${tr(s[0])}</a>`).join('')}</nav>
-   <div class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2><span class="tn">${String(i+1).padStart(2,'0')}</span>${tr(s[0])}</h2><div>${s[1]}</div></section>`).join('')}</div>
-   <p class="pv-note muted small">${tr('This policy explains how LahLahLearn handles data. It is not legal advice.')}</p></div>`;
+   ['Introduction',`<p>This Privacy Policy explains how LahLahLearn (&ldquo;LahLahLearn&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;) collects, uses, discloses and protects personal data when you use our website and services (the &ldquo;Service&rdquo;). We process personal data in accordance with the Personal Data Protection Act 2010 of Malaysia (&ldquo;PDPA&rdquo;).</p><p>By creating an account or using the Service, you acknowledge that you have read and understood this Policy.</p>`],
+   ['Information we collect',`<p>We collect only the information needed to provide the Service.</p><h3>Account information</h3><p>The parent or guardian&rsquo;s email address and password. Passwords are stored by our authentication provider in hashed form and are not visible to us.</p><h3>Child profile</h3><p>A first name, age range, learning preferences and display settings provided by the parent or guardian during set-up.</p><h3>Learning activity</h3><p>Lesson progress, time spent learning, stars, streaks and skill levels, used to personalise lessons and to prepare progress reports.</p><h3>Care Circle information</h3><p>Names and email addresses of teachers or therapists invited by a parent, shared notes, and check-up bookings.</p><h3>Payment information</h3><p>Subscription status and billing period. Card details are collected and processed by Stripe and are never stored on our systems.</p>`],
+   ['Information processed on your device',`<p>Some optional features process data locally on the device and do not transmit it to us.</p><ul><li><b>Focus helper (camera).</b> When enabled by a parent, camera images are analysed on the device to detect signs of tiredness or distress. Images are not recorded, stored or uploaded.</li><li><b>Speaking practice (microphone).</b> When the child chooses to speak, speech recognition is performed by the web browser, which may use a service provided by the browser&rsquo;s developer.</li></ul>`],
+   ['How we use information',`<p>We use personal data to:</p><ul><li>create and manage accounts and authenticate users;</li><li>deliver and personalise lessons;</li><li>provide progress reports, weekly summaries and Care Circle features;</li><li>process subscriptions and payments;</li><li>respond to enquiries and provide support; and</li><li>maintain the security and reliability of the Service.</li></ul><p>We do not sell personal data and we do not use it for advertising.</p>`],
+   ['Children&rsquo;s privacy',`<p>The Service is intended for use by children under the supervision of a parent or guardian. Accounts are created and managed by the parent or guardian, who provides consent on the child&rsquo;s behalf. Children are not asked to provide an email address or contact details, and the in-app assistant is instructed not to request personal information.</p>`],
+   ['Disclosure to service providers',`<p>We share personal data only with service providers that help us operate the Service, and only to the extent necessary:</p><table class="pv-t"><thead><tr><th>Provider</th><th>Purpose</th></tr></thead><tbody><tr><td>Supabase</td><td>Database, authentication and server functions</td></tr><tr><td>Stripe</td><td>Payment processing</td></tr><tr><td>Anthropic</td><td>Generating responses in the learning assistant (message text only)</td></tr><tr><td>Google (Gmail)</td><td>Sending sign-in codes and Care Circle emails</td></tr><tr><td>Netlify and GitHub</td><td>Website hosting</td></tr></tbody></table><p>We may also disclose information where required by law.</p>`],
+   ['International transfers',`<p>Our database is hosted in Singapore. Some service providers may process data in other countries. Where data is transferred outside Malaysia, we take reasonable steps to ensure it receives a comparable level of protection.</p>`],
+   ['Cookies and local storage',`<p>We use essential browser storage to keep users signed in, save learning progress and remember settings. These are necessary for the Service to function. Optional anonymous usage statistics are used only with your consent. You may change your choice at any time through <button class="pv-link" data-cookies>Cookie settings</button>.</p>`],
+   ['Data retention',`<p>We retain personal data for as long as the account remains active. When a parent deletes the account through Settings, we delete the family&rsquo;s profiles, learning records and Care Circle data, cancel any active subscription, and remove the login. Records that we or our payment provider are legally required to keep are retained only for the required period.</p>`],
+   ['Security',`<p>We apply technical and organisational measures to protect personal data, including encrypted connections, access controls that limit each user to their own family&rsquo;s data, and PIN protection for the parent area. No method of transmission or storage is completely secure, but we work to protect your information.</p>`],
+   ['Your rights',`<p>Subject to the PDPA, you may request to access or correct your personal data, withdraw consent, or limit how it is processed. Most information can be viewed, edited or deleted in the Care Circle and Settings. For other requests, contact us at ${ml}. We will respond within 21 days.</p>`],
+   ['Changes to this Policy',`<p>We may update this Policy from time to time. If we make material changes, we will notify users within the Service before the changes take effect. The effective date above shows when this Policy was last revised.</p>`],
+   ['Contact us',`<p>For questions about this Policy or our handling of personal data, please contact:</p><p class="pv-ad"><b>LahLahLearn</b><br>Selangor, Malaysia<br>${ml}</p>`]];
+  $('#page').innerHTML=`<div class="pv wrap"><header class="pv-hd"><p class="pv-eb">${tr('Legal')}</p><h1>${tr('Privacy Policy')}</h1><p class="pv-dt">${tr('Effective date')}: 6 November 2026</p></header>
+   <div class="pv-grid"><nav class="pv-toc" aria-label="${tr('Contents')}"><p>${tr('Contents')}</p><ol>${S.map((s,i)=>`<li><a href="#" data-pv="${i}">${s[0]}</a></li>`).join('')}</ol></nav>
+   <article class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2>${i+1}. ${s[0]}</h2>${s[1]}</section>`).join('')}</article></div></div>`;
   $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
 };
 
