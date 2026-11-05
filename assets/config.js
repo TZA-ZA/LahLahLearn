@@ -8,5 +8,5 @@ window.LLL_CONFIG = {
   google: true,       // button appears automatically once Google is enabled in Supabase Auth
   apple: true,        // button appears automatically once Apple is enabled in Supabase Auth
   pipAI: true,        // Pip answers with AI through the pip-chat function
-  contactEmail: 'hello@lahlahlearn.com'  // change to the inbox schools should write to
+  contactEmail: 'lahlahlearn@gmail.com'
 };

@@ -2205,7 +2205,8 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 }
 
 /* privacy page */
-.pv{max-width:1080px;padding-top:36px;padding-bottom:72px}
+.pv{--ink:#1c2520;--muted:#5f6b64;--line:#e7e3da;max-width:1120px;margin:28px auto 64px;padding:52px 60px 40px;background:#fff;color:#1c2520;border:1px solid #e7e3da;border-radius:28px;box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 30px 70px -40px rgba(20,40,30,.35)}
+@media (max-width:640px){.pv{margin:16px 12px 48px;padding:30px 20px 24px;border-radius:22px;width:auto}}
 .pv-hd{padding:0 0 28px;border-bottom:1px solid var(--line);margin-bottom:36px}
 .pv-eb{margin:0 0 10px;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--muted)}
 .pv-hd h1{margin:0;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;font-size:clamp(2.2rem,4.6vw,3.2rem);letter-spacing:-.015em;color:var(--ink)}
@@ -3220,7 +3221,7 @@ R.helping=()=>{
 
 /* ---------- Privacy policy ---------- */
 R.privacy=()=>{
-  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'hello@lahlahlearn.com'),ml=`<a href="mailto:${mail}">${mail}</a>`;
+  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'lahlahlearn@gmail.com'),ml=`<a href="mailto:${mail}">${mail}</a>`;
   const S=[
    ['Introduction',`<p>This Privacy Policy explains how LahLahLearn (&ldquo;LahLahLearn&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;) collects, uses, discloses and protects personal data when you use our website and services (the &ldquo;Service&rdquo;). We process personal data in accordance with the Personal Data Protection Act 2010 of Malaysia (&ldquo;PDPA&rdquo;).</p><p>By creating an account or using the Service, you acknowledge that you have read and understood this Policy.</p>`],
    ['Information we collect',`<p>We collect only the information needed to provide the Service.</p><h3>Account information</h3><p>The parent or guardian&rsquo;s email address and password. Passwords are stored by our authentication provider in hashed form and are not visible to us.</p><h3>Child profile</h3><p>A first name, age range, learning preferences and display settings provided by the parent or guardian during set-up.</p><h3>Learning activity</h3><p>Lesson progress, time spent learning, stars, streaks and skill levels, used to personalise lessons and to prepare progress reports.</p><h3>Care Circle information</h3><p>Names and email addresses of teachers or therapists invited by a parent, shared notes, and check-up bookings.</p><h3>Payment information</h3><p>Subscription status and billing period. Card details are collected and processed by Stripe and are never stored on our systems.</p>`],
@@ -6889,8 +6890,8 @@ function islandBuild(T){
   const fpTex=(()=>{const c=document.createElement('canvas');c.width=64;c.height=96;const g=c.getContext('2d');g.fillStyle='#fff';
     g.beginPath();g.ellipse(32,62,17,21,0,0,6.2832);g.fill();[[13,30,7,9],[26,20,7,9.5],[39,20,7,9.5],[51,30,7,9]].forEach(([x,y,rx,ry])=>{g.beginPath();g.ellipse(x,y,rx,ry,0,0,6.2832);g.fill()});
     const tx=new T.CanvasTexture(c);tx.anisotropy=4;return tx})();
-  const fpGeo=new T.PlaneGeometry(.42,.6),fps=[];
-  for(let i=0;i<26;i++){const m=new T.Mesh(fpGeo,new T.MeshBasicMaterial({map:fpTex,color:p.dark?'#2b2a33':'#7a5a3a',transparent:true,opacity:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));m.rotation.x=-Math.PI/2;m.rotation.order='YXZ';m.visible=false;m.renderOrder=1;scene.add(m);fps.push({m,age:99})}
+  const fpGeo=new T.PlaneGeometry(.5,.72),fps=[];
+  for(let i=0;i<34;i++){const m=new T.Mesh(fpGeo,new T.MeshBasicMaterial({map:fpTex,color:p.dark?'#1d1c24':'#6b4a2c',transparent:true,opacity:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));m.rotation.x=-Math.PI/2;m.rotation.order='YXZ';m.visible=false;m.renderOrder=1;scene.add(m);fps.push({m,age:99})}
   let fpI=0,fpAcc=0,fpSide=0;
   const footprint=(x,z,ang)=>{const f=fps[fpI++%fps.length];fpSide^=1;const s=fpSide?1:-1,ox=Math.cos(ang)*.17*s,oz=-Math.sin(ang)*.17*s;f.m.position.set(x+ox,.035,z+oz);f.m.rotation.set(-Math.PI/2,ang+Math.PI,0);f.age=0;f.m.visible=true};
   const ringM=new T.Mesh(new T.TorusGeometry(3.5,.09,8,64),new T.MeshBasicMaterial({color:0xffd36b,transparent:true,opacity:.0,depthWrite:false}));ringM.rotation.x=Math.PI/2;ringM.position.y=.12;ringM.visible=false;scene.add(ringM);
@@ -6939,7 +6940,7 @@ function islandBuild(T){
     let dx=-Math.sin(yaw)*f+Math.cos(yaw)*r,dz=-Math.cos(yaw)*f-Math.sin(yaw)*r,moving=false;
     if(!f&&!r&&tgt){const ex=tgt.x-me.position.x,ez=tgt.z-me.position.z,d=Math.hypot(ex,ez);if(d<.35)tgt=null;else{dx=ex/d;dz=ez/d}}
     const l=Math.hypot(dx,dz);
-    if(l>.05){const k=Math.min(1,l),sp=(NEW?7:5.2)*dt*k;dx/=l;dz/=l;me.position.x+=dx*sp;me.position.z+=dz*sp;face=Math.atan2(dx,dz);moving=true;stepAcc+=sp;puffAcc+=sp;fpAcc+=sp;if(fpAcc>.62&&!air&&buddy()!=='cloud'){fpAcc=0;footprint(me.position.x-dx*.25,me.position.z-dz*.25,face)}if(puffAcc>.7&&!calm){puffAcc=0;const pf=puffs[puffI++%puffs.length],cl=buddy()==='cloud';pf.age=0;pf.cl=cl;pf.trail=1;pf.vx=-dx*.45+(Math.random()-.5)*.2;pf.vz=-dz*.45+(Math.random()-.5)*.2;pf.sp.position.set(me.position.x-dx*1.05+(Math.random()-.5)*.25,.08,me.position.z-dz*1.05+(Math.random()-.5)*.25);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}if(stepAcc>1.7){stepAcc-=1.7;if(!air)(buddy()==='cloud'?sfxWind():sfxStep(stepSide^=1))}if(!f&&!r){let dy=face+Math.PI-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));if(!down||!down.moved)yaw+=dy*Math.min(1,dt*2.2)}}
+    if(l>.05){const k=Math.min(1,l),sp=(NEW?7:5.2)*dt*k;dx/=l;dz/=l;me.position.x+=dx*sp;me.position.z+=dz*sp;face=Math.atan2(dx,dz);moving=true;stepAcc+=sp;puffAcc+=sp;fpAcc+=sp;if(fpAcc>.55&&!air){fpAcc=0;footprint(me.position.x-dx*.25,me.position.z-dz*.25,face)}if(puffAcc>.7&&!calm){puffAcc=0;const pf=puffs[puffI++%puffs.length],cl=buddy()==='cloud';pf.age=0;pf.cl=cl;pf.trail=1;pf.vx=-dx*.45+(Math.random()-.5)*.2;pf.vz=-dz*.45+(Math.random()-.5)*.2;pf.sp.position.set(me.position.x-dx*1.05+(Math.random()-.5)*.25,.08,me.position.z-dz*1.05+(Math.random()-.5)*.25);pf.sp.material.color.set(cl?'#ffffff':(p.dark?'#a89684':'#b08a5c'));pf.sp.visible=true}if(stepAcc>1.7){stepAcc-=1.7;if(!air)(buddy()==='cloud'?sfxWind():sfxStep(stepSide^=1))}if(!f&&!r){let dy=face+Math.PI-yaw;dy=Math.atan2(Math.sin(dy),Math.cos(dy));if(!down||!down.moved)yaw+=dy*Math.min(1,dt*2.2)}}
     LM.forEach(m=>{const ex=me.position.x-m.x,ez=me.position.z-m.z,d=Math.hypot(ex,ez);if(d<2.6){me.position.x=m.x+ex/d*2.6;me.position.z=m.z+ez/d*2.6}});
     if(S.tcol)for(let k=0;k<2;k++)S.tcol.forEach(([tx,tz,tr])=>{const ex=me.position.x-tx,ez=me.position.z-tz,d=Math.hypot(ex,ez);if(d<tr){const q=d<.001?1:d;me.position.x=tx+(d<.001?tr:ex/q*tr);me.position.z=tz+(d<.001?0:ez/q*tr)}});
     const R0=Math.hypot(me.position.x,me.position.z);if(R0>33){me.position.x*=33/R0;me.position.z*=33/R0}
@@ -6961,7 +6962,7 @@ function islandBuild(T){
     if(mmDraw)mmDraw(me,face);
     let nn=null,best=5.6;LM.forEach(m=>{const d=Math.hypot(m.x-me.position.x,m.z-me.position.z);if(d<best){best=d;nn=m}});
     const key=nn?nn.L.id:'';if(key!==lastNear){lastNear=key;near=nn;setP(nn);if(nn)sfxNear()}
-    fps.forEach(f=>{if(!f.m.visible)return;f.age+=dt;const k=f.age/4.5;if(k>=1){f.m.visible=false;f.m.material.opacity=0;return}f.m.material.opacity=(p.dark?.6:.5)*Math.min(1,f.age*6)*(1-k*k)});
+    fps.forEach(f=>{if(!f.m.visible)return;f.age+=dt;const k=f.age/6;if(k>=1){f.m.visible=false;f.m.material.opacity=0;return}f.m.material.opacity=(p.dark?.7:.62)*Math.min(1,f.age*6)*(1-k*k)});
     puffs.forEach(pf=>{if(!pf.sp.visible)return;pf.age+=dt;const k=pf.age/1;if(k>=1){pf.sp.visible=false;return}const e=1-Math.pow(1-k,2);pf.sp.position.x+=pf.vx*dt;pf.sp.position.z+=pf.vz*dt;pf.sp.position.y=pf.trail?.08+e*.12:.12+e*.28;const sz=(pf.cl?.38:.22)+e*(pf.cl?.34:.2);pf.sp.scale.set(sz,sz,1);pf.sp.material.opacity=(pf.cl?.55:.8)*(1-k)});
     LM.forEach(m=>{const tgt=(near&&near===m)?1:0;m.h+=(tgt-m.h)*Math.min(1,dt*5);const h=m.h;m.gl.material.opacity=.09*h;m.hm.forEach(q=>{q.m.emissive.copy(q.e0).lerp(warm,.08*h);q.m.emissiveIntensity=q.i0+.1*h})});
     if(near){selL.position.set(near.x,5,near.z)}selL.intensity+=(((near?.55:0))-selL.intensity)*Math.min(1,dt*5);
@@ -7075,7 +7076,7 @@ function camStop(){
   const c=HS.cam;c.on=false;c.state='off';clearTimeout(c.timer);
   try{c.stream&&c.stream.getTracks().forEach(t=>t.stop())}catch(e){}
   try{c.fm&&c.fm.close&&c.fm.close()}catch(e){}
-  c.stream=null;c.vid=null;c.fm=null;c.fl=null;c.feel=null;c.em=null;c.hist=[];c.att=[];c.blinks=[];c.recent=[];c.mood=[];c.upset=false;c.base=null;c.eyes=[];c.yawns=[];c.tired=false;c.perclos=0;hsUpdate();
+  c.stream=null;c.vid=null;c.fm=null;c.fl=null;c.feel=null;c.em=null;c.hist=[];c.att=[];c.blinks=[];c.recent=[];c.mood=[];c.upset=false;c.base=null;c.pose0=null;c.onS=null;c.onPrev=false;c.tooFar=false;c.eyes=[];c.yawns=[];c.tired=false;c.perclos=0;hsUpdate();
 }
 function camLoop(){
   const c=HS.cam;if(!c.on)return;
@@ -7094,7 +7095,10 @@ function camResults(res){
     let open=(ear([159,145,33,133])+ear([386,374,362,263]))/2>.1;
     if(res.bs&&res.bs.length){const gb=n=>{const x=res.bs.find(q=>q.categoryName===n);return x?x.score:0};c.blinkS=(gb('eyeBlinkLeft')+gb('eyeBlinkRight'))/2;c.jawS=gb('jawOpen');open=c.blinkS<.5}else{c.blinkS=null;c.jawS=null}
     let gaze=.5;if(L.length>473){const g1=(L[468].x-L[33].x)/((L[133].x-L[33].x)||1),g2=(L[473].x-L[362].x)/((L[263].x-L[362].x)||1);gaze=(g1+g2)/2}
-    on=Math.abs(yaw-.5)<.17&&pit>.2&&pit<.75&&Math.abs(gaze-.5)<.2&&open;
+    {const P0=c.pose0,dy=P0?yaw-P0.y:yaw-.5,dg=P0?gaze-P0.g:gaze-.5,pOk=P0?Math.abs(pit-P0.p)<.2:(pit>.2&&pit<.75);
+     const raw=Math.abs(dy)<.17&&pOk&&Math.abs(dg)<.2&&open;
+     /* smooth over ~1 s with hysteresis, so a single glance or blink does not flip the state */
+     c.onS=(c.onS==null?(raw?1:0):c.onS*.72+(raw?.28:0));on=c.onS>(c.onPrev?.38:.62);c.onPrev=on}
     c.state=on?'focus':'drift';
     /* fatigue: eyes closed (PERCLOS), yawns, head dropping */
     c.eyes.push([now,open?0:1]);while(c.eyes.length&&now-c.eyes[0][0]>30000)c.eyes.shift();
@@ -7110,18 +7114,26 @@ function camResults(res){
     if(c.wasOpen===false&&open)c.blinks.push(now);c.wasOpen=open;while(c.blinks.length&&now-c.blinks[0]>60000)c.blinks.shift();
     c.att.push([now,on]);while(c.att.length&&now-c.att[0][0]>20000)c.att.shift();
     /* feelings: each score is compared with this child's own relaxed face, then smoothed over about a second */
-    if(open&&Math.abs(yaw-.5)<.3){
-      const fw=Math.abs(L[454].x-L[234].x)||1,fh=Math.abs(L[152].y-L[10].y)||1;let F,SC;
+    const fwN=Math.abs(L[454].x-L[234].x),talking=c.jawS!=null?c.jawS>.28:false,P0=c.pose0;
+    c.tooFar=fwN<.14;
+    if(open&&!c.tooFar&&!talking&&Math.abs(yaw-(P0?P0.y:.5))<.22&&(!P0||Math.abs(pit-P0.p)<.22)){
+      const fw=fwN||1,fh=Math.abs(L[152].y-L[10].y)||1;let F,SC;
       if(res.bs&&res.bs.length){const g=n=>{const x=res.bs.find(q=>q.categoryName===n);return x?x.score:0},av=(x,y)=>(g(x)+g(y))/2;
         F={browDown:av('browDownLeft','browDownRight'),browInnerUp:g('browInnerUp'),frown:av('mouthFrownLeft','mouthFrownRight'),press:av('mouthPressLeft','mouthPressRight'),sneer:av('noseSneerLeft','noseSneerRight'),squint:av('eyeSquintLeft','eyeSquintRight'),smile:av('mouthSmileLeft','mouthSmileRight')};
         SC={browDown:.38,browInnerUp:.38,frown:.32,press:.38,sneer:.32,squint:.4,smile:.4}}
       else{const bg=((L[159].y-L[105].y)+(L[386].y-L[334].y))/2/fh,bd=Math.abs(L[336].x-L[107].x)/fw,inner=((L[159].y-L[107].y)+(L[386].y-L[336].y))/2/fh,outer=((L[33].y-L[70].y)+(L[263].y-L[300].y))/2/fh,mc=((L[61].y+L[291].y)/2-(L[13].y+L[14].y)/2)/fh,lip=(L[17].y-L[0].y)/fh,sq=(ear([159,145,33,133])+ear([386,374,362,263]))/2,mw=Math.abs(L[291].x-L[61].x)/fw;
         F={browDown:-bg-.5*bd,browInnerUp:inner-outer,frown:mc,press:-lip,sneer:0,squint:-sq,smile:mw-mc};
         SC={browDown:.016,browInnerUp:.01,frown:.012,press:.014,sneer:1,squint:.06,smile:.04}}
-      if(!c.base||!c.base.F)c.base={n:0,F:{}};const B=c.base;
-      if(B.n<30){for(const k in F)B.F[k]=((B.F[k]||0)*B.n+F[k])/(B.n+1);B.n++;c.mood=[];c.feel={label:'Getting to know their face',learning:true,pct:Math.round(B.n/30*100),engine:c.engine}}
+      if(!c.base||!c.base.F)c.base={n:0,F:{},sd:{},S:[]};const B=c.base,CAL=40;
+      if(B.n<CAL){
+        /* learn this child's relaxed face: median of ~6 s of frames (ignores a smile or frown during set-up) and how much each signal naturally wobbles */
+        B.S.push({F,y:yaw,p:pit,g:gaze});B.n++;c.mood=[];c.feel={label:'Getting to know their face',learning:true,pct:Math.round(B.n/CAL*100),engine:c.engine};
+        if(B.n===CAL){const med=a=>{const s=a.slice().sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+          for(const k in F){const v=B.S.map(s=>s.F[k]),m=med(v);B.F[k]=m;B.sd[k]=1.4826*med(v.map(x=>Math.abs(x-m)))}
+          c.pose0={y:med(B.S.map(s=>s.y)),p:med(B.S.map(s=>s.p)),g:med(B.S.map(s=>s.g))};B.S=[]}
+      }
       else{
-        const d={};for(const k in F)d[k]=Math.max(0,Math.min(1,(F[k]-B.F[k])/SC[k]));
+        const d={};for(const k in F){const sc=Math.max(SC[k],3*(B.sd[k]||0));d[k]=Math.max(0,Math.min(1,(F[k]-B.F[k]-1.5*(B.sd[k]||0))/sc))}
         const raw={happy:Math.min(1,d.smile*(1-.5*d.browDown)),frowning:d.browDown,frustrated:Math.min(1,.55*d.browDown+.45*d.press+.25*d.sneer+.15*d.squint),sad:Math.min(1,.6*d.browInnerUp+.6*d.frown)*(1-.6*d.smile)};
         const E=c.em||(c.em={happy:0,frowning:0,frustrated:0,sad:0});for(const k in raw)E[k]=E[k]*.7+raw[k]*.3;
         const neg=Math.max(.85*E.frowning,E.frustrated,E.sad);
@@ -7279,6 +7291,7 @@ function setHelpers(box){
      ['happy','calm','frowning','frustrated','sad','upset'].forEach(k=>{const has=face&&F&&!F.learning,v=has?F[k]:0,u=$i('hl-b-'+k);if(u)u.style.width=(has?Math.round(v*100):0)+'%';tx('hl-v-'+k,has?pc(v):'–')});
      if(!co){tx('hl-fl','Camera off');tx('hl-fs','Turn on the Focus helper below.');lv('hl-face','off')}
      else if(!face){tx('hl-fl','No face seen');tx('hl-fs','Sit '+P.name+' facing the screen, about an arm away.');lv('hl-face','off')}
+     else if(HS.cam.tooFar&&F&&!F.learning){tx('hl-fl','Move a little closer');tx('hl-fs','The face is too small for a clear read.');lv('hl-face','off')}
      else if(!F||F.learning){tx('hl-fl','Getting to know their face');tx('hl-fs','Keep a relaxed face for a few seconds'+(F&&F.pct?' · '+F.pct+'%':'')+'.');lv('hl-face','off')}
      else{const L=F.label;tx('hl-fl',L);tx('hl-fs',L==='Happy'?'Smiling and relaxed.':L==='Calm'?'Relaxed face, no frown.':L==='Not calm'?'A little tense. Watch for a few seconds.':L==='Frowning'?'Brows pulled down and together.':L==='Frustrated'?'Brows down and lips pressed tight.':L==='Sad'?'Inner brows raised, mouth corners down.':'Tense face for most of the last 8 seconds.');lv('hl-face',L==='Calm'||L==='Happy'?'good':L==='Not calm'||L==='Frowning'?'warn':'bad')}
      {const H=(c.hist||[]).filter(h=>now-h[0]<=60000),tp=$i('hl-tp'),ta=$i('hl-ta');if(tp&&ta){if(face&&H.length>1){const pts=H.map(h=>[(300-(now-h[0])/200).toFixed(1),(44-h[1]*40).toFixed(1)]);tp.setAttribute('points',pts.map(q=>q.join(',')).join(' '));ta.setAttribute('d','M'+pts[0][0]+',48 L'+pts.map(q=>q.join(',')).join(' L')+' L'+pts[pts.length-1][0]+',48 Z')}else{tp.setAttribute('points','');ta.setAttribute('d','')}}}
@@ -7555,9 +7568,19 @@ let CU=null,careTab='overview',CTRY={n:0,until:0};
 const careUser=()=>{if(CLOUD.readonly&&CU)return CU;if(CU&&Date.now()<CU.until){CU.until=Date.now()+15*60000;return CU}CU=null;return null};
 function cuCloud(){if(cloudLive()&&!CLOUD.readonly&&CU&&CLOUD.user){CU.id=CLOUD.user.id;CU.role='parent';CU.email=CLOUD.user.email||CU.email}}
 function careLock(){if(CLOUD.readonly){go('helping');return}CU=null;if(cur==='care')R.care();try{guideSync()}catch(e){}}
+/* Cloud: the parent's PIN (salted hash only) is kept in care_pins so the same PIN works on any device. */
+function cloudPinSave(a){if(!cloudLive()||CLOUD.readonly||!CLOUD.user||!a)return;CLOUD.sb.from('care_pins').upsert({user_id:CLOUD.user.id,family_id:UID,name:a.name||'',salt:a.salt,h:a.h,rs:a.rs||null,rh:a.rh||null}).then(r=>{if(r.error)console.warn('pin save',r.error.message)})}
+let pinFetched='';
 function careGate(){
   if(careUser())return true;
   const pt=portalGet(),has=pt.acc.length>0;
+  if(cloudLive()&&!CLOUD.readonly&&CLOUD.user&&pinFetched!==UID){pinFetched=UID;
+    CLOUD.sb.from('care_pins').select('name,salt,h,rs,rh').eq('user_id',CLOUD.user.id).eq('family_id',UID).maybeSingle().then(r=>{
+      const d=r.data;if(r.error){console.warn('pin load',r.error.message);return}
+      if(d){const p=portalGet(),me=p.acc[0];if(!me||me.h!==d.h||me.salt!==d.salt){p.acc=[{id:CLOUD.user.id,name:d.name||'Parent',role:'parent',email:CLOUD.user.email||'',salt:d.salt,h:d.h,rs:d.rs,rh:d.rh,slots:[]}];portalSet(p);if(cur==='care'&&!careUser())R.care()}}
+      else if(has)cloudPinSave(pt.acc[0]);
+    });
+  }
   const body=has?`<div class="gr-sec" style="max-width:460px;margin:0 auto;width:100%;text-align:center"><div class="cg-lock" aria-hidden="true">${ic('lock',34)}</div><h3>Who is looking?</h3><p class="muted">The Care Circle is for parents, teachers and therapists. Enter your PIN.</p>
      <div class="cg-who" id="cgw">${pt.acc.map((a,i)=>`<button class="cg-a ${i===0?'on':''}" data-i="${i}"><span aria-hidden="true">${ic(ROLES.find(r=>r[0]===a.role)[2],20)}</span><b>${esc(a.name)}</b><small>${ROLES.find(r=>r[0]===a.role)[1]}</small></button>`).join('')}</div>
      <div class="cg-dots" id="cgd" aria-live="polite"><i></i><i></i><i></i><i></i></div><div class="cg-pad" id="cgp">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<i></i>':`<button class="cg-k" data-k="${k}" aria-label="${k==='⌫'?'Delete':k}">${k}</button>`).join('')}</div>
@@ -7578,7 +7601,7 @@ function careGate(){
       const n=$('#cgn').value.trim(),e=$('#cge').value.trim(),p1=$('#cgp1').value,p2=$('#cgp2').value;
       if(!n)return msg('Please add your name.');if(e&&!(await emailGate($('#cge'),null,$('#cgc'))))return msg('Please check the email address, or leave it empty.');if(!/^\d{4}$/.test(p1))return msg('The PIN needs 4 numbers.');if(p1!==p2)return msg('The PINs do not match.');
       const salt=rnd(8),h=await pinHash(p1,salt),code=recCode(),rs=rnd(8),rh=await pinHash(code,rs);
-      const pt2=portalGet();pt2.acc.push({id:rnd(6),name:n,role,email:e,salt,h,rs,rh,slots:[]});portalSet(pt2);
+      const pt2=portalGet();pt2.acc.push({id:rnd(6),name:n,role,email:e,salt,h,rs,rh,slots:[]});portalSet(pt2);cloudPinSave(pt2.acc[0]);
       const acc=pt2.acc[0];CU={id:acc.id,name:acc.name,role:acc.role,email:e,until:Date.now()+15*60000};cuCloud();if(cloudLive()&&!CLOUD.readonly)CLOUD.sb.from('family_members').update({display_name:n}).eq('family_id',UID).eq('user_id',CLOUD.user.id).then(()=>{CLOUD.careAt=0});
       if(e){G.rep=G.rep||{};G.rep.email=e;save()}
       $('#page').innerHTML=`<div class="wrap" style="max-width:520px"><div class="gr-sec" style="text-align:center"><div class="cg-lock">✅</div><h3>Your portal is ready</h3><p>Write down this recovery code. You will need it if you forget your PIN. It is shown only once.</p><div class="cg-code" data-notr>${code}</div><button class="btn pri lg" id="cgok">I saved it ${ic('arrow',18)}</button></div></div>`;
@@ -7601,7 +7624,7 @@ function careGate(){
   $('#cgf').onclick=()=>{
     $('#cgp').parentElement.insertAdjacentHTML('beforeend',`<div class="stack" style="gap:8px;margin-top:10px"><input class="in" id="rcc" maxlength="8" placeholder="Recovery code" autocomplete="off"><input class="in" id="rcp" type="password" inputmode="numeric" maxlength="4" placeholder="New 4-digit PIN"><button class="btn pri" id="rcg">Set new PIN</button></div>`);$('#cgf').remove();
     $('#rcg').onclick=async()=>{const a=pt.acc[sel],c=$('#rcc').value.trim().toUpperCase(),np=$('#rcp').value;if(!/^\d{4}$/.test(np))return msg('The new PIN needs 4 numbers.');
-      if(await pinHash(c,a.rs)!==a.rh)return msg('That recovery code is not right.');const pt2=portalGet(),b=pt2.acc.find(x=>x.id===a.id);b.salt=rnd(8);b.h=await pinHash(np,b.salt);portalSet(pt2);unlocked(b)};
+      if(await pinHash(c,a.rs)!==a.rh)return msg('That recovery code is not right.');const pt2=portalGet(),b=pt2.acc.find(x=>x.id===a.id);b.salt=rnd(8);b.h=await pinHash(np,b.salt);portalSet(pt2);if(pt2.acc[0]===b)cloudPinSave(b);unlocked(b)};
   };
   return false;
 }
@@ -7823,7 +7846,7 @@ R.pricing=()=>{
       if(id==='free'){if(cSub)cloudPortal();else toast(tr('You are on Free.'));return}
       if(id==='family'){if(cSub){cloudPortal();return}if(cUsed){cloudCheckout(kn,billCycle);return}
         CLOUD.sb.rpc('start_trial',{p_family:UID}).then(async r=>{if(r.error||!r.data||!r.data.ok){toast(tr('Could not start the trial. Please try again.'));return}await cloudContext();cloudApplyPlan();save(true);R.pricing();reveal($('#page'));trialSync();toast(tr('Your 7-day free trial has started. No payment needed.'))});return}
-      location.href='mailto:'+(CFG.contactEmail||'hello@lahlahlearn.com')+'?subject='+encodeURIComponent('LahLahLearn for schools and clinics');return}
+      location.href='mailto:'+(CFG.contactEmail||'lahlahlearn@gmail.com')+'?subject='+encodeURIComponent('LahLahLearn for schools and clinics');return}
     if(id==='free'){P.plan='free';save(true);R.pricing();reveal($('#page'));toast('You are on Free.');return}
     if(id==='family'){
       if(P.plan==='family'){cancelFlow();return}
