@@ -3552,46 +3552,50 @@ let calmI=0;
 let calmLast=Date.now(),wrongRun=0;
 /* LahLahLearn calm fox: vector character, every part rigged. */
 function foxSVG(){
-  const M=s=>s.replace(/(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/g,(m,x,y)=>(300-x)+' '+y); // mirror x around 150
-  const ear='M66 118 C56 76 62 40 78 18 C100 34 120 60 128 96 Z',earTip='M78 18 C70 30 66 44 65 58 C80 52 96 48 108 47 C99 36 89 26 78 18 Z',earIn='M76 108 C70 80 73 54 81 38 C95 52 107 72 113 96 Z';
-  const arm=(id,x)=>`<g id="${id}"><rect x="${x-13}" y="210" width="26" height="66" rx="13" fill="url(#fxO)"/><g id="${id}P"><ellipse cx="${x}" cy="276" rx="15.5" ry="14.5" fill="url(#fxPaw)"/><ellipse cx="${x}" cy="280" rx="7" ry="5" fill="#c08562" opacity=".6"/><circle cx="${x-8}" cy="270" r="2.6" fill="#c08562" opacity=".6"/><circle cx="${x}" cy="267" r="2.6" fill="#c08562" opacity=".6"/><circle cx="${x+8}" cy="270" r="2.6" fill="#c08562" opacity=".6"/></g></g>`;
-  const leg=(id,x)=>`<g id="${id}"><rect x="${x-17}" y="280" width="34" height="46" rx="17" fill="url(#fxO2)"/><ellipse cx="${x}" cy="327" rx="22" ry="12" fill="url(#fxPaw)"/><ellipse cx="${x}" cy="329" rx="9" ry="5" fill="#c08562" opacity=".75"/><circle cx="${x-12}" cy="322" r="3.2" fill="#c08562" opacity=".75"/><circle cx="${x}" cy="319" r="3.2" fill="#c08562" opacity=".75"/><circle cx="${x+12}" cy="322" r="3.2" fill="#c08562" opacity=".75"/></g>`;
-  const eye=(id,x)=>`<g id="${id}"><clipPath id="${id}C"><ellipse cx="${x}" cy="140" rx="15.5" ry="17.5"/></clipPath>
-     <ellipse cx="${x}" cy="140" rx="15" ry="17" fill="url(#fxEye)"/><g id="${id}P"><ellipse cx="${x}" cy="142" rx="8.5" ry="10" fill="#160a05"/><circle cx="${x+5}" cy="132" r="5.2" fill="#fff"/><circle cx="${x-5}" cy="149" r="2.4" fill="#fff" opacity=".9"/></g>
-     <path id="${id}L" clip-path="url(#${id}C)" fill="url(#fxH)" d=""/><path id="${id}S" fill="none" stroke="#3a1d10" stroke-width="3" stroke-linecap="round" d=""/></g>`;
-  return `<svg class="fox" viewBox="-20 -10 340 360" aria-hidden="true"><defs>
-   <radialGradient id="fxH" gradientUnits="userSpaceOnUse" cx="128" cy="92" r="170"><stop offset="0" stop-color="#ffb46a"/><stop offset=".55" stop-color="#f68b3b"/><stop offset="1" stop-color="#dc6a22"/></radialGradient>
-   <radialGradient id="fxO" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#ffae62"/><stop offset=".6" stop-color="#f3863a"/><stop offset="1" stop-color="#d4621f"/></radialGradient>
-   <radialGradient id="fxO2" cx=".35" cy=".25" r=".95"><stop offset="0" stop-color="#ffa95c"/><stop offset="1" stop-color="#d4621f"/></radialGradient>
-   <radialGradient id="fxC" cx=".45" cy=".35" r=".8"><stop offset="0" stop-color="#fffdf9"/><stop offset=".7" stop-color="#fcf0e2"/><stop offset="1" stop-color="#f1dcc4"/></radialGradient>
-   <radialGradient id="fxPaw" cx=".4" cy=".3" r=".9"><stop offset="0" stop-color="#93593a"/><stop offset="1" stop-color="#5a301d"/></radialGradient>
-   <radialGradient id="fxEye" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#8a4f2c"/><stop offset=".6" stop-color="#4a2514"/><stop offset="1" stop-color="#1e0d06"/></radialGradient>
-   <linearGradient id="fxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#56c174"/><stop offset="1" stop-color="#2e8e4c"/></linearGradient>
-   <radialGradient id="fxK"><stop offset="0" stop-color="#ff9fa8" stop-opacity=".85"/><stop offset="1" stop-color="#ff9fa8" stop-opacity="0"/></radialGradient>
+  const M=s=>s.replace(/(-?\d+(?:\.\d+)?)[ ,](-?\d+(?:\.\d+)?)/g,(m,x,y)=>(300-x)+' '+y); // mirror x around 150
+  const ear='M62 124 C50 82 54 42 72 14 C98 30 122 56 132 96 Z',
+        earEdge='M72 14 C56 40 50 80 60 120 C57 92 60 62 72 40 C82 34 92 32 100 33 C91 25 82 19 72 14 Z',
+        earIn='M74 112 C66 84 68 56 79 36 C96 52 110 72 117 98 C110 96 106 100 104 104 C98 100 92 104 90 108 C84 104 78 106 74 112 Z';
+  const arm=(id,x)=>`<g id="${id}"><rect x="${x-14}" y="208" width="28" height="64" rx="14" fill="url(#fxO)"/><g id="${id}P"><path d="M${x-15} 258 C${x-15} 250 ${x+15} 250 ${x+15} 258 L${x+16} 276 C${x+16} 292 ${x-16} 292 ${x-16} 276 Z" fill="url(#fxPaw)"/><path d="M${x-7} 288 v-6 M${x} 289 v-7 M${x+7} 288 v-6" stroke="#3f1f10" stroke-width="1.6" stroke-linecap="round" opacity=".55"/><ellipse cx="${x-4}" cy="262" rx="5" ry="3" fill="#fff" opacity=".18"/></g></g>`;
+  const leg=(id,x)=>`<g id="${id}"><rect x="${x-18}" y="276" width="36" height="48" rx="18" fill="url(#fxO2)"/><path d="M${x-23} 322 C${x-23} 310 ${x+23} 310 ${x+23} 322 C${x+23} 334 ${x-23} 336 ${x-23} 322 Z" fill="url(#fxPaw)"/><ellipse cx="${x}" cy="326" rx="9" ry="5" fill="#c58a66" opacity=".8"/><circle cx="${x-12}" cy="320" r="3.2" fill="#c58a66" opacity=".8"/><circle cx="${x}" cy="317" r="3.2" fill="#c58a66" opacity=".8"/><circle cx="${x+12}" cy="320" r="3.2" fill="#c58a66" opacity=".8"/></g>`;
+  const eye=(id,x)=>`<g id="${id}"><clipPath id="${id}C"><ellipse cx="${x}" cy="140" rx="20" ry="22"/></clipPath>
+     <ellipse cx="${x}" cy="140" rx="18" ry="20" fill="#2a130a"/><ellipse cx="${x}" cy="141" rx="16" ry="18" fill="url(#fxEye)"/>
+     <g id="${id}P"><ellipse cx="${x}" cy="143" rx="9" ry="10.5" fill="#140804"/><circle cx="${x+6}" cy="131" r="6.4" fill="#fff"/><circle cx="${x-6}" cy="151" r="3" fill="#fff" opacity=".9"/><circle cx="${x+9}" cy="146" r="1.6" fill="#fff" opacity=".7"/></g>
+     <path id="${id}L" clip-path="url(#${id}C)" fill="url(#fxH)" d=""/><path id="${id}S" fill="none" stroke="#3a1d10" stroke-width="3.2" stroke-linecap="round" d=""/></g>`;
+  return `<svg class="fox" viewBox="-20 -36 340 386" aria-hidden="true"><defs>
+   <radialGradient id="fxH" gradientUnits="userSpaceOnUse" cx="130" cy="86" r="175"><stop offset="0" stop-color="#ffb871"/><stop offset=".5" stop-color="#f7913f"/><stop offset="1" stop-color="#e06d22"/></radialGradient>
+   <radialGradient id="fxO" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#ffb26a"/><stop offset=".6" stop-color="#f58b3c"/><stop offset="1" stop-color="#d9661f"/></radialGradient>
+   <radialGradient id="fxO2" cx=".35" cy=".25" r=".95"><stop offset="0" stop-color="#ffad60"/><stop offset="1" stop-color="#d9661f"/></radialGradient>
+   <radialGradient id="fxC" cx=".45" cy=".3" r=".85"><stop offset="0" stop-color="#ffffff"/><stop offset=".65" stop-color="#fdf3e7"/><stop offset="1" stop-color="#f0dcc6"/></radialGradient>
+   <radialGradient id="fxPaw" cx=".4" cy=".3" r=".9"><stop offset="0" stop-color="#9a5c38"/><stop offset="1" stop-color="#5c2f1b"/></radialGradient>
+   <radialGradient id="fxEye" cx=".45" cy=".6" r=".75"><stop offset="0" stop-color="#9a5a30"/><stop offset=".55" stop-color="#5a2c15"/><stop offset="1" stop-color="#26100a"/></radialGradient>
+   <linearGradient id="fxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5cc27a"/><stop offset="1" stop-color="#2f904e"/></linearGradient>
+   <radialGradient id="fxK"><stop offset="0" stop-color="#ff98a6" stop-opacity=".9"/><stop offset=".6" stop-color="#ffa3ae" stop-opacity=".55"/><stop offset="1" stop-color="#ffa3ae" stop-opacity="0"/></radialGradient>
+   <filter id="fxFur" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".22" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs>
-  <ellipse id="fxShadow" cx="150" cy="336" rx="78" ry="10" fill="#1d4a33" opacity=".16"/>
+  <ellipse id="fxShadow" cx="150" cy="336" rx="80" ry="10" fill="#1d4a33" opacity=".16"/>
   <g id="fxAll">
-   <g id="fxTail"><path fill="url(#fxO)" d="M178 300 C222 316 276 292 282 238 C287 196 262 168 236 176 C222 181 222 196 236 204 C252 214 250 250 226 268 C210 280 192 284 178 300 Z"/>
-     <path fill="url(#fxC)" d="M236 176 C262 168 287 196 282 238 C281 248 278 256 274 262 C268 236 256 214 238 204 C224 196 222 181 236 176 Z"/></g>
-   ${leg('fxLegL',128)}${leg('fxLegR',172)}
-   <g id="fxBody"><path fill="url(#fxO)" d="M150 196 C104 196 90 246 96 282 C100 312 124 326 150 326 C176 326 200 312 204 282 C210 246 196 196 150 196 Z"/>
-     <ellipse id="fxBelly" cx="150" cy="270" rx="35" ry="44" fill="url(#fxC)"/></g>
-   <g id="fxScarf"><path fill="url(#fxG)" d="M96 202 Q150 222 204 202 L196 218 Q176 236 150 258 Q124 236 104 218 Z"/>
-     <path fill="#fff" opacity=".92" d="M150 244 C140 238 140 226 150 220 C160 226 160 238 150 244 Z M150 244 L150 226"/><path stroke="#3f9e5c" stroke-width="1.6" d="M150 243 L150 225" fill="none"/></g>
-   ${arm('fxArmL',104)}${arm('fxArmR',196)}
-   <g id="fxHead">
-     <g id="fxEarL"><path fill="url(#fxH)" d="${ear}"/><path fill="#7b3f20" d="${earTip}"/><path fill="#fde7dc" d="${earIn}"/></g>
-     <g id="fxEarR"><path fill="url(#fxH)" d="${M(ear)}"/><path fill="#7b3f20" d="${M(earTip)}"/><path fill="#fde7dc" d="${M(earIn)}"/></g>
-     <path fill="url(#fxH)" d="M150 56 C94 56 62 88 58 128 C50 140 38 150 32 164 C48 160 56 166 62 172 C74 198 110 214 150 214 C190 214 226 198 238 172 C244 166 252 160 268 164 C262 150 250 140 242 128 C238 88 206 56 150 56 Z"/>
-     <path fill="#e8792c" d="M134 62 C138 50 146 46 150 52 C154 44 162 48 164 60 C158 58 154 62 150 66 C146 62 140 58 134 62 Z"/>
-     <path fill="url(#fxC)" d="M150 150 C132 150 118 156 104 160 C86 158 64 160 46 166 C60 172 70 182 80 190 C100 206 124 212 150 212 C176 212 200 206 220 190 C230 182 240 172 254 166 C236 160 214 158 196 160 C182 156 168 150 150 150 Z"/>
-     <ellipse cx="98" cy="174" rx="18" ry="11" fill="url(#fxK)"/><ellipse cx="202" cy="174" rx="18" ry="11" fill="url(#fxK)"/>
-     <path id="fxBrowL" d="M104 112 Q116 105 128 111" stroke="#5a2e18" stroke-width="3" fill="none" stroke-linecap="round"/>
-     <path id="fxBrowR" d="M172 111 Q184 105 196 112" stroke="#5a2e18" stroke-width="3" fill="none" stroke-linecap="round"/>
-     ${eye('fxEyeL',117)}${eye('fxEyeR',183)}
-     <g id="fxMouth"><path id="fxMO" fill="#7c2a25" d=""/><ellipse id="fxTo" cx="150" cy="180" rx="6" ry="3" fill="#f17d86"/><path id="fxMW" fill="none" stroke="#3a1d10" stroke-width="2.6" stroke-linecap="round" d="M137 171 Q143.5 178 150 171 Q156.5 178 163 171"/></g>
-     <path fill="#2b150b" d="M141 158 Q150 154 159 158 Q160 163 150 169 Q140 163 141 158 Z"/><ellipse cx="146" cy="158.5" rx="3" ry="1.6" fill="#fff" opacity=".55"/>
-   </g>
+   <g id="fxTail" filter="url(#fxFur)"><path fill="url(#fxO)" d="M176 302 C222 322 284 300 290 240 C294 196 266 162 236 170 C220 175 218 194 234 204 C252 216 252 252 226 270 C210 282 190 286 176 302 Z"/>
+     <path fill="url(#fxC)" d="M236 170 C266 162 294 196 290 240 C289 250 286 258 281 264 C278 256 272 254 268 258 C266 246 260 240 254 242 C254 228 248 214 240 206 C226 198 220 180 236 170 Z"/></g>
+   ${leg('fxLegL',126)}${leg('fxLegR',174)}
+   <g id="fxBody" filter="url(#fxFur)"><path fill="url(#fxO)" d="M150 194 C102 194 88 246 94 282 C98 314 124 328 150 328 C176 328 202 314 206 282 C212 246 198 194 150 194 Z"/>
+     <path id="fxBelly" fill="url(#fxC)" d="M150 214 C126 214 112 236 112 266 C112 296 128 314 150 314 C172 314 188 296 188 266 C188 236 174 214 150 214 Z"/></g>
+   <g id="fxScarf"><path fill="url(#fxG)" d="M92 200 Q150 224 208 200 L200 218 Q178 238 150 262 Q122 238 100 218 Z"/>
+     <path fill="#fff" opacity=".95" d="M150 248 C150 240 150 236 150 232 C142 234 134 230 132 222 C140 220 148 224 150 232 C152 224 160 220 168 222 C166 230 158 234 150 232 Z"/><path stroke="#fff" stroke-width="2.4" stroke-linecap="round" d="M150 232 L150 248" fill="none"/></g>
+   ${arm('fxArmL',102)}${arm('fxArmR',198)}
+   <g id="fxHead"><g transform="translate(150 205) scale(1.08) translate(-150 -205)">
+     <g id="fxEarL"><path fill="url(#fxH)" d="${ear}"/><path fill="#7a3e1f" d="${earEdge}"/><path fill="#fff1e8" d="${earIn}"/></g>
+     <g id="fxEarR"><path fill="url(#fxH)" d="${M(ear)}"/><path fill="#7a3e1f" d="${M(earEdge)}"/><path fill="#fff1e8" d="${M(earIn)}"/></g>
+     <g filter="url(#fxFur)"><path fill="url(#fxH)" d="M150 52 C206 52 246 86 248 130 C254 140 262 148 274 154 C264 158 262 162 268 168 C256 170 252 174 256 182 C244 186 238 194 228 200 C210 210 182 216 150 216 C118 216 90 210 72 200 C62 194 56 186 44 182 C48 174 44 170 32 168 C38 162 36 158 26 154 C38 148 46 140 52 130 C54 86 94 52 150 52 Z"/>
+     <path fill="url(#fxC)" d="M150 150 C170 150 186 158 200 158 C220 156 240 150 262 156 C254 160 252 164 258 168 C248 170 244 174 248 180 C236 186 228 194 220 198 C200 210 176 214 150 214 C124 214 100 210 80 198 C72 194 64 186 52 180 C56 174 52 170 42 168 C48 164 46 160 38 156 C60 150 80 156 100 158 C114 158 130 150 150 150 Z"/></g>
+     <path fill="#e9782c" d="M130 60 C132 46 142 40 148 48 C150 36 162 36 164 48 C170 42 178 48 174 58 C166 54 158 56 152 62 C146 56 138 56 130 60 Z"/>
+     <ellipse cx="94" cy="174" rx="20" ry="13" fill="url(#fxK)"/><ellipse cx="206" cy="174" rx="20" ry="13" fill="url(#fxK)"/>
+     <path id="fxBrowL" d="M104 110 Q115 104 127 108" stroke="#6a3519" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+     <path id="fxBrowR" d="M173 108 Q185 104 196 110" stroke="#6a3519" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+     ${eye('fxEyeL',115)}${eye('fxEyeR',185)}
+     <g id="fxMouth"><path id="fxMO" fill="#8a2a2a" d=""/><ellipse id="fxTo" cx="150" cy="180" rx="6" ry="3" fill="#f27f8d"/><path id="fxMW" fill="none" stroke="#3a1d10" stroke-width="2.6" stroke-linecap="round" d="M136 170 Q143 177 150 170 Q157 177 164 170"/></g>
+     <path fill="#2b150b" d="M140 157 Q150 152 160 157 Q161 162 150 168 Q139 162 140 157 Z"/><ellipse cx="145.5" cy="157.5" rx="3.4" ry="1.7" fill="#fff" opacity=".6"/>
+   </g></g>
   </g></svg>`;
 }
 /* Pose the fox. s: {b breath 0..1, t seconds, lid 0..1, mouth 0..1, look -1..1, lookY, sway, armL/armR deg, wrist, tail deg, earL/earR deg, hop} */
@@ -3602,23 +3606,23 @@ function foxPose(root,s){
   T('fxShadow',`translate(150 336) scale(${(1-.12*b-(s.hop||0)*.01).toFixed(3)} 1) translate(-150 -336)`);
   T('fxLegL',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legL||0).toFixed(2)} 128 282)`);T('fxLegR',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legR||0).toFixed(2)} 172 282)`);
   T('fxBody',`translate(150 324) scale(${(1+.07*b).toFixed(3)} ${(1+.09*b).toFixed(3)}) translate(-150 -324)`);
-  T('fxBelly',`translate(150 266) scale(${(1+.1*b).toFixed(3)} ${(1+.08*b).toFixed(3)}) translate(-150 -266)`);
+  T('fxBelly',`translate(150 264) scale(${(1+.1*b).toFixed(3)} ${(1+.08*b).toFixed(3)}) translate(-150 -266)`);
   const sh=-18*b;
-  T('fxArmL',`translate(${(-4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armL).toFixed(2)} 104 220)`);T('fxArmLP',`rotate(${(s.wristL||0).toFixed(2)} 104 268)`);
-  T('fxArmR',`translate(${(4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armR).toFixed(2)} 196 220)`);T('fxArmRP',`rotate(${(s.wristR||0).toFixed(2)} 196 268)`);
+  T('fxArmL',`translate(${(-4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armL).toFixed(2)} 102 218)`);T('fxArmLP',`rotate(${(s.wristL||0).toFixed(2)} 102 262)`);
+  T('fxArmR',`translate(${(4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armR).toFixed(2)} 198 218)`);T('fxArmRP',`rotate(${(s.wristR||0).toFixed(2)} 198 262)`);
   T('fxScarf',`translate(0 ${(-16*b).toFixed(2)}) translate(150 210) scale(${(1+.05*b).toFixed(3)}) translate(-150 -210)`);
   T('fxHead',`translate(${(s.look*4).toFixed(2)} ${(-17*b+(s.nod||0)).toFixed(2)}) rotate(${(s.look*7+(s.tilt||0)).toFixed(2)} 150 205)`);
   T('fxTail',`rotate(${(s.tail).toFixed(2)} 186 296)`);
   T('fxEarL',`rotate(${(s.earL||0).toFixed(2)} 96 100)`);T('fxEarR',`rotate(${(s.earR||0).toFixed(2)} 204 100)`);
   T('fxBrowL',`translate(0 ${(-3*b-(s.brow||0)).toFixed(2)})`);T('fxBrowR',`translate(0 ${(-3*b-(s.brow||0)).toFixed(2)})`);
-  for(const [id,x] of [['fxEyeL',117],['fxEyeR',183]]){
+  for(const [id,x] of [['fxEyeL',115],['fxEyeR',185]]){
     T(id+'P',`translate(${(s.look*4.5+(s.px||0)).toFixed(2)} ${(s.lookY||0).toFixed(2)})`);
-    const l=Math.max(0,Math.min(1,s.lid)),top=140-19,bot=140+19,ys=top+(bot-top)*l*.62,yc=top+(bot-top+10)*l*1.02;
+    const l=Math.max(0,Math.min(1,s.lid)),top=140-23,bot=140+22,ys=top+(bot-top)*l*.62,yc=top+(bot-top+10)*l*1.02;
     const midY=(ys+yc)/2;
-    q(id+'L').setAttribute('d',`M${x-18} ${top} H${x+18} V${ys.toFixed(2)} Q${x} ${(2*midY-ys).toFixed(2)} ${x-18} ${ys.toFixed(2)} Z`);
-    const sd=q(id+'S');if(l>.55){const yy=ys,cy=2*midY-ys;sd.setAttribute('d',`M${x-15} ${(yy+ (cy-yy)*.17).toFixed(2)} Q${x} ${(cy).toFixed(2)} ${x+15} ${(yy+(cy-yy)*.17).toFixed(2)}`);sd.setAttribute('opacity',Math.min(1,(l-.55)/.3).toFixed(2))}else sd.setAttribute('opacity','0');
+    q(id+'L').setAttribute('d',`M${x-22} ${top} H${x+22} V${ys.toFixed(2)} Q${x} ${(2*midY-ys).toFixed(2)} ${x-22} ${ys.toFixed(2)} Z`);
+    const sd=q(id+'S');if(l>.55){const yy=ys,cy=2*midY-ys;sd.setAttribute('d',`M${x-17} ${(yy+ (cy-yy)*.17).toFixed(2)} Q${x} ${(cy).toFixed(2)} ${x+17} ${(yy+(cy-yy)*.17).toFixed(2)}`);sd.setAttribute('opacity',Math.min(1,(l-.55)/.3).toFixed(2))}else sd.setAttribute('opacity','0');
   }
-  const m=Math.max(0,s.mouth),w=8+4*m,h=2+17*m;
+  const m=Math.max(0,s.mouth),w=9+5*m,h=2+19*m;
   q('fxMO').setAttribute('d',m<.03?'':`M${150-w} 172 Q150 ${170} ${150+w} 172 Q${150+w*.8} ${172+h} 150 ${172+h} Q${150-w*.8} ${172+h} ${150-w} 172 Z`);
   const to=q('fxTo');to.setAttribute('cy',(172+h*.78).toFixed(2));to.setAttribute('ry',(Math.max(0,h*.22)).toFixed(2));to.setAttribute('rx',(w*.55).toFixed(2));to.setAttribute('opacity',m<.12?0:1);
 }
@@ -3691,7 +3695,7 @@ function openCalm(auto){
     const A=gentle?.35:1,sway=Math.sin(sec*.9)*2.2*A+(running?0:Math.sin(sec*2.1)*.6*A);
     const lag=Math.sin(sec*1.7)*4*A;
     foxPose(fox,{b,t:sec,lid,mouth,look,lookY,px:Math.sin(sec*.8)*.6,sway,
-      armL:12+110*b+Math.sin(sec*1.1)*2*A,armR:-12-110*b-Math.sin(sec*1.1+.6)*2*A,
+      armL:12+92*b+Math.sin(sec*1.1)*2*A,armR:-12-92*b-Math.sin(sec*1.1+.6)*2*A,
       wristL:-8*b+lag-(running&&ph==='in'?6:0),wristR:8*b-lag+(running&&ph==='in'?6:0),
       tail:Math.sin(sec*1.6)*10*A+6*b,earL:tw(twL)+Math.sin(sec*1.2)*1.5*A-4*b,earR:-tw(twR)-Math.sin(sec*1.2)*1.5*A+4*b,
       brow:running&&ph==='hold'?1.5:0,nod:Math.sin(sec*.9+1)*1.2*A,tilt:sway*.6,legL:Math.sin(sec*.9)*1.5*A,legR:Math.sin(sec*.9)*1.5*A});
