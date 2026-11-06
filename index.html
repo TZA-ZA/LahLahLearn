@@ -2238,6 +2238,31 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 .ckb-l{color:var(--brand);font-weight:600}
 .ckb-b{display:flex;gap:8px;flex-shrink:0}
 @media (max-width:640px){.ckb{flex-direction:column;align-items:stretch;bottom:12px}.ckb-b{justify-content:stretch}.ckb-b .btn{flex:1}}
+
+/* ===== Calm breath: one 10-second breath (in 4 s, hold 2 s, out 4 s) ===== */
+.br-card{gap:10px!important}
+.br-msg{margin:0;font:600 1.15rem/1.4 var(--f-d);max-width:24ch;text-align:center;opacity:.92}
+.br{position:relative;width:min(74vw,19rem);aspect-ratio:1;display:grid;place-items:center;margin:6px auto 2px}
+.br-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.br-trk{fill:none;stroke:rgba(47,143,99,.15);stroke-width:2.2}
+.br-prog{fill:none;stroke:#3a9d6e;stroke-width:2.8;stroke-linecap:round}
+.br-glow{position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.85),rgba(207,236,220,.55) 52%,rgba(127,190,156,.22) 70%,transparent 72%);transform:scale(.6);transition:transform 4s cubic-bezier(.42,0,.32,1)}
+.br.ph-in .br-glow,.br.ph-hold .br-glow{transform:scale(1)}
+.br.ph-out .br-glow,.br.ph-rest .br-glow{transform:scale(.6)}
+.br-pet{position:relative;z-index:2;transform-origin:50% 90%;transform:translateY(6%) scale(.9,.88);transition:transform 4s cubic-bezier(.42,0,.32,1);filter:drop-shadow(0 14px 24px rgba(0,0,0,.28))}
+.br.ph-in .br-pet,.br.ph-hold .br-pet{transform:translateY(-3%) scale(1.04,1.1)}
+.br.ph-out .br-pet{transform:translateY(6%) scale(.9,.88)}
+.br-pet-in{transform-origin:50% 80%}
+.br.ph-hold .br-pet-in{animation:brLook 2s ease-in-out}
+.br.ph-rest .br-pet-in{animation:brIdle 3.2s ease-in-out infinite}
+@keyframes brLook{0%{transform:none}22%{transform:translateX(-5%) rotate(-9deg)}50%{transform:translateX(-5%) rotate(-9deg)}72%{transform:translateX(5%) rotate(9deg)}100%{transform:none}}
+@keyframes brIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3%)}}
+.br-cue{margin:0;font:700 1.7rem/1.2 var(--f-d);letter-spacing:.01em}
+.br-sub{margin:0;font:600 1.1rem var(--f-d);opacity:.7;min-height:1.4em}
+.br-end{display:flex;flex-direction:column;align-items:center;gap:12px}
+.br-done{margin:0;font:700 1.35rem var(--f-d)}
+body.noanim .br-pet,body.noanim .br-glow{transition:none}body.noanim .br-pet-in{animation:none!important}
+@media (prefers-reduced-motion:reduce){.br-pet,.br-glow{transition:none}.br-pet-in{animation:none!important}}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -2782,7 +2807,7 @@ function touchDay(){
 function recordAnswer(skill,ok){
   const m=G.mastery[skill],s=G.st[skill]||(G.st[skill]=[0,0]);s[0]++;if(ok)s[1]++;
   G.mastery[skill]=clamp(ok?m+(100-m)*.12:m-m*.04,5,99);
-  if(ok){award(10);wrongRun=0}else if(++wrongRun>=(TF().big?2:3))setTimeout(autoCalm,1400);touchDay();save();try{comboHit(ok)}catch(e){}
+  if(ok){award(10);wrongRun=0}else if(++wrongRun>=4)setTimeout(()=>autoCalm('wrong'),1400);touchDay();save();try{comboHit(ok)}catch(e){}
 }
 const plantCount=()=>Math.floor(G.pts/5);
 const PLANTS=['\u{1F331}','\u{1F33C}','\u{1F33B}','\u{1F344}','\u{1F337}','\u{1F333}','\u{1F34E}','\u{1F98B}','\u{1F41D}','\u{1F308}','\u{1F41E}','\u{1F33A}'];
@@ -3502,34 +3527,56 @@ function guideSync(){
   if(!lsGet('ll.g.'+k)&&['learn','lesson','game','island','play','study'].includes(k))setTimeout(()=>{if(guideKey()===k&&!calmOpen&&!$('#guidepop'))guideOpen(k)},900);
 }
 let calmLockUntil=0;
-function calmRelease(){document.body.classList.remove('calming');const n=Date.now(),c=HS.cam,m=HS.mic;c.cool=m.cool=n+3*60000;c.eyes=[];c.yawns=[];c.recent=[];c.tired=false;c.perclos=0;c.droop=0;c.mood=[];c.upset=false;m.fast=0;calmLast=n}
+function calmRelease(){document.body.classList.remove('calming');const n=Date.now(),c=HS.cam,m=HS.mic;c.cool=m.cool=n+10*60000;c.eyes=[];c.yawns=[];c.recent=[];c.tired=false;c.perclos=0;c.droop=0;c.mood=[];c.upset=false;m.fast=0;calmLast=n}
 function overlayClose(){if(calmOpen){if(Date.now()<calmLockUntil)return;calmOpen=false;clearTimeout(calmT);clearInterval(calmI);calmRelease()}$('#overlay').innerHTML='';document.removeEventListener('keydown',escKey,true)}
 const escKey=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();overlayClose()}};
 let calmI=0;
 let calmLast=Date.now(),wrongRun=0;
 function openCalm(auto){
-  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+(auto?60000:30000);document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
+  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+10000;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
-  $('#overlay').innerHTML=`<div class="calm" role="dialog" aria-modal="true" aria-label="Calming Corner"><div class="calm-card" id="ccard"><span class="bt" aria-hidden="true"></span><p class="big" id="cmsg" style="max-width:22ch">${auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us rest and breathe together.':calmWhy==='breath'?'Your breathing is fast. Let us slow it down together.':calmWhy==='focus'?'Pip is here. Let us pause and breathe together.':calmWhy==='upset'?'It is okay to feel upset. Pip is here. Let us breathe together.':'Let us calm down together. Breathe with me, nice and slow.'):'You are safe. You are doing well. Let us breathe, nice and slow.'}</p>
-   <div class="cbm bout" id="corb"><i class="cbm-r r1"></i><i class="cbm-r r2"></i><i class="cbm-r r3"></i><div class="cbm-aura"></div><div class="cbm-pet">${buddySVG(buddy(),210,'calm')}</div><div class="cbm-n" id="ccnt" aria-hidden="true"></div></div>
-   <p class="big" id="cbr" aria-live="polite">Breathe in slowly</p><p class="muted calm-wait" id="cwait" aria-live="off"></p><button class="btn" id="cdone" hidden>I feel calmer</button></div></div>`;
-  const orb=$('#corb'),txt=$('#cbr'),cnt=$('#ccnt');let cdI=0;
-  const step=inh=>{if(!calmOpen)return;txt.textContent=tr(inh?'Breathe in slowly':'Breathe out softly');orb.className='cbm '+(inh?'bin':'bout');{const cc=$('#ccard');if(cc)cc.dataset.b=inh?'in':'out'}
-    let n=inh?4:6;cnt.textContent=n;clearInterval(cdI);cdI=setInterval(()=>{n--;if(n>0)cnt.textContent=n;else clearInterval(cdI)},1000);calmT=setTimeout(()=>step(!inh),inh?4000:6000)};
-  setTimeout(()=>step(true),80);
-  if(auto&&P&&P.prefs.voice)setTimeout(()=>{const m=$('#cmsg');if(m)say(m.textContent)},400);
-  const prompts=['Look around. Can you find something blue?','Feel your feet on the floor. Strong and steady.','Let your shoulders drop. Soft and loose.','Look around. Can you find something round?','Wiggle your fingers slowly.','There is nothing to do right now. Just breathe.'];let k=0;
-  calmI=setInterval(()=>{const m=$('#cmsg');if(m)m.textContent=tr(prompts[k++%prompts.length])},12000);
-  const cw=$('#cwait'),cd=$('#cdone');
-  const tick=()=>{const left=Math.ceil((calmLockUntil-Date.now())/1000);if(left>0){cw.textContent=tr('Resting together')+' · '+left+'s'}else{cw.textContent='';cd.hidden=false;clearInterval(lockI)}};
-  const lockI=setInterval(()=>{if(!calmOpen){clearInterval(lockI);return}tick()},500);tick();
-  cd.onclick=overlayClose;document.addEventListener('keydown',escKey,true);
+  const msg=auto?tr(calmWhy==='tired'?'You look a little sleepy. One slow breath with me.':calmWhy==='upset'?'It is okay to feel upset. One slow breath with me.':'Let us take one slow breath together.'):tr('One slow breath with me.');
+  const R=46,Lc=2*Math.PI*R;
+  $('#overlay').innerHTML=`<div class="calm" role="dialog" aria-modal="true" aria-label="${tr('Calm breath')}"><div class="calm-card br-card" id="ccard">
+   <p class="br-msg" id="cmsg">${msg}</p>
+   <div class="br" id="br"><svg class="br-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="${R}" class="br-trk"/><circle cx="50" cy="50" r="${R}" class="br-prog" id="brp" style="stroke-dasharray:${Lc};stroke-dashoffset:${Lc}"/></svg>
+     <div class="br-glow"></div><div class="br-pet"><div class="br-pet-in">${buddySVG(buddy(),190,'calm')}</div></div></div>
+   <p class="br-cue" id="cue" aria-live="polite">${tr('Get ready')}</p><p class="br-sub" id="csub" aria-hidden="true">&nbsp;</p>
+   <div class="br-end" id="cend" hidden><p class="br-done">${tr('Well done. You did it.')}</p><div class="row" style="gap:10px;justify-content:center"><button class="btn ghost" id="cagain">${tr('Again')}</button><button class="btn pri" id="cdone">${tr('I feel calmer')}</button></div></div>
+  </div></div>`;
+  const br=$('#br'),cue=$('#cue'),sub=$('#csub'),prog=$('#brp'),end=$('#cend');
+  const PH=[['in',4,'Breathe in'],['hold',2,'Hold and look around'],['out',4,'Breathe out']];
+  let autoClose=0;
+  const run=()=>{
+    end.hidden=true;cue.hidden=false;sub.hidden=false;calmLockUntil=Date.now()+10000;
+    prog.style.transition='none';prog.style.strokeDashoffset=Lc;void prog.getBoundingClientRect();
+    prog.style.transition='stroke-dashoffset 10s linear';prog.style.strokeDashoffset=0;
+    let p=0;
+    const phase=()=>{if(!calmOpen)return;
+      if(p>=PH.length){br.className='br ph-rest';cue.hidden=true;sub.hidden=true;end.hidden=false;try{$('#cdone').focus()}catch(e){}
+        if(auto)autoClose=setTimeout(()=>{if(calmOpen)overlayClose()},7000);return}
+      const [k,s,t]=PH[p++];br.className='br ph-'+k;cue.textContent=tr(t);let n=s;sub.textContent=n;
+      clearInterval(calmI);calmI=setInterval(()=>{n--;if(n>0)sub.textContent=n},1000);
+      if(P&&P.prefs&&P.prefs.voice&&k!=='hold')try{say(tr(t))}catch(e){}
+      calmT=setTimeout(phase,s*1000)};
+    calmT=setTimeout(phase,350);
+  };
+  run();
+  $('#cagain').onclick=()=>{clearTimeout(autoClose);run()};
+  $('#cdone').onclick=()=>{clearTimeout(autoClose);calmLockUntil=0;overlayClose()};
+  document.addEventListener('keydown',escKey,true);
 }
 let calmWhy='';
+/* Automatic calm breaks are rare: only for real signs (upset, sleepy, several wrong answers),
+   never more than once every 10 minutes and at most 3 times a day. Drifting focus or fast breathing only shows a small note. */
+const CALM_GAP=10*60000,CALM_DAY=3;
 function autoCalm(why){
   if(calmOpen||!session||!G||document.hidden)return false;
+  if(why==='focus'||why==='breath'||!why)return false;
+  if(Date.now()-calmLast<CALM_GAP)return false;
+  const ac=G.autoCalmN||(G.autoCalmN={}),d=todayStr();if((ac[d]||0)>=CALM_DAY)return false;
   if(!['learn','play','explore','world','talk','study','together'].includes(cur))return false;
-  calmWhy=why||'';openCalm(true);return true;
+  ac[d]=(ac[d]||0)+1;calmWhy=why||'';openCalm(true);return true;
 }
 studyUI();
 
@@ -3537,7 +3584,6 @@ studyUI();
 setInterval(()=>{
   if(document.hidden||calmOpen||!session||!G||!['learn','play','together','talk','explore','world'].includes(cur))return;
   const d=todayStr();G.mins[d]=(G.mins[d]||0)+1;if(G.mins[d]===STREAK_SEC&&streakCheck()){save();try{toast(tr('5 minutes today! Your streak is now')+' '+G.streak+'.')}catch(e){}}
-  if(Date.now()-calmLast>Math.max(8,P.att*3+6)*60000)autoCalm();
   if(G.mins[d]%10===0)save();
   updateClock();
 },1000);
@@ -7042,7 +7088,7 @@ const hsSaveSoon=k=>{const h=HS[k],n=Date.now();if(n-h.saved>15000){h.saved=n;if
 function nudge(kind){
   const h=HS[kind==='breath'?'mic':'cam'],now=Date.now();
   if(now<h.cool||calmOpen||$('#nudge')||!session||!G)return;
-  h.cool=now+4*60000;
+  h.cool=now+10*60000;
   if(kind==='breath'){const b=G.breath[todayStr()]||(G.breath[todayStr()]=[0,0,0]);b[0]++}
   else if(kind==='upset'){const f=G.upsetN||(G.upsetN={});f[todayStr()]=(f[todayStr()]||0)+1}
   else{const f=G.focusN||(G.focusN={});f[todayStr()]=(f[todayStr()]||0)+1}
@@ -7157,7 +7203,7 @@ function camResults(res){
     hsSaveSoon('cam');
   }
   /* sleepy: open the calm corner straight away, no question first */
-  if(c.tired&&L&&session&&G&&kidMode()&&!calmOpen&&!document.hidden&&cur!=='care'&&cur!=='profile'&&Date.now()>(c.tcool||0)){c.tcool=Date.now()+4*60000;const tf=G.tiredN||(G.tiredN={});tf[todayStr()]=(tf[todayStr()]||0)+1;calmWhy='tired';openCalm(true);save()}
+  if(c.tired&&L&&session&&G&&kidMode()&&!calmOpen&&!document.hidden&&cur!=='care'&&cur!=='profile'&&Date.now()>(c.tcool||0)){c.tcool=Date.now()+10*60000;const tf=G.tiredN||(G.tiredN={});tf[todayStr()]=(tf[todayStr()]||0)+1;autoCalm('tired');save()}
   hsUpdate();
 }
 
