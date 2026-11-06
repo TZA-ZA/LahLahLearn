@@ -2276,7 +2276,7 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 .cm-chip{min-height:38px;padding:0 13px;border-radius:999px;border:1.5px solid rgba(58,157,110,.25);background:rgba(255,255,255,.7);font:700 .85rem var(--f-b);color:#3c5f4e;cursor:pointer}
 .cm-chip[aria-pressed=true]{background:#e2f4ea;border-color:#3a9d6e;color:#17382a}
 .cm-chip:focus-visible,.cm-ctl .btn:focus-visible,.cm-done:focus-visible{outline:3px solid #f0b54a;outline-offset:2px}
-.cm-done{min-height:42px}
+.cm-done{min-height:42px;animation:cmIn .5s ease both}.cm-done[hidden]{display:none}@keyframes cmIn{from{opacity:0;transform:translateY(8px)}}
 .cm.gentle .cm-sky i,.cm.gentle .cm-sky::before,.cm.gentle .cm-sky::after{animation:none}.cm.gentle .cm-sky i{display:none}
 .cm.gentle .cm-ring.r3{transform:scale(calc(.8 + var(--b)*.15))}
 @media (max-height:720px){.cm-stage{width:min(100%,15rem)}.cm-msg{display:none}}
@@ -3638,7 +3638,7 @@ function calmSound(){ /* soft pad + breath-like air, all made in the browser (no
     off(){if(!ctx)return;const c=ctx;ctx=null;try{master.gain.setTargetAtTime(0,c.currentTime,.2);air.gain.setTargetAtTime(0,c.currentTime,.1);setTimeout(()=>c.close(),700)}catch(e){}},
     get isOn(){return!!ctx}}}
 function openCalm(auto){
-  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=auto?Date.now()+CALM_CYC+1000:0;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
+  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+CALM_CYC+1000;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
   const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
   const sysStill=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3654,7 +3654,7 @@ function openCalm(auto){
     </div>
     <p class="cm-cue" id="cue" aria-live="polite">${tr('Get ready...')}</p>
     <div class="cm-phases" aria-hidden="true"><div data-ph="in"><b></b><span>${tr('In')}</span></div><div data-ph="hold"><b></b><span>${tr('Hold')}</span></div><div data-ph="out"><b></b><span>${tr('Out')}</span></div></div>
-    <button class="btn ghost cm-done" id="cdone">${tr('I feel calmer')}</button>
+    <button class="btn ghost cm-done" id="cdone" hidden>${tr('I feel calmer')}</button>
    </div></div>`;
   const root=$('#cm'),fox=$('#cfox'),stage=$('#cstage'),cue=$('#cue'),msg=$('#cmsg'),phs=[...root.querySelectorAll('.cm-phases>div')];
   const snd=calmSound();
@@ -3670,7 +3670,7 @@ function openCalm(auto){
   const frame=now=>{
     const dt=Math.max(0,Math.min(100,now-last));last=now;const sec=now/1000;
     if(running&&!paused){const before=Math.floor(t/CALM_CYC);t+=dt;const after=Math.floor(t/CALM_CYC);
-      if(after>before&&after>0&&!doneShown){cycles=after;doneShown=true;stop(tr("Amazing! You're doing great!"));msg.textContent=tr('You feel calmer now.');try{$('#cdone').focus()}catch(x){}
+      if(after>before&&after>0&&!doneShown){cycles=after;doneShown=true;stop(tr("Amazing! You're doing great!"));msg.textContent=tr('You feel calmer now.');try{const d=$('#cdone');d.hidden=false;d.focus()}catch(x){}
         if(auto)autoT=setTimeout(()=>{if(calmOpen)overlayClose()},8000)}}
     /* breath value */
     let target=0,ph='rest',pp=0,left=0;
