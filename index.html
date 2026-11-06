@@ -2239,33 +2239,48 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 .ckb-b{display:flex;gap:8px;flex-shrink:0}
 @media (max-width:640px){.ckb{flex-direction:column;align-items:stretch;bottom:12px}.ckb-b{justify-content:stretch}.ckb-b .btn{flex:1}}
 
-/* ===== Calm breath: one 10-second breath (in 4 s, hold 2 s, out 4 s) ===== */
-.br-card{gap:10px!important}
-.br-msg{margin:0;font:600 1.15rem/1.4 var(--f-d);max-width:24ch;text-align:center;opacity:.92}
-.br{position:relative;width:min(74vw,19rem);aspect-ratio:1;display:grid;place-items:center;margin:6px auto 2px}
-.br-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
-.br-trk{fill:none;stroke:rgba(47,143,99,.15);stroke-width:2.2}
-.br-prog{fill:none;stroke:#3a9d6e;stroke-width:2.8;stroke-linecap:round}
-.br-glow{position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.85),rgba(207,236,220,.55) 52%,rgba(127,190,156,.22) 70%,transparent 72%);transform:scale(.55);transition:none!important}
-.br-shd{position:absolute;left:30%;right:30%;bottom:15%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(20,60,40,.35),transparent);opacity:.55;transition:none!important}
-.br-pet{position:relative;z-index:2;transform-origin:50% 92%;transform:translateY(5%) scale(.93,.9);transition:none!important;filter:drop-shadow(0 14px 24px rgba(0,0,0,.22));will-change:transform}
-.br-pet-in{transform-origin:50% 85%;transition:none!important}
-.br-air{position:absolute;left:50%;top:40%;width:0;height:0;z-index:3;pointer-events:none}
-.br-air i{position:absolute;left:-12px;top:-12px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff 0 22%,rgba(150,215,185,.9) 55%,rgba(90,175,135,.55) 68%,rgba(90,175,135,0) 72%);box-shadow:0 0 10px rgba(90,175,135,.25);opacity:0;will-change:transform,opacity}
-.fx{position:relative;width:min(38vw,9.6rem);aspect-ratio:351/426;transform-origin:50% 95%}
-.fx-img{display:block;width:100%;height:100%;user-select:none;-webkit-user-drag:none;-webkit-mask-image:linear-gradient(#000 84%,transparent);mask-image:linear-gradient(#000 84%,transparent)}
-.br-spark{position:absolute;left:50%;top:48%;width:0;height:0;z-index:3;pointer-events:none}
-.br-spark i{position:absolute;left:-13px;top:-14px;font:normal 28px/1 system-ui;font-style:normal;opacity:0;text-shadow:0 1px 2px rgba(0,0,0,.15)}
-.fx-air{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.fx-in path,.fx-out path{fill:none;stroke-linecap:round;stroke-width:9;stroke-dasharray:.1 18}
-.fx-in,.fx-out{opacity:0;filter:drop-shadow(0 0 2px #fff)}
-.fx-mist>g{fill:#dff1ff;stroke:#7cc4f0;stroke-width:3;opacity:0;transform-box:fill-box;transform-origin:center}
-.fx-mouth{opacity:0;transform-box:fill-box;transform-origin:center}
-.br-cue{margin:0;font:700 clamp(1.25rem,5vw,1.6rem)/1.2 var(--f-d);letter-spacing:.01em;text-align:center;max-width:19ch}
-.br-sub{margin:0;font:600 1.1rem var(--f-d);opacity:.7;min-height:1.4em}
-.br-end{display:flex;flex-direction:column;align-items:center;gap:12px}
-.br-done{margin:0;font:700 1.35rem var(--f-d)}
-body.noanim .br-air,.br-air:empty{display:none}
+/* ===== Calm Mode with the breathing fox ===== */
+.calm.cm{overflow-y:auto;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));background:radial-gradient(120% 80% at 50% 0%,#fff7e8 0%,#e7f6ee 45%,#c5e6d4 100%);color:#17382a}
+.cm-sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.cm-sky::before,.cm-sky::after{content:"";position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(40px);opacity:.55;animation:cmDrift 18s ease-in-out infinite alternate}
+.cm-sky::before{left:-20vmax;top:-18vmax;background:radial-gradient(circle,#ffe2b8,transparent 65%)}
+.cm-sky::after{right:-22vmax;bottom:-22vmax;background:radial-gradient(circle,#bfe8ff,transparent 65%);animation-delay:-9s}
+@keyframes cmDrift{to{transform:translate(4vmax,3vmax) scale(1.08)}}
+.cm-sky i{position:absolute;left:var(--x);bottom:-30px;width:calc(14px*var(--s));height:calc(14px*var(--s));border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,rgba(255,255,255,.35) 60%,rgba(255,255,255,0) 72%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);animation:cmUp var(--d) linear infinite;animation-delay:var(--w);display:grid;place-items:center;font:normal 14px/1 system-ui;color:#ffd66b;opacity:.75}
+.cm-sky i:not(:empty){background:none;box-shadow:none;font-size:calc(18px*var(--s))}
+@keyframes cmUp{0%{transform:translate(0,0);opacity:0}10%{opacity:.8}50%{transform:translate(18px,-55vh)}90%{opacity:.7}100%{transform:translate(-10px,-110vh);opacity:0}}
+.cm-card{position:relative;z-index:1;gap:10px!important;width:min(100%,30rem);padding:18px clamp(16px,4vw,30px) 16px!important;background:rgba(255,255,255,.62)!important;border:1px solid rgba(255,255,255,.8)}
+.cm-msg{margin:2px 0 0;font:700 clamp(1.1rem,4.4vw,1.35rem)/1.3 var(--f-d);text-align:center;color:#1f4a35}
+.cm-stage{--b:0;position:relative;width:min(100%,19rem);aspect-ratio:1/1.02;display:grid;place-items:center;margin:0 auto}
+.cm-ring{position:absolute;inset:6%;border-radius:50%;border:2px solid rgba(58,157,110,.28);transform:scale(calc(.72 + var(--b)*.3));opacity:calc(.35 + var(--b)*.5)}
+.cm-ring.r2{inset:13%;border-color:rgba(58,157,110,.2);transform:scale(calc(.78 + var(--b)*.24))}
+.cm-ring.r3{inset:0;border:2px dashed rgba(255,190,90,.35);transform:scale(calc(.66 + var(--b)*.36)) rotate(calc(var(--b)*40deg))}
+.cm-glow{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.95),rgba(255,236,200,.6) 45%,rgba(160,220,190,.25) 68%,transparent 72%);transform:scale(calc(.75 + var(--b)*.35))}
+.cm-fox{position:relative;z-index:2;width:88%;margin-top:4%}
+.cm-fox svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 10px 18px rgba(80,50,20,.18))}
+.cm-cue{margin:0;min-height:2.6em;display:grid;place-items:center;font:800 clamp(1.35rem,6vw,1.8rem)/1.2 var(--f-d);color:#17382a;text-align:center}
+.cm-phases{display:grid;grid-template-columns:4fr 2fr 6fr;gap:6px;width:100%;max-width:22rem}
+.cm-phases>div{--p:0;display:flex;flex-direction:column;gap:4px;align-items:center;font:700 .78rem var(--f-b);color:#4d6f5e}
+.cm-phases b{display:block;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,#3a9d6e calc(var(--p)*100%),rgba(58,157,110,.16) 0)}
+.cm-phases>div.on{color:#17382a}
+.cm-phases>div[data-ph=hold] b{background:linear-gradient(90deg,#f0b54a calc(var(--p)*100%),rgba(240,181,74,.2) 0)}
+.cm-phases>div[data-ph=out] b{background:linear-gradient(90deg,#55a9de calc(var(--p)*100%),rgba(85,169,222,.18) 0)}
+.cm-stats{display:flex;gap:10px;justify-content:center;font:600 .9rem var(--f-b);color:#3c5f4e}
+.cm-stats span{padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.75);border:1px solid rgba(58,157,110,.15)}
+.cm-stats b{font-variant-numeric:tabular-nums;color:#17382a;margin-left:3px}
+.cm-ctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.cm-ctl .btn{display:inline-flex;align-items:center;gap:7px;min-height:46px;border-radius:999px}
+.calm .cm-main,.calm .cm-main:hover,.calm .cm-main:focus{min-width:8.5rem;justify-content:center;font-size:1.05rem;background:#2f8f5f;border-color:#2f8f5f;color:#fff}.calm .cm-main:hover{background:#277c52}
+.cm-ico{padding:0 14px}.cm-ico[disabled]{opacity:.45;cursor:default}
+.cm-tog{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.cm-chip{min-height:38px;padding:0 13px;border-radius:999px;border:1.5px solid rgba(58,157,110,.25);background:rgba(255,255,255,.7);font:700 .85rem var(--f-b);color:#3c5f4e;cursor:pointer}
+.cm-chip[aria-pressed=true]{background:#e2f4ea;border-color:#3a9d6e;color:#17382a}
+.cm-chip:focus-visible,.cm-ctl .btn:focus-visible,.cm-done:focus-visible{outline:3px solid #f0b54a;outline-offset:2px}
+.cm-done{min-height:42px}
+.cm.gentle .cm-sky i,.cm.gentle .cm-sky::before,.cm.gentle .cm-sky::after{animation:none}.cm.gentle .cm-sky i{display:none}
+.cm.gentle .cm-ring.r3{transform:scale(calc(.8 + var(--b)*.15))}
+@media (max-height:720px){.cm-stage{width:min(100%,15rem)}.cm-msg{display:none}}
+@media (prefers-reduced-motion:reduce){.cm-sky i{display:none}}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -3531,88 +3546,181 @@ function guideSync(){
 }
 let calmLockUntil=0;
 function calmRelease(){document.body.classList.remove('calming');const n=Date.now(),c=HS.cam,m=HS.mic;c.cool=m.cool=n+10*60000;c.eyes=[];c.yawns=[];c.recent=[];c.tired=false;c.perclos=0;c.droop=0;c.mood=[];c.upset=false;m.fast=0;calmLast=n}
-function overlayClose(){if(calmOpen){if(Date.now()<calmLockUntil)return;calmOpen=false;clearTimeout(calmT);clearInterval(calmI);calmRelease()}$('#overlay').innerHTML='';document.removeEventListener('keydown',escKey,true)}
+function overlayClose(){if(calmOpen){if(Date.now()<calmLockUntil)return;calmOpen=false;clearTimeout(calmT);clearInterval(calmI);if(calmStop){try{calmStop()}catch(e){}calmStop=null}calmRelease()}$('#overlay').innerHTML='';document.removeEventListener('keydown',escKey,true)}
 const escKey=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();overlayClose()}};
 let calmI=0;
 let calmLast=Date.now(),wrongRun=0;
+/* LahLahLearn calm fox: vector character, every part rigged. */
+function foxSVG(){
+  const M=s=>s.replace(/(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/g,(m,x,y)=>(300-x)+' '+y); // mirror x around 150
+  const ear='M66 118 C56 76 62 40 78 18 C100 34 120 60 128 96 Z',earTip='M78 18 C70 30 66 44 65 58 C80 52 96 48 108 47 C99 36 89 26 78 18 Z',earIn='M76 108 C70 80 73 54 81 38 C95 52 107 72 113 96 Z';
+  const arm=(id,x)=>`<g id="${id}"><rect x="${x-13}" y="210" width="26" height="66" rx="13" fill="url(#fxO)"/><g id="${id}P"><ellipse cx="${x}" cy="276" rx="15.5" ry="14.5" fill="url(#fxPaw)"/><ellipse cx="${x}" cy="280" rx="7" ry="5" fill="#c08562" opacity=".6"/><circle cx="${x-8}" cy="270" r="2.6" fill="#c08562" opacity=".6"/><circle cx="${x}" cy="267" r="2.6" fill="#c08562" opacity=".6"/><circle cx="${x+8}" cy="270" r="2.6" fill="#c08562" opacity=".6"/></g></g>`;
+  const leg=(id,x)=>`<g id="${id}"><rect x="${x-17}" y="280" width="34" height="46" rx="17" fill="url(#fxO2)"/><ellipse cx="${x}" cy="327" rx="22" ry="12" fill="url(#fxPaw)"/><ellipse cx="${x}" cy="329" rx="9" ry="5" fill="#c08562" opacity=".75"/><circle cx="${x-12}" cy="322" r="3.2" fill="#c08562" opacity=".75"/><circle cx="${x}" cy="319" r="3.2" fill="#c08562" opacity=".75"/><circle cx="${x+12}" cy="322" r="3.2" fill="#c08562" opacity=".75"/></g>`;
+  const eye=(id,x)=>`<g id="${id}"><clipPath id="${id}C"><ellipse cx="${x}" cy="140" rx="15.5" ry="17.5"/></clipPath>
+     <ellipse cx="${x}" cy="140" rx="15" ry="17" fill="url(#fxEye)"/><g id="${id}P"><ellipse cx="${x}" cy="142" rx="8.5" ry="10" fill="#160a05"/><circle cx="${x+5}" cy="132" r="5.2" fill="#fff"/><circle cx="${x-5}" cy="149" r="2.4" fill="#fff" opacity=".9"/></g>
+     <path id="${id}L" clip-path="url(#${id}C)" fill="url(#fxH)" d=""/><path id="${id}S" fill="none" stroke="#3a1d10" stroke-width="3" stroke-linecap="round" d=""/></g>`;
+  return `<svg class="fox" viewBox="-20 -10 340 360" aria-hidden="true"><defs>
+   <radialGradient id="fxH" gradientUnits="userSpaceOnUse" cx="128" cy="92" r="170"><stop offset="0" stop-color="#ffb46a"/><stop offset=".55" stop-color="#f68b3b"/><stop offset="1" stop-color="#dc6a22"/></radialGradient>
+   <radialGradient id="fxO" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#ffae62"/><stop offset=".6" stop-color="#f3863a"/><stop offset="1" stop-color="#d4621f"/></radialGradient>
+   <radialGradient id="fxO2" cx=".35" cy=".25" r=".95"><stop offset="0" stop-color="#ffa95c"/><stop offset="1" stop-color="#d4621f"/></radialGradient>
+   <radialGradient id="fxC" cx=".45" cy=".35" r=".8"><stop offset="0" stop-color="#fffdf9"/><stop offset=".7" stop-color="#fcf0e2"/><stop offset="1" stop-color="#f1dcc4"/></radialGradient>
+   <radialGradient id="fxPaw" cx=".4" cy=".3" r=".9"><stop offset="0" stop-color="#93593a"/><stop offset="1" stop-color="#5a301d"/></radialGradient>
+   <radialGradient id="fxEye" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#8a4f2c"/><stop offset=".6" stop-color="#4a2514"/><stop offset="1" stop-color="#1e0d06"/></radialGradient>
+   <linearGradient id="fxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#56c174"/><stop offset="1" stop-color="#2e8e4c"/></linearGradient>
+   <radialGradient id="fxK"><stop offset="0" stop-color="#ff9fa8" stop-opacity=".85"/><stop offset="1" stop-color="#ff9fa8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse id="fxShadow" cx="150" cy="336" rx="78" ry="10" fill="#1d4a33" opacity=".16"/>
+  <g id="fxAll">
+   <g id="fxTail"><path fill="url(#fxO)" d="M178 300 C222 316 276 292 282 238 C287 196 262 168 236 176 C222 181 222 196 236 204 C252 214 250 250 226 268 C210 280 192 284 178 300 Z"/>
+     <path fill="url(#fxC)" d="M236 176 C262 168 287 196 282 238 C281 248 278 256 274 262 C268 236 256 214 238 204 C224 196 222 181 236 176 Z"/></g>
+   ${leg('fxLegL',128)}${leg('fxLegR',172)}
+   <g id="fxBody"><path fill="url(#fxO)" d="M150 196 C104 196 90 246 96 282 C100 312 124 326 150 326 C176 326 200 312 204 282 C210 246 196 196 150 196 Z"/>
+     <ellipse id="fxBelly" cx="150" cy="270" rx="35" ry="44" fill="url(#fxC)"/></g>
+   <g id="fxScarf"><path fill="url(#fxG)" d="M96 202 Q150 222 204 202 L196 218 Q176 236 150 258 Q124 236 104 218 Z"/>
+     <path fill="#fff" opacity=".92" d="M150 244 C140 238 140 226 150 220 C160 226 160 238 150 244 Z M150 244 L150 226"/><path stroke="#3f9e5c" stroke-width="1.6" d="M150 243 L150 225" fill="none"/></g>
+   ${arm('fxArmL',104)}${arm('fxArmR',196)}
+   <g id="fxHead">
+     <g id="fxEarL"><path fill="url(#fxH)" d="${ear}"/><path fill="#7b3f20" d="${earTip}"/><path fill="#fde7dc" d="${earIn}"/></g>
+     <g id="fxEarR"><path fill="url(#fxH)" d="${M(ear)}"/><path fill="#7b3f20" d="${M(earTip)}"/><path fill="#fde7dc" d="${M(earIn)}"/></g>
+     <path fill="url(#fxH)" d="M150 56 C94 56 62 88 58 128 C50 140 38 150 32 164 C48 160 56 166 62 172 C74 198 110 214 150 214 C190 214 226 198 238 172 C244 166 252 160 268 164 C262 150 250 140 242 128 C238 88 206 56 150 56 Z"/>
+     <path fill="#e8792c" d="M134 62 C138 50 146 46 150 52 C154 44 162 48 164 60 C158 58 154 62 150 66 C146 62 140 58 134 62 Z"/>
+     <path fill="url(#fxC)" d="M150 150 C132 150 118 156 104 160 C86 158 64 160 46 166 C60 172 70 182 80 190 C100 206 124 212 150 212 C176 212 200 206 220 190 C230 182 240 172 254 166 C236 160 214 158 196 160 C182 156 168 150 150 150 Z"/>
+     <ellipse cx="98" cy="174" rx="18" ry="11" fill="url(#fxK)"/><ellipse cx="202" cy="174" rx="18" ry="11" fill="url(#fxK)"/>
+     <path id="fxBrowL" d="M104 112 Q116 105 128 111" stroke="#5a2e18" stroke-width="3" fill="none" stroke-linecap="round"/>
+     <path id="fxBrowR" d="M172 111 Q184 105 196 112" stroke="#5a2e18" stroke-width="3" fill="none" stroke-linecap="round"/>
+     ${eye('fxEyeL',117)}${eye('fxEyeR',183)}
+     <g id="fxMouth"><path id="fxMO" fill="#7c2a25" d=""/><ellipse id="fxTo" cx="150" cy="180" rx="6" ry="3" fill="#f17d86"/><path id="fxMW" fill="none" stroke="#3a1d10" stroke-width="2.6" stroke-linecap="round" d="M137 171 Q143.5 178 150 171 Q156.5 178 163 171"/></g>
+     <path fill="#2b150b" d="M141 158 Q150 154 159 158 Q160 163 150 169 Q140 163 141 158 Z"/><ellipse cx="146" cy="158.5" rx="3" ry="1.6" fill="#fff" opacity=".55"/>
+   </g>
+  </g></svg>`;
+}
+/* Pose the fox. s: {b breath 0..1, t seconds, lid 0..1, mouth 0..1, look -1..1, lookY, sway, armL/armR deg, wrist, tail deg, earL/earR deg, hop} */
+function foxPose(root,s){
+  const q=id=>root.querySelector('#'+id),T=(id,v)=>{const e=q(id);if(e)e.setAttribute('transform',v)};
+  const b=s.b;
+  T('fxAll',`translate(0 ${(-7*b-(s.hop||0)).toFixed(2)}) rotate(${(s.sway||0).toFixed(2)} 150 330)`);
+  T('fxShadow',`translate(150 336) scale(${(1-.12*b-(s.hop||0)*.01).toFixed(3)} 1) translate(-150 -336)`);
+  T('fxLegL',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legL||0).toFixed(2)} 128 282)`);T('fxLegR',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legR||0).toFixed(2)} 172 282)`);
+  T('fxBody',`translate(150 324) scale(${(1+.07*b).toFixed(3)} ${(1+.09*b).toFixed(3)}) translate(-150 -324)`);
+  T('fxBelly',`translate(150 266) scale(${(1+.1*b).toFixed(3)} ${(1+.08*b).toFixed(3)}) translate(-150 -266)`);
+  const sh=-18*b;
+  T('fxArmL',`translate(${(-4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armL).toFixed(2)} 104 220)`);T('fxArmLP',`rotate(${(s.wristL||0).toFixed(2)} 104 268)`);
+  T('fxArmR',`translate(${(4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armR).toFixed(2)} 196 220)`);T('fxArmRP',`rotate(${(s.wristR||0).toFixed(2)} 196 268)`);
+  T('fxScarf',`translate(0 ${(-16*b).toFixed(2)}) translate(150 210) scale(${(1+.05*b).toFixed(3)}) translate(-150 -210)`);
+  T('fxHead',`translate(${(s.look*4).toFixed(2)} ${(-17*b+(s.nod||0)).toFixed(2)}) rotate(${(s.look*7+(s.tilt||0)).toFixed(2)} 150 205)`);
+  T('fxTail',`rotate(${(s.tail).toFixed(2)} 186 296)`);
+  T('fxEarL',`rotate(${(s.earL||0).toFixed(2)} 96 100)`);T('fxEarR',`rotate(${(s.earR||0).toFixed(2)} 204 100)`);
+  T('fxBrowL',`translate(0 ${(-3*b-(s.brow||0)).toFixed(2)})`);T('fxBrowR',`translate(0 ${(-3*b-(s.brow||0)).toFixed(2)})`);
+  for(const [id,x] of [['fxEyeL',117],['fxEyeR',183]]){
+    T(id+'P',`translate(${(s.look*4.5+(s.px||0)).toFixed(2)} ${(s.lookY||0).toFixed(2)})`);
+    const l=Math.max(0,Math.min(1,s.lid)),top=140-19,bot=140+19,ys=top+(bot-top)*l*.62,yc=top+(bot-top+10)*l*1.02;
+    const midY=(ys+yc)/2;
+    q(id+'L').setAttribute('d',`M${x-18} ${top} H${x+18} V${ys.toFixed(2)} Q${x} ${(2*midY-ys).toFixed(2)} ${x-18} ${ys.toFixed(2)} Z`);
+    const sd=q(id+'S');if(l>.55){const yy=ys,cy=2*midY-ys;sd.setAttribute('d',`M${x-15} ${(yy+ (cy-yy)*.17).toFixed(2)} Q${x} ${(cy).toFixed(2)} ${x+15} ${(yy+(cy-yy)*.17).toFixed(2)}`);sd.setAttribute('opacity',Math.min(1,(l-.55)/.3).toFixed(2))}else sd.setAttribute('opacity','0');
+  }
+  const m=Math.max(0,s.mouth),w=8+4*m,h=2+17*m;
+  q('fxMO').setAttribute('d',m<.03?'':`M${150-w} 172 Q150 ${170} ${150+w} 172 Q${150+w*.8} ${172+h} 150 ${172+h} Q${150-w*.8} ${172+h} ${150-w} 172 Z`);
+  const to=q('fxTo');to.setAttribute('cy',(172+h*.78).toFixed(2));to.setAttribute('ry',(Math.max(0,h*.22)).toFixed(2));to.setAttribute('rx',(w*.55).toFixed(2));to.setAttribute('opacity',m<.12?0:1);
+}
+/* ===== Calm Mode: a living vector fox that breathes with the child (in 4 s, hold 2 s, out 6 s, repeat) ===== */
+const CM_PLAY='<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4c0 .6.7 1 1.2.6l8-5.2c.5-.3.5-1 0-1.3l-8-5.2c-.5-.3-1.2 0-1.2.7z" fill="currentColor"/></svg>',CM_RE='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 3.5v5h5"/></svg>';
+const CALM_IN=4000,CALM_HOLD=2000,CALM_OUT=6000,CALM_CYC=CALM_IN+CALM_HOLD+CALM_OUT;
+let calmStop=null;
+function calmSound(){ /* soft pad + breath-like air, all made in the browser (no files) */
+  let ctx=null,master,air,airF;
+  return{on(){if(ctx)return;try{const AC=window.AudioContext||window.webkitAudioContext;ctx=new AC();master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);
+      const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;lp.connect(master);
+      [[196,.22],[293.66,.14],[392,.07],[98,.16]].forEach(([f,g])=>{const o=ctx.createOscillator(),v=ctx.createGain();o.type=f<100?'triangle':'sine';o.frequency.value=f;v.gain.value=g;o.connect(v);v.connect(lp);o.start()});
+      const n=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate),d=n.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+      const src=ctx.createBufferSource();src.buffer=n;src.loop=true;airF=ctx.createBiquadFilter();airF.type='bandpass';airF.frequency.value=700;airF.Q.value=.7;air=ctx.createGain();air.gain.value=0;src.connect(airF);airF.connect(air);air.connect(ctx.destination);src.start();
+      master.gain.setTargetAtTime(.09,ctx.currentTime,.8)}catch(e){ctx=null}},
+    set(b,flow){if(!ctx)return;const t=ctx.currentTime;master.gain.setTargetAtTime(.06+.06*b,t,.25);air.gain.setTargetAtTime(Math.min(.06,flow*.05),t,.12);airF.frequency.setTargetAtTime(500+700*b,t,.3)},
+    off(){if(!ctx)return;const c=ctx;ctx=null;try{master.gain.setTargetAtTime(0,c.currentTime,.2);air.gain.setTargetAtTime(0,c.currentTime,.1);setTimeout(()=>c.close(),700)}catch(e){}},
+    get isOn(){return!!ctx}}}
 function openCalm(auto){
-  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+10000;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
+  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=auto?Date.now()+CALM_CYC+800:0;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
-  const msg=auto?tr(calmWhy==='tired'?'You look a little sleepy. One slow breath with me.':calmWhy==='upset'?'It is okay to feel upset. One slow breath with me.':'Let us take one slow breath together.'):tr('One slow breath with me.');
-  const R=46,Lc=2*Math.PI*R;
-  $('#overlay').innerHTML=`<div class="calm" role="dialog" aria-modal="true" aria-label="${tr('Calm breath')}"><div class="calm-card br-card" id="ccard">
-   <p class="br-msg" id="cmsg">${msg}</p>
-   <div class="br" id="br"><svg class="br-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="${R}" class="br-trk"/><circle cx="50" cy="50" r="${R}" class="br-prog" id="brp" style="stroke-dasharray:${Lc};stroke-dashoffset:${Lc}"/></svg>
-     <div class="br-glow"></div><div class="br-air" id="bair" aria-hidden="true"></div><div class="br-spark" id="bspark" aria-hidden="true"></div><div class="br-shd"></div><div class="br-pet"><div class="br-pet-in"><div class="fx"><img class="fx-img" src="assets/img/fox-breathe.webp" alt="" draggable="false">
-     <svg class="fx-air" viewBox="0 0 351 426" aria-hidden="true">
-      <defs>
-       <linearGradient id="fxInL" gradientUnits="userSpaceOnUse" x1="-80" y1="0" x2="140" y2="0"><stop offset="0" stop-color="#3aa6e6" stop-opacity="0"/><stop offset="1" stop-color="#2f9be0"/></linearGradient>
-       <linearGradient id="fxInR" gradientUnits="userSpaceOnUse" x1="430" y1="0" x2="160" y2="0"><stop offset="0" stop-color="#3aa6e6" stop-opacity="0"/><stop offset="1" stop-color="#2f9be0"/></linearGradient>
-       <linearGradient id="fxOutL" gradientUnits="userSpaceOnUse" x1="140" y1="0" x2="-80" y2="0"><stop offset="0" stop-color="#2f9be0"/><stop offset=".7" stop-color="#3aa6e6" stop-opacity=".8"/><stop offset="1" stop-color="#3aa6e6" stop-opacity="0"/></linearGradient>
-       <linearGradient id="fxOutR" gradientUnits="userSpaceOnUse" x1="160" y1="0" x2="430" y2="0"><stop offset="0" stop-color="#2f9be0"/><stop offset=".7" stop-color="#3aa6e6" stop-opacity=".8"/><stop offset="1" stop-color="#3aa6e6" stop-opacity="0"/></linearGradient>
-      </defs>
-      <g class="fx-in">
-       <path stroke="url(#fxInL)" d="M-80 165 Q40 205 142 187"/><path stroke="url(#fxInL)" d="M-85 235 Q40 230 143 191"/><path stroke="url(#fxInL)" d="M-75 300 Q60 270 145 195"/>
-       <path stroke="url(#fxInR)" d="M430 165 Q310 205 158 187"/><path stroke="url(#fxInR)" d="M435 235 Q310 230 157 191"/><path stroke="url(#fxInR)" d="M425 300 Q290 270 155 195"/>
-      </g>
-      <g class="fx-out">
-       <path stroke="url(#fxOutL)" d="M138 208 Q40 190 -80 150"/><path stroke="url(#fxOutL)" d="M140 214 Q40 245 -80 255"/>
-       <path stroke="url(#fxOutR)" d="M162 208 Q260 190 430 150"/><path stroke="url(#fxOutR)" d="M160 214 Q260 245 430 255"/>
-      </g>
-      <g class="fx-mist"><g><circle cx="150" cy="210" r="26"/><circle cx="128" cy="220" r="19"/><circle cx="172" cy="220" r="19"/></g><g><circle cx="150" cy="210" r="26"/><circle cx="128" cy="220" r="19"/><circle cx="172" cy="220" r="19"/></g><g><circle cx="150" cy="210" r="26"/><circle cx="128" cy="220" r="19"/><circle cx="172" cy="220" r="19"/></g></g>
-     </svg></div></div></div></div>
-   <p class="br-cue" id="cue" aria-live="polite">${tr('Get ready')}</p><p class="br-sub" id="csub" aria-hidden="true">&nbsp;</p>
-   <div class="br-end" id="cend" hidden><p class="br-done">${tr('Well done. You did it.')}</p><div class="row" style="gap:10px;justify-content:center"><button class="btn ghost" id="cagain">${tr('Again')}</button><button class="btn pri" id="cdone">${tr('I feel calmer')}</button></div></div>
-  </div></div>`;
-  const br=$('#br'),cue=$('#cue'),sub=$('#csub'),prog=$('#brp'),end=$('#cend');
-  /* Mascot breathing, driven by script so the timing is exact: grows and rises on the in-breath,
-     looks around while holding, sinks and squashes on the out-breath, with air drifting in and out. */
-  const pet=br.querySelector('.br-pet'),inn=br.querySelector('.br-pet-in'),glow=br.querySelector('.br-glow'),shd=br.querySelector('.br-shd'),air=$('#bair');
-  const still=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches||!pet.animate;
-  const REST='translateY(5%) scale(.94,.91)',FULL='translateY(-5%) scale(1.06,1.13)';
-  const mv=(el,f,ms,o)=>{if(still)return;try{el.getAnimations().forEach(a=>a.cancel());el.animate(f,Object.assign({duration:ms,fill:'forwards',easing:'cubic-bezier(.45,0,.3,1)'},o||{}))}catch(e){}};
-  const fxInG=br.querySelector('.fx-in'),fxOutG=br.querySelector('.fx-out'),fxIn=[...fxInG.children],fxOut=[...fxOutG.children],fxMist=[...br.querySelectorAll('.fx-mist>g')],fx=br.querySelector('.fx'),spark=$('#bspark');
-  const stopAir=()=>{[fxInG,fxOutG,...fxIn,...fxOut,...fxMist].forEach(e=>{try{e.getAnimations().forEach(a=>a.cancel())}catch(x){}})};
-  const flow=(paths,g,ms)=>{g.animate([{opacity:0},{opacity:1,offset:.12},{opacity:1,offset:.85},{opacity:0}],{duration:ms,fill:'both'});
-    paths.forEach((p,i)=>p.animate([{strokeDashoffset:0},{strokeDashoffset:-36}],{duration:700,delay:-i*130,iterations:Infinity}))};
-  const puffs=(dir,ms)=>{stopAir();if(still)return;
-    if(dir==='in')flow(fxIn,fxInG,ms);
-    else{flow(fxOut,fxOutG,ms);
-      fxMist.forEach((c,i)=>{const dx=[-115,115,-110][i],dy=[-10,-10,25][i];c.animate([{transform:'translate(0,0) scale(.35)',opacity:0},{opacity:1,transform:`translate(${dx*.25}px,${dy*.25}px) scale(1)`,offset:.25},{opacity:.9,offset:.6},{transform:`translate(${dx}px,${dy}px) scale(1.7)`,opacity:0}],{duration:1700,delay:150+i*600,iterations:2,easing:'ease-out',fill:'both'})})}};
-  /* Dance layer: the fox sways and bops the whole time; after the breath it does a happy dance with sparkles. */
-  const dance=mode=>{if(still)return;try{fx.getAnimations().forEach(a=>a.cancel())}catch(e){}
-    if(mode==='party'){fx.animate([{transform:'none'},{transform:'translate(-6%,-9%) rotate(-10deg)',offset:.2},{transform:'translate(0,0) rotate(0) scale(1.04,.95)',offset:.35},{transform:'translate(6%,-9%) rotate(10deg)',offset:.55},{transform:'translate(0,0) rotate(0) scale(1.04,.95)',offset:.7},{transform:'translate(0,-12%) rotate(0)',offset:.85},{transform:'none'}],{duration:1900,iterations:Infinity,easing:'ease-in-out'});
-      spark.innerHTML='';['#ffd34d','#ff8fb3','#7fd0ff','#9be37a','#ffd34d','#c9a2ff','#ff8fb3','#7fd0ff'].forEach((c,i)=>{const s=document.createElement('i');s.textContent=i%2?'\u2726':'\u2605';s.style.color=c;spark.appendChild(s);const a=i/8*Math.PI*2,r=(br.offsetWidth||280)*.42;
-        s.animate([{transform:'translate(0,0) scale(.2)',opacity:0},{opacity:1,offset:.3},{transform:`translate(${Math.cos(a)*r}px,${Math.sin(a)*r}px) scale(1.1) rotate(${i%2?90:-90}deg)`,opacity:0}],{duration:1400,delay:i*90,iterations:Infinity,easing:'ease-out'})})}
-    else fx.animate([{transform:'rotate(-4deg) translateX(-2%)'},{transform:'rotate(0) translateY(-2%)',offset:.25},{transform:'rotate(4deg) translateX(2%)',offset:.5},{transform:'rotate(0) translateY(-2%)',offset:.75},{transform:'rotate(-4deg) translateX(-2%)'}],{duration:2600,iterations:Infinity,easing:'ease-in-out'})};
-  dance('sway');
-  const breathe=k=>{
-    if(k==='in'){mv(pet,[{transform:REST},{transform:FULL}],4000);mv(glow,[{transform:'scale(.55)'},{transform:'scale(1)'}],4000);mv(shd,[{transform:'scale(1)',opacity:.55},{transform:'scale(.72)',opacity:.3}],4000);mv(inn,[{transform:'none'}],10);puffs('in',4000)}
-    else if(k==='hold'){stopAir();mv(pet,[{transform:FULL},{transform:'translateY(-5%) scale(1.08,1.15)'},{transform:FULL}],2000,{easing:'ease-in-out'});
-      mv(inn,[{transform:'none'},{transform:'translateX(-6%) rotate(-11deg)',offset:.22},{transform:'translateX(-6%) rotate(-11deg)',offset:.45},{transform:'translateX(6%) rotate(11deg)',offset:.68},{transform:'translateX(6%) rotate(11deg)',offset:.85},{transform:'none'}],2000,{easing:'ease-in-out'})}
-    else if(k==='out'){mv(pet,[{transform:FULL},{transform:'translateY(7%) scale(1.05,.86)',offset:.82},{transform:REST}],4000);mv(glow,[{transform:'scale(1)'},{transform:'scale(.55)'}],4000);mv(shd,[{transform:'scale(.72)',opacity:.3},{transform:'scale(1.05)',opacity:.6,offset:.82},{transform:'scale(1)',opacity:.55}],4000);mv(inn,[{transform:'none'}],10);puffs('out',4000)}
-    else{stopAir();mv(pet,[{transform:REST},{transform:'translateY(1%) scale(.98,1)'},{transform:REST}],3600,{iterations:Infinity,easing:'ease-in-out',fill:'none'})}
-  };
-  const PH=[['in',4,'Breathe in through your nose'],['hold',2,'Hold and look around'],['out',4,'Breathe out through your mouth']];
-  let autoClose=0;
-  const run=()=>{
-    end.hidden=true;cue.hidden=false;sub.hidden=false;calmLockUntil=Date.now()+10000;if(typeof dance==='function'){dance('sway');try{spark.innerHTML=''}catch(e){}}
-    prog.style.transition='none';prog.style.strokeDashoffset=Lc;void prog.getBoundingClientRect();
-    prog.style.transition='stroke-dashoffset 10s linear';prog.style.strokeDashoffset=0;
-    let p=0;
-    const phase=()=>{if(!calmOpen)return;
-      if(p>=PH.length){br.className='br ph-rest';breathe('rest');dance('party');cue.hidden=true;sub.hidden=true;end.hidden=false;try{$('#cdone').focus()}catch(e){}
-        if(auto)autoClose=setTimeout(()=>{if(calmOpen)overlayClose()},7000);return}
-      const [k,s,t]=PH[p++];br.className='br ph-'+k;breathe(k);cue.textContent=tr(t);let n=s;sub.textContent=n;
-      clearInterval(calmI);calmI=setInterval(()=>{n--;if(n>0)sub.textContent=n},1000);
-      if(P&&P.prefs&&P.prefs.voice&&k!=='hold')try{say(tr(t))}catch(e){}
-      calmT=setTimeout(phase,s*1000)};
-    calmT=setTimeout(phase,350);
-  };
-  run();
-  $('#cagain').onclick=()=>{clearTimeout(autoClose);run()};
-  $('#cdone').onclick=()=>{clearTimeout(autoClose);calmLockUntil=0;overlayClose()};
+  const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
+  const sysStill=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let gentle=sysStill;try{const v=lsGet('lll.calmGentle');if(v!=null)gentle=!!v}catch(e){}
+  const bub=Array.from({length:12},(_,i)=>`<i style="--x:${(i*83)%100}%;--d:${7+(i*37)%7}s;--w:${i%3?'':'-'}${2+(i%4)}s;--s:${.6+(i%3)*.25}">${i%4===1?'✦':''}</i>`).join('');
+  $('#overlay').innerHTML=`<div class="calm cm${gentle?' gentle':''}" id="cm" role="dialog" aria-modal="true" aria-label="${tr('Calm breathing with Fox')}">
+   <div class="cm-sky" aria-hidden="true">${bub}</div>
+   <div class="calm-card cm-card" id="ccard">
+    <p class="cm-msg" id="cmsg">${intro}</p>
+    <div class="cm-stage" id="cstage">
+      <div class="cm-ring r3"></div><div class="cm-ring r2"></div><div class="cm-ring r1"></div><div class="cm-glow"></div>
+      <div class="cm-fox" id="cfox">${foxSVG()}</div>
+    </div>
+    <p class="cm-cue" id="cue" aria-live="polite">${tr('Press Start when you are ready')}</p>
+    <div class="cm-phases" aria-hidden="true"><div data-ph="in"><b></b><span>${tr('In')}</span></div><div data-ph="hold"><b></b><span>${tr('Hold')}</span></div><div data-ph="out"><b></b><span>${tr('Out')}</span></div></div>
+    <div class="cm-stats"><span>${tr('Time')} <b id="ctime">0:00</b></span><span>${tr('Breaths')} <b id="ccount">0</b></span></div>
+    <div class="cm-ctl">
+      <button class="btn pri cm-main" id="cgo">${CM_PLAY}<span>${tr('Start')}</span></button>
+      <button class="btn ghost cm-ico" id="crestart" aria-label="${tr('Restart')}" title="${tr('Restart')}" disabled>${CM_RE}<span>${tr('Restart')}</span></button>
+      <button class="btn ghost cm-ico" id="cstop" aria-label="${tr('Stop')}" title="${tr('Stop')}" disabled><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2.5" fill="currentColor"/></svg><span>${tr('Stop')}</span></button>
+    </div>
+    <div class="cm-tog">
+      <button class="cm-chip" id="csound" aria-pressed="false">\u{1F3B5} <span>${tr('Calm sounds')}</span></button>
+      <button class="cm-chip" id="cgentle" aria-pressed="${gentle}">\u{1F343} <span>${tr('Gentle motion')}</span></button>
+    </div>
+    <button class="btn ghost cm-done" id="cdone">${tr('I feel calmer')}</button>
+   </div></div>`;
+  const root=$('#cm'),fox=$('#cfox'),stage=$('#cstage'),cue=$('#cue'),msg=$('#cmsg'),go=$('#cgo'),rs=$('#crestart'),st=$('#cstop'),tEl=$('#ctime'),cEl=$('#ccount'),phs=[...root.querySelectorAll('.cm-phases>div')];
+  const snd=calmSound();
+  /* state: t = time inside the exercise (ms), only moves while running and not paused */
+  let running=false,paused=false,t=0,cycles=0,last=performance.now(),raf=0,bShow=0,prevB=0,doneShown=false,autoT=0;
+  let blinkAt=performance.now()+1800,blinkT=-1,twL=-9,twR=-9,twAt=performance.now()+2500,lastPhase='';
+  const ease=x=>.5-Math.cos(Math.PI*Math.max(0,Math.min(1,x)))/2,sm=(a,b2,x)=>{const k=Math.max(0,Math.min(1,(x-a)/(b2-a)));return k*k*(3-2*k)};
+  const PH_TXT={in:'Breathe In...',hold:'Hold it...',out:'Now slowly breathe Out...'};
+  const phaseAt=ms=>{const c=ms%CALM_CYC;return c<CALM_IN?['in',c/CALM_IN,CALM_IN-c]:c<CALM_IN+CALM_HOLD?['hold',(c-CALM_IN)/CALM_HOLD,CALM_IN+CALM_HOLD-c]:['out',(c-CALM_IN-CALM_HOLD)/CALM_OUT,CALM_CYC-c]};
+  const setBtns=()=>{go.innerHTML=!running?`${CM_PLAY}<span>${tr('Start')}</span>`:paused?`${CM_PLAY}<span>${tr('Resume')}</span>`:`<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2.5" width="3.6" height="11" rx="1.4" fill="currentColor"/><rect x="9.4" y="2.5" width="3.6" height="11" rx="1.4" fill="currentColor"/></svg><span>${tr('Pause')}</span>`;
+    go.setAttribute('aria-label',go.textContent.trim());rs.disabled=!running&&t===0;st.disabled=!running;root.classList.toggle('running',running&&!paused)};
+  const start=()=>{running=true;paused=false;doneShown=false;last=performance.now();msg.textContent=tr("Let's take a deep breath!");lastPhase='';setBtns()};
+  const stop=(text)=>{running=false;paused=false;t=0;lastPhase='';phs.forEach(d=>{d.classList.remove('on');d.style.setProperty('--p',0)});cue.textContent=text||tr('Press Start when you are ready');setBtns()};
+  go.onclick=()=>{if(!running)start();else{paused=!paused;cue.textContent=paused?tr('Paused. Press Resume to carry on.'):tr(PH_TXT[phaseAt(t)[0]]);setBtns()}};
+  rs.onclick=()=>{t=0;cycles=0;cEl.textContent='0';tEl.textContent='0:00';start()};
+  st.onclick=()=>{stop(tr('Well done. Fox is resting now.'))};
+  $('#csound').onclick=e=>{const b=e.currentTarget;if(snd.isOn)snd.off();else snd.on();b.setAttribute('aria-pressed',snd.isOn)};
+  $('#cgentle').onclick=e=>{gentle=!gentle;root.classList.toggle('gentle',gentle);e.currentTarget.setAttribute('aria-pressed',gentle);try{lsSet('lll.calmGentle',gentle?1:0)}catch(x){}};
+  const keys=e=>{if(e.key===' '&&e.target===document.body){e.preventDefault();go.click()}};document.addEventListener('keydown',keys);
+  const frame=now=>{
+    const dt=Math.max(0,Math.min(100,now-last));last=now;const sec=now/1000;
+    if(running&&!paused){const before=Math.floor(t/CALM_CYC);t+=dt;const after=Math.floor(t/CALM_CYC);
+      if(after>before&&after>0){cycles=after;cEl.textContent=cycles;msg.textContent=tr(cycles%2?"Amazing! You're doing great!":"Let's do it again!");
+        if(auto&&cycles>=2&&!doneShown){doneShown=true;stop(tr("Amazing! You're doing great!"));try{$('#cdone').focus()}catch(x){}autoT=setTimeout(()=>{if(calmOpen)overlayClose()},9000)}}
+      const s=Math.floor(t/1000);tEl.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+    /* breath value */
+    let target=0,ph='rest',pp=0,left=0;
+    if(running){[ph,pp,left]=phaseAt(t);target=ph==='in'?ease(pp):ph==='hold'?1:1-ease(pp)}
+    bShow=running?target:bShow+(0-bShow)*Math.min(1,dt/450);
+    const b=bShow,flow=Math.abs(b-prevB)/(dt/1000||1);prevB=b;
+    if(running&&ph!==lastPhase){lastPhase=ph;cue.textContent=tr(PH_TXT[ph]);phs.forEach(d=>d.classList.toggle('on',d.dataset.ph===ph));if(P&&P.prefs&&P.prefs.voice&&!paused)try{say(tr(PH_TXT[ph].replace('...','')))}catch(x){}}
+    if(running){const order=['in','hold','out'],i=order.indexOf(ph);phs.forEach((d,j)=>d.style.setProperty('--p',j<i?1:j===i?pp:0))}
+    snd.set(b,running&&!paused?flow:0);
+    /* face: blinks, eyes close softly while breathing out, peaceful smile while holding */
+    let lid=0;if(running&&ph==='out')lid=sm(.05,.35,pp)*(1-sm(.85,1,pp));
+    if(blinkT<0&&now>blinkAt&&lid<.2){blinkT=now}
+    if(blinkT>=0){const k=(now-blinkT)/170;lid=Math.max(lid,k<1?k:k<2?2-k:0);if(k>=2){blinkT=-1;blinkAt=now+2200+Math.random()*3200}}
+    let mouth=.28+.08*Math.sin(sec*1.3);if(running){mouth=ph==='in'?.2+.45*ease(pp):ph==='hold'?.18:.12*(1-ease(pp))}
+    let look=Math.sin(sec*.45)*.25,lookY=0;if(running&&ph==='hold')look=Math.sin(pp*Math.PI*2)*.85;if(running&&ph==='in')lookY=-2.2*b;
+    if(now>twAt){if(Math.random()<.5)twL=now;else twR=now;twAt=now+2600+Math.random()*4200}
+    const tw=x=>{const k=(now-x)/320;return k>0&&k<1?Math.sin(k*Math.PI)*-16:0};
+    const A=gentle?.35:1,sway=Math.sin(sec*.9)*2.2*A+(running?0:Math.sin(sec*2.1)*.6*A);
+    const lag=Math.sin(sec*1.7)*4*A;
+    foxPose(fox,{b,t:sec,lid,mouth,look,lookY,px:Math.sin(sec*.8)*.6,sway,
+      armL:12+110*b+Math.sin(sec*1.1)*2*A,armR:-12-110*b-Math.sin(sec*1.1+.6)*2*A,
+      wristL:-8*b+lag-(running&&ph==='in'?6:0),wristR:8*b-lag+(running&&ph==='in'?6:0),
+      tail:Math.sin(sec*1.6)*10*A+6*b,earL:tw(twL)+Math.sin(sec*1.2)*1.5*A-4*b,earR:-tw(twR)-Math.sin(sec*1.2)*1.5*A+4*b,
+      brow:running&&ph==='hold'?1.5:0,nod:Math.sin(sec*.9+1)*1.2*A,tilt:sway*.6,legL:Math.sin(sec*.9)*1.5*A,legR:Math.sin(sec*.9)*1.5*A});
+    stage.style.setProperty('--b',b.toFixed(3));
+    raf=requestAnimationFrame(frame)};
+  raf=requestAnimationFrame(frame);
+  calmStop=()=>{cancelAnimationFrame(raf);clearTimeout(autoT);snd.off();document.removeEventListener('keydown',keys)};
+  $('#cdone').onclick=()=>{calmLockUntil=0;overlayClose()};
   document.addEventListener('keydown',escKey,true);
+  setBtns();
+  if(auto)setTimeout(()=>{if(calmOpen&&!running)start()},1200);else try{go.focus()}catch(e){}
 }
 let calmWhy='';
 /* Automatic calm breaks are rare: only for real signs (upset, sleepy, several wrong answers),
