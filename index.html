@@ -2259,7 +2259,7 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 .cm-fox{position:relative;z-index:2;width:88%;margin-top:4%}
 .cm-fox svg{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 10px 18px rgba(80,50,20,.18))}
 .cm-cue{margin:0;min-height:2.6em;display:grid;place-items:center;font:800 clamp(1.35rem,6vw,1.8rem)/1.2 var(--f-d);color:#17382a;text-align:center}
-.cm-phases{display:grid;grid-template-columns:4fr 2fr 6fr;gap:6px;width:100%;max-width:22rem}
+.cm-phases{display:grid;grid-template-columns:4fr 2fr 4fr;gap:6px;width:100%;max-width:22rem}
 .cm-phases>div{--p:0;display:flex;flex-direction:column;gap:4px;align-items:center;font:700 .78rem var(--f-b);color:#4d6f5e}
 .cm-phases b{display:block;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,#3a9d6e calc(var(--p)*100%),rgba(58,157,110,.16) 0)}
 .cm-phases>div.on{color:#17382a}
@@ -3624,7 +3624,7 @@ function foxPose(root,s){
 }
 /* ===== Calm Mode: a living vector fox that breathes with the child (in 4 s, hold 2 s, out 6 s, repeat) ===== */
 const CM_PLAY='<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4c0 .6.7 1 1.2.6l8-5.2c.5-.3.5-1 0-1.3l-8-5.2c-.5-.3-1.2 0-1.2.7z" fill="currentColor"/></svg>',CM_RE='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 3.5v5h5"/></svg>';
-const CALM_IN=4000,CALM_HOLD=2000,CALM_OUT=6000,CALM_CYC=CALM_IN+CALM_HOLD+CALM_OUT;
+const CALM_IN=4000,CALM_HOLD=2000,CALM_OUT=4000,CALM_CYC=CALM_IN+CALM_HOLD+CALM_OUT;
 let calmStop=null;
 function calmSound(){ /* soft pad + breath-like air, all made in the browser (no files) */
   let ctx=null,master,air,airF;
@@ -3638,11 +3638,11 @@ function calmSound(){ /* soft pad + breath-like air, all made in the browser (no
     off(){if(!ctx)return;const c=ctx;ctx=null;try{master.gain.setTargetAtTime(0,c.currentTime,.2);air.gain.setTargetAtTime(0,c.currentTime,.1);setTimeout(()=>c.close(),700)}catch(e){}},
     get isOn(){return!!ctx}}}
 function openCalm(auto){
-  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=auto?Date.now()+CALM_CYC+800:0;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
+  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=auto?Date.now()+CALM_CYC+1000:0;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
   const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
   const sysStill=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let gentle=sysStill;try{const v=lsGet('lll.calmGentle');if(v!=null)gentle=!!v}catch(e){}
+  const gentle=true; /* always the gentle version: soft movement, no busy particles */
   const bub=Array.from({length:12},(_,i)=>`<i style="--x:${(i*83)%100}%;--d:${7+(i*37)%7}s;--w:${i%3?'':'-'}${2+(i%4)}s;--s:${.6+(i%3)*.25}">${i%4===1?'✦':''}</i>`).join('');
   $('#overlay').innerHTML=`<div class="calm cm${gentle?' gentle':''}" id="cm" role="dialog" aria-modal="true" aria-label="${tr('Calm breathing with Fox')}">
    <div class="cm-sky" aria-hidden="true">${bub}</div>
@@ -3652,21 +3652,11 @@ function openCalm(auto){
       <div class="cm-ring r3"></div><div class="cm-ring r2"></div><div class="cm-ring r1"></div><div class="cm-glow"></div>
       <div class="cm-fox" id="cfox">${foxSVG()}</div>
     </div>
-    <p class="cm-cue" id="cue" aria-live="polite">${tr('Press Start when you are ready')}</p>
+    <p class="cm-cue" id="cue" aria-live="polite">${tr('Get ready...')}</p>
     <div class="cm-phases" aria-hidden="true"><div data-ph="in"><b></b><span>${tr('In')}</span></div><div data-ph="hold"><b></b><span>${tr('Hold')}</span></div><div data-ph="out"><b></b><span>${tr('Out')}</span></div></div>
-    <div class="cm-stats"><span>${tr('Time')} <b id="ctime">0:00</b></span><span>${tr('Breaths')} <b id="ccount">0</b></span></div>
-    <div class="cm-ctl">
-      <button class="btn pri cm-main" id="cgo">${CM_PLAY}<span>${tr('Start')}</span></button>
-      <button class="btn ghost cm-ico" id="crestart" aria-label="${tr('Restart')}" title="${tr('Restart')}" disabled>${CM_RE}<span>${tr('Restart')}</span></button>
-      <button class="btn ghost cm-ico" id="cstop" aria-label="${tr('Stop')}" title="${tr('Stop')}" disabled><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2.5" fill="currentColor"/></svg><span>${tr('Stop')}</span></button>
-    </div>
-    <div class="cm-tog">
-      <button class="cm-chip" id="csound" aria-pressed="false">\u{1F3B5} <span>${tr('Calm sounds')}</span></button>
-      <button class="cm-chip" id="cgentle" aria-pressed="${gentle}">\u{1F343} <span>${tr('Gentle motion')}</span></button>
-    </div>
     <button class="btn ghost cm-done" id="cdone">${tr('I feel calmer')}</button>
    </div></div>`;
-  const root=$('#cm'),fox=$('#cfox'),stage=$('#cstage'),cue=$('#cue'),msg=$('#cmsg'),go=$('#cgo'),rs=$('#crestart'),st=$('#cstop'),tEl=$('#ctime'),cEl=$('#ccount'),phs=[...root.querySelectorAll('.cm-phases>div')];
+  const root=$('#cm'),fox=$('#cfox'),stage=$('#cstage'),cue=$('#cue'),msg=$('#cmsg'),phs=[...root.querySelectorAll('.cm-phases>div')];
   const snd=calmSound();
   /* state: t = time inside the exercise (ms), only moves while running and not paused */
   let running=false,paused=false,t=0,cycles=0,last=performance.now(),raf=0,bShow=0,prevB=0,doneShown=false,autoT=0;
@@ -3674,22 +3664,14 @@ function openCalm(auto){
   const ease=x=>.5-Math.cos(Math.PI*Math.max(0,Math.min(1,x)))/2,sm=(a,b2,x)=>{const k=Math.max(0,Math.min(1,(x-a)/(b2-a)));return k*k*(3-2*k)};
   const PH_TXT={in:'Breathe In...',hold:'Hold it...',out:'Now slowly breathe Out...'};
   const phaseAt=ms=>{const c=ms%CALM_CYC;return c<CALM_IN?['in',c/CALM_IN,CALM_IN-c]:c<CALM_IN+CALM_HOLD?['hold',(c-CALM_IN)/CALM_HOLD,CALM_IN+CALM_HOLD-c]:['out',(c-CALM_IN-CALM_HOLD)/CALM_OUT,CALM_CYC-c]};
-  const setBtns=()=>{go.innerHTML=!running?`${CM_PLAY}<span>${tr('Start')}</span>`:paused?`${CM_PLAY}<span>${tr('Resume')}</span>`:`<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2.5" width="3.6" height="11" rx="1.4" fill="currentColor"/><rect x="9.4" y="2.5" width="3.6" height="11" rx="1.4" fill="currentColor"/></svg><span>${tr('Pause')}</span>`;
-    go.setAttribute('aria-label',go.textContent.trim());rs.disabled=!running&&t===0;st.disabled=!running;root.classList.toggle('running',running&&!paused)};
-  const start=()=>{running=true;paused=false;doneShown=false;last=performance.now();msg.textContent=tr("Let's take a deep breath!");lastPhase='';setBtns()};
-  const stop=(text)=>{running=false;paused=false;t=0;lastPhase='';phs.forEach(d=>{d.classList.remove('on');d.style.setProperty('--p',0)});cue.textContent=text||tr('Press Start when you are ready');setBtns()};
-  go.onclick=()=>{if(!running)start();else{paused=!paused;cue.textContent=paused?tr('Paused. Press Resume to carry on.'):tr(PH_TXT[phaseAt(t)[0]]);setBtns()}};
-  rs.onclick=()=>{t=0;cycles=0;cEl.textContent='0';tEl.textContent='0:00';start()};
-  st.onclick=()=>{stop(tr('Well done. Fox is resting now.'))};
-  $('#csound').onclick=e=>{const b=e.currentTarget;if(snd.isOn)snd.off();else snd.on();b.setAttribute('aria-pressed',snd.isOn)};
-  $('#cgentle').onclick=e=>{gentle=!gentle;root.classList.toggle('gentle',gentle);e.currentTarget.setAttribute('aria-pressed',gentle);try{lsSet('lll.calmGentle',gentle?1:0)}catch(x){}};
-  const keys=e=>{if(e.key===' '&&e.target===document.body){e.preventDefault();go.click()}};document.addEventListener('keydown',keys);
+  const setBtns=()=>{root.classList.toggle('running',running&&!paused)};
+  const start=()=>{running=true;paused=false;doneShown=false;last=performance.now();lastPhase='';setBtns()};
+  const stop=(text)=>{running=false;paused=false;t=0;lastPhase='';phs.forEach(d=>{d.classList.remove('on');d.style.setProperty('--p',1)});cue.textContent=text||'';setBtns()};
   const frame=now=>{
     const dt=Math.max(0,Math.min(100,now-last));last=now;const sec=now/1000;
     if(running&&!paused){const before=Math.floor(t/CALM_CYC);t+=dt;const after=Math.floor(t/CALM_CYC);
-      if(after>before&&after>0){cycles=after;cEl.textContent=cycles;msg.textContent=tr(cycles%2?"Amazing! You're doing great!":"Let's do it again!");
-        if(auto&&cycles>=2&&!doneShown){doneShown=true;stop(tr("Amazing! You're doing great!"));try{$('#cdone').focus()}catch(x){}autoT=setTimeout(()=>{if(calmOpen)overlayClose()},9000)}}
-      const s=Math.floor(t/1000);tEl.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+      if(after>before&&after>0&&!doneShown){cycles=after;doneShown=true;stop(tr("Amazing! You're doing great!"));msg.textContent=tr('You feel calmer now.');try{$('#cdone').focus()}catch(x){}
+        if(auto)autoT=setTimeout(()=>{if(calmOpen)overlayClose()},8000)}}
     /* breath value */
     let target=0,ph='rest',pp=0,left=0;
     if(running){[ph,pp,left]=phaseAt(t);target=ph==='in'?ease(pp):ph==='hold'?1:1-ease(pp)}
@@ -3716,11 +3698,11 @@ function openCalm(auto){
     stage.style.setProperty('--b',b.toFixed(3));
     raf=requestAnimationFrame(frame)};
   raf=requestAnimationFrame(frame);
-  calmStop=()=>{cancelAnimationFrame(raf);clearTimeout(autoT);snd.off();document.removeEventListener('keydown',keys)};
+  calmStop=()=>{cancelAnimationFrame(raf);clearTimeout(autoT);clearTimeout(goT);snd.off()};
   $('#cdone').onclick=()=>{calmLockUntil=0;overlayClose()};
   document.addEventListener('keydown',escKey,true);
   setBtns();
-  if(auto)setTimeout(()=>{if(calmOpen&&!running)start()},1200);else try{go.focus()}catch(e){}
+  const goT=setTimeout(()=>{if(calmOpen&&!running)start()},900);
 }
 let calmWhy='';
 /* Automatic calm breaks are rare: only for real signs (upset, sleepy, several wrong answers),
