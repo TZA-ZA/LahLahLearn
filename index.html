@@ -3670,8 +3670,8 @@ function openCalm(auto){
   const frame=now=>{
     const dt=Math.max(0,Math.min(100,now-last));last=now;const sec=now/1000;
     if(running&&!paused){const before=Math.floor(t/CALM_CYC);t+=dt;const after=Math.floor(t/CALM_CYC);
-      if(after>before&&after>0&&!doneShown){cycles=after;doneShown=true;stop(tr("Amazing! You're doing great!"));msg.textContent=tr('You feel calmer now.');try{const d=$('#cdone');d.hidden=false;d.focus()}catch(x){}
-        if(auto)autoT=setTimeout(()=>{if(calmOpen)overlayClose()},8000)}}
+      if(after>before&&after>0){cycles=after;msg.textContent=tr(cycles%2?"Amazing! You're doing great!":"Let's do it again!");
+        if(!doneShown){doneShown=true;try{$('#cdone').hidden=false}catch(x){}}}}
     /* breath value */
     let target=0,ph='rest',pp=0,left=0;
     if(running){[ph,pp,left]=phaseAt(t);target=ph==='in'?ease(pp):ph==='hold'?1:1-ease(pp)}
