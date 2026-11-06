@@ -2246,23 +2246,17 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 .br-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
 .br-trk{fill:none;stroke:rgba(47,143,99,.15);stroke-width:2.2}
 .br-prog{fill:none;stroke:#3a9d6e;stroke-width:2.8;stroke-linecap:round}
-.br-glow{position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.85),rgba(207,236,220,.55) 52%,rgba(127,190,156,.22) 70%,transparent 72%);transform:scale(.6);transition:transform 4s cubic-bezier(.42,0,.32,1)}
-.br.ph-in .br-glow,.br.ph-hold .br-glow{transform:scale(1)}
-.br.ph-out .br-glow,.br.ph-rest .br-glow{transform:scale(.6)}
-.br-pet{position:relative;z-index:2;transform-origin:50% 90%;transform:translateY(6%) scale(.9,.88);transition:transform 4s cubic-bezier(.42,0,.32,1);filter:drop-shadow(0 14px 24px rgba(0,0,0,.28))}
-.br.ph-in .br-pet,.br.ph-hold .br-pet{transform:translateY(-3%) scale(1.04,1.1)}
-.br.ph-out .br-pet{transform:translateY(6%) scale(.9,.88)}
-.br-pet-in{transform-origin:50% 80%}
-.br.ph-hold .br-pet-in{animation:brLook 2s ease-in-out}
-.br.ph-rest .br-pet-in{animation:brIdle 3.2s ease-in-out infinite}
-@keyframes brLook{0%{transform:none}22%{transform:translateX(-5%) rotate(-9deg)}50%{transform:translateX(-5%) rotate(-9deg)}72%{transform:translateX(5%) rotate(9deg)}100%{transform:none}}
-@keyframes brIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3%)}}
+.br-glow{position:absolute;inset:9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.85),rgba(207,236,220,.55) 52%,rgba(127,190,156,.22) 70%,transparent 72%);transform:scale(.55);transition:none!important}
+.br-shd{position:absolute;left:30%;right:30%;bottom:15%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(20,60,40,.35),transparent);opacity:.55;transition:none!important}
+.br-pet{position:relative;z-index:2;transform-origin:50% 92%;transform:translateY(5%) scale(.93,.9);transition:none!important;filter:drop-shadow(0 14px 24px rgba(0,0,0,.22));will-change:transform}
+.br-pet-in{transform-origin:50% 85%;transition:none!important}
+.br-air{position:absolute;left:50%;top:40%;width:0;height:0;z-index:3;pointer-events:none}
+.br-air i{position:absolute;left:-12px;top:-12px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff 0 22%,rgba(150,215,185,.9) 55%,rgba(90,175,135,.55) 68%,rgba(90,175,135,0) 72%);box-shadow:0 0 10px rgba(90,175,135,.25);opacity:0;will-change:transform,opacity}
 .br-cue{margin:0;font:700 1.7rem/1.2 var(--f-d);letter-spacing:.01em}
 .br-sub{margin:0;font:600 1.1rem var(--f-d);opacity:.7;min-height:1.4em}
 .br-end{display:flex;flex-direction:column;align-items:center;gap:12px}
 .br-done{margin:0;font:700 1.35rem var(--f-d)}
-body.noanim .br-pet,body.noanim .br-glow{transition:none}body.noanim .br-pet-in{animation:none!important}
-@media (prefers-reduced-motion:reduce){.br-pet,.br-glow{transition:none}.br-pet-in{animation:none!important}}
+body.noanim .br-air,.br-air:empty{display:none}
 </style>
 
 <div id="bgfx" aria-hidden="true"><i></i><i></i></div>
@@ -3540,11 +3534,30 @@ function openCalm(auto){
   $('#overlay').innerHTML=`<div class="calm" role="dialog" aria-modal="true" aria-label="${tr('Calm breath')}"><div class="calm-card br-card" id="ccard">
    <p class="br-msg" id="cmsg">${msg}</p>
    <div class="br" id="br"><svg class="br-ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="${R}" class="br-trk"/><circle cx="50" cy="50" r="${R}" class="br-prog" id="brp" style="stroke-dasharray:${Lc};stroke-dashoffset:${Lc}"/></svg>
-     <div class="br-glow"></div><div class="br-pet"><div class="br-pet-in">${buddySVG(buddy(),190,'calm')}</div></div></div>
+     <div class="br-glow"></div><div class="br-air" id="bair" aria-hidden="true"></div><div class="br-shd"></div><div class="br-pet"><div class="br-pet-in">${buddySVG(buddy(),190,'calm')}</div></div></div>
    <p class="br-cue" id="cue" aria-live="polite">${tr('Get ready')}</p><p class="br-sub" id="csub" aria-hidden="true">&nbsp;</p>
    <div class="br-end" id="cend" hidden><p class="br-done">${tr('Well done. You did it.')}</p><div class="row" style="gap:10px;justify-content:center"><button class="btn ghost" id="cagain">${tr('Again')}</button><button class="btn pri" id="cdone">${tr('I feel calmer')}</button></div></div>
   </div></div>`;
   const br=$('#br'),cue=$('#cue'),sub=$('#csub'),prog=$('#brp'),end=$('#cend');
+  /* Mascot breathing, driven by script so the timing is exact: grows and rises on the in-breath,
+     looks around while holding, sinks and squashes on the out-breath, with air drifting in and out. */
+  const pet=br.querySelector('.br-pet'),inn=br.querySelector('.br-pet-in'),glow=br.querySelector('.br-glow'),shd=br.querySelector('.br-shd'),air=$('#bair');
+  const still=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches||!pet.animate;
+  const REST='translateY(5%) scale(.93,.9)',FULL='translateY(-7%) scale(1.07,1.16)';
+  const mv=(el,f,ms,o)=>{if(still)return;try{el.getAnimations().forEach(a=>a.cancel());el.animate(f,Object.assign({duration:ms,fill:'forwards',easing:'cubic-bezier(.45,0,.3,1)'},o||{}))}catch(e){}};
+  const puffs=(dir,ms)=>{if(still)return;air.innerHTML='';const N=dir==='in'?7:9;
+    for(let i=0;i<N;i++){const d=document.createElement('i');air.appendChild(d);
+      const a=(dir==='in'?-150:-35)+Math.random()*(dir==='in'?120:70)+(dir==='in'?0:(i%2?0:-110)),r=(br.offsetWidth||280)*(.34+Math.random()*.1),
+        x=Math.cos(a*Math.PI/180)*r,y=Math.sin(a*Math.PI/180)*r*.8,s=.5+Math.random()*.7,del=i*(ms*.62/N);
+      const far=`translate(${x}px,${y}px) scale(${s})`,near='translate(0,0) scale(.25)';
+      d.animate(dir==='in'?[{transform:far,opacity:0},{opacity:.95,offset:.3},{transform:near,opacity:0}]:[{transform:near,opacity:0},{opacity:.9,offset:.25},{transform:far+' scale(1.6)',opacity:0}],{duration:ms*.55,delay:del,easing:'ease-out',fill:'both'})}};
+  const breathe=k=>{
+    if(k==='in'){mv(pet,[{transform:REST},{transform:FULL}],4000);mv(glow,[{transform:'scale(.55)'},{transform:'scale(1)'}],4000);mv(shd,[{transform:'scale(1)',opacity:.55},{transform:'scale(.72)',opacity:.3}],4000);mv(inn,[{transform:'none'}],10);puffs('in',4000)}
+    else if(k==='hold'){mv(pet,[{transform:FULL},{transform:'translateY(-7%) scale(1.09,1.18)'},{transform:FULL}],2000,{easing:'ease-in-out'});
+      mv(inn,[{transform:'none'},{transform:'translateX(-6%) rotate(-11deg)',offset:.22},{transform:'translateX(-6%) rotate(-11deg)',offset:.45},{transform:'translateX(6%) rotate(11deg)',offset:.68},{transform:'translateX(6%) rotate(11deg)',offset:.85},{transform:'none'}],2000,{easing:'ease-in-out'})}
+    else if(k==='out'){mv(pet,[{transform:FULL},{transform:'translateY(7%) scale(1.05,.86)',offset:.82},{transform:REST}],4000);mv(glow,[{transform:'scale(1)'},{transform:'scale(.55)'}],4000);mv(shd,[{transform:'scale(.72)',opacity:.3},{transform:'scale(1.05)',opacity:.6,offset:.82},{transform:'scale(1)',opacity:.55}],4000);mv(inn,[{transform:'none'}],10);puffs('out',4000)}
+    else{mv(pet,[{transform:REST},{transform:'translateY(1%) scale(.98,1)'},{transform:REST}],3600,{iterations:Infinity,easing:'ease-in-out',fill:'none'});air.innerHTML=''}
+  };
   const PH=[['in',4,'Breathe in'],['hold',2,'Hold and look around'],['out',4,'Breathe out']];
   let autoClose=0;
   const run=()=>{
@@ -3553,9 +3566,9 @@ function openCalm(auto){
     prog.style.transition='stroke-dashoffset 10s linear';prog.style.strokeDashoffset=0;
     let p=0;
     const phase=()=>{if(!calmOpen)return;
-      if(p>=PH.length){br.className='br ph-rest';cue.hidden=true;sub.hidden=true;end.hidden=false;try{$('#cdone').focus()}catch(e){}
+      if(p>=PH.length){br.className='br ph-rest';breathe('rest');cue.hidden=true;sub.hidden=true;end.hidden=false;try{$('#cdone').focus()}catch(e){}
         if(auto)autoClose=setTimeout(()=>{if(calmOpen)overlayClose()},7000);return}
-      const [k,s,t]=PH[p++];br.className='br ph-'+k;cue.textContent=tr(t);let n=s;sub.textContent=n;
+      const [k,s,t]=PH[p++];br.className='br ph-'+k;breathe(k);cue.textContent=tr(t);let n=s;sub.textContent=n;
       clearInterval(calmI);calmI=setInterval(()=>{n--;if(n>0)sub.textContent=n},1000);
       if(P&&P.prefs&&P.prefs.voice&&k!=='hold')try{say(tr(t))}catch(e){}
       calmT=setTimeout(phase,s*1000)};
