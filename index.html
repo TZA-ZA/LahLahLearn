@@ -4461,7 +4461,7 @@ R.welcome=()=>{
   pp.addEventListener('pip-hop',()=>{yay.classList.remove('on');void yay.offsetWidth;yay.classList.add('on')});
   countUp($('.lp'));
   try{const le=$('#lpend'),eio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){le.classList.add('go');eio.disconnect()}}),{threshold:.3});eio.observe(le);offs.push(()=>eio.disconnect())}catch(e){le&&le.classList.add('go')}
-  if(!calmMotion()&&!REDUCED&&!window.__lpSplash){window.__lpSplash=1;const s=document.createElement('div');s.className='lp-splash';s.innerHTML='<div aria-hidden="true">'+'LahLahLearn'.split('').map((c,i)=>`<span style="--i:${i}">${c}</span>`).join('')+'</div>';document.body.appendChild(s);setTimeout(()=>s.classList.add('out'),1300);setTimeout(()=>s.remove(),2300)}
+  /* (the old 'LahLahLearn' letter intro that slid up over a green screen was removed) */
   teardowns.push(()=>offs.forEach(f=>{try{f()}catch(e){}}));
 };
 
