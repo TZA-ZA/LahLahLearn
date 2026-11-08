@@ -2180,69 +2180,89 @@ body.cloud #aicard{display:none!important}
 .au2-eye:hover{color:var(--ink);background:var(--surf2,rgba(0,0,0,.04))}
 .au2-forgot{margin:-4px 0 0;text-align:right;font-size:.88rem}.au2-forgot a{color:var(--brand);font-weight:600}
 
-/* ===== Care Circle: bright family dashboard (tabs on top, pastel tiles, rounded type) ===== */
-body.carepro{--cc-a:#2f9466;--cc-a2:#e3f5ea;--cc-sky:#e4f2fd;--cc-sun:#fff4d8;--cc-peach:#ffe8df;--cc-lav:#efeafd;--cc-card:var(--surf);--cc-ink:var(--ink);--cc-mut:var(--muted)}
-html[data-theme=dark] body.carepro{--cc-a2:rgba(80,190,140,.16);--cc-sky:rgba(120,180,240,.14);--cc-sun:rgba(250,210,110,.13);--cc-peach:rgba(255,160,130,.13);--cc-lav:rgba(170,150,250,.14)}
-/* layout: one column, sections as tabs along the top */
-body.carepro #page .cc .cc-body{display:block!important}
-body.carepro #page .cc .cc-body>.cc-nav{display:block!important;position:sticky!important;top:74px;z-index:6;margin:0 0 22px!important;min-width:0}
-body.carepro #page .cc .cc-navin,body.carepro #page .cc .cc-navk{display:contents!important}
-body.carepro #page .cc .cc-list{display:flex!important;flex-direction:row!important;gap:6px!important;width:fit-content;max-width:100%;margin:0 auto;padding:6px!important;overflow-x:auto;scrollbar-width:none;border-radius:999px;background:color-mix(in srgb,var(--surf) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(20,60,40,.4)}
-body.carepro #page .cc .cc-list::-webkit-scrollbar{display:none}
-body.carepro #page .cc .cc-list button{flex:none!important;width:auto!important;min-width:0!important;justify-content:center!important;display:inline-flex!important;align-items:center;gap:8px;padding:10px 16px!important;border-radius:999px!important;border:0!important;background:transparent!important;color:var(--cc-mut)!important;font:600 .92rem var(--f-b)!important;white-space:nowrap;transition:background .2s,color .2s}
-body.carepro #page .cc .cc-list button:hover{color:var(--cc-ink)!important;background:var(--cc-a2)!important}
-body.carepro #page .cc .cc-list button.on{background:var(--cc-a)!important;color:#fff!important;box-shadow:0 8px 16px -10px var(--cc-a)}
-body.carepro #page .cc .cc-list button.on svg{color:#fff!important}
-body.carepro #page .cc .cc-list button::before,body.carepro #page .cc .cc-list button::after{display:none!important}
-body.carepro #page .cc .cc-main{max-width:1120px;margin:0 auto;width:100%}
-body.carepro #page .cc .cc-tabs{display:none!important}
-/* hero */
-body.carepro #page .cc .cc-hero{position:relative;overflow:hidden;isolation:isolate;margin-bottom:18px!important;padding:38px 44px 34px!important;border:1px solid var(--line)!important;border-radius:32px!important;color:var(--cc-ink);
-  background:radial-gradient(380px 240px at 92% 10%,rgba(255,214,120,.45),transparent 65%),radial-gradient(420px 300px at 0% 110%,rgba(140,205,250,.35),transparent 60%),linear-gradient(135deg,#eafaf1 0%,#e6f4fd 100%)!important;
-  box-shadow:0 30px 60px -44px rgba(30,90,60,.5)!important}
-html[data-theme=dark] body.carepro #page .cc .cc-hero{background:radial-gradient(380px 240px at 92% 10%,rgba(255,200,100,.16),transparent 65%),linear-gradient(135deg,#183a2d 0%,#16303f 100%)!important}
-body.carepro #page .cc .cc-hero::before{content:"";position:absolute;z-index:-1;right:-60px;bottom:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0) 70%)}
-html[data-theme=dark] body.carepro #page .cc .cc-hero::before{opacity:.12}
-body.carepro #page .cc .cc-hero::after{display:none}
-body.carepro #page .cc .cc-hero .muted{color:var(--cc-a)!important;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem!important;font-weight:700}
-body.carepro #page .cc .cc-hero h2{font-family:var(--f-d)!important;font-weight:700!important;color:var(--cc-ink)!important;font-size:clamp(2rem,4vw,3rem)!important;letter-spacing:-.02em;line-height:1.08}
+
+/* delete account: sad Pip */
+.dl-card{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;max-width:480px;width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:26px 24px 20px!important}
+.dl-pip{width:132px;margin:-6px auto -6px;animation:dlSway 3s ease-in-out infinite}.dl-pip svg{width:100%;height:auto;display:block}
+.dl-pip .pp-tear{animation:dlTear 2.4s ease-in infinite}
+@keyframes dlSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes dlTear{0%,15%{transform:translateY(0);opacity:0}25%{opacity:1}85%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+.dl-card h3{margin:0;font:700 1.35rem/1.25 var(--f-d)}
+.dl-card>p{margin:0}
+.dl-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.dl-stats div{padding:12px 6px;border-radius:14px;background:var(--surf2,rgba(0,0,0,.04));border:1px solid var(--line)}
+.dl-stats b{display:block;font:700 1.5rem var(--f-d);color:var(--brand)}.dl-stats span{font-size:.78rem;color:var(--muted)}
+.dl-q{margin:4px 0 0!important;font-weight:700}
+.dl-alt{display:grid;gap:8px;width:100%}
+.dl-o{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:12px;align-items:center;text-align:left;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;transition:border-color .2s,transform .15s}
+.dl-o:hover{border-color:var(--brand);transform:translateY(-1px)}
+.dl-o span{grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--surf2,rgba(0,0,0,.04));color:var(--brand)}
+.dl-o b{font-size:.95rem}.dl-o small{color:var(--muted);font-size:.8rem;line-height:1.35}
+.dl-stay{width:100%;justify-content:center;margin-top:4px}
+.dl-go{border:0;background:none;color:var(--muted);font-size:.84rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
+.dl-go:hover{color:var(--warn)}
+@media (prefers-reduced-motion:reduce){.dl-pip,.dl-pip .pp-tear{animation:none}}
+/* ===== Care Circle: minimalist parent area ===== */
+body.carepro{--cc-a:#2f8f5f;--cc-bg:#f7f8f6;--cc-card:#ffffff;--cc-line:#e6e9e5;--cc-ink:#1d2a23;--cc-mut:#6b776f;--cc-soft:#eef5f0}
+html[data-theme=dark] body.carepro{--cc-a:#5cc08f;--cc-bg:#121714;--cc-card:#1a211d;--cc-line:#2b352f;--cc-ink:#e8efe9;--cc-mut:#9aa8a0;--cc-soft:rgba(92,192,143,.12)}
+/* quiet page: no child toolbar, no floating help, no scenery */
+body.carepro #dock,body.carepro .guidebtn,body.carepro .guidepop,body.carepro .calmfab,body.carepro #scenefx{display:none!important}
+body.carepro{background:var(--cc-bg)!important}
+body.carepro #page .cc{max-width:1080px;margin:0 auto;color:var(--cc-ink);gap:0!important}
+/* header: one line, name + lock */
+body.carepro #page .cc .cc-hero{margin:8px 0 6px!important;padding:6px 0 18px!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;color:var(--cc-ink);overflow:visible}
+body.carepro #page .cc .cc-hero::before,body.carepro #page .cc .cc-hero::after,body.carepro #page .cc .cc-hero .cc-pal,body.carepro #page .cc .cc-hero .cc-av,body.carepro #page .cc .cc-hero [data-go=profile]{display:none!important}
+body.carepro #page .cc .cc-hero .muted{color:var(--cc-mut)!important;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem!important;font-weight:600}
+body.carepro #page .cc .cc-hero h2{font-family:var(--f-d)!important;font-weight:700!important;color:var(--cc-ink)!important;font-size:clamp(1.6rem,3vw,2.1rem)!important;letter-spacing:-.02em;line-height:1.15}
 body.carepro #page .cc .cc-hero h2 *{font-family:inherit!important}
-body.carepro #page .cc .cc-hero .chip,body.carepro #page .cc .cc-hero [class*=chip]{border:0!important;color:var(--cc-a)!important;background:color-mix(in srgb,var(--surf) 80%,transparent)!important;font-weight:700}
-body.carepro #page .cc .cc-hero .btn{color:var(--cc-ink)!important;border:1px solid var(--line)!important;background:var(--surf)!important;border-radius:999px!important;font-weight:700}
-body.carepro #page .cc .cc-hero .btn:hover{border-color:var(--cc-a)!important;transform:translateY(-1px)}
-body.carepro #page .cc .cc-hero .btn svg{color:var(--cc-a)}
-body.carepro #page .cc .cc-hero .cc-pal{position:absolute;right:clamp(28px,4vw,48px);bottom:-10px;width:130px;pointer-events:none;z-index:0;filter:drop-shadow(0 10px 14px rgba(30,80,50,.18))}
-.cc-pal svg,.cc-pal img{width:100%;height:auto;display:block}
-@media (max-width:820px){.cc-pal{display:none}}
-/* headings in the brand's rounded type */
-body.carepro #page .cc .dh-top h1,body.carepro #page .cc .cc-ttl{font-family:var(--f-d)!important;font-weight:700!important;letter-spacing:-.015em}
-body.carepro #page .cc .dh-top h1{font-size:clamp(1.6rem,2.8vw,2.1rem)!important}
-body.carepro #page .cc .dc h2,body.carepro #page .cc .dc-h h2,body.carepro #page .cc .gr-sec h3{font-family:var(--f-d)!important;font-weight:700!important;font-size:1.18rem!important;letter-spacing:-.01em}
-/* stat tiles: each its own soft colour */
-body.carepro #page .cc .dm{border-radius:24px!important;border:1px solid transparent!important;box-shadow:none!important;background:var(--cc-a2)!important;transition:transform .2s}
-body.carepro #page .cc .dm:nth-of-type(4n+2){background:var(--cc-sun)!important}
-body.carepro #page .cc .dm:nth-of-type(4n+3){background:var(--cc-peach)!important}
-body.carepro #page .cc .dm:nth-of-type(4n+4){background:var(--cc-sky)!important}
-body.carepro #page .cc .dm:hover{transform:translateY(-3px)}
-body.carepro #page .cc .dm-h b{font-size:.7rem!important;letter-spacing:.12em;text-transform:uppercase;font-weight:700!important;color:var(--cc-mut)!important}
-body.carepro #page .cc .dm-h span{display:grid;place-items:center;width:32px;height:32px;border-radius:12px;background:color-mix(in srgb,var(--surf) 75%,transparent);color:var(--cc-a)!important}
-body.carepro #page .cc .dm-v{font-family:var(--f-d)!important;font-weight:700!important;font-size:2.6rem!important;letter-spacing:-.02em;color:var(--cc-ink)!important}
-body.carepro #page .cc .dm-v small{font-family:var(--f-b);font-size:.82rem!important;color:var(--cc-mut)!important}
+body.carepro #page .cc .cc-hero .chip,body.carepro #page .cc .cc-hero [class*=chip]{border:1px solid var(--cc-line)!important;color:var(--cc-mut)!important;background:var(--cc-card)!important;font-weight:600}
+body.carepro #page .cc .cc-hero .btn{color:var(--cc-ink)!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;border-radius:12px!important;font-weight:600;box-shadow:none!important}
+body.carepro #page .cc .cc-hero .btn:hover{border-color:var(--cc-a)!important}
+body.carepro #page .cc .cc-hero .btn svg{color:var(--cc-mut)}
+/* navigation: simple underlined tabs */
+body.carepro #page .cc .cc-body{display:block!important}
+body.carepro #page .cc .cc-body>.cc-nav{display:block!important;position:sticky!important;top:64px;z-index:6;margin:0 0 26px!important;min-width:0;background:var(--cc-bg);border-bottom:1px solid var(--cc-line)}
+body.carepro #page .cc .cc-navin,body.carepro #page .cc .cc-navk,body.carepro #page .cc .cc-navh{display:contents!important}
+body.carepro #page .cc .cc-list{display:flex!important;flex-direction:row!important;gap:4px!important;width:100%;margin:0;padding:0!important;overflow-x:auto;scrollbar-width:none;border:0;border-radius:0;background:none;box-shadow:none}
+body.carepro #page .cc .cc-list::-webkit-scrollbar{display:none}
+body.carepro #page .cc .cc-list button{flex:none!important;width:auto!important;min-width:0!important;display:inline-flex!important;align-items:center;gap:8px;padding:14px 14px 13px!important;margin-bottom:-1px;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;background:none!important;color:var(--cc-mut)!important;font:600 .93rem var(--f-b)!important;white-space:nowrap;box-shadow:none!important;transition:color .15s,border-color .15s}
+body.carepro #page .cc .cc-list button svg{width:17px;height:17px;opacity:.75}
+body.carepro #page .cc .cc-list button:hover{color:var(--cc-ink)!important}
+body.carepro #page .cc .cc-list button.on{color:var(--cc-ink)!important;border-bottom-color:var(--cc-a)!important}
+body.carepro #page .cc .cc-list button.on svg{color:var(--cc-a)!important;opacity:1}
+body.carepro #page .cc .cc-list button::before,body.carepro #page .cc .cc-list button::after{display:none!important}
+body.carepro #page .cc .cc-main{width:100%;gap:20px!important}
+body.carepro #page .cc .cc-tabs{display:none!important}
+/* headings */
+body.carepro #page .cc .dh-top h1,body.carepro #page .cc .cc-ttl{font-family:var(--f-d)!important;font-weight:700!important;letter-spacing:-.015em;color:var(--cc-ink)!important}
+body.carepro #page .cc .dh-top h1{font-size:1.45rem!important}
+body.carepro #page .cc .cc-ttl{font-size:1.35rem!important;margin:0 0 4px}
+body.carepro #page .cc .dc h2,body.carepro #page .cc .dc-h h2,body.carepro #page .cc .gr-sec h3{font-family:var(--f-b)!important;font-weight:700!important;font-size:1rem!important;letter-spacing:0;color:var(--cc-ink)!important}
+/* numbers: plain white tiles, one accent */
+body.carepro #page .cc .dm{border-radius:16px!important;border:1px solid var(--cc-line)!important;box-shadow:none!important;background:var(--cc-card)!important;transform:none!important}
+body.carepro #page .cc .dm-h b{font-size:.74rem!important;letter-spacing:.02em;text-transform:none;font-weight:600!important;color:var(--cc-mut)!important}
+body.carepro #page .cc .dm-h span{color:var(--cc-mut)!important;opacity:.7}
+body.carepro #page .cc .dm-v{font-family:var(--f-d)!important;font-weight:700!important;font-size:2.2rem!important;letter-spacing:-.02em;color:var(--cc-ink)!important}
+body.carepro #page .cc .dm-v small{font-family:var(--f-b);font-size:.8rem!important;color:var(--cc-mut)!important}
 /* cards */
-body.carepro #page .cc .dc,body.carepro #page .cc .gr-sec,body.carepro #page .cc .card{border-radius:26px!important;border:1px solid var(--line)!important;background:var(--cc-card)!important;box-shadow:0 22px 44px -36px rgba(20,60,40,.35)!important}
+body.carepro #page .cc .dc,body.carepro #page .cc .gr-sec,body.carepro #page .cc .card{border-radius:16px!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;box-shadow:none!important}
 body.carepro #page .cc .dc-st p{font-family:var(--f-d)!important;font-weight:700!important}
 body.carepro #page .cc .dl-bar i{height:6px;border-radius:6px}
-body.carepro #page .cc .dg-m{height:8px!important;border-radius:8px;background:var(--cc-a2)!important}
-body.carepro #page .cc .dg-m u{background:linear-gradient(90deg,#4fc08a,#2f9466)!important;border-radius:8px}
-body.carepro #page .cc .dc-l{color:var(--cc-a)!important;font-weight:700}
-/* buttons */
-body.carepro #page .cc .btn.pri{background:var(--cc-a)!important;color:#fff!important;border:0!important;border-radius:999px!important;box-shadow:0 12px 22px -14px var(--cc-a)!important}
-body.carepro #page .cc .btn.pri:hover{filter:brightness(1.06);transform:translateY(-1px)}
+body.carepro #page .cc .dg-m{height:6px!important;border-radius:6px;background:var(--cc-soft)!important}
+body.carepro #page .cc .dg-m u{background:var(--cc-a)!important;border-radius:6px}
+body.carepro #page .cc .dc-l{color:var(--cc-a)!important;font-weight:600}
+body.carepro #page .cc .muted{color:var(--cc-mut)}
+/* buttons and fields */
+body.carepro #page .cc .btn{border-radius:12px!important;box-shadow:none!important}
+body.carepro #page .cc .btn.pri{background:var(--cc-a)!important;color:#fff!important;border:0!important}
+body.carepro #page .cc .btn.pri:hover{filter:brightness(1.07)}
+body.carepro #page .cc .in,body.carepro #page .cc select,body.carepro #page .cc textarea{border-radius:12px!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important}
+body.carepro #page .cc .in:focus,body.carepro #page .cc select:focus,body.carepro #page .cc textarea:focus{border-color:var(--cc-a)!important;outline:3px solid var(--cc-soft)}
 @media (max-width:640px){
-  body.carepro #page .cc .cc-hero{padding:26px 20px 22px!important;border-radius:26px!important}
-  body.carepro #page .cc .dm-v{font-size:2.1rem!important}
-  body.carepro #page .cc .cc-body>.cc-nav{top:64px;margin-bottom:16px!important}
-  body.carepro #page .cc .cc-list{width:100%;justify-content:flex-start}
+  body.carepro #page .cc .cc-hero{padding:4px 0 12px!important}
+  body.carepro #page .cc .dm-v{font-size:1.9rem!important}
+  body.carepro #page .cc .cc-body>.cc-nav{top:58px;margin-bottom:18px!important}
+  body.carepro #page .cc .cc-list button{padding:12px 10px 11px!important;font-size:.88rem!important}
 }
 
 /* privacy page */
@@ -2698,7 +2718,7 @@ function mountPipMascot(el,{onPoke}={}){
     renderer.domElement.style.cssText='width:100%;height:100%;display:block';
     el.innerHTML='';el.appendChild(renderer.domElement);
     const scene=new T.Scene();
-    const camera=new T.PerspectiveCamera(30,w/h,.1,20);camera.position.set(0,1.32,4.4);camera.lookAt(0,.95,0);
+    const camera=new T.PerspectiveCamera(30,w/h,.1,20);camera.position.set(0,1.25,5.6);camera.lookAt(0,1.08,0);
     scene.add(new T.HemisphereLight(0xffffff,0x5fae72,1.05));
     const sun=new T.DirectionalLight(0xffeccb,.85);sun.position.set(2,4,3);scene.add(sun);
     const mesh=pipMesh(T);mesh.scale.setScalar(1.18);scene.add(mesh);
@@ -2734,7 +2754,7 @@ function mountPipStatic(el){
     renderer.domElement.style.cssText='width:100%;height:100%;display:block';
     el.innerHTML='';el.appendChild(renderer.domElement);
     const scene=new T.Scene();
-    const camera=new T.PerspectiveCamera(30,w/h,.1,20);camera.position.set(0,1.32,4.4);camera.lookAt(0,.95,0);
+    const camera=new T.PerspectiveCamera(30,w/h,.1,20);camera.position.set(0,1.25,5.6);camera.lookAt(0,1.08,0);
     scene.add(new T.HemisphereLight(0xffffff,0x5fae72,1.05));
     const sun=new T.DirectionalLight(0xffeccb,.85);sun.position.set(2,4,3);scene.add(sun);
     const mesh=pipMesh(T);mesh.scale.setScalar(1.18);scene.add(mesh);
@@ -4310,7 +4330,6 @@ function careLayout(cc,hero,tb){
   const main=document.createElement('div');main.className='cc-main';
   [...cc.children].forEach(c=>{if(c!==hero&&c!==tb)main.appendChild(c)});
   body.append(nav,main);cc.appendChild(body);cc.dataset.tab=careTab;
-  try{if(!$('.cc-pal',hero)){const pal=document.createElement('div');pal.className='cc-pal';pal.setAttribute('aria-hidden','true');pal.innerHTML=buddySVG(buddy(),140,'hello');hero.appendChild(pal)}}catch(e){}
   $$('details.acc',main).forEach(d=>{const t=($('summary',d)||{}).textContent||'';if(!/Shared care notes/.test(t))d.remove();else{d.open=false}});
   $$('p',main).forEach(q=>{if(/stays on this device/.test(q.textContent))q.textContent='The portal locks itself after 15 minutes.'});
   const tt={overview:'Overview',strengths:'Strengths',report:'Weekly report',visits:'Check-ups',team:'Care team',settings:'Settings'};
@@ -6834,11 +6853,24 @@ const ISL=[
 let ISLPOS=null;
 const islNew=()=>true;
 function pipMesh(T){
-  const walk=[];const g=new T.Group(),m=(c,r=.55)=>x3Mat(T,c,{roughness:r,metalness:0});
-  const body=new T.Mesh(new T.SphereGeometry(.62,28,20),m('#5faa80'));body.scale.set(1,1.1,.95);body.position.y=.8;g.add(body);
-  const belly=new T.Mesh(new T.SphereGeometry(.42,20,14),m('#ffd884'));belly.scale.set(1,1.1,.55);belly.position.set(0,.7,.34);g.add(belly);
-  const ears=[-1,1].map(s=>{const e=new T.Mesh(new T.SphereGeometry(.2,14,10),m('#5faa80'));e.scale.set(.6,1.6,.5);e.position.set(s*.34,1.6,0);e.rotation.z=-s*.28;g.add(e);return e});
-  [-1,1].forEach(s=>{const e=new T.Mesh(new T.SphereGeometry(.07,10,8),m('#14231a',.3));e.position.set(s*.2,1.02,.54);g.add(e);const f=new T.Mesh(new T.SphereGeometry(.17,12,8),m('#3a6a4c'));f.scale.set(1,.6,1.3);f.position.set(s*.28,.1,.12);g.add(f);walk.push({m:f,s,x:s*.28,y:.1,z:.12,k:'foot'})});
+  /* Pip in 3D, matching the logo: mint bunny with long ears, big shiny eyes, pink cheeks, a small smile and a sunny belly */
+  const walk=[];const g=new T.Group(),m=(c,r=.5)=>x3Mat(T,c,{roughness:r,metalness:0}),basic=c=>new T.MeshBasicMaterial({color:c});
+  const GREEN='#6fcf97',DEEP='#4fb07a',LIGHT='#c9f3d8';
+  const body=new T.Mesh(new T.SphereGeometry(.62,36,26),m(GREEN,.45));body.scale.set(1,1.04,.95);body.position.y=.8;g.add(body);
+  const belly=new T.Mesh(new T.SphereGeometry(.27,24,16),m('#ffe08a',.55));belly.scale.set(1.1,.9,.5);belly.position.set(0,.42,.45);g.add(belly);
+  const ears=[-1,1].map(s=>{const e=new T.Group();e.position.set(s*.25,1.3,-.02);e.rotation.z=-s*.16;
+    const outer=new T.Mesh(new T.SphereGeometry(.2,20,14),m(GREEN,.45));outer.scale.set(.62,1.75,.5);outer.position.y=.32;e.add(outer);
+    const inner=new T.Mesh(new T.SphereGeometry(.2,16,12),m(LIGHT,.6));inner.scale.set(.32,1.35,.2);inner.position.set(0,.3,.07);e.add(inner);
+    g.add(e);return e});
+  [-1,1].forEach(s=>{
+    const eye=new T.Mesh(new T.SphereGeometry(.122,20,16),m('#1a2420',.2));eye.scale.set(.95,1.15,.55);eye.position.set(s*.2,.99,.535);g.add(eye);
+    const hi=new T.Mesh(new T.SphereGeometry(.036,12,10),basic(0xffffff));hi.position.set(s*.2+.04,1.05,.6);g.add(hi);
+    const hi2=new T.Mesh(new T.SphereGeometry(.017,10,8),basic(0xffffff));hi2.position.set(s*.2-.035,.945,.595);g.add(hi2);
+    const cheek=new T.Mesh(new T.SphereGeometry(.085,16,12),new T.MeshBasicMaterial({color:0xff9fb2,transparent:true,opacity:.75}));cheek.scale.set(1,.62,.3);cheek.position.set(s*.34,.85,.5);g.add(cheek);
+    const arm=new T.Mesh(new T.SphereGeometry(.13,16,12),m(GREEN,.45));arm.scale.set(.75,1.2,.75);arm.position.set(s*.6,.72,.08);arm.rotation.z=s*.55;g.add(arm);
+    const f=new T.Mesh(new T.SphereGeometry(.17,14,10),m(DEEP));f.scale.set(1,.6,1.3);f.position.set(s*.26,.1,.12);g.add(f);walk.push({m:f,s,x:s*.26,y:.1,z:.12,k:'foot'})});
+  const smile=new T.Mesh(new T.TorusGeometry(.06,.018,10,24,Math.PI),m('#1a2420',.4));smile.rotation.z=Math.PI;smile.rotation.x=-.25;smile.position.set(0,.86,.615);g.add(smile);
+  const tuft=new T.Mesh(new T.SphereGeometry(.07,12,10),m(DEEP));tuft.scale.set(1,.7,.8);tuft.position.set(0,1.41,.08);g.add(tuft);
   g.userData={body,ears,walk};return g;
 }
 function x3Lake(T,S,g,M,add){
@@ -8358,18 +8390,43 @@ function setAccount(box){
   $('#rst').onclick=()=>{if(CONFIRM!=='r'){CONFIRM='r';R.profile();return}CONFIRM='';G=newG({read:G.mastery.read,num:G.mastery.num,att:G.mastery.att,talk:G.mastery.talk});save();toast('Progress reset.');R.profile()};
   $('#del').onclick=()=>confirmDelete(async()=>{if(CLOUD.on&&CLOUD.user){try{await cloudInvoke('delete-account',{confirm:'DELETE'})}catch(e){toast(e.message);return}await cloudSignOut();applyA11y();go('welcome');return}await wipe();applyA11y();go('welcome')});
 }
-/* Deleting the account cannot be undone, so it needs the word DELETE typed in. Logging out is the everyday choice. */
+/* Deleting the account: first a sad Pip with gentler options, then the word DELETE typed in. */
+function pipSad(s=150){
+  return pipOrig(s).replace('d="M141 208Q160 226 179 208"','d="M144 220Q160 206 176 220"')
+    .replace('<ellipse cx="160" cy="198" rx="7" ry="5"','<path d="M108 126Q124 114 146 116" fill="none" stroke="#1b2a22" stroke-width="5" stroke-linecap="round"/><path d="M212 126Q196 114 174 116" fill="none" stroke="#1b2a22" stroke-width="5" stroke-linecap="round"/><path class="pp-tear" d="M199 176C193 188 190 194 190 199A9 9 0 0 0 208 199C208 194 205 188 199 176Z" fill="#7cc7f2" stroke="#4aa3dc" stroke-width="1.5"/><ellipse cx="160" cy="198" rx="7" ry="5"');
+}
 function confirmDelete(done){
   const ov=$('#overlay'),prev=document.activeElement,shut=()=>{ov.innerHTML='';document.removeEventListener('keydown',esc,true);if(prev&&prev.focus)try{prev.focus()}catch(e){}};
   const esc=e=>{if(e.key==='Escape'){e.stopPropagation();shut()}};
-  ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT" aria-describedby="dlD"><div class="card stack" style="gap:14px;text-align:center;max-width:440px;align-items:center"><span class="lgico" aria-hidden="true" style="color:var(--warn)">${ic('lock',28)}</span><h3 id="dlT">Delete this account for good?</h3>
-   <p id="dlD" class="muted">This permanently removes the parent account, every child profile, all progress, the Care Circle and your parent PIN. It cannot be undone. If you only want to leave, choose Log out instead.</p>
-   <label class="stack" style="gap:6px;width:100%;text-align:left"><b class="small">Type DELETE to confirm</b><input class="in" id="dlIn" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
-   <div class="row" style="justify-content:center;gap:10px;flex-wrap:wrap"><button class="btn" id="dlNo">Keep my account</button><button class="btn lgred" id="dlOut">Log out instead</button><button class="btn ghost" id="dlYes" disabled style="color:var(--warn)">Delete forever</button></div></div></div>`;
-  document.addEventListener('keydown',esc,true);
-  const inp=$('#dlIn'),yes=$('#dlYes');inp.oninput=()=>{yes.disabled=inp.value.trim().toUpperCase()!=='DELETE'};
-  $('#dlNo').onclick=shut;$('#dlOut').onclick=()=>{shut();confirmLogout()};
-  yes.onclick=()=>{if(yes.disabled)return;shut();done()};$('#dlNo').focus();
+  const nm=esc2(P&&P.name||'your child'),stars=(G&&G.pts)||0,days=(G&&G.days&&G.days.length)||0,les=(G&&G.lessons)||0,kids=(KIDS&&KIDS.list&&KIDS.list.length)||1;
+  function esc2(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  const step1=()=>{ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT" aria-describedby="dlD"><div class="card dl-card">
+     <div class="dl-pip" aria-hidden="true">${pipSad(150)}</div>
+     <h3 id="dlT">Oh no&hellip; Pip is sad to see you go</h3>
+     <p id="dlD" class="muted">${kids>1?'Your children have':nm+' has'} been doing so well. Deleting the account removes all of this for good:</p>
+     <div class="dl-stats"><div><b>${stars}</b><span>stars earned</span></div><div><b>${days}</b><span>days of learning</span></div><div><b>${les}</b><span>lessons done</span></div></div>
+     <p class="dl-q">Could one of these help instead?</p>
+     <div class="dl-alt">
+       <button class="dl-o" id="dlBreak"><span aria-hidden="true">${ic('out',20)}</span><b>Take a break</b><small>Log out. Everything is kept for when you come back.</small></button>
+       <button class="dl-o" id="dlFree"><span aria-hidden="true">${ic('star',20)}</span><b>Switch to Free</b><small>Stop paying but keep progress and the Care Circle.</small></button>
+       <button class="dl-o" id="dlTalk"><span aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span><b>Tell us what is wrong</b><small>We read every message and will try to fix it.</small></button>
+     </div>
+     <button class="btn pri lg dl-stay" id="dlNo">Stay with Pip</button>
+     <button class="dl-go" id="dlNext">I still want to delete my account</button></div></div>`;
+    $('#dlNo').onclick=()=>{shut();toast(tr('Yay! Pip is so happy you are staying.'))};
+    $('#dlBreak').onclick=()=>{shut();confirmLogout()};
+    $('#dlFree').onclick=()=>{shut();go('pricing')};
+    $('#dlTalk').onclick=()=>{location.href='mailto:'+((window.LLL_CONFIG||{}).contactEmail||'lahlahlearn@gmail.com')+'?subject='+encodeURIComponent('Before I delete my LahLahLearn account')};
+    $('#dlNext').onclick=step2;$('#dlNo').focus()};
+  const step2=()=>{ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT2" aria-describedby="dlD2"><div class="card dl-card">
+     <h3 id="dlT2">Delete the account for good?</h3>
+     <p id="dlD2" class="muted">This permanently removes the parent account, every child profile, all progress, the Care Circle and your parent PIN. It cannot be undone.</p>
+     <label class="stack" style="gap:6px;width:100%;text-align:left"><b class="small">Type DELETE to confirm</b><input class="in" id="dlIn" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+     <div class="row" style="justify-content:center;gap:10px;flex-wrap:wrap;width:100%"><button class="btn pri" id="dlBack">Keep my account</button><button class="btn ghost" id="dlYes" disabled style="color:var(--warn)">Delete forever</button></div></div></div>`;
+    const inp=$('#dlIn'),yes=$('#dlYes');inp.oninput=()=>{yes.disabled=inp.value.trim().toUpperCase()!=='DELETE'};
+    $('#dlBack').onclick=()=>{shut();toast(tr('Yay! Pip is so happy you are staying.'))};
+    yes.onclick=()=>{if(yes.disabled)return;shut();done()};inp.focus()};
+  document.addEventListener('keydown',esc,true);step1();
 }
 R.profile=()=>{
   hsRefresh=null;
