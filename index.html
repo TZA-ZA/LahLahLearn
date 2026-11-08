@@ -1585,7 +1585,7 @@ body.noanim .top .navlinks .tl::after,body.noanim .lp-foot nav button::after,bod
 .dr-rc{width:min(46%,200px);aspect-ratio:1/1;border-radius:26px;overflow:hidden;background:#fff;box-shadow:0 16px 40px -14px rgba(0,0,0,.45);border:4px solid var(--surf);z-index:1;animation:grin .4s}.dr-rc img,.dr-rt img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .dr-rt{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px 0 0 -31px;padding:3px;border-radius:16px;background:var(--surf);border:1px solid var(--line);box-shadow:0 8px 18px -8px rgba(0,0,0,.4);cursor:pointer;overflow:hidden;transition:box-shadow .2s}.dr-rt.on{box-shadow:0 0 0 3px var(--brand),0 8px 18px -8px rgba(0,0,0,.4)}.dr-rt img{border-radius:12px}
 
-body.kid [data-go=pricing],body.kid [data-go=profile],body.kid #foot [data-go=home],body.kid #foot [data-go=pricing],body.kid #foot a:not(.ft-mail){display:none!important}
+body.kid [data-go=pricing],body.kid [data-go=profile],body.kid #foot [data-go=home],body.kid #foot [data-go=pricing],body.kid #foot a:not(.ft-mail){display:none!important}body.kid #foot{display:none!important}
 #plock{margin-left:2px}
 .lp-bub{left:auto!important;right:16px;bottom:clamp(70px,11vh,130px);width:clamp(150px,calc(50vw - 340px),260px);max-width:none;translate:none;border-radius:22px 22px 6px 22px}
 @media(max-width:980px){.lp-bub{display:none!important}}
@@ -2280,6 +2280,8 @@ body.carepro #page .cc .btn.pri:hover{filter:brightness(1.06);transform:translat
 
 @media (max-width:640px){}
 
+
+.fox .fx-air path{fill:none;stroke-width:7;stroke-linecap:round;stroke-dasharray:.1 15}
 /* ===== Calm Mode with the breathing fox ===== */
 .calm.cm{overflow-y:auto;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));background:radial-gradient(120% 80% at 50% 0%,#fff7e8 0%,#e7f6ee 45%,#c5e6d4 100%);color:#17382a}
 .cm-sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
@@ -3747,6 +3749,10 @@ function foxSVG(){
    <radialGradient id="fxEye" cx=".45" cy=".6" r=".75"><stop offset="0" stop-color="#9a5a30"/><stop offset=".55" stop-color="#5a2c15"/><stop offset="1" stop-color="#26100a"/></radialGradient>
    <linearGradient id="fxG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5cc27a"/><stop offset="1" stop-color="#2f904e"/></linearGradient>
    <radialGradient id="fxK"><stop offset="0" stop-color="#ff98a6" stop-opacity=".9"/><stop offset=".6" stop-color="#ffa3ae" stop-opacity=".55"/><stop offset="1" stop-color="#ffa3ae" stop-opacity="0"/></radialGradient>
+   <linearGradient id="fxAL" gradientUnits="userSpaceOnUse" x1="4" y1="0" x2="140" y2="0"><stop offset="0" stop-color="#4aa8e6" stop-opacity="0"/><stop offset=".55" stop-color="#4aa8e6" stop-opacity=".85"/><stop offset="1" stop-color="#2f8fd6"/></linearGradient>
+   <linearGradient id="fxAR" gradientUnits="userSpaceOnUse" x1="296" y1="0" x2="160" y2="0"><stop offset="0" stop-color="#4aa8e6" stop-opacity="0"/><stop offset=".55" stop-color="#4aa8e6" stop-opacity=".85"/><stop offset="1" stop-color="#2f8fd6"/></linearGradient>
+   <linearGradient id="fxOL" gradientUnits="userSpaceOnUse" x1="145" y1="0" x2="6" y2="0"><stop offset="0" stop-color="#5bb6ee"/><stop offset=".5" stop-color="#7cc4f0" stop-opacity=".8"/><stop offset="1" stop-color="#7cc4f0" stop-opacity="0"/></linearGradient>
+   <linearGradient id="fxOR" gradientUnits="userSpaceOnUse" x1="155" y1="0" x2="294" y2="0"><stop offset="0" stop-color="#5bb6ee"/><stop offset=".5" stop-color="#7cc4f0" stop-opacity=".8"/><stop offset="1" stop-color="#7cc4f0" stop-opacity="0"/></linearGradient>
    <filter id="fxFur" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".22" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs>
   <ellipse id="fxShadow" cx="150" cy="336" rx="80" ry="10" fill="#1d4a33" opacity=".16"/>
@@ -3771,6 +3777,8 @@ function foxSVG(){
      ${eye('fxEyeL',115)}${eye('fxEyeR',185)}
      <g id="fxMouth"><path id="fxMO" fill="#8a2a2a" d=""/><ellipse id="fxTo" cx="150" cy="180" rx="6" ry="3" fill="#f27f8d"/><path id="fxMW" fill="none" stroke="#3a1d10" stroke-width="2.6" stroke-linecap="round" d="M136 170 Q143 177 150 170 Q157 177 164 170"/></g>
      <path fill="#2b150b" d="M140 157 Q150 152 160 157 Q161 162 150 168 Q139 162 140 157 Z"/><ellipse cx="145.5" cy="157.5" rx="3.4" ry="1.7" fill="#fff" opacity=".6"/>
+     <g id="fxAirIn" class="fx-air" opacity="0"><path stroke="url(#fxAL)" d="M4 168 Q80 170 141 162"/><path stroke="url(#fxAL)" d="M14 200 Q92 198 143 166"/><path stroke="url(#fxAR)" d="M296 168 Q220 170 159 162"/><path stroke="url(#fxAR)" d="M286 200 Q208 198 157 166"/></g>
+     <g id="fxAirOut" class="fx-air" opacity="0"><path stroke="url(#fxOL)" d="M142 165 Q92 176 6 176"/><path stroke="url(#fxOL)" d="M145 168 Q112 202 64 230"/><path stroke="url(#fxOR)" d="M158 165 Q208 176 294 176"/><path stroke="url(#fxOR)" d="M155 168 Q188 202 236 230"/></g>
    </g></g>
   </g></svg>`;
 }
@@ -3875,6 +3883,11 @@ function openCalm(auto){
       wristL:-8*b+lag-(running&&ph==='in'?6:0),wristR:8*b-lag+(running&&ph==='in'?6:0),
       tail:Math.sin(sec*1.6)*10*A+6*b,earL:tw(twL)+Math.sin(sec*1.2)*1.5*A-4*b,earR:-tw(twR)-Math.sin(sec*1.2)*1.5*A+4*b,
       brow:running&&ph==='hold'?1.5:0,nod:Math.sin(sec*.9+1)*1.2*A,tilt:sway*.6,legL:Math.sin(sec*.9)*1.5*A,legR:Math.sin(sec*.9)*1.5*A});
+    { /* air into the nose while breathing in, out of the nose while breathing out */
+      const ai=fox.querySelector('#fxAirIn'),ao=fox.querySelector('#fxAirOut');
+      if(ai&&ao){const fade=x=>Math.min(1,x/.12,(1-x)/.12);const off=(-(now/1000)*32).toFixed(1);
+        ai.setAttribute('opacity',running&&ph==='in'?fade(pp).toFixed(2):'0');ao.setAttribute('opacity',running&&ph==='out'?fade(pp).toFixed(2):'0');
+        ai.querySelectorAll('path').forEach(p=>p.style.strokeDashoffset=off);ao.querySelectorAll('path').forEach(p=>p.style.strokeDashoffset=off)}}
     stage.style.setProperty('--b',b.toFixed(3));
     raf=requestAnimationFrame(frame)};
   raf=requestAnimationFrame(frame);
