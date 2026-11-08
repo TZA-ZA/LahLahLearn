@@ -1,9 +1,12 @@
-// POST { action: "checkout" | "portal", family_id, children?: 1-3, cycle?: "month" | "year", return_url? }
+// POST { action: "checkout" | "portal", family_id, children?: 1-3, cycle?: "month" | "year", currency?, return_url? }
 // Starts Stripe Checkout for a Family plan, or opens the Stripe customer portal to change or cancel.
 import { HttpError, json, optionalEnv, readJson, serveJson } from "../_shared/http.ts";
 import { adminClient, requireParent, requireUser } from "../_shared/clients.ts";
 import { siteUrl } from "../_shared/email.ts";
 import { priceKey, stripe } from "../_shared/stripe.ts";
+
+// Currencies set up on every plan price (Stripe currency_options). The family pays in the currency shown to them.
+const CURRENCIES = ["myr", "sgd", "usd", "eur", "gbp", "aud", "nzd", "cad", "idr", "thb", "php", "vnd", "inr", "hkd", "jpy", "krw", "cny", "aed"];
 
 function returnBase(candidate: unknown): string {
   const allowed = [siteUrl(), ...(optionalEnv("ALLOWED_ORIGINS") ?? "").split(",").map((s) => s.trim()).filter(Boolean)];
@@ -14,7 +17,7 @@ function returnBase(candidate: unknown): string {
 export const handler = serveJson(async (req) => {
   if (req.method !== "POST") throw new HttpError(405, "Use POST.");
   const { user, db } = await requireUser(req);
-  const b = await readJson<{ action?: string; family_id?: string; children?: number; cycle?: string; return_url?: string }>(req);
+  const b = await readJson<{ action?: string; family_id?: string; children?: number; cycle?: string; currency?: string; return_url?: string }>(req);
   const fid = await requireParent(db, b.family_id);
   const admin = adminClient();
   const { data: fam, error } = await admin.from("families").select("*").eq("id", fid).single();
@@ -43,7 +46,8 @@ export const handler = serveJson(async (req) => {
   }
   const te = fam.trial_ends_at ? Math.floor(new Date(fam.trial_ends_at).getTime() / 1000) : 0;
   const trialEnd = te > Date.now() / 1000 + 48 * 3600 ? te : 0; // Stripe needs at least 48 hours
-  const session = await stripe("checkout/sessions", {
+  const cur = typeof b.currency === "string" && CURRENCIES.includes(b.currency.toLowerCase()) ? b.currency.toLowerCase() : "myr";
+  const params = {
     mode: "subscription",
     customer,
     client_reference_id: fid,
@@ -57,7 +61,16 @@ export const handler = serveJson(async (req) => {
       // Someone who subscribes during the free week keeps the rest of it: the first charge waits until it ends.
       ...(trialEnd ? { trial_end: trialEnd } : {}),
     },
-  });
+  };
+  let session;
+  try {
+    session = await stripe("checkout/sessions", { ...params, currency: cur });
+  } catch (e) {
+    // A customer who already paid in another currency must keep it: fall back to the price's default.
+    if (cur === "myr") throw e;
+    console.warn("checkout in", cur, "failed, using the default currency", e);
+    session = await stripe("checkout/sessions", params);
+  }
   return json({ url: session.url });
 });
 

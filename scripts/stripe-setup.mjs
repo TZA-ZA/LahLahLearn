@@ -20,6 +20,15 @@ const PRICES = [
   [1, "month", 2000], [2, "month", 3500], [3, "month", 4500],
   [1, "year", 20000], [2, "year", 35000], [3, "year", 45000],
 ];
+// The same plan in other currencies (Stripe currency_options). Must match CUR_P in index.html.
+const LOCAL = { sgd: [6, 10, 13], usd: [5, 8, 10], eur: [5, 8, 10], gbp: [4, 7, 9], aud: [7, 12, 15], nzd: [8, 13, 17], cad: [7, 11, 14],
+  idr: [69000, 119000, 149000], thb: [159, 279, 349], php: [279, 479, 619], vnd: [119000, 209000, 269000], inr: [399, 699, 899],
+  hkd: [39, 69, 85], jpy: [699, 1199, 1499], krw: [6500, 11000, 14500], cny: [35, 59, 79], aed: [19, 32, 42] };
+const ZERO_DECIMAL = ["jpy", "krw", "vnd"];
+const localOptions = (n, cycle) => Object.fromEntries(Object.entries(LOCAL).map(([c, v]) => {
+  const a = v[n - 1] * (cycle === "year" ? 10 : 1);
+  return [c, { unit_amount: ZERO_DECIMAL.includes(c) ? a : a * 100 }];
+}));
 const EVENTS = [
   "checkout.session.completed",
   "customer.subscription.created",
@@ -71,10 +80,14 @@ const existing = await stripe("GET", "prices?active=true&limit=20&" + keys.map((
 for (const [n, cycle, amount] of PRICES) {
   const key = `family_${n}_${cycle}`;
   const have = existing.data.find((p) => p.lookup_key === key);
-  if (have && have.unit_amount === amount && have.currency === "myr" && have.product === products[n].id) { console.log("price", key, have.id, "(exists)"); continue; }
+  if (have && have.unit_amount === amount && have.currency === "myr" && have.product === products[n].id) {
+    await stripe("POST", "prices/" + have.id, { currency_options: localOptions(n, cycle) });
+    console.log("price", key, have.id, "(exists, local currencies updated)"); continue;
+  }
   const p = await stripe("POST", "prices", {
     product: products[n].id, currency: "myr", unit_amount: amount,
     recurring: { interval: cycle }, lookup_key: key, transfer_lookup_key: "true",
+    currency_options: localOptions(n, cycle),
     nickname: `${n} ${n === 1 ? "child" : "children"}, ${cycle}ly`,
     metadata: { children: n, cycle },
   });
