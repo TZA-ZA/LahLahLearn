@@ -180,15 +180,23 @@ table.cmp th,table.cmp td{text-align:center}table.cmp th:first-child,table.cmp t
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .foot{position:relative;z-index:2;padding:26px 0 calc(110px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
 .foot button{background:none;border:0;padding:4px 0;color:var(--muted);font-weight:600}.foot button:hover{color:var(--ink)}
-.ft{display:grid;grid-template-columns:1.3fr 1.4fr 1fr;gap:18px 32px;align-items:start}
-.ft-b{display:flex;flex-direction:column;gap:4px}.ft-n{color:var(--ink);font-family:var(--f-d);font-size:1.15rem}
-.ft-l{display:flex;flex-wrap:wrap;gap:6px 22px;align-content:start}
-.ft-c{display:flex;flex-direction:column;gap:6px}.ft-c>span{font-weight:700;color:var(--ink)}
-.ft-mail{display:inline-flex;align-items:center;gap:8px;width:fit-content;padding:8px 14px;border-radius:999px;background:var(--surf);border:1px solid var(--line);color:var(--ink);font-weight:700;text-decoration:none;transition:border-color .2s,transform .2s}
-.ft-mail:hover{border-color:var(--brand);transform:translateY(-1px)}.ft-mail svg{color:var(--brand)}
-.ft-x{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding-top:14px;border-top:1px dashed var(--line);font-size:.82rem}
-.lpf-b{display:flex;flex-direction:column;gap:10px}
-@media (max-width:760px){.ft{grid-template-columns:1fr;text-align:center;justify-items:center}.ft-l{justify-content:center}.ft-c{align-items:center}.ft-x{justify-content:center}.lpf-b{align-items:center}}
+html body .foot>.wrap.ft{display:grid;grid-template-columns:1.7fr 1fr 1.1fr 1.5fr;gap:26px 40px;align-items:start;width:min(1180px,calc(100% - 32px));max-width:none;margin:0 auto;padding:34px 38px 20px;border-radius:30px;background:color-mix(in srgb,var(--surf) 88%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 24px 60px -32px rgba(20,50,35,.35)}
+html body .foot{border-top:0}
+.ft-b{display:flex;flex-direction:column;gap:12px}.ft-logo{width:150px;height:auto;display:block}
+.ft-b p,.ft-c p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55;max-width:30ch}
+.ft-col{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.ft-h{margin:2px 0 4px;font:800 .72rem/1 var(--f-b);letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+.foot .ft-col button{padding:2px 0;font-size:.95rem;font-weight:600;color:var(--ink);opacity:.8;position:relative;transition:opacity .2s,color .2s}
+.foot .ft-col button::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.foot .ft-col button:hover,.foot .ft-col button:focus-visible{opacity:1;color:var(--brand)}.foot .ft-col button:hover::after,.foot .ft-col button:focus-visible::after{transform:scaleX(1)}
+.ft-mail{display:inline-flex;align-items:center;gap:8px;width:fit-content;margin-top:4px;padding:10px 16px;border-radius:999px;background:var(--brand);color:#fff!important;font-weight:700;font-size:.9rem;text-decoration:none;box-shadow:0 8px 18px -10px var(--brand);transition:transform .2s,box-shadow .2s}
+.ft-mail:hover{transform:translateY(-2px);box-shadow:0 12px 22px -10px var(--brand)}.ft-mail svg{color:#fff}
+.ft-x{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;margin-top:6px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+.ft-love{font-weight:600}
+@media (max-width:860px){html body .foot>.wrap.ft{grid-template-columns:1fr 1fr;padding:28px 24px 18px}.ft-b,.ft-c{grid-column:1/-1}}
+@media (max-width:480px){html body .foot>.wrap.ft{text-align:center;justify-items:center}.ft-b,.ft-col{align-items:center}.ft-b p,.ft-c p{margin-inline:auto}.ft-x{justify-content:center;text-align:center}}
+.lpf-b{display:flex;flex-direction:column;gap:10px}.lp-foot .ft-mail{background:var(--surf);color:var(--ink)!important;border:1px solid var(--line);box-shadow:none}.lp-foot .ft-mail svg{color:var(--brand)}
+@media (max-width:760px){.lpf-b{align-items:center}}
 .ring{position:relative;flex:none}.ring svg{transform:rotate(-90deg)}.ring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-d);font-weight:600}
 
 
@@ -2293,10 +2301,11 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 @media (prefers-reduced-motion:reduce){.cm-sky i{display:none}}
 
 /* ===== Cookie choices ===== */
-.ckb{position:fixed;z-index:120;left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));width:min(430px,calc(100% - 32px));padding:20px 20px 18px;border-radius:24px;background:var(--surf);border:1px solid var(--line);box-shadow:0 30px 70px -26px rgba(20,40,30,.45),0 2px 6px rgba(0,0,0,.05);transform:translateY(28px) scale(.98);opacity:0;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s;color:var(--ink)}
-.ckb.on{transform:none;opacity:1}
-.ckb-h{display:flex;gap:14px;align-items:center;margin-bottom:10px}
-.ckb-ic{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#fff3dc,#ffe2b3)}
+.ckbg{position:fixed;inset:0;z-index:119;background:rgba(14,30,22,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}.ckbg.on{opacity:1}
+.ckb{position:fixed;z-index:120;left:50%;top:50%;width:min(460px,calc(100% - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:26px 24px 20px;border-radius:28px;background:var(--surf);border:1px solid var(--line);box-shadow:0 30px 70px -26px rgba(20,40,30,.45),0 2px 6px rgba(0,0,0,.05);transform:translate(-50%,-46%) scale(.96);opacity:0;transition:transform .4s cubic-bezier(.2,.8,.2,1),opacity .3s;color:var(--ink)}
+.ckb.on{transform:translate(-50%,-50%);opacity:1}
+.ckb-h{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;margin-bottom:12px}.ckb-p{text-align:center}
+.ckb-ic{flex:none;width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#fff3dc,#ffe2b3)}
 .ckb-h b{display:block;font:700 1.12rem/1.25 var(--f-d)}
 .ckb-h small{display:block;margin-top:2px;color:var(--muted);font-size:.8rem}
 .ckb-p{margin:0 0 14px;font-size:.92rem;line-height:1.55;color:var(--muted)}
@@ -2313,7 +2322,7 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 .ckb-more{display:block;margin:10px auto 0;padding:6px 10px;border:0;background:none;color:var(--muted);font-weight:700;font-size:.85rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .ckb-more:hover{color:var(--ink)}
 .ckb :focus-visible{outline:3px solid #f0b54a;outline-offset:2px}
-@media (max-width:560px){.ckb{left:0;right:0;bottom:0;width:100%;border-radius:24px 24px 0 0;padding:18px 18px calc(16px + env(safe-area-inset-bottom));border-bottom:0}}
+@media (max-width:560px){.ckb{padding:22px 18px 16px;border-radius:24px}}
 @media (prefers-reduced-motion:reduce){.ckb{transition:opacity .2s}}
 </style>
 
@@ -2337,10 +2346,11 @@ body.carepro #page .cc .btn.pri:hover{border-color:var(--lx-gold)!important}
 </div></header>
 <main id="main"><section class="page" id="page"></section>
 <footer class="foot" id="foot"><div class="wrap ft">
-  <div class="ft-b"><b class="ft-n">LahLahLearn</b><span>Empowering a brighter future for every child</span></div>
-  <nav class="ft-l" aria-label="Footer"><button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="privacy">Privacy policy</button><button data-cookies>Cookie settings</button></nav>
-  <div class="ft-c"><span>Contact us</span><a class="ft-mail" href="mailto:lahlahlearn@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>lahlahlearn@gmail.com</a></div>
-  <div class="ft-x"><span>&copy; <span class="ft-y">2026</span> LahLahLearn &middot; Selangor, Malaysia</span><span id="syncState" style="font-weight:600"></span></div>
+  <div class="ft-b"><img class="ft-logo" src="assets/img/logo.webp" alt="LahLahLearn" width="150" height="72" loading="lazy"><p>Empowering a brighter future for every child. Calm, playful learning for ages 3 to 8.</p></div>
+  <nav class="ft-col" aria-label="Explore"><h2 class="ft-h">Explore</h2><button data-go="home">About</button><button data-go="pricing">Plans</button></nav>
+  <nav class="ft-col" aria-label="Legal"><h2 class="ft-h">Legal</h2><button data-go="terms">Terms of service</button><button data-go="privacy">Privacy policy</button><button data-cookies>Cookie settings</button></nav>
+  <div class="ft-col ft-c"><h2 class="ft-h">Contact</h2><p>Questions or ideas? We would love to hear from you.</p><a class="ft-mail" href="mailto:lahlahlearn@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>lahlahlearn@gmail.com</a></div>
+  <div class="ft-x"><span>&copy; <span class="ft-y">2026</span> LahLahLearn &middot; Selangor, Malaysia</span><span id="syncState" style="font-weight:600"></span><span class="ft-love">Made with care for every child</span></div>
 </div></footer></main>
 <nav class="dock" id="dock" aria-label="App"></nav><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><filter id="sgpf" x="-12%" y="-12%" width="124%" height="124%"><feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/><feSpecularLighting in="b" surfaceScale="5" specularConstant=".8" specularExponent="22" lighting-color="#fff" result="s"><fePointLight x="20" y="-20" z="120"/></feSpecularLighting><feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/><feComposite in="SourceGraphic" in2="s2" operator="arithmetic" k1="0" k2="1" k3=".55" k4="0" result="lit"/><feGaussianBlur in="SourceAlpha" stdDeviation="2" result="sb"/><feOffset in="sb" dy="3" result="so"/><feComponentTransfer in="so" result="sh"><feFuncA type="linear" slope=".26"/></feComponentTransfer><feMerge><feMergeNode in="sh"/><feMergeNode in="lit"/></feMerge></filter></defs></svg>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -3260,7 +3270,7 @@ function cloudAuthUI(reg){
   const em=$('#aEm');[em,pw,pw2].forEach(x=>x&&x.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopImmediatePropagation();e.preventDefault();send()}},true));
   if(lsGet('ll.email')&&!em.value)em.value=lsGet('ll.email');
   const lab=$('#aGo span');if(lab)lab.textContent=reg?tr('Create account'):tr('Log in');
-  const note=$('.au2-note',card);if(note){if(reg)note.innerHTML=esc(tr('We email you a code once to confirm your address.'))+' '+esc(tr('By creating an account you agree to our'))+' <a href="#privacy">'+esc(tr('Privacy policy'))+'</a>.';else note.textContent=tr('One parent account holds up to 3 children.')}
+  const note=$('.au2-note',card);if(note){if(reg)note.innerHTML=esc(tr('We email you a code once to confirm your address.'))+' '+esc(tr('By creating an account you agree to our'))+' <a href="#terms">'+esc(tr('Terms of Service'))+'</a> '+esc(tr('and'))+' <a href="#privacy">'+esc(tr('Privacy policy'))+'</a>.';else note.textContent=tr('One parent account holds up to 3 children.')}
 }
 
 /* ---- Care Circle data */
@@ -3383,15 +3393,49 @@ R.privacy=()=>{
   $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
 };
 
+/* ---------- Terms of Service ---------- */
+function legalPage(title,date,S,note){
+  $('#page').innerHTML=`<div class="pv wrap"><header class="pv-hd"><p class="pv-eb">${tr('Legal')}</p><h1>${tr(title)}</h1><p class="pv-dt">${tr('Effective date')}: ${date}</p>${note?`<p class="pv-note">${note}</p>`:''}</header>
+   <div class="pv-grid"><nav class="pv-toc" aria-label="${tr('Contents')}"><p>${tr('Contents')}</p><ol>${S.map((s,i)=>`<li><a href="#" data-pv="${i}">${s[0]}</a></li>`).join('')}</ol></nav>
+   <article class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2>${i+1}. ${s[0]}</h2>${s[1]}</section>`).join('')}</article></div></div>`;
+  $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
+}
+R.terms=()=>{
+  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'lahlahlearn@gmail.com'),ml=`<a href="mailto:${mail}">${mail}</a>`,pv=`<a href="#privacy">Privacy Policy</a>`;
+  const S=[
+   ['Agreement to these Terms',`<p>These Terms of Service (the &ldquo;Terms&rdquo;) are an agreement between you and LahLahLearn (&ldquo;LahLahLearn&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo; or &ldquo;our&rdquo;) and govern your use of our website, web application and related services (together, the &ldquo;Service&rdquo;).</p><p>By creating an account, starting a free trial, subscribing or otherwise using the Service, you agree to these Terms and to our ${pv}. If you do not agree, please do not use the Service.</p>`],
+   ['Who may use the Service',`<ul><li>Accounts may only be created by a parent or legal guardian who is at least 18 years old (an &ldquo;Account Holder&rdquo;).</li><li>Children may use the Service only through a profile created and supervised by their Account Holder. The Account Holder is responsible for the child&rsquo;s use of the Service.</li><li>Teachers, therapists and other carers may use the Care Circle only when invited by an Account Holder (&ldquo;Care Circle Members&rdquo;).</li></ul><p>You confirm that the information you provide is accurate and that you have the authority to agree to these Terms on behalf of any child whose profile you create.</p>`],
+   ['Your account',`<ul><li>One family account can hold up to three child profiles.</li><li>Keep your password and parent area PIN private. You are responsible for all activity under your account.</li><li>Tell us promptly at ${ml} if you believe your account has been used without your permission.</li><li>You may not sell, transfer or share your account with people outside your household, other than invited Care Circle Members.</li></ul>`],
+   ['Plans, free trial and payment',`<h3>Plans</h3><p>We offer a Free plan, a paid Family plan and a School or clinic plan. The features of each plan are described on our <a href="#pricing">Plans</a> page.</p><h3>Free trial</h3><p>New families may try the Family plan free for 7 days. No payment details are needed for the trial. When it ends, the account returns to the Free plan unless you subscribe.</p><h3>Subscriptions</h3><p>Paid plans are billed in advance, monthly or yearly, in the currency shown at checkout. <b>Subscriptions renew automatically</b> at the end of each billing period until cancelled. Payments are processed by Stripe; we do not store your card details.</p><h3>Price changes</h3><p>We may change prices from time to time. We will give you at least 30 days&rsquo; notice before a new price applies to your subscription, and you may cancel before it takes effect.</p><h3>Taxes</h3><p>Prices include any taxes we are required to collect unless stated otherwise.</p>`],
+   ['Cancellation and refunds',`<p>You may cancel at any time from the Plans page (&ldquo;Manage plan&rdquo;). Cancellation takes effect at the end of the current billing period, and you keep access to paid features until then. Your child&rsquo;s progress is kept on the Free plan.</p><p>Except where required by law, payments are non-refundable and we do not give refunds for partial billing periods. If you believe you were charged in error, contact us within 14 days of the charge and we will review it promptly. Nothing in these Terms affects your rights under the Consumer Protection Act 1999 or other laws that cannot be excluded.</p>`],
+   ['Acceptable use',`<p>You agree not to:</p><ul><li>use the Service for any unlawful, harmful or fraudulent purpose;</li><li>upload or share content that is abusive, discriminatory, sexual, violent or that infringes anyone&rsquo;s rights, including in Care Circle notes;</li><li>impersonate another person or misrepresent your relationship with a child;</li><li>attempt to access accounts, data or systems that are not yours, or interfere with the security or operation of the Service;</li><li>copy, scrape, reverse engineer or resell any part of the Service, except as allowed by law; or</li><li>use automated tools to access the Service or to send large volumes of requests.</li></ul>`],
+   ['The Care Circle',`<p>The Care Circle lets an Account Holder share progress with people they choose. The Account Holder decides who is invited and can remove access at any time. Care Circle Members must use the information they see only to support the child, keep it confidential, and follow any professional obligations that apply to them.</p>`],
+   ['The learning assistant (Pip)',`<p>Pip uses artificial intelligence to chat with children in a friendly, age-appropriate way. Although we design Pip with safety rules, AI can sometimes give answers that are incomplete, inaccurate or unexpected. Pip is a learning companion, not a teacher, therapist or source of advice. We recommend that an adult is nearby when a child uses the Service.</p>`],
+   ['Not medical or professional advice',`<p>LahLahLearn supports learning at home. Features such as calm breaks, the focus and feelings helper, progress reports and check-up notes are for general support only. They do not diagnose, treat or monitor any condition and are not a substitute for advice from a qualified doctor, therapist or educator. If you have concerns about your child&rsquo;s health or development, please speak to a qualified professional.</p>`],
+   ['Our content and your content',`<h3>Our content</h3><p>The Service, including its lessons, games, characters (such as Pip, Fox and Cloud), artwork, sounds, software and logos, is owned by LahLahLearn or our licensors and is protected by intellectual property laws. We give you a personal, non-exclusive, non-transferable licence to use the Service for your family&rsquo;s own non-commercial learning while these Terms apply.</p><h3>Your content</h3><p>You keep ownership of the information and content you add, such as child profiles, notes and drawings. You give us permission to store, process and display it only as needed to provide the Service to you and the people you share it with, as described in our ${pv}.</p><h3>Feedback</h3><p>If you send us ideas or suggestions, we may use them to improve the Service without any obligation to you.</p>`],
+   ['Privacy',`<p>Our ${pv} explains how we collect, use and protect personal data, including children&rsquo;s data. By using the Service, you agree that we may process personal data as described in it.</p>`],
+   ['Changes to the Service',`<p>We are always improving LahLahLearn. We may add, change or remove features from time to time. If a change significantly reduces what a paid plan includes, we will tell you in advance, and you may cancel before the change takes effect.</p><p>We aim to keep the Service available at all times, but it may occasionally be unavailable because of maintenance, updates or events outside our control.</p>`],
+   ['Suspension and termination',`<p>You may stop using the Service and delete your account at any time in Settings. We may suspend or close an account if it breaches these Terms, if we are required to by law, or to protect children, other users or the Service. Where reasonable, we will tell you first and give you a chance to fix the problem. If we close a paid account without a breach on your part, we will refund the unused part of the current billing period.</p>`],
+   ['Disclaimers',`<p>To the extent permitted by law, the Service is provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;. We do not promise that the Service will meet every need, be uninterrupted or be free of errors, or that any particular learning outcome will be achieved.</p>`],
+   ['Limitation of liability',`<p>To the extent permitted by law, LahLahLearn will not be liable for any indirect, incidental, special or consequential loss, or for loss of data, profits or goodwill, arising from your use of the Service. Our total liability for any claim relating to the Service is limited to the amount you paid us in the 12 months before the claim arose, or RM100 if you have not paid us anything.</p><p>Nothing in these Terms limits liability that cannot be limited by law, including liability for death or personal injury caused by negligence, or for fraud.</p>`],
+   ['Changes to these Terms',`<p>We may update these Terms from time to time. If we make material changes, we will notify Account Holders within the Service or by email at least 14 days before they take effect. Continuing to use the Service after that date means you accept the updated Terms. If you do not agree, you may cancel and delete your account.</p>`],
+   ['Governing law and disputes',`<p>These Terms are governed by the laws of Malaysia. We encourage you to contact us first so we can try to resolve any concern informally. Any dispute that cannot be resolved will be subject to the jurisdiction of the courts of Malaysia. If you live outside Malaysia, you also keep any protections given to you by the mandatory laws of your country.</p>`],
+   ['General',`<p>If any part of these Terms is found to be unenforceable, the rest remains in effect. Our failure to enforce a right is not a waiver of it. You may not transfer your rights under these Terms without our consent; we may transfer ours as part of a reorganisation or sale of our business, with notice to you. These Terms and our ${pv} are the whole agreement between you and us about the Service.</p>`],
+   ['Contact us',`<p>If you have questions about these Terms, please contact:</p><p class="pv-ad"><b>LahLahLearn</b><br>Selangor, Malaysia<br>${ml}</p>`]];
+  legalPage('Terms of Service','9 November 2026',S);
+};
+
 /* ---------- Cookie consent: Accept all / Essential only ---------- */
 const CONSENT_KEY='lll.consent';
 const consentGet=()=>{try{return localStorage.getItem(CONSENT_KEY)}catch(e){return null}};
 window.LLL_CONSENT=()=>consentGet()==='all';
 function cookieBanner(force){
   if(!force&&consentGet())return;
-  const old=$('#ckb');if(old)old.remove();
+  const old=$('#ckb');if(old)old.remove();const oldBg=$('#ckbg');if(oldBg)oldBg.remove();
+  const bg=document.createElement('div');bg.id='ckbg';bg.className='ckbg';bg.setAttribute('aria-hidden','true');
+  const close=()=>{b.classList.remove('on');bg.classList.remove('on');setTimeout(()=>{b.remove();bg.remove()},350)};
   const c=consentGet();let stats=c==='all',open=!!force;
-  const b=document.createElement('div');b.id='ckb';b.className='ckb';b.setAttribute('role','dialog');b.setAttribute('aria-label',tr('Cookie choices'));
+  const b=document.createElement('div');b.id='ckb';b.className='ckb';b.setAttribute('role','dialog');b.setAttribute('aria-modal','true');b.setAttribute('aria-label',tr('Cookie choices'));
   const cookie='<svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4a20 20 0 1 0 20 20 6 6 0 0 1-7-6 6 6 0 0 1-6-7 6 6 0 0 1-7-7z" fill="#e8a55a"/><path d="M24 4a20 20 0 1 0 20 20 6 6 0 0 1-7-6 6 6 0 0 1-6-7 6 6 0 0 1-7-7z" fill="none" stroke="#c4813a" stroke-width="2"/><circle cx="16" cy="20" r="3" fill="#7a4520"/><circle cx="27" cy="31" r="3.4" fill="#7a4520"/><circle cx="15" cy="32" r="2.2" fill="#7a4520"/><circle cx="34" cy="38" r="1.8" fill="#7a4520"/><circle cx="22" cy="12" r="1.6" fill="#7a4520"/></svg>';
   const draw=()=>{b.innerHTML=`<div class="ckb-h"><span class="ckb-ic">${cookie}</span><div><b>${tr('Your privacy, your choice')}</b><small>${c?tr('Current choice')+': '+(c==='all'?tr('All cookies'):tr('Essential only')):tr('No adverts. No tracking.')}</small></div></div>
    <p class="ckb-p">${tr('We use essential storage to keep you signed in and save progress. With your OK, we also count which lessons are used, without names, to make them better.')} <a href="#privacy" class="ckb-l">${tr('Read our privacy policy')}</a></p>
@@ -3402,13 +3446,15 @@ function cookieBanner(force){
    ${open?'':`<button class="ckb-more" id="ckMore">${tr('Customise')}</button>`}`;
     const st=$('#ckStat',b);if(st)st.onclick=()=>{stats=!stats;st.setAttribute('aria-checked',stats)};
     const mo=$('#ckMore',b);if(mo)mo.onclick=()=>{open=true;draw();const s2=$('#ckStat',b);s2&&s2.focus()};
-    $$('[data-ck]',b).forEach(x=>x.onclick=()=>{const v=x.dataset.ck==='save'?(stats?'all':'essential'):x.dataset.ck;try{localStorage.setItem(CONSENT_KEY,v);localStorage.setItem(CONSENT_KEY+'.at',new Date().toISOString())}catch(e){}b.classList.remove('on');setTimeout(()=>b.remove(),350);toast(v==='all'?tr('Thank you. Your choice is saved.'):tr('Saved. Only essential storage will be used.'))});
-    $('.ckb-l',b).onclick=()=>{b.classList.remove('on');setTimeout(()=>b.remove(),300);setTimeout(()=>{if(!consentGet())cookieBanner()},1500)};
+    $$('[data-ck]',b).forEach(x=>x.onclick=()=>{const v=x.dataset.ck==='save'?(stats?'all':'essential'):x.dataset.ck;try{localStorage.setItem(CONSENT_KEY,v);localStorage.setItem(CONSENT_KEY+'.at',new Date().toISOString())}catch(e){}close();toast(v==='all'?tr('Thank you. Your choice is saved.'):tr('Saved. Only essential storage will be used.'))});
+    $('.ckb-l',b).onclick=()=>close(); /* read the policy first; the choice comes back when leaving it */
   };
-  draw();document.body.appendChild(b);requestAnimationFrame(()=>b.classList.add('on'));
+  draw();document.body.appendChild(bg);document.body.appendChild(b);requestAnimationFrame(()=>{b.classList.add('on');bg.classList.add('on')});
+  setTimeout(()=>{const f=$('[data-ck]',b);f&&f.focus({preventScroll:true})},120);
 }
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('[data-cookies]');if(t){e.preventDefault();cookieBanner(true)}});
-setTimeout(()=>cookieBanner(),1200);
+setTimeout(()=>{if(!/^#(privacy|terms)/.test(location.hash))cookieBanner()},1200);
+addEventListener('hashchange',()=>{if(!consentGet()&&!$('#ckb')&&!/^#(privacy|terms)/.test(location.hash))setTimeout(()=>cookieBanner(),400)});
 R.join=arg=>{
   if(!CLOUD.on){go('welcome');return}
   if(/^[0-9a-f-]{36}$/i.test(arg||''))lsSet('lll.join',arg);
@@ -3460,7 +3506,7 @@ function greetShow(){
   el.onclick=shut;$('button',el).focus();setTimeout(shut,6500);
   try{if(typeof say==='function'&&!calmOpen)say('Hi '+P.name+', welcome to LahLahLearn. '+w+'!')}catch(e){}
 }
-const PUBLIC=['welcome','auth','home','pricing','join','privacy'],FULL=['welcome','onboard','pick','who'];
+const PUBLIC=['welcome','auth','home','pricing','join','privacy','terms'],FULL=['welcome','onboard','pick','who'];
 const DOCK=[['dashboard','Home','home'],['learn','Learn','book'],['explore-island','3D World','globe'],['together','Leaderboard','trophy'],['care','Care Circle','chart']];
 const parseHash=()=>{const h=(location.hash||'').slice(1),i=h.indexOf('-');return i<0?{base:h,arg:''}:{base:h.slice(0,i),arg:h.slice(i+1)}};
 const go=r=>{if(('#'+r)===location.hash)route();else location.hash=r};
@@ -3496,7 +3542,7 @@ function chrome(){
   $('#foot').style.display=FULL.includes(cur)||(cur==='explore'&&parseHash().arg)?'none':'';setSync();updateClock();musSync();if(!session&&(HS.cam.on||HS.mic.on)){camStop();micStop()}hsUpdate();
 }
 function resolve(){
-  if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
+  if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy','terms'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
   let{base,arg}=parseHash();
   if(!R[base])base=session?'dashboard':'welcome';
   if(!session&&!PUBLIC.includes(base)&&base!=='onboard'&&base!=='pick')base='auth';
@@ -4407,7 +4453,7 @@ R.welcome=()=>{
     <div class="lp-crew"><div class="lp-cm rv"><div class="im" id="lpcpip">${pipSVG()}</div><h3>Pip</h3><p>Our leafy guide, always by your side.</p></div><div class="lp-cm rv" style="--d:1"><div class="im" id="lpcfox">${buddySVG('fox',380,'hello')}</div><h3>Fox</h3><p>A cosy little fox who loves a good story.</p></div><div class="lp-cm rv" style="--d:2"><div class="im" id="lpccld">${buddySVG('cloud',380,'hello')}</div><h3>Cloud</h3><p>A sleepy cloud bunny who is great at calm breaks.</p></div></div></div></section>
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-two"><div><div class="lp-k">For grown-ups</div><h2 class="lp-h2 rv">One calm view for everyone who cares.</h2></div><div class="stack" style="gap:22px"><p class="lp-p rv">The Care Circle turns daily play into clear goals that parents, teachers and therapists can all see. No tests. No scores. Just progress.</p><div class="row rv"><button class="btn pri lg mag" data-go="home">How it works ${ic('arrow',18)}</button><button class="btn lg mag" data-go="pricing">Plans</button></div></div></div></div></section>
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-end rv" id="lpend"><svg class="le-rb" viewBox="0 0 800 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="26"><path d="M50 400a350 350 0 0 1 700 0" stroke="#ff9f8f"/><path d="M84 400a316 316 0 0 1 632 0" stroke="#ffd36b"/><path d="M118 400a282 282 0 0 1 564 0" stroke="#9fe3b2"/><path d="M152 400a248 248 0 0 1 496 0" stroke="#9ccdf2"/><path d="M186 400a214 214 0 0 1 428 0" stroke="#c9b6f2"/></g></svg><svg class="le-sp" viewBox="0 0 100 100" aria-hidden="true">${[[10,20,1],[88,16,.8],[22,62,.7],[78,56,.9],[40,10,.6],[62,12,.7],[50,38,.5]].map(([x,y,k],i)=>`<path class="sk" style="--d:${i*.6}s" transform="translate(${x} ${y}) scale(${k*.13})" d="M0-10L2.6-3.2 10 0 2.6 3.2 0 10-2.6 3.2-10 0-2.6-3.2z"/>`).join('')}</svg><h2 class="le-h"><span>Every child</span> <span>can do this.</span></h2><p style="margin:0;opacity:.92;max-width:38ch">Start free. Learn at a calm, kind pace.</p><button class="btn sun lg mag" data-go="auth-register">Register ${ic('arrow',18)}</button><div class="pp2 l" id="lpe1"><img src="assets/img/fox-hello.webp" alt="" draggable="false"></div><div class="pp2 l2" id="lpe3"><img src="assets/img/pip-hello.webp" alt="" draggable="false"></div><div class="pp2 r2" id="lpe4"><img src="assets/img/pip-hello.webp" alt="" draggable="false"></div><div class="pp2 r" id="lpe2"><img src="assets/img/cloud-hello.webp" alt="" draggable="false"></div></div>
-    <div class="lp-foot"><div class="lpf-b"><span>&copy; ${new Date().getFullYear()} LahLahLearn. Calm learning for every child.</span><a class="ft-mail" href="mailto:lahlahlearn@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>lahlahlearn@gmail.com</a></div><nav><button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="privacy">Privacy</button><button data-cookies>Cookies</button><button data-go="auth-login">Log in</button></nav></div></div></section></div>`;
+    <div class="lp-foot"><div class="lpf-b"><span>&copy; ${new Date().getFullYear()} LahLahLearn. Calm learning for every child.</span><a class="ft-mail" href="mailto:lahlahlearn@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>lahlahlearn@gmail.com</a></div><nav><button data-go="home">About</button><button data-go="pricing">Plans</button><button data-go="terms">Terms</button><button data-go="privacy">Privacy</button><button data-cookies>Cookies</button><button data-go="auth-login">Log in</button></nav></div></div></section></div>`;
   lpArtBake();
   const hero=$('#lphero'),bub=$('#lpbub'),yay=$('#lpyay'),pp=$('#lppip');
   /* the 4 small Pip/Fox/Cloud figures in the closing banner (lpe1-4) are purely decorative - giving each its own cursor-tracking animation loop just for a background flourish was a big chunk of the page's idle CPU cost, so they stay as still illustrations */
