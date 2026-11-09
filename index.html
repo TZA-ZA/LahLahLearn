@@ -2189,24 +2189,24 @@ body.cloud #aicard{display:none!important}
 .cp-st span{font-size:1.6rem;line-height:1}.cp-st b{display:block;font:700 1rem var(--f-d)}.cp-st small{display:block;font-size:.76rem;color:var(--muted)}
 .cp-st.on{opacity:1;border-color:var(--lc);box-shadow:0 10px 24px -16px var(--lc)}.cp-st.ok{opacity:1}.cp-st.ok b::after{content:" ✓";color:var(--brand)}
 .cp-ln{flex:1;height:3px;min-width:12px;border-radius:3px;background:var(--line)}
-.cp-head{display:grid;grid-template-columns:1fr minmax(160px,260px);gap:6px 20px;align-items:end}
+.cp-head{display:flex;align-items:center;gap:18px}.cp-head .cp-bar{flex:1;max-width:320px}
 .cp-head h2{margin:2px 0 0;font:700 clamp(1.5rem,3.4vw,2rem)/1.15 var(--f-d)}
 .cp-eb{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lc)}
 .cp-bar{height:12px;border-radius:12px;background:var(--line);overflow:hidden}.cp-bar i{display:block;height:100%;border-radius:12px;background:var(--lc);transition:width .6s}
 .cp-head small{grid-column:2;text-align:right}
-.cp-next{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;gap:4px 18px;align-items:center;text-align:left;width:100%;padding:22px 24px;border-radius:26px;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--lc),color-mix(in srgb,var(--lc) 70%,#0d3b26));box-shadow:0 22px 40px -26px var(--lc);transition:transform .2s}
+.cp-next{display:flex;justify-content:space-between;gap:18px;align-items:center;text-align:left;width:100%;padding:22px 24px;border-radius:26px;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--lc),color-mix(in srgb,var(--lc) 70%,#0d3b26));box-shadow:0 22px 40px -26px var(--lc);transition:transform .2s}
 .cp-next:hover{transform:translateY(-2px)}
 .cp-next .cp-nl{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
 .cp-next b{font:700 clamp(1.4rem,3.6vw,1.9rem)/1.15 var(--f-d)}.cp-next>span:nth-of-type(2){opacity:.9}
-.cp-next .btn{grid-column:2;grid-row:1/4;background:#fff!important;color:#173a28!important;border:0}
+.cp-next .btn{flex:none;background:#fff!important;color:#173a28!important;border:0}
 .cp-next.all{cursor:default;display:flex;flex-direction:column;gap:4px}
-.cp-path{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.cp-path{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
 .cp-u{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 16px;border-radius:20px;border:1.5px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;transition:border-color .2s,transform .15s}
 .cp-u:hover:not([disabled]){border-color:var(--lc);transform:translateY(-1px)}
 .cp-u[disabled]{cursor:default;opacity:.55}
 .cp-n{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--line);font:700 1rem var(--f-d)}
 .cp-u.done .cp-n{background:var(--lc);color:#fff}.cp-u.now{border-color:var(--lc);border-width:2px}.cp-u.now .cp-n{background:color-mix(in srgb,var(--lc) 18%,transparent);color:var(--lc)}
-.cp-t{flex:1;min-width:0}.cp-t b{display:block;font-size:.98rem}.cp-t small{display:block;color:var(--muted);font-size:.8rem;line-height:1.35}
+.cp-t{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:8px}.cp-t b{display:block;font-size:.98rem}.cp-t small{display:block;color:var(--muted);font-size:.8rem;line-height:1.35}
 .cp-go{color:var(--lc)}
 .cp-exam{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:22px;border:1.5px dashed color-mix(in srgb,var(--lc) 55%,var(--line));background:color-mix(in srgb,var(--lc) 7%,var(--surf))}
 .cp-ei{font-size:2rem}.cp-exam>div{flex:1;min-width:0}.cp-exam b{display:block;font:700 1.05rem var(--f-d)}.cp-exam small{display:block;color:var(--muted);font-size:.84rem;line-height:1.4}
@@ -2214,8 +2214,8 @@ body.cloud #aicard{display:none!important}
 .cq-read{margin:0;padding:14px 18px;border-radius:18px;background:var(--surf2,rgba(0,0,0,.04));font:600 clamp(1.15rem,3vw,1.45rem)/1.5 var(--f-d)}
 .cu-end h2{margin:0;font:700 1.7rem var(--f-d)}.cu-conf{font-size:3rem;animation:cuPop .8s ease}
 @keyframes cuPop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-@media (max-width:640px){.cp-st small{display:none}.cp-st{padding:8px 10px;gap:6px}.cp-st span{font-size:1.3rem}.cp-head{grid-template-columns:1fr}.cp-head small{grid-column:1;text-align:left}
-  .cp-next{grid-template-columns:1fr;padding:20px}.cp-next .btn{grid-column:1;grid-row:auto;justify-self:start;margin-top:8px}.cp-exam{flex-wrap:wrap}}
+@media (max-width:640px){.cp-st{padding:8px 10px;gap:6px}.cp-st span{font-size:1.3rem}.cp-head{flex-direction:column;align-items:stretch;gap:8px}.cp-head .cp-bar{max-width:none}
+  .cp-next{flex-direction:column;align-items:flex-start;padding:20px}.cp-next .btn{margin-top:4px}}
 /* delete account: sad Pip */
 .dl-card{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;max-width:480px;width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow:auto;padding:26px 24px 20px!important}
 .dl-pip{width:132px;margin:-6px auto -6px;animation:dlSway 3s ease-in-out infinite}.dl-pip svg{width:100%;height:auto;display:block}
@@ -5268,17 +5268,17 @@ function curUnitDone(u){const c=curGet();if(u.k==='write'){const w=G.write||{};i
 function curNext(){const lv=curLv();return lv.units.find(u=>!curUnitDone(u))||null}
 function curView(){
   const c=curGet(),lv=curLv(),nx=curNext(),doneN=lv.units.filter(curUnitDone).length,pct=Math.round(doneN/lv.units.length*100);
-  const steps=CURR.map((l,i)=>`<li class="cp-st ${i<c.lv||c.grad&&i===c.lv?'ok':i===c.lv?'on':''}"><span aria-hidden="true">${l.e}</span><b>${l.n}</b><small>${l.d}</small></li>`).join('<li class="cp-ln" aria-hidden="true"></li>');
+  const steps=CURR.map((l,i)=>`<li class="cp-st ${i<c.lv||c.grad&&i===c.lv?'ok':i===c.lv?'on':''}" title="${l.d}"><span aria-hidden="true">${l.e}</span><b>${l.n}</b></li>`).join('<li class="cp-ln" aria-hidden="true"></li>');
   const unit=(u,i)=>{const d=curUnitDone(u),open=d||u===nx,st=d?'done':u===nx?'now':'lock';
-    const extra=u.k==='write'?` · ${u.letters.filter(l=>(G.write||{})[l]).length} of ${u.letters.length} letters`:'';
-    return`<li><button class="cp-u ${st}" ${open?`data-cu="${u.id}"`:'disabled'} aria-label="${esc(u.n+'. '+(d?'Done':open?'Next':'Locked'))}"><span class="cp-n" aria-hidden="true">${d?'✓':st==='lock'?'🔒':i+1}</span><span class="cp-t"><b>${esc(u.n)}</b><small>${esc(u.d+extra)}</small></span>${u===nx?`<span class="cp-go">${ic('arrow',18)}</span>`:''}</button></li>`};
+    const extra=u.k==='write'&&!d?`<small>${u.letters.filter(l=>(G.write||{})[l]).length}/${u.letters.length}</small>`:'';
+    return`<li><button class="cp-u ${st}" ${open?`data-cu="${u.id}"`:'disabled'} title="${esc(u.d)}" aria-label="${esc(u.n+'. '+(d?'Done':open?'Next':'Locked'))}"><span class="cp-n" aria-hidden="true">${d?'✓':st==='lock'?'🔒':i+1}</span><span class="cp-t"><b>${esc(u.n)}</b>${extra}</span></button></li>`};
   const best=c.best[lv.id];
   return`<section class="cp rv" style="--lc:${lv.c}">
     <ol class="cp-steps" aria-label="Levels">${steps}</ol>
-    <div class="cp-head"><div><span class="cp-eb">${c.grad?'All levels finished':'Level '+(c.lv+1)+' of 3'}</span><h2>${lv.e} ${lv.n}: ${lv.d}</h2></div><div class="cp-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${pct}% of ${lv.n}"><i style="width:${pct}%"></i></div><small class="muted">${doneN} of ${lv.units.length} done</small></div>
-    ${nx?`<button class="cp-next" data-cu="${nx.id}"><span class="cp-nl">Next up</span><b>${esc(nx.n)}</b><span>${esc(nx.d)}</span><span class="btn pri lg">Start ${ic('arrow',18)}</span></button>`:`<div class="cp-next all"><span class="cp-nl">All ${lv.n} lessons done</span><b>${c.grad?'You finished every level!':'Time for the '+lv.n+' exam'}</b></div>`}
+    <div class="cp-head"><h2>${lv.e} ${lv.n}</h2><div class="cp-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${doneN} of ${lv.units.length} lessons done"><i style="width:${pct}%"></i></div></div>
+    ${nx?`<button class="cp-next" data-cu="${nx.id}"><b>${esc(nx.n)}</b><span class="btn pri lg">Start ${ic('arrow',18)}</span></button>`:`<div class="cp-next all"><b>${c.grad?'All done! 🎉':'Exam time! 🏆'}</b></div>`}
     <ol class="cp-path">${lv.units.map(unit).join('')}</ol>
-    <div class="cp-exam"><span class="cp-ei" aria-hidden="true">🏆</span><div><b>${lv.n} exam</b><small>${c.grad&&c.lv===2?'Take it again any time.':c.lv<2?`Get ${EXAM_PASS} of ${EXAM_Q} right to move up to ${CURR[c.lv+1].n}. You can try it now.`:`Get ${EXAM_PASS} of ${EXAM_Q} right to finish Bloom.`}${best!=null?` Best so far: ${best} of ${EXAM_Q}.`:''}</small></div><button class="btn ${nx?'':'pri'}" data-go="learn-exam">${nx?'Try the exam':'Take the exam'}</button></div>
+    <div class="cp-exam"><span class="cp-ei" aria-hidden="true">🏆</span><div><b>${lv.n} exam</b>${best!=null?`<small>Best: ${best}/${EXAM_Q}</small>`:''}</div><button class="btn ${nx?'':'pri'}" data-go="learn-exam" aria-label="${lv.n} exam. Get ${EXAM_PASS} of ${EXAM_Q} right to move up.">Try it</button></div>
   </section>`;
 }
 function curBind(){$$('[data-cu]').forEach(b=>b.onclick=()=>go('learn-cu-'+b.dataset.cu))}
@@ -5309,13 +5309,13 @@ function curEnd(){
   if(CUQ.exam){
     c.best[lv.id]=Math.max(c.best[lv.id]||0,CUQ.correct);
     if(CUQ.correct>=EXAM_PASS){
-      if(CUQ.lv<2){c.lv=CUQ.lv+1;title=`You are now a ${CURR[c.lv].n}!`;body=`Amazing! ${CUQ.correct} of ${CUQ.total} right. ${lv.n} is finished. Now ${CURR[c.lv].n} begins: ${CURR[c.lv].d.toLowerCase()}.`}
-      else{c.grad=true;title='You finished Bloom!';body=`Wonderful! ${CUQ.correct} of ${CUQ.total} right. You have finished every level. Keep exploring and practising.`}
+      if(CUQ.lv<2){c.lv=CUQ.lv+1;title=`You are a ${CURR[c.lv].n}! ${CURR[c.lv].e}`;body=`${CUQ.correct} of ${CUQ.total} right!`}
+      else{c.grad=true;title='You finished Bloom! 🌸';body=`${CUQ.correct} of ${CUQ.total} right!`}
       btns=`<button class="btn pri lg" data-go="learn">See my path ${ic('arrow',18)}</button>`;
-    }else{title='So close!';body=`${CUQ.correct} of ${CUQ.total} right. You need ${EXAM_PASS} to move up. Let us practise a little more and try again.`;btns=`<button class="btn pri lg" data-go="learn">Back to my path</button><button class="btn" id="cuAgain">Try again</button>`}
+    }else{title='So close!';body=`${CUQ.correct} of ${CUQ.total}. You need ${EXAM_PASS}.`;btns=`<button class="btn pri lg" data-go="learn">Back to my path</button><button class="btn" id="cuAgain">Try again</button>`}
   }else{
-    if(CUQ.correct>=CUR_PASS){c.done[CUQ.id]=true;const nx=curNext();title='Lesson done!';body=`${CUQ.correct} of ${CUQ.total} right.${nx?' Next: '+nx.n+'.':' Now you can take the '+lv.n+' exam!'}`;btns=nx?`<button class="btn pri lg" data-cu="${nx.id}">Next lesson ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`:`<button class="btn pri lg" data-go="learn-exam">Take the exam ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`}
-    else{title='Almost there!';body=`${CUQ.correct} of ${CUQ.total} right. Get ${CUR_PASS} right to open the next lesson. Let us try again.`;btns=`<button class="btn pri lg" id="cuAgain">Try again</button><button class="btn" data-go="learn">My path</button>`}
+    if(CUQ.correct>=CUR_PASS){c.done[CUQ.id]=true;const nx=curNext();title='Lesson done!';body=`${CUQ.correct} of ${CUQ.total} right!`;btns=nx?`<button class="btn pri lg" data-cu="${nx.id}">Next ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`:`<button class="btn pri lg" data-go="learn-exam">Take the exam ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`}
+    else{title='Almost there!';body=`${CUQ.correct} of ${CUQ.total}. Try again!`;btns=`<button class="btn pri lg" id="cuAgain">Try again</button><button class="btn" data-go="learn">My path</button>`}
   }
   save();
   const win=CUQ.exam?CUQ.correct>=EXAM_PASS:CUQ.correct>=CUR_PASS;
