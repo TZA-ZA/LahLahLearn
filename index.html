@@ -2202,67 +2202,71 @@ body.cloud #aicard{display:none!important}
 .dl-go{border:0;background:none;color:var(--muted);font-size:.84rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
 .dl-go:hover{color:var(--warn)}
 @media (prefers-reduced-motion:reduce){.dl-pip,.dl-pip .pp-tear{animation:none}}
-/* ===== Care Circle: minimalist parent area ===== */
-body.carepro{--cc-a:#2f8f5f;--cc-bg:#f7f8f6;--cc-card:#ffffff;--cc-line:#e6e9e5;--cc-ink:#1d2a23;--cc-mut:#6b776f;--cc-soft:#eef5f0}
-html[data-theme=dark] body.carepro{--cc-a:#5cc08f;--cc-bg:#121714;--cc-card:#1a211d;--cc-line:#2b352f;--cc-ink:#e8efe9;--cc-mut:#9aa8a0;--cc-soft:rgba(92,192,143,.12)}
-/* quiet page: no child toolbar, no floating help, no scenery */
+/* ===== Care Circle: quiet luxury (ivory, ink, soft gold; serif display, hairlines, lots of air) ===== */
+body.carepro{--cc-bg:#f6f3ee;--cc-card:#fffdf9;--cc-line:#e6dfd3;--cc-ink:#1b201d;--cc-mut:#76786f;--cc-gold:#a8834a;--cc-a:#1f4d3a;--cc-soft:#efe8db;
+  --cc-serif:'Iowan Old Style','Palatino Linotype','Book Antiqua',Palatino,'Hoefler Text',Georgia,serif;--cc-sh:0 1px 2px rgba(40,30,15,.04),0 24px 48px -36px rgba(40,30,15,.28)}
+html[data-theme=dark] body.carepro{--cc-bg:#121513;--cc-card:#191d1a;--cc-line:#2c322d;--cc-ink:#ece8df;--cc-mut:#9c9e95;--cc-gold:#cfa968;--cc-a:#8fcfae;--cc-soft:rgba(207,169,104,.12);--cc-sh:0 24px 48px -36px rgba(0,0,0,.6)}
 body.carepro #dock,body.carepro .guidebtn,body.carepro .guidepop,body.carepro .calmfab,body.carepro #scenefx{display:none!important}
 body.carepro{background:var(--cc-bg)!important}
 body.carepro #page .cc{max-width:1080px;margin:0 auto;color:var(--cc-ink);gap:0!important}
-/* header: one line, name + lock */
-body.carepro #page .cc .cc-hero{margin:8px 0 6px!important;padding:6px 0 18px!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;color:var(--cc-ink);overflow:visible}
-body.carepro #page .cc .cc-hero::before,body.carepro #page .cc .cc-hero::after,body.carepro #page .cc .cc-hero .cc-pal,body.carepro #page .cc .cc-hero .cc-av,body.carepro #page .cc .cc-hero [data-go=profile]{display:none!important}
-body.carepro #page .cc .cc-hero .muted{color:var(--cc-mut)!important;letter-spacing:.08em;text-transform:uppercase;font-size:.72rem!important;font-weight:600}
-body.carepro #page .cc .cc-hero h2{font-family:var(--f-d)!important;font-weight:700!important;color:var(--cc-ink)!important;font-size:clamp(1.6rem,3vw,2.1rem)!important;letter-spacing:-.02em;line-height:1.15}
+/* header */
+body.carepro #page .cc .cc-hero{position:relative;margin:18px 0 8px!important;padding:8px 0 30px!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;color:var(--cc-ink);overflow:visible}
+body.carepro #page .cc .cc-hero::before,body.carepro #page .cc .cc-hero .cc-pal,body.carepro #page .cc .cc-hero .cc-av,body.carepro #page .cc .cc-hero [data-go=profile]{display:none!important}
+body.carepro #page .cc .cc-hero::after{content:"";display:block!important;position:absolute;left:0;bottom:12px;width:44px;height:1.5px;background:var(--cc-gold);border-radius:2px;opacity:.9}
+body.carepro #page .cc .cc-hero .muted{color:var(--cc-gold)!important;letter-spacing:.22em;text-transform:uppercase;font-size:.7rem!important;font-weight:600}
+body.carepro #page .cc .cc-hero h2{font-family:var(--cc-serif)!important;font-weight:500!important;color:var(--cc-ink)!important;font-size:clamp(2rem,4vw,2.8rem)!important;letter-spacing:-.01em;line-height:1.1}
 body.carepro #page .cc .cc-hero h2 *{font-family:inherit!important}
-body.carepro #page .cc .cc-hero .chip,body.carepro #page .cc .cc-hero [class*=chip]{border:1px solid var(--cc-line)!important;color:var(--cc-mut)!important;background:var(--cc-card)!important;font-weight:600}
-body.carepro #page .cc .cc-hero .btn{color:var(--cc-ink)!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;border-radius:12px!important;font-weight:600;box-shadow:none!important}
-body.carepro #page .cc .cc-hero .btn:hover{border-color:var(--cc-a)!important}
-body.carepro #page .cc .cc-hero .btn svg{color:var(--cc-mut)}
-/* navigation: simple underlined tabs */
+body.carepro #page .cc .cc-hero .chip,body.carepro #page .cc .cc-hero [class*=chip]{border:1px solid var(--cc-line)!important;color:var(--cc-mut)!important;background:transparent!important;font-weight:500;letter-spacing:.04em}
+body.carepro #page .cc .cc-hero .btn{color:var(--cc-ink)!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;border-radius:999px!important;font-weight:500;letter-spacing:.04em;box-shadow:none!important;padding-inline:18px!important}
+body.carepro #page .cc .cc-hero .btn:hover{border-color:var(--cc-gold)!important}
+body.carepro #page .cc .cc-hero .btn svg{color:var(--cc-gold)}
+/* navigation */
 body.carepro #page .cc .cc-body{display:block!important}
-body.carepro #page .cc .cc-body>.cc-nav{display:block!important;position:sticky!important;top:64px;z-index:6;margin:0 0 26px!important;min-width:0;background:var(--cc-bg);border-bottom:1px solid var(--cc-line)}
+body.carepro #page .cc .cc-body>.cc-nav{display:block!important;position:sticky!important;top:64px;z-index:6;margin:0 0 34px!important;min-width:0;background:color-mix(in srgb,var(--cc-bg) 92%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--cc-line)}
 body.carepro #page .cc .cc-navin,body.carepro #page .cc .cc-navk,body.carepro #page .cc .cc-navh{display:contents!important}
-body.carepro #page .cc .cc-list{display:flex!important;flex-direction:row!important;gap:4px!important;width:100%;margin:0;padding:0!important;overflow-x:auto;scrollbar-width:none;border:0;border-radius:0;background:none;box-shadow:none}
+body.carepro #page .cc .cc-list{display:flex!important;flex-direction:row!important;gap:10px!important;width:100%;margin:0;padding:0!important;overflow-x:auto;scrollbar-width:none;border:0;border-radius:0;background:none;box-shadow:none}
 body.carepro #page .cc .cc-list::-webkit-scrollbar{display:none}
-body.carepro #page .cc .cc-list button{flex:none!important;width:auto!important;min-width:0!important;display:inline-flex!important;align-items:center;gap:8px;padding:14px 14px 13px!important;margin-bottom:-1px;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;background:none!important;color:var(--cc-mut)!important;font:600 .93rem var(--f-b)!important;white-space:nowrap;box-shadow:none!important;transition:color .15s,border-color .15s}
-body.carepro #page .cc .cc-list button svg{width:17px;height:17px;opacity:.75}
+body.carepro #page .cc .cc-list button{flex:none!important;width:auto!important;min-width:0!important;display:inline-flex!important;align-items:center;gap:8px;padding:16px 12px 15px!important;margin-bottom:-1px;border:0!important;border-bottom:1.5px solid transparent!important;border-radius:0!important;background:none!important;color:var(--cc-mut)!important;font:500 .76rem var(--f-b)!important;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;box-shadow:none!important;transition:color .2s,border-color .2s}
+body.carepro #page .cc .cc-list button svg{width:16px;height:16px;opacity:.6}
 body.carepro #page .cc .cc-list button:hover{color:var(--cc-ink)!important}
-body.carepro #page .cc .cc-list button.on{color:var(--cc-ink)!important;border-bottom-color:var(--cc-a)!important}
-body.carepro #page .cc .cc-list button.on svg{color:var(--cc-a)!important;opacity:1}
+body.carepro #page .cc .cc-list button.on{color:var(--cc-ink)!important;border-bottom-color:var(--cc-gold)!important}
+body.carepro #page .cc .cc-list button.on svg{color:var(--cc-gold)!important;opacity:1}
 body.carepro #page .cc .cc-list button::before,body.carepro #page .cc .cc-list button::after{display:none!important}
-body.carepro #page .cc .cc-main{width:100%;gap:20px!important}
+body.carepro #page .cc .cc-main{width:100%;gap:24px!important}
 body.carepro #page .cc .cc-tabs{display:none!important}
 /* headings */
-body.carepro #page .cc .dh-top h1,body.carepro #page .cc .cc-ttl{font-family:var(--f-d)!important;font-weight:700!important;letter-spacing:-.015em;color:var(--cc-ink)!important}
-body.carepro #page .cc .dh-top h1{font-size:1.45rem!important}
-body.carepro #page .cc .cc-ttl{font-size:1.35rem!important;margin:0 0 4px}
-body.carepro #page .cc .dc h2,body.carepro #page .cc .dc-h h2,body.carepro #page .cc .gr-sec h3{font-family:var(--f-b)!important;font-weight:700!important;font-size:1rem!important;letter-spacing:0;color:var(--cc-ink)!important}
-/* numbers: plain white tiles, one accent */
-body.carepro #page .cc .dm{border-radius:16px!important;border:1px solid var(--cc-line)!important;box-shadow:none!important;background:var(--cc-card)!important;transform:none!important}
-body.carepro #page .cc .dm-h b{font-size:.74rem!important;letter-spacing:.02em;text-transform:none;font-weight:600!important;color:var(--cc-mut)!important}
-body.carepro #page .cc .dm-h span{color:var(--cc-mut)!important;opacity:.7}
-body.carepro #page .cc .dm-v{font-family:var(--f-d)!important;font-weight:700!important;font-size:2.2rem!important;letter-spacing:-.02em;color:var(--cc-ink)!important}
-body.carepro #page .cc .dm-v small{font-family:var(--f-b);font-size:.8rem!important;color:var(--cc-mut)!important}
+body.carepro #page .cc .dh-top h1,body.carepro #page .cc .cc-ttl{font-family:var(--cc-serif)!important;font-weight:500!important;letter-spacing:-.005em;color:var(--cc-ink)!important}
+body.carepro #page .cc .dh-top h1{font-size:1.7rem!important}
+body.carepro #page .cc .cc-ttl{font-size:1.6rem!important;margin:0 0 6px}
+body.carepro #page .cc .dc h2,body.carepro #page .cc .dc-h h2,body.carepro #page .cc .gr-sec h3{font-family:var(--cc-serif)!important;font-weight:500!important;font-size:1.18rem!important;letter-spacing:0;color:var(--cc-ink)!important}
+/* figures */
+body.carepro #page .cc .dm{border-radius:18px!important;border:1px solid var(--cc-line)!important;box-shadow:var(--cc-sh)!important;background:var(--cc-card)!important;transform:none!important;padding:20px 20px 18px!important}
+body.carepro #page .cc .dm-h b{font-size:.66rem!important;letter-spacing:.18em;text-transform:uppercase;font-weight:600!important;color:var(--cc-mut)!important}
+body.carepro #page .cc .dm-h span{color:var(--cc-gold)!important;opacity:.85}
+body.carepro #page .cc .dm-v{font-family:var(--cc-serif)!important;font-weight:500!important;font-size:2.7rem!important;letter-spacing:-.01em;color:var(--cc-ink)!important}
+body.carepro #page .cc .dm-v small{font-family:var(--f-b);font-size:.8rem!important;color:var(--cc-mut)!important;letter-spacing:.02em}
 /* cards */
-body.carepro #page .cc .dc,body.carepro #page .cc .gr-sec,body.carepro #page .cc .card{border-radius:16px!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;box-shadow:none!important}
-body.carepro #page .cc .dc-st p{font-family:var(--f-d)!important;font-weight:700!important}
-body.carepro #page .cc .dl-bar i{height:6px;border-radius:6px}
-body.carepro #page .cc .dg-m{height:6px!important;border-radius:6px;background:var(--cc-soft)!important}
-body.carepro #page .cc .dg-m u{background:var(--cc-a)!important;border-radius:6px}
-body.carepro #page .cc .dc-l{color:var(--cc-a)!important;font-weight:600}
+body.carepro #page .cc .dc,body.carepro #page .cc .gr-sec,body.carepro #page .cc .card{border-radius:20px!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;box-shadow:var(--cc-sh)!important}
+body.carepro #page .cc .dc-st p{font-family:var(--cc-serif)!important;font-weight:500!important}
+body.carepro #page .cc .dl-bar i{height:4px;border-radius:4px}
+body.carepro #page .cc .dg-m{height:4px!important;border-radius:4px;background:var(--cc-soft)!important}
+body.carepro #page .cc .dg-m u{background:linear-gradient(90deg,var(--cc-gold),#c8a46a)!important;border-radius:4px}
+body.carepro #page .cc .dc-l{color:var(--cc-gold)!important;font-weight:500;letter-spacing:.04em}
 body.carepro #page .cc .muted{color:var(--cc-mut)}
 /* buttons and fields */
-body.carepro #page .cc .btn{border-radius:12px!important;box-shadow:none!important}
-body.carepro #page .cc .btn.pri{background:var(--cc-a)!important;color:#fff!important;border:0!important}
-body.carepro #page .cc .btn.pri:hover{filter:brightness(1.07)}
-body.carepro #page .cc .in,body.carepro #page .cc select,body.carepro #page .cc textarea{border-radius:12px!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important}
-body.carepro #page .cc .in:focus,body.carepro #page .cc select:focus,body.carepro #page .cc textarea:focus{border-color:var(--cc-a)!important;outline:3px solid var(--cc-soft)}
+body.carepro #page .cc .btn{border-radius:999px!important;box-shadow:none!important;font-weight:500;letter-spacing:.03em}
+body.carepro #page .cc .btn.pri{background:var(--cc-a)!important;color:#fbf8f2!important;border:0!important}
+html[data-theme=dark] body.carepro #page .cc .btn.pri{color:#10201a!important}
+body.carepro #page .cc .btn.pri:hover{filter:brightness(1.1)}
+body.carepro #page .cc .btn.ghost,body.carepro #page .cc .btn:not(.pri){border-color:var(--cc-line)!important}
+body.carepro #page .cc .in,body.carepro #page .cc select,body.carepro #page .cc textarea{border-radius:12px!important;border:1px solid var(--cc-line)!important;background:var(--cc-card)!important;color:var(--cc-ink)}
+body.carepro #page .cc .in:focus,body.carepro #page .cc select:focus,body.carepro #page .cc textarea:focus{border-color:var(--cc-gold)!important;outline:3px solid var(--cc-soft)}
 @media (max-width:640px){
-  body.carepro #page .cc .cc-hero{padding:4px 0 12px!important}
-  body.carepro #page .cc .dm-v{font-size:1.9rem!important}
-  body.carepro #page .cc .cc-body>.cc-nav{top:58px;margin-bottom:18px!important}
-  body.carepro #page .cc .cc-list button{padding:12px 10px 11px!important;font-size:.88rem!important}
+  body.carepro #page .cc .cc-hero{margin-top:6px!important;padding:4px 0 24px!important}
+  body.carepro #page .cc .dm-v{font-size:2.2rem!important}
+  body.carepro #page .cc .cc-body>.cc-nav{top:58px;margin-bottom:22px!important}
+  body.carepro #page .cc .cc-list{gap:2px!important}
+  body.carepro #page .cc .cc-list button{padding:14px 10px 13px!important;font-size:.7rem!important}
 }
 
 /* privacy page */
