@@ -2006,6 +2006,7 @@ body:not(.noanim) .pkcard.on .pkart{animation:pkb 2.4s ease-in-out infinite}@key
 .px .px-step{display:flex;align-items:center;gap:8px;margin:2px 0 4px}.px .px-step span{color:var(--muted);margin-right:auto;font-size:.86rem}
 .px .px-step .sc-b{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surf);color:var(--ink);font:700 1.2rem/1 var(--f-d);cursor:pointer;display:grid;place-items:center;transition:border-color .2s,transform .15s}
 .px .px-step .sc-b:hover:not([disabled]){border-color:var(--brand);transform:translateY(-1px)}.px .px-step .sc-b[disabled]{opacity:.35;cursor:default}
+.px .px-min{margin:-2px 0 6px;font-size:.8rem;font-weight:700;color:var(--muted)}
 .px .px-step output{min-width:2.4ch;text-align:center;font:700 1.25rem var(--f-d);color:var(--ink)}
 .px .px-kids.pl-calc{display:flex;align-items:center;gap:6px;padding:0;border:0;border-radius:0;background:none;grid-template-columns:none}
 .px-kids span{font-size:.86rem;color:#bcd0c3;margin-right:auto}
@@ -2919,9 +2920,9 @@ const KID_MAX=3;let KIDS=null;
 let billCycle='month';
 /* ---- Prices in the family's own currency (worked out from the device time zone, changeable on the Plans page).
    The same price points are set on the Stripe prices, so families are charged exactly what they see. ---- */
-const CUR_P={MYR:[[20,35,45],15,'RM'],SGD:[[6,10,13],5,'S$'],USD:[[5,8,10],4,'US$'],EUR:[[5,8,10],4,'€'],GBP:[[4,7,9],3,'£'],AUD:[[7,12,15],6,'A$'],NZD:[[8,13,17],7,'NZ$'],CAD:[[7,11,14],5,'C$'],
-  IDR:[[69000,119000,149000],52000,'Rp'],THB:[[159,279,349],119,'฿'],PHP:[[279,479,619],199,'₱'],VND:[[119000,209000,269000],89000,'₫'],INR:[[399,699,899],299,'₹'],HKD:[[39,69,85],29,'HK$'],
-  JPY:[[699,1199,1499],499,'¥'],KRW:[[6500,11000,14500],4900,'₩'],CNY:[[35,59,79],25,'CN¥'],AED:[[19,32,42],14,'AED ']};
+const CUR_P={MYR:[[20,35,45],10,'RM'],SGD:[[6,10,13],3,'S$'],USD:[[5,8,10],2.5,'US$'],EUR:[[5,8,10],2.5,'€'],GBP:[[4,7,9],2,'£'],AUD:[[7,12,15],4,'A$'],NZD:[[8,13,17],4.5,'NZ$'],CAD:[[7,11,14],3.5,'C$'],
+  IDR:[[69000,119000,149000],35000,'Rp'],THB:[[159,279,349],79,'฿'],PHP:[[279,479,619],129,'₱'],VND:[[119000,209000,269000],59000,'₫'],INR:[[399,699,899],199,'₹'],HKD:[[39,69,85],19,'HK$'],
+  JPY:[[699,1199,1499],349,'¥'],KRW:[[6500,11000,14500],3300,'₩'],CNY:[[35,59,79],17,'CN¥'],AED:[[19,32,42],9,'AED ']};
 const CUR_N={MYR:'Malaysian ringgit',SGD:'Singapore dollar',USD:'US dollar',EUR:'Euro',GBP:'British pound',AUD:'Australian dollar',NZD:'New Zealand dollar',CAD:'Canadian dollar',IDR:'Indonesian rupiah',THB:'Thai baht',PHP:'Philippine peso',VND:'Vietnamese dong',INR:'Indian rupee',HKD:'Hong Kong dollar',JPY:'Japanese yen',KRW:'Korean won',CNY:'Chinese yuan',AED:'UAE dirham'};
 function curDetect(){
   try{const s=lsGet('ll.cur');if(s&&CUR_P[s])return s}catch(e){}
@@ -8619,8 +8620,8 @@ R.pricing=()=>{
   const cp=P&&P.plan||'free',on=session;let kn=Math.min(KID_MAX,Math.max(1,(KIDS&&KIDS.list.length)||1));
   const yr=m=>Math.round(m*10); // 2 months free when billed yearly
   const cycAmt=m=>billCycle==='year'?Math.round(yr(m)/12):m;
-  const SCH_PER=CUR_P[CUR][1],Y=billCycle==='year';
-  const schAmt=n=>cycAmt(SCH_PER*n),schSub=n=>(Y?`a month, billed ${rmTxt(yr(SCH_PER*n))} a year`:'a month')+` · ${rmTxt(SCH_PER)} per child`;
+  const SCH_PER=CUR_P[CUR][1],Y=billCycle==='year';if(schN<SCH_MIN)schN=SCH_MIN;
+  const schAmt=n=>cycAmt(SCH_PER*n),schSub=n=>Y?`a month, billed ${rmTxt(yr(SCH_PER*n))} a year`:'a month';
   const famWas=n=>Y?FAM[n]:FAMW[n];
   const famSub=n=>Y?`a month, billed ${rmTxt(yr(FAM[n]))} a year`:'a month';
   const tick='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3.5 8.4l2.8 2.8 6.2-6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -8644,7 +8645,7 @@ R.pricing=()=>{
      <p class="px-d">${p.d}</p>
      ${price(p)}
      ${p.id==='family'?`<div class="px-kids pl-calc" role="group" aria-label="Number of children"><span>Children</span>${[1,2,3].map(n=>`<button class="pl-cb ${n===kn?'on':''}" data-n="${n}" aria-pressed="${n===kn}">${n}</button>`).join('')}</div>`:''}
-     ${p.id==='school'?`<div class="px-kids px-step" role="group" aria-label="Number of children"><span>Children</span><button class="sc-b" data-d="-1" aria-label="One fewer child">&minus;</button><output id="scN" aria-live="polite">${schN}</output><button class="sc-b" data-d="1" aria-label="One more child">+</button></div>`:''}
+     ${p.id==='school'?`<div class="px-kids px-step" role="group" aria-label="Number of children"><span>Children</span><button class="sc-b" data-d="-1" aria-label="One fewer child">&minus;</button><output id="scN" aria-live="polite">${schN}</output><button class="sc-b" data-d="1" aria-label="One more child">+</button></div><p class="px-min">Minimum ${SCH_MIN} children · ${rmTxt(SCH_PER)} per child</p>`:''}
      <button class="px-btn" data-plan="${p.id}" ${p.id==='free'&&cp==='free'&&on?'disabled':''}>${p.cta}</button>
      ${p.note?`<p class="px-note">${p.note}</p>`:''}
      <ul class="px-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
