@@ -42,6 +42,14 @@ export async function handleEvent(admin: SupabaseClient, evt: any, fetchSub = (i
   switch (evt.type) {
     case "checkout.session.completed": {
       const fid = o.client_reference_id ?? o.metadata?.family_id ?? null;
+      if (o.metadata?.kind === "ai_credits") {
+        const n = Math.max(0, Math.min(100000, Number(o.metadata?.credits) || 0));
+        if (fid && n && o.payment_status === "paid") {
+          const { error } = await admin.rpc("ai_add_bonus", { p_family: fid, p_n: n });
+          if (error) throw error;
+        }
+        break;
+      }
       if (fid && o.customer) await admin.from("families").update({ stripe_customer_id: o.customer }).eq("id", fid);
       if (o.subscription) await applySubscription(admin, await fetchSub(o.subscription), fid);
       break;
