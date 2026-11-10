@@ -2677,7 +2677,7 @@ body.has-sidx .msb{display:none!important}
 .lq-top{margin-bottom:12px}
 /* ===== Feelings and life (and Make and move lists): chalkboard header + notebook lessons, like the class lessons ===== */
 .gr2{display:flex;flex-direction:column;gap:22px}
-.gr-cred{margin:4px 0 0;text-align:center;font-size:.6rem;opacity:.75;color:var(--muted)}.gr-cred a{color:inherit}
+.gr-cred{margin:2px 0 0;text-align:center;font-size:.5rem;line-height:1.2;opacity:.55;color:var(--muted)}.gr-cred a{color:inherit}
 .doo{display:inline-block;width:1.2em;height:1.2em;vertical-align:-.22em;object-fit:contain;user-select:none;-webkit-user-drag:none}
 .gt-e .doo,.gr-te .doo,.gr-se .doo{width:1.5em;height:1.5em}.gr-face .doo{width:1.35em;height:1.35em}
 .gr-top{margin-bottom:-4px}
@@ -3514,7 +3514,7 @@ const VOXL={
   gemini:['Kore','Leda','Zephyr','Aoede','Puck','Charon'].map(n=>[n,n]),
   azure:[['en-US-AnaNeural','Ana (child)'],['en-US-AvaMultilingualNeural','Ava'],['en-US-JennyNeural','Jenny'],['en-US-AriaNeural','Aria'],['en-US-GuyNeural','Guy'],['en-GB-SoniaNeural','Sonia (UK)']],
   eleven:[['21m00Tcm4TlvDq8ikWAM','Rachel'],['EXAVITQu4vr4xnSDxMaL','Sarah'],['AZnzlk1XvdvUeBnXmlld','Domi'],['MF3mGyEYCl7XYWbV9V6O','Elli'],['ErXwobaYiN019PkySvjV','Antoni']]};
-function voxGet(){let c={};try{c=JSON.parse(lsGet('ll.voice')||'{}')||{}}catch(e){}const o={engine:VOX[c.engine]?c.engine:'device'};for(const k in VOXD)o[k]=Object.assign({},VOXD[k],c[k]||{});return o}
+function voxGet(){let c={};try{c=JSON.parse(lsGet('ll.voice')||'{}')||{}}catch(e){}const o={engine:VOX[c.engine]?c.engine:'device'};for(const k in VOXD)o[k]=Object.assign({},VOXD[k],c[k]||{});if(o.kokoro&&o.kokoro.voice==='am_eric')o.kokoro.voice='am_puck'; /* the happy boy is now Puck, recorded at his natural pitch */return o}
 function voxSave(o){lsSet('ll.voice',JSON.stringify(o))}
 /* ready-made recordings: every line is its own small mp3 in audio/voice/VOICE/, found through the small inline vpi-VOICE index and downloaded only when it is actually spoken (they used to be ~9MB of text baked into this page, which made the first load slow) */
 const VPK={};
@@ -3547,8 +3547,8 @@ const b64blob=(b,t)=>{const bin=atob(b),u=new Uint8Array(bin.length);for(let i=0
 function pcm2wav(b64,rate){const bin=atob(b64),n=bin.length,buf=new ArrayBuffer(44+n),dv=new DataView(buf),w=(o,t)=>{for(let i=0;i<t.length;i++)dv.setUint8(o+i,t.charCodeAt(i))};w(0,'RIFF');dv.setUint32(4,36+n,true);w(8,'WAVEfmt ');dv.setUint32(16,16,true);dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,rate,true);dv.setUint32(28,rate*2,true);dv.setUint16(32,2,true);dv.setUint16(34,16,true);w(36,'data');dv.setUint32(40,n,true);for(let i=0;i<n;i++)dv.setUint8(44+i,bin.charCodeAt(i));return new Blob([buf],{type:'audio/wav'})}
 const xmlEsc=t=>t.replace(/[<>&'"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'})[c]);
 let KOK=null;const KSTAT={state:'idle',pct:0,t:0,cb:null};
-const KST={am_eric:4,am_puck:8},KSP={af_heart:.8};/* pitch lift in semitones; base speaking speed */
-const KNAME={af_heart:'Heart (happy girl)',am_eric:'Eric (happy boy)',bf_alice:'Alice (UK girl)',af_jessica:'Jessica',af_sarah:'Sarah',bf_lily:'Lily (UK girl)',am_puck:'Puck (younger boy)'};
+const KST={},KSP={af_heart:.8,am_puck:.92};/* no pitch lifting: shifting a voice makes it sound robotic */
+const KNAME={af_heart:'Heart (happy girl)',am_puck:'Puck (happy boy)',am_eric:'Eric',bf_alice:'Alice (UK girl)',af_jessica:'Jessica',af_sarah:'Sarah',bf_lily:'Lily (UK girl)'};
 function kokoroGet(){
   if(KOK)return KOK;
   if(KSTAT.state==='error'&&Date.now()-KSTAT.t<60000)return Promise.reject(new Error('The voice could not be downloaded a moment ago.'));
@@ -3578,7 +3578,7 @@ async function voxSpeak(text,strict){
     if(!packed&&!blob&&eng==='kokoro'&&KSTAT.state!=='ready'){kokoroGet().catch(()=>{});if(!strict){sayDevice(text,v.device.voice);return}}
     if(!packed&&!blob){blob=await VFETCH[eng](text,c);if(!blob||!blob.size)throw new Error('No audio came back');vcPut(key,blob)}
     if(id!==sayId)return;
-    const au=new Audio(packed||URL.createObjectURL(blob)),rate=eng==='kokoro'&&!packed?Math.pow(2,(KST[c.voice]||0)/12):1;const keep=rate===1,pr=keep?.85:rate*.88;au.preservesPitch=keep;au.mozPreservesPitch=keep;au.webkitPreservesPitch=keep;au.defaultPlaybackRate=pr;au.playbackRate=pr;sayAudio=au;au.onended=()=>{if(!packed)try{URL.revokeObjectURL(au.src)}catch(e){}};await au.play();
+    const au=new Audio(packed||URL.createObjectURL(blob)),rate=eng==='kokoro'&&!packed?Math.pow(2,(KST[c.voice]||0)/12):1;const keep=rate===1,pr=packed&&c.voice==='am_puck'?1:keep?.85:rate*.88;au.preservesPitch=keep;au.mozPreservesPitch=keep;au.webkitPreservesPitch=keep;au.defaultPlaybackRate=pr;au.playbackRate=pr;sayAudio=au;au.onended=()=>{if(!packed)try{URL.revokeObjectURL(au.src)}catch(e){}};await au.play();
   }catch(e){
     if(id!==sayId)return;
     if(strict)throw e;
@@ -9681,7 +9681,7 @@ function voxCard(){
   const fld=(f,l,html)=>`<label class="stack" style="gap:4px"><span class="small muted"><b>${l}</b></span>${html}</label>`;
   const inp=(f,type,ph,list)=>`<input class="in" data-vf="${f}" type="${type}" value="${esc(c[f]||'')}" placeholder="${ph}" autocomplete="off" spellcheck="false" ${list?'list="vxl"':''}>`;
   const sel=(f,arr)=>`<select class="in" data-vf="${f}">${opt(arr,c[f])}</select>`;
-  const girl=e==='kokoro'&&kv==='af_heart',boy=e==='kokoro'&&kv==='am_eric',dev=e==='device',adv=!(girl||boy||dev);
+  const girl=e==='kokoro'&&kv==='af_heart',boy=e==='kokoro'&&kv==='am_puck',dev=e==='device',adv=!(girl||boy||dev);
   const face=(k)=>k==='girl'?`<svg viewBox="0 0 64 64" width="58" height="58" aria-hidden="true"><circle cx="14" cy="26" r="9" fill="#e08a4b"/><circle cx="50" cy="26" r="9" fill="#e08a4b"/><circle cx="32" cy="34" r="22" fill="#ffd9b8"/><path d="M10 30C10 12 54 12 54 30 46 22 18 22 10 30z" fill="#e08a4b"/><circle cx="24" cy="36" r="2.6" fill="#3b2a1a"/><circle cx="40" cy="36" r="2.6" fill="#3b2a1a"/><path d="M24 44q8 8 16 0" stroke="#3b2a1a" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="19" cy="42" r="3.2" fill="#ff9aa8" opacity=".7"/><circle cx="45" cy="42" r="3.2" fill="#ff9aa8" opacity=".7"/></svg>`:k==='boy'?`<svg viewBox="0 0 64 64" width="58" height="58" aria-hidden="true"><circle cx="32" cy="34" r="22" fill="#ffd9b8"/><path d="M10 30C8 8 56 8 54 30 48 20 16 20 10 30z" fill="#6b4a2f"/><path d="M26 12q6-10 14 0z" fill="#6b4a2f"/><circle cx="24" cy="36" r="2.6" fill="#3b2a1a"/><circle cx="40" cy="36" r="2.6" fill="#3b2a1a"/><path d="M24 44q8 8 16 0" stroke="#3b2a1a" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="19" cy="42" r="3.2" fill="#ff9aa8" opacity=".7"/><circle cx="45" cy="42" r="3.2" fill="#ff9aa8" opacity=".7"/></svg>`:`<span class="x3ico" style="width:58px;height:58px;border-radius:50%;color:var(--brand)">${ic('vol',26)}</span>`;
   const tile=(k,on,n,d)=>`<button class="bpick ${on?'on':''}" data-vq="${k}" aria-pressed="${on}">${face(k)}<b>${n}</b><span class="muted small">${d}</span></button>`;
   let body='';
@@ -9705,7 +9705,7 @@ function voxCard(){
 function voxMsgErr(e){const m=String(e&&e.message||'That did not work'),k=voxGet().engine;if(/fetch|NetworkError|Load failed/i.test(m))return k==='kokoro'?'Could not download the voice. Check your internet connection and try again.':'Could not reach the service. Check the key, or the service may block calls from web pages.';return m}
 function voxBind(box){
   KSTAT.cb=()=>{const m=$('#voxSt');if(m)m.textContent=voxStatusTxt()};
-  $$('[data-vq]',box).forEach(b=>b.onclick=()=>{const o=voxGet(),q=b.dataset.vq;if(q==='device')o.engine='device';else{o.engine='kokoro';o.kokoro.voice=q==='girl'?'af_heart':'am_eric'}voxSave(o);setComfort(box);if(o.engine==='kokoro')kokoroGet().catch(()=>{})});
+  $$('[data-vq]',box).forEach(b=>b.onclick=()=>{const o=voxGet(),q=b.dataset.vq;if(q==='device')o.engine='device';else{o.engine='kokoro';o.kokoro.voice=q==='girl'?'af_heart':'am_puck'}voxSave(o);setComfort(box);if(o.engine==='kokoro')kokoroGet().catch(()=>{})});
   $$('[data-vox]',box).forEach(b=>b.onclick=()=>{const o=voxGet();o.engine=b.dataset.vox;voxSave(o);setComfort(box);if(o.engine==='kokoro')kokoroGet().catch(()=>{})});
   $$('[data-vf]',box).forEach(i=>i.onchange=()=>{const o=voxGet();o[o.engine][i.dataset.vf]=i.value.trim();voxSave(o);if(i.dataset.vf==='key'||(o.engine==='kokoro'&&i.dataset.vf==='voice'))setComfort(box)});
   const t=$('#voxTest',box);if(t)t.onclick=async()=>{const m=$('#voxMsg',box);m.textContent=voxGet().engine==='kokoro'&&KSTAT.state!=='ready'?'Getting the voice ready…':'Loading…';t.disabled=true;try{await voxSpeak('Hello! I am your learning buddy. Let us play and learn together.',true);m.textContent='Playing'}catch(e){m.textContent=voxMsgErr(e)}t.disabled=false};
