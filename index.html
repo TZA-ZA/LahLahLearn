@@ -2346,6 +2346,79 @@ html[data-theme=dark] .nf-c{background:var(--surf2)}
 .nf-ft{display:flex;justify-content:flex-end;margin-top:10px}
 .nf-empty{margin:4px 2px 2px;color:var(--muted);font-size:.9rem;line-height:1.45}
 @media (prefers-reduced-motion:reduce){.nf-li,.nf-st,.sn-a,.rn-c,.pg-pill,.pg-end{transition:none!important}.pc-bell.ring svg{animation:none}}
+/* ===== Care Circle dashboard (sidebar + summary cards + charts) ===== */
+.pc.pc2{--c-sun:#e9a92a;--c-coral:#e57a5e;--c-sky:#4f9fd6;--c-violet:#8f78d2;--c-teal:#2fa596;--c-rose:#d9679a;max-width:1320px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start;padding-top:14px}
+.pc-side{position:sticky;top:84px;display:flex;flex-direction:column;gap:18px;padding:18px 14px;border-radius:24px;background:var(--surf);border:1px solid var(--line);min-height:calc(100vh - 120px);box-sizing:border-box}
+.pc-brand{display:flex;align-items:center;gap:10px;padding:0 6px}.pc-brand .pc-av{width:42px;height:42px;border-radius:13px}.pc-brand b{display:block;font:700 1rem var(--f-d)}.pc-brand small{color:var(--muted);font-size:.78rem}
+.pc-nav{display:flex;flex-direction:column;gap:2px}
+.pc-nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;color:var(--muted);font:600 .92rem var(--f-b);text-decoration:none;transition:background .15s,color .15s}
+.pc-nav a:hover{background:var(--surf2);color:var(--ink)}
+.pc-nav a.on{background:var(--brand);color:var(--on-brand)}
+.pc-nav a:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.pc-kid{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px;border-radius:16px;background:var(--surf2)}.pc-kid b{display:block;font-size:.9rem}.pc-kid small{color:var(--muted);font-size:.78rem}
+.pc-lockb{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:12px;border:1px solid var(--line);background:none;color:var(--ink);font:600 .86rem var(--f-b);cursor:pointer}.pc-lockb:hover{background:var(--surf2)}
+.pc-main{min-width:0;display:flex;flex-direction:column;gap:18px}
+.pc2 .pc-top{align-items:flex-end}
+.pc2 .pc-id h1{margin:0 0 4px}
+.pc2 .sn{display:none}
+.pc2 .pc-lock{display:none}
+.pc-per{background:var(--surf);border:1px solid var(--line)}.pc-per .pg-pill{background:var(--brand)}.pc-per button[aria-pressed=true]{color:var(--on-brand)}
+.pc-ov{display:flex;flex-direction:column;gap:14px}
+.pc-row4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pc-row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pc-perf,.pc-tab{grid-column:span 2}
+.pc2 .pc-card{padding:20px;border-radius:22px}
+.pc-sc{display:flex;flex-direction:column;gap:14px;min-height:12rem}
+.pc-sch{display:flex;align-items:center;justify-content:space-between;gap:8px}.pc2 .pc-sch h3{margin:0;font:500 1rem var(--f-b)!important;color:var(--ink)}
+.pc-ib{flex:none;width:32px;height:32px;border-radius:10px;background:var(--brand);color:var(--on-brand);display:grid;place-items:center}
+.pc-big{margin:0;font:700 1.9rem/1 var(--f-d);display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}.pc-big small{font:600 .92rem var(--f-b);color:color-mix(in srgb,var(--ink) 70%,transparent)}
+.pc-dl{margin:0;display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);flex-wrap:wrap}.pc-dl b{color:var(--ink);font-weight:600}
+.pc-chg{display:inline-flex;align-items:center;gap:2px;font-weight:700}.pc-chg.up{color:var(--good,#1f7a50)}.pc-chg.dn{color:var(--coral)}.pc-chg.flat{color:var(--muted)}
+.pc-arw.dn{transform:rotate(180deg)}
+.pc-mini{width:100%;display:block;margin-top:auto;overflow:visible}
+.pc-tk{display:grid;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}.pc-tk span:nth-child(n+2){text-align:center}.pc-tk span:last-child{text-align:right}
+.pc-pb{height:8px;border-radius:8px;background:var(--surf2);overflow:hidden}.pc-pb i{display:block;height:100%;border-radius:8px;background:var(--brand);transition:width .6s}
+.pc-bars{display:flex;align-items:flex-end;gap:5px;height:34px;margin-top:auto}.pc-bars i{flex:1;border-radius:4px 4px 2px 2px;background:var(--brand);opacity:.35}.pc-bars i.on{opacity:1}
+.pc2 .pc-bars+.pc-tk span{text-align:center}
+.pc-stk{display:flex;gap:3px;height:20px}.pc-stk i{flex-basis:0;min-width:6px;border-radius:999px;background:repeating-linear-gradient(-45deg,var(--k),var(--k) 4px,color-mix(in srgb,var(--k) 72%,#fff) 4px,color-mix(in srgb,var(--k) 72%,#fff) 8px)}
+.pc-lgs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.82rem}.pc-lgs li{display:flex;align-items:center;gap:8px}.pc-lgs i{width:9px;height:9px;border-radius:3px;flex:none}.pc-lgs span{flex:1;color:color-mix(in srgb,var(--ink) 80%,transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-ph{display:flex;align-items:center;gap:10px;margin-bottom:16px}.pc2 .pc-ph h2{margin:0!important}
+.pc-tag{padding:3px 10px;border-radius:999px;background:var(--surf2);color:var(--muted);font:700 .75rem var(--f-b)}.pc-tag.up{background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}.pc-tag.dn{background:color-mix(in srgb,var(--coral) 14%,var(--surf));color:var(--coral)}
+.pc-sb{margin-left:auto;display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surf2);color:var(--ink);font:600 .8rem var(--f-b);cursor:pointer;white-space:nowrap}.pc-sb:hover{border-color:var(--brand)}
+.pc-chart{display:grid;grid-template-columns:auto 1fr;gap:10px;min-height:16rem;outline:none;border-radius:12px}.pc-chart:focus-visible{box-shadow:0 0 0 2px var(--brand)}
+.pc-ya{display:flex;flex-direction:column;justify-content:space-between;font-size:.72rem;color:var(--muted);padding:4px 0 2px;font-variant-numeric:tabular-nums;text-align:right}
+.pc-plot{position:relative;border-radius:12px;background-image:radial-gradient(color-mix(in srgb,var(--muted) 35%,transparent) 1px,transparent 1.2px);background-size:16px 16px;cursor:crosshair;touch-action:pan-y}
+.pc-plot svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pc-ln{fill:none;stroke:var(--brand);stroke-width:3;stroke-linecap:round}
+.pc-bm{fill:none;stroke:var(--c-sun);stroke-width:2;stroke-dasharray:5 5}
+.pc-cx{position:absolute;top:0;bottom:0;width:1px;background:var(--line);pointer-events:none}
+.pc-cd{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px var(--surf);pointer-events:none}
+.pc-tt{position:absolute;top:8px;min-width:150px;padding:8px 10px;border-radius:12px;background:var(--surf);border:1px solid var(--line);box-shadow:0 10px 24px -14px rgba(0,0,0,.4);font-size:.78rem;display:flex;flex-direction:column;gap:3px;pointer-events:none}.pc-tt span{display:flex;align-items:center;gap:6px;color:var(--muted)}
+.pc-tt i,.pc-lg i{width:10px;height:3px;border-radius:2px;display:inline-block}.pc-tt i.a,.pc-lg i.a{background:var(--brand)}.pc-tt i.b,.pc-lg i.b{background:var(--c-sun)}
+.pc-pft{display:flex;align-items:center;gap:16px;margin:8px 0 0;padding-left:34px}.pc-pft .pc-tk{flex:1}
+.pc-lg{display:flex;gap:14px;font-size:.82rem;color:var(--muted);white-space:nowrap}.pc-lg span{display:flex;align-items:center;gap:6px}
+.pc-mets{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.pc-mets div{display:flex;flex-direction:column;gap:3px}.pc-mets span{color:var(--muted);font-size:.8rem}.pc-mets b{font:600 1.45rem var(--f-d)}.pc-mets small{font-size:.75rem}
+.pc-dw{position:relative;width:100%;max-width:14rem;margin:0 auto 18px;aspect-ratio:1}.pc-dw svg{width:100%;height:100%;transform:rotate(0)}
+.pc-dw [data-i]{transition:opacity .2s}.pc-dw [data-i].dim{opacity:.25}
+.pc-dc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.pc-dc b{font:600 1.9rem var(--f-d)}.pc-dc span{color:var(--muted)}
+.pc-dlg{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:.88rem}.pc-dlg li{display:flex;align-items:center;gap:10px}.pc-dlg i{width:14px;height:14px;border-radius:4px;flex:none}.pc-dlg span{flex:1;font-weight:500;color:color-mix(in srgb,var(--ink) 80%,transparent);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pc-dlg em{font-style:normal;color:var(--muted);width:38px;text-align:right}
+.pc-tbl{display:flex;flex-direction:column}
+.pc-tr{display:grid;grid-template-columns:1fr 4fr 2fr 1.5fr 1.5fr 2fr;gap:10px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);font-size:.88rem}.pc-tr:last-child{border-bottom:0}
+.pc-th{border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,var(--surf));font-weight:600;font-size:.82rem;color:color-mix(in srgb,var(--ink) 80%,transparent)}
+.pc-no{color:var(--muted)}
+.pc-sk{display:flex;align-items:center;gap:10px;min-width:0}.pc-sk b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pc-sk small{color:var(--muted);font-size:.75rem}.pc-sk>span:last-child{min-width:0}
+.pc-skb{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--k) 18%,var(--surf));color:var(--k);font:700 .95rem var(--f-d)}
+.pc-mb{display:block;height:4px;border-radius:4px;background:var(--surf2);margin-top:5px;overflow:hidden;max-width:90px}.pc-mb u{display:block;height:100%;background:var(--brand);border-radius:4px}
+.pc-st{padding:3px 9px;border-radius:999px;font:700 .72rem var(--f-b);background:var(--surf2);color:var(--muted)}.pc-st.up{background:color-mix(in srgb,var(--brand) 15%,var(--surf));color:var(--brand)}.pc-st.mid{background:color-mix(in srgb,var(--c-sun) 18%,var(--surf));color:#9a6a00}.pc-st.dn{background:color-mix(in srgb,var(--coral) 15%,var(--surf));color:var(--coral)}
+.pc-tips ul{list-style:none;margin:0;padding:0}.pc-tips li{display:flex;gap:12px;padding:16px 0;border-top:1px solid var(--line)}.pc-tips li:first-child{border-top:0;padding-top:0}
+.pc-tips li>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.pc-tips b{font-weight:600}.pc-tips p{margin:0;color:var(--muted);font-size:.86rem;line-height:1.4}.pc-tips .pc-sb{align-self:flex-end;margin-top:4px}
+@media (max-width:1180px){.pc-row4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1100px){.pc-row3{grid-template-columns:1fr}.pc-perf,.pc-tab{grid-column:auto}}
+@media (max-width:980px){.pc.pc2{grid-template-columns:1fr;gap:16px}.pc-side{display:none}.pc2 .sn{display:flex}.pc2 .pc-lock{display:inline-flex}}
+@media (max-width:620px){.pc-row4{grid-template-columns:1fr}.pc-sc{min-height:0}.pc2 .pc-top{align-items:flex-start}.pc-acts{width:100%;justify-content:space-between}
+ .pc-mets{grid-template-columns:repeat(2,1fr)}.pc-pft{flex-direction:column;align-items:stretch;padding-left:30px}.pc-lg{justify-content:flex-end}.pc-chart{min-height:12rem}
+ .pc-th{display:none}.pc-tr{grid-template-columns:minmax(0,1fr) 64px auto;padding:10px 2px;gap:10px}
+ .pc-no,.pc-tr [data-l=Answers],.pc-tr [data-l=Accuracy]{display:none}.pc-mb{max-width:none}}
 /* ===== Story time ===== */
 .bk-shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:8px}
 .bk-sb{display:flex;flex-direction:column;text-align:left;padding:0;border:0;border-radius:22px;overflow:hidden;background:var(--surf);box-shadow:0 0 0 1px var(--line),0 14px 28px -20px rgba(0,0,0,.35);cursor:pointer;transition:transform .2s,box-shadow .2s;font:inherit;color:var(--ink)}
@@ -9186,158 +9259,124 @@ function rollSet(el,s){const old=el.querySelector('.rn');const len=old?old.child
   if(!old||len!==String(s).length){el.innerHTML=rollNum('0'.repeat(String(s).length).replace(/0/g,(m,i)=>/\d/.test(String(s)[i])?'0':String(s)[i]));}
   const cs=[...el.querySelector('.rn').children];String(s).split('').forEach((c,i)=>{const n=cs[i];if(!n)return;if(n.classList.contains('rn-d'))requestAnimationFrame(()=>{n.firstElementChild.style.transform=`translateY(-${+c*10}%)`});else n.textContent=c});
   const sr=el.parentElement&&el.parentElement.querySelector('.sr');if(sr)sr.textContent=s}
-function pgCard(){
-  return `<section class="pc-card pc-prog" aria-labelledby="pgT"><div class="pg-hd"><h2 id="pgT">Progress</h2>
-    <div class="pg-tabs" role="group" aria-label="Show">${PG_M.map(([k,l])=>`<button data-m="${k}" aria-pressed="${PG.metric===k}">${l}</button>`).join('')}</div>
-    <div class="pg-per" role="group" aria-label="Period"><i class="pg-pill" aria-hidden="true"></i>${PG_P.map(([v,l])=>`<button data-p="${v}" aria-pressed="${PG.per===v}">${l}</button>`).join('')}</div></div>
-   <p class="pg-v"><span class="sr"></span><span id="pgNum"></span><small id="pgUnit"></small></p>
-   <div class="pg-sub"><span id="pgD"></span><span id="pgCap" aria-live="polite"></span><button class="pg-clr" id="pgClr" hidden>Clear</button></div>
-   <div class="pg-ch" id="pgCh" role="slider" tabindex="0" aria-valuemin="1"><svg viewBox="0 0 ${PGW} ${PGH}" preserveAspectRatio="none" aria-hidden="true"><defs><clipPath id="pgLit"><rect id="pgLr" x="0" y="-10" width="${PGW}" height="${PGH+20}"/></clipPath><linearGradient id="pgGr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--brand)" stop-opacity=".22"/><stop offset="1" stop-color="var(--brand)" stop-opacity="0"/></linearGradient></defs>
-    <line x1="0" x2="${PGW}" y1="${PGH-.5}" y2="${PGH-.5}" class="pg-base" vector-effect="non-scaling-stroke"/>
-    <path id="pgPrev" class="pg-prev" vector-effect="non-scaling-stroke"/><path id="pgArea" fill="url(#pgGr)" clip-path="url(#pgLit)"/><path id="pgDim" class="pg-dim" vector-effect="non-scaling-stroke"/><path id="pgLine" class="pg-line" clip-path="url(#pgLit)" vector-effect="non-scaling-stroke"/></svg>
-    <i class="pg-x" id="pgX" hidden></i><i class="pg-x b" id="pgXa" hidden></i><i class="pg-x b" id="pgXb" hidden></i><i class="pg-dt tw" id="pgTw" hidden></i><i class="pg-dt" id="pgDt" hidden></i><i class="pg-end" id="pgEnd"></i></div>
-   <div class="pg-ax"><span id="pgA0"></span><span class="pg-lg"><i></i>Period before</span><span id="pgA1"></span></div></section>`;
+/* ---- Care Circle overview, laid out like a finance dashboard: sidebar, four summary cards, progress chart, practice donut, skills table, smart tips ---- */
+const PC_ICON={overview:'home',strengths:'star',report:'chart',visits:'clock',team:'users',settings:'gear'};
+const PCP={per:30};
+const SK_C=['--brand','--c-sun','--c-coral','--c-sky','--c-violet','--c-teal','--c-rose'];
+const pcSum=a=>a.reduce((t,x)=>t+x.v,0);
+const pcR=v=>v>=10?Math.round(v):Math.round(v*10)/10;
+function pcDelta(now,bef){if(!now&&!bef)return{t:'No change',c:'flat'};const d=bef?(now-bef)/bef*100:100;return{t:(d>=0?'+':'')+d.toFixed(0)+'%',c:d>=0?'up':'dn'}}
+const pcArrow=c=>c==='flat'?'':`<svg class="pc-arw ${c}" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M6 10V2M2.500 5.500 6 2l3.500 3.500" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function pcMiniArea(vals,h,id){const mx=Math.max(1,...vals),p=pgPath(vals.map(v=>v/mx));
+  return `<svg class="pc-mini" viewBox="0 0 ${PGW} ${PGH}" preserveAspectRatio="none" aria-hidden="true" style="height:${h*1.6}px"><defs><linearGradient id="${id}" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--brand)" stop-opacity=".32"/><stop offset="1" stop-color="var(--brand)" stop-opacity="0"/></linearGradient></defs><path d="${p}L${PGW} ${PGH}L0 ${PGH}Z" fill="url(#${id})"/><path d="${p}" fill="none" stroke="var(--brand)" stroke-width="2.200" vector-effect="non-scaling-stroke" stroke-linecap="round"/></svg>`}
+const pcTicks=(arr,n=3)=>`<div class="pc-tk" style="grid-template-columns:repeat(${n},1fr)">${Array.from({length:n},(_,i)=>{const x=arr[Math.round(i/(n-1)*(arr.length-1))];return `<span>${x?x.sh:''}</span>`}).join('')}</div>`;
+const pcBadge=k=>`<span class="pc-ib" aria-hidden="true">${ic(k,18)}</span>`;
+function pcSkills(){return Object.keys(SKN).map((k,i)=>{const s=k==='talk'?[G.speaks||0,G.speaks||0]:(G.st[k]||[0,0]);return{k,i,n:SKN[k],m:Math.round(G.mastery[k]),tot:s[0],ok:s[1]}})}
+function pcCards(per){
+  const M=pgData('min',per),S=pgData('star',per),mn=pcR(pcSum(M.cur)),mb=pcR(pcSum(M.prev)),dm=pcDelta(mn,mb);
+  const st=pcSum(S.cur),sb=pcSum(S.prev),ds=pcDelta(st,sb);
+  const goal=Math.max(5,P.att||5),mt=minsToday(),w7=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);return{sh:d.toLocaleDateString('en-GB',{weekday:'narrow'}),v:pgVal(dstr(d),'min')}}),met=w7.filter(x=>x.v>=goal).length,w7m=Math.max(goal,...w7.map(x=>x.v));
+  const sk=pcSkills().filter(s=>s.tot>0).sort((a,b)=>b.tot-a.tot),tot=sk.reduce((t,s)=>t+s.tot,0),avg=Math.round(pcSkills().reduce((t,s)=>t+s.m,0)/7);
+  const card=(t,icn,val,suf,mid,foot)=>`<article class="pc-card pc-sc"><div class="pc-sch"><h3>${t}</h3>${pcBadge(icn)}</div><p class="pc-big tn">${val}${suf?`<small>${suf}</small>`:''}</p>${mid}${foot||''}</article>`;
+  const dl=(d,lab)=>`<p class="pc-dl"><span class="pc-chg ${d.c}">${pcArrow(d.c)}${d.t}</span><span>${lab}</span></p>`;
+  return card('Learning time','clock',mn,'min',dl(dm,per===12?'vs the 12 months before':`vs the ${per} days before`),pcMiniArea(M.cur.map(x=>x.v),40,'pcg1')+pcTicks(M.cur))+
+   card('Daily goal','check',mt,`of ${goal} min today`,`<div class="pc-pb" role="progressbar" aria-valuemin="0" aria-valuemax="${goal}" aria-valuenow="${Math.min(mt,goal)}" aria-label="Today's goal"><i style="width:${Math.min(100,mt/goal*100)}%"></i></div><p class="pc-dl"><b class="tn">${met} of 7</b><span>days met this week</span></p>`,
+     `<div class="pc-bars" aria-hidden="true">${w7.map((x,i)=>`<i class="${i===6?'on':''}" style="height:${Math.max(6,x.v/w7m*100)}%"></i>`).join('')}</div><div class="pc-tk" style="grid-template-columns:repeat(7,1fr)">${w7.map(x=>`<span>${x.sh}</span>`).join('')}</div>`)+
+   card('Skill mix','chart',avg,'% average',`<div class="pc-stk" aria-hidden="true">${tot?sk.slice(0,5).map(s=>`<i style="flex-grow:${s.tot};--k:var(${SK_C[s.i]})"></i>`).join(''):'<i style="flex-grow:1;--k:var(--line)"></i>'}</div>`,
+     `<ul class="pc-lgs">${(tot?sk.slice(0,3):pcSkills().slice(0,3)).map(s=>`<li><i style="background:var(${SK_C[s.i]})"></i><span>${s.n}</span><b class="tn">${s.tot}</b></li>`).join('')}</ul>`)+
+   card('Stars earned','star',st,'stars',dl(ds,'vs the period before'),pcMiniArea(S.cur.map(x=>x.v),26,'pcg2'));
 }
-function pgBind(root){
-  const ch=$('#pgCh',root);if(!ch)return;
-  let D,info,raf=0,drag=null;
-  const unit={min:'min',les:'lessons',star:'stars'};
-  const build=()=>{D=pgData(PG.metric,PG.per);const now=D.cur.map(x=>x.v),bef=D.prev.map(x=>x.v),all=now.concat(bef),hi=Math.max(1,...all)*1.08;
-    info={now,bef,nrm:v=>v/hi,shape:{c:pgResample(now.map(v=>v/hi),90),p:pgResample(bef.map(v=>v/hi),90)},paths:{c:pgPath(now.map(v=>v/hi)),p:pgPath(bef.map(v=>v/hi))}}};
-  const paint=(c,p)=>{$('#pgLine',ch).setAttribute('d',c);$('#pgDim',ch).setAttribute('d',c);$('#pgArea',ch).setAttribute('d',c+`L${PGW} ${PGH}L0 ${PGH}Z`);$('#pgPrev',ch).setAttribute('d',p)};
-  const morph=()=>{cancelAnimationFrame(raf);const from=PG.shape,to=info.shape;PG.shape=to;
-    if(!from||matchMedia('(prefers-reduced-motion: reduce)').matches){paint(info.paths.c,info.paths.p);return}
-    const t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-    const f=now=>{const t=ease(Math.min(1,(now-t0)/420)),mix=(a,b)=>a.map((v,i)=>v+(b[i]-v)*t);if(t<1){paint(pgPath(mix(from.c,to.c)),pgPath(mix(from.p,to.p)));raf=requestAnimationFrame(f)}else paint(info.paths.c,info.paths.p)};raf=requestAnimationFrame(f)};
-  const last=()=>D.cur.length-1;
-  const pct=i=>last()?i/last()*100:100;
-  const read=()=>{
-    const L=last(),r=PG.range&&PG.range.a!==PG.range.b?{lo:Math.min(PG.range.a,PG.range.b),hi:Math.max(PG.range.a,PG.range.b)}:null,c=r?null:PG.focus;
-    const sum=(arr,lo,hi)=>Math.round(arr.slice(lo,hi+1).reduce((a,b)=>a+b,0)*10)/10;
-    let v,cmp,cap;const rd=x=>x>=10?Math.round(x):x;
-    if(r){v=sum(info.now,r.lo,r.hi);cmp=sum(info.bef,r.lo,r.hi);cap=`${D.cur[r.lo].sh} – ${D.cur[r.hi].sh} vs the period before`}
-    else if(c!==null){v=info.now[c];cmp=info.bef[c];cap=`${D.cur[c].lab} vs ${D.prev[c]?D.prev[c].sh:''}`}
-    else{v=sum(info.now,0,L);cmp=sum(info.bef,0,L);cap=PG.per===12?'last 12 months vs the 12 before':`last ${PG.per} days vs the ${PG.per} before`}
-    v=rd(v);cmp=rd(cmp);const dl=cmp?(v-cmp)/cmp*100:(v?100:0),up=dl>=0;
-    rollSet($('#pgNum',root),String(v));$('#pgUnit',root).textContent=' '+unit[PG.metric];
-    const dd=$('#pgD',root);dd.className='pg-d '+(up?'up':'dn');dd.textContent=(v===0&&cmp===0)?'–':(up?'▲ ':'▼ ')+Math.abs(dl).toFixed(0)+'%';
-    $('#pgCap',root).textContent=cap;$('#pgClr',root).hidden=!r;
-    ch.setAttribute('aria-valuemax',D.cur.length);ch.setAttribute('aria-valuenow',(c!==null?c:L)+1);ch.setAttribute('aria-valuetext',`${cap}: ${v} ${unit[PG.metric]}`);
-    ch.setAttribute('aria-label',`${PG_M.find(m=>m[0]===PG.metric)[1]} over ${PG.per===12?'12 months':PG.per+' days'}. Arrow keys read each ${PG.per===12?'month':'day'}; hold Shift to select a range.`);
-    const lr=$('#pgLr',ch),x0=r?pct(r.lo)/100*PGW:0,x1=r?pct(r.hi)/100*PGW:c!==null?pct(c)/100*PGW:PGW;lr.setAttribute('x',x0);lr.setAttribute('width',Math.max(0,x1-x0));
-    const X=$('#pgX',ch),dt=$('#pgDt',ch),tw=$('#pgTw',ch),xa=$('#pgXa',ch),xb=$('#pgXb',ch),end=$('#pgEnd',ch);
-    X.hidden=dt.hidden=tw.hidden=c===null;xa.hidden=xb.hidden=!r;end.style.opacity=c!==null||r?0:1;
-    end.style.top=pgY(info.nrm(info.now[L]||0))/PGH*100+'%';
-    if(c!==null){X.style.left=dt.style.left=tw.style.left=pct(c)+'%';dt.style.top=pgY(info.nrm(info.now[c]))/PGH*100+'%';tw.style.top=pgY(info.nrm(info.bef[c]||0))/PGH*100+'%';tw.hidden=info.bef[c]===undefined}
-    if(r){xa.style.left=pct(r.lo)+'%';xb.style.left=pct(r.hi)+'%'}
-    $('#pgA0',root).textContent=D.cur[0].sh;$('#pgA1',root).textContent=D.cur[L].sh;
-  };
-  const full=()=>{build();morph();read();
-    $$('[data-m]',root).forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===PG.metric));$$('[data-p]',root).forEach(b=>b.setAttribute('aria-pressed',+b.dataset.p===PG.per));
-    const pi=PG_P.findIndex(p=>p[0]===PG.per);$('.pg-pill',root).style.transform=`translateX(${pi*100}%)`};
-  const idx=x=>{const r=ch.getBoundingClientRect();return Math.round(Math.max(0,Math.min(1,(x-r.left)/r.width))*last())};
-  ch.onpointerdown=e=>{if(e.pointerType==='mouse'&&e.button!==0)return;try{ch.setPointerCapture(e.pointerId)}catch(_){}const i=idx(e.clientX);drag=i;PG.range=null;PG.focus=i;read()};
-  ch.onpointermove=e=>{const i=idx(e.clientX);if(drag!==null){if(PG.range||i!==drag)PG.range={a:drag,b:i};PG.focus=i;read()}else if(e.pointerType==='mouse'&&!PG.range){PG.focus=i;read()}};
-  ch.onpointerup=ch.onpointercancel=e=>{drag=null;if(e.pointerType!=='mouse'&&!PG.range){PG.focus=null;read()}};
-  ch.onpointerleave=()=>{if(drag===null&&!PG.range){PG.focus=null;read()}};
-  ch.onblur=()=>{if(!PG.range){PG.focus=null;read()}};
-  ch.onkeydown=e=>{if(e.key==='Escape'){PG.range=null;PG.focus=null;read();return}const mv={ArrowLeft:-1,ArrowRight:1,Home:-1e3,End:1e3}[e.key];if(mv===undefined)return;e.preventDefault();
-    const from=PG.range?PG.range.b:(PG.focus===null?last():PG.focus),to=Math.max(0,Math.min(last(),from+mv));if(e.shiftKey)PG.range={a:PG.range?PG.range.a:from,b:to};else PG.range=null;PG.focus=to;read()};
-  $('#pgClr',root).onclick=()=>{PG.range=null;PG.focus=null;read()};
-  $$('[data-m]',root).forEach(b=>b.onclick=()=>{PG.metric=b.dataset.m;PG.range=null;PG.focus=null;full()});
-  $$('[data-p]',root).forEach(b=>b.onclick=()=>{PG.per=+b.dataset.p;PG.range=null;PG.focus=null;full()});
-  PG.shape=null;full();
+function pcPerf(per){
+  const D=pgData('min',per),L=pgData('les',per),S=pgData('star',per);
+  const now=D.cur.map(x=>x.v),bef=D.prev.map(x=>x.v),hi=Math.max(1,...now,...bef)*1.1,nice=Math.ceil(hi/5)*5;
+  const c=pcPath2(now,nice),p=pcPath2(bef,nice);
+  const act=a=>a.filter(x=>x.v>0).length;
+  const met=[['Minutes',pcR(pcSum(D.cur)),pcR(pcSum(D.prev))],['Lessons',pcSum(L.cur),pcSum(L.prev)],['Stars',pcSum(S.cur),pcSum(S.prev)],['Active days',act(D.cur),act(D.prev)]];
+  const dt=pcDelta(pcSum(D.cur),pcSum(D.prev));
+  return `<section class="pc-card pc-perf" aria-labelledby="pfT"><div class="pc-ph"><h2 id="pfT">Progress</h2><span class="pc-tag ${dt.c}">${dt.t}</span><button class="pc-sb" data-k="report">Full report ${ic('arrow',14)}</button></div>
+   <div class="pc-chart" id="pcCh" tabindex="0" role="img" aria-label="Minutes learned per ${per===12?'month':'day'}, this period compared with the period before.">
+    <div class="pc-ya" aria-hidden="true"><span>${nice}</span><span>${Math.round(nice/2)}</span><span>0</span></div>
+    <div class="pc-plot"><svg viewBox="0 0 ${PGW} ${PGH}" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="pcPf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--brand)" stop-opacity=".28"/><stop offset="1" stop-color="var(--brand)" stop-opacity="0"/></linearGradient></defs>
+     <path d="${p}" class="pc-bm" vector-effect="non-scaling-stroke"/><path d="${c}L${PGW} ${PGH}L0 ${PGH}Z" fill="url(#pcPf)"/><path d="${c}" class="pc-ln" vector-effect="non-scaling-stroke"/></svg>
+     <i class="pc-cx" hidden></i><i class="pc-cd" hidden></i><div class="pc-tt" hidden></div></div></div>
+   <div class="pc-pft">${pcTicks(D.cur,4)}<div class="pc-lg"><span><i class="a"></i>This period</span><span><i class="b"></i>Period before</span></div></div>
+   <div class="pc-mets">${met.map(([l,v,b])=>{const d=pcDelta(v,b);return `<div><span>${l}</span><b class="tn">${v}</b><small class="pc-chg ${d.c}">${pcArrow(d.c)}${d.t}</small></div>`}).join('')}</div></section>`;
 }
-
-/* ---- skills ring: turn it (drag, tap a slice, arrow keys or the list) and the middle reads that skill ---- */
-const SK_C=['--brand','--sun','--coral','--sky2','--brand2','--violet','--teal'];
-function skRing(){
-  const ks=Object.keys(SKN),vals=ks.map(k=>Math.max(1,Math.round(G.mastery[k]))),tot=vals.reduce((a,b)=>a+b,0);
-  let at=0;const sp=vals.map(v=>{const sw=v/tot*360,o={f:at,t:at+sw,m:at+sw/2};at+=sw;return o});
-  const C=120,R=88,arc=(f,t)=>{const p=d=>{const r=d*Math.PI/180;return[C+R*Math.sin(r),C-R*Math.cos(r)]};const[a,b]=p(f),[c,d]=p(t);return `M${a.toFixed(2)} ${b.toFixed(2)}A${R} ${R} 0 ${t-f>180?1:0} 1 ${c.toFixed(2)} ${d.toFixed(2)}`};
-  return {ks,vals,sp,html:`<section class="pc-card pc-skill" aria-labelledby="skT"><div class="pc-ch"><h2 id="skT">Skills</h2><button class="pc-lk" data-k="strengths">Details ${ic('arrow',14)}</button></div>
-    <div class="sk-ring" id="skR" role="slider" tabindex="0" aria-valuemin="1" aria-valuemax="${ks.length}" aria-label="Skills. Use the arrow keys to turn the ring."><svg viewBox="0 0 240 240" aria-hidden="true"><g id="skG">${sp.map((s,i)=>`<path d="${arc(s.f+1.2,s.t-1.2)}" fill="none" style="stroke:var(${SK_C[i%SK_C.length]})" data-i="${i}"/>`).join('')}</g><path d="M115 2L125 2L120 9Z" class="sk-mk"/></svg><div class="sk-mid" id="skM"></div></div>
-    <ul class="sk-lg">${ks.map((k,i)=>`<li><button data-i="${i}" aria-pressed="false"><i style="background:var(${SK_C[i%SK_C.length]})"></i><span>${SKN[k]}</span><b class="tn">${vals[i]}%</b></button></li>`).join('')}</ul></section>`};
+function pcPath2(vals,max){return pgPath(vals.map(v=>v/max))}
+function pcPerfBind(per){
+  const ch=$('#pcCh');if(!ch)return;const D=pgData('min',per),plot=$('.pc-plot',ch),cx=$('.pc-cx',ch),cd=$('.pc-cd',ch),tt=$('.pc-tt',ch);
+  const max=Math.ceil(Math.max(1,...D.cur.map(x=>x.v),...D.prev.map(x=>x.v))*1.1/5)*5;let at=null;
+  const show=i=>{at=i;if(i===null){cx.hidden=cd.hidden=tt.hidden=true;return}const x=i/Math.max(1,D.cur.length-1)*100,v=D.cur[i].v,b=D.prev[i]?D.prev[i].v:0;
+    cx.hidden=cd.hidden=tt.hidden=false;cx.style.left=cd.style.left=x+'%';cd.style.top=pgY(v/max)/PGH*100+'%';
+    tt.innerHTML=`<b>${D.cur[i].lab}</b><span><i class="a"></i>${pcR(v)} min</span><span><i class="b"></i>${pcR(b)} min before</span>`;tt.style.left=Math.min(78,Math.max(2,x-11))+'%'};
+  const idx=e=>{const r=plot.getBoundingClientRect();return Math.round(Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*(D.cur.length-1))};
+  plot.onpointermove=e=>show(idx(e));plot.onpointerdown=e=>show(idx(e));plot.onpointerleave=()=>show(null);
+  ch.onkeydown=e=>{const m={ArrowLeft:-1,ArrowRight:1}[e.key];if(e.key==='Escape')return show(null);if(!m)return;e.preventDefault();show(Math.max(0,Math.min(D.cur.length-1,(at===null?D.cur.length-1:at)+m)))};ch.onblur=()=>show(null);
 }
-function skBind(R){
-  const el=$('#skR');if(!el)return;const g=$('#skG',el),n=R.ks.length;
-  const s={a:-R.sp[0].m,v:0,t:-R.sp[0].m,raf:0,sel:0,drag:null};
-  const wrap=d=>((d+180)%360+360)%360-180;
-  const at=d=>{const a=((d%360)+360)%360;const i=R.sp.findIndex(p=>a>=p.f&&a<p.t);return i<0?0:i};
-  const paint=()=>g.setAttribute('transform',`rotate(${s.a.toFixed(2)} 120 120)`);
-  const show=i=>{if(i===s.sel&&$('#skM').dataset.i==String(i))return;s.sel=i;const k=R.ks[i],v=R.vals[i],ok=ev(k)>=5;
-    $('#skM').dataset.i=i;$('#skM').innerHTML=`<span class="sk-n"><i style="background:var(${SK_C[i%SK_C.length]})"></i>${SKN[k]}</span><b class="tn">${v}%</b><span class="sk-t">${!ok?'Getting started':v>=65?'Strength':v>=40?'Growing':'Needs support'}</span>`;
-    $$('path[data-i]',g).forEach(p=>p.classList.toggle('on',+p.dataset.i===i));$$('.sk-lg button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===i));
-    el.setAttribute('aria-valuenow',i+1);el.setAttribute('aria-valuetext',`${SKN[k]}, ${v} percent`)};
-  const tick=now=>{s.raf=0;if(s.drag)return;const dt=s.last?Math.min((now-s.last)/1000,1/30):1/60;s.last=now;const h=dt/4;for(let j=0;j<4;j++){const acc=-121*(s.a-s.t)-2*.78*11*s.v;s.v+=acc*h;s.a+=s.v*h}
-    const done=Math.abs(s.a-s.t)<.05&&Math.abs(s.v)<2;if(done){s.a=s.t;s.v=0;s.last=0}paint();if(s.coast)show(at(-s.a));if(!done)s.raf=requestAnimationFrame(tick);else s.coast=false};
-  const turn=(i,rest=s.a,coast=false)=>{s.t=rest+wrap(-R.sp[i].m-rest);s.coast=coast;if(!coast)show(i);
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){s.a=s.t;s.v=0;paint();show(i);return}if(!s.raf){s.last=0;s.raf=requestAnimationFrame(tick)}};
-  const ang=e=>{const r=el.getBoundingClientRect();return Math.atan2(e.clientX-r.left-r.width/2,-(e.clientY-r.top-r.height/2))*180/Math.PI};
-  el.onpointerdown=e=>{if(e.pointerType==='mouse'&&e.button!==0)return;try{el.setPointerCapture(e.pointerId)}catch(_){}cancelAnimationFrame(s.raf);s.raf=0;s.v=0;s.drag={a:ang(e),t:e.timeStamp,m:0,x:e.clientX,y:e.clientY}};
-  el.onpointermove=e=>{const d=s.drag;if(!d)return;d.m=Math.max(d.m,Math.hypot(e.clientX-d.x,e.clientY-d.y));if(d.m<5)return;const a=ang(e),da=wrap(a-d.a),dt=Math.max((e.timeStamp-d.t)/1000,1/240);s.a+=da;s.v=s.v*.6+da/dt*.4;d.a=a;d.t=e.timeStamp;el.classList.add('grab');paint();show(at(-s.a))};
-  el.onpointerup=el.onpointercancel=e=>{const d=s.drag;if(!d)return;s.drag=null;el.classList.remove('grab');
-    if(d.m<5){const r=el.getBoundingClientRect(),rr=Math.hypot(e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2);if(rr>r.width*.27)turn(at(ang(e)-s.a));return}
-    if(e.timeStamp-d.t>80)s.v=0;s.v=Math.max(-1440,Math.min(1440,s.v));const rest=s.a+s.v*.2;turn(at(-rest),rest,true)};
-  el.onkeydown=e=>{const m={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];let nx=null;if(m)nx=(s.sel+m+n)%n;else if(e.key==='Home')nx=0;else if(e.key==='End')nx=n-1;if(nx!==null){e.preventDefault();turn(nx)}};
-  $$('.sk-lg button').forEach(b=>b.onclick=()=>turn(+b.dataset.i));
-  paint();show(0);
-  teardowns.push(()=>cancelAnimationFrame(s.raf));
+function pcDonut(){
+  const sk=pcSkills(),tot=sk.reduce((t,s)=>t+s.tot,0),list=tot?sk.filter(s=>s.tot>0).sort((a,b)=>b.tot-a.tot):[];
+  const C=110,R=82,gap=6;let a=0;const arc=(f,t)=>{const p=d=>{const r=d*Math.PI/180;return[C+R*Math.sin(r),C-R*Math.cos(r)]};const[x1,y1]=p(f),[x2,y2]=p(t);return `M${x1.toFixed(2)} ${y1.toFixed(2)}A${R} ${R} 0 ${t-f>180?1:0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`};
+  const segs=list.map(s=>{const sw=s.tot/tot*360,o={s,f:a+(list.length>1?gap/2:0),t:a+sw-(list.length>1?gap/2:0)};a+=sw;return o});
+  return `<section class="pc-card pc-don" aria-labelledby="dnT"><div class="pc-ph"><h2 id="dnT">Practice mix</h2><span class="pc-tag">${list.length} of 7 skills</span></div>
+   <div class="pc-dw"><svg viewBox="0 0 220 220" aria-hidden="true"><circle cx="110" cy="110" r="${R}" fill="none" stroke="var(--surf2)" stroke-width="22"/>${segs.map(g=>g.t-g.f>359?`<circle cx="110" cy="110" r="${R}" fill="none" style="stroke:var(${SK_C[g.s.i]})" stroke-width="22" data-i="${g.s.i}"/>`:`<path d="${arc(g.f,Math.max(g.f+.5,g.t))}" fill="none" style="stroke:var(${SK_C[g.s.i]})" stroke-width="22" stroke-linecap="round" data-i="${g.s.i}"/>`).join('')}</svg>
+    <div class="pc-dc"><b class="tn">${tot}</b><span>answers</span></div></div>
+   ${list.length?`<ul class="pc-dlg">${list.slice(0,5).map(s=>`<li data-i="${s.i}"><i style="background:var(${SK_C[s.i]})"></i><span>${s.n}</span><b class="tn">${s.tot}</b><em class="tn">${Math.round(s.tot/tot*100)}%</em></li>`).join('')}</ul>`:`<p class="muted small">Answers show here as ${esc(P.name)} practises.</p>`}</section>`;
 }
-
-/* ---- the overview: four numbers, the graph, latest activity, skills, team and notes ---- */
-function pcOverview(user){
-  const wl=(()=>{let t=0;for(let i=0;i<7;i++)t+=(G.dl||{})[dstr(new Date(Date.now()-i*864e5))]||0;return t})();
-  const goal=Math.max(5,P.att||5),mt=minsToday();
-  const spark=k=>{const v=[...Array(7)].map((_,i)=>pgVal(dstr(new Date(Date.now()-(6-i)*864e5)),k)),mx=Math.max(1,...v);return `<svg class="pc-sp" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><polyline points="${v.map((x,i)=>`${(i/6*100).toFixed(1)},${(26-x/mx*24).toFixed(1)}`).join(' ')}" vector-effect="non-scaling-stroke"/></svg>`};
-  const T=[['Today',mt,'min',`<div class="pc-bar" aria-hidden="true"><i style="width:${Math.min(100,mt/goal*100)}%"></i></div><span class="pc-ts">${mt>=goal?'Daily goal met':`Goal ${goal} min`}</span>`,'clock'],
-    ['This week',weekMins(),'min',spark('min')+`<span class="pc-ts">${weekDays()} of 7 days</span>`,'chart'],
-    ['Streak',effStreak(G),effStreak(G)===1?'day':'days',`<span class="pc-ts">Best ${Math.max(G.best||0,effStreak(G))} days</span>`,'flame'],
-    ['Lessons',wl||G.lessons,wl?'this week':'in total',spark('les')+`<span class="pc-ts">${G.calm} calm breaks</span>`,'book']];
-  const acts=nfyList().slice(0,5);
-  const pt=careAcc(),nxt=(G.appts||[]).filter(a=>a.when>Date.now()).sort((a,b)=>a.when-b.when)[0];
-  const sk=skRing();
-  return {sk,html:`<div class="pc-grid">
-   ${T.map(t=>`<article class="pc-card pc-t"><div class="pc-th"><span>${t[0]}</span>${ic(t[4],16)}</div><p class="pc-tv tn">${t[1]}<small>${t[2]}</small></p>${t[3]}</article>`).join('')}
-   ${pgCard()}
-   <section class="pc-card pc-act" aria-labelledby="acT"><div class="pc-ch"><h2 id="acT">Latest activity</h2><button class="pc-lk" id="acAll">All ${ic('arrow',14)}</button></div>
-    ${acts.length?`<ol class="pc-tl">${acts.map((a,i)=>`<li${i===0?' class="new"':''}><span class="pc-tld" aria-hidden="true"></span><span class="pc-tlm">${esc(a.m)}</span><time>${nfyAgo(a.t)}</time></li>`).join('')}</ol>`:`<p class="muted small">Nothing yet today. Activity shows here as ${esc(P.name)} learns.</p>`}</section>
-   ${sk.html}
-   <section class="pc-card pc-team" aria-labelledby="tmT"><div class="pc-ch"><h2 id="tmT">Care team</h2><button class="pc-lk" data-k="team">Manage ${ic('arrow',14)}</button></div>
-    <ul class="pc-ppl">${pt.acc.map(a=>{const r=ROLES.find(x=>x[0]===a.role)||ROLES[0];return `<li><span class="pc-pa" aria-hidden="true">${esc((a.name||'?').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase())}</span><span><b>${esc(a.name)}</b><small>${r[1]}</small></span></li>`}).join('')}</ul>
-    <div class="pc-next">${nxt?`<b>Next check-up</b><span>${new Date(nxt.when).toLocaleString('en-GB',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})} · ${esc(nxt.who)}</span>`:`<b>No check-up booked</b><button class="pc-lk" data-k="visits">Book one ${ic('arrow',14)}</button>`}</div></section>
-   <section class="pc-card pc-notes"><div class="pc-ch"><h2><label for="pcNotes">Shared notes</label></h2></div><textarea id="pcNotes" class="in" placeholder="For example: responds well to picture cards before lessons."></textarea><span class="muted small">Everyone in the care team sees these.</span></section>
-  </div>`};
+function pcDonutBind(){$$('.pc-dlg li').forEach(li=>{const on=v=>$$('.pc-dw [data-i]').forEach(p=>p.classList.toggle('dim',v&&p.dataset.i!==li.dataset.i));li.onpointerenter=()=>on(1);li.onpointerleave=()=>on(0)})}
+function pcTable(){
+  const sk=pcSkills().sort((a,b)=>b.m-a.m),lv=s=>s.tot<5?['Getting started','flat']:s.m>=65?['Strength','up']:s.m>=40?['Growing','mid']:['Needs support','dn'];
+  return `<section class="pc-card pc-tab" aria-labelledby="tbT"><div class="pc-ph"><h2 id="tbT">Skills</h2><button class="pc-sb" data-k="strengths">Strengths ${ic('arrow',14)}</button></div>
+   <div class="pc-tbl" role="table" aria-label="Skills"><div class="pc-tr pc-th" role="row"><span role="columnheader">No</span><span role="columnheader">Skill</span><span role="columnheader">Score</span><span role="columnheader">Answers</span><span role="columnheader">Accuracy</span><span role="columnheader">Status</span></div>
+   ${sk.map((s,i)=>{const L=lv(s),acc=s.tot?Math.round(s.ok/s.tot*100):0;return `<div class="pc-tr" role="row"><span role="cell" class="tn pc-no">${i+1}</span><span role="cell" class="pc-sk"><span class="pc-skb" style="--k:var(${SK_C[s.i]})" aria-hidden="true">${esc(s.n[0])}</span><span><b>${s.n}</b><small>${L[0]}</small></span></span>
+     <span role="cell" class="tn" data-l="Score"><b>${s.m}%</b><i class="pc-mb"><u style="width:${s.m}%"></u></i></span><span role="cell" class="tn" data-l="Answers">${s.tot}</span><span role="cell" class="tn pc-chg ${s.tot?(acc>=70?'up':acc>=50?'flat':'dn'):'flat'}" data-l="Accuracy">${s.tot?acc+'%':'–'}</span><span role="cell" data-l="Status"><span class="pc-st ${L[1]}">${L[0].split(' ')[0]}</span></span></div>`}).join('')}</div></section>`;
 }
-
+function pcTips(){
+  const sk=pcSkills().filter(s=>s.tot>=3).sort((a,b)=>a.m-b.m),w=sk[0],goal=Math.max(5,P.att||5);
+  const met=[...Array(7)].filter((_,i)=>pgVal(dstr(new Date(Date.now()-i*864e5)),'min')>=goal).length;
+  const nx=(G.appts||[]).filter(a=>a.when>Date.now()).length;
+  const T=[w?['spark',`Practise ${w.n.toLowerCase()}`,`${esc(P.name)} scores ${w.m}% here. A few short games each day help the most.`,'Strengths','strengths']:['spark','Try a little of everything',`After a few more lessons, Pip will show which skills to focus on.`,'Strengths','strengths'],
+    met<4?['clock','Short and often works best',`The daily goal was met on ${met} of the last 7 days. A smaller goal can make it easier to keep going.`,'Change goal','settings']:['flame','Great routine',`The daily goal was met on ${met} of the last 7 days. Keep the same time each day.`,'Report','report'],
+    nx?['users','Check-up booked','Add notes in the care team before the visit so everyone is ready.','Care team','team']:['users','Book a check-up','Share progress with a therapist or teacher and get ideas for home.','Book','visits']];
+  return `<section class="pc-card pc-tips" aria-labelledby="tpT"><div class="pc-ph"><h2 id="tpT">Smart tips</h2><span class="pc-tag up">${T.length} new</span></div>
+   <ul>${T.map(t=>`<li>${pcBadge(t[0])}<div><b>${t[1]}</b><p>${t[2]}</p><button class="pc-sb" data-k="${t[4]}">${t[3]} ${ic('arrow',14)}</button></div></li>`).join('')}</ul></section>`;
+}
+function pcOverview(){
+  return `<div class="pc-ov"><div class="pc-row4">${pcCards(PCP.per)}</div><div class="pc-row3">${pcPerf(PCP.per)}${pcDonut()}</div><div class="pc-row3">${pcTable()}${pcTips()}</div></div>`;
+}
 function careDraw(){
   const user=careUser();if(!user){R.care();return}
   nfyClose();
-  const role=(ROLES.find(r=>r[0]===user.role)||ROLES[0])[1],d=new Date();
+  const role=(ROLES.find(r=>r[0]===user.role)||ROLES[0])[1],d=new Date(),tt=PC_TABS.find(t=>t[0]===careTab)||PC_TABS[0];
   const pg=$('#page');
-  pg.innerHTML=`<div class="wrap pc" data-tab="${careTab}"><header class="pc-top"><div class="pc-id"><span class="pc-av" aria-hidden="true">${pip(46)}</span><div><span class="pc-eb">Care Circle</span><h1>${esc(greetWord())}, ${esc(user.name)}</h1><span class="pc-sub">${d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})} · ${esc(P.name)} · ${esc(curName())} · ${esc(role)}</span></div></div>
-    <div class="pc-acts"><div class="pc-bw"><button class="pc-bell" id="pcBell" aria-haspopup="dialog" aria-expanded="false" aria-label="Notifications">${ic('bell',20)}<i class="pc-dot tn" hidden></i></button></div><button class="btn sm pc-lock" id="pcLock">${ic('lock',15)}<span>Lock</span></button></div></header>
-   <div id="pcNav"></div><main class="pc-body" id="pcBody"></main></div>`;
-  $('#pcNav').replaceWith(splitNav(PC_TABS,careTab,k=>{careTab=k;careDraw();try{const t=$('.pc-top');if(t&&scrollY>t.offsetTop)scrollTo({top:0})}catch(e){}}));
-  $('#pcLock').onclick=careLock;$('#pcBell').onclick=()=>nfyToggle();
+  pg.innerHTML=`<div class="pc pc2" data-tab="${careTab}">
+   <aside class="pc-side" aria-label="Care Circle"><div class="pc-brand"><span class="pc-av" aria-hidden="true">${pip(34)}</span><span><b>Care Circle</b><small>${esc(role)}</small></span></div>
+    <nav class="pc-nav" aria-label="Care Circle sections">${PC_TABS.map(([k,l])=>`<a href="#care" data-k="${k}" class="${k===careTab?'on':''}" ${k===careTab?'aria-current="page"':''}>${ic(PC_ICON[k],18)}<span>${l}</span></a>`).join('')}</nav>
+    <div class="pc-kid"><span class="pc-pa" aria-hidden="true">${esc((P.name||'?')[0].toUpperCase())}</span><span><b>${esc(P.name)}</b><small>${esc(curName())} · ${esc(ageLabel?ageLabel(P):'')}</small></span></div>
+    <button class="pc-lockb" id="pcLock2">${ic('lock',16)} Lock Care Circle</button></aside>
+   <div class="pc-main"><header class="pc-top"><div class="pc-id"><div><h1>${careTab==='overview'?`${esc(greetWord())}, ${esc(user.name)}`:tt[1]}</h1><span class="pc-sub">${d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})} · ${esc(P.name)}'s learning</span></div></div>
+    <div class="pc-acts">${careTab==='overview'?`<div class="pg-per pc-per" role="group" aria-label="Period"><i class="pg-pill" aria-hidden="true" style="transform:translateX(${PG_P.findIndex(p=>p[0]===PCP.per)*100}%)"></i>${PG_P.map(([v,l])=>`<button data-p="${v}" aria-pressed="${PCP.per===v}">${l}</button>`).join('')}</div>`:''}
+     <div class="pc-bw"><button class="pc-bell" id="pcBell" aria-haspopup="dialog" aria-expanded="false" aria-label="Notifications">${ic('bell',20)}<i class="pc-dot tn" hidden></i></button></div><button class="btn sm pc-lock" id="pcLock">${ic('lock',15)}<span>Lock</span></button></div></header>
+    <div id="pcNav"></div><main class="pc-body" id="pcBody"></main></div></div>`;
+  $('#pcNav').replaceWith(splitNav(PC_TABS,careTab,k=>{careTab=k;careDraw();scrollTo({top:0})}));
+  $('#pcLock').onclick=careLock;$('#pcLock2').onclick=careLock;$('#pcBell').onclick=()=>nfyToggle();
+  $$('.pc-nav a').forEach(a=>a.onclick=e=>{e.preventDefault();if(a.dataset.k!==careTab){careTab=a.dataset.k;careDraw();scrollTo({top:0})}});
   nfyBell(false);
   const box=$('#pcBody');
+  const paint=()=>{box.innerHTML=pcOverview();pcPerfBind(PCP.per);pcDonutBind();$$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}})};
   if(careTab==='overview'){
-    const o=pcOverview(user);box.innerHTML=o.html;pgBind(box);skBind(o.sk);
-    const n=$('#pcNotes');n.value=G.notes||'';n.oninput=()=>{G.notes=n.value;if(cloudCare())cloudNotesSave(n.value);else save()};
-    $('#acAll').onclick=()=>nfyToggle(true);
+    paint();
+    $$('.pc-per [data-p]').forEach((b,i)=>b.onclick=()=>{PCP.per=+b.dataset.p;$$('.pc-per [data-p]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('.pc-per .pg-pill').style.transform=`translateX(${i*100}%)`;paint()});
   }else{
-    const tt=PC_TABS.find(t=>t[0]===careTab);
-    box.innerHTML=`<h2 class="pc-h">${tt?tt[1]:''}</h2><div class="stack pc-sec" style="gap:16px"></div>`;
+    box.innerHTML=`<div class="stack pc-sec" style="gap:16px"></div>`;
     const sec=$('.pc-sec',box);
     if(careTab==='strengths')sec.innerHTML=strengthsHTML(user.role);
     if(careTab==='report'){sec.innerHTML=reportHTML();bindReport()}
     if(careTab==='visits'){sec.innerHTML=visitsHTML(user);bindVisits(user)}
-    if(careTab==='team'){sec.innerHTML=teamHTML(user);bindTeam(user)}
-    if(careTab==='settings'){sec.innerHTML=settingsHTML(user)+(typeof aiSetHTML==='function'?aiSetHTML():'');bindSettings(user);if(typeof aiSetBind==='function')aiSetBind(sec)}
-    const f=$('.gr-sh h3',sec);if(f&&tt&&f.textContent.trim()===tt[1]){const sh=f.closest('.gr-sh');if(sh)sh.remove()}
+    if(careTab==='team'){sec.innerHTML=`<section class="gr-sec"><div class="gr-sh"><div><h3><label for="pcNotes">Shared notes</label></h3><p class="muted small">Everyone in the care team sees these.</p></div></div><textarea id="pcNotes" class="in" style="min-height:110px" placeholder="For example: responds well to picture cards before lessons."></textarea></section>`+teamHTML(user);bindTeam(user);
+      const n=$('#pcNotes');n.value=G.notes||'';n.oninput=()=>{G.notes=n.value;if(cloudCare())cloudNotesSave(n.value);else save()}}
+    if(careTab==='settings'){sec.innerHTML=settingsHTML(user)+aiSetHTML();bindSettings(user);aiSetBind(sec)}
+    $$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}});
   }
-  $$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}});
   document.body.classList.add('carepro');if(!teardowns.includes(careUnpro))teardowns.push(careUnpro);
   if(!teardowns.includes(nfyClose))teardowns.push(nfyClose);
   try{reveal(pg)}catch(e){}
