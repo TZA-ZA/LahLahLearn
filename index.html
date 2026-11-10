@@ -2072,6 +2072,87 @@ body.carepro .cc-main{min-width:0}
 body.carepro .cc-body .dh-m{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
 @media (max-width:640px){body.carepro .cc-who{flex-wrap:wrap!important;gap:12px!important}body.carepro .cc-who>.stack{flex:1 1 calc(100% - 70px)}body.carepro .cc-who>.btn{flex:0 0 auto}body.carepro #page[data-r=care] .cc-hero h2{font-size:1.45rem!important;line-height:1.15}body.carepro .cc-hero .cc-av{width:48px!important;height:48px!important}}
 @media (max-width:900px){body.carepro .cc-body{grid-template-columns:minmax(0,1fr)!important}body.carepro .cc-body>.cc-nav{position:static;min-width:0}.cc-list{flex-direction:row;overflow-x:auto;scrollbar-width:none}.cc-list button{width:auto;white-space:nowrap;padding:9px 14px}}
+body.cloud #aicard{display:none!important}
+.lgl{position:fixed;inset:0;z-index:99990;display:grid;place-items:center;background:linear-gradient(#e8f6ee,#fdf6df);opacity:1;transition:opacity .4s}
+html[data-theme=dark] .lgl{background:linear-gradient(#10251b,#1c1a12)}
+.lgl.in{opacity:1}.lgl.out{opacity:0;pointer-events:none}
+.lgl-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
+.lgl-logo{width:min(260px,64vw);height:auto;margin-bottom:6px}
+.lgl-pip{animation:lglHop 1s cubic-bezier(.3,.7,.4,1) infinite alternate}
+@keyframes lglHop{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-12px) rotate(3deg)}}
+.lgl-m{margin:12px 0 2px;font:700 1.35rem var(--f-d);color:var(--ink)}.lgl-s{margin:0;color:var(--muted)}
+.lgl-bar{width:200px;height:8px;margin-top:18px;border-radius:8px;background:rgba(0,0,0,.08);overflow:hidden}.lgl-bar i{display:block;height:100%;width:0;border-radius:8px;background:var(--brand);animation:lglBar 1.6s cubic-bezier(.3,.6,.3,1) forwards}
+@keyframes lglBar{to{width:100%}}
+@media (prefers-reduced-motion:reduce){.lgl-pip{animation:none}}
+.pv-back{display:inline-flex;align-items:center;gap:6px;margin:-14px 0 26px -8px;padding:8px 14px 8px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 .9rem var(--f-b);cursor:pointer;transition:background .15s}
+.pv-back:hover{background:#f5f3ee}.pv-back:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+html[data-theme=dark] .pcr-in,html[data-theme=dark] .pcr-p,html[data-theme=dark] .pcr-cost li{background:var(--surf)}html[data-theme=dark] .pcr-pr,html[data-theme=dark] .pcr-n,html[data-theme=dark] .pcr-cost li{color:var(--ink)}html[data-theme=dark] .pcr-b{background:var(--surf2);color:var(--ink)}
+/* ===== Restored: footer phone layout, register steps, password field, privacy page, fox air ===== */
+
+/* phone: tidy page endings */
+@media (max-width:640px){
+  .lp-foot{flex-direction:column;align-items:center;text-align:center;gap:16px;padding:28px 0 calc(88px + env(safe-area-inset-bottom,0px))}
+  .lp-foot nav{justify-content:center;gap:10px}
+  .lp-foot nav button{padding:8px 16px}
+  .foot{padding-top:8px;padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  .foot>.wrap:not(.ft){width:auto;max-width:none;margin-inline:16px;border-radius:24px;padding:16px 20px;gap:6px 22px!important;justify-content:flex-start}
+  .foot>.wrap>span:not(.sp):not(#syncState){flex-basis:100%}
+  .foot .sp{display:none}
+  main:has(#foot:not([style*="none"])) #page{padding-bottom:12px}
+}
+.ab-facts .ab-dash{font-style:normal;margin:0 .22em}
+
+.au2-steps{list-style:none;margin:2px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.au2-steps li{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font:600 .74rem/1.2 var(--f-b);color:var(--muted)}
+.au2-steps i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);background:var(--surf);font-size:.8rem;position:relative}
+.au2-steps li.on{color:var(--ink)}.au2-steps li.on i{background:var(--brand);border-color:var(--brand);color:#fff}
+.au2-pw{position:relative;display:block}.au2-pw .au2-in{padding-right:76px;width:100%}
+.au2-eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border:0;background:transparent;color:var(--muted);padding:0;border-radius:12px;cursor:pointer}.au2-pw .au2-in{padding-right:54px!important}.au2-eye:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+.au2-eye:hover{color:var(--ink);background:var(--surf2,rgba(0,0,0,.04))}
+.au2-forgot{margin:-4px 0 0;text-align:right;font-size:.88rem}.au2-forgot a{color:var(--brand);font-weight:600}
+
+
+
+
+
+/* privacy page */
+.pv{--ink:#1c2520;--muted:#5f6b64;--line:#e7e3da;max-width:1120px;margin:28px auto 64px;padding:52px 60px 40px;background:#fff;color:#1c2520;border:1px solid #e7e3da;border-radius:28px;box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 30px 70px -40px rgba(20,40,30,.35)}
+@media (max-width:640px){.pv{margin:16px 12px 48px;padding:30px 20px 24px;border-radius:22px;width:auto}}
+.pv-hd{padding:0 0 28px;border-bottom:1px solid var(--line);margin-bottom:36px}
+.pv-eb{margin:0 0 10px;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.pv-hd h1{margin:0;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:400;font-size:clamp(2.2rem,4.6vw,3.2rem);letter-spacing:-.015em;color:var(--ink)}
+.pv-dt{margin:10px 0 0;color:var(--muted);font-size:.92rem}
+.pv-grid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:56px;align-items:start}
+.pv-toc{position:sticky;top:96px}
+.pv-toc p{margin:0 0 12px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.pv-toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.pv-toc li a{display:block;padding:6px 0 6px 16px;margin-left:-1px;border-left:1px solid transparent;font-size:.9rem;color:var(--muted);text-decoration:none;line-height:1.35}
+.pv-toc li a:hover{color:var(--ink);border-left-color:var(--ink)}
+.pv-body{max-width:680px;color:var(--ink);font-size:1rem;line-height:1.75}
+.pv-s{padding:0 0 30px;margin:0 0 30px;border-bottom:1px solid var(--line);scroll-margin-top:96px}.pv-s:last-child{border-bottom:0}
+.pv-s h2{margin:0 0 14px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;font-weight:500;font-size:1.45rem;letter-spacing:-.005em}
+.pv-s h3{margin:20px 0 4px;font-size:.98rem;font-weight:600}
+.pv-s p{margin:0 0 12px}.pv-s ul{margin:0 0 12px;padding-left:20px}.pv-s li{margin:6px 0}
+.pv-s a,.pv-link{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.pv-link{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.pv-tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0 14px}.pv-tw .pv-t{margin:0}.pv-t{width:100%;border-collapse:collapse;margin:6px 0 14px;font-size:.94rem}
+.pv-t th,.pv-t td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.pv-t th{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.pv-t td:first-child{font-weight:600;white-space:nowrap}
+.pv-ad{line-height:1.6}
+@media (max-width:820px){.pv-grid{grid-template-columns:1fr;gap:24px}.pv-toc{position:static}.pv-toc ol{columns:2;column-gap:18px}}
+@media (max-width:520px){.pv-toc ol{columns:1}.pv-t td:first-child{white-space:normal}}
+/* cookie banner */
+
+
+
+
+
+@media (max-width:640px){}
+
+
+.fox .fx-air path{fill:none;stroke-width:7;stroke-linecap:round;stroke-dasharray:.1 15}
+
 /* ===== Learn as a school: classes, chalkboard, notebooks, class test ===== */
 .si{display:inline-grid;place-items:center;width:var(--s);height:var(--s);vertical-align:middle;flex:none}.si svg{width:100%;height:100%;display:block}
 .skl{--lc:#3f9a62;--paper:#fffaf0;--ink2:#2a2a2a;display:flex;flex-direction:column;gap:24px;margin:4px 0 34px}
@@ -2421,25 +2502,24 @@ html[data-theme=dark] .nf-c{background:var(--surf2)}
  .pc-no,.pc-tr [data-l=Answers],.pc-tr [data-l=Accuracy]{display:none}.pc-mb{max-width:none}}
 /* ===== Plans: Pip AI credit packs ===== */
 .pcr{max-width:1000px;margin:28px auto 8px;padding:0 16px;box-sizing:border-box}
-.pcr-in{position:relative;overflow:hidden;padding:28px;border-radius:28px;background:var(--surf);border:1px solid var(--line);box-shadow:0 18px 40px -30px rgba(0,0,0,.35)}
-.pcr-in::before{content:"";position:absolute;right:-80px;top:-80px;width:240px;height:240px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--brand) 14%,transparent),transparent);pointer-events:none}
+.pcr-in{position:relative;overflow:hidden;padding:28px;border-radius:28px;background:color-mix(in srgb,var(--brand) 5%,#fff);border:1px solid var(--line);box-shadow:0 18px 40px -30px rgba(0,0,0,.35)}
 .pcr-hd{display:flex;align-items:flex-start;gap:14px;text-align:left}
 .pcr-ic{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--brand);color:var(--on-brand)}
 .pcr-hd h2{margin:0 0 4px!important;font-size:1.45rem!important;line-height:1.2!important;color:var(--ink)}
 .pcr-hd p{margin:0;color:var(--muted);font-size:.95rem}
 .pcr-cost{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.pcr-cost li{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--surf2);font-size:.85rem}.pcr-cost b{font-weight:700}.pcr-cost li>span:last-child{color:var(--muted)}
+.pcr-cost li{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.86rem;color:#1f2a24}.pcr-cost b{font-weight:700}.pcr-cost li>span:last-child{color:#56625b}
 .pcr-packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
-.pcr-p{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:20px;border-radius:22px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
+.pcr-p{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:22px;border-radius:22px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
 .pcr-p:hover{transform:translateY(-3px);border-color:var(--brand);box-shadow:0 14px 30px -20px rgba(0,0,0,.4)}
 .pcr-p:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
-.pcr-p.best{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 7%,var(--surf));box-shadow:0 0 0 1px var(--brand)}
+.pcr-p.best{border-color:var(--brand);background:#fff;box-shadow:0 0 0 1px var(--brand),0 16px 34px -22px rgba(0,0,0,.45)}
 .pcr-tag{position:absolute;top:-11px;left:18px;padding:3px 10px;border-radius:999px;background:var(--sun,#f2b632);color:#3a2a00;font:700 .72rem var(--f-b)}
-.pcr-n{font:700 2rem/1 var(--f-d)}.pcr-u{color:var(--muted);font-size:.85rem;margin-bottom:12px}
-.pcr-pr{font:700 1.25rem var(--f-d)}.pcr-h{color:var(--muted);font-size:.8rem}
-.pcr-b{margin-top:14px;align-self:stretch;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:12px;background:var(--surf2);font:700 .9rem var(--f-b);transition:background .18s,color .18s}
+.pcr-n{font:700 1.15rem var(--f-d);color:#1f2a24}.pcr-n small{font:600 .9rem var(--f-b);color:#56625b}
+.pcr-pr{font:700 2.3rem/1.05 var(--f-d);color:#1f2a24}.pcr-h{color:#56625b;font-size:.84rem;line-height:1.4;padding-top:10px;margin-top:6px;border-top:1px dashed #dfe5df;align-self:stretch}
+.pcr-b{margin-top:16px;align-self:stretch;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;border-radius:12px;background:#eef3ef;color:#1f2a24;font:700 .9rem var(--f-b);transition:background .18s,color .18s}
 .pcr-p:hover .pcr-b,.pcr-p.best .pcr-b{background:var(--brand);color:var(--on-brand)}
-@media (max-width:700px){.pcr-in{padding:20px}.pcr-packs{grid-template-columns:1fr}.pcr-p{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px}.pcr-n,.pcr-u,.pcr-h{grid-column:1}.pcr-pr{grid-column:2;grid-row:1/3;align-self:center}.pcr-u{margin-bottom:4px}.pcr-b{grid-column:1/-1}}
+@media (max-width:700px){.pcr-in{padding:20px}.pcr-packs{grid-template-columns:1fr;gap:18px}.pcr-pr{font-size:1.9rem}}
 /* ===== Story time ===== */
 .bk-shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:8px}
 .bk-sb{display:flex;flex-direction:column;text-align:left;padding:0;border:0;border-radius:22px;overflow:hidden;background:var(--surf);box-shadow:0 0 0 1px var(--line),0 14px 28px -20px rgba(0,0,0,.35);cursor:pointer;transition:transform .2s,box-shadow .2s;font:inherit;color:var(--ink)}
@@ -3365,7 +3445,7 @@ function touchDay(){
 function recordAnswer(skill,ok){
   const m=G.mastery[skill],s=G.st[skill]||(G.st[skill]=[0,0]);s[0]++;if(ok)s[1]++;
   G.mastery[skill]=clamp(ok?m+(100-m)*.12:m-m*.04,5,99);
-  if(ok){award(10);wrongRun=0}else if(++wrongRun>=4)setTimeout(()=>autoCalm('wrong'),1400);touchDay();save();try{comboHit(ok)}catch(e){}
+  if(ok){award(10);wrongRun=0}else if(++wrongRun>=(TF().big?3:4)){wrongRun=0;setTimeout(()=>autoCalm('wrong'),1400)}touchDay();save();try{comboHit(ok)}catch(e){}
 }
 const plantCount=()=>Math.floor(G.pts/5);
 const PLANTS=['\u{1F331}','\u{1F33C}','\u{1F33B}','\u{1F344}','\u{1F337}','\u{1F333}','\u{1F34E}','\u{1F98B}','\u{1F41D}','\u{1F308}','\u{1F41E}','\u{1F33A}'];
@@ -3655,6 +3735,16 @@ async function cloudSignOut(){
 }
 let cProv=null;
 function cloudProviders(){return cProv||(cProv=fetch(CFG.supabaseUrl.replace(/\/$/,'')+'/auth/v1/settings',{headers:{apikey:CFG.supabaseAnonKey}}).then(r=>r.ok?r.json():{}).then(s=>(s&&s.external)||{}).catch(()=>({}))) }
+/* a short loading screen after logging in, so the app opens on a finished page */
+function loginLoad(msg){
+  const el=document.createElement('div');el.className='lgl';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
+  el.innerHTML=`<div class="lgl-in">${LOGO_SRC?`<img class="lgl-logo" src="${LOGO_SRC}" alt="LahLahLearn">`:''}<div class="lgl-pip" aria-hidden="true">${pip(92)}</div><p class="lgl-m">${esc(msg||'')}</p><p class="lgl-s">${tr('Getting your adventure ready')}</p><div class="lgl-bar" aria-hidden="true"><i></i></div></div>`;
+  document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add('in'));
+  const t0=performance.now();
+  return{close(){const wait=Math.max(0,1600-(performance.now()-t0));setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),450)},wait)}};
+}
+const EYE_ON='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.700 5.100A10.700 10.700 0 0112 5c6.400 0 10 7 10 7a17.600 17.600 0 01-2.700 3.600M6.600 6.600A17.400 17.400 0 002 12s3.600 7 10 7a9.700 9.700 0 005.400-1.600"/><path d="M9.900 9.900a3 3 0 004.200 4.200M2 2l20 20"/></svg>';
 function cloudAuthUI(reg){
   const card=$('.au2-card');if(!card)return;
   if(CFG.google===false)$$('[data-am="google"]',card).forEach(b=>b.remove());
@@ -3669,15 +3759,15 @@ function cloudAuthUI(reg){
     if(error){b.disabled=false;toast(tr('Could not open sign-in. Please try again.'))}});
   // ---- Email + password. Passwords are stored by Supabase Auth (bcrypt-hashed), never in the app.
   const emErr=$('#aEmErr');
-  emErr.insertAdjacentHTML('afterend',`<label class="au2-f"><span>${tr('Password')}</span><span class="au2-pw"><input class="au2-in" id="aPw" type="password" autocomplete="${reg?'new-password':'current-password'}" placeholder="${reg?tr('At least 8 characters'):''}" aria-describedby="aPwErr"><button type="button" class="au2-eye" id="aEye" aria-label="${tr('Show password')}">${tr('Show')}</button></span></label>
+  emErr.insertAdjacentHTML('afterend',`<label class="au2-f"><span>${tr('Password')}</span><span class="au2-pw"><input class="au2-in" id="aPw" type="password" autocomplete="${reg?'new-password':'current-password'}" placeholder="${reg?tr('At least 8 characters'):''}" aria-describedby="aPwErr"><button type="button" class="au2-eye" id="aEye" aria-label="${tr('Show password')}" aria-pressed="false">${EYE_ON}</button></span></label>
     ${reg?`<label class="au2-f"><span>${tr('Type the password again')}</span><input class="au2-in" id="aPw2" type="password" autocomplete="new-password" aria-describedby="aPwErr"></label>`:''}
     <p class="em-err" id="aPwErr" role="alert" hidden></p>${reg?'':`<p class="au2-forgot"><a href="#" id="aForgot">${tr('Forgot password?')}</a></p>`}`);
   const pw=$('#aPw'),pw2=$('#aPw2'),pwErr=$('#aPwErr');
   const say=(el,t)=>{el.hidden=!t;el.textContent=t||''};
-  $('#aEye').onclick=()=>{const show=pw.type==='password';[pw,pw2].forEach(x=>{if(x)x.type=show?'text':'password'});$('#aEye').textContent=show?tr('Hide'):tr('Show');$('#aEye').setAttribute('aria-label',show?tr('Hide password'):tr('Show password'))};
+  $('#aEye').onclick=()=>{const show=pw.type==='password';[pw,pw2].forEach(x=>{if(x)x.type=show?'text':'password'});$('#aEye').innerHTML=show?EYE_OFF:EYE_ON;$('#aEye').setAttribute('aria-pressed',show);$('#aEye').setAttribute('aria-label',show?tr('Hide password'):tr('Show password'))};
   [pw,pw2].forEach(x=>x&&x.addEventListener('input',()=>say(pwErr,'')));
   const redirect=location.origin+location.pathname;
-  const done=async em=>{lsSet('ll.email',em);try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}};
+  const done=async em=>{lsSet('ll.email',em);const L=loginLoad(reg?tr('Setting up your account'):tr('Welcome back!'));try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}finally{L.close()}};
   const send=async()=>{
     say(pwErr,'');
     const em=await emailGate($('#aEm'),emErr,$('#aGo'));if(!em)return;
@@ -3869,7 +3959,7 @@ R.privacy=()=>{
    ['Emails we send',`<p>We send service emails such as sign-in codes, receipts, weekly progress reports and Care Circle invitations. You can change the report day in the Care Circle, or ask us to stop weekly reports at any time. We do not send marketing emails without your consent, and every marketing email includes a way to unsubscribe.</p>`],
    ['Changes to this Policy',`<p>We may update this Policy from time to time. If we make material changes, we will tell users within the Service, and by email where appropriate, before the changes take effect. The effective date at the top shows when this Policy was last revised.</p>`],
    ['Contact us',`<p>For questions about this Policy or how we handle personal data, or to make a request, please contact:</p><p class="pv-ad"><b>LahLahLearn</b><br>Data Protection Contact<br>Selangor, Malaysia<br>${ml}</p>`]];
-  $('#page').innerHTML=`<div class="pv wrap"><header class="pv-hd"><p class="pv-eb">${tr('Legal')}</p><h1>${tr('Privacy Policy')}</h1><p class="pv-dt">${tr('Effective date')}: 9 November 2026</p></header>
+  $('#page').innerHTML=`<div class="pv wrap"><button class="pv-back" data-go="${session?'dashboard':'welcome'}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>${tr('Back to home')}</button><header class="pv-hd"><p class="pv-eb">${tr('Legal')}</p><h1>${tr('Privacy Policy')}</h1><p class="pv-dt">${tr('Effective date')}: 9 November 2026</p></header>
    <div class="pv-grid"><nav class="pv-toc" aria-label="${tr('Contents')}"><p>${tr('Contents')}</p><ol>${S.map((s,i)=>`<li><a href="#" data-pv="${i}">${s[0]}</a></li>`).join('')}</ol></nav>
    <article class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2>${i+1}. ${s[0]}</h2>${s[1]}</section>`).join('')}</article></div></div>`;
   $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
@@ -3878,7 +3968,7 @@ R.privacy=()=>{
 
 /* ---------- Terms of Service ---------- */
 function legalPage(title,date,S,note){
-  $('#page').innerHTML=`<div class="pv wrap"><header class="pv-hd"><p class="pv-eb">${tr('Legal')}</p><h1>${tr(title)}</h1><p class="pv-dt">${tr('Effective date')}: ${date}</p>${note?`<p class="pv-note">${note}</p>`:''}</header>
+  $('#page').innerHTML=`<div class="pv wrap"><button class="pv-back" data-go="${session?'dashboard':'welcome'}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>${tr('Back to home')}</button><header class="pv-hd"><p class="pv-eb">${tr('Legal')}</p><h1>${tr(title)}</h1><p class="pv-dt">${tr('Effective date')}: ${date}</p>${note?`<p class="pv-note">${note}</p>`:''}</header>
    <div class="pv-grid"><nav class="pv-toc" aria-label="${tr('Contents')}"><p>${tr('Contents')}</p><ol>${S.map((s,i)=>`<li><a href="#" data-pv="${i}">${s[0]}</a></li>`).join('')}</ol></nav>
    <article class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2>${i+1}. ${s[0]}</h2>${s[1]}</section>`).join('')}</article></div></div>`;
   $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
@@ -4208,7 +4298,7 @@ function calmRelease(){document.body.classList.remove('calming');const n=Date.no
 function overlayClose(){if(calmOpen){if(Date.now()<calmLockUntil)return;calmOpen=false;clearTimeout(calmT);clearInterval(calmI);if(calmStop){try{calmStop()}catch(e){}calmStop=null}calmRelease()}$('#overlay').innerHTML='';document.removeEventListener('keydown',escKey,true)}
 const escKey=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();overlayClose()}};
 let calmI=0;
-let calmLast=Date.now(),wrongRun=0;
+let calmLast=0,wrongRun=0;
 /* LahLahLearn calm fox: vector character, every part rigged. */
 function foxSVG(){
   const M=s=>s.replace(/(-?\d+(?:\.\d+)?)[ ,](-?\d+(?:\.\d+)?)/g,(m,x,y)=>(300-x)+' '+y); // mirror x around 150
@@ -4240,12 +4330,12 @@ function foxSVG(){
   <g id="fxAll">
    <g id="fxTail" filter="url(#fxFur)"><path fill="url(#fxO)" d="M176 302 C222 322 284 300 290 240 C294 196 266 162 236 170 C220 175 218 194 234 204 C252 216 252 252 226 270 C210 282 190 286 176 302 Z"/>
      <path fill="url(#fxC)" d="M236 170 C266 162 294 196 290 240 C289 250 286 258 281 264 C278 256 272 254 268 258 C266 246 260 240 254 242 C254 228 248 214 240 206 C226 198 220 180 236 170 Z"/></g>
-   ${leg('fxLegL',126)}${leg('fxLegR',174)}
-   <g id="fxBody" filter="url(#fxFur)"><path fill="url(#fxO)" d="M150 194 C102 194 88 246 94 282 C98 314 124 328 150 328 C176 328 202 314 206 282 C212 246 198 194 150 194 Z"/>
-     <path id="fxBelly" fill="url(#fxC)" d="M150 214 C126 214 112 236 112 266 C112 296 128 314 150 314 C172 314 188 296 188 266 C188 236 174 214 150 214 Z"/></g>
-   <g id="fxScarf"><path fill="url(#fxG)" d="M92 200 Q150 224 208 200 L200 218 Q178 238 150 262 Q122 238 100 218 Z"/>
+   ${leg('fxLegL',120)}${leg('fxLegR',180)}
+   <g id="fxBody" filter="url(#fxFur)"><path fill="url(#fxO)" d="M150 192 C96 192 72 244 78 284 C82 318 114 332 150 332 C186 332 218 318 222 284 C228 244 204 192 150 192 Z"/>
+     <path id="fxBelly" fill="url(#fxC)" d="M150 212 C118 212 100 236 100 268 C100 300 122 318 150 318 C178 318 200 300 200 268 C200 236 182 212 150 212 Z"/></g>
+   <g id="fxScarf"><path fill="url(#fxG)" d="M84 198 Q150 226 216 198 L208 218 Q182 240 150 264 Q118 240 92 218 Z"/>
      <path fill="#fff" opacity=".95" d="M150 248 C150 240 150 236 150 232 C142 234 134 230 132 222 C140 220 148 224 150 232 C152 224 160 220 168 222 C166 230 158 234 150 232 Z"/><path stroke="#fff" stroke-width="2.4" stroke-linecap="round" d="M150 232 L150 248" fill="none"/></g>
-   ${arm('fxArmL',102)}${arm('fxArmR',198)}
+   ${arm('fxArmL',92)}${arm('fxArmR',208)}
    <g id="fxHead"><g transform="translate(150 205) scale(1.08) translate(-150 -205)">
      <g id="fxEarL"><path fill="url(#fxH)" d="${ear}"/><path fill="#7a3e1f" d="${earEdge}"/><path fill="#fff1e8" d="${earIn}"/></g>
      <g id="fxEarR"><path fill="url(#fxH)" d="${M(ear)}"/><path fill="#7a3e1f" d="${M(earEdge)}"/><path fill="#fff1e8" d="${M(earIn)}"/></g>
@@ -4258,8 +4348,8 @@ function foxSVG(){
      ${eye('fxEyeL',115)}${eye('fxEyeR',185)}
      <g id="fxMouth"><path id="fxMO" fill="#8a2a2a" d=""/><ellipse id="fxTo" cx="150" cy="180" rx="6" ry="3" fill="#f27f8d"/><path id="fxMW" fill="none" stroke="#3a1d10" stroke-width="2.6" stroke-linecap="round" d="M136 170 Q143 177 150 170 Q157 177 164 170"/></g>
      <path fill="#2b150b" d="M140 157 Q150 152 160 157 Q161 162 150 168 Q139 162 140 157 Z"/><ellipse cx="145.5" cy="157.5" rx="3.4" ry="1.7" fill="#fff" opacity=".6"/>
-     <g id="fxAirIn" class="fx-air" opacity="0"><path stroke="url(#fxAL)" d="M4 168 Q80 170 141 162"/><path stroke="url(#fxAL)" d="M14 200 Q92 198 143 166"/><path stroke="url(#fxAR)" d="M296 168 Q220 170 159 162"/><path stroke="url(#fxAR)" d="M286 200 Q208 198 157 166"/></g>
-     <g id="fxAirOut" class="fx-air" opacity="0"><path stroke="url(#fxOL)" d="M142 165 Q92 176 6 176"/><path stroke="url(#fxOL)" d="M145 168 Q112 202 64 230"/><path stroke="url(#fxOR)" d="M158 165 Q208 176 294 176"/><path stroke="url(#fxOR)" d="M155 168 Q188 202 236 230"/></g>
+     <filter id="fxAirBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation=".6"/></filter><radialGradient id="fxPuff" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#bfe6fb"/><stop offset="1" stop-color="#5fb3ea"/></radialGradient>
+     <g id="fxAirIn" opacity="0" fill="url(#fxPuff)" filter="url(#fxAirBlur)"><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/></g><g id="fxAirOut" opacity="0" fill="url(#fxPuff)" filter="url(#fxAirBlur)"><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/><circle r="0" cx="150" cy="164"/></g>
    </g></g>
   </g></svg>`;
 }
@@ -4269,12 +4359,12 @@ function foxPose(root,s){
   const b=s.b;
   T('fxAll',`translate(0 ${(-7*b-(s.hop||0)).toFixed(2)}) rotate(${(s.sway||0).toFixed(2)} 150 330)`);
   T('fxShadow',`translate(150 336) scale(${(1-.12*b-(s.hop||0)*.01).toFixed(3)} 1) translate(-150 -336)`);
-  T('fxLegL',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legL||0).toFixed(2)} 128 282)`);T('fxLegR',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legR||0).toFixed(2)} 172 282)`);
+  T('fxLegL',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legL||0).toFixed(2)} 122 282)`);T('fxLegR',`translate(0 ${(7*b+(s.hop||0)).toFixed(2)}) rotate(${(s.legR||0).toFixed(2)} 178 282)`);
   T('fxBody',`translate(150 324) scale(${(1+.07*b).toFixed(3)} ${(1+.09*b).toFixed(3)}) translate(-150 -324)`);
   T('fxBelly',`translate(150 264) scale(${(1+.1*b).toFixed(3)} ${(1+.08*b).toFixed(3)}) translate(-150 -266)`);
   const sh=-18*b;
-  T('fxArmL',`translate(${(-4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armL).toFixed(2)} 102 218)`);T('fxArmLP',`rotate(${(s.wristL||0).toFixed(2)} 102 262)`);
-  T('fxArmR',`translate(${(4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armR).toFixed(2)} 198 218)`);T('fxArmRP',`rotate(${(s.wristR||0).toFixed(2)} 198 262)`);
+  T('fxArmL',`translate(${(-4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armL).toFixed(2)} 92 218)`);T('fxArmLP',`rotate(${(s.wristL||0).toFixed(2)} 92 262)`);
+  T('fxArmR',`translate(${(4*b).toFixed(2)} ${sh.toFixed(2)}) rotate(${(s.armR).toFixed(2)} 208 218)`);T('fxArmRP',`rotate(${(s.wristR||0).toFixed(2)} 208 262)`);
   T('fxScarf',`translate(0 ${(-16*b).toFixed(2)}) translate(150 210) scale(${(1+.05*b).toFixed(3)}) translate(-150 -210)`);
   T('fxHead',`translate(${(s.look*4).toFixed(2)} ${(-17*b+(s.nod||0)).toFixed(2)}) rotate(${(s.look*7+(s.tilt||0)).toFixed(2)} 150 205)`);
   T('fxTail',`rotate(${(s.tail).toFixed(2)} 186 296)`);
@@ -4309,7 +4399,7 @@ function calmSound(){ /* soft pad + breath-like air, all made in the browser (no
 function openCalm(auto){
   if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+CALM_CYC+1000;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
-  const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
+  const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':calmWhy==='breath'?'Your breathing sounds fast. Let us slow down together.':calmWhy==='taps'||calmWhy==='wrong'?'That was tricky! Let us take a calm breath.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
   const sysStill=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches;
   const gentle=true; /* always the gentle version: soft movement, no busy particles */
   const bub=Array.from({length:12},(_,i)=>`<i style="--x:${(i*83)%100}%;--d:${7+(i*37)%7}s;--w:${i%3?'':'-'}${2+(i%4)}s;--s:${.6+(i%3)*.25}">${i%4===1?'✦':''}</i>`).join('');
@@ -4368,7 +4458,12 @@ function openCalm(auto){
       const ai=fox.querySelector('#fxAirIn'),ao=fox.querySelector('#fxAirOut');
       if(ai&&ao){const fade=x=>Math.min(1,x/.12,(1-x)/.12);const off=(-(now/1000)*32).toFixed(1);
         ai.setAttribute('opacity',running&&ph==='in'?fade(pp).toFixed(2):'0');ao.setAttribute('opacity',running&&ph==='out'?fade(pp).toFixed(2):'0');
-        ai.querySelectorAll('path').forEach(p=>p.style.strokeDashoffset=off);ao.querySelectorAll('path').forEach(p=>p.style.strokeDashoffset=off)}}
+        const T=now/1000,sm=x=>x*x*(3-2*x),q=(a,c,e,t)=>(1-t)*(1-t)*a+2*(1-t)*t*c+t*t*e;
+        if(running&&ph==='in')ai.querySelectorAll('circle').forEach((c,i)=>{const sd=i%2?1:-1,k=(T*.62+i/16)%1,e=sm(k),sx=150+sd*(96+(i%4)*18),sy=168+((i*37)%46),ex=150+sd*5,ey=165;
+          c.setAttribute('cx',q(sx,150+sd*40,ex,e).toFixed(1));c.setAttribute('cy',q(sy,180,ey,e).toFixed(1));c.setAttribute('r',(2+7*(1-e)).toFixed(2));c.setAttribute('opacity',Math.min(1,Math.sin(Math.PI*k)*1.4).toFixed(2))});
+        if(running&&ph==='out')ao.querySelectorAll('circle').forEach((c,i)=>{const sd=i%2?1:-1,k=(T*.5+i/16)%1,e=sm(k),sx=150+sd*4,sy=168,ex=150+sd*(58+(i%4)*24),ey=172+((i*29)%58);
+          c.setAttribute('cx',q(sx,150+sd*22,ex,e).toFixed(1));c.setAttribute('cy',q(sy,184,ey,e).toFixed(1));c.setAttribute('r',(2.5+9*e).toFixed(2));c.setAttribute('opacity',(Math.min(1,(1-e)*1.6)*Math.min(1,k*5)).toFixed(2))});
+      }}
     stage.style.setProperty('--b',b.toFixed(3));
     raf=requestAnimationFrame(frame)};
   raf=requestAnimationFrame(frame);
@@ -4382,14 +4477,20 @@ let calmWhy='';
 /* Automatic calm breaks are rare: only for real signs (upset, sleepy, several wrong answers),
    never more than once every 10 minutes and at most 3 times a day. Drifting focus or fast breathing only shows a small note. */
 const CALM_GAP=10*60000,CALM_DAY=3;
+/* opens the calm break by itself when the helpers (camera, microphone) or play patterns say the child is not calm */
+const CALM_SIGNS=['upset','breath','tired','taps','wrong'];
 function autoCalm(why){
-  if(calmOpen||!session||!G||document.hidden)return false;
-  if(why==='focus'||why==='breath'||!why)return false;
-  if(Date.now()-calmLast<CALM_GAP)return false;
-  const ac=G.autoCalmN||(G.autoCalmN={}),d=todayStr();if((ac[d]||0)>=CALM_DAY)return false;
-  if(!['learn','play','explore','world','talk','study','together'].includes(cur))return false;
-  ac[d]=(ac[d]||0)+1;calmWhy=why||'';openCalm(true);return true;
+  if(calmOpen||!session||!G||document.hidden||!kidMode())return false;
+  if(!CALM_SIGNS.includes(why))return false;
+  const helper=why==='upset'||why==='breath';
+  if(Date.now()-calmLast<(helper?4*60000:CALM_GAP))return false;
+  const ac=G.autoCalmN||(G.autoCalmN={}),d=todayStr();if((ac[d]||0)>=(helper?6:CALM_DAY))return false;
+  if(['care','profile','auth','onboard','pricing','privacy','terms','welcome'].includes(cur))return false;
+  ac[d]=(ac[d]||0)+1;calmWhy=why;save();openCalm(true);return true;
 }
+/* many fast taps in a row usually means frustration: offer the calm break */
+(()=>{let taps=[];document.addEventListener('pointerdown',e=>{if(!session||!G||calmOpen||!kidMode()||e.pointerType==='mouse'&&e.button!==0)return;
+  const n=Date.now();taps.push(n);taps=taps.filter(t=>n-t<2500);if(taps.length>=(TF().big?7:9)){taps=[];if(!['learn','talk','study','dashboard'].includes(cur))return;if(cur==='learn'&&/draw|trace|make|pop|bubble|game|memory/.test(curArg||''))return;autoCalm('taps')}},true)})();
 studyUI();
 
 
@@ -5083,7 +5184,7 @@ R.auth=arg=>{
       if(!reg&&has){const stored=(lsGet('ll.email')||'').trim().toLowerCase();
         if(stored&&em.toLowerCase()!==stored){$('#aEm').setAttribute('aria-invalid','true');$('#aEmErr').hidden=false;$('#aEmErr').textContent='This email does not match the account on this device. Please use the email you registered with, or create a new account.';$('#aEm').focus();return}}}
     if(em)lsSet('ll.email',em);if(m)lsSet('ll.am',m);
-    if(reg||!has){OB.start(null);return}session=true;lsSet('ll1.session','1');applyA11y();go(KIDS&&KIDS.list.length>1?'who':'dashboard')};
+    if(reg||!has){OB.start(null);return}const L=loginLoad(tr('Welcome back!'));session=true;lsSet('ll1.session','1');applyA11y();go(KIDS&&KIDS.list.length>1?'who':'dashboard');L.close()};
   $('#aGo').onclick=()=>proceed('email');
   $$('[data-am]').forEach(b=>b.onclick=()=>proceed(b.dataset.am));
   $('#aEm').addEventListener('keydown',e=>{if(e.key==='Enter')proceed('email')});$('#aEm').addEventListener('input',()=>{$('#aEmErr').hidden=true;$('#aEm').removeAttribute('aria-invalid')});
@@ -9462,7 +9563,7 @@ R.pricing=()=>{
    <section class="pcr" id="credits" aria-labelledby="pcrT"><div class="pcr-in">
     <div class="pcr-hd"><span class="pcr-ic" aria-hidden="true">${ic('spark',22)}</span><div><h2 id="pcrT">Need more Pip AI?</h2><p>Every plan comes with monthly credits. Top up any time. Bought credits never expire.</p></div></div>
     <ul class="pcr-cost" aria-label="Credits per answer">${AI_MODELS.map((m,i)=>`<li><span class="ai-gl" aria-hidden="true">${[1,2,3].map(j=>`<i class="${j<=i+1?'on':''}" style="height:${j*3+3}px"></i>`).join('')}</span><b>${m.name}</b><span>${m.cost} credit${m.cost>1?'s':''} per answer</span></li>`).join('')}</ul>
-    <div class="pcr-packs">${AI_PACKS.map((k,i)=>{const pr=AI_PACK_P[CUR][i],per=pr/k.n*100,best=i===1;return `<button class="pcr-p${best?' best':''}" data-pack="${k.id}" aria-label="Buy ${k.n.toLocaleString()} credits for ${curSym()}${curNum(pr)}">${best?'<span class="pcr-tag">Most popular</span>':''}<span class="pcr-n tn">${k.n.toLocaleString()}</span><span class="pcr-u">credits</span><span class="pcr-pr tn">${curSym()}${curNum(pr)}</span><span class="pcr-h">About ${Math.round(k.n/AI_MODELS[0].cost).toLocaleString()} quick answers</span><span class="pcr-b">Buy ${ic('arrow',15)}</span></button>`}).join('')}</div>
+    <div class="pcr-packs">${AI_PACKS.map((k,i)=>{const pr=AI_PACK_P[CUR][i],per=pr/k.n*100,best=i===1;return `<button class="pcr-p${best?' best':''}" data-pack="${k.id}" aria-label="Buy ${k.n.toLocaleString()} credits for ${curSym()}${curNum(pr)}">${best?'<span class="pcr-tag">Most popular</span>':''}<span class="pcr-pr tn">${curSym()}${curNum(pr)}</span><span class="pcr-n tn">${k.n.toLocaleString()} <small>credits</small></span><span class="pcr-h">${['Try it out','Best for most families','For daily Pip chats'][i]} · up to ${Math.round(k.n/AI_MODELS[0].cost).toLocaleString()} answers</span><span class="pcr-b">Buy ${ic('arrow',15)}</span></button>`}).join('')}</div>
    </div></section>
    <section class="px-faq" aria-label="Questions"><h2>Questions</h2>${faq.map(f=>`<details class="px-q"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</section></div>`;
   $$('[data-pack]').forEach(b=>b.onclick=()=>aiBuy(b.dataset.pack));if(R.pricing.arg==='credits'||/credits/.test(location.hash))setTimeout(()=>{const c=$('#credits');c&&c.scrollIntoView({behavior:'smooth',block:'center'})},400);
@@ -9547,7 +9648,7 @@ function setComfort(box){
     <label class="stack" style="gap:4px"><span class="muted small">API URL</span><input id="aiurl" class="in" placeholder="https://api.example.com/v1/chat/completions" value="${esc(aiCfg().url)}"></label>
     <label class="stack" style="gap:4px"><span class="muted small">API key</span><input id="aikey" class="in" type="password" placeholder="sk-..." value="${esc(aiCfg().key)}"></label>
     <label class="stack" style="gap:4px"><span class="muted small">Model (optional)</span><input id="aimodel" class="in" placeholder="e.g. gpt-4o-mini" value="${esc(aiCfg().model)}"></label>
-    <div class="row between" style="gap:10px"><span class="muted small">${aiReady()?'&#9989; AI brain connected':'Using practice answers for now'}</span><button class="btn pri sm" id="aisave">Save</button></div></div>
+    <div class="row" style="justify-content:flex-end"><button class="btn pri sm" id="aisave">Save</button></div></div>
    <div class="stack" style="gap:10px">${PREFS.map(([k,l,d])=>sw(k,l,d)).join('')}</div>`;
   $$('[data-lang]',box).forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
   if($('#aisave',box))$('#aisave',box).onclick=()=>{aiSave({url:$('#aiurl',box).value.trim(),key:$('#aikey',box).value.trim(),model:$('#aimodel',box).value.trim()});toast(aiReady()?'Pip is connected!':'Saved. Add a URL and key to connect an AI brain.');setComfort(box)};
