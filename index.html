@@ -1751,7 +1751,9 @@ body.noanim .au2-logo,body.noanim .au2-fox img{animation:none}
 .au2-in{height:54px;border-radius:16px;border:1.5px solid var(--line);background:color-mix(in srgb,var(--ink) 3%,var(--surf));padding:0 18px;font:500 1rem var(--f-b);color:var(--ink);width:100%}.au2-in:focus{outline:2px solid var(--brand);outline-offset:1px;border-color:transparent}
 .au2-go{display:flex;align-items:center;justify-content:center;gap:10px;height:58px;border:0;border-radius:99px;background:linear-gradient(180deg,#2d6a4a,#1f5239);color:#fff;font:700 1.02rem var(--f-b);cursor:pointer;box-shadow:0 12px 24px -12px rgba(18,60,40,.6);transition:filter .18s,transform .18s}.au2-go:hover{filter:brightness(1.12)}.au2-go:active{transform:translateY(1px)}
 .au2-note{margin:0;text-align:center;font-size:.82rem;color:var(--muted)}.au2-sw{margin:0;text-align:center;color:var(--muted)}.au2-sw a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;cursor:pointer}
-@media(max-width:900px){.au2{grid-template-columns:1fr}.au2-l{min-height:300px;border-radius:28px}.au2-h{font-size:2rem}.au2-logo{width:120px;bottom:16px}.au2-fox{width:150px}.au2-rb{bottom:40px}.au2-hill{height:130px;bottom:-40px}.au2-r{margin-top:-30px;position:relative;z-index:5}}
+.au2-l{min-height:0!important;align-self:center}.au2-top{padding-bottom:clamp(320px,33vw,420px)!important}.au2-rb{bottom:60px}
+@media(max-width:1100px) and (orientation:portrait){.au2{grid-template-columns:1fr;min-height:0}.au2-l{align-self:stretch}.au2-r{margin-top:-30px;position:relative;z-index:5}.au2-top{padding-bottom:clamp(250px,40vw,340px)!important}.au2-rb{width:min(80%,520px)}.au2-fox{width:clamp(150px,24vw,230px)}.au2-logo{width:clamp(120px,16vw,180px)}}
+@media(max-width:900px){.au2{grid-template-columns:1fr}.au2-l{min-height:300px;border-radius:28px}.au2-h{font-size:2rem}.au2-logo{width:120px;bottom:16px}.au2-fox{width:150px}.au2-rb{bottom:40px}.au2-hill{height:130px;bottom:-40px}.au2-top{padding-bottom:clamp(170px,30vw,230px)!important}.au2-r{margin-top:-30px;position:relative;z-index:5}}
 /* liquid glass chrome */
 .top .navpill,.dock{background:color-mix(in srgb,var(--surf) 52%,transparent)!important;backdrop-filter:blur(14px) saturate(1.5)!important;-webkit-backdrop-filter:blur(14px) saturate(1.5)!important;border:0!important;box-shadow:inset 0 1px 1px rgba(255,255,255,.55),0 10px 28px -16px rgba(10,30,20,.35)!important;position:relative}
 .dock{position:fixed}
@@ -2073,8 +2075,8 @@ body.carepro .cc-body .dh-m{grid-template-columns:repeat(auto-fit,minmax(min(100
 @media (max-width:640px){body.carepro .cc-who{flex-wrap:wrap!important;gap:12px!important}body.carepro .cc-who>.stack{flex:1 1 calc(100% - 70px)}body.carepro .cc-who>.btn{flex:0 0 auto}body.carepro #page[data-r=care] .cc-hero h2{font-size:1.45rem!important;line-height:1.15}body.carepro .cc-hero .cc-av{width:48px!important;height:48px!important}}
 @media (max-width:900px){body.carepro .cc-body{grid-template-columns:minmax(0,1fr)!important}body.carepro .cc-body>.cc-nav{position:static;min-width:0}.cc-list{flex-direction:row;overflow-x:auto;scrollbar-width:none}.cc-list button{width:auto;white-space:nowrap;padding:9px 14px}}
 body.cloud #aicard{display:none!important}
-.lgl{position:fixed;inset:0;z-index:99990;display:grid;place-items:center;background:linear-gradient(#e8f6ee,#fdf6df);opacity:1;transition:opacity .4s}
-html[data-theme=dark] .lgl{background:linear-gradient(#10251b,#1c1a12)}
+.lgl{position:fixed;inset:0;z-index:99990;display:grid;place-items:center;background:linear-gradient(#e8f6ee,#fdf6df);opacity:1;transition:opacity .45s}.lgl .sp-m{color:#3b4a40}
+
 .lgl.in{opacity:1}.lgl.out{opacity:0;pointer-events:none}
 .lgl-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
 .lgl-logo{width:min(260px,64vw);height:auto;margin-bottom:6px}
@@ -2673,6 +2675,15 @@ body.has-sidx .msb{display:none!important}
 .bk-wrap{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))!important}
 .bk-end{display:flex;justify-content:center;margin-top:4px;animation:mmIn .3s cubic-bezier(.23,1,.32,1)}
 .lq-top{margin-bottom:12px}
+/* ===== Feelings and life (and Make and move lists): chalkboard header + notebook lessons, like the class lessons ===== */
+.gr2{display:flex;flex-direction:column;gap:22px}
+.gr-top{margin-bottom:-4px}
+.gr-chalkp{margin:-4px 0 0;max-width:46ch;color:#e6dfc8;font-size:1.02rem;line-height:1.45}
+.gr2 .gr-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.gr2 .sk-nb{background:var(--paper)}
+.gr-nbt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}.gr-nbt b{font:700 1rem/1.25 var(--f-d)}.gr-nbt small{color:var(--muted);font-weight:700;font-size:.8rem}
+.gr2 .gr-sec{background:var(--paper);border-radius:22px}
+@media (max-width:640px){.gr2 .gr-list{grid-template-columns:1fr}}
 /* ===== Calm Mode with the breathing fox ===== */
 .calm.cm{overflow-y:auto;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));background:radial-gradient(120% 80% at 50% 0%,#fff7e8 0%,#e7f6ee 45%,#c5e6d4 100%);color:#17382a}
 .cm-sky{position:fixed;inset:0;overflow:hidden;pointer-events:none}
@@ -3573,8 +3584,10 @@ async function voxSpeak(text,strict){
     sayDevice(text,v.device.voice);
   }
 }
+let sayCalm=0;
 function say(text){
   if(!text)return false;
+  if(typeof calmOpen!=='undefined'&&calmOpen&&!sayCalm)return false; /* a calm break silences everything except its own breathing cues */
   /* until a grown-up picks a voice in Settings, Pip uses the recorded natural voice for every line it has, and the best device voice for the rest */
   let chosen=false;try{chosen=!!(JSON.parse(lsGet('ll.voice')||'{}')||{}).engine}catch(e){}
   if(!chosen){const pk=vpkGet('af_heart',text);if(pk){stopSay();const id=sayId,au=new Audio(pk);sayAudio=au;au.onplay=()=>pipTalk=1;au.onended=au.onerror=()=>{pipTalk=0};au.play().catch(()=>{if(id===sayId)sayDevice(text)});return true}return sayDevice(text)}
@@ -3743,11 +3756,12 @@ let cProv=null;
 function cloudProviders(){return cProv||(cProv=fetch(CFG.supabaseUrl.replace(/\/$/,'')+'/auth/v1/settings',{headers:{apikey:CFG.supabaseAnonKey}}).then(r=>r.ok?r.json():{}).then(s=>(s&&s.external)||{}).catch(()=>({}))) }
 /* a short loading screen after logging in, so the app opens on a finished page */
 function loginLoad(msg){
-  const el=document.createElement('div');el.className='lgl';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
-  el.innerHTML=`<div class="lgl-in">${LOGO_SRC?`<img class="lgl-logo" src="${LOGO_SRC}" alt="LahLahLearn">`:''}<div class="lgl-pip" aria-hidden="true">${pip(92)}</div><p class="lgl-m">${esc(msg||'')}</p><p class="lgl-s">${tr('Getting your adventure ready')}</p><div class="lgl-bar" aria-hidden="true"><i></i></div></div>`;
-  document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add('in'));
+  /* same look as the splash shown on refresh: logo, tagline, three dots */
+  const el=document.createElement('div');el.id='lglSplash';el.className='lgl';el.setAttribute('role','status');el.setAttribute('aria-live','polite');el.setAttribute('aria-label',msg||tr('Loading'));
+  el.innerHTML=`<div class="sp-in">${LOGO_SRC?`<img class="sp-logo" src="${LOGO_SRC}" alt="LahLahLearn" width="360" height="171">`:''}<div class="sp-m">${tr('Empowering a brighter future for every child')}</div><div class="sp-d" aria-hidden="true"><i></i><i></i><i></i></div></div>`;
+  document.body.appendChild(el);try{const m=$('.sp-m',el);if(m&&typeof mpScramble==='function')mpScramble(m,900)}catch(e){}
   const t0=performance.now();
-  return{close(){const wait=Math.max(0,1600-(performance.now()-t0));setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),450)},wait)}};
+  return{close(){const wait=Math.max(0,2000-(performance.now()-t0));setTimeout(()=>{el.classList.add('out');setTimeout(()=>el.remove(),450)},wait)}};
 }
 const EYE_ON='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.600-7 10-7 10 7 10 7-3.600 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
 const EYE_OFF='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.700 5.100A10.700 10.700 0 0112 5c6.400 0 10 7 10 7a17.600 17.600 0 01-2.700 3.600M6.600 6.600A17.400 17.400 0 002 12s3.600 7 10 7a9.700 9.700 0 005.400-1.600"/><path d="M9.900 9.900a3 3 0 004.200 4.200M2 2l20 20"/></svg>';
@@ -3969,7 +3983,6 @@ R.privacy=()=>{
    <div class="pv-grid"><nav class="pv-toc" aria-label="${tr('Contents')}"><p>${tr('Contents')}</p><ol>${S.map((s,i)=>`<li><a href="#" data-pv="${i}">${s[0]}</a></li>`).join('')}</ol></nav>
    <article class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2>${i+1}. ${s[0]}</h2>${s[1]}</section>`).join('')}</article></div></div>`;
   $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
-  pvIndex(S);
 };
 
 /* ---------- Terms of Service ---------- */
@@ -3978,7 +3991,6 @@ function legalPage(title,date,S,note){
    <div class="pv-grid"><nav class="pv-toc" aria-label="${tr('Contents')}"><p>${tr('Contents')}</p><ol>${S.map((s,i)=>`<li><a href="#" data-pv="${i}">${s[0]}</a></li>`).join('')}</ol></nav>
    <article class="pv-body">${S.map((s,i)=>`<section class="pv-s" id="pv${i}"><h2>${i+1}. ${s[0]}</h2>${s[1]}</section>`).join('')}</article></div></div>`;
   $$('[data-pv]').forEach(a=>a.onclick=e=>{e.preventDefault();const t=$('#pv'+a.dataset.pv);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
-  pvIndex(S);
 }
 
 /* a slim scroll index on the right edge: one tick per section, the current one lit, names on hover; drag or tap to jump */
@@ -4158,7 +4170,7 @@ function render(base,arg){
   if(session&&P&&kidMode()&&['pricing','home','profile'].includes(base)){careNext=base;base='care';arg='';pg.dataset.r='care'}
   cur=base;curArg=arg;if((base==='explore'&&arg==='island')||['dashboard','together','care','profile','study','home','pricing','helpers'].includes(base)||(base==='learn'&&!arg))fromIsl=false;chrome();
   try{R[base](arg)}catch(e){pg.innerHTML='<div class="wrap" style="padding-top:40px"><div class="card"><h3>Something went wrong</h3><p class="muted">Please go back to the start page.</p></div></div>';console.error(e)}
-  reveal(pg);window.scrollTo(0,0);lbStart();guideSync();trialSync();mpEnhance();
+  reveal(pg);window.scrollTo(0,0);try{grGoSync()}catch(e){}lbStart();guideSync();trialSync();mpEnhance();
 }
 function islBackSync(){
   const pg=$('#page');if(!pg)return;
@@ -4300,7 +4312,16 @@ function guideSync(){
   if(!lsGet('ll.g.'+k)&&['learn','lesson','game','island','play','study'].includes(k))setTimeout(()=>{if(guideKey()===k&&!calmOpen&&!$('#guidepop'))guideOpen(k)},900);
 }
 let calmLockUntil=0;
-function calmRelease(){document.body.classList.remove('calming');const n=Date.now(),c=HS.cam,m=HS.mic;c.cool=m.cool=n+10*60000;c.eyes=[];c.yawns=[];c.recent=[];c.tired=false;c.perclos=0;c.droop=0;c.mood=[];c.upset=false;m.fast=0;calmLast=n}
+/* pause every sound, video and reading while the calm break is open; pick back up after */
+let calmHeld=[];
+function calmHush(){calmHeld=[];try{stopSay()}catch(e){}try{speechSynthesis.cancel()}catch(e){}
+  $$('audio,video').forEach(m=>{if(!m.paused&&!m.closest('#overlay')){try{m.pause();calmHeld.push(m)}catch(e){}}});
+  try{if(typeof BGM!=='undefined'&&BGM&&!BGM.paused){BGM.pause();calmHeld.push('bgm')}}catch(e){}
+  try{dispatchEvent(new CustomEvent('ll:calm',{detail:{on:true}}))}catch(e){}}
+function calmResume(){const h=calmHeld;calmHeld=[];
+  h.forEach(m=>{try{if(m==='bgm'){if(bgmWanted&&bgmOn()&&BGM)BGM.play().catch(()=>{})}else if(m.isConnected)m.play().catch(()=>{})}catch(e){}});
+  try{dispatchEvent(new CustomEvent('ll:calm',{detail:{on:false}}))}catch(e){}}
+function calmRelease(){document.body.classList.remove('calming');setTimeout(calmResume,300);const n=Date.now(),c=HS.cam,m=HS.mic;c.cool=m.cool=n+10*60000;c.eyes=[];c.yawns=[];c.recent=[];c.tired=false;c.perclos=0;c.droop=0;c.mood=[];c.upset=false;m.fast=0;calmLast=n}
 function overlayClose(){if(calmOpen){if(Date.now()<calmLockUntil)return;calmOpen=false;clearTimeout(calmT);clearInterval(calmI);if(calmStop){try{calmStop()}catch(e){}calmStop=null}calmRelease()}$('#overlay').innerHTML='';document.removeEventListener('keydown',escKey,true)}
 const escKey=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();overlayClose()}};
 let calmI=0;
@@ -4403,7 +4424,7 @@ function calmSound(){ /* soft pad + breath-like air, all made in the browser (no
     off(){if(!ctx)return;const c=ctx;ctx=null;try{master.gain.setTargetAtTime(0,c.currentTime,.2);air.gain.setTargetAtTime(0,c.currentTime,.1);setTimeout(()=>c.close(),700)}catch(e){}},
     get isOn(){return!!ctx}}}
 function openCalm(auto){
-  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+CALM_CYC+1000;document.body.classList.add('calming');try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
+  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+CALM_CYC+1000;document.body.classList.add('calming');calmHush();try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
   const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':calmWhy==='breath'?'Your breathing sounds fast. Let us slow down together.':calmWhy==='taps'||calmWhy==='wrong'?'That was tricky! Let us take a calm breath.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
   const sysStill=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4442,7 +4463,7 @@ function openCalm(auto){
     if(running){[ph,pp,left]=phaseAt(t);target=ph==='in'?ease(pp):ph==='hold'?1:1-ease(pp)}
     bShow=running?target:bShow+(0-bShow)*Math.min(1,dt/450);
     const b=bShow,flow=Math.abs(b-prevB)/(dt/1000||1);prevB=b;
-    if(running&&ph!==lastPhase){lastPhase=ph;cue.textContent=tr(PH_TXT[ph]);phs.forEach(d=>d.classList.toggle('on',d.dataset.ph===ph));if(P&&P.prefs&&P.prefs.voice&&!paused)try{say(tr(PH_TXT[ph].replace('...','')))}catch(x){}}
+    if(running&&ph!==lastPhase){lastPhase=ph;cue.textContent=tr(PH_TXT[ph]);phs.forEach(d=>d.classList.toggle('on',d.dataset.ph===ph));if(P&&P.prefs&&P.prefs.voice&&!paused)try{sayCalm=1;say(tr(PH_TXT[ph].replace('...','')))}catch(x){}sayCalm=0}
     if(running){const order=['in','hold','out'],i=order.indexOf(ph);phs.forEach((d,j)=>d.style.setProperty('--p',j<i?1:j===i?pp:0))}
     snd.set(b,running&&!paused?flow:0);
     /* face: blinks, eyes close softly while breathing out, peaceful smile while holding */
@@ -6108,19 +6129,20 @@ function flipBook(cfg){
   /* narration: the recorded voice when we have the line, otherwise the nicest voice on the device */
   let au=null;
   const stopRead=()=>{rdId++;try{au&&au.pause()}catch(e){}au=null;try{speechSynthesis.cancel()}catch(e){}$$('.bk-t.rd',B).forEach(x=>x.classList.remove('rd'));pipTalk=0};
-  const sayOne=(t,done)=>{const id=rdId,url=vpkGet('af_heart',t),fin=()=>{if(id===rdId)done()};
+  const sayOne=(t,done)=>{const id=rdId,url=vpkGet('af_heart',t),fin=()=>{if(id===rdId)done()};if(calmOpen){stopRead();return}
     if(url){au=new Audio(url);au.onended=fin;au.onerror=()=>dev();pipTalk=1;au.play().catch(()=>dev());return}dev();
     function dev(){try{const u=new SpeechSynthesisUtterance(speakable(t)),v=bestVoice();if(v)u.voice=v;u.rate=.9;u.pitch=1.08;u.onend=fin;u.onerror=fin;speechSynthesis.speak(u)}catch(e){setTimeout(fin,Math.min(6000,t.length*70))}}};
   function readSpread(){
-    stopRead();if(!readOn||dead)return;const id=rdId;
+    stopRead();if(!readOn||dead||calmOpen)return;const id=rdId;
     const ts=$$('.bk-pp:not(.turn):not(.flap) .bk-t',B).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);
     let i=0;const next=()=>{if(id!==rdId||dead)return;$$('.bk-t.rd',B).forEach(x=>x.classList.remove('rd'));
-      if(i>=ts.length){pipTalk=0;if(can(1))setTimeout(()=>{if(id===rdId&&readOn&&!dead&&!turn)goDir(1)},1400);else{try{nfyAdd('story',`${P.name} finished "${st.title}".`)}catch(e){}try{award(3);save()}catch(e){}}return}
+      if(i>=ts.length){pipTalk=0;if(can(1))setTimeout(()=>{if(id===rdId&&readOn&&!dead&&!turn&&!calmOpen)goDir(1)},1400);else{try{nfyAdd('story',`${P.name} finished "${st.title}".`)}catch(e){}try{award(3);save()}catch(e){}}return}
       const el=ts[i++];el.classList.add('rd');sayOne(el.dataset.say||el.textContent,()=>setTimeout(next,500))};
     setTimeout(next,450);
   }
   $('#bkRd').onclick=()=>{readOn=!readOn;const b=$('#bkRd');b.classList.toggle('on',readOn);b.setAttribute('aria-pressed',readOn);$('span',b).textContent=readOn?'Reading to me':'Read to me';if(readOn)readSpread();else stopRead()};
-  teardowns.push(()=>{dead=true;stopRead();cancelAnimationFrame(anim);ro.disconnect();document.removeEventListener('keydown',keys)});
+  const onCalm=e=>{if(dead)return;if(e.detail&&e.detail.on)stopRead();else if(readOn&&!turn)setTimeout(()=>{if(!dead&&!calmOpen)readSpread()},500)};addEventListener('ll:calm',onCalm);
+  teardowns.push(()=>{dead=true;stopRead();removeEventListener('ll:calm',onCalm);cancelAnimationFrame(anim);ro.disconnect();document.removeEventListener('keydown',keys)});
   const eb=$('#bkEndB');if(eb)eb.onclick=()=>{stopRead();cfg.onEnd&&cfg.onEnd()};
   measure();setTimeout(readSpread,300);
 }
@@ -6432,10 +6454,21 @@ function growDone(kind,id){const g=growG();if(kind==='life'){const d=todayStr();
 function growMark(kind,id,pts){const g=growG();let first=false;if(kind==='life'){const d=todayStr();g.life[d]=g.life[d]||{};if(!g.life[d][id]){g.life[d][id]=1;first=true}const ks=Object.keys(g.life);if(ks.length>14)delete g.life[ks.sort()[0]]}else if(!g[kind][id]){g[kind][id]=todayStr();first=true}
   if(first){award(pts);touchDay()}save();return first}
 const GRC={emo:'--sun',int:'--coral',talk:'--brand2',life:'--kb'};
+const GR_LC={'--sun':'#c98a12','--coral':'#d4654a','--brand2':'#3f9a62','--kb':'#3a7fc0','--brand':'#3f9a62'};
 function growShell(title,back,body,hero){
-  const hr=hero?`<section class="gh" style="--c:var(${hero.c})"><span class="gh-e" aria-hidden="true">${hero.e}</span><div class="gh-t"><h2>${esc(title)}</h2>${hero.sub?`<p>${hero.sub}</p>`:''}</div>${hero.total?`<div class="gh-p" aria-label="${hero.done} of ${hero.total} done"><svg viewBox="0 0 64 64" width="72" height="72" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(0,0,0,.1)" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--brand)" stroke-width="7" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="${(163.4*(1-hero.done/hero.total)).toFixed(1)}" transform="rotate(-90 32 32)"/></svg><b class="tn" data-notr>${hero.done}/${hero.total}</b></div>`:''}</section>`:`<h2>${esc(title)}</h2>`;
-  return `<div class="wrap gr stack" style="gap:18px;max-width:900px"><div class="row"><button class="btn sm ghost" data-go="${back}"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',15)}</span> Back</button></div>${hr}${body}</div>`;
+  const top=`<div class="kq-top gr-top"><button class="btn lg kq-back" data-go="${back}"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button>${hero?'':`<h2>${esc(title)}</h2>`}</div>`;
+  if(!hero)return `<div class="wrap gr stack" style="gap:18px;max-width:960px">${top}${body}</div>`;
+  const lc=GR_LC[hero.c]||'#3f9a62',pct=hero.total?Math.round(hero.done/hero.total*100):0;
+  return `<div class="wrap gr gr2 skl" style="--lc:${lc};max-width:1100px">${top}
+   <div class="sk-board"><div class="sk-chalk"><span class="sk-eb">${esc(hero.eb||(['Stories','Sing along','Dance','Sports'].includes(title)?'Make and move':'Feelings and life'))}</span><h2>${esc(title)}</h2>${hero.sub?`<p class="gr-chalkp">${hero.sub}</p>`:''}
+    ${hero.total?`<div class="sk-prog"><span class="sk-bar"><i style="width:${pct}%"></i></span><small>${hero.done}/${hero.total}</small></div>`:''}
+    <button class="sk-go" id="grGo" hidden>Start ${ic('arrow',18)}</button></div><div class="sk-teacher" aria-hidden="true">${pip(150)}</div></div>
+   ${body}</div>`;
 }
+/* after a list page renders: point the chalkboard's Start at the first thing not done yet */
+function grGoSync(){const g=$('#grGo');if(!g)return;const n=$('.gr-list .sk-nb:not(.done)')||$('.gr-list .sk-nb');if(!n){return}g.hidden=false;g.dataset.go=n.dataset.go;
+  $$('.gr-list .sk-nb').forEach(x=>x.classList.toggle('now',x===n&&!n.classList.contains('done')));if(!$('.gr-list .sk-nb:not(.done)'))g.innerHTML='Again '+ic('arrow',18)}
+
 function growStart(arg){
   const [k,id]=[arg.split('-')[0],arg.split('-').slice(1).join('-')];
   if(k==='emo')return id?emoScene(id):emoList();
@@ -6445,7 +6478,7 @@ function growStart(arg){
   go('learn');
 }
 const GR_COL=['--sun','--coral','--brand2','--kb'];
-const growCard=(go2,e,t,sub,done,i=0)=>`<button class="gr-c ${done?'done':''}" style="--c:var(${GR_COL[i%4]})" data-go="${go2}"><span class="gr-e" aria-hidden="true">${e}</span><span class="gr-t"><b>${esc(t)}</b><small>${esc(sub)}</small></span><span class="gr-pill ${done?'ok':''}">${done?ic('check',16)+' Done':ic('play',14)+' Start'}</span></button>`;
+const growCard=(go2,e,t,sub,done,i=0)=>`<button class="sk-nb ${done?'done':''}" data-go="${go2}" aria-label="${esc(t+'. '+sub+(done?'. Done':''))}"><span class="sk-pg" aria-hidden="true">${i+1}</span><span class="gr-nbt"><b>${esc(t)}</b><small>${esc(sub)}</small></span><span class="sk-st" aria-hidden="true">${done?ic('check',18):ic('arrow',18)}</span></button>`;
 function emoList(){
   const dn=EMO_SC.filter(s=>growDone('emo',s.id)).length;
   $('#page').innerHTML=growShell('Feelings in real life','learn',`<div class="gr-list">${EMO_SC.map((s,i)=>growCard('learn-grow-emo-'+s.id,FACE[s.feel][0],s.t,'Story · '+FACE[s.feel][1].toLowerCase(),growDone('emo',s.id),i)).join('')}</div>`,{e:'🎬',sub:'Watch a short story. Say how the person feels. Pick what they can do.',c:'--sun',done:dn,total:EMO_SC.length});
