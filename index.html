@@ -5911,7 +5911,7 @@ function curView(){
       </div>
       <div class="sk-teacher" aria-hidden="true">${pip(150)}</div>
     </div>
-    <h3 class="sk-h">${si(lv.e,26)} ${lv.cls} lessons</h3>
+    <h3 class="sk-h">${lv.cls} lessons</h3>
     <ol class="sk-nbs">${lv.units.map(unit).join('')}</ol>
     <div class="sk-test"><span class="sk-medal">${si('medal',54)}</span><div><b>${lv.n} test</b><small>${best!=null?`Best: ${best}/${EXAM_Q}`:`${EXAM_PASS}/${EXAM_Q} to move up`}</small></div><button class="btn ${nx?'':'pri'}" data-go="learn-exam">Try it</button></div>
   </section>`;
