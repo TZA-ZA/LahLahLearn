@@ -1,0 +1,1 @@
+Pictures in this folder are adapted from OpenMoji (https://openmoji.org) by HfG Schwaebisch Gmuend, licensed CC BY-SA 4.0. Changes: wobbly hand-drawn line filter, offset colour fill, softer outline colour. These adapted files are shared under the same licence.

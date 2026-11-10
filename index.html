@@ -2157,7 +2157,7 @@ html[data-theme=dark] .pcr-in,html[data-theme=dark] .pcr-p,html[data-theme=dark]
 
 /* ===== Learn as a school: classes, chalkboard, notebooks, class test ===== */
 .si{display:inline-grid;place-items:center;width:var(--s);height:var(--s);vertical-align:middle;flex:none}.si svg{width:100%;height:100%;display:block}
-.skl{--lc:#3f9a62;--paper:#fffaf0;--ink2:#2a2a2a;display:flex;flex-direction:column;gap:24px;margin:4px 0 34px}
+.skl{--lc:#3f9a62;--paper:#fffaf0;--ink2:#2a2a2a;display:flex;flex-direction:column;gap:24px;margin:4px auto 34px}
 html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,var(--surf) 92%,#fff3)}
 .sk-cls{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .sk-cl{position:relative;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:12px;align-items:center;padding:14px 16px;border-radius:22px;background:var(--surf);border:2px solid var(--line);opacity:.6}
@@ -2677,6 +2677,9 @@ body.has-sidx .msb{display:none!important}
 .lq-top{margin-bottom:12px}
 /* ===== Feelings and life (and Make and move lists): chalkboard header + notebook lessons, like the class lessons ===== */
 .gr2{display:flex;flex-direction:column;gap:22px}
+.gr-cred{margin:6px 0 0;text-align:center;font-size:.72rem;color:var(--muted)}.gr-cred a{color:inherit}
+.doo{display:inline-block;width:1.2em;height:1.2em;vertical-align:-.22em;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.gt-e .doo,.gr-te .doo,.gr-se .doo{width:1.5em;height:1.5em}.gr-face .doo{width:1.35em;height:1.35em}
 .gr-top{margin-bottom:-4px}
 .gr-chalkp{margin:-4px 0 0;max-width:46ch;color:#e6dfc8;font-size:1.02rem;line-height:1.45}
 .gr2 .gr-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
@@ -6457,13 +6460,13 @@ const GRC={emo:'--sun',int:'--coral',talk:'--brand2',life:'--kb'};
 const GR_LC={'--sun':'#c98a12','--coral':'#d4654a','--brand2':'#3f9a62','--kb':'#3a7fc0','--brand':'#3f9a62'};
 function growShell(title,back,body,hero){
   const top=`<div class="kq-top gr-top"><button class="btn lg kq-back" data-go="${back}"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button>${hero?'':`<h2>${esc(title)}</h2>`}</div>`;
-  if(!hero)return `<div class="wrap gr stack" style="gap:18px;max-width:960px">${top}${body}</div>`;
+  if(!hero)return `<div class="wrap gr stack" style="gap:18px;max-width:960px">${top}${body}<p class="gr-cred" data-notr>Pictures adapted from <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0)</p></div>`;
   const lc=GR_LC[hero.c]||'#3f9a62',pct=hero.total?Math.round(hero.done/hero.total*100):0;
   return `<div class="wrap gr gr2 skl" style="--lc:${lc};max-width:1100px">${top}
    <div class="sk-board"><div class="sk-chalk"><span class="sk-eb">${esc(hero.eb||(['Stories','Sing along','Dance','Sports'].includes(title)?'Make and move':'Feelings and life'))}</span><h2>${esc(title)}</h2>${hero.sub?`<p class="gr-chalkp">${hero.sub}</p>`:''}
     ${hero.total?`<div class="sk-prog"><span class="sk-bar"><i style="width:${pct}%"></i></span><small>${hero.done}/${hero.total}</small></div>`:''}
     <button class="sk-go" id="grGo" hidden>Start ${ic('arrow',18)}</button></div><div class="sk-teacher" aria-hidden="true">${pip(150)}</div></div>
-   ${body}</div>`;
+   ${body}<p class="gr-cred" data-notr>Pictures adapted from <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> (CC BY-SA 4.0)</p></div>`;
 }
 /* after a list page renders: point the chalkboard's Start at the first thing not done yet */
 function grGoSync(){const g=$('#grGo');if(!g)return;const n=$('.gr-list .sk-nb:not(.done)')||$('.gr-list .sk-nb');if(!n){return}g.hidden=false;g.dataset.go=n.dataset.go;
@@ -6479,6 +6482,11 @@ function growStart(arg){
 }
 const GR_COL=['--sun','--coral','--brand2','--kb'];
 const growCard=(go2,e,t,sub,done,i=0)=>`<button class="sk-nb ${done?'done':''}" data-go="${go2}" aria-label="${esc(t+'. '+sub+(done?'. Done':''))}"><span class="sk-pg" aria-hidden="true">${i+1}</span><span class="gr-nbt"><b>${esc(t)}</b><small>${esc(sub)}</small></span><span class="sk-st" aria-hidden="true">${done?ic('check',18):ic('arrow',18)}</span></button>`;
+/* hand-drawn pictures for Feelings and life (OpenMoji, CC BY-SA 4.0, redrawn with a wobbly marker look) */
+const DOO={"💬":"1f4ac","🧒":"1f9d2","👀":"1f440","👋":"1f44b","🙋":"1f64b","❓":"2753","👂":"1f442","🙌":"1f64c","🐶":"1f436","🦕":"1f995","🚀":"1f680","🚗":"1f697","🐠":"1f420","🎵":"1f3b5","🚂":"1f682","🤖":"1f916","🎨":"1f3a8","🧱":"1f9f1","⚽":"26bd","🍳":"1f373","🌳":"1f333","🦸":"1f9b8","💃":"1f483","🎮":"1f3ae","✏️":"270f","🧩":"1f9e9","🏃":"1f3c3","📖":"1f4d6","🎧":"1f3a7","🤫":"1f92b","🌤️":"1f324","🎭":"1f3ad","🔊":"1f50a","👥":"1f465","💡":"1f4a1","🧶":"1f9f6","🎁":"1f381","🔀":"1f500","😊":"1f60a","😢":"1f622","😠":"1f620","😨":"1f628","🤩":"1f929","😟":"1f61f","🥺":"1f97a","😤":"1f624","😌":"1f60c","😴":"1f634","🌅":"1f305","🛏️":"1f6cf","🚽":"1f6bd","🪥":"1faa5","🧼":"1f9fc","👕":"1f455","🥣":"1f963","😁":"1f601","🦷":"1f9b7","👅":"1f445","💧":"1f4a7","🧻":"1f9fb","🚰":"1f6b0","🧴":"1f9f4","👏":"1f44f","💦":"1f4a6","🩲":"1fa72","👖":"1f456","🧦":"1f9e6","👟":"1f45f","🪞":"1fa9e","🎒":"1f392","📚":"1f4da","🍎":"1f34e","📒":"1f4d2","🍽️":"1f37d","🪑":"1fa91","🥛":"1f95b","🙂":"1f642","🧹":"1f9f9","🧸":"1f9f8","🗑️":"1f5d1","✨":"2728","🚸":"1f6b8","🛑":"1f6d1","🚦":"1f6a6","🤝":"1f91d","🚶":"1f6b6","⏸️":"23f8","🗣️":"1f5e3","🛒":"1f6d2","🪙":"1fa99","🍪":"1f36a","🧍":"1f9cd","🌙":"1f319","🛁":"1f6c1","💛":"1f49b","🤔":"1f914","🔄":"1f504","🍦":"1f366","💥":"1f4a5","🫂":"1fac2","👩":"1f469","📦":"1f4e6","😄":"1f604","🐕":"1f415","👦":"1f466","🔥":"1f525","🌬️":"1f32c","📢":"1f4e2","🙉":"1f649","👨":"1f468","🚪":"1f6aa","🎈":"1f388","🎉":"1f389","👨‍👩‍👧":"1f468-200d-1f469-200d-1f467","🎂":"1f382","👧":"1f467","💭":"1f4ad","⏰":"23f0","💨":"1f4a8","🔢":"1f522"};
+const dooSeg=(typeof Intl!=='undefined'&&Intl.Segmenter)?new Intl.Segmenter('en',{granularity:'grapheme'}):null;
+function doo(str){if(!str)return'';const parts=dooSeg?[...dooSeg.segment(str)].map(x=>x.segment):[...str];
+  return parts.map(g=>{const h=DOO[g]||DOO[g.replace(/\uFE0F/g,'')];return h?`<img class="doo" src="assets/doodle/${h}.svg" alt="" draggable="false" loading="lazy">`:esc(g)}).join('')}
 function emoList(){
   const dn=EMO_SC.filter(s=>growDone('emo',s.id)).length;
   $('#page').innerHTML=growShell('Feelings in real life','learn',`<div class="gr-list">${EMO_SC.map((s,i)=>growCard('learn-grow-emo-'+s.id,FACE[s.feel][0],s.t,'Story · '+FACE[s.feel][1].toLowerCase(),growDone('emo',s.id),i)).join('')}</div>`,{e:'🎬',sub:'Watch a short story. Say how the person feels. Pick what they can do.',c:'--sun',done:dn,total:EMO_SC.length});
@@ -6490,7 +6498,7 @@ function emoScene(id){
   const draw=()=>{
     const s=S.sc[i];dur=dFor(s);t0=Date.now();
     const st=$('#grst');if(!st)return;
-    st.className='gr-stage bg-'+s[0];$('#grch').textContent=s[1];$('#grch').classList.remove('gin');void $('#grch').offsetWidth;$('#grch').classList.add('gin');
+    st.className='gr-stage bg-'+s[0];$('#grch').innerHTML=doo(s[1]);$('#grch').classList.remove('gin');void $('#grch').offsetWidth;$('#grch').classList.add('gin');
     $('#grcap').textContent=s[2];$('#grcap').setAttribute('data-notr','');
     $$('.gr-seg i').forEach((e,k)=>{e.style.setProperty('--w',k<i?'100%':'0')});
     say(s[2]);
@@ -6498,7 +6506,7 @@ function emoScene(id){
   const quiz=()=>{
     phase='quiz';clearInterval(tm);stopSay();phs(1);
     const ops=shuffle([S.feel,...shuffle(Object.keys(FACE).filter(k=>k!==S.feel)).slice(0,2)]);
-    $('#grbox').innerHTML=`<div class="card stack" style="gap:16px"><h3>How does the person feel?</h3><div class="gr-faces">${ops.map(k=>`<button class="gr-face" data-k="${k}"><span>${FACE[k][0]}</span><b>${FACE[k][1]}</b></button>`).join('')}</div><div id="grfb" aria-live="polite"></div></div>`;
+    $('#grbox').innerHTML=`<div class="card stack" style="gap:16px"><h3>How does the person feel?</h3><div class="gr-faces">${ops.map(k=>`<button class="gr-face" data-k="${k}"><span>${doo(FACE[k][0])}</span><b>${FACE[k][1]}</b></button>`).join('')}</div><div id="grfb" aria-live="polite"></div></div>`;
     say('How does the person feel?');
     $$('.gr-face').forEach(b=>b.onclick=()=>{
       const ok=b.dataset.k===S.feel;recordAnswer('feel',ok);
@@ -6541,7 +6549,7 @@ function emoScene(id){
 }
 function intPage(){
   const sel=new Set(P.interests||[]),lk=new Set(P.likes||[]),dl=new Set(P.dislikes||[]);
-  const tiles=(L,set,name,max)=>L.map(([k,e,n])=>`<button class="gr-tile ${set.has(k)?'on':''}" data-set="${name}" data-k="${k}" aria-pressed="${set.has(k)}"><span class="gt-e" aria-hidden="true">${e}</span><b>${n}</b><i class="gt-ck" aria-hidden="true">${ic('check',14)}</i></button>`).join('');
+  const tiles=(L,set,name,max)=>L.map(([k,e,n])=>`<button class="gr-tile ${set.has(k)?'on':''}" data-set="${name}" data-k="${k}" aria-pressed="${set.has(k)}"><span class="gt-e" aria-hidden="true">${doo(e)}</span><b>${n}</b><i class="gt-ck" aria-hidden="true">${ic('check',14)}</i></button>`).join('');
   const sec=(n,t,sub,cnt,body)=>`<section class="gr-sec"><div class="gr-sh"><span class="gr-n" data-notr>${n}</span><div><h3>${t}</h3>${sub?`<p class="muted small">${sub}</p>`:''}</div>${cnt?`<span class="chip" data-notr>${cnt}</span>`:''}</div><div class="gr-tiles">${body}</div></section>`;
   const draw=()=>{
     $('#page').innerHTML=growShell('All about me','learn',`<div class="gr-say"><span style="flex:none">${pip(64)}</span><p>Hi ${esc(P.name)}! Tell me what you love. I will use it in your lessons and games.</p></div>
@@ -6562,8 +6570,8 @@ function intPage(){
 function talkList(){
   const dn=TALK_SC.filter(s=>growDone('talk',s.id)).length;
   $('#page').innerHTML=growShell('Let us talk','learn',`<section class="gr-sec"><div class="gr-sh"><span class="gr-n" data-notr>1</span><div><h3>How to start a conversation</h3><p class="muted small">Seven small steps.</p></div></div>
-    <ol class="gr-tl">${TALK_STEPS.map(([e,t,d],i)=>`<li><span class="gr-tn" data-notr>${i+1}</span><span class="gr-te" aria-hidden="true">${e}</span><div class="gr-tx"><b>${t}</b><small>${d}</small></div><button class="btn sm ghost" data-say="${esc(t+'. '+d)}" aria-label="Hear it">${ic('vol',15)}</button></li>`).join('')}</ol></section>
-   <section class="gr-sec"><div class="gr-sh"><span class="gr-n" data-notr>2</span><div><h3>Things I can say</h3><p class="muted small">Tap one to hear it.</p></div></div><div class="gr-bubs">${TALK_ST.map(s=>`<button class="gr-bub" data-say="${esc(s)}"><span aria-hidden="true">💬</span>${esc(s)}</button>`).join('')}</div></section>
+    <ol class="gr-tl">${TALK_STEPS.map(([e,t,d],i)=>`<li><span class="gr-tn" data-notr>${i+1}</span><span class="gr-te" aria-hidden="true">${doo(e)}</span><div class="gr-tx"><b>${t}</b><small>${d}</small></div><button class="btn sm ghost" data-say="${esc(t+'. '+d)}" aria-label="Hear it">${ic('vol',15)}</button></li>`).join('')}</ol></section>
+   <section class="gr-sec"><div class="gr-sh"><span class="gr-n" data-notr>2</span><div><h3>Things I can say</h3><p class="muted small">Tap one to hear it.</p></div></div><div class="gr-bubs">${TALK_ST.map(s=>`<button class="gr-bub" data-say="${esc(s)}"><span aria-hidden="true">${doo('💬')}</span>${esc(s)}</button>`).join('')}</div></section>
    <section class="gr-sec"><div class="gr-sh"><span class="gr-n" data-notr>3</span><div><h3>Practice with Pip</h3><p class="muted small">Pick a chat.</p></div></div><div class="gr-list">${TALK_SC.map((s,i)=>growCard('learn-grow-talk-'+s.id,s.e,s.t,'Chat practice',growDone('talk',s.id),i)).join('')}</div></section>`,{e:'💬',sub:'Learn what to say, then practise.',c:'--brand2',done:dn,total:TALK_SC.length});
   $$('[data-say]').forEach(b=>b.onclick=()=>{if(!say(b.dataset.say))toast('Your device cannot read aloud here.')});
 }
@@ -6574,7 +6582,7 @@ function talkChat(id){
     if(n>=S.turns.length){const f=growMark('talk',S.id,5),ni=TALK_SC[(TALK_SC.findIndex(x=>x.id===S.id)+1)%TALK_SC.length];
       $('#grchat').insertAdjacentHTML('beforeend',`<div class="fb"><strong>You did it!</strong><span>${f?starTxt():'Nice practice.'}</span></div><div class="row"><button class="btn pri" data-go="learn-grow-talk-${ni.id}">Next ${ic('arrow',17)}</button><button class="btn" data-go="learn-grow-talk">All chats</button></div>`);sfxStar(5,true);return}
     const [fr,ops]=S.turns[n];
-    $('#grchat').insertAdjacentHTML('beforeend',`<div class="gr-b fr"><span class="gr-av" aria-hidden="true">🧒</span><p>${esc(fill(fr))}</p></div><div class="gr-ans" id="gra${n}">${shuffle(ops.slice()).map(o=>`<button class="gr-o" data-g="${o[1]}" data-fb="${esc(o[2])}">${esc(fill(o[0]))}</button>`).join('')}</div>`);
+    $('#grchat').insertAdjacentHTML('beforeend',`<div class="gr-b fr"><span class="gr-av" aria-hidden="true">${doo('🧒')}</span><p>${esc(fill(fr))}</p></div><div class="gr-ans" id="gra${n}">${shuffle(ops.slice()).map(o=>`<button class="gr-o" data-g="${o[1]}" data-fb="${esc(o[2])}">${esc(fill(o[0]))}</button>`).join('')}</div>`);
     say(fill(fr));
     const box=$('#gra'+n);
     $$('.gr-o',box).forEach(b=>b.onclick=()=>{
@@ -6584,7 +6592,7 @@ function talkChat(id){
     });
     window.scrollTo({top:document.body.scrollHeight,behavior:calmMotion()?'auto':'smooth'});
   };
-  $('#page').innerHTML=growShell(S.t,'learn-grow-talk',`<div class="gr-chatw"><div class="gr-chh"><span class="gr-av" aria-hidden="true">🧒</span><div><b>Kai</b><small>is chatting with you</small></div><span class="chip" data-notr>${S.turns.length} parts</span></div><div class="gr-chat" id="grchat"></div><div class="gr-tip" id="grtip" hidden aria-live="polite"></div></div>`,{e:S.e,sub:'Pick the kind reply.',c:'--brand2'});
+  $('#page').innerHTML=growShell(S.t,'learn-grow-talk',`<div class="gr-chatw"><div class="gr-chh"><span class="gr-av" aria-hidden="true">${doo('🧒')}</span><div><b>Kai</b><small>is chatting with you</small></div><span class="chip" data-notr>${S.turns.length} parts</span></div><div class="gr-chat" id="grchat"></div><div class="gr-tip" id="grtip" hidden aria-live="polite"></div></div>`,{e:S.e,sub:'Pick the kind reply.',c:'--brand2'});
   turn();
 }
 function lifeList(){
@@ -6597,7 +6605,7 @@ function lifeRoutine(id){
   const draw=()=>{
     const f=done.size===S.steps.length,nx=[...Array(S.steps.length).keys()].find(x=>!done.has(x));
     $('#page').innerHTML=growShell(S.t,'learn-grow-life',`<div class="gr-seg">${S.steps.map((_,k)=>`<i style="--w:${done.has(k)?100:0}%"></i>`).join('')}</div>
-     <ol class="gr-sched">${S.steps.map(([e,t],k)=>`<li><button class="gr-s ${done.has(k)?'on':''} ${k===nx?'next':''}" data-k="${k}" aria-pressed="${done.has(k)}"><span class="gr-se" aria-hidden="true">${e}</span><span class="gr-sx"><small data-notr>Step ${k+1}</small><b class="gr-st">${esc(t)}</b></span>${k===nx?'<span class="gr-nx">Next</span>':''}<span class="gr-sc" aria-hidden="true">${done.has(k)?ic('check',22):''}</span></button></li>`).join('')}</ol>
+     <ol class="gr-sched">${S.steps.map(([e,t],k)=>`<li><button class="gr-s ${done.has(k)?'on':''} ${k===nx?'next':''}" data-k="${k}" aria-pressed="${done.has(k)}"><span class="gr-se" aria-hidden="true">${doo(e)}</span><span class="gr-sx"><small data-notr>Step ${k+1}</small><b class="gr-st">${esc(t)}</b></span>${k===nx?'<span class="gr-nx">Next</span>':''}<span class="gr-sc" aria-hidden="true">${done.has(k)?ic('check',22):''}</span></button></li>`).join('')}</ol>
      <div class="row"><button class="btn" id="grhear">${ic('vol',16)} Hear the steps</button></div>
      ${f?`<div class="gr-win"><span aria-hidden="true">${pip(70)}</span><div class="stack" style="gap:2px"><strong>All done! Great job.</strong><span id="grpts"></span></div><div class="row" style="margin-left:auto"><button class="btn pri" data-go="learn-grow-life">More routines</button><button class="btn ghost" id="grre">Do it again</button></div></div>`:''}`,{e:S.e,sub:done.size+' of '+S.steps.length+' steps done',c:'--kb',done:done.size,total:S.steps.length});
     $$('.gr-s').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;if(done.has(k))done.delete(k);else{done.add(k);sfxPop&&sfxPop();say(S.steps[k][1])}const y=scrollY;draw();scrollTo(0,y)});
