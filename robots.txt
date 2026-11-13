@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /thank-you/
+Disallow: /supabase/
+Disallow: /scripts/
 
 Sitemap: https://lahlahlearn.com/sitemap.xml

@@ -51,7 +51,7 @@ export async function sendMail(admin: SupabaseClient | null, m: Mail): Promise<{
   return result;
 }
 
-export const siteUrl = (): string => (optionalEnv("SITE_URL") ?? "https://lahlahlearn.netlify.app/").replace(/\/?$/, "/");
+export const siteUrl = (): string => (optionalEnv("SITE_URL") ?? "https://lahlahlearn.com/").replace(/\/?$/, "/");
 
 /** Calm, simple branded email shell. `body` is trusted HTML built by our own code (values escaped by callers). */
 export function layout(title: string, body: string, cta?: { label: string; url: string }): string {

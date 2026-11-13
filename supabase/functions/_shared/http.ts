@@ -3,8 +3,25 @@ export class HttpError extends Error {
   constructor(public status: number, message: string) { super(message); }
 }
 
+// Browsers may only call the functions from our own sites (plus local development).
+// Add more with the ALLOWED_ORIGINS secret (comma separated). Calls without an Origin (servers, Stripe, cron) are unaffected.
+const SITE_ORIGINS = ["https://lahlahlearn.com", "https://www.lahlahlearn.com", "https://lahlahlearn.netlify.app", "https://tza-za.github.io"];
+export function allowedOrigin(req: Request): string {
+  const o = req.headers.get("Origin") ?? "";
+  const extra = (lookup("ALLOWED_ORIGINS") ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+  if (SITE_ORIGINS.includes(o) || extra.includes(o)) return o;
+  if (/^https:\/\/[a-z0-9-]+--lahlahlearn\.netlify\.app$/.test(o)) return o; // Netlify deploy previews
+  if (/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(o)) return o;
+  return SITE_ORIGINS[0];
+}
+function withCors(req: Request, res: Response): Response {
+  res.headers.set("Access-Control-Allow-Origin", allowedOrigin(req));
+  res.headers.append("Vary", "Origin");
+  return res;
+}
+
 export const corsHeaders: Record<string, string> = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": "https://lahlahlearn.com",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-cron-secret",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
 };
@@ -16,14 +33,14 @@ export function json(data: unknown, status = 200): Response {
 /** Wraps a handler with CORS, OPTIONS handling and friendly error responses. */
 export function serveJson(handler: (req: Request) => Promise<Response>): (req: Request) => Promise<Response> {
   return async (req: Request) => {
-    if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
+    if (req.method === "OPTIONS") return withCors(req, new Response("ok", { headers: corsHeaders }));
     await loadSettings();
     try {
-      return await handler(req);
+      return withCors(req, await handler(req));
     } catch (e) {
-      if (e instanceof HttpError) return json({ error: e.message }, e.status);
+      if (e instanceof HttpError) return withCors(req, json({ error: e.message }, e.status));
       console.error(e);
-      return json({ error: "Something went wrong. Please try again." }, 500);
+      return withCors(req, json({ error: "Something went wrong. Please try again." }, 500));
     }
   };
 }

@@ -187,6 +187,7 @@ html body .foot{border-top:0}
 .ft-col{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
 .ft-h{margin:2px 0 4px;font:800 .72rem/1 var(--f-b);letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
 .foot .ft-col button{padding:2px 0;font-size:.95rem;font-weight:600;color:var(--ink);opacity:.8;position:relative;transition:opacity .2s,color .2s}
+.foot .ft-col a.fl{padding:2px 0;font-size:.95rem;font-weight:600;color:var(--ink);opacity:.8;position:relative;text-decoration:none;transition:opacity .2s,color .2s}.foot .ft-col a.fl:hover,.foot .ft-col a.fl:focus-visible{opacity:1;color:var(--brand)}
 .foot .ft-col button::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s}
 .foot .ft-col button:hover,.foot .ft-col button:focus-visible{opacity:1;color:var(--brand)}.foot .ft-col button:hover::after,.foot .ft-col button:focus-visible::after{transform:scaleX(1)}
 .ft-mail{display:inline-flex;align-items:center;gap:8px;width:fit-content;margin-top:4px;padding:10px 16px;border-radius:999px;background:var(--brand);color:#fff!important;font-weight:700;font-size:.9rem;text-decoration:none;box-shadow:0 8px 18px -10px var(--brand);transition:transform .2s,box-shadow .2s}
@@ -1750,7 +1751,8 @@ body.noanim .au2-logo,body.noanim .au2-fox img{animation:none}
 .au2-f{display:flex;flex-direction:column;gap:6px}.au2-f span{font:600 .85rem var(--f-b);color:var(--muted)}
 .au2-in{height:54px;border-radius:16px;border:1.5px solid var(--line);background:color-mix(in srgb,var(--ink) 3%,var(--surf));padding:0 18px;font:500 1rem var(--f-b);color:var(--ink);width:100%}.au2-in:focus{outline:2px solid var(--brand);outline-offset:1px;border-color:transparent}
 .au2-go{display:flex;align-items:center;justify-content:center;gap:10px;height:58px;border:0;border-radius:99px;background:linear-gradient(180deg,#2d6a4a,#1f5239);color:#fff;font:700 1.02rem var(--f-b);cursor:pointer;box-shadow:0 12px 24px -12px rgba(18,60,40,.6);transition:filter .18s,transform .18s}.au2-go:hover{filter:brightness(1.12)}.au2-go:active{transform:translateY(1px)}
-.au2-note{margin:0;text-align:center;font-size:.82rem;color:var(--muted)}.au2-sw{margin:0;text-align:center;color:var(--muted)}.au2-sw a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;cursor:pointer}
+.au2-note{margin:0;text-align:center;font-size:.82rem;color:var(--muted)}
+.au2-ck{display:flex;gap:10px;align-items:flex-start;text-align:left;font-size:.86rem;line-height:1.4;color:var(--ink);cursor:pointer}.au2-ck input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--brand)}.au2-ck a{color:inherit;text-decoration:underline;text-underline-offset:2px}.au2-sw{margin:0;text-align:center;color:var(--muted)}.au2-sw a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;cursor:pointer}
 .au2-l{min-height:0!important;align-self:center}.au2-top{padding-bottom:clamp(320px,33vw,420px)!important}.au2-rb{bottom:60px}
 @media(max-width:1100px) and (orientation:portrait){.au2{grid-template-columns:1fr;min-height:0}.au2-l{align-self:stretch}.au2-r{margin-top:-30px;position:relative;z-index:5}.au2-top{padding-bottom:clamp(250px,40vw,340px)!important}.au2-rb{width:min(80%,520px)}.au2-fox{width:clamp(150px,24vw,230px)}.au2-logo{width:clamp(120px,16vw,180px)}}
 @media(max-width:900px){.au2{grid-template-columns:1fr}.au2-l{min-height:300px;border-radius:28px}.au2-h{font-size:2rem}.au2-logo{width:120px;bottom:16px}.au2-fox{width:150px}.au2-rb{bottom:40px}.au2-hill{height:130px;bottom:-40px}.au2-top{padding-bottom:clamp(170px,30vw,230px)!important}.au2-r{margin-top:-30px;position:relative;z-index:5}}
@@ -2190,6 +2192,84 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 .sk-nb.done .sk-st{background:var(--lc);color:#fff}.sk-nb.now{border-color:var(--lc);border-width:2px}.sk-nb.now .sk-st{background:#ffd978;color:#5a3d06}
 .sk-test{display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:24px;background:var(--paper);border:3px double #e2b65a;box-shadow:0 18px 30px -26px rgba(160,110,20,.7)}
 .sk-test>div{flex:1}.sk-test b{display:block;font:700 1.15rem var(--f-d)}.sk-test small{color:var(--muted);font-weight:600}
+.ab-team .ab-hd{position:static}.tm-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
+.tm-c{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:22px 14px 18px;border-radius:24px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
+.tm-c img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid color-mix(in srgb,var(--brand) 35%,var(--surf));margin-bottom:6px}
+.tm-c b{font:700 1.08rem/1.25 var(--f-d)}.tm-c small{color:var(--muted);font-weight:600}
+.tm-l{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.tm-l a{display:inline-flex;align-items:center;min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);font:600 .82rem var(--f-b);color:var(--ink);text-decoration:none;background:var(--bg)}
+.tm-l a:hover,.tm-l a:focus-visible{border-color:var(--brand);color:var(--brand)}
+/* ===== Journey: the class as a path of stepping stones, with treasure chests on the way ===== */
+.jr-h{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;margin:6px 0 -12px}.jr-h .sk-h{margin:0}.jr-h small{color:var(--muted);font-weight:700}
+.jr{--jx:46px;--jn:84px;list-style:none;margin:0 auto;padding:30px calc(var(--jx)*2) 6px;width:100%;max-width:680px;display:flex;flex-direction:column;gap:32px}
+.jr-s{position:relative;display:grid;grid-template-columns:1fr var(--jn) 1fr;align-items:center;gap:16px;transform:translateX(calc(var(--o,0)*var(--jx)))}
+.jr-s+.jr-s::before{content:"";position:absolute;left:50%;top:-30px;width:8px;height:28px;margin-left:-4px;background:radial-gradient(circle,color-mix(in srgb,var(--muted) 45%,transparent) 2.6px,transparent 3.1px) center/8px 9px repeat-y;transform:translateX(calc(var(--d,0)*var(--jx)*.5)) rotate(calc(var(--d,0)*26deg))}
+.jr-s.go::before{background-image:radial-gradient(circle,var(--lc) 2.8px,transparent 3.3px)}
+.jr-n{grid-column:2;grid-row:1;position:relative;width:var(--jn);height:var(--jn);border-radius:50%;border:0;padding:0;cursor:pointer;display:grid;place-items:center;font:700 1.8rem var(--f-d);color:#fff;background:var(--lc);box-shadow:0 7px 0 color-mix(in srgb,var(--lc) 66%,#000),0 18px 22px -12px rgba(30,40,30,.5);transition:transform .15s,box-shadow .15s}
+.jr-n:hover:not([disabled]){transform:translateY(-2px)}.jr-n:active:not([disabled]){transform:translateY(5px);box-shadow:0 2px 0 color-mix(in srgb,var(--lc) 66%,#000)}
+.jr-n svg{display:block}
+.jr-s.done .jr-n{background:#f2c14e;color:#6a4505;box-shadow:0 7px 0 #c9962a,0 18px 22px -12px rgba(120,90,10,.5)}
+.jr-s.lock .jr-n{background:color-mix(in srgb,var(--muted) 26%,var(--surf));color:var(--muted);box-shadow:0 7px 0 color-mix(in srgb,var(--muted) 42%,var(--surf));cursor:default}
+.jr-s.now .jr-n::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:4px solid color-mix(in srgb,var(--lc) 55%,transparent);animation:jrPulse 1.9s ease-out infinite}
+@keyframes jrPulse{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.2);opacity:0}}
+.jr-t{grid-column:3;grid-row:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.jr-s.lf .jr-t{grid-column:1;text-align:right;align-items:flex-end}
+.jr-t b{font:700 1.04rem/1.25 var(--f-d)}.jr-t small{color:var(--muted);font-weight:600;font-size:.85rem;line-height:1.3}
+.jr-t em{font-style:normal;font-weight:700;font-size:.8rem;color:var(--lc);margin-top:2px}
+.jr-s.lock .jr-t{opacity:.62}
+.jr-me{grid-column:1;grid-row:1;justify-self:end;align-self:end;margin:0 -8px -4px 0;pointer-events:none;animation:jrBob 2.6s ease-in-out infinite}
+.jr-s.lf .jr-me{grid-column:3;justify-self:start;margin:0 0 -4px -8px}
+.jr-me>*{display:block;width:78px;height:auto}
+@keyframes jrBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.jr-ch{grid-column:2;grid-row:1;width:var(--jn);height:var(--jn);border:0;background:none;padding:0;display:grid;place-items:center;filter:drop-shadow(0 8px 7px rgba(60,40,10,.28))}
+button.jr-ch{cursor:pointer}.jr-ch svg{width:94%;height:94%;display:block}
+.jr-c.lock .jr-ch{filter:grayscale(.9) opacity(.5)}
+.jr-c.ready .jr-ch{animation:jrWig 1.7s ease-in-out infinite}
+@keyframes jrWig{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg) scale(1.07)}}
+.jr-c.open .jr-ch{background:var(--paper);border-radius:50%;border:3px solid #f2c14e;filter:none}.jr-c.open .jr-ch svg{width:64%;height:64%}
+.jr-gate{grid-column:2;grid-row:1;width:var(--jn);height:var(--jn);border-radius:24px;border:3px double #e2b65a;background:var(--paper);padding:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 7px 0 #d9b25e,0 18px 22px -12px rgba(120,90,10,.5);transition:transform .15s}
+.jr-gate:hover:not([disabled]){transform:translateY(-2px)}
+.jr-g.lock .jr-gate{filter:grayscale(.85);opacity:.6;cursor:default}
+.jr-g.ready .jr-gate{animation:jrWig 2.2s ease-in-out infinite}
+.jr-land{grid-column:2;grid-row:1;width:var(--jn);height:var(--jn);border-radius:50%;border:3px dashed color-mix(in srgb,var(--muted) 50%,transparent);display:grid;place-items:center;filter:grayscale(.7);opacity:.75}
+.jr-x.end .jr-land{filter:none;opacity:1;border:3px solid #f2c14e;background:var(--paper)}
+.jr.calm .jr-n::after,.jr.calm .jr-me,.jr.calm .jr-ch,.jr.calm .jr-gate{animation:none!important}
+@media(prefers-reduced-motion:reduce){.jr-n::after,.jr-me,.jr-ch,.jr-gate{animation:none!important}}
+@media(max-width:620px){
+ .jr{--jx:13px;--jn:72px;gap:28px;padding:26px 26px 6px}
+ .jr-s{grid-template-columns:var(--jn) 1fr;gap:14px}
+ .jr-s+.jr-s::before{left:calc(var(--jn)/2);top:-27px}
+ .jr-n,.jr-ch,.jr-gate,.jr-land{grid-column:1}
+ .jr-t,.jr-s.lf .jr-t{grid-column:2;text-align:left;align-items:flex-start}
+ .jr-me,.jr-s.lf .jr-me{grid-column:1;position:absolute;left:-20px;top:-34px;margin:0;justify-self:auto}.jr-me>*{width:50px}
+ .jr-n{font-size:1.5rem}
+}
+.tre{display:flex;flex-direction:column;gap:14px;padding:20px 22px;border-radius:24px;background:var(--paper);border:1px solid var(--line)}
+.tre-h{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap}.tre-h h3{margin:0;font:700 1.3rem var(--f-d)}
+.tre-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:12px}
+.tre-g li{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;padding:12px 8px;border-radius:18px;background:var(--surf);border:1px solid var(--line)}
+.tre-i{width:56px;height:56px;display:grid;place-items:center}.tre-i svg{width:100%;height:100%;display:block}
+.tre-g li.lk .tre-i{filter:grayscale(1) opacity(.35)}
+.tre-g b{font:700 .9rem/1.2 var(--f-d)}.tre-g small{color:var(--muted);font-size:.76rem;font-weight:600}
+.rw-card{gap:12px}.rw-burst{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.rw-i{width:98px;height:98px;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle,#fff6d6 40%,#ffe08a);box-shadow:0 0 0 6px rgba(255,214,90,.3);animation:rwPop .5s cubic-bezier(.3,1.5,.5,1) both}
+.rw-i svg{width:66%;height:66%;display:block}.rw-burst .rw-i:nth-child(n+4){width:70px;height:70px}
+@keyframes rwPop{from{transform:scale(.3);opacity:0}}
+.cu-prize{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:18px;background:color-mix(in srgb,#ffd978 30%,var(--surf));border:2px solid #f2c14e;text-align:left}.cu-prize svg{width:54px;height:54px;flex:none}.cu-prize b{display:block;font:700 1.05rem var(--f-d)}.cu-prize small{color:var(--muted);font-weight:600}
+/* 3D world: decorate panel */
+.decop{right:14px;top:142px;width:min(330px,calc(100% - 28px));max-height:min(64%,480px);overflow:auto;pointer-events:auto;z-index:8;padding:14px 16px;display:flex;flex-direction:column;gap:10px;color:var(--ink)}
+.decop[hidden]{display:none}
+.dp-h{display:flex;align-items:center;justify-content:space-between;gap:10px}.dp-h b{font:700 1.12rem var(--f-d)}
+.dp-x{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surf);cursor:pointer;font-size:1.3rem;line-height:1;color:var(--ink)}
+.dp-s{margin:4px 0 -2px;font-weight:700;font-size:.84rem;color:var(--muted)}
+.dp-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dp-w{position:relative}
+.dp-b{width:100%;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;min-height:92px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;font:600 .76rem/1.15 var(--f-b)}
+.dp-b svg{width:40px;height:40px;display:block}.dp-b.on{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 14%,var(--surf))}
+.dp-b.lk{cursor:default;opacity:.62}.dp-b.lk svg{filter:grayscale(1)}
+.dp-b small{font-size:.7rem;color:var(--muted);font-weight:600}
+.dp-rm{position:absolute;right:-5px;top:-5px;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;font-size:1rem;line-height:1;padding:0;box-shadow:var(--shadow)}
+@media(max-width:620px){.decop{top:auto;bottom:calc(120px + env(safe-area-inset-bottom,0px));right:10px;max-height:46%}}
 /* teaching cards */
 .tc{position:relative;display:flex;flex-direction:column;gap:18px;padding:22px 24px;border-radius:30px;background:var(--paper,#fffaf0);border:1.5px solid var(--line);box-shadow:0 26px 50px -36px rgba(40,30,10,.5)}
 .tc-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -2265,6 +2345,7 @@ html[data-theme=dark] .tc-vis{background:color-mix(in srgb,var(--brand) 12%,var(
 .dl-o span{grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--surf2,rgba(0,0,0,.04));color:var(--brand)}
 .dl-o b{font-size:.95rem}.dl-o small{color:var(--muted);font-size:.8rem;line-height:1.35}
 .dl-stay{width:100%;justify-content:center;margin-top:4px}
+.dl-btns{justify-content:center;gap:10px;flex-wrap:wrap;width:100%;margin-top:4px}.dl-code{font-size:1.5rem;letter-spacing:.35em;text-align:center;font-variant-numeric:tabular-nums}
 .dl-go{border:0;background:none;color:var(--muted);font-size:.84rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
 .dl-go:hover{color:var(--warn)}
 @media (prefers-reduced-motion:reduce){.dl-pip,.dl-pip .pp-tear{animation:none}}
@@ -2777,8 +2858,8 @@ body.has-sidx .msb{display:none!important}
 <main id="main"><section class="page" id="page"></section>
 <footer class="foot" id="foot"><div class="wrap ft">
   <div class="ft-b"><img class="ft-logo" src="assets/img/logo.webp" alt="LahLahLearn" width="150" height="72" loading="lazy"><p>Empowering a brighter future for every child. Calm, playful learning for ages 3 to 8.</p></div>
-  <nav class="ft-col" aria-label="Explore"><h2 class="ft-h">Explore</h2><button data-go="home">About</button><button data-go="pricing">Plans</button></nav>
-  <nav class="ft-col" aria-label="Legal"><h2 class="ft-h">Legal</h2><button data-go="terms">Terms of service</button><button data-go="privacy">Privacy policy</button><button data-cookies>Cookie settings</button></nav>
+  <nav class="ft-col" aria-label="Explore"><h2 class="ft-h">Explore</h2><a class="fl" href="about/" data-go="home">About</a><a class="fl" href="about/#team" data-go="home" data-team>Our team</a><a class="fl" href="#pricing" data-go="pricing">Plans</a><a class="fl" href="contact/">Contact</a></nav>
+  <nav class="ft-col" aria-label="Legal"><h2 class="ft-h">Legal</h2><a class="fl" href="terms/" data-go="terms">Terms of service</a><a class="fl" href="privacy/" data-go="privacy">Privacy policy</a><a class="fl" href="refunds/" data-go="refunds">Refund policy</a><a class="fl" href="cookies/" data-go="cookies">Cookie policy</a><button data-cookies>Cookie settings</button></nav>
   <div class="ft-col ft-c"><h2 class="ft-h">Contact</h2><p>Questions or ideas? We would love to hear from you.</p><a class="ft-mail" href="mailto:lahlahlearn@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>lahlahlearn@gmail.com</a></div>
   <div class="ft-x"><span>&copy; <span class="ft-y">2026</span> LahLahLearn</span><span id="syncState" style="font-weight:600"></span><span class="ft-love">Made with care for every child</span></div>
 </div></footer></main>
@@ -3786,6 +3867,7 @@ function cloudAuthUI(reg){
   const apl=$('[data-am="apple"] span',card);if(apl)apl.textContent=tr('Continue with Apple (iCloud)');
   // Google and Apple always show. Until a provider is switched on in Supabase Auth, the button explains instead of failing.
   $$('[data-am]',card).forEach(b=>b.onclick=async()=>{
+    if(reg&&!consentOk())return;
     const pv=b.dataset.am,on=(await cloudProviders())[pv];
     if(!on){let n=$('#aSocNote',card);if(!n){n=document.createElement('p');n.id='aSocNote';n.className='em-err';n.setAttribute('role','status');$('.au2-soc',card).after(n)}n.hidden=false;n.textContent=(pv==='google'?'Google':'Apple')+' '+tr('sign-in is almost ready. For now, please use your email below. It only takes a moment.');return}
     b.disabled=true;const {error}=await CLOUD.sb.auth.signInWithOAuth({provider:pv,options:{redirectTo:location.origin+location.pathname}});
@@ -3803,6 +3885,7 @@ function cloudAuthUI(reg){
   const done=async em=>{lsSet('ll.email',em);const L=loginLoad(reg?tr('Setting up your account'):tr('Welcome back!'));try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}finally{L.close()}};
   const send=async()=>{
     say(pwErr,'');
+    if(reg&&!consentOk())return;
     const em=await emailGate($('#aEm'),emErr,$('#aGo'));if(!em)return;
     const p=pw.value;
     if(reg){
@@ -3875,7 +3958,7 @@ function cloudAuthUI(reg){
   const em=$('#aEm');[em,pw,pw2].forEach(x=>x&&x.addEventListener('keydown',e=>{if(e.key==='Enter'){e.stopImmediatePropagation();e.preventDefault();send()}},true));
   if(lsGet('ll.email')&&!em.value)em.value=lsGet('ll.email');
   const lab=$('#aGo span');if(lab)lab.textContent=reg?tr('Create account'):tr('Log in');
-  const note=$('.au2-note',card);if(note){if(reg)note.innerHTML=esc(tr('We email you a code once to confirm your address.'))+' '+esc(tr('By creating an account you agree to our'))+' <a href="#terms">'+esc(tr('Terms of Service'))+'</a> '+esc(tr('and'))+' <a href="#privacy">'+esc(tr('Privacy policy'))+'</a>.';else note.textContent=tr('One parent account holds up to 3 children.')}
+  const note=$('.au2-note',card);if(note){if(reg)note.textContent=tr('We email you a code once to confirm your address.');else note.textContent=tr('One parent account holds up to 3 children.')}
 }
 
 /* ---- Care Circle data */
@@ -4052,6 +4135,35 @@ R.terms=()=>{
   legalPage('Terms of Service','9 November 2026',S);
 };
 
+/* ---------- Refund Policy and Cookie Policy (same wording as the Terms and the Privacy Policy, on their own pages) ---------- */
+R.refunds=()=>{
+  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'lahlahlearn@gmail.com'),ml=`<a href="mailto:${mail}">${mail}</a>`;
+  const S=[
+   ['Summary',`<p>This Refund Policy explains how cancellations and refunds work for paid LahLahLearn plans. It forms part of our <a href="#terms">Terms of Service</a>.</p><ul><li>The Free plan costs nothing.</li><li>The 7-day free trial of the Family plan needs no payment details, so there is nothing to refund when it ends.</li><li>You can cancel a paid plan at any time.</li></ul>`],
+   ['Cancelling a plan',`<p>You may cancel at any time from the <a href="#pricing">Plans</a> page (&ldquo;Manage plan&rdquo;). Cancellation takes effect at the end of the current billing period, and you keep access to paid features until then. After that the account returns to the Free plan, and your child&rsquo;s progress is kept.</p><p>Paid plans renew automatically at the end of each billing period until cancelled. To avoid the next charge, cancel before the renewal date shown on the Plans page.</p>`],
+   ['Refunds',`<p>Except where required by law, payments are non-refundable and we do not give refunds for partial billing periods.</p>`],
+   ['If you were charged in error',`<p>If you believe you were charged in error, for example you were charged twice or charged after cancelling, contact us at ${ml} within 14 days of the charge and we will review it promptly. Please include the email address of your account, the date of the charge and the amount.</p><p>If a refund is approved, it is returned through Stripe to the payment method you used. Your bank may take several working days to show it.</p>`],
+   ['Price changes',`<p>We will give you at least 30 days&rsquo; notice before a new price applies to your subscription, and you may cancel before it takes effect.</p>`],
+   ['Your legal rights',`<p>Nothing in this Policy affects your rights under the Consumer Protection Act 1999 of Malaysia or other laws that cannot be excluded.</p>`],
+   ['Contact us',`<p>For questions about a charge or a refund, please contact:</p><p class="pv-ad"><b>LahLahLearn</b><br>Selangor, Malaysia<br>${ml}</p>`]];
+  legalPage('Refund Policy','13 November 2026',S);
+};
+R.cookies=()=>{
+  const mail=esc((window.LLL_CONFIG||{}).contactEmail||'lahlahlearn@gmail.com'),ml=`<a href="mailto:${mail}">${mail}</a>`;
+  const T=(hd,rows)=>`<div class="pv-tw"><table class="pv-t"><thead><tr>${hd.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const S=[
+   ['What this Policy covers',`<p>This Cookie Policy explains how LahLahLearn uses cookies and similar browser storage (such as local storage) on our website and web application. It should be read with our <a href="#privacy">Privacy Policy</a>.</p>`],
+   ['What we use',`<p>We do not use advertising or tracking cookies. We use browser storage as follows:</p>${T(['Type','What it does','Can I turn it off?'],[
+      ['Essential','Keeps you signed in, saves learning progress and settings on the device, and remembers your cookie choice','No. The Service cannot work without it'],
+      ['Optional statistics','Anonymous counts of which lessons are used, to help us improve them. No names or contact details are included','Yes. It is off unless you choose &ldquo;Accept all&rdquo;']])}`],
+   ['What we do not use',`<ul><li>No advertising cookies and no advertising networks.</li><li>No cookies that follow you or your child across other websites.</li><li>No selling or sharing of browsing data.</li></ul>`],
+   ['Other companies',`<p>Some steps happen on pages run by other companies, which may set their own cookies there under their own policies:</p><ul><li><b>Stripe</b>, when you pay for a plan on Stripe&rsquo;s checkout page; and</li><li><b>Google</b> or <b>Apple</b>, if you choose to sign in with them.</li></ul>`],
+   ['Your choices',`<p>You can change your choice at any time through <button class="pv-link" data-cookies>Cookie settings</button>.</p><p>You can also clear cookies and site data in your browser settings. If you do, you will be signed out, and settings or progress saved only on that device may be removed.</p>`],
+   ['Changes to this Policy',`<p>We may update this Policy from time to time. The effective date at the top shows when it was last revised.</p>`],
+   ['Contact us',`<p>For questions about this Policy, please contact:</p><p class="pv-ad"><b>LahLahLearn</b><br>Selangor, Malaysia<br>${ml}</p>`]];
+  legalPage('Cookie Policy','13 November 2026',S);
+};
+
 /* ---------- Cookie consent: Accept all / Essential only ---------- */
 const CONSENT_KEY='lll.consent';
 const consentGet=()=>{try{return localStorage.getItem(CONSENT_KEY)}catch(e){return null}};
@@ -4133,7 +4245,7 @@ function greetShow(){
   el.onclick=shut;$('button',el).focus();setTimeout(shut,6500);
   try{if(typeof say==='function'&&!calmOpen)say('Hi '+P.name+', welcome to LahLahLearn. '+w+'!')}catch(e){}
 }
-const PUBLIC=['welcome','auth','home','pricing','join','privacy','terms'],FULL=['welcome','onboard','pick','who'];
+const PUBLIC=['welcome','auth','home','pricing','join','privacy','terms','refunds','cookies'],FULL=['welcome','onboard','pick','who'];
 const DOCK=[['dashboard','Home','home'],['learn','Learn','book'],['explore-island','3D World','globe'],['together','Leaderboard','trophy'],['care','Care Circle','chart']];
 const parseHash=()=>{const h=(location.hash||'').slice(1),i=h.indexOf('-');return i<0?{base:h,arg:''}:{base:h.slice(0,i),arg:h.slice(i+1)}};
 const go=r=>{if(('#'+r)===location.hash)route();else location.hash=r};
@@ -4169,7 +4281,7 @@ function chrome(){
   $('#foot').style.display=FULL.includes(cur)||(cur==='explore'&&parseHash().arg)?'none':'';setSync();updateClock();musSync();if(!session&&(HS.cam.on||HS.mic.on)){camStop();micStop()}hsUpdate();
 }
 function resolve(){
-  if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy','terms'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
+  if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy','terms','refunds','cookies'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
   let{base,arg}=parseHash();
   if(!R[base])base=session?'dashboard':'welcome';
   if(!session&&!PUBLIC.includes(base)&&base!=='onboard'&&base!=='pick')base='auth';
@@ -4177,10 +4289,12 @@ function resolve(){
   if(session&&(base==='welcome'||base==='auth')&&!OB.live)base='dashboard';
   return{base,arg};
 }
+const PAGE_TITLE={welcome:'LahLahLearn - Fun, calm learning app for kids',home:'About LahLahLearn - Calm learning made for your child',pricing:'Plans and prices - LahLahLearn',auth:'Log in or register - LahLahLearn',privacy:'Privacy Policy - LahLahLearn',terms:'Terms of Service - LahLahLearn',refunds:'Refund Policy - LahLahLearn',cookies:'Cookie Policy - LahLahLearn',dashboard:'My page - LahLahLearn',learn:'Learn - LahLahLearn',explore:'Play - LahLahLearn',care:'Care Circle - LahLahLearn',profile:'Settings - LahLahLearn',together:'Together - LahLahLearn',journey:'My journey - LahLahLearn'};
 function render(base,arg){
   teardowns.forEach(f=>{try{f()}catch(e){}});teardowns=[];
   const pg=$('#page');pg.className='page'+(FULL.includes(base)?' full':'');pg.dataset.r=base;pg.innerHTML='';
   if(session&&P&&kidMode()&&['pricing','home','profile'].includes(base)){careNext=base;base='care';arg='';pg.dataset.r='care'}
+  try{document.title=PAGE_TITLE[base]||'LahLahLearn'}catch(e){}
   cur=base;curArg=arg;if((base==='explore'&&arg==='island')||['dashboard','together','care','profile','study','home','pricing','helpers'].includes(base)||(base==='learn'&&!arg))fromIsl=false;chrome();
   try{R[base](arg)}catch(e){pg.innerHTML='<div class="wrap" style="padding-top:40px"><div class="card"><h3>Something went wrong</h3><p class="muted">Please go back to the start page.</p></div></div>';console.error(e)}
   reveal(pg);window.scrollTo(0,0);try{grGoSync()}catch(e){}lbStart();guideSync();trialSync();mpEnhance();
@@ -5165,6 +5279,10 @@ function abFx(root){
   addEventListener('scroll',on,{passive:true});addEventListener('resize',on);upd();setTimeout(upd,300);
   return()=>{io.disconnect();removeEventListener('scroll',on);removeEventListener('resize',on);cancelAnimationFrame(raf)};
 }
+/* the people behind LahLahLearn: [photo, name, role, Instagram handle, LinkedIn id] */
+const TEAM=[['thant','Thant Zaw Aung','Leader and web developer','tzaa_za','thant-zaw-aung-5aa5192ab'],['nay','Nay Myo Thiha','Researcher','o.nax.o',''],['htoo','Htoo Thi Kyi','Content and media lead','dumplingboyboy._',''],['fatima','Fatima Abdullah','Secretary and treasurer','5ati3a','fatima-abdullah-24135667abc'],['chelsea','Chelsea Choo Minshe','QA and marketing lead','3helsea','']];
+let TEAMGO=false;
+const teamCards=()=>TEAM.map(m=>`<li class="tm-c rv"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="160" height="160" loading="lazy" decoding="async"><b data-notr>${esc(m[1])}</b><small>${esc(m[2])}</small><span class="tm-l">${m[3]?`<a href="https://www.instagram.com/${m[3]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on Instagram" data-notr>Instagram</a>`:''}${m[4]?`<a href="https://www.linkedin.com/in/${m[4]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on LinkedIn" data-notr>LinkedIn</a>`:''}</span></li>`).join('');
 R.home=()=>{
   const cta=session?'dashboard':'auth-register',ctaT=session?'Open my page':'Register';
   const kinds=[['Predictable','Clear and predictable','Same layout every time.','check','--brand'],['Paced','Short and quick','Small steps, visible timer.','flame','--coral'],['Readable','Easy to read','Big text, wide spacing.','book','--sky'],['Visual','See everything','Hand signs and captions.','hand','--sun']];
@@ -5192,12 +5310,17 @@ R.home=()=>{
      <div class="ab-mb">${[40,62,35,78,55,90,66].map((v,i)=>`<i style="--v:${v}%;--i:${i}"></i>`).join('')}</div>
      <div class="ab-mk"><i style="--w:34%;--c:var(--brand)"></i><i style="--w:22%;--c:var(--sun)"></i><i style="--w:18%;--c:var(--coral)"></i><i style="--w:26%;--c:var(--sky)"></i></div>
      <div class="ab-mg">${[72,48,60].map(v=>`<div><i style="--w:${v}%"></i></div>`).join('')}</div></div></section>
+   <section class="ab-sec ab-team" id="team" aria-labelledby="teamT"><div class="ab-hd rv"><span class="ab-ey">Behind the scenes</span><h2 class="kx" id="teamT" data-notr>${tr('The people behind LahLahLearn')}</h2><p>We are a small student team in Malaysia. Say hello.</p></div><ul class="tm-g">${teamCards()}</ul></section>
    <section class="ab-sec ab-faq"><div class="ab-hd rv"><span class="ab-ey">FAQ</span><h2 class="kx" data-notr>${tr('Good questions')}</h2></div>
     <div class="rv">${FAQ.slice(0,3).map(f=>`<details class="acc"><summary>${f[0]}</summary><div class="accb"><p class="muted">${f[1]}</p></div></details>`).join('')}</div></section>
    <section class="ab-cta rv"><h2 class="kx" data-notr>${tr('Every child can do this.')}</h2><button class="btn sun lg" data-go="${cta}">${ctaT} ${ic('arrow',18)}</button></section></div>`;
+  if(TEAMGO){TEAMGO=false;[80,700].forEach(ms=>setTimeout(()=>{const t=$('#team');if(t&&cur==='home')t.scrollIntoView({block:'start'})},ms))}  /* twice: the pinned sections above change height as they set up */
   teardowns.push(abFx($('.ab')));countUp($('.ab'));teardowns.push(spiral3D($('#abspiral'),{radius:235,verticalGap:64,cardWidth:255,cardAspectRatio:3/2,autoRotate:true,autoSpeed:.08,scrollSensitivity:.0018,smoothing:.05,blurStrength:1.65,bend:.17,fov:44}));
 };
 
+/* sign-up needs the grown-up's clear consent (their own age, and the child's data) before any account is made */
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-team]');if(!a)return;if(cur==='home'){e.preventDefault();e.stopPropagation();const t=$('#team');if(t)t.scrollIntoView({block:'start',behavior:calmMotion()?'auto':'smooth'})}else TEAMGO=true},true);
+function consentOk(){const c=$('#aOk');if(!c||c.checked)return true;const e=$('#aOkErr');if(e){e.hidden=false;e.textContent=tr('Please tick the box to confirm you are the parent or guardian and agree to the terms.')}c.focus();return false}
 R.auth=arg=>{
   const reg=arg==='register',has=!!P;
   const gG='<svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
@@ -5214,20 +5337,21 @@ R.auth=arg=>{
     <div class="au2-soc"><button type="button" class="au2-b" data-am="google">${gG}<span>Continue with Google</span></button><button type="button" class="au2-b" data-am="apple">${gA}<span>Continue with Apple</span></button></div>
     <div class="au2-or"><i></i><b>OR</b><i></i></div>
     <label class="au2-f"><span>Email</span><input class="au2-in" id="aEm" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" aria-label="Email address" aria-describedby="aEmErr"></label><p class="em-err" id="aEmErr" role="alert" hidden></p>
+    ${reg?`<label class="au2-ck"><input type="checkbox" id="aOk" aria-describedby="aOkErr"><span>I am the child&rsquo;s parent or legal guardian, I am 18 or older, and I agree to the <a href="terms/" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy/" target="_blank" rel="noopener">Privacy Policy</a>, including how my child&rsquo;s data is used.</span></label><p class="em-err" id="aOkErr" role="alert" hidden></p>`:''}
     <button class="au2-go" id="aGo" type="button"><span>${reg?'Create account':(has?'Continue as '+esc(P.name):'Log in')}</span>${ic('arrow',18)}</button>
     <p class="au2-note">One parent account holds up to 3 children.</p>
     <p class="au2-sw">${reg?'Already have an account? ':'New here? '}<a href="#auth-${reg?'login':'register'}" id="aSw">${reg?'Log in':'Create account'}</a></p>
    </div></section></div>`;
   const sg=$('#aseg');segPill(sg);$$('button',sg).forEach(b=>b.onclick=()=>go('auth-'+b.dataset.k));
   $('#aSw').onclick=e=>{e.preventDefault();go('auth-'+(reg?'login':'register'))};
-  const proceed=async m=>{let em=($('#aEm').value||'').trim();if(m==='email'){em=await emailGate($('#aEm'),$('#aEmErr'),$('#aGo'));if(!em)return
+  const proceed=async m=>{if(reg&&!consentOk())return;let em=($('#aEm').value||'').trim();if(m==='email'){em=await emailGate($('#aEm'),$('#aEmErr'),$('#aGo'));if(!em)return
       if(!reg&&has){const stored=(lsGet('ll.email')||'').trim().toLowerCase();
         if(stored&&em.toLowerCase()!==stored){$('#aEm').setAttribute('aria-invalid','true');$('#aEmErr').hidden=false;$('#aEmErr').textContent='This email does not match the account on this device. Please use the email you registered with, or create a new account.';$('#aEm').focus();return}}}
     if(em)lsSet('ll.email',em);if(m)lsSet('ll.am',m);
     if(reg||!has){OB.start(null);return}const L=loginLoad(tr('Welcome back!'));session=true;lsSet('ll1.session','1');applyA11y();go(KIDS&&KIDS.list.length>1?'who':'dashboard');L.close()};
   $('#aGo').onclick=()=>proceed('email');
   $$('[data-am]').forEach(b=>b.onclick=()=>proceed(b.dataset.am));
-  $('#aEm').addEventListener('keydown',e=>{if(e.key==='Enter')proceed('email')});$('#aEm').addEventListener('input',()=>{$('#aEmErr').hidden=true;$('#aEm').removeAttribute('aria-invalid')});
+  $('#aEm').addEventListener('keydown',e=>{if(e.key==='Enter')proceed('email')});{const ck=$('#aOk');if(ck)ck.onchange=()=>{const e=$('#aOkErr');if(e)e.hidden=true}}$('#aEm').addEventListener('input',()=>{$('#aEmErr').hidden=true;$('#aEm').removeAttribute('aria-invalid')});
   if(CLOUD.on&&CLOUD.sb)cloudAuthUI(reg);
 };
 
@@ -5902,7 +6026,76 @@ const curLv=()=>CURR[curGet().lv]||CURR[0];
 const curName=()=>curLv().n;
 function curUnitDone(u){const c=curGet();if(u.k==='write'){const w=G.write||{};if(u.letters.every(l=>w[l]))c.done[u.id]=true}return!!c.done[u.id]}
 function curNext(){const lv=curLv();return lv.units.find(u=>!curUnitDone(u))||null}
+/* ===== Journey and treasures =====
+   Each class is a path of stepping stones. Steps open one at a time, in order; the class test opens when every step is done.
+   Treasure chests on the path give things for the 3D world: hats for the buddy, a little friend, decorations to place.
+   Kept calm on purpose: no timers, nothing is ever lost, and stars stay capped at 5 a day.
+   G.rw = {got:{id:time}, put:{decorId:[x,z,rot]}, hat:id|'', pal:id|''} */
+const RWI={
+chest:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 21c0-7 5-11 11-11h12c6 0 11 4 11 11v3H7z" fill="#b9793f"/><rect x="7" y="22" width="34" height="17" rx="3" fill="#9a5f2c"/><rect x="7" y="20" width="34" height="5" fill="#f2c14e"/><rect x="20" y="10" width="8" height="29" fill="#f2c14e"/><rect x="19.5" y="19" width="9" height="10" rx="2.5" fill="#ffd978" stroke="#d9a32f" stroke-width="1.4"/><circle cx="24" cy="23.5" r="1.7" fill="#8a5a12"/></svg>',
+'hat-party':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 7l13 31H11z" fill="#e583ad"/><path d="M19.4 18h9.2l2.5 6H16.9zM14.4 30h19.2l2.5 6H11.9z" fill="#ffd978"/><ellipse cx="24" cy="38.5" rx="14.5" ry="3.6" fill="#7fb7e6"/><circle cx="24" cy="7" r="4" fill="#f2c14e"/></svg>',
+'d-balloons':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 27c2 5 6 9 9 16M24 24v19M34 27c-2 5-6 9-9 16" stroke="#8a8f8a" stroke-width="1.6" fill="none" stroke-linecap="round"/><ellipse cx="13" cy="17" rx="8" ry="10" fill="#e0765c"/><ellipse cx="35" cy="17" rx="8" ry="10" fill="#7fb7e6"/><ellipse cx="24" cy="13" rx="8.5" ry="10.5" fill="#f2c14e"/><ellipse cx="21" cy="9" rx="2.2" ry="3.2" fill="#fff" opacity=".55"/></svg>',
+'d-rainbow':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 37a19 19 0 0138 0" fill="none" stroke="#e0765c" stroke-width="5"/><path d="M10 37a14 14 0 0128 0" fill="none" stroke="#f2c14e" stroke-width="5"/><path d="M15 37a9 9 0 0118 0" fill="none" stroke="#5cbf7f" stroke-width="5"/><ellipse cx="8" cy="38" rx="7" ry="4.5" fill="#eef4f8"/><ellipse cx="40" cy="38" rx="7" ry="4.5" fill="#eef4f8"/></svg>',
+'hat-flower':'<svg viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="25" rx="17" ry="9" fill="none" stroke="#5cbf7f" stroke-width="4"/><g fill="#e583ad"><circle cx="8" cy="23" r="5"/><circle cx="40" cy="23" r="5"/><circle cx="24" cy="34" r="5.5"/></g><g fill="#ffd978"><circle cx="15" cy="31" r="4.5"/><circle cx="33" cy="31" r="4.5"/></g><g fill="#fff"><circle cx="8" cy="23" r="1.8"/><circle cx="40" cy="23" r="1.8"/><circle cx="24" cy="34" r="2"/></g><g fill="#e0765c"><circle cx="15" cy="31" r="1.6"/><circle cx="33" cy="31" r="1.6"/></g></svg>',
+'d-windmill':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 43l3-22h6l3 22z" fill="#f6e3c0"/><rect x="21.5" y="34" width="5" height="9" rx="2.5" fill="#b9793f"/><g fill="#e0765c"><path d="M24 20L10 8l6-3z"/><path d="M24 20l14-12 3 6z"/><path d="M24 20l14 12-6 3z"/><path d="M24 20L10 32l-3-6z"/></g><circle cx="24" cy="20" r="3.2" fill="#f2c14e"/></svg>',
+'pal-butterfly':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M23 24C17 10 6 9 6 18c0 7 9 9 17 6z" fill="#b79df0"/><path d="M25 24c6-14 17-15 17-6 0 7-9 9-17 6z" fill="#b79df0"/><path d="M23 25c-8 1-13 7-9 12 4 4 8-3 9-12z" fill="#e583ad"/><path d="M25 25c8 1 13 7 9 12-4 4-8-3-9-12z" fill="#e583ad"/><rect x="22.4" y="17" width="3.2" height="20" rx="1.6" fill="#3a2f55"/><path d="M23 18c-1-4-3-6-5-7M25 18c1-4 3-6 5-7" stroke="#3a2f55" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="13" cy="17" r="2.4" fill="#fff" opacity=".7"/><circle cx="35" cy="17" r="2.4" fill="#fff" opacity=".7"/></svg>',
+'hat-crown':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 36L5 15l10 9 9-14 9 14 10-9-2 21z" fill="#f2c14e"/><rect x="7" y="33" width="34" height="7" rx="2" fill="#d9a32f"/><circle cx="24" cy="36.5" r="2.4" fill="#e0765c"/><circle cx="14" cy="36.5" r="2" fill="#7fb7e6"/><circle cx="34" cy="36.5" r="2" fill="#5cbf7f"/><circle cx="5" cy="14" r="2.6" fill="#ffd978"/><circle cx="24" cy="9" r="2.8" fill="#ffd978"/><circle cx="43" cy="14" r="2.6" fill="#ffd978"/></svg>',
+'d-fountain':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 9c-7 0-10 5-10 11M24 9c7 0 10 5 10 11M24 7v14" stroke="#7fc8ee" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M15 23c0 4 4 7 9 7s9-3 9-7z" fill="#b9c4cc"/><ellipse cx="24" cy="23" rx="9" ry="2.6" fill="#cfe9f7"/><rect x="21.5" y="29" width="5" height="7" fill="#a5b1ba"/><path d="M7 36c0 5 7 8 17 8s17-3 17-8z" fill="#b9c4cc"/><ellipse cx="24" cy="36" rx="17" ry="4.5" fill="#7fc8ee"/></svg>',
+'d-trophy':'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="17" y="34" width="14" height="5" rx="1.5" fill="#b9793f"/><rect x="13" y="39" width="22" height="5" rx="2" fill="#9a5f2c"/><path d="M24 3l5.3 10.8 11.9 1.7-8.6 8.4 2 11.8L24 30.1l-10.6 5.6 2-11.8-8.6-8.4 11.9-1.7z" fill="#f2c14e"/><path d="M24 9l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6L24 26.4z" fill="#ffd978"/></svg>'
+};
+const RW=[
+ {id:'hat-party',n:'Party hat',t:'hat',lv:0,at:'c1'},{id:'d-balloons',n:'Balloons',t:'decor',lv:0,at:'c2'},{id:'d-rainbow',n:'Rainbow arch',t:'decor',lv:0,at:'test'},
+ {id:'hat-flower',n:'Flower crown',t:'hat',lv:1,at:'c1'},{id:'d-windmill',n:'Windmill',t:'decor',lv:1,at:'c2'},{id:'pal-butterfly',n:'Butterfly friend',t:'pal',lv:1,at:'test'},
+ {id:'hat-crown',n:'Golden crown',t:'hat',lv:2,at:'c1'},{id:'d-fountain',n:'Fountain',t:'decor',lv:2,at:'c2'},{id:'d-trophy',n:'Star statue',t:'decor',lv:2,at:'test'}];
+const RW_AT={c1:3,c2:6};  /* a chest opens after this many steps of the class */
+const JR_O=[0,1,2,1,0,-1,-2,-1];
+const JR_STAR='<svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z" fill="currentColor"/></svg>';
+let RWNEW=null,ISLDECO=false;
+function rwGet(){if(!G.rw)G.rw={got:{},put:{},hat:'',pal:''};const r=G.rw;r.got=r.got||{};r.put=r.put||{};return r}
+const rwHas=id=>!!rwGet().got[id];
+const rwFor=(lv,at)=>RW.find(x=>x.lv===lv&&x.at===at);
+const rwKind=x=>x.t==='hat'?'Hat for your buddy':x.t==='pal'?'Little friend':'For your 3D world';
+function rwGive(id){const r=rwGet(),x=RW.find(y=>y.id===id);if(!x||r.got[id])return false;r.got[id]=Date.now();if(x.t==='hat'&&!r.hat)r.hat=id;if(x.t==='pal'&&!r.pal)r.pal=id;save();return true}
+function rwChest(lvI,at){const lv=CURR[lvI],x=rwFor(lvI,at);if(!lv||!x)return null;return{x,st:rwHas(x.id)?'open':lv.units.slice(0,RW_AT[at]).every(curUnitDone)?'ready':'lock'}}
+/* a child placed straight into a higher class, or one who passed a test before treasures existed, still gets those treasures */
+function rwSync(){const c=curGet(),nw=[];RW.forEach(x=>{if(!rwHas(x.id)&&(x.lv<c.lv||(c.grad&&x.at==='test'))&&rwGive(x.id))nw.push(x)});return nw}
+function rwShow(xs,then){
+  const ov=$('#overlay');if(!ov||!xs||!xs.length)return;const prev=document.activeElement;
+  const off=()=>{ov.innerHTML='';document.removeEventListener('keydown',key,true)};
+  const shut=()=>{off();if(then)then();else if(prev&&prev.focus)try{prev.focus()}catch(e){}};
+  const key=e=>{if(e.key==='Escape'){e.stopPropagation();shut()}};
+  const one=xs.length===1,what=one?(xs[0].t==='hat'?'A hat for your buddy.':xs[0].t==='pal'?'A little friend who flies with you.':'Something new for your 3D world.'):'They are waiting in your 3D world.';
+  ov.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="rwT" aria-describedby="rwD"><div class="card stack rw-card"><div class="rw-burst" aria-hidden="true">${xs.map(x=>`<span class="rw-i">${RWI[x.id]}</span>`).join('')}</div><h3 id="rwT">${one?'You found a treasure!':'You found treasures!'}</h3><p id="rwD"><b>${xs.map(x=>esc(x.n)).join(', ')}</b><br><span class="muted small">${what}</span></p><div class="row" style="justify-content:center;gap:10px;flex-wrap:wrap"><button class="btn pri lg" id="rwOk">Keep going</button><button class="btn" id="rwDeco">Decorate my world</button></div></div></div>`;
+  document.addEventListener('keydown',key,true);
+  $('#rwOk').onclick=shut;$('#rwDeco').onclick=()=>{off();ISLDECO=true;go('explore-island')};$('#rwOk').focus();
+  try{sfxStar(3,true)}catch(e){}
+  try{if(P&&P.prefs&&P.prefs.voice)say((one?'You found a treasure! ':'You found treasures! ')+xs.map(x=>x.n).join(', ')+'.')}catch(e){}
+}
+function jrView(){
+  const c=curGet(),lvI=Math.max(0,CURR.indexOf(curLv())),lv=CURR[lvI],nx=curNext(),best=c.best[lv.id],rows=[];
+  lv.units.forEach((u,i)=>{
+    const d=curUnitDone(u),now=u===nx,st=d?'done':now?'now':'lock';
+    const extra=u.k==='write'&&!d?` (${u.letters.filter(l=>(G.write||{})[l]).length}/${u.letters.length})`:'';
+    rows.push([`jr-l ${st}${st==='lock'?'':' go'}`,`${now?`<span class="jr-me" aria-hidden="true">${pip(78)}</span>`:''}<button class="jr-n" ${d||now?`data-cu="${u.id}"`:'disabled'} title="${esc(u.d)}" aria-label="${esc('Step '+(i+1)+': '+u.n+'. '+(d?'Done. Tap to do it again':now?'This is your next step. Tap to start':'Locked. Finish the step before it first'))}">${d?JR_STAR:now?`<span>${i+1}</span>`:ic('lock',26)}</button><span class="jr-t"><b>${esc(u.n)}</b><small>${esc(u.d)}${extra}</small>${now?'<em>You are here</em>':''}</span>`]);
+    const at=Object.keys(RW_AT).find(k=>RW_AT[k]===i+1),ch=at&&rwChest(lvI,at);
+    if(ch)rows.push([`jr-c ${ch.st}${ch.st==='lock'?'':' go'}`,(ch.st==='ready'?`<button class="jr-ch" data-chest="${ch.x.id}" aria-label="Treasure chest. Tap to open it.">${RWI.chest}</button>`:`<span class="jr-ch" aria-hidden="true">${ch.st==='open'?RWI[ch.x.id]:RWI.chest}</span>`)+`<span class="jr-t"><b>${ch.st==='open'?esc(ch.x.n):'Treasure chest'}</b><small>${ch.st==='open'?esc(rwKind(ch.x)):ch.st==='ready'?'Tap to open!':'Finish '+RW_AT[at]+' steps to open'}</small></span>`]);
+  });
+  const pz=rwFor(lvI,'test'),gst=c.grad?'done':nx?'lock':'ready';
+  rows.push([`jr-g ${gst}${gst==='lock'?'':' go'}`,`<button class="jr-gate" ${gst==='lock'?'disabled':'data-go="learn-exam"'} aria-label="${esc(lv.n+' test. '+(gst==='lock'?'Locked. Finish every step first':gst==='done'?'Passed. Tap to try again':'Tap to take the test'))}">${si('medal',58)}</button><span class="jr-t"><b>${esc(lv.n)} test</b><small>${gst==='lock'?'Finish every step first':(best!=null?`Best: ${best}/${EXAM_Q}. `:'')+`${EXAM_PASS} of ${EXAM_Q} to move up`}${pz&&!rwHas(pz.id)?'. Prize: '+esc(pz.n):''}</small></span>`]);
+  const nl=CURR[lvI+1];
+  rows.push(nl?['jr-x lock',`<span class="jr-land" aria-hidden="true">${si(nl.e,50)}</span><span class="jr-t"><b>Next: ${esc(nl.cls)}</b><small>${esc(nl.d)}</small></span>`]
+              :[`jr-x ${c.grad?'end go':'lock'}`,`<span class="jr-land" aria-hidden="true">${JR_STAR.replace('currentColor','#f2c14e').replace(/36/g,'48')}</span><span class="jr-t"><b>${c.grad?'You finished every class!':'The end of the path'}</b><small>${c.grad?'Play any step again whenever you like.':'Pass the test to finish.'}</small></span>`]);
+  const mine=RW.filter(x=>x.lv===lvI),doneN=lv.units.filter(curUnitDone).length;
+  return `<div class="jr-h"><h3 class="sk-h">${esc(lv.cls)} journey</h3><small>${doneN} of ${lv.units.length} steps · ${mine.filter(x=>rwHas(x.id)).length} of ${mine.length} treasures</small></div>
+    <ol class="jr${calmMotion()?' calm':''}" aria-label="${esc(lv.cls)} journey, in order">${rows.map(([cls,h],k)=>{const o=JR_O[k%JR_O.length],po=k?JR_O[(k-1)%JR_O.length]:o;return `<li class="jr-s ${cls}${o>0?' lf':''}" style="--o:${o};--d:${po-o}">${h}</li>`}).join('')}</ol>`;
+}
+function treView(){
+  const has=RW.filter(x=>rwHas(x.id)).length;
+  return `<section class="tre" aria-labelledby="treT"><div class="tre-h"><h3 id="treT">My treasures <small class="muted" style="font:600 .9rem var(--f-b)">${has} of ${RW.length}</small></h3><button class="btn" id="treGo">Decorate my 3D world ${ic('arrow',16)}</button></div>
+    <ul class="tre-g">${RW.map(x=>{const h=rwHas(x.id);return `<li class="${h?'on':'lk'}"><span class="tre-i">${RWI[x.id]}</span><b>${esc(x.n)}</b><small>${h?esc(rwKind(x)):esc('On the '+CURR[x.lv].cls+' path')}</small></li>`}).join('')}</ul></section>`;
+}
 function curView(){
+  RWNEW=rwSync();
   const c=curGet(),lv=curLv(),nx=curNext(),doneN=lv.units.filter(curUnitDone).length,pct=Math.round(doneN/lv.units.length*100),best=c.best[lv.id];
   const cls=CURR.map((l,i)=>{const st=i<c.lv||(c.grad&&i===c.lv)?'ok':i===c.lv?'on':'lock';
     return`<li class="sk-cl ${st}" style="--lc:${l.c}"><span class="sk-ci">${si(l.e,46)}</span><b>${l.cls}</b><small>${l.d}</small>${st==='on'?'<em>Your class</em>':st==='ok'?`<i class="sk-tick">${ic('check',14)}</i>`:`<i class="sk-lk">${ic('lock',13)}</i>`}</li>`}).join('');
@@ -5921,12 +6114,14 @@ function curView(){
       </div>
       <div class="sk-teacher" aria-hidden="true">${pip(150)}</div>
     </div>
-    <h3 class="sk-h">${lv.cls} lessons</h3>
-    <ol class="sk-nbs">${lv.units.map(unit).join('')}</ol>
-    <div class="sk-test"><span class="sk-medal">${si('medal',54)}</span><div><b>${lv.n} test</b><small>${best!=null?`Best: ${best}/${EXAM_Q}`:`${EXAM_PASS}/${EXAM_Q} to move up`}</small></div><button class="btn ${nx?'':'pri'}" data-go="learn-exam">Try it</button></div>
+    ${jrView()}
+    ${treView()}
   </section>`;
 }
-function curBind(){$$('[data-cu]').forEach(b=>b.onclick=()=>go('learn-cu-'+b.dataset.cu))}
+function curBind(){$$('[data-cu]').forEach(b=>b.onclick=()=>go('learn-cu-'+b.dataset.cu));
+  $$('[data-chest]').forEach(b=>b.onclick=()=>{const x=RW.find(r=>r.id===b.dataset.chest);if(!x||!rwGive(x.id))return;rwShow([x],()=>{if(cur==='learn'&&!curArg)R.learn()})});
+  const tg=$('#treGo');if(tg)tg.onclick=()=>{ISLDECO=true;go('explore-island')};
+  if(RWNEW&&RWNEW.length){const nw=RWNEW;RWNEW=null;rwShow(nw)}}
 let CUQ=null;
 function curStart(id,exam){
   const c=curGet(),lv=curLv(),u=exam?null:lv.units.find(x=>x.id===id);
@@ -5962,30 +6157,31 @@ function curQ(){
   }});
 }
 function curEnd(){
-  const c=curGet(),lv=CURR[CUQ.lv];let title,body,btns;
+  const c=curGet(),lv=CURR[CUQ.lv];let title,body,btns,prize=null,chest=null;
   today().lessons++;G.lessons++;touchDay();if(CUQ.correct>0)award(1);
   if(CUQ.exam){
     c.best[lv.id]=Math.max(c.best[lv.id]||0,CUQ.correct);
     if(CUQ.correct>=EXAM_PASS){
       try{nfyAdd('test',`${P.name} passed the ${lv.cls} test (${CUQ.correct} of ${CUQ.total}).`)}catch(e){}
+      {const pz=rwFor(CUQ.lv,'test');if(pz&&rwGive(pz.id))prize=pz}
       if(CUQ.lv<2){c.lv=CUQ.lv+1;title=`Welcome to ${CURR[c.lv].cls}!`;body=`${CUQ.correct} of ${CUQ.total} right!`}
       else{c.grad=true;title='You finished every class!';body=`${CUQ.correct} of ${CUQ.total} right!`}
       btns=`<button class="btn pri lg" data-go="learn">See my path ${ic('arrow',18)}</button>`;
     }else{title='So close!';body=`${CUQ.correct} of ${CUQ.total}. You need ${EXAM_PASS}.`;btns=`<button class="btn pri lg" data-go="learn">Back to my path</button><button class="btn" id="cuAgain">Try again</button>`}
   }else{
-    if(CUQ.correct>=CUR_PASS){c.done[CUQ.id]=true;const nx=curNext();title='Lesson done!';body=`${CUQ.correct} of ${CUQ.total} right!`;btns=nx?`<button class="btn pri lg" data-cu="${nx.id}">Next ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`:`<button class="btn pri lg" data-go="learn-exam">Take the exam ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`}
+    if(CUQ.correct>=CUR_PASS){c.done[CUQ.id]=true;const nx=curNext();title='Lesson done!';body=`${CUQ.correct} of ${CUQ.total} right!`;chest=['c1','c2'].map(a=>rwChest(CUQ.lv,a)).find(x=>x&&x.st==='ready')||null;btns=chest?`<button class="btn pri lg" data-go="learn">Open my treasure ${ic('arrow',18)}</button>${nx?`<button class="btn" data-cu="${nx.id}">Next step</button>`:''}`:nx?`<button class="btn pri lg" data-cu="${nx.id}">Next ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`:`<button class="btn pri lg" data-go="learn-exam">Take the exam ${ic('arrow',18)}</button><button class="btn" data-go="learn">My path</button>`}
     else{title='Almost there!';body=`${CUQ.correct} of ${CUQ.total}. Try again!`;btns=`<button class="btn pri lg" id="cuAgain">Try again</button><button class="btn" data-go="learn">My path</button>`}
   }
   save();
   const win=CUQ.exam?CUQ.correct>=EXAM_PASS:CUQ.correct>=CUR_PASS;
-  $('#page').innerHTML=`<div class="wrap stack" style="gap:20px;max-width:640px"><div class="card stack cu-end" style="gap:16px;align-items:center;text-align:center">${win&&CUQ.exam?`<div class="cu-conf">${si('medal',90)}</div>`:''}<div class="pipline">${pip(110)}</div><h2>${title}</h2><p>${body}</p>
+  $('#page').innerHTML=`<div class="wrap stack" style="gap:20px;max-width:640px"><div class="card stack cu-end" style="gap:16px;align-items:center;text-align:center">${win&&CUQ.exam?`<div class="cu-conf">${si('medal',90)}</div>`:''}<div class="pipline">${pip(110)}</div><h2>${title}</h2><p>${body}</p>${prize?`<div class="cu-prize">${RWI[prize.id]}<div><b>You won: ${esc(prize.n)}</b><small>${esc(rwKind(prize))}</small></div></div>`:chest?`<div class="cu-prize">${RWI.chest}<div><b>A treasure chest is waiting!</b><small>Open it on your path.</small></div></div>`:''}
     <div class="stars big" aria-label="${CUQ.correct} of ${CUQ.total} right">${Array.from({length:CUQ.total},(_,i)=>`<i class="${i<CUQ.correct?'on':''}" style="animation-delay:${i*90}ms"></i>`).join('')}</div><div class="row" style="justify-content:center;gap:10px">${btns}</div></div></div>`;
   curBind();const ag=$('#cuAgain');if(ag){const id=CUQ.id,ex=CUQ.exam;ag.onclick=()=>{curStart.skip=true;curStart(id,ex)}}
-  if(P.prefs.voice)say(title+' '+body);
+  if(P.prefs.voice)say(title+' '+body+(prize?' You won: '+prize.n+'.':chest?' A treasure chest is waiting!':''));
 }
 
 R.learn=arg=>{
-  if(arg==='exam')return curStart(null,true);
+  if(arg==='exam'){if(curNext()&&!curGet().grad){toast('Finish every step on your path first.');go('learn');return}return curStart(null,true)}
   if(arg&&arg.startsWith('cu-'))return curStart(arg.slice(3));
   if(arg&&arg.startsWith('story-'))return storyStart(arg.slice(6));
   if(arg==='quest')return questStart();
@@ -8346,12 +8542,59 @@ function sfxStep(side){
     og.gain.setValueAtTime(.0001,t0);og.gain.exponentialRampToValueAtTime(.05,t0+.006);og.gain.exponentialRampToValueAtTime(.0001,t0+.08);o.connect(og);og.connect(m);o.start(t0);o.stop(t0+.1);
   }catch(e){}
 }
+/* ---- Treasures in the 3D world: hats for the buddy, a butterfly friend, decorations the child places ---- */
+const RW_HAT_Y={pip:[1.4,0,1],cloud:[2.32,.02,1.3],fox:[2.2,.02,1.3]};  /* top of each buddy's head: [height, forward, size] */
+function rwHatMesh(T,id,k){
+  const g=new T.Group(),M=(c,o)=>x3Mat(T,c,Object.assign({roughness:.55},o||{}));let dy=0;
+  if(id==='hat-party'){const c=new T.Mesh(new T.ConeGeometry(.27,.64,24),M('#e583ad'));c.position.y=.32;g.add(c);
+    [.15,.37].forEach(y=>{const b=new T.Mesh(new T.TorusGeometry(.27*(1-y/.64)+.012,.03,8,28),M('#ffd978'));b.rotation.x=Math.PI/2;b.position.y=y;g.add(b)});
+    const p=new T.Mesh(new T.SphereGeometry(.09,14,10),M('#f2c14e'));p.position.y=.67;g.add(p);
+    const br=new T.Mesh(new T.TorusGeometry(.28,.04,8,28),M('#7fb7e6'));br.rotation.x=Math.PI/2;br.position.y=.02;g.add(br)}
+  if(id==='hat-flower'){dy=-.07;const r=new T.Mesh(new T.TorusGeometry(.37,.045,8,32),M('#5cbf7f'));r.rotation.x=Math.PI/2;g.add(r);
+    const cols=['#e583ad','#ffd978','#ffffff','#e0765c','#b79df0'];for(let i=0;i<10;i++){const a=i/10*6.2832,f=new T.Mesh(new T.SphereGeometry(.09,12,10),M(cols[i%5]));f.position.set(Math.cos(a)*.37,.03,Math.sin(a)*.37);g.add(f)}}
+  if(id==='hat-crown'){dy=-.03;const gold=M('#f2c14e',{metalness:.5,roughness:.3});gold.side=T.DoubleSide;const b=new T.Mesh(new T.CylinderGeometry(.31,.28,.2,28,1,true),gold);b.position.y=.1;g.add(b);
+    for(let i=0;i<6;i++){const a=i/6*6.2832,s=new T.Mesh(new T.ConeGeometry(.08,.2,10),gold);s.position.set(Math.cos(a)*.295,.3,Math.sin(a)*.295);g.add(s);
+      const j=new T.Mesh(new T.SphereGeometry(.042,10,8),M(['#e0765c','#7fb7e6','#5cbf7f'][i%3],{roughness:.2}));j.position.set(Math.cos(a+.52)*.3,.1,Math.sin(a+.52)*.3);g.add(j)}}
+  const H=RW_HAT_Y[k]||RW_HAT_Y.pip;g.position.set(0,H[0]+dy*H[2],H[1]);g.scale.setScalar(H[2]);x3Shade(g);return g;
+}
+function rwPalMesh(T){
+  const g=new T.Group(),M=c=>new T.MeshLambertMaterial({color:c,side:T.DoubleSide});
+  const b=new T.Mesh(new T.SphereGeometry(.05,10,8),M('#3a2f55'));b.scale.set(1,1,3.6);g.add(b);
+  const wings=[-1,1].map(s=>{const w=new T.Group(),up=new T.Mesh(new T.CircleGeometry(.22,18),M('#b79df0'));up.scale.set(1,.85,1);up.rotation.x=-Math.PI/2;up.position.set(s*.2,0,-.07);
+    const lo=new T.Mesh(new T.CircleGeometry(.15,16),M('#e583ad'));lo.rotation.x=-Math.PI/2;lo.position.set(s*.15,0,.13);w.add(up,lo);g.add(w);return w});
+  g.userData.wings=wings;return g;
+}
+function rwDecoMesh(T,id){
+  const g=new T.Group(),M=(c,o)=>x3Mat(T,c,Object.assign({roughness:.6},o||{})),add=(geo,col,x,y,z,o,par)=>{const m=new T.Mesh(geo,M(col,o));m.position.set(x,y,z);(par||g).add(m);return m};
+  let anim=null;
+  if(id==='d-balloons'){add(new T.CylinderGeometry(.2,.26,.18,14),'#b9793f',0,.09,0);
+    const bs=['#e0765c','#f2c14e','#7fb7e6'].map((c,i)=>{const b=new T.Group();add(new T.CylinderGeometry(.015,.015,2,6),'#8a8f8a',0,1,0,null,b);const o=add(new T.SphereGeometry(.44,20,16),c,0,2.4,0,{roughness:.3},b);o.scale.y=1.2;b.rotation.z=(i-1)*.24;b.rotation.x=i===1?-.14:.1;g.add(b);return b});
+    anim=(dt,t)=>bs.forEach((b,i)=>{b.rotation.z=(i-1)*.24+Math.sin(t*.9+i*1.7)*.05})}
+  if(id==='d-rainbow'){['#e0765c','#f2a04e','#f2c14e','#5cbf7f','#7fb7e6','#b79df0'].forEach((c,i)=>{const m=new T.Mesh(new T.TorusGeometry(2.7-i*.21,.115,10,44,Math.PI),M(c,{roughness:.5}));g.add(m)});
+    [-1,1].forEach(s=>[[0,.32,0,.62],[.45,.26,.22,.46],[-.45,.26,-.12,.46]].forEach(([x,y,z,r])=>add(new T.SphereGeometry(r,16,12),'#ffffff',s*2.2+x,y,z,{roughness:.9})))}
+  if(id==='d-windmill'){add(new T.CylinderGeometry(.5,.86,2.6,16),'#f6e3c0',0,1.3,0);add(new T.ConeGeometry(.7,.72,16),'#e0765c',0,2.96,0);add(new T.BoxGeometry(.5,.85,.1),'#b9793f',0,.42,.8);
+    const hub=new T.Group();hub.position.set(0,2.35,.66);g.add(hub);add(new T.SphereGeometry(.14,12,10),'#f2c14e',0,0,0,null,hub);
+    for(let i=0;i<4;i++){const a=new T.Group();add(new T.BoxGeometry(.36,1.35,.05),'#fff8e6',0,.78,0,null,a);a.rotation.z=i*Math.PI/2;hub.add(a)}
+    anim=dt=>{hub.rotation.z-=dt*.7}}
+  if(id==='d-fountain'){add(new T.CylinderGeometry(1.5,1.6,.4,32),'#b9c4cc',0,.2,0);add(new T.CylinderGeometry(1.32,1.32,.1,32),'#7fc8ee',0,.42,0,{roughness:.15,transparent:true,opacity:.85});
+    add(new T.CylinderGeometry(.2,.28,1.1,14),'#a5b1ba',0,.9,0);add(new T.CylinderGeometry(.76,.4,.25,24),'#b9c4cc',0,1.5,0);add(new T.CylinderGeometry(.63,.63,.06,24),'#7fc8ee',0,1.63,0,{roughness:.15,transparent:true,opacity:.85});
+    const drops=[];for(let i=0;i<10;i++){const d=add(new T.SphereGeometry(.07,8,6),'#cfeeff',0,1.7,0,{roughness:.1,transparent:true,opacity:.9});d.userData={a:i/10*6.2832,ph:i/10};drops.push(d)}
+    const place=(d,u)=>{const r=.08+u*.8;d.position.set(Math.cos(d.userData.a)*r,1.7+Math.sin(u*Math.PI)*.6-u*.95,Math.sin(d.userData.a)*r)};
+    drops.forEach(d=>place(d,d.userData.ph));anim=(dt,t)=>drops.forEach(d=>place(d,(t*.55+d.userData.ph)%1))}
+  if(id==='d-trophy'){add(new T.CylinderGeometry(.76,.9,.36,24),'#9a5f2c',0,.18,0);add(new T.CylinderGeometry(.5,.6,.5,24),'#b9793f',0,.6,0);
+    const sh=new T.Shape();for(let i=0;i<10;i++){const a=i/10*6.2832+Math.PI/2,r=i%2?.38:.9;sh[i?'lineTo':'moveTo'](Math.cos(a)*r,Math.sin(a)*r)}
+    const geo=new T.ExtrudeGeometry(sh,{depth:.24,bevelEnabled:true,bevelSize:.05,bevelThickness:.05,bevelSegments:2});geo.center();
+    const st=new T.Mesh(geo,M('#f2c14e',{metalness:.45,roughness:.28,emissive:0x5a3d00,emissiveIntensity:.3}));st.position.y=1.9;g.add(st);
+    anim=dt=>{st.rotation.y+=dt*.6}}
+  g.userData.anim=anim;x3Shade(g);return g;
+}
 function islandStart(){
   const tok=++X3tok;let S=null;bgmPlay();
   $('#page').classList.add('full');
   $('#page').innerHTML=`<div class="x3stage" id="x3st"><div class="x3v" id="x3v"><div class="x3load" id="x3load">Loading the island…</div></div>
-   <div class="x3hud isltop"><div class="isl-l"><button class="btn sm glass x3back" data-go="dashboard"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',15)}</span> Back</button><button class="isl-ib glass" id="bgmbtn"></button><button class="isl-ib glass" id="buddybtn"></button><button class="isl-ib glass" id="wtbtn"></button></div><div class="isl-c"><div class="row" id="islchips"></div></div><div class="islstars" id="islstw" aria-live="polite">${ic('star',26)}<span class="isls-t"><span><b id="islst">0</b> / 5</span><small>Stars found</small></span></div></div>
+   <div class="x3hud isltop"><div class="isl-l"><button class="btn sm glass x3back" data-go="dashboard"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',15)}</span> Back</button><button class="isl-ib glass" id="bgmbtn"></button><button class="isl-ib glass" id="buddybtn"></button><button class="isl-ib glass" id="wtbtn"></button><button class="isl-ib glass" id="decobtn"></button></div><div class="isl-c"><div class="row" id="islchips"></div></div><div class="islstars" id="islstw" aria-live="polite">${ic('star',26)}<span class="isls-t"><span><b id="islst">0</b> / 5</span><small>Stars found</small></span></div></div>
    <div class="x3hud islprompt" id="islp" aria-live="polite"></div>
+   <div class="x3hud decop glass" id="decop" role="dialog" aria-label="Decorate my world" hidden></div>
    <div class="x3hud islmap" id="islmapw"><canvas id="islmap" role="img" aria-label="Map of the island. The arrow is you."></canvas><button class="islmap-b" id="islmapb" aria-label="Make the map bigger" aria-expanded="false">${ic('globe',16)}</button></div>
    <div class="x3hud islhint"><div class="glass small muted" style="padding:8px 14px">WASD or arrow keys to walk · <kbd class="kcap">Space</kbd> to jump · <kbd class="kcap">E</kbd> to go in · <kbd class="kcap">M</kbd> for the map · Click the ground to go there</div></div>
    <div class="isljoy" id="isljoy" aria-label="Walk"><i></i></div>
@@ -8364,6 +8607,21 @@ function islandStart(){
   wb.onclick=()=>{const i=WTIME.findIndex(x=>x[0]===wtMode()),nx=WTIME[(i+1)%WTIME.length];lsSet('ll.wtime',nx[0]);wset();toast('Time of day: '+nx[1]);hk()};
   const wtI=setInterval(()=>{if(wtMode()==='auto'&&S&&S.p&&Math.abs(x3T()-(S.p.t||0))>.12)hk()},120000);teardowns.push(()=>clearInterval(wtI));
   bdb.onclick=()=>{const op=BUDDIES.filter(b=>budOpen(b[0])),i=op.findIndex(b=>b[0]===buddy()),nx=op[(i+1)%op.length];if(op.length<2){const n=BUDDIES.filter(b=>!budOpen(b[0])).sort((a,b)=>BUD_NEED[a[0]]-BUD_NEED[b[0]])[0];toast(n?n[1]+' unlocks at '+BUD_NEED[n[0]]+' stars. You have '+budStars()+'.':'Buddy: '+buddy());return}setBuddyPref(nx[0]);if(S&&S.setBuddy)S.setBuddy(nx[0]);bdset();toast('Buddy: '+nx[1])};
+  const dcb=$('#decobtn'),dp=$('#decop');dcb.innerHTML=ic('palette',20);dcb.title='Decorate my world';dcb.setAttribute('aria-label','Decorate my world');dcb.setAttribute('aria-expanded','false');
+  const dpDraw=()=>{const r=rwGet(),by=t=>RW.filter(x=>x.t===t),
+    tile=(x,on,sub,rm)=>{const h=rwHas(x.id);return `<div class="dp-w"><button class="dp-b${h?'':' lk'}${on?' on':''}" data-rw="${x.id}" ${h?`aria-pressed="${!!on}"`:'aria-disabled="true"'} aria-label="${esc(x.n+'. '+(h?sub:'Locked. Find it on your learning path'))}">${RWI[x.id]}<span>${esc(x.n)}</span><small>${h?sub:'Locked'}</small></button>${rm?`<button class="dp-rm" data-rm="${x.id}" aria-label="${esc('Put away '+x.n)}">&times;</button>`:''}</div>`};
+    dp.innerHTML=`<div class="dp-h"><b>Decorate my world</b><button class="dp-x" id="dpX" aria-label="Close">&times;</button></div>
+     <p class="dp-s">Hats for ${esc(BUDDIES.find(b=>b[0]===buddy())[1])}</p><div class="dp-g">${by('hat').map(x=>tile(x,r.hat===x.id,r.hat===x.id?'Wearing':'Wear')).join('')}</div>
+     <p class="dp-s">Little friend</p><div class="dp-g">${by('pal').map(x=>tile(x,r.pal===x.id,r.pal===x.id?'With you':'Call')).join('')}</div>
+     <p class="dp-s">Things to place</p><div class="dp-g">${by('decor').map(x=>tile(x,!!r.put[x.id],r.put[x.id]?'Move here':'Put here',!!r.put[x.id])).join('')}</div>
+     <p class="muted small" style="margin:0">Walk to a spot, then tap a thing to put it there. Find more treasures on your learning path.</p>`;
+    $('#dpX').onclick=()=>dpOpen(false);
+    $$('[data-rm]',dp).forEach(b=>b.onclick=()=>{if(S&&S.decoOff)S.decoOff(b.dataset.rm);dpDraw()});
+    $$('[data-rw]',dp).forEach(b=>b.onclick=()=>{const x=RW.find(y=>y.id===b.dataset.rw);if(!x)return;if(!rwHas(x.id)){toast('Find this treasure on your learning path.');return}if(!S){toast('The island is still loading.');return}
+      if(x.t==='hat'){r.hat=r.hat===x.id?'':x.id;save();S.wear()}else if(x.t==='pal'){r.pal=r.pal===x.id?'':x.id;save();S.pal()}else{S.decoPut(x.id);toast(x.n+' is here now.')}
+      try{sfxPop()}catch(e){}dpDraw();const again=$(`[data-rw="${x.id}"]`,dp);if(again)again.focus()})};
+  const dpOpen=on=>{dp.hidden=!on;dcb.setAttribute('aria-expanded',on?'true':'false');if(on){dpDraw();$('#dpX').focus()}else dcb.focus()};
+  dcb.onclick=()=>dpOpen(dp.hidden);if(ISLDECO){ISLDECO=false;dp.hidden=false;dcb.setAttribute('aria-expanded','true');dpDraw()}
   bb.onclick=()=>{const on=!bgmOn();lsSet('lala_bgm',on?'1':'0');bset();if(on)bgmPlay();else if(BGM)BGM.pause()};
   teardowns.push(()=>{bgmStop();X3tok++;const i=themeHooks.indexOf(hk);if(i>=0)themeHooks.splice(i,1);if(S){ISLPOS=S.snap();S.dispose()}});
   loadThree().then(T=>{
@@ -8451,6 +8709,24 @@ function islandBuild(T){
   const sh=new T.Mesh(new T.PlaneGeometry(2.3,2.3),new T.MeshBasicMaterial({map:S.blob,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));sh.rotation.x=-Math.PI/2;sh.position.y=.025;sh.renderOrder=1;scene.add(sh);
   const st0=ISLPOS||{x:0,z:5.5,yaw:0};me.position.set(st0.x,0,st0.z);if(st0.face!=null)me.rotation.y=st0.face;let jumpReq=false,yaw=st0.yaw,zoom=1,face=st0.face!=null?st0.face:Math.PI,tgt=null,near=null,found=stars.filter(s=>!s.on).length;const keys={};let joy={x:0,y:0};
   S.snap=()=>({x:me.position.x,z:me.position.z,yaw});
+  /* treasures from the learning path: a hat on the buddy, a little friend, and decorations placed by the child */
+  {const free=o=>o.traverse(n=>{if(n.geometry)n.geometry.dispose();if(n.material)(Array.isArray(n.material)?n.material:[n.material]).forEach(m=>m.dispose())});
+   const deco=new T.Group();scene.add(deco);const decoAn=[];let hatM=null,palM=null;
+   const wear=()=>{if(hatM&&hatM.parent===me){me.remove(hatM);free(hatM)}hatM=null;const h=rwGet().hat;if(h&&rwHas(h)){hatM=rwHatMesh(T,h,buddy());me.add(hatM)}};
+   const pal=()=>{if(palM){scene.remove(palM);free(palM);palM=null}const k=rwGet().pal;if(k&&rwHas(k)){palM=rwPalMesh(T);palM.position.set(me.position.x+1.1,1.8,me.position.z);scene.add(palM)}};
+   const sync=()=>{[...deco.children].forEach(c=>{deco.remove(c);free(c)});decoAn.length=0;const put=rwGet().put;
+     Object.keys(put).forEach(id=>{const q=put[id];if(!rwHas(id)||!Array.isArray(q))return;const m=rwDecoMesh(T,id);m.position.set(+q[0]||0,0,+q[1]||0);m.rotation.y=+q[2]||0;deco.add(m);if(m.userData.anim)decoAn.push(m.userData.anim)})};
+   S.setBuddy=k=>{hatM=null;setBuddy(k);wear()};S.wear=wear;S.pal=pal;S.decoSync=sync;
+   S.decoPut=id=>{const a0=me.rotation.y,far=id==='d-rainbow'?3.6:2.8,put=rwGet().put;let x=0,z=0;
+     /* in front of the buddy; if something is already there, try a little to each side so things do not pile up */
+     for(const da of [0,.9,-.9,1.8,-1.8,2.7,-2.7,Math.PI]){const a=a0+da;x=me.position.x+Math.sin(a)*far;z=me.position.z+Math.cos(a)*far;const r=Math.hypot(x,z);if(r>30){x*=30/r;z*=30/r}
+       if(!Object.keys(put).some(k=>k!==id&&Array.isArray(put[k])&&Math.hypot(put[k][0]-x,put[k][1]-z)<2.6))break}
+     put[id]=[+x.toFixed(2),+z.toFixed(2),+a0.toFixed(2)];save();sync()};
+   S.decoOff=id=>{const put=rwGet().put;if(id)delete put[id];else Object.keys(put).forEach(k=>delete put[k]);save();sync()};
+   wear();pal();sync();
+   S.rt.push((dt,t)=>{const cm=calmMotion();if(!cm)decoAn.forEach(f=>f(dt,t));
+     if(palM){const a=cm?.9:t*.8;palM.position.set(me.position.x+Math.cos(a)*1.15,me.position.y+1.8+(cm?0:Math.sin(t*2.1)*.18),me.position.z+Math.sin(a)*1.15);palM.rotation.y=-a;
+       palM.userData.wings.forEach((w,i)=>{w.rotation.z=(i?1:-1)*(cm?.45:.15+Math.abs(Math.sin(t*9))*.95)})}});}
   const st=$('#islst');if(st)st.textContent=found;
   
   $('#islchips').innerHTML=ISL.map(L=>`<button class="btn sm glass" data-isl="${L.id}">${esc(L.n)}</button>`).join('');
@@ -9790,44 +10066,73 @@ function setAccount(box){
   box.innerHTML=`<div class="row"><button class="btn lgred" id="out">${ic('out',18)} Log out</button><button class="btn ghost" id="rst">${CONFIRM==='r'?'Press again to confirm':'Reset progress'}</button><button class="btn ghost" id="del" style="color:var(--warn)">Delete account</button></div>`;
   $('#out').onclick=confirmLogout;
   $('#rst').onclick=()=>{if(CONFIRM!=='r'){CONFIRM='r';R.profile();return}CONFIRM='';G=newG({read:G.mastery.read,num:G.mastery.num,att:G.mastery.att,talk:G.mastery.talk});save();toast('Progress reset.');R.profile()};
-  $('#del').onclick=()=>confirmDelete(async()=>{if(CLOUD.on&&CLOUD.user){try{await cloudInvoke('delete-account',{confirm:'DELETE'})}catch(e){toast(e.message);return}await cloudSignOut();applyA11y();go('welcome');return}await wipe();applyA11y();go('welcome')});
+  $('#del').onclick=()=>confirmDelete(async()=>{if(CLOUD.on&&CLOUD.user){await cloudSignOut();applyA11y();toast(tr('Your account was deleted.'));go('welcome');return}await wipe();applyA11y();go('welcome')});
 }
-/* Deleting the account: first a sad Pip with gentler options, then the word DELETE typed in. */
-function pipSad(s=150){
-  return pipOrig(s).replace('d="M141 208Q160 226 179 208"','d="M144 220Q160 206 176 220"')
-    .replace('<ellipse cx="160" cy="198" rx="7" ry="5"','<path d="M108 126Q124 114 146 116" fill="none" stroke="#1b2a22" stroke-width="5" stroke-linecap="round"/><path d="M212 126Q196 114 174 116" fill="none" stroke="#1b2a22" stroke-width="5" stroke-linecap="round"/><path class="pp-tear" d="M199 176C193 188 190 194 190 199A9 9 0 0 0 208 199C208 194 205 188 199 176Z" fill="#7cc7f2" stroke="#4aa3dc" stroke-width="1.5"/><ellipse cx="160" cy="198" rx="7" ry="5"');
-}
+/* Deleting the account: a plain summary with other options, then a code emailed to the parent (cloud) or the word DELETE (this device only). */
 function confirmDelete(done){
+  const cloud=!!(CLOUD.on&&CLOUD.user);
   const ov=$('#overlay'),prev=document.activeElement,shut=()=>{ov.innerHTML='';document.removeEventListener('keydown',esc,true);if(prev&&prev.focus)try{prev.focus()}catch(e){}};
   const esc=e=>{if(e.key==='Escape'){e.stopPropagation();shut()}};
   const nm=esc2(P&&P.name||'your child'),stars=(G&&G.pts)||0,days=(G&&G.days&&G.days.length)||0,les=(G&&G.lessons)||0,kids=(KIDS&&KIDS.list&&KIDS.list.length)||1;
   function esc2(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  const keep=()=>{shut();toast(tr('Okay. Nothing was deleted.'))};
   const step1=()=>{ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT" aria-describedby="dlD"><div class="card dl-card">
-     <div class="dl-pip" aria-hidden="true">${pipSad(150)}</div>
-     <h3 id="dlT">Oh no&hellip; Pip is sad to see you go</h3>
-     <p id="dlD" class="muted">${kids>1?'Your children have':nm+' has'} been doing so well. Deleting the account removes all of this for good:</p>
+     <h3 id="dlT">Delete your account?</h3>
+     <p id="dlD" class="muted">Deleting the account removes ${kids>1?'your children&rsquo;s':nm+'&rsquo;s'} learning records for good:</p>
      <div class="dl-stats"><div><b>${stars}</b><span>stars earned</span></div><div><b>${days}</b><span>days of learning</span></div><div><b>${les}</b><span>lessons done</span></div></div>
-     <p class="dl-q">Could one of these help instead?</p>
+     <p class="dl-q">Other things you can do instead</p>
      <div class="dl-alt">
        <button class="dl-o" id="dlBreak"><span aria-hidden="true">${ic('out',20)}</span><b>Take a break</b><small>Log out. Everything is kept for when you come back.</small></button>
        <button class="dl-o" id="dlFree"><span aria-hidden="true">${ic('star',20)}</span><b>Switch to Free</b><small>Stop paying but keep progress and the Care Circle.</small></button>
        <button class="dl-o" id="dlTalk"><span aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span><b>Tell us what is wrong</b><small>We read every message and will try to fix it.</small></button>
      </div>
-     <button class="btn pri lg dl-stay" id="dlNo">Stay with Pip</button>
-     <button class="dl-go" id="dlNext">I still want to delete my account</button></div></div>`;
-    $('#dlNo').onclick=()=>{shut();toast(tr('Yay! Pip is so happy you are staying.'))};
+     <div class="row dl-btns"><button class="btn pri" id="dlNo">Keep my account</button><button class="btn ghost" id="dlNext" style="color:var(--warn)">Continue to delete</button></div></div></div>`;
+    $('#dlNo').onclick=keep;
     $('#dlBreak').onclick=()=>{shut();confirmLogout()};
     $('#dlFree').onclick=()=>{shut();go('pricing')};
     $('#dlTalk').onclick=()=>{location.href='mailto:'+((window.LLL_CONFIG||{}).contactEmail||'lahlahlearn@gmail.com')+'?subject='+encodeURIComponent('Before I delete my LahLahLearn account')};
-    $('#dlNext').onclick=step2;$('#dlNo').focus()};
-  const step2=()=>{ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT2" aria-describedby="dlD2"><div class="card dl-card">
+    $('#dlNext').onclick=cloud?stepMail:()=>stepType();$('#dlNo').focus()};
+  const WHAT='This permanently removes the parent account, every child profile, all progress, the Care Circle and your parent PIN. It cannot be undone.';
+  /* this device only: type the word */
+  const stepType=old=>{ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT2" aria-describedby="dlD2"><div class="card dl-card">
      <h3 id="dlT2">Delete the account for good?</h3>
-     <p id="dlD2" class="muted">This permanently removes the parent account, every child profile, all progress, the Care Circle and your parent PIN. It cannot be undone.</p>
+     <p id="dlD2" class="muted">${WHAT}</p>
      <label class="stack" style="gap:6px;width:100%;text-align:left"><b class="small">Type DELETE to confirm</b><input class="in" id="dlIn" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
-     <div class="row" style="justify-content:center;gap:10px;flex-wrap:wrap;width:100%"><button class="btn pri" id="dlBack">Keep my account</button><button class="btn ghost" id="dlYes" disabled style="color:var(--warn)">Delete forever</button></div></div></div>`;
+     <div class="row dl-btns"><button class="btn pri" id="dlBack">Keep my account</button><button class="btn ghost" id="dlYes" disabled style="color:var(--warn)">Delete forever</button></div></div></div>`;
     const inp=$('#dlIn'),yes=$('#dlYes');inp.oninput=()=>{yes.disabled=inp.value.trim().toUpperCase()!=='DELETE'};
-    $('#dlBack').onclick=()=>{shut();toast(tr('Yay! Pip is so happy you are staying.'))};
-    yes.onclick=()=>{if(yes.disabled)return;shut();done()};inp.focus()};
+    $('#dlBack').onclick=keep;
+    yes.onclick=async()=>{if(yes.disabled)return;if(old===true){yes.disabled=true;try{await cloudInvoke('delete-account',{confirm:'DELETE'})}catch(e){yes.disabled=false;toast(e.message);return}}shut();done()};inp.focus()};
+  /* cloud account: a 6-digit code goes to the parent's own email first */
+  const stepMail=()=>{const em=esc2((CLOUD.user&&CLOUD.user.email)||'your email address');
+    ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT2" aria-describedby="dlD2"><div class="card dl-card">
+     <h3 id="dlT2">Check it is really you</h3>
+     <p id="dlD2" class="muted">${WHAT}</p>
+     <p>To keep the account safe, we will email a 6-digit code to <b>${em}</b>. You type it here to finish.</p>
+     <p class="em-err" id="dlErr" role="alert" hidden></p>
+     <div class="row dl-btns"><button class="btn pri" id="dlBack">Keep my account</button><button class="btn ghost" id="dlSend" style="color:var(--warn)">Email me the code</button></div></div></div>`;
+    $('#dlBack').onclick=keep;
+    const b=$('#dlSend'),er=$('#dlErr');
+    b.onclick=async()=>{b.disabled=true;b.textContent=tr('Sending…');er.hidden=true;
+      try{const r=await cloudInvoke('delete-account',{action:'request'});stepCode(r&&r.sent_to||em,r&&r.minutes||15)}
+      catch(e){/* a server that has not been updated to email codes yet answers like this: use the typed confirmation with it */
+        if(/confirm the deletion/i.test(e.message||'')){stepType(true);return}
+        b.disabled=false;b.textContent=tr('Email me the code');er.hidden=false;er.textContent=e.message}};
+    b.focus()};
+  const stepCode=(to,mins)=>{ov.innerHTML=`<div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="dlT3" aria-describedby="dlD3"><div class="card dl-card">
+     <h3 id="dlT3">Type the code from your email</h3>
+     <p id="dlD3" class="muted">We sent a 6-digit code to <b>${esc2(to)}</b>. It works for ${mins} minutes. Check the spam folder if you cannot see it.</p>
+     <label class="stack" style="gap:6px;width:100%;text-align:left"><b class="small">6-digit code</b><input class="in dl-code" id="dlCode" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" spellcheck="false" aria-describedby="dlErr"></label>
+     <p class="em-err" id="dlErr" role="alert" hidden></p>
+     <div class="row dl-btns"><button class="btn pri" id="dlBack">Keep my account</button><button class="btn ghost" id="dlYes" disabled style="color:var(--warn)">Delete forever</button></div>
+     <button class="dl-go" id="dlAgain">Send a new code</button></div></div>`;
+    const inp=$('#dlCode'),yes=$('#dlYes'),er=$('#dlErr'),say=t=>{er.hidden=!t;er.textContent=t||''};
+    inp.oninput=()=>{inp.value=inp.value.replace(/\D/g,'').slice(0,6);yes.disabled=inp.value.length!==6;say('')};
+    $('#dlBack').onclick=keep;
+    $('#dlAgain').onclick=async()=>{const a=$('#dlAgain');a.disabled=true;try{await cloudInvoke('delete-account',{action:'request'});say('');toast(tr('We sent a new code.'))}catch(e){say(e.message)}a.disabled=false};
+    yes.onclick=async()=>{if(yes.disabled)return;yes.disabled=true;yes.textContent=tr('Deleting…');
+      try{await cloudInvoke('delete-account',{confirm:'DELETE',code:inp.value});shut();done()}
+      catch(e){yes.textContent=tr('Delete forever');say(e.message);inp.focus();inp.select()}};
+    inp.focus()};
   document.addEventListener('keydown',esc,true);step1();
 }
 R.profile=()=>{

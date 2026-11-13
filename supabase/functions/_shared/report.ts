@@ -77,11 +77,12 @@ export function reportEmail(children: ChildReport[], weekEnding: string, upcomin
     <p style="margin:12px 0 0">Calm breaks used: ${c.calm} · Upset moments this week: ${c.upsets}</p>
     ${c.notes ? `<p style="margin:12px 0 0;color:#6c746d">Shared notes</p><p style="margin:2px 0 0;white-space:pre-wrap">${esc(c.notes)}</p>` : ""}`;
   const next = upcoming.length ? `<p style="margin:22px 0 0">Next check-up: ${esc(upcoming[0].when)} with ${esc(upcoming[0].who)}</p>` : "";
-  const html = `<p style="margin:0">Here is the week ending ${esc(weekEnding)}.</p>${children.map(block).join("")}${next}`;
+  const stop = "You get this email because the weekly report is switched on for your family. To stop it, open the Care Circle, go to Report and untick \"Email the report automatically\", or reply to this email and we will stop it for you.";
+  const html = `<p style="margin:0">Here is the week ending ${esc(weekEnding)}.</p>${children.map(block).join("")}${next}<p style="margin:26px 0 0;font-size:12px;color:#6c746d">${stop}</p>`;
   const text = [`LahLahLearn weekly report — week ending ${weekEnding}`, ""].concat(children.flatMap((c) => [
     c.name, `- Learning time: ${c.minutes} minutes over ${c.days} day(s)`, `- Lessons so far: ${c.lessons}`, `- Level: ${c.level}`,
     `- Strengths: ${c.strengths.join(", ") || "Still collecting activity"}`, `- Needs support: ${c.support.join(", ") || "Still collecting activity"}`,
     `- Calm breaks: ${c.calm}; upset moments this week: ${c.upsets}`, ...(c.notes ? [`- Notes: ${c.notes}`] : []), "",
-  ])).concat(upcoming.length ? [`Next check-up: ${upcoming[0].when} with ${upcoming[0].who}`] : []).join("\n");
+  ])).concat(upcoming.length ? [`Next check-up: ${upcoming[0].when} with ${upcoming[0].who}`] : []).concat(["", stop]).join("\n");
   return { subject, html, text };
 }

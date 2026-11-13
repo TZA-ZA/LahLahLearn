@@ -1,2 +1,118 @@
+# LahLahLearn on Netlify: a static site, no build step.
 [build]
   publish = "."
+
+# ---- Security headers for every page ----
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    # camera and microphone are used by the optional helpers, on our own pages only
+    Permissions-Policy = "camera=(self), microphone=(self), geolocation=(), payment=(), usb=(), bluetooth=(), accelerometer=(), gyroscope=(), magnetometer=(), browsing-topics=()"
+    # Scripts only from this site and the two CDNs the app loads its 3D and voice libraries from.
+    # The app is one file with inline scripts and styles, so 'unsafe-inline' stays; the voice and camera
+    # helpers run WebAssembly, which needs the two eval entries. Nobody else may frame the site.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; media-src 'self' data: blob: https:; connect-src 'self' data: blob: https: wss:; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+# ---- Keep private and working files out of search results and off the site ----
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+[[headers]]
+  for = "/thank-you/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# ---- Caching: pages always fresh, pictures, fonts and sounds kept by the browser ----
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/doodle/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/audio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+[[headers]]
+  for = "/signs/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# ---- Backend source, scripts and notes are in the repo but are not web pages ----
+[[redirects]]
+  from = "/supabase/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/.github/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/BACKEND.md"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# ---- Old or guessed addresses go straight to the right page (one hop, no chains) ----
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy/"
+  status = 301
+[[redirects]]
+  from = "/terms-of-service"
+  to = "/terms/"
+  status = 301
+[[redirects]]
+  from = "/refund"
+  to = "/refunds/"
+  status = 301
+[[redirects]]
+  from = "/refund-policy"
+  to = "/refunds/"
+  status = 301
+[[redirects]]
+  from = "/cookie-policy"
+  to = "/cookies/"
+  status = 301
+[[redirects]]
+  from = "/team"
+  to = "/about/#team"
+  status = 301

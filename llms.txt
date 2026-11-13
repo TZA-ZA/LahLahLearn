@@ -1,0 +1,20 @@
+# LahLahLearn
+
+> LahLahLearn is a calm, playful web learning app for children aged 3 to 8. Short 3 to 5 minute lessons cover reading, maths, feelings and life skills, guided by Pip, a friendly character. Parents, teachers and therapists follow progress together in the Care Circle. Made in Selangor, Malaysia.
+
+Key facts:
+- Runs in the browser on computers, tablets and phones at https://lahlahlearn.com/
+- For children who learn best with short lessons, calm screens and a flexible pace
+- Accounts are created by a parent or guardian aged 18 or over; children are never asked for contact details and never chat with each other
+- No advertising and no tracking cookies
+- Free plan, a paid Family plan with a 7-day free trial (no payment details needed), and a School or clinic plan
+- It supports learning at home; it does not diagnose or treat any condition
+- Contact: lahlahlearn@gmail.com
+
+## Pages
+- [About LahLahLearn](https://lahlahlearn.com/about/): what it is, who it is for, how it works, FAQ, credits
+- [Contact](https://lahlahlearn.com/contact/): email, privacy and data requests, billing help
+- [Privacy Policy](https://lahlahlearn.com/privacy/)
+- [Terms of Service](https://lahlahlearn.com/terms/)
+- [Refund Policy](https://lahlahlearn.com/refunds/)
+- [Cookie Policy](https://lahlahlearn.com/cookies/)
