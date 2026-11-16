@@ -2201,49 +2201,41 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 .tm-l a:hover,.tm-l a:focus-visible{border-color:var(--brand);color:var(--brand)}
 /* ===== Journey: the class as a path of stepping stones, with treasure chests on the way ===== */
 .jr-h{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;margin:6px 0 -12px}.jr-h .sk-h{margin:0}.jr-h small{color:var(--muted);font-weight:700}
-.jr{--jx:46px;--jn:84px;list-style:none;margin:0 auto;padding:30px calc(var(--jx)*2) 6px;width:100%;max-width:680px;display:flex;flex-direction:column;gap:32px}
-.jr-s{position:relative;display:grid;grid-template-columns:1fr var(--jn) 1fr;align-items:center;gap:16px;transform:translateX(calc(var(--o,0)*var(--jx)))}
-.jr-s+.jr-s::before{content:"";position:absolute;left:50%;top:-30px;width:8px;height:28px;margin-left:-4px;background:radial-gradient(circle,color-mix(in srgb,var(--muted) 45%,transparent) 2.6px,transparent 3.1px) center/8px 9px repeat-y;transform:translateX(calc(var(--d,0)*var(--jx)*.5)) rotate(calc(var(--d,0)*26deg))}
+.jr{position:relative;--jy:16px;--jn:78px;list-style:none;margin:0;padding:34px 22px 18px;width:100%;display:flex;gap:18px;align-items:flex-start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:thin;-webkit-overflow-scrolling:touch;background:linear-gradient(transparent calc(34px + var(--jn)/2 - 3px),color-mix(in srgb,var(--muted) 18%,transparent) calc(34px + var(--jn)/2 - 3px),color-mix(in srgb,var(--muted) 18%,transparent) calc(34px + var(--jn)/2 + 3px),transparent calc(34px + var(--jn)/2 + 3px)) no-repeat;background-size:100% 100%;border-radius:24px}
+.jr-s{position:relative;flex:0 0 132px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;scroll-snap-align:center;transform:translateY(calc(var(--o,0)*var(--jy)))}
+.jr-s+.jr-s::before{content:"";position:absolute;right:calc(50% + var(--jn)/2 + 4px);top:calc(var(--jn)/2 - 4px);width:calc(132px + 18px - var(--jn) - 8px);height:8px;background:radial-gradient(circle,color-mix(in srgb,var(--muted) 45%,transparent) 2.6px,transparent 3.1px) center/10px 8px repeat-x;transform-origin:right center;transform:rotate(calc(var(--d,0)*-7deg))}
 .jr-s.go::before{background-image:radial-gradient(circle,var(--lc) 2.8px,transparent 3.3px)}
-.jr-n{grid-column:2;grid-row:1;position:relative;width:var(--jn);height:var(--jn);border-radius:50%;border:0;padding:0;cursor:pointer;display:grid;place-items:center;font:700 1.8rem var(--f-d);color:#fff;background:var(--lc);box-shadow:0 7px 0 color-mix(in srgb,var(--lc) 66%,#000),0 18px 22px -12px rgba(30,40,30,.5);transition:transform .15s,box-shadow .15s}
+.jr-n{position:relative;width:var(--jn);height:var(--jn);flex:none;border-radius:50%;border:0;padding:0;cursor:pointer;display:grid;place-items:center;font:700 1.7rem var(--f-d);color:#fff;background:var(--lc);box-shadow:0 7px 0 color-mix(in srgb,var(--lc) 66%,#000),0 18px 22px -12px rgba(30,40,30,.5);transition:transform .15s,box-shadow .15s}
 .jr-n:hover:not([disabled]){transform:translateY(-2px)}.jr-n:active:not([disabled]){transform:translateY(5px);box-shadow:0 2px 0 color-mix(in srgb,var(--lc) 66%,#000)}
 .jr-n svg{display:block}
 .jr-s.done .jr-n{background:#f2c14e;color:#6a4505;box-shadow:0 7px 0 #c9962a,0 18px 22px -12px rgba(120,90,10,.5)}
 .jr-s.lock .jr-n{background:color-mix(in srgb,var(--muted) 26%,var(--surf));color:var(--muted);box-shadow:0 7px 0 color-mix(in srgb,var(--muted) 42%,var(--surf));cursor:default}
 .jr-s.now .jr-n::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:4px solid color-mix(in srgb,var(--lc) 55%,transparent);animation:jrPulse 1.9s ease-out infinite}
 @keyframes jrPulse{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.2);opacity:0}}
-.jr-t{grid-column:3;grid-row:1;display:flex;flex-direction:column;gap:2px;min-width:0}
-.jr-s.lf .jr-t{grid-column:1;text-align:right;align-items:flex-end}
-.jr-t b{font:700 1.04rem/1.25 var(--f-d)}.jr-t small{color:var(--muted);font-weight:600;font-size:.85rem;line-height:1.3}
-.jr-t em{font-style:normal;font-weight:700;font-size:.8rem;color:var(--lc);margin-top:2px}
+.jr-t,.jr-s.lf .jr-t{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;width:100%;text-align:center}
+.jr-t b{font:700 .95rem/1.2 var(--f-d)}.jr-t small{color:var(--muted);font-weight:600;font-size:.78rem;line-height:1.3}
+.jr-t em{font-style:normal;font-weight:700;font-size:.78rem;color:var(--lc);margin-top:2px}
 .jr-s.lock .jr-t{opacity:.62}
-.jr-me{grid-column:1;grid-row:1;justify-self:end;align-self:end;margin:0 -8px -4px 0;pointer-events:none;animation:jrBob 2.6s ease-in-out infinite}
-.jr-s.lf .jr-me{grid-column:3;justify-self:start;margin:0 0 -4px -8px}
-.jr-me>*{display:block;width:78px;height:auto}
+.jr-me,.jr-s.lf .jr-me{position:absolute;left:calc(50% + var(--jn)/2 - 22px);top:-30px;margin:0;pointer-events:none;z-index:2;animation:jrBob 2.6s ease-in-out infinite}
+.jr-me>*{display:block;width:52px;height:auto}
 @keyframes jrBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.jr-ch{grid-column:2;grid-row:1;width:var(--jn);height:var(--jn);border:0;background:none;padding:0;display:grid;place-items:center;filter:drop-shadow(0 8px 7px rgba(60,40,10,.28))}
+.jr-ch{width:var(--jn);height:var(--jn);flex:none;border:0;background:none;padding:0;display:grid;place-items:center;filter:drop-shadow(0 8px 7px rgba(60,40,10,.28))}
 button.jr-ch{cursor:pointer}.jr-ch svg{width:94%;height:94%;display:block}
 .jr-c.lock .jr-ch{filter:grayscale(.9) opacity(.5)}
 .jr-c.ready .jr-ch{animation:jrWig 1.7s ease-in-out infinite}
 @keyframes jrWig{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg) scale(1.07)}}
 .jr-c.open .jr-ch{background:var(--paper);border-radius:50%;border:3px solid #f2c14e;filter:none}.jr-c.open .jr-ch svg{width:64%;height:64%}
-.jr-gate{grid-column:2;grid-row:1;width:var(--jn);height:var(--jn);border-radius:24px;border:3px double #e2b65a;background:var(--paper);padding:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 7px 0 #d9b25e,0 18px 22px -12px rgba(120,90,10,.5);transition:transform .15s}
+.jr-gate{width:var(--jn);height:var(--jn);flex:none;border-radius:24px;border:3px double #e2b65a;background:var(--paper);padding:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 7px 0 #d9b25e,0 18px 22px -12px rgba(120,90,10,.5);transition:transform .15s}
 .jr-gate:hover:not([disabled]){transform:translateY(-2px)}
 .jr-g.lock .jr-gate{filter:grayscale(.85);opacity:.6;cursor:default}
 .jr-g.ready .jr-gate{animation:jrWig 2.2s ease-in-out infinite}
-.jr-land{grid-column:2;grid-row:1;width:var(--jn);height:var(--jn);border-radius:50%;border:3px dashed color-mix(in srgb,var(--muted) 50%,transparent);display:grid;place-items:center;filter:grayscale(.7);opacity:.75}
+.jr-land{width:var(--jn);height:var(--jn);flex:none;border-radius:50%;border:3px dashed color-mix(in srgb,var(--muted) 50%,transparent);display:grid;place-items:center;filter:grayscale(.7);opacity:.75}
 .jr-x.end .jr-land{filter:none;opacity:1;border:3px solid #f2c14e;background:var(--paper)}
 .jr.calm .jr-n::after,.jr.calm .jr-me,.jr.calm .jr-ch,.jr.calm .jr-gate{animation:none!important}
 @media(prefers-reduced-motion:reduce){.jr-n::after,.jr-me,.jr-ch,.jr-gate{animation:none!important}}
-@media(max-width:620px){
- .jr{--jx:13px;--jn:72px;gap:28px;padding:26px 26px 6px}
- .jr-s{grid-template-columns:var(--jn) 1fr;gap:14px}
- .jr-s+.jr-s::before{left:calc(var(--jn)/2);top:-27px}
- .jr-n,.jr-ch,.jr-gate,.jr-land{grid-column:1}
- .jr-t,.jr-s.lf .jr-t{grid-column:2;text-align:left;align-items:flex-start}
- .jr-me,.jr-s.lf .jr-me{grid-column:1;position:absolute;left:-20px;top:-34px;margin:0;justify-self:auto}.jr-me>*{width:50px}
- .jr-n{font-size:1.5rem}
-}
+.jr-nav{display:flex;gap:8px}.jr-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.jr-nav button:disabled{opacity:.35;cursor:default}
+@media(max-width:620px){.jr{--jn:66px;--jy:10px;gap:14px;padding:30px 14px 14px}.jr-s{flex-basis:112px}.jr-s+.jr-s::before{width:calc(112px + 14px - var(--jn) - 8px)}.jr-n{font-size:1.4rem}.jr-me>*{width:42px}}
 .tre{display:flex;flex-direction:column;gap:14px;padding:20px 22px;border-radius:24px;background:var(--paper);border:1px solid var(--line)}
 .tre-h{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap}.tre-h h3{margin:0;font:700 1.3rem var(--f-d)}
 .tre-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:12px}
@@ -2263,8 +2255,10 @@ button.jr-ch{cursor:pointer}.jr-ch svg{width:94%;height:94%;display:block}
 .jn-d{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--surf);font:700 .95rem var(--f-d);color:var(--muted);display:grid;place-items:center;padding:0}
 button.jn-d{cursor:pointer}.jn-d.on{background:#f2c14e;border-color:#c9962a;color:#6a4505}.jn-d.now{border-color:var(--brand);color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 25%,transparent)}
 .jn-t{margin:0;font-weight:600}.jn-t small{display:block;color:var(--muted);font-weight:600;margin-top:2px}
-.jn-c .btn{align-self:stretch;justify-content:center}
-@media(max-width:620px){.jnbar{bottom:calc(92px + env(safe-area-inset-bottom,0px));width:min(440px,calc(100% - 110px));left:10px;transform:none}}
+.jn-bs{display:flex;flex-direction:column;gap:8px}.jn-bs:empty{display:none}.jn-c .btn{align-self:stretch;justify-content:center}
+@media (pointer:coarse),(hover:none),(max-width:760px){.jnbar{width:min(420px,calc(100% - 300px));min-width:300px}}
+@media(max-width:620px){.jnbar{bottom:calc(88px + env(safe-area-inset-bottom,0px));width:auto;min-width:0;left:10px;right:70px;transform:none}.jn-c{padding:10px 12px;gap:6px;border-radius:20px}.jn-top b{font-size:.95rem}.jn-d{width:32px;height:32px}.jn-c .btn.lg{min-height:46px;padding:8px 14px;font-size:1rem}.jn-t{font-size:.9rem}
+ .isljoy{bottom:calc(var(--jnh,190px) + 104px + env(safe-area-inset-bottom,0px))!important;left:14px!important;width:104px!important;height:104px!important}.isljump{bottom:calc(var(--jnh,190px) + 108px + env(safe-area-inset-bottom,0px))!important;right:14px!important;width:84px!important;height:84px!important}}
 /* 3D world: decorate panel */
 .decop{right:14px;top:142px;width:min(330px,calc(100% - 28px));max-height:min(64%,480px);overflow:auto;pointer-events:auto;z-index:8;padding:14px 16px;display:flex;flex-direction:column;gap:10px;color:var(--ink)}
 .decop[hidden]{display:none}
@@ -2705,7 +2699,14 @@ body.has-sidx .msb{display:none!important}
 @media (max-width:700px){.sidx{right:2px}.sidx-tr{gap:7px}}
 /* ===== Pip AI: bar, thinking loader, voice, memory, credits ===== */
 .tp-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.85rem}
-.tp-model{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:var(--surf2);font-weight:600}
+.tp-mw{position:relative;display:inline-flex}
+.tp-model{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;min-height:36px;border-radius:999px;background:var(--surf2);font:600 inherit;font-weight:600;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+.tp-model:hover,.tp-model[aria-expanded="true"]{border-color:var(--brand)}
+.tp-mp{position:absolute;left:0;top:calc(100% + 6px);z-index:30;width:min(300px,82vw);display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:18px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow),0 18px 40px -16px rgba(0,0,0,.35)}
+.tp-mp[hidden]{display:none}
+.tp-mp button{display:grid;grid-template-columns:1fr auto;gap:2px 10px;text-align:left;padding:10px 12px;border-radius:12px;border:2px solid transparent;background:var(--surf2);color:var(--ink);cursor:pointer;font:inherit}
+.tp-mp button b{font-weight:700}.tp-mp button small{grid-column:1;color:var(--muted);font-size:.78rem;line-height:1.3}.tp-mp button span{grid-row:1;grid-column:2;font-size:.8rem;font-weight:700;color:var(--muted)}
+.tp-mp button[aria-checked="true"]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,var(--surf))}
 .ai-gl{display:inline-flex;align-items:flex-end;gap:2px;height:12px}.ai-gl i{width:3px;border-radius:1px;background:color-mix(in srgb,var(--muted) 40%,transparent)}.ai-gl i.on{background:var(--brand)}
 .tp-cr{color:var(--muted)}.tp-cr.low{color:var(--coral);font-weight:700}
 .tp-memb{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surf);color:var(--ink);font:600 .82rem var(--f-b);cursor:pointer}
@@ -3176,6 +3177,18 @@ function voiceRec(host,{onSend}){
 }
 
 /* ---- Care Circle settings: choose Pip's model, see credits, manage memory ---- */
+const tpModelIn=()=>`<span class="ai-gl" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=AI_MODELS.indexOf(aiModel())+1?'on':''}" style="height:${i*3+2}px"></i>`).join('')}</span>${aiModel().name}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
+/* switch Pip's model straight from the chat */
+function tpModelBind(box){
+  const b=$('#tpModel',box),mp=$('#tpMp',box);if(!b||!mp)return;
+  const draw=()=>{const m=aiModel();mp.innerHTML=AI_MODELS.map(x=>`<button role="radio" aria-checked="${x.id===m.id}" data-tpm="${x.id}"><b>${x.name}</b><small>${esc(x.d)}</small><span class="tn">${x.cost} credit${x.cost>1?'s':''}</span></button>`).join('');
+    $$('[data-tpm]',mp).forEach((o,i,all)=>{o.onclick=()=>{P.aiModel=o.dataset.tpm;save(true);b.innerHTML=tpModelIn();b.title=aiModel().d;shut();toast(`Pip will use ${aiModel().name}.`);b.focus()};
+      o.onkeydown=e=>{const d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];if(e.key==='Escape'){e.preventDefault();shut();b.focus();return}if(!d)return;e.preventDefault();all[(i+d+all.length)%all.length].focus()}})};
+  const out=e=>{if(!e.target.closest('.tp-mw'))shut()};
+  const shut=()=>{mp.hidden=true;b.setAttribute('aria-expanded','false');document.removeEventListener('click',out,true)};
+  b.onclick=()=>{if(!mp.hidden){shut();return}draw();mp.hidden=false;b.setAttribute('aria-expanded','true');document.addEventListener('click',out,true);const on=mp.querySelector('[aria-checked="true"]');if(on)on.focus({preventScroll:true});try{mp.scrollIntoView({block:'nearest',behavior:calmMotion()?'auto':'smooth'})}catch(e){}};
+  teardowns.push(shut);
+}
 function aiSetHTML(){
   const b=aiBal(),m=aiModel(),pct=Math.min(100,b.left/Math.max(1,b.allow+b.bonus)*100);
   return `<section class="gr-sec ai-set"><div class="gr-sh"><div><h3>Pip AI</h3><p class="muted small">Each answer from Pip's thinking helper uses credits. ${P.plan==='family'?'Family':'Free'} includes ${aiAllow().toLocaleString()} credits a month.</p></div></div>
@@ -3285,7 +3298,7 @@ function studyView(box){
     </div>
    </div>
    <p id="sdone" class="muted small" style="text-align:center;min-height:1.2em" aria-live="polite"></p>
-   <div class="tp-bar"><span class="tp-model" title="${esc(aiModel().d)}"><span class="ai-gl" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=AI_MODELS.indexOf(aiModel())+1?'on':''}" style="height:${i*3+2}px"></i>`).join('')}</span>${aiModel().name}</span><span class="tp-cr tn" id="tpCr"></span><button class="tp-memb" id="tpMem" aria-expanded="false" aria-controls="tpMm">${ic('bookmark',15)}<span>Pip remembers</span><b class="tn" id="tpMemN"></b></button></div>
+   <div class="tp-bar"><span class="tp-mw"><button class="tp-model" id="tpModel" aria-haspopup="true" aria-expanded="false" aria-controls="tpMp" title="${esc(aiModel().d)}">${tpModelIn()}</button><div class="tp-mp" id="tpMp" role="radiogroup" aria-label="Pip's thinking helper" hidden></div></span><span class="tp-cr tn" id="tpCr"></span><button class="tp-memb" id="tpMem" aria-expanded="false" aria-controls="tpMm">${ic('bookmark',15)}<span>Pip remembers</span><b class="tn" id="tpMemN"></b></button></div>
    <div class="tp-split"><div class="tpchat-wrap"><div class="tpchat" id="tpchat">${tpBubbles(PIPCHAT.msgs)}</div></div><aside class="mm tp-mm" id="tpMm" hidden aria-label="What Pip remembers"></aside></div>
    <div class="tp-vr" id="tpVr" hidden></div>
    <div class="row" style="gap:8px;flex-wrap:nowrap"><input id="tpin" class="in" placeholder="Talk to Pip..." aria-label="Message to Pip" autocomplete="off">
@@ -3302,6 +3315,7 @@ function studyView(box){
   const micSync=()=>{const on=vr.mode()==='rec',mb=$('#tpmic',box);if(!mb)return;mb.classList.toggle('on',on);mb.innerHTML=on?'<span class="tp-stop" aria-hidden="true"></span>':ic('mic',22);mb.setAttribute('aria-label',on?'Stop recording':'Speak to Pip')};
   $('#tpmic',box).onclick=async()=>{await vr.toggle();micSync();const iv=setInterval(()=>{if(vr.mode()!=='rec'){clearInterval(iv);micSync()}},300)};
   teardowns.push(()=>vr.stop());
+  tpModelBind(box);
   $('#tpMem',box).onclick=()=>{const mm=$('#tpMm',box),o=mm.hidden;mm.hidden=!o;$('#tpMem',box).setAttribute('aria-expanded',o);box.querySelector('.tp-split').classList.toggle('open',o);tpBar(box)};
   $('.tpchat',box).addEventListener('click',e=>{if(e.target.closest('[data-memc]')){const mm=$('#tpMm',box);if(mm.hidden)$('#tpMem',box).click()}});
   tpBar(box);
@@ -3581,7 +3595,7 @@ const styleKey=()=>{const v=document.documentElement.dataset.style;return STYLES
 function setStyle(v){document.documentElement.dataset.style=v;lsSet('ll.style',v);themeSync();styleMenu()}
 {const s=lsGet('ll.theme');if(s==='light'||s==='dark')document.documentElement.dataset.theme=s}
 const satVal=p=>{p=p||{};let v=p.sat;if(v==='low')v=55;else if(v==='high')v=150;else if(v==='mid'||v==null)v=p.soft?55:100;v=+v;return isFinite(v)?Math.max(20,Math.min(200,Math.round(v))):100};
-function applySat(p,v){v=v==null?satVal(p):v;document.documentElement.style.filter='saturate('+(v/100*1.3).toFixed(3)+') contrast(1.03)';document.documentElement.dataset.sat=v<100?'low':v>100?'high':'mid'}
+function applySat(p,v){v=v==null?satVal(p):v;document.documentElement.style.filter='saturate('+(v/100*1.3).toFixed(3)+') contrast('+(p&&p.contrast?1.16:1.03)+')';document.documentElement.dataset.sat=v<100?'low':v>100?'high':'mid'}
 function applyA11y(){
   const p=P&&P.prefs||{};
   document.body.classList.toggle('dys',!!p.dys);document.body.classList.toggle('big',!!p.big);document.body.classList.toggle('noanim',!!p.calm);
@@ -4369,7 +4383,7 @@ const GUIDE={
  grow:['Grow every day',['Watch the story, then pick the answer.','Tick each step in a routine.','Take your time. Pip is with you.']],
  lesson:['This lesson',['Press Hear it to listen.','Use the arrows to go next.','Press Watch lesson to see it like a video. It pauses if you look away.']],
  game:['This game',['Read the question. Press the speaker to hear it.','Tap the answer you think is right.','Wrong is okay. Pip will help you try again.']],
- island:['3D World',['Every day has a trail with 3 stops. Tap Walk there and your buddy walks to the stop.','Play the game at each stop. Pick up stars on the way.','Finish all 3 stops, then come back tomorrow for a new trail.']],
+ island:['3D World',['Walk anywhere with the arrow keys, WASD or the stick. Or tap the ground.','Today’s trail has 3 stops. Tap Walk there and your buddy goes by itself.','Finish all 3 stops for a new flower. A new trail opens every day.']],
  play:['Games',['Pick a game.','Take your time. There is no timer.','Press Back when you want to stop.']],
  study:['Study with Pip',['Choose how long to study.','Press Start. Pip studies with you.','You can take a calm break any time.']],
  together:['Leaderboard',['See stars from all the children.','Your stars come from lessons and games.','Be kind. Everyone is learning.']],
@@ -6058,7 +6072,7 @@ const RW=[
  {id:'hat-flower',n:'Flower crown',t:'hat',lv:1,at:'c1'},{id:'d-windmill',n:'Windmill',t:'decor',lv:1,at:'c2'},{id:'pal-butterfly',n:'Butterfly friend',t:'pal',lv:1,at:'test'},
  {id:'hat-crown',n:'Golden crown',t:'hat',lv:2,at:'c1'},{id:'d-fountain',n:'Fountain',t:'decor',lv:2,at:'c2'},{id:'d-trophy',n:'Star statue',t:'decor',lv:2,at:'test'}];
 const RW_AT={c1:3,c2:6};  /* a chest opens after this many steps of the class */
-const JR_O=[0,1,2,1,0,-1,-2,-1];
+const JR_O=[0,-1,0,1];
 const JR_STAR='<svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z" fill="currentColor"/></svg>';
 let RWNEW=null,ISLDECO=false;
 function rwGet(){if(!G.rw)G.rw={got:{},put:{},hat:'',pal:''};const r=G.rw;r.got=r.got||{};r.put=r.put||{};return r}
@@ -6096,8 +6110,8 @@ function jrView(){
   rows.push(nl?['jr-x lock',`<span class="jr-land" aria-hidden="true">${si(nl.e,50)}</span><span class="jr-t"><b>Next: ${esc(nl.cls)}</b><small>${esc(nl.d)}</small></span>`]
               :[`jr-x ${c.grad?'end go':'lock'}`,`<span class="jr-land" aria-hidden="true">${JR_STAR.replace('currentColor','#f2c14e').replace(/36/g,'48')}</span><span class="jr-t"><b>${c.grad?'You finished every class!':'The end of the path'}</b><small>${c.grad?'Play any step again whenever you like.':'Pass the test to finish.'}</small></span>`]);
   const mine=RW.filter(x=>x.lv===lvI),doneN=lv.units.filter(curUnitDone).length;
-  return `<div class="jr-h"><h3 class="sk-h">${esc(lv.cls)} journey</h3><small>${doneN} of ${lv.units.length} steps · ${mine.filter(x=>rwHas(x.id)).length} of ${mine.length} treasures</small></div>
-    <ol class="jr${calmMotion()?' calm':''}" aria-label="${esc(lv.cls)} journey, in order">${rows.map(([cls,h],k)=>{const o=JR_O[k%JR_O.length],po=k?JR_O[(k-1)%JR_O.length]:o;return `<li class="jr-s ${cls}${o>0?' lf':''}" style="--o:${o};--d:${po-o}">${h}</li>`}).join('')}</ol>`;
+  return `<div class="jr-h"><h3 class="sk-h">${esc(lv.cls)} journey</h3><small>${doneN} of ${lv.units.length} steps · ${mine.filter(x=>rwHas(x.id)).length} of ${mine.length} treasures</small><span class="jr-nav"><button data-jrs="-1" aria-label="Scroll the journey back"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',18)}</span></button><button data-jrs="1" aria-label="Scroll the journey forward">${ic('arrow',18)}</button></span></div>
+    <ol class="jr${calmMotion()?' calm':''}" id="jrList" tabindex="0" aria-label="${esc(lv.cls)} journey, in order. Scroll sideways to see every step.">${rows.map(([cls,h],k)=>{const o=JR_O[k%JR_O.length],po=k?JR_O[(k-1)%JR_O.length]:o;return `<li class="jr-s ${cls}${o>0?' lf':''}" style="--o:${o};--d:${po-o}">${h}</li>`}).join('')}</ol>`;
 }
 function treView(){
   const has=RW.filter(x=>rwHas(x.id)).length;
@@ -6130,6 +6144,11 @@ function curView(){
 }
 function curBind(){$$('[data-cu]').forEach(b=>b.onclick=()=>go('learn-cu-'+b.dataset.cu));
   $$('[data-chest]').forEach(b=>b.onclick=()=>{const x=RW.find(r=>r.id===b.dataset.chest);if(!x||!rwGive(x.id))return;rwShow([x],()=>{if(cur==='learn'&&!curArg)R.learn()})});
+  {const jl=$('#jrList');if(jl){const nav=()=>{const m=jl.scrollWidth-jl.clientWidth-2;$$('[data-jrs]').forEach(b=>b.disabled=b.dataset.jrs<0?jl.scrollLeft<=2:jl.scrollLeft>=m)};
+    $$('[data-jrs]').forEach(b=>b.onclick=()=>{jl.scrollBy({left:+b.dataset.jrs*jl.clientWidth*.8,behavior:calmMotion()?'auto':'smooth'})});
+    jl.addEventListener('scroll',nav,{passive:true});
+    /* start with the current step in view */
+    const here=jl.querySelector('.jr-s.now')||jl.querySelector('.jr-c.ready,.jr-g.ready');if(here)jl.scrollLeft=Math.max(0,here.offsetLeft-jl.clientWidth/2+here.offsetWidth/2);nav()}}
   const tg=$('#treGo');if(tg)tg.onclick=()=>{ISLDECO=true;go('explore-island')};
   if(RWNEW&&RWNEW.length){const nw=RWNEW;RWNEW=null;rwShow(nw)}}
 let CUQ=null;
@@ -8386,7 +8405,7 @@ function buddy3D(T,kind){
       head.rotation.z=Math.sin(t*1.3)*.02;arm.rotation.z=Math.sin(t*2.6)*.16;
       stars.forEach((s,i)=>{s.rotation.y=t*1.4+i;s.position.y=s.userData.y0+Math.sin(t*1.6+i*2)*.06})};
     stars.forEach(s=>{s.userData.y0=s.position.y});
-    root.scale.setScalar(.68);
+    root.scale.setScalar(.58);
   }
   return {root,body,ears,fx,walk};
 }
@@ -8553,7 +8572,7 @@ function sfxStep(side){
   }catch(e){}
 }
 /* ---- Treasures in the 3D world: hats for the buddy, a butterfly friend, decorations the child places ---- */
-const RW_HAT_Y={pip:[1.4,0,1],cloud:[2.02,.02,1.13],fox:[2.2,.02,1.3]};  /* top of each buddy's head: [height, forward, size] */
+const RW_HAT_Y={pip:[1.4,0,1],cloud:[1.73,.02,.97],fox:[2.2,.02,1.3]};  /* top of each buddy's head: [height, forward, size] */
 function rwHatMesh(T,id,k){
   const g=new T.Group(),M=(c,o)=>x3Mat(T,c,Object.assign({roughness:.55},o||{}));let dy=0;
   if(id==='hat-party'){const c=new T.Mesh(new T.ConeGeometry(.27,.64,24),M('#e583ad'));c.position.y=.32;g.add(c);
@@ -8621,6 +8640,8 @@ function islandStart(){
    <div class="x3hud islprompt" id="islp" aria-live="polite"></div>
    <div class="x3hud decop glass" id="decop" role="dialog" aria-label="Decorate my world" hidden></div>
    <div class="x3hud islmap" id="islmapw"><canvas id="islmap" role="img" aria-label="Map of the island. The arrow is you."></canvas><button class="islmap-b" id="islmapb" aria-label="Make the map bigger" aria-expanded="false">${ic('globe',16)}</button></div>
+   <div class="x3hud islhint"><div class="glass small muted" style="padding:8px 14px">WASD or arrow keys to walk · <kbd class="kcap">Space</kbd> to jump · <kbd class="kcap">E</kbd> to go in · <kbd class="kcap">M</kbd> for the map · Click the ground to go there</div></div>
+   <div class="isljoy" id="isljoy" aria-label="Walk"><i></i></div>
    <div class="x3hud jnbar" id="jnbar"></div>
    <button class="isljump" id="isljump" aria-label="Jump" data-nosnd><span style="display:inline-flex;transform:rotate(-90deg)">${ic('arrow',34)}</span><span>Jump</span></button></div>`;
   const hk=()=>{if(S)ISLPOS=S.snap();render('explore','island')};
@@ -8712,7 +8733,7 @@ function islandBuild(T){
       const px=X(me2.position.x),pz=Z(me2.position.z);c2.save();c2.translate(px,pz);c2.rotate(Math.PI-fc);c2.fillStyle='#e0594a';c2.strokeStyle='#fff';c2.lineWidth=1.8;c2.beginPath();c2.moveTo(0,-7);c2.lineTo(5.4,6);c2.lineTo(0,3);c2.lineTo(-5.4,6);c2.closePath();c2.fill();c2.stroke();c2.restore();c2.restore()};
     const tog=()=>{big=!big;w.classList.toggle('big',big);bt.setAttribute('aria-expanded',big);bt.setAttribute('aria-label',big?'Make the map smaller':'Make the map bigger');sz=0};
     bt.onclick=tog;
-    cv2.addEventListener('pointerdown',e=>{e.stopPropagation();if(!big){tog();return}const r=cv2.getBoundingClientRect(),k=sz/2/(36+2),mx=(e.clientX-r.left-sz/2)/k,mz=(e.clientY-r.top-sz/2)/k;let best=null,bd=6;LM.forEach(l=>{const d=Math.hypot(l.x-mx,l.z-mz);if(d<bd){bd=d;best=l}});const dd=Math.hypot(mx,mz);tog()});
+    cv2.addEventListener('pointerdown',e=>{e.stopPropagation();if(!big){tog();return}const r=cv2.getBoundingClientRect(),k=sz/2/(36+2),mx=(e.clientX-r.left-sz/2)/k,mz=(e.clientY-r.top-sz/2)/k;let best=null,bd=6;LM.forEach(l=>{const d=Math.hypot(l.x-mx,l.z-mz);if(d<bd){bd=d;best=l}});const dd=Math.hypot(mx,mz);const t2=best?{x:best.x*.86,z:best.z*.86}:dd<36?{x:mx,z:mz}:null;if(t2){quit();tgt=t2}tog()});
     const kd=e=>{if((e.key==='m'||e.key==='M')&&!e.target.closest('input,textarea'))tog()};addEventListener('keydown',kd);teardowns.push(()=>removeEventListener('keydown',kd))}}
   const selL=new T.PointLight(0xffe2a8,0,22,1.6);selL.position.set(0,5,0);scene.add(selL);
   const warm=new T.Color('#ffd98a');
@@ -8755,15 +8776,20 @@ function islandBuild(T){
   const st=$('#islst');if(st)st.textContent=found;
   
   /* the daily trail: the buddy walks from stop to stop by itself */
-  const route=[];let walk=null,arrived=false;
+  const route=[];let walk=null,arrived=false,nearL=null;
+  /* the child takes over: stop the trail walk */
+  const quit=()=>{if(route.length||(walk&&!arrived)||tgt){route.length=0;tgt=null;if(walk&&!arrived){walk=null;jnDraw()}}};
   const jnDraw=()=>{const el=$('#jnbar');if(!el)return;const st=jnStops(jnDay()),lock=jnLocked(),idx=lock?JN_N:jnGet().i,arw=ic('arrow',18);
     const dots=st.map((q,k)=>k<idx?`<button class="jn-d on" data-jn="${k}" aria-label="${esc('Stop '+(k+1)+': '+q.n+'. Done. Tap to walk there and play it again')}">${JR_STAR.replace(/36/g,'20')}</button>`:`<span class="jn-d${k===idx?' now':''}" aria-hidden="true">${k+1}</span>`).join('');
     let body,btn='';
+    const inL=nearL&&!(walk&&arrived&&walk.lm===nearL.L.id)?`<button class="btn lg" id="jnin">${nearL.L.go==='calm'?'Breathe':'Go in'}: ${esc(nearL.L.n)} ${arw}</button>`:'';
     if(walk&&!arrived){body=`Walking to stop ${walk.k+1}: ${esc(walk.n)}`;btn=`<button class="btn pri lg" disabled>On the way…</button>`}
     else if(walk&&arrived){body=`Stop ${walk.k+1}: ${esc(walk.n)}`;btn=`<button class="btn pri lg" id="jnplay">Play ${arw}</button>`}
     else if(lock){body=`Today’s trail is done!<small>A new trail opens tomorrow. Tap a star to play a stop again.</small>`}
     else{body=`Stop ${idx+1} of ${JN_N}: ${esc(st[idx].n)}`;btn=`<button class="btn pri lg" id="jngo">Walk there ${arw}</button>`}
-    el.innerHTML=`<div class="glass jn-c"><div class="jn-top"><b>Trail day ${jnDay()}</b><span class="jn-dots">${dots}</span></div><p class="jn-t" aria-live="polite">${body}</p>${btn}</div>`;
+    el.innerHTML=`<div class="glass jn-c"><div class="jn-top"><b>Trail day ${jnDay()}</b><span class="jn-dots">${dots}</span></div><p class="jn-t" aria-live="polite">${body}</p><div class="jn-bs">${btn}${inL}</div></div>`;
+    const ji=$('#jnin');if(ji)ji.onclick=goIn;
+    requestAnimationFrame(()=>{document.documentElement.style.setProperty('--jnh',el.offsetHeight+'px')});
     const g=$('#jngo');if(g)g.onclick=()=>walkTo(idx);const pl=$('#jnplay');if(pl)pl.onclick=play;
     $$('[data-jn]',el).forEach(b=>b.onclick=()=>walkTo(+b.dataset.jn))};
   /* along the paths: back to the middle, round the big tree, then out to the stop */
@@ -8778,8 +8804,10 @@ function islandBuild(T){
   const walkHome=()=>{walk=null;arrived=false;viaHub(0,1);route.push({x:0,z:5.5});tgt=route.shift();jnDraw()};
   const arrive=()=>{if(walk){arrived=true;try{sfxNear()}catch(e){}}jnDraw();const b=$('#jnplay');if(b)try{b.focus({preventScroll:true})}catch(e){}};
   const play=()=>{if(!walk)return;JNRUN=walk.go;ISLPOS=S.snap();fromIsl=true;go(walk.go)};
-  const enter=()=>{const b=$('#jnplay')||$('#jngo');if(b&&!b.disabled)b.click()};
-  const setP=()=>{};
+  const goIn=()=>{if(!nearL)return;ISLPOS=S.snap();fromIsl=true;if(nearL.L.go==='calm')openCalm();else go(nearL.L.go)};
+  /* E or Enter: play the trail stop if the buddy is there, otherwise go into the place you are standing at */
+  const enter=()=>{const b=$('#jnplay');if(b){b.click();return}if(nearL){goIn();return}const g=$('#jngo');if(g)g.click()};
+  const setP=n=>{nearL=n||null;jnDraw()};
   /* back from a game: the buddy is still standing at that stop */
   {const lock=jnLocked(),st=jnStops(jnDay()),idx=lock?JN_N:jnGet().i,k2=(RAD-4.4)/RAD;
    if(JNWIN){JNWIN=false;const n=jnGet().done;setTimeout(()=>{if(S.dead)return;toast('Trail day '+n+' is done! A new flower is growing by the big tree.');try{sfxStar(5,true)}catch(e){}},700);walkHome()}
@@ -8793,19 +8821,20 @@ function islandBuild(T){
      const mid=new T.Mesh(new T.SphereGeometry(.08,10,8),x3Mat(T,'#f2c14e'));mid.position.y=.63;g.add(mid);scene.add(g)}}
 
   const kd=e=>{if(e.target.matches&&e.target.matches('input,textarea'))return;const k=e.key.toLowerCase();
+    if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright'].includes(k)){keys[k]=1;quit();e.preventDefault();return}
     if(e.code==='Space'||k===' '){e.preventDefault();if(!e.repeat)jumpReq=true;return}
     if((k==='e'&&NEW)||((k==='e'||k==='enter')&&!(e.target.matches&&e.target.matches('button')))){enter()}};
   const ku=e=>{delete keys[e.key.toLowerCase()]};addEventListener('keydown',kd);addEventListener('keyup',ku);
   const jb=$('#isljump');
   if(jb){jb.addEventListener('pointerdown',e=>{e.preventDefault();jumpReq=true;jb.classList.add('dn')});const up=()=>jb.classList.remove('dn');jb.addEventListener('pointerup',up);jb.addEventListener('pointercancel',up);jb.addEventListener('pointerleave',up);jb.addEventListener('click',e=>{if(e.detail===0)jumpReq=true})}
   const jy=$('#isljoy'),kn=jy&&$('i',jy);let jp=null;
-  if(jy){const set=e=>{const r=jy.getBoundingClientRect();let dx=(e.clientX-r.left-r.width/2)/(r.width*.393),dy=(e.clientY-r.top-r.height/2)/(r.width*.393);const l=Math.hypot(dx,dy);if(l>1){dx/=l;dy/=l}joy={x:dx,y:dy};kn.style.transform=`translate(${dx*r.width*.27}px,${dy*r.width*.27}px)`;tgt=null};
+  if(jy){const set=e=>{const r=jy.getBoundingClientRect();let dx=(e.clientX-r.left-r.width/2)/(r.width*.393),dy=(e.clientY-r.top-r.height/2)/(r.width*.393);const l=Math.hypot(dx,dy);if(l>1){dx/=l;dy/=l}joy={x:dx,y:dy};kn.style.transform=`translate(${dx*r.width*.27}px,${dy*r.width*.27}px)`;quit()};
     jy.addEventListener('pointerdown',e=>{jp=e.pointerId;jy.setPointerCapture(jp);set(e)});jy.addEventListener('pointermove',e=>{if(e.pointerId===jp)set(e)});
     const end=()=>{jp=null;joy={x:0,y:0};kn.style.transform=''};jy.addEventListener('pointerup',end);jy.addEventListener('pointercancel',end)}
   let down=null;const rc=new T.Raycaster(),v2=new T.Vector2();
   cv.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY,yaw,moved:false};try{cv.setPointerCapture(e.pointerId)}catch(_){}cv.style.cursor='grabbing'});
   cv.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-down.x;if(Math.abs(dx)>6||Math.abs(e.clientY-down.y)>6)down.moved=true;if(down.moved)yaw=down.yaw-dx*.006});
-  cv.addEventListener('pointerup',e=>{cv.style.cursor='grab';if(down&&!down.moved){const r=cv.getBoundingClientRect();v2.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);rc.setFromCamera(v2,camera);}down=null});
+  cv.addEventListener('pointerup',e=>{cv.style.cursor='grab';if(down&&!down.moved){const r=cv.getBoundingClientRect();v2.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);rc.setFromCamera(v2,camera);const h=rc.intersectObject(gnd)[0];if(h){quit();tgt={x:h.point.x,z:h.point.z}}}down=null});
   cv.addEventListener('pointercancel',()=>{down=null});
   cv.addEventListener('wheel',e=>{zoom=Math.max(.6,Math.min(NEW?2:1.6,zoom+e.deltaY*.001));e.preventDefault()},{passive:false});
   const fit=()=>{const w=box.clientWidth||w0,h=box.clientHeight||h0;renderer.setSize(w,h,false);camera.aspect=w/h;baseFov=w/h<.8?(NEW?72:64):(NEW?62:52);camera.fov=baseFov-7*fcs;camera.updateProjectionMatrix()};
