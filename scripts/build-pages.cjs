@@ -156,7 +156,7 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
 
   const ta = src.indexOf('const TEAM=['), tb = src.indexOf('];', ta);
   const TEAM = new Function('return ' + src.slice(ta + 'const TEAM='.length, tb + 1))();
-  const teamHtml = '<ul class="team">' + TEAM.map(m => `<li><span class="ph"><img src="../assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="120" height="120" loading="lazy"></span><b>${esc(m[1])}</b><span class="rl">${esc(m[2])}</span><span>${esc(m[6])}</span><span class="hl">${m[7].map(esc).join(' · ')}</span><span>${esc(m[5])}</span><span class="tl">${m[3] ? `<a href="https://www.instagram.com/${m[3]}/" rel="noopener">Instagram</a>` : ''}${m[4] ? `<a href="https://www.linkedin.com/in/${m[4]}/" rel="noopener">LinkedIn</a>` : ''}</span></li>`).join('') + '</ul>';
+  const teamHtml = '<ul class="team">' + TEAM.map(m => `<li><span class="ph"><img src="../assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="120" height="120" loading="lazy"></span><b>${esc(m[1])}</b><span class="rl">${m[2].split(' · ').map(esc).join('<br>')}</span><span>${esc(m[6])}</span><span>${esc(m[5])}</span><span class="tl">${m[3] ? `<a href="https://www.instagram.com/${m[3]}/" rel="noopener">Instagram</a>` : ''}${m[4] ? `<a href="https://www.linkedin.com/in/${m[4]}/" rel="noopener">LinkedIn</a>` : ''}</span></li>`).join('') + '</ul>';
   /* plain sentences and structured data so search engines can answer "who is the researcher of LahLahLearn" */
   const roleSay = m => `${m[1]} is ${m[0] === 'thant' ? 'the team leader and web developer' : 'the ' + m[2].replace(/\s*[&·]\s*/g, ' and ')} of LahLahLearn.`;
   const teamText = '<p class="team-who">' + TEAM.map(m => esc(roleSay(m))).join(' ') + '</p>';
