@@ -160,7 +160,7 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
   /* plain sentences and structured data so search engines can answer "who is the researcher of LahLahLearn" */
   const roleSay = m => `${m[1]} is ${m[0] === 'thant' ? 'the team leader and web developer' : 'the ' + m[2].replace(/\s*[&·]\s*/g, ' and ')} of LahLahLearn.`;
   const teamText = '<p class="team-who">' + TEAM.map(m => esc(roleSay(m))).join(' ') + '</p>';
-  const person = m => ({ '@type': 'Person', name: m[1], jobTitle: m[2].replace(/\s*[&·]\s*/g, ' and ') + ' at LahLahLearn', image: `${SITE}/assets/team/${m[0]}.webp`, worksFor: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/' }, affiliation: { '@type': 'CollegeOrUniversity', name: 'Sunway University' }, sameAs: [m[3] ? `https://www.instagram.com/${m[3]}/` : null, m[4] ? `https://www.linkedin.com/in/${m[4]}/` : null].filter(Boolean) });
+  const person = m => ({ '@type': 'Person', name: m[1], jobTitle: m[2].replace(/\s*[&·]\s*/g, ' and ') + ' at LahLahLearn', image: `${SITE}/assets/team/${m[0]}.webp`, worksFor: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/' }, sameAs: [m[3] ? `https://www.instagram.com/${m[3]}/` : null, m[4] ? `https://www.linkedin.com/in/${m[4]}/` : null].filter(Boolean) });
   const faqHtml = FAQ.map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('\n');
   out('about/index.html', page({
     slug: 'about', title: 'About LahLahLearn - Calm learning app for children aged 3 to 8',
@@ -204,7 +204,7 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
 <p>LahLahLearn supports learning at home. It does not diagnose or treat any condition and does not replace school, therapy or professional advice.</p>
 
 <h2 id="team">Who makes it</h2>
-<p>LahLahLearn is made in Selangor, Malaysia, by a small student team at Sunway University. ${esc(TEAM.map(roleSay).join(' '))} Meet everyone on <a href="../team/">Our team</a>, or reach us at <a href="mailto:${MAIL}">${MAIL}</a>.</p>
+<p>LahLahLearn is made in Selangor, Malaysia, by a small student team. ${esc([...TEAM].sort((a, b) => (b[0] === 'thant') - (a[0] === 'thant')).map(roleSay).join(' '))} Meet everyone on <a href="../team/">Our team</a>, or reach us at <a href="mailto:${MAIL}">${MAIL}</a>.</p>
 
 <h2>Good questions</h2>
 ${faqHtml}
@@ -223,7 +223,7 @@ ${faqHtml}
 
   out('team/index.html', page({
     slug: 'team', title: 'Our team - the people behind LahLahLearn',
-    desc: 'Meet the LahLahLearn team: ' + TEAM.map(m => m[1] + ' (' + m[2].replace(/\s*[&·]\s*/g, ' and ') + ')').join(', ') + '. A student team at Sunway University, Malaysia.',
+    desc: 'Meet the LahLahLearn team: ' + TEAM.map(m => m[1] + ' (' + m[2].replace(/\s*[&·]\s*/g, ' and ') + ')').join(', ') + '. A student team in Malaysia.',
     h1: 'The people behind LahLahLearn',
     body: `<p class="lead">We’re a student team building LahLahLearn to give children a calmer, more encouraging space to learn at their own pace.</p>
 ${teamHtml}
@@ -276,7 +276,7 @@ Key facts:
 - It supports learning at home; it does not diagnose or treat any condition
 - Contact: ${MAIL}
 
-Team (a student team at Sunway University, Malaysia):
+Team (a student team in Selangor, Malaysia):
 ${TEAM.map(m => '- ' + m[1] + ': ' + m[2].replace(/\s*[&·]\s*/g, ' and ')).join('\n')}
 
 ## Pages
