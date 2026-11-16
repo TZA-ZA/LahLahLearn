@@ -2229,7 +2229,9 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 .tm-c:hover .tm-wv,.tm-in:focus-visible .tm-wv{animation:tmWave 1s ease-in-out .25s 2}
 @keyframes tmWave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(18deg)}40%,80%{transform:rotate(-10deg)}}
 body.noanim .tm-wv{animation:none!important}
-.tm-hi,.tm-ph,.tm-ph img{-webkit-backface-visibility:hidden;backface-visibility:hidden}.tm-c.flip .tm-hi{opacity:0!important;transition:none}
+/* only the side facing you is shown: swap halfway through the turn */
+.tm-f,.tm-b{transition:visibility 0s .3s}.tm-c.flip .tm-f,.tm-c:not(.flip) .tm-b{visibility:hidden}.tm-c.flip .tm-hi{opacity:0!important;transition:none}
+body.noanim .tm-f,body.noanim .tm-b{transition:none}
 .tm-ph img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
 .tm-c{transition:transform .35s cubic-bezier(.3,1.4,.5,1),box-shadow .35s}.tm-c:hover,.tm-c:has(.tm-in:focus-visible){transform:scale(1.06);z-index:2;box-shadow:var(--shadow),0 30px 50px -26px rgba(30,60,40,.45)}
 .tm-n{font:700 1.08rem/1.25 var(--f-d)}
