@@ -20,6 +20,7 @@ Team (a student team at Sunway University, Malaysia):
 
 ## Pages
 - [About LahLahLearn](https://lahlahlearn.com/about/): what it is, who it is for, how it works, FAQ, credits
+- [Our team](https://lahlahlearn.com/team/): who makes LahLahLearn and their roles
 - [Contact](https://lahlahlearn.com/contact/): email, privacy and data requests, billing help
 - [Privacy Policy](https://lahlahlearn.com/privacy/)
 - [Terms of Service](https://lahlahlearn.com/terms/)

@@ -2106,6 +2106,20 @@ html[data-theme=dark] .pcr-in,html[data-theme=dark] .pcr-p,html[data-theme=dark]
 }
 .ab-facts .ab-dash{font-style:normal;margin:0 .22em}
 
+.au2-now{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--brand) 9%,var(--surf));border:1px solid color-mix(in srgb,var(--brand) 22%,transparent)}
+.au2-now b{font:700 .95rem var(--f-d)}.au2-now span{font-size:.84rem;color:var(--muted);line-height:1.4}
+.au2-f>span small{display:block;font-weight:500;font-size:.78rem;color:var(--muted);margin-top:2px}
+.au2-agree{display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:16px;border:1px dashed color-mix(in srgb,var(--brand) 40%,var(--line));background:color-mix(in srgb,var(--sun) 10%,var(--surf))}
+.au2-agh{font:700 .9rem var(--f-d)}
+.au2-ck input[type=checkbox]{width:24px!important;height:24px!important;border-radius:7px!important;border:2px solid color-mix(in srgb,var(--brand) 60%,var(--line))!important;background:var(--surf)!important;margin-top:1px!important}
+.au2-ck input[type=checkbox]::before{content:""!important}
+.au2-ck input[type=checkbox]::after{content:""!important;left:6px!important;top:2px!important;width:7px!important;height:13px!important;border-radius:0!important;background:none!important;box-shadow:none!important;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) scale(0)!important;transition:transform .15s!important}
+.au2-ck input[type=checkbox]:checked{background:var(--brand)!important;border-color:var(--brand)!important}
+.au2-ck input[type=checkbox]:checked::after{transform:rotate(45deg) scale(1)!important}
+.au2-chk{list-style:none;margin:-4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted)}
+.au2-chk li{display:inline-flex;align-items:center;gap:6px}.au2-chk li::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--line);box-sizing:border-box}
+.au2-chk li.ok{color:var(--good,#1f7a50);font-weight:600}.au2-chk li.ok::before{background:var(--good,#1f7a50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;border-color:transparent}
+@media(min-width:901px){.au2-r{padding-top:62px}}
 .au2-steps{list-style:none;margin:2px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .au2-steps li{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font:600 .74rem/1.2 var(--f-b);color:var(--muted)}
 .au2-steps i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);background:var(--surf);font-size:.8rem;position:relative}
@@ -2199,19 +2213,26 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 .tm-g{perspective:1100px}
 .tm-c{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .25s ease,box-shadow .25s ease,border-color .25s;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),color-mix(in srgb,var(--brand) 10%,var(--surf)),var(--surf) 60%)}
 .tm-c:hover{box-shadow:var(--shadow),0 26px 40px -22px rgba(30,60,40,.45);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
-.tm-c.lead{border:2px solid #f2c14e;box-shadow:var(--shadow),0 0 0 6px rgba(242,193,78,.18)}
+
 .tm-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:4px 12px;border-radius:999px;background:#f2c14e;color:#5a3c00;font:700 .72rem var(--f-d);letter-spacing:.04em;white-space:nowrap;box-shadow:0 4px 10px -4px rgba(120,80,0,.5)}
 .tm-ph{position:relative;border:0;padding:0;background:none;cursor:pointer;border-radius:50%;margin-bottom:6px}
 .tm-ph img{display:block;margin:0!important;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
 .tm-ph:hover img,.tm-c.hi .tm-ph img{transform:scale(1.06) rotate(-3deg)}
-.tm-ph::before{content:"";position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(#f2c14e,#e583ad,#7fb7e6,#5cbf7f,#f2c14e);opacity:0;transition:opacity .3s;z-index:-1}
-.tm-ph:hover::before,.tm-c.hi .tm-ph::before{opacity:1;animation:tmSpin 4s linear infinite}
+.tm-ph{isolation:isolate}
+.tm-ph::before{content:"";position:absolute;inset:-6px;border-radius:50%;z-index:-1;background:conic-gradient(from 0deg,transparent 0 52%,rgba(80,230,150,.15) 62%,#5fe6a0 82%,#b9ffd8 88%,transparent 92%);filter:drop-shadow(0 0 5px rgba(95,230,160,.55));animation:tmSpin 3.6s linear infinite}
+.tm-ph::after{content:"";position:absolute;inset:-6px;border-radius:50%;z-index:-2;border:2px solid rgba(95,200,140,.28)}
+.tm-c:nth-child(2) .tm-ph::before{animation-delay:-.7s}.tm-c:nth-child(3) .tm-ph::before{animation-delay:-1.4s}.tm-c:nth-child(4) .tm-ph::before{animation-delay:-2.1s}.tm-c:nth-child(5) .tm-ph::before{animation-delay:-2.8s}
+.tm-ph:hover::before,.tm-c.hi .tm-ph::before{animation-duration:1.8s}
+.tm-c img{border-color:var(--surf)!important}
+.tm-role{line-height:1.35}
+.tm-pg{padding-top:clamp(10px,3vw,30px)}.tm-h1{margin:0;font:700 clamp(2rem,4.4vw,3.1rem)/1.08 var(--f-d);letter-spacing:-.03em}
+
 @keyframes tmSpin{to{transform:rotate(360deg)}}
 .tm-wave{position:absolute;right:-6px;top:4px;padding:3px 9px;border-radius:12px 12px 12px 3px;background:var(--brand);color:var(--on-brand);font:700 .78rem var(--f-d);opacity:0;transform:scale(.4) translateY(8px);transition:opacity .2s,transform .3s cubic-bezier(.3,1.6,.5,1)}
 .tm-ph:hover .tm-wave,.tm-ph:focus-visible .tm-wave,.tm-c.hi .tm-wave{opacity:1;transform:none}
 .tm-say{display:block;margin:2px 0 6px;padding:10px 12px;border-radius:16px;background:color-mix(in srgb,var(--brand) 12%,var(--surf));font-size:.86rem;line-height:1.4;font-weight:600;animation:pop .3s var(--ease)}
 .tm-say[hidden]{display:none}
-@media(min-width:900px){.tm-c.lead{transform:translateY(-10px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}}
+
 @media(prefers-reduced-motion:reduce){.tm-c{transform:none!important}.tm-ph::before{animation:none!important}}
 .tm-l{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
 .tm-l a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);font:600 .82rem var(--f-b);color:var(--ink);text-decoration:none;background:var(--bg)}
@@ -2886,7 +2907,7 @@ body.has-sidx .msb{display:none!important}
 <main id="main"><section class="page" id="page"></section>
 <footer class="foot" id="foot"><div class="wrap ft">
   <div class="ft-b"><img class="ft-logo" src="assets/img/logo.webp" alt="LahLahLearn" width="150" height="72" loading="lazy"><p>Empowering a brighter future for every child. Calm, playful learning for ages 3 to 8.</p></div>
-  <nav class="ft-col" aria-label="Explore"><h2 class="ft-h">Explore</h2><a class="fl" href="about/" data-go="home">About</a><a class="fl" href="about/#team" data-go="home" data-team>Our team</a><a class="fl" href="#pricing" data-go="pricing">Plans</a><a class="fl" href="contact/">Contact</a></nav>
+  <nav class="ft-col" aria-label="Explore"><h2 class="ft-h">Explore</h2><a class="fl" href="about/" data-go="home">About</a><a class="fl" href="team/" data-go="team">Our team</a><a class="fl" href="#pricing" data-go="pricing">Plans</a><a class="fl" href="contact/">Contact</a></nav>
   <nav class="ft-col" aria-label="Legal"><h2 class="ft-h">Legal</h2><a class="fl" href="terms/" data-go="terms">Terms of service</a><a class="fl" href="privacy/" data-go="privacy">Privacy policy</a><a class="fl" href="refunds/" data-go="refunds">Refund policy</a><a class="fl" href="cookies/" data-go="cookies">Cookie policy</a><button data-cookies>Cookie settings</button></nav>
   <div class="ft-col ft-c"><h2 class="ft-h">Contact</h2><p>Questions or ideas? We would love to hear from you.</p><a class="ft-mail" href="mailto:lahlahlearn@gmail.com"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>lahlahlearn@gmail.com</a></div>
   <div class="ft-x"><span>&copy; <span class="ft-y">2026</span> LahLahLearn</span><span id="syncState" style="font-weight:600"></span><span class="ft-love">Made with care for every child</span></div>
@@ -3915,13 +3936,15 @@ function cloudAuthUI(reg){
     if(error){b.disabled=false;toast(tr('Could not open sign-in. Please try again.'))}});
   // ---- Email + password. Passwords are stored by Supabase Auth (bcrypt-hashed), never in the app.
   const emErr=$('#aEmErr');
-  emErr.insertAdjacentHTML('afterend',`<label class="au2-f"><span>${tr('Password')}</span><span class="au2-pw"><input class="au2-in" id="aPw" type="password" autocomplete="${reg?'new-password':'current-password'}" placeholder="${reg?tr('At least 8 characters'):''}" aria-describedby="aPwErr"><button type="button" class="au2-eye" id="aEye" aria-label="${tr('Show password')}" aria-pressed="false">${EYE_ON}</button></span></label>
-    ${reg?`<label class="au2-f"><span>${tr('Type the password again')}</span><input class="au2-in" id="aPw2" type="password" autocomplete="new-password" aria-describedby="aPwErr"></label>`:''}
+  emErr.insertAdjacentHTML('afterend',`<label class="au2-f"><span>${reg?tr('Choose a password'):tr('Password')}</span><span class="au2-pw"><input class="au2-in" id="aPw" type="password" autocomplete="${reg?'new-password':'current-password'}" placeholder="${reg?tr('At least 8 characters'):''}" aria-describedby="aPwErr"><button type="button" class="au2-eye" id="aEye" aria-label="${tr('Show password')}" aria-pressed="false">${EYE_ON}</button></span></label>
+    ${reg?`<label class="au2-f"><span>${tr('Type the password again')}</span><input class="au2-in" id="aPw2" type="password" autocomplete="new-password" aria-describedby="aPwErr aPwChk"></label>
+    <ul class="au2-chk" id="aPwChk" aria-live="polite"><li data-r="len">${tr('At least 8 characters')}</li><li data-r="mix">${tr('Letters and numbers')}</li><li data-r="same">${tr('Both passwords match')}</li></ul>`:''}
     <p class="em-err" id="aPwErr" role="alert" hidden></p>${reg?'':`<p class="au2-forgot"><a href="#" id="aForgot">${tr('Forgot password?')}</a></p>`}`);
   const pw=$('#aPw'),pw2=$('#aPw2'),pwErr=$('#aPwErr');
   const say=(el,t)=>{el.hidden=!t;el.textContent=t||''};
   $('#aEye').onclick=()=>{const show=pw.type==='password';[pw,pw2].forEach(x=>{if(x)x.type=show?'text':'password'});$('#aEye').innerHTML=show?EYE_OFF:EYE_ON;$('#aEye').setAttribute('aria-pressed',show);$('#aEye').setAttribute('aria-label',show?tr('Hide password'):tr('Show password'))};
   [pw,pw2].forEach(x=>x&&x.addEventListener('input',()=>say(pwErr,'')));
+  {const ck=$('#aPwChk');if(ck){const upd=()=>{const v=pw.value,r={len:v.length>=8,mix:/[a-z]/i.test(v)&&/\d/.test(v),same:!!v&&pw2.value===v};$$('li',ck).forEach(li=>{const ok=r[li.dataset.r];li.classList.toggle('ok',ok);li.setAttribute('aria-label',li.textContent+(ok?': done':': not yet'))})};[pw,pw2].forEach(x=>x.addEventListener('input',upd));upd()}}
   const redirect=location.origin+location.pathname;
   const done=async em=>{lsSet('ll.email',em);const L=loginLoad(reg?tr('Setting up your account'):tr('Welcome back!'));try{await cloudAfterLogin({reg})}catch(e){console.error(e);toast(tr('Signed in, but we could not load your account. Please refresh the page.'))}finally{L.close()}};
   const send=async()=>{
@@ -4286,7 +4309,7 @@ function greetShow(){
   el.onclick=shut;$('button',el).focus();setTimeout(shut,6500);
   try{if(typeof say==='function'&&!calmOpen)say('Hi '+P.name+', welcome to LahLahLearn. '+w+'!')}catch(e){}
 }
-const PUBLIC=['welcome','auth','home','pricing','join','privacy','terms','refunds','cookies'],FULL=['welcome','onboard','pick','who'];
+const PUBLIC=['welcome','auth','home','team','pricing','join','privacy','terms','refunds','cookies'],FULL=['welcome','onboard','pick','who'];
 const DOCK=[['dashboard','Home','home'],['learn','Learn','book'],['explore-island','3D World','globe'],['together','Leaderboard','trophy'],['care','Care Circle','chart']];
 const parseHash=()=>{const h=(location.hash||'').slice(1),i=h.indexOf('-');return i<0?{base:h,arg:''}:{base:h.slice(0,i),arg:h.slice(i+1)}};
 const go=r=>{if(('#'+r)===location.hash)route();else location.hash=r};
@@ -4314,7 +4337,7 @@ function chrome(){
   $('#dock').classList.toggle('on',!!(session&&!(CLOUD.helperOnly||CLOUD.readonly)&&!['welcome','auth','onboard','pick','who','helping'].includes(cur)));
   const dockCur=cur==='profile'?'':cur==='explore'&&parseHash().arg==='island'?'explore-island':cur==='explore'||cur==='play'?'explore-island':cur==='world'||cur==='signs'?'learn':cur;
   $('#dock').innerHTML=DOCK.filter(d=>!(kid&&d[0]==='care')).map(([k,l,i])=>`<button class="dk ${dockCur===k?'on':''}" data-go="${k}" aria-label="${l}">${ic(i,22)}<span>${l}</span></button>`).join('');
-  let links=(session?[['dashboard','My page'],['learn','Learn']].concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[]:[['pricing','Plans'],['home','About']]);
+  let links=(session?[['dashboard','My page'],['learn','Learn']].concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[]:[['pricing','Plans'],['home','About'],['team','Our team']]);
   if(CLOUD.on&&CLOUD.user){if(CLOUD.helperOnly||CLOUD.readonly)links=[['helping','Children']].concat(CLOUD.readonly?[['care','Care Circle']]:[]);else if(!kid&&cloudHelps().length)links.push(['helping','Children you support'])}
   $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':cur===k)?'on':''}" data-go="${k}">${l}</button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
   $('#meb').innerHTML=session&&P?(kid?ic('lock',18):ic('gear',18)):ic('user',18);studyUI();$('#meb').className='ibtn'+(cur==='profile'?' on':'');$('#meb').setAttribute('aria-label',session?(kid?'For parents':'Settings'):'Log in');$('#meb').title=session?(kid?'For parents':'Settings'):'Log in';
@@ -4330,7 +4353,7 @@ function resolve(){
   if(session&&(base==='welcome'||base==='auth')&&!OB.live)base='dashboard';
   return{base,arg};
 }
-const PAGE_TITLE={welcome:'LahLahLearn - Fun, calm learning app for kids',home:'About LahLahLearn - Calm learning made for your child',pricing:'Plans and prices - LahLahLearn',auth:'Log in or register - LahLahLearn',privacy:'Privacy Policy - LahLahLearn',terms:'Terms of Service - LahLahLearn',refunds:'Refund Policy - LahLahLearn',cookies:'Cookie Policy - LahLahLearn',dashboard:'My page - LahLahLearn',learn:'Learn - LahLahLearn',explore:'Play - LahLahLearn',care:'Care Circle - LahLahLearn',profile:'Settings - LahLahLearn',together:'Together - LahLahLearn',journey:'My journey - LahLahLearn'};
+const PAGE_TITLE={welcome:'LahLahLearn - Fun, calm learning app for kids',home:'About LahLahLearn - Calm learning made for your child',team:'Our team - the people behind LahLahLearn',pricing:'Plans and prices - LahLahLearn',auth:'Log in or register - LahLahLearn',privacy:'Privacy Policy - LahLahLearn',terms:'Terms of Service - LahLahLearn',refunds:'Refund Policy - LahLahLearn',cookies:'Cookie Policy - LahLahLearn',dashboard:'My page - LahLahLearn',learn:'Learn - LahLahLearn',explore:'Play - LahLahLearn',care:'Care Circle - LahLahLearn',profile:'Settings - LahLahLearn',together:'Together - LahLahLearn',journey:'My journey - LahLahLearn'};
 function render(base,arg){
   teardowns.forEach(f=>{try{f()}catch(e){}});teardowns=[];
   const pg=$('#page');pg.className='page'+(FULL.includes(base)?' full':'');pg.dataset.r=base;pg.innerHTML='';
@@ -5258,7 +5281,7 @@ R.welcome=()=>{
    <section class="lp-sec" style="padding-top:0" id="lpstories"><div class="lp-w"><div class="lp-k">What inspired us</div><h2 class="lp-h2 rv">Stories behind every feature.</h2><p class="lp-p rv" style="margin-top:16px">These are the moments we kept thinking about while we built LahLahLearn.</p></div>
     <div class="lp-mg" data-cur="Drag" data-n="${LP_STORIES.length}" tabindex="0" role="region" aria-label="Stories behind every feature. Drag, scroll sideways or use the arrow keys."><div class="mg-t">${[0,1,2].map(cp=>LP_STORIES.map((s,i)=>`<article class="mg-c" ${cp!==1?'aria-hidden="true"':''}>${cp===1?`<span class="sr">${s[0]}. ${s[1]}</span>`:''}<div class="mg-r">${[0,1,2,3,4,5,6].map(k=>`<div class="mg-s" style="--i:${k}" aria-hidden="true"><div class="lp-card"><div class="art">${lpArtUse(i)}</div><div class="tx"><span class="no">STORY 0${i+1}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class="to">${ic('arrow',16)} ${s[2]}</span></div></div></div>`).join('')}</div></article>`).join('')).join('')}</div></div>
     <div class="lp-w"><div class="lp-car-ui"><div class="lp-bar"><i></i></div><div class="lp-arr"><button data-car="-1" aria-label="Previous"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',20)}</span></button><button data-car="1" aria-label="Next">${ic('arrow',20)}</button></div></div></div></div></div></section>
-   <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-k">What we believe</div><h2 class="lp-h2 rv" style="margin-bottom:clamp(28px,5vw,56px)">Three ideas, in everything we make.</h2>
+   <section class="lp-sec" style="padding-top:clamp(36px,5vw,72px)"><div class="lp-w"><div class="lp-k">What we believe</div><h2 class="lp-h2 rv" style="margin-bottom:clamp(28px,5vw,56px)">Three ideas, in everything we make.</h2>
     <div class="lp-bel">${rows.map(r=>`<div class="lp-row rv"><span class="n">${r[0]}</span><h3>${r[1]}</h3><p>${r[2]}</p><span class="ic">${ic(r[3],24)}</span></div>`).join('')}</div></div></section>
    <section class="lp-sec" style="padding-top:0"><div class="lp-w"><div class="lp-isl rv" id="lpisl"><div class="st"><img class="lpisl-img" data-lpisl alt="" aria-hidden="true" draggable="false"${LP_ART.isl?` src="${LP_ART.isl}"`:''}></div>
     <div class="in"><span class="lp-k" style="color:#2f6a46">The 3D world</span><h2 class="lp-h2">A small island to explore.</h2><p class="lp-p">A new trail every day: three stops, each with a 3D game for numbers, shapes, letters or our world.</p><div class="lp-pills"><span>Numbers and sizes</span><span>Shapes and colours</span><span>Letters and words</span><span>Look and remember</span></div><div><button class="btn pri lg mag" data-go="auth-register">Start exploring ${ic('arrow',18)}</button></div></div></div></div></section>
@@ -5321,8 +5344,7 @@ function abFx(root){
   return()=>{io.disconnect();removeEventListener('scroll',on);removeEventListener('resize',on);cancelAnimationFrame(raf)};
 }
 /* the people behind LahLahLearn: [photo, name, role, Instagram handle, LinkedIn id] */
-const TEAM=[['nay','Nay Myo Thiha','Researcher','o.nax.o','','I find out what helps children learn, and test our ideas with families.'],['fatima','Fatima Abdullah','Secretary & Treasurer','5ati3a','fatima-abdullah-24135667abc','I keep our plans, meetings and money in order.'],['thant','Thant Zaw Aung','Leader & Web Developer','tzaa_za','thant-zaw-aung-5aa5192ab','I lead the team and build the LahLahLearn app.'],['chelsea','Chelsea Choo Minshe','Marketing Lead','3helsea','chelsea-choo-981099366','I test every page and tell families about us.'],['htoo','Htoo Thi Kyi','Content & Media Lead','dumplingboyboy._','','I make our stories, pictures and videos.']];
-let TEAMGO=false;
+const TEAM=[['nay','Nay Myo Thiha','Researcher','o.nax.o','','I find out what helps children learn, and test our ideas with families.'],['fatima','Fatima Abdullah','Secretary & Treasurer','5ati3a','fatima-abdullah-24135667abc','I keep our plans, meetings and money in order.'],['thant','Thant Zaw Aung','Leader & Web Developer','tzaa_za','thant-zaw-aung-5aa5192ab','I lead the team and build the LahLahLearn app.'],['chelsea','Chelsea Choo Minshe','Marketing Lead','3helsea','chelsea-choo-981099366','I test every page and tell families about us.'],['htoo','Htoo Thi Kyi','Content & Media Lead','dumplingboyboy._','htoo-thi-kyi-2867692a2','I make our stories, pictures and videos.']];
 /* team cards: tilt toward the pointer, tap a photo to hear hello */
 function teamFx(root){
   if(!root)return()=>{};const cards=$$('.tm-c',root),off=[];
@@ -5336,7 +5358,14 @@ function teamFx(root){
   return()=>off.forEach(f=>f());
 }
 const TM_IC={ig:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',li:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2M3 13h18"/></svg>'};
-const teamCards=()=>TEAM.map((m,i)=>`<li class="tm-c rv${m[0]==='thant'?' lead':''}" style="--d:${i}"><button class="tm-ph" data-tm="${i}" aria-expanded="false" aria-label="${esc('Say hi to '+m[1])}"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="160" height="160" loading="lazy" decoding="async"><span class="tm-wave" aria-hidden="true">Hi!</span></button><span class="tm-say" role="status" hidden>${esc(m[5])}</span><b data-notr>${esc(m[1])}</b><small>${esc(m[2])}</small><span class="tm-l">${m[3]?`<a href="https://www.instagram.com/${m[3]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on Instagram" data-notr>${TM_IC.ig}Instagram</a>`:''}${m[4]?`<a href="https://www.linkedin.com/in/${m[4]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on LinkedIn" data-notr>${TM_IC.li}LinkedIn</a>`:''}</span></li>`).join('');
+const teamCards=()=>TEAM.map((m,i)=>`<li class="tm-c rv" style="--d:${i}"><button class="tm-ph" data-tm="${i}" aria-expanded="false" aria-label="${esc('Say hi to '+m[1])}"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="160" height="160" loading="lazy" decoding="async"><span class="tm-wave" aria-hidden="true">Hi!</span></button><span class="tm-say" role="status" hidden>${esc(m[5])}</span><b data-notr>${esc(m[1])}</b><small class="tm-role">${m[2].split(' & ').map(esc).join('<br>')}</small><span class="tm-l">${m[3]?`<a href="https://www.instagram.com/${m[3]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on Instagram" data-notr>${TM_IC.ig}Instagram</a>`:''}${m[4]?`<a href="https://www.linkedin.com/in/${m[4]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on LinkedIn" data-notr>${TM_IC.li}LinkedIn</a>`:''}</span></li>`).join('');
+R.team=()=>{
+  const cta=session?'dashboard':'auth-register',ctaT=session?'Open my page':'Start free';
+  $('#page').innerHTML=`<div class="ab tm-pg">
+   <section class="ab-sec ab-team" id="team" aria-labelledby="teamT"><div class="ab-hd rv"><span class="ab-ey">Our team</span><h1 class="kx tm-h1" id="teamT" data-notr>${tr('The people behind LahLahLearn')}</h1><p>We are a small student team at Sunway University in Malaysia, building a calm way for children to learn. Tap a photo to say hi.</p></div><ul class="tm-g">${teamCards()}</ul></section>
+   <section class="ab-cta rv"><h2 class="kx" data-notr>${tr('Every child can do this.')}</h2><button class="btn sun lg" data-go="${cta}">${ctaT} ${ic('arrow',18)}</button></section></div>`;
+  teardowns.push(teamFx($('#team')));
+};
 R.home=()=>{
   const cta=session?'dashboard':'auth-register',ctaT=session?'Open my page':'Register';
   const kinds=[['Predictable','Clear and predictable','Same layout every time.','check','--brand'],['Paced','Short and quick','Small steps, visible timer.','flame','--coral'],['Readable','Easy to read','Big text, wide spacing.','book','--sky'],['Visual','See everything','Hand signs and captions.','hand','--sun']];
@@ -5364,17 +5393,13 @@ R.home=()=>{
      <div class="ab-mb">${[40,62,35,78,55,90,66].map((v,i)=>`<i style="--v:${v}%;--i:${i}"></i>`).join('')}</div>
      <div class="ab-mk"><i style="--w:34%;--c:var(--brand)"></i><i style="--w:22%;--c:var(--sun)"></i><i style="--w:18%;--c:var(--coral)"></i><i style="--w:26%;--c:var(--sky)"></i></div>
      <div class="ab-mg">${[72,48,60].map(v=>`<div><i style="--w:${v}%"></i></div>`).join('')}</div></div></section>
-   <section class="ab-sec ab-team" id="team" aria-labelledby="teamT"><div class="ab-hd rv"><span class="ab-ey">Behind the scenes</span><h2 class="kx" id="teamT" data-notr>${tr('The people behind LahLahLearn')}</h2><p>We are a small student team in Malaysia. Tap a photo to say hi.</p></div><ul class="tm-g">${teamCards()}</ul></section>
    <section class="ab-sec ab-faq"><div class="ab-hd rv"><span class="ab-ey">FAQ</span><h2 class="kx" data-notr>${tr('Good questions')}</h2></div>
     <div class="rv">${FAQ.slice(0,3).map(f=>`<details class="acc"><summary>${f[0]}</summary><div class="accb"><p class="muted">${f[1]}</p></div></details>`).join('')}</div></section>
    <section class="ab-cta rv"><h2 class="kx" data-notr>${tr('Every child can do this.')}</h2><button class="btn sun lg" data-go="${cta}">${ctaT} ${ic('arrow',18)}</button></section></div>`;
-  teardowns.push(teamFx($('#team')));
-  if(TEAMGO){TEAMGO=false;[80,700].forEach(ms=>setTimeout(()=>{const t=$('#team');if(t&&cur==='home')t.scrollIntoView({block:'start'})},ms))}  /* twice: the pinned sections above change height as they set up */
   teardowns.push(abFx($('.ab')));countUp($('.ab'));teardowns.push(spiral3D($('#abspiral'),{radius:235,verticalGap:64,cardWidth:255,cardAspectRatio:3/2,autoRotate:true,autoSpeed:.08,scrollSensitivity:.0018,smoothing:.05,blurStrength:1.65,bend:.17,fov:44}));
 };
 
 /* sign-up needs the grown-up's clear consent (their own age, and the child's data) before any account is made */
-document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-team]');if(!a)return;if(cur==='home'){e.preventDefault();e.stopPropagation();const t=$('#team');if(t)t.scrollIntoView({block:'start',behavior:calmMotion()?'auto':'smooth'})}else TEAMGO=true},true);
 function consentOk(){const c=$('#aOk');if(!c||c.checked)return true;const e=$('#aOkErr');if(e){e.hidden=false;e.textContent=tr('Please tick the box to confirm you are the parent or guardian and agree to the terms.')}c.focus();return false}
 R.auth=arg=>{
   const reg=arg==='register',has=!!P;
@@ -5387,14 +5412,15 @@ R.auth=arg=>{
      ${rb}<div class="au2-hill"></div>${LOGO_SRC?`<img class="au2-logo" src="${LOGO_SRC}" alt="LahLahLearn" draggable="false">`:''}<div class="au2-fox">${mtImg('hello')}</div></section>
    <section class="au2-r"><div class="au2-card">
     ${mkSeg('aseg',[['login','Log in'],['register','Register']],reg?'register':'login')}
-    <div class="au2-hd"><h1>${reg?'Create your account':'Welcome back!'}</h1><p>${reg?'Start free. It takes about three minutes.':(has?'Continue where '+esc(P.name)+' left off.':'Log in to continue.')}</p></div>
-    ${reg?`<ol class="au2-steps" aria-label="How set-up works"><li class="on"><i>1</i><span>Account</span></li><li><i>2</i><span>Your child</span></li><li><i>3</i><span>How they learn</span></li><li><i>4</i><span>Colours and sound</span></li></ol>`:''}
+    <div class="au2-hd"><h1>${reg?'Create your account':'Welcome back!'}</h1><p>${reg?'Free to start. About three minutes in 4 short steps.':(has?'Continue where '+esc(P.name)+' left off.':'Log in to continue.')}</p></div>
+    ${reg?`<ol class="au2-steps" aria-label="How set-up works"><li class="on" aria-current="step"><i>1</i><span>Account</span></li><li><i>2</i><span>Your child</span></li><li><i>3</i><span>How they learn</span></li><li><i>4</i><span>Colours and sound</span></li></ol>
+    <div class="au2-now"><b>Step 1 of 4: your parent account</b><span>This account is for you, the grown-up. Your child never needs an email or password.</span></div>`:''}
     <div class="au2-soc"><button type="button" class="au2-b" data-am="google">${gG}<span>Continue with Google</span></button><button type="button" class="au2-b" data-am="apple">${gA}<span>Continue with Apple</span></button></div>
     <div class="au2-or"><i></i><b>OR</b><i></i></div>
-    <label class="au2-f"><span>Email</span><input class="au2-in" id="aEm" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" aria-label="Email address" aria-describedby="aEmErr"></label><p class="em-err" id="aEmErr" role="alert" hidden></p>
-    ${reg?`<label class="au2-ck"><input type="checkbox" id="aOk" aria-describedby="aOkErr"><span>I am the child&rsquo;s parent or legal guardian, I am 18 or older, and I agree to the <a href="terms/" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy/" target="_blank" rel="noopener">Privacy Policy</a>, including how my child&rsquo;s data is used.</span></label><p class="em-err" id="aOkErr" role="alert" hidden></p>`:''}
+    <label class="au2-f"><span>${reg?'Your email':'Email'}${reg?'<small>We send a 6-digit code to check it. You also log in with it.</small>':''}</span><input class="au2-in" id="aEm" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com" aria-label="Email address" aria-describedby="aEmErr"></label><p class="em-err" id="aEmErr" role="alert" hidden></p>
+    ${reg?`<div class="au2-agree"><b class="au2-agh">Before you start</b><label class="au2-ck"><input type="checkbox" id="aOk" aria-describedby="aOkErr"><span>I am the child&rsquo;s parent or legal guardian, I am 18 or older, and I agree to the <a href="terms/" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy/" target="_blank" rel="noopener">Privacy Policy</a>, including how my child&rsquo;s data is used.</span></label></div><p class="em-err" id="aOkErr" role="alert" hidden></p>`:''}
     <button class="au2-go" id="aGo" type="button"><span>${reg?'Create account':(has?'Continue as '+esc(P.name):'Log in')}</span>${ic('arrow',18)}</button>
-    <p class="au2-note">One parent account holds up to 3 children.</p>
+    <p class="au2-note">${reg?'Next: your child&rsquo;s name and age. One account holds up to 3 children.':'One parent account holds up to 3 children.'}</p>
     <p class="au2-sw">${reg?'Already have an account? ':'New here? '}<a href="#auth-${reg?'login':'register'}" id="aSw">${reg?'Log in':'Create account'}</a></p>
    </div></section></div>`;
   const sg=$('#aseg');segPill(sg);$$('button',sg).forEach(b=>b.onclick=()=>go('auth-'+b.dataset.k));
