@@ -51,7 +51,7 @@ p,li{max-width:70ch}ul,ol{padding-left:1.3em}li{margin:.3em 0}
 .card{background:var(--surf);border:1px solid var(--line);border-radius:26px;padding:22px 26px;margin:18px 0;box-shadow:var(--shadow)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}.grid .card{margin:0}
 .pv-tw{overflow-x:auto;margin:14px 0}table{border-collapse:collapse;width:100%;font-size:.93rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--surf)}
-.team{list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}.team li{margin:0;max-width:none;background:var(--surf);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}.team .ph{position:relative;isolation:isolate;border-radius:50%;margin-bottom:8px}.team .ph::before{content:"";position:absolute;inset:-6px;border-radius:50%;z-index:-1;background:conic-gradient(transparent 0 52%,rgba(80,230,150,.15) 62%,#5fe6a0 82%,#b9ffd8 88%,transparent 92%);filter:drop-shadow(0 0 5px rgba(95,230,160,.55));animation:spin 3.6s linear infinite}.team .ph::after{content:"";position:absolute;inset:-6px;border-radius:50%;z-index:-2;border:2px solid rgba(95,200,140,.28)}@keyframes spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.team .ph::before{animation:none}}.team img{display:block;width:104px;height:104px;border-radius:50%;object-fit:cover;border:3px solid var(--surf)}.team span{color:var(--muted);font-size:.93rem}.team .tl{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.team{list-style:none;padding:0;margin:18px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}.team li{margin:0;max-width:none;background:var(--surf);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}.team .ph{position:relative;isolation:isolate;border-radius:50%;margin-bottom:8px}.team .ph{padding:4px;background:color-mix(in srgb,var(--brand) 30%,var(--surf));transition:transform .3s}.team li:hover .ph{transform:scale(1.08)}.team img{display:block;width:104px;height:104px;border-radius:50%;object-fit:cover;border:3px solid var(--surf)}.team span{color:var(--muted);font-size:.93rem}.team .rl{color:#b7861d;font-weight:600}.team .hl{color:var(--ink);font-size:.85rem}.team .tl{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
 details{background:var(--surf);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:12px 16px;margin:10px 0}summary{font-weight:600;cursor:pointer}
 .hero{display:flex;gap:26px;align-items:center;flex-wrap:wrap}.hero img{width:min(300px,70vw);height:auto}
 footer{border-top:1px solid var(--line);background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
@@ -154,13 +154,13 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
   const FAQ = new Function('return ' + src.slice(fa + 'const FAQ='.length, fb + 2))();
   await b.close(); srv.close();
 
-  const ta = src.indexOf('const TEAM=['), tb = src.indexOf(']];', ta);
-  const TEAM = new Function('return ' + src.slice(ta + 'const TEAM='.length, tb + 2))();
-  const teamHtml = '<ul class="team">' + TEAM.map(m => `<li><span class="ph"><img src="../assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="120" height="120" loading="lazy"></span><b>${esc(m[1])}</b><span>${m[2].split(' & ').map(esc).join('<br>')}</span><span class="tl">${m[3] ? `<a href="https://www.instagram.com/${m[3]}/" rel="noopener">Instagram</a>` : ''}${m[4] ? `<a href="https://www.linkedin.com/in/${m[4]}/" rel="noopener">LinkedIn</a>` : ''}</span></li>`).join('') + '</ul>';
+  const ta = src.indexOf('const TEAM=['), tb = src.indexOf('];', ta);
+  const TEAM = new Function('return ' + src.slice(ta + 'const TEAM='.length, tb + 1))();
+  const teamHtml = '<ul class="team">' + TEAM.map(m => `<li><span class="ph"><img src="../assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="120" height="120" loading="lazy"></span><b>${esc(m[1])}</b><span class="rl">${esc(m[2])}</span><span>${esc(m[6])}</span><span class="hl">${m[7].map(esc).join(' · ')}</span><span>${esc(m[5])}</span><span class="tl">${m[3] ? `<a href="https://www.instagram.com/${m[3]}/" rel="noopener">Instagram</a>` : ''}${m[4] ? `<a href="https://www.linkedin.com/in/${m[4]}/" rel="noopener">LinkedIn</a>` : ''}</span></li>`).join('') + '</ul>';
   /* plain sentences and structured data so search engines can answer "who is the researcher of LahLahLearn" */
-  const roleSay = m => `${m[1]} is ${m[0] === 'thant' ? 'the founder, team leader and web developer' : 'the ' + m[2].replace('&', 'and').toLowerCase()} of LahLahLearn.`;
+  const roleSay = m => `${m[1]} is ${m[0] === 'thant' ? 'the founder, team leader and web developer' : 'the ' + m[2].replace(/\s*[&·]\s*/g, ' and ')} of LahLahLearn.`;
   const teamText = '<p class="team-who">' + TEAM.map(m => esc(roleSay(m))).join(' ') + '</p>';
-  const person = m => ({ '@type': 'Person', name: m[1], jobTitle: m[2].replace('&', 'and') + ' at LahLahLearn', image: `${SITE}/assets/team/${m[0]}.webp`, worksFor: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/' }, affiliation: { '@type': 'CollegeOrUniversity', name: 'Sunway University' }, sameAs: [m[3] ? `https://www.instagram.com/${m[3]}/` : null, m[4] ? `https://www.linkedin.com/in/${m[4]}/` : null].filter(Boolean) });
+  const person = m => ({ '@type': 'Person', name: m[1], jobTitle: m[2].replace(/\s*[&·]\s*/g, ' and ') + ' at LahLahLearn', image: `${SITE}/assets/team/${m[0]}.webp`, worksFor: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/' }, affiliation: { '@type': 'CollegeOrUniversity', name: 'Sunway University' }, sameAs: [m[3] ? `https://www.instagram.com/${m[3]}/` : null, m[4] ? `https://www.linkedin.com/in/${m[4]}/` : null].filter(Boolean) });
   const faqHtml = FAQ.map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('\n');
   out('about/index.html', page({
     slug: 'about', title: 'About LahLahLearn - Calm learning app for children aged 3 to 8',
@@ -217,23 +217,23 @@ ${faqHtml}
     jsonld: [
       { '@context': 'https://schema.org', '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/', logo: SITE + '/icon-512.png', email: MAIL, address: { '@type': 'PostalAddress', addressRegion: 'Selangor', addressCountry: 'MY' },
         founder: person(TEAM.find(m => m[0] === 'thant')),
-        member: TEAM.map(m => ({ '@type': 'OrganizationRole', roleName: m[2].replace('&', 'and'), member: person(m) })) },
+        member: TEAM.map(m => ({ '@type': 'OrganizationRole', roleName: m[2].replace(/\s*[&·]\s*/g, ' and '), member: person(m) })) },
       { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'LahLahLearn', url: SITE + '/', applicationCategory: 'EducationalApplication', operatingSystem: 'Any (web browser)', audience: { '@type': 'PeopleAudience', suggestedMinAge: 3, suggestedMaxAge: 8 }, description: 'A calm, playful learning app for children aged 3 to 8: reading, maths, feelings and life skills with Pip, a friendly guide.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'MYR', description: 'Free plan' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) },
     ] }));
 
   out('team/index.html', page({
     slug: 'team', title: 'Our team - the people behind LahLahLearn',
-    desc: 'Meet the LahLahLearn team: ' + TEAM.map(m => m[1] + ' (' + m[2].replace('&', 'and') + ')').join(', ') + '. A student team at Sunway University, Malaysia.',
+    desc: 'Meet the LahLahLearn team: ' + TEAM.map(m => m[1] + ' (' + m[2].replace(/\s*[&·]\s*/g, ' and ') + ')').join(', ') + '. A student team at Sunway University, Malaysia.',
     h1: 'The people behind LahLahLearn',
-    body: `<p class="lead">We are a small student team at Sunway University in Selangor, Malaysia, building a calm way for children aged 3 to 8 to learn.</p>
+    body: `<p class="lead">We’re a student team building LahLahLearn to give children a calmer, more encouraging space to learn at their own pace.</p>
 ${teamHtml}
 ${teamText}
 <p>Want to say hello? Email <a href="mailto:${MAIL}">${MAIL}</a> or visit the <a href="../contact/">Contact</a> page.</p>`,
     jsonld: [
       { '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Our team - LahLahLearn', url: SITE + '/team/', mainEntity: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/', logo: SITE + '/icon-512.png',
         founder: person(TEAM.find(m => m[0] === 'thant')),
-        member: TEAM.map(m => ({ '@type': 'OrganizationRole', roleName: m[2].replace('&', 'and'), member: person(m) })) } },
+        member: TEAM.map(m => ({ '@type': 'OrganizationRole', roleName: m[2].replace(/\s*[&·]\s*/g, ' and '), member: person(m) })) } },
       { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'LahLahLearn', item: SITE + '/' }, { '@type': 'ListItem', position: 2, name: 'Our team', item: SITE + '/team/' }] },
     ] }));
 
@@ -279,7 +279,7 @@ Key facts:
 - Contact: ${MAIL}
 
 Team (a student team at Sunway University, Malaysia):
-${TEAM.map(m => '- ' + m[1] + ': ' + m[2].replace('&', 'and') + (m[0] === 'thant' ? ' (founder)' : '')).join('\n')}
+${TEAM.map(m => '- ' + m[1] + ': ' + m[2].replace(/\s*[&·]\s*/g, ' and ') + (m[0] === 'thant' ? ' (founder)' : '')).join('\n')}
 
 ## Pages
 - [About LahLahLearn](${SITE}/about/): what it is, who it is for, how it works, FAQ, credits
