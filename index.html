@@ -2230,7 +2230,7 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 @keyframes tmWave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(18deg)}40%,80%{transform:rotate(-10deg)}}
 body.noanim .tm-wv{animation:none!important}
 /* only the side facing you is shown: swap halfway through the turn */
-.tm-f,.tm-b{transition:visibility 0s .3s}.tm-c.flip .tm-f,.tm-c:not(.flip) .tm-b{visibility:hidden}.tm-c.flip .tm-hi{opacity:0!important;transition:none}
+.tm-f,.tm-b{transition:visibility 0s .3s}.tm-c.flip .tm-f,.tm-c:not(.flip) .tm-b{visibility:hidden}.tm-c.flip .tm-hi,.tm-c.turning .tm-hi{opacity:0!important;visibility:hidden;transition:none}
 body.noanim .tm-f,body.noanim .tm-b{transition:none}
 .tm-ph img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
 .tm-c{transition:transform .35s cubic-bezier(.3,1.4,.5,1),box-shadow .35s}.tm-c:hover,.tm-c:has(.tm-in:focus-visible){transform:scale(1.06);z-index:2;box-shadow:var(--shadow),0 30px 50px -26px rgba(30,60,40,.45)}
@@ -5365,7 +5365,7 @@ const TEAM=[
 function teamFx(root){
   if(!root)return()=>{};
   $$('.tm-c',root).forEach(c=>{const card=$('.tm-in',c),back=$('.tm-b',c);
-    const set=on=>{c.classList.toggle('flip',on);card.setAttribute('aria-pressed',on);back.setAttribute('aria-hidden',!on);$$('a',$('.tm-f',c)).forEach(a=>a.tabIndex=on?-1:0)};
+    const set=on=>{c.classList.add('turning');clearTimeout(c._tt);c._tt=setTimeout(()=>c.classList.remove('turning'),calmMotion()?0:750);c.classList.toggle('flip',on);card.setAttribute('aria-pressed',on);back.setAttribute('aria-hidden',!on);$$('a',$('.tm-f',c)).forEach(a=>a.tabIndex=on?-1:0)};
     card.addEventListener('click',e=>{if(e.target.closest('a'))return;set(!c.classList.contains('flip'));try{sfxPop&&sfxPop()}catch(_){}});
     card.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===card){e.preventDefault();card.click()}})});
   return()=>{};
