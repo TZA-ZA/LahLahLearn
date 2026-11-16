@@ -2212,17 +2212,17 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 @media(max-width:700px){.tm-g{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
 @media(max-width:420px){.tm-g{grid-template-columns:1fr}}
 /* card: a light runs round the edge in LahLahLearn green; tap to flip and read about the person */
-.tm-c{position:relative;border-radius:24px;padding:2px;overflow:hidden;isolation:isolate;perspective:1200px;background:var(--line);box-shadow:var(--shadow)}
-.tm-c::before{content:"";position:absolute;left:50%;top:50%;width:170%;aspect-ratio:1;translate:-50% -50%;z-index:-1;background:conic-gradient(from 0deg,transparent 0 76%,color-mix(in srgb,var(--brand) 35%,transparent) 84%,var(--brand) 94%,transparent 99%);animation:tmRun 6s linear infinite}
+.tm-c{position:relative;border-radius:24px;padding:3px;overflow:hidden;isolation:isolate;perspective:1200px;background:color-mix(in srgb,var(--brand) 22%,var(--surf));box-shadow:var(--shadow)}
+.tm-c::before{content:"";position:absolute;left:50%;top:50%;width:170%;aspect-ratio:1;translate:-50% -50%;z-index:-1;background:conic-gradient(from 0deg,transparent 0 70%,color-mix(in srgb,var(--brand) 45%,transparent) 80%,var(--brand) 92%,transparent 98%);animation:tmRun 6s linear infinite}
 .tm-c:nth-child(2)::before{animation-delay:-1.2s}.tm-c:nth-child(3)::before{animation-delay:-2.4s}.tm-c:nth-child(4)::before{animation-delay:-3.6s}.tm-c:nth-child(5)::before{animation-delay:-4.8s}
 @keyframes tmRun{to{transform:rotate(360deg)}}
 .tm-in{display:grid;height:100%;width:100%;text-align:center;cursor:pointer;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,.9,.3,1);border-radius:22px}
 .tm-c.flip .tm-in{transform:rotateY(180deg)}
-.tm-f,.tm-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 14px 16px;border-radius:22px;background:var(--surf);-webkit-backface-visibility:hidden;backface-visibility:hidden}
-.tm-b{transform:rotateY(180deg);justify-content:center;gap:10px}
+.tm-f,.tm-b{grid-area:1/1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 14px 16px;border-radius:21px;background:var(--surf);-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.tm-b{transform:rotateY(180deg);justify-content:center;gap:10px}.tm-f{justify-content:center}.tm-f .tm-turn{margin-top:10px}
 .tm-ph{display:block;width:120px;height:120px;border-radius:50%;margin-bottom:6px;transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
-.tm-ph img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid color-mix(in srgb,var(--brand) 35%,var(--surf))}
-.tm-c:hover .tm-ph,.tm-in:focus-visible .tm-ph{transform:scale(1.12)}
+.tm-ph img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.tm-c{transition:transform .35s cubic-bezier(.3,1.4,.5,1),box-shadow .35s}.tm-c:hover,.tm-c:focus-within{transform:scale(1.06);z-index:2;box-shadow:var(--shadow),0 30px 50px -26px rgba(30,60,40,.45)}
 .tm-n{font:700 1.08rem/1.25 var(--f-d)}
 .tm-role{color:var(--muted);font-weight:600;font-size:.9rem;line-height:1.3}
 .tm-deg{font-size:.8rem;color:var(--muted);line-height:1.35;opacity:.9}
@@ -5347,7 +5347,7 @@ function abFx(root){
 const TEAM=[
  ['nay','Nay Myo Thiha','Researcher','o.nax.o','','As an assistant teacher, Nay has seen up close how young children really learn. That experience guides the research behind every lesson, and every idea is checked with real families first.','BSc IT (Networking & Security)',['Assistant teacher']],
  ['htoo','Htoo Thi Kyi','Content & Media Lead','dumplingboyboy._','htoo-thi-kyi-2867692a2','Four years of video editing and a year as an IGCSE tutor mean Htoo knows how to explain things simply and make them look friendly, which is exactly what our stories, pictures and videos need.','Software Engineering',['4 yrs video editing','IGCSE tutor, 1 yr']],
- ['thant','Thant Zaw Aung','Leader · Web Developer','tzaa_za','thant-zaw-aung-5aa5192ab','Six years of coding and real experience teaching children with special needs let Thant build an app that is both well made and truly gentle for the children who use it.','BSc IT (Networking & Security)',['6 yrs coding','Taught special-needs kids']],
+ ['thant','Thant Zaw Aung','Leader · Web Developer','tzaa_za','thant-zaw-aung-5aa5192ab','Six years of coding and real experience teaching children with special needs help Thant lead the team and build an app that is both well made and truly gentle for the children who use it.','BSc IT (Networking & Security)',['6 yrs coding','Taught special-needs kids']],
  ['fatima','Fatima Abdullah','Secretary & Treasurer','5ati3a','fatima-abdullah-24135667abc','Three years of coding and experience with people with special needs help Fatima keep the team organised while making sure every plan stays focused on what children need.','BSc Computer Science',['3 yrs coding','Interacted w/ special needs']],
  ['chelsea','Chelsea Choo Minshe','QA & Marketing Lead','3helsea','chelsea-choo-981099366','Three years of coding and experience teaching young learners give Chelsea a sharp eye for what works for children, so problems are caught early and families hear about us clearly.','BSc Computer Science',['3 yrs coding','Taught young learners']]];
 /* team cards: tilt toward the pointer, tap a photo to hear hello */
@@ -5361,9 +5361,9 @@ function teamFx(root){
 }
 const TM_IC={ig:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',li:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2M3 13h18"/></svg>'};
 const tmLinks=(m,back)=>`<span class="tm-l">${m[3]?`<a href="https://www.instagram.com/${m[3]}/" target="_blank" rel="noopener" ${back?'tabindex="-1" ':''}aria-label="${esc(m[1])} on Instagram" data-notr>${TM_IC.ig}Instagram</a>`:''}${m[4]?`<a href="https://www.linkedin.com/in/${m[4]}/" target="_blank" rel="noopener" ${back?'tabindex="-1" ':''}aria-label="${esc(m[1])} on LinkedIn" data-notr>${TM_IC.li}LinkedIn</a>`:''}</span>`;
-const teamCards=()=>TEAM.map((m,i)=>`<li class="tm-c rv" style="--d:${i}"><div class="tm-in" role="button" tabindex="0" aria-pressed="false" aria-label="${esc(m[1]+', '+m[2]+'. Tap to read why '+m[1].split(' ')[0]+' fits the team')}">
-  <div class="tm-f"><span class="tm-ph"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="300" height="300" loading="lazy" decoding="async"></span><b class="tm-n" data-notr>${esc(m[1])}</b><span class="tm-role" data-notr>${esc(m[2])}</span><span class="tm-deg" data-notr>${esc(m[6])}</span><span class="tm-chips">${m[7].map(x=>`<span>${esc(x)}</span>`).join('')}</span>${tmLinks(m)}<span class="tm-turn">Tap to read more</span></div>
-  <div class="tm-b" aria-hidden="true"><b class="tm-n" data-notr>${esc(m[1])}</b><span class="tm-role" data-notr>${esc(m[2])}</span><span class="tm-why">Why ${esc(m[1].split(' ')[0])} fits</span><p>${esc(m[5])}</p><span class="tm-turn">Tap to turn back</span></div></div></li>`).join('');
+const teamCards=()=>TEAM.map((m,i)=>`<li class="tm-c rv" style="--d:${i}"><div class="tm-in" role="button" tabindex="0" aria-pressed="false" aria-label="${esc(m[1]+', '+m[2]+'. Tap to read more')}">
+  <div class="tm-f"><span class="tm-ph"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="300" height="300" loading="lazy" decoding="async"></span><b class="tm-n" data-notr>${esc(m[1])}</b><span class="tm-role" data-notr>${m[2].split(' · ').map(esc).join('<br>')}</span>${tmLinks(m)}<span class="tm-turn">Tap to read more</span></div>
+  <div class="tm-b" aria-hidden="true"><b class="tm-n" data-notr>${esc(m[1])}</b><span class="tm-deg" data-notr>${esc(m[6])}</span><span class="tm-chips">${m[7].map(x=>`<span>${esc(x)}</span>`).join('')}</span><span class="tm-why">Why ${esc(m[1].split(' ')[0])} fits</span><p>${esc(m[5])}</p><span class="tm-turn">Tap to turn back</span></div></div></li>`).join('');
 R.team=()=>{
   const cta=session?'dashboard':'auth-register',ctaT=session?'Open my page':'Start free';
   $('#page').innerHTML=`<div class="ab tm-pg">
