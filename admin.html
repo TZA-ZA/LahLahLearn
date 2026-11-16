@@ -55,6 +55,9 @@ td.n,th.n{text-align:right}
 .tools{display:flex;gap:12px;align-items:center;margin-bottom:12px}
 .tools input{max-width:320px;padding:10px 14px}
 @media (max-width:760px){.kpis,.plans{grid-template-columns:repeat(2,1fr)}.kpi dd{font-size:28px}header{margin-bottom:24px}}
+.ai-r{display:grid;gap:8px;padding:12px 0;border-top:1px solid rgba(0,0,0,.08)}.ai-r:first-of-type{border-top:0}
+.ai-r label{display:flex;flex-direction:column;gap:2px}.ai-in{display:flex;gap:8px;flex-wrap:wrap}.ai-in input{flex:1 1 260px;min-width:0}
+.ai-r .err:empty{display:none}
 </style>
 </head>
 <body>
@@ -127,6 +130,29 @@ function render(d){
     document.getElementById('cnt').textContent=list.length+' shown';
     document.getElementById('tb').innerHTML=list.map(f=>`<tr><td>${esc(f.name||'—')}</td><td>${esc(f.email)}</td><td class="n">${f.children}</td><td><span class="tag ${esc(f.plan)}">${esc(f.plan)}</span></td><td class="n">${fmt(f.minutes_7d)}</td><td>${f.last_active?dshort(f.last_active):'—'}</td><td>${new Date(f.created_at).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</td></tr>`).join('')||'<tr><td colspan="7" class="muted">No families yet.</td></tr>'};
   q.oninput=rows;rows();
+  aiLoad();
+}
+/* ---- Pip AI settings: API key and models, saved in Supabase Vault through the admin-settings function ---- */
+async function aiLoad(){
+  const box=document.createElement('section');box.id='ais';app.appendChild(box);
+  box.innerHTML='<h2>Pip AI settings</h2><div class="card"><p class="muted">Loading…</p></div>';
+  const {data,error}=await sb.functions.invoke('admin-settings',{method:'GET'});
+  if(error){let m=error.message;try{m=(await error.context.json()).error||m}catch(e){}box.innerHTML=`<h2>Pip AI settings</h2><div class="card"><p class="muted">${esc(m)}</p></div>`;return}
+  aiDraw(box,data.settings);
+}
+function aiDraw(box,list){
+  box.innerHTML=`<h2>Pip AI settings</h2><div class="card ai"><p class="muted small" style="margin:0 0 14px">Paste the API key for Pip's AI here. It is stored encrypted in Supabase Vault and is never shown again, only its last 4 characters. A function secret with the same name in the Supabase dashboard takes priority.</p>
+   ${list.map(s=>`<form class="ai-r" data-n="${esc(s.name)}"><label for="ai_${esc(s.name)}"><b>${esc(s.label)}</b><span class="muted small">${esc(s.hint)}${s.set?` · Now: <code>${esc(s.preview)}</code> (${esc(s.source)})`:' · Not set'}</span></label>
+     <div class="ai-in"><input id="ai_${esc(s.name)}" ${s.secret?'type="password" autocomplete="off"':''} placeholder="${s.set&&s.secret?'Paste a new key to replace it':''}" value="${s.secret?'':esc(s.set?s.preview:'')}" spellcheck="false"><button class="pri" type="submit">Save</button>${s.set&&s.source==='admin page'?'<button type="button" data-clear>Remove</button>':''}</div><p class="err" role="alert"></p></form>`).join('')}</div>`;
+  box.querySelectorAll('.ai-r').forEach(f=>{
+    const send=async v=>{const er=f.querySelector('.err'),bs=f.querySelectorAll('button');er.textContent='';bs.forEach(b=>b.disabled=true);
+      const {data,error}=await sb.functions.invoke('admin-settings',{method:'POST',body:{name:f.dataset.n,value:v}});
+      bs.forEach(b=>b.disabled=false);
+      if(error){let m=error.message;try{m=(await error.context.json()).error||m}catch(e){}er.textContent=m;return}
+      aiDraw(box,data.settings);const ok=box.querySelector(`.ai-r[data-n="${f.dataset.n}"] .err`);if(ok){ok.style.color='var(--good,#1f7a50)';ok.textContent=v?'Saved.':'Removed.'}};
+    f.onsubmit=e=>{e.preventDefault();send(f.querySelector('input').value.trim())};
+    const c=f.querySelector('[data-clear]');if(c)c.onclick=()=>{if(confirm('Remove this setting?'))send('')};
+  });
 }
 function chart(daily){last=daily;
   const box=document.getElementById('ch'),lab={active_children:'Active children per day',minutes:'Learning minutes per day',signups:'New families per day'}[metric];

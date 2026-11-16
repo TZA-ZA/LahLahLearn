@@ -10,7 +10,7 @@ const CURRENCIES = ["myr", "sgd", "usd", "eur", "gbp", "aud", "nzd", "cad", "idr
 
 // Pip AI credit packs (one-off payments). Amounts in each currency's display units.
 export const PACKS: Record<string, { n: number; i: number }> = { s: { n: 500, i: 0 }, m: { n: 2000, i: 1 }, l: { n: 6000, i: 2 } };
-export const PACK_PRICE: Record<string, number[]> = { myr: [5, 15, 39], sgd: [1.5, 4.5, 12], usd: [1.25, 3.75, 9.75], eur: [1.25, 3.75, 9.75], gbp: [1, 3, 8], aud: [2, 6, 15], nzd: [2, 6.5, 17], cad: [1.75, 5.25, 13.5], idr: [17000, 52000, 135000], thb: [39, 119, 299], php: [69, 209, 539], vnd: [29000, 89000, 229000], inr: [99, 299, 779], hkd: [9.5, 29, 75], jpy: [179, 529, 1379], krw: [1600, 4800, 12500], cny: [8.5, 25, 65], aed: [4.5, 14, 36] };
+export const PACK_PRICE: Record<string, number[]> = { myr: [49, 179, 499], sgd: [14.5, 54, 154], usd: [12.0, 45, 125], eur: [12.0, 45, 125], gbp: [10.0, 36, 102], aud: [19.5, 72, 192], nzd: [19.5, 78, 218], cad: [17.0, 63, 173], idr: [167000, 620000, 1725000], thb: [379, 1419, 3829], php: [679, 2489, 6899], vnd: [285000, 1060000, 2930000], inr: [969, 3569, 9969], hkd: [93, 346, 960], jpy: [1749, 6309, 17639], krw: [16000, 57000, 160000], cny: [83, 298, 832], aed: [44, 167, 461] };
 const ZERO_DECIMAL = ["jpy", "krw", "vnd"];
 export const minorUnits = (cur: string, v: number) => ZERO_DECIMAL.includes(cur) ? Math.round(v) : Math.round(v * 100);
 

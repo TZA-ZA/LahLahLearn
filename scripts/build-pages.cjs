@@ -141,6 +141,10 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
   const ta = src.indexOf('const TEAM=['), tb = src.indexOf(']];', ta);
   const TEAM = new Function('return ' + src.slice(ta + 'const TEAM='.length, tb + 2))();
   const teamHtml = '<ul class="team">' + TEAM.map(m => `<li><img src="../assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="120" height="120" loading="lazy"><b>${esc(m[1])}</b><span>${esc(m[2])}</span><span class="tl">${m[3] ? `<a href="https://www.instagram.com/${m[3]}/" rel="noopener">Instagram</a>` : ''}${m[4] ? `<a href="https://www.linkedin.com/in/${m[4]}/" rel="noopener">LinkedIn</a>` : ''}</span></li>`).join('') + '</ul>';
+  /* plain sentences and structured data so search engines can answer "who is the researcher of LahLahLearn" */
+  const roleSay = m => `${m[1]} is ${m[0] === 'thant' ? 'the founder, team leader and web developer' : 'the ' + m[2].replace('&', 'and').toLowerCase()} of LahLahLearn.`;
+  const teamText = '<p class="team-who">' + TEAM.map(m => esc(roleSay(m))).join(' ') + '</p>';
+  const person = m => ({ '@type': 'Person', name: m[1], jobTitle: m[2].replace('&', 'and') + ' at LahLahLearn', image: `${SITE}/assets/team/${m[0]}.webp`, worksFor: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/' }, affiliation: { '@type': 'CollegeOrUniversity', name: 'Sunway University' }, sameAs: [m[3] ? `https://www.instagram.com/${m[3]}/` : null, m[4] ? `https://www.linkedin.com/in/${m[4]}/` : null].filter(Boolean) });
   const faqHtml = FAQ.map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('\n');
   out('about/index.html', page({
     slug: 'about', title: 'About LahLahLearn - Calm learning app for children aged 3 to 8',
@@ -186,6 +190,7 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
 <h2 id="team">Behind the scenes: who makes it</h2>
 <p>LahLahLearn is made in Selangor, Malaysia, by a small student team at Sunway University. You can reach us at <a href="mailto:${MAIL}">${MAIL}</a> or on the <a href="../contact/">Contact</a> page.</p>
 ${teamHtml}
+${teamText}
 
 <h2>Good questions</h2>
 ${faqHtml}
@@ -196,7 +201,9 @@ ${faqHtml}
 <li>The app uses the open-source libraries supabase-js and three.js, both under the MIT License.</li>
 <li>The official Global Goals names and logos belong to the United Nations. Our goal tiles use our own colours.</li></ul>`,
     jsonld: [
-      { '@context': 'https://schema.org', '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/', logo: SITE + '/icon-512.png', email: MAIL, address: { '@type': 'PostalAddress', addressRegion: 'Selangor', addressCountry: 'MY' } },
+      { '@context': 'https://schema.org', '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/', logo: SITE + '/icon-512.png', email: MAIL, address: { '@type': 'PostalAddress', addressRegion: 'Selangor', addressCountry: 'MY' },
+        founder: person(TEAM.find(m => m[0] === 'thant')),
+        member: TEAM.map(m => ({ '@type': 'OrganizationRole', roleName: m[2].replace('&', 'and'), member: person(m) })) },
       { '@context': 'https://schema.org', '@type': 'WebApplication', name: 'LahLahLearn', url: SITE + '/', applicationCategory: 'EducationalApplication', operatingSystem: 'Any (web browser)', audience: { '@type': 'PeopleAudience', suggestedMinAge: 3, suggestedMaxAge: 8 }, description: 'A calm, playful learning app for children aged 3 to 8: reading, maths, feelings and life skills with Pip, a friendly guide.', offers: { '@type': 'Offer', price: '0', priceCurrency: 'MYR', description: 'Free plan' } },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) },
     ] }));
@@ -241,6 +248,9 @@ Key facts:
 - Free plan, a paid Family plan with a 7-day free trial (no payment details needed), and a School or clinic plan
 - It supports learning at home; it does not diagnose or treat any condition
 - Contact: ${MAIL}
+
+Team (a student team at Sunway University, Malaysia):
+${TEAM.map(m => '- ' + m[1] + ': ' + m[2].replace('&', 'and') + (m[0] === 'thant' ? ' (founder)' : '')).join('\n')}
 
 ## Pages
 - [About LahLahLearn](${SITE}/about/): what it is, who it is for, how it works, FAQ, credits

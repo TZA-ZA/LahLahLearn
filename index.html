@@ -2196,6 +2196,23 @@ html[data-theme=dark] .skl,html[data-theme=dark] .tc{--paper:color-mix(in srgb,v
 .tm-c{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:22px 14px 18px;border-radius:24px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
 .tm-c img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid color-mix(in srgb,var(--brand) 35%,var(--surf));margin-bottom:6px}
 .tm-c b{font:700 1.08rem/1.25 var(--f-d)}.tm-c small{color:var(--muted);font-weight:600}
+.tm-g{perspective:1100px}
+.tm-c{position:relative;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .25s ease,box-shadow .25s ease,border-color .25s;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),color-mix(in srgb,var(--brand) 10%,var(--surf)),var(--surf) 60%)}
+.tm-c:hover{box-shadow:var(--shadow),0 26px 40px -22px rgba(30,60,40,.45);border-color:color-mix(in srgb,var(--brand) 40%,var(--line))}
+.tm-c.lead{border:2px solid #f2c14e;box-shadow:var(--shadow),0 0 0 6px rgba(242,193,78,.18)}
+.tm-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:4px 12px;border-radius:999px;background:#f2c14e;color:#5a3c00;font:700 .72rem var(--f-d);letter-spacing:.04em;white-space:nowrap;box-shadow:0 4px 10px -4px rgba(120,80,0,.5)}
+.tm-ph{position:relative;border:0;padding:0;background:none;cursor:pointer;border-radius:50%;margin-bottom:6px}
+.tm-ph img{display:block;margin:0!important;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.tm-ph:hover img,.tm-c.hi .tm-ph img{transform:scale(1.06) rotate(-3deg)}
+.tm-ph::before{content:"";position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(#f2c14e,#e583ad,#7fb7e6,#5cbf7f,#f2c14e);opacity:0;transition:opacity .3s;z-index:-1}
+.tm-ph:hover::before,.tm-c.hi .tm-ph::before{opacity:1;animation:tmSpin 4s linear infinite}
+@keyframes tmSpin{to{transform:rotate(360deg)}}
+.tm-wave{position:absolute;right:-6px;top:4px;padding:3px 9px;border-radius:12px 12px 12px 3px;background:var(--brand);color:var(--on-brand);font:700 .78rem var(--f-d);opacity:0;transform:scale(.4) translateY(8px);transition:opacity .2s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.tm-ph:hover .tm-wave,.tm-ph:focus-visible .tm-wave,.tm-c.hi .tm-wave{opacity:1;transform:none}
+.tm-say{display:block;margin:2px 0 6px;padding:10px 12px;border-radius:16px;background:color-mix(in srgb,var(--brand) 12%,var(--surf));font-size:.86rem;line-height:1.4;font-weight:600;animation:pop .3s var(--ease)}
+.tm-say[hidden]{display:none}
+@media(min-width:900px){.tm-c.lead{transform:translateY(-10px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}}
+@media(prefers-reduced-motion:reduce){.tm-c{transform:none!important}.tm-ph::before{animation:none!important}}
 .tm-l{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}
 .tm-l a{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);font:600 .82rem var(--f-b);color:var(--ink);text-decoration:none;background:var(--bg)}
 .tm-l a:hover,.tm-l a:focus-visible{border-color:var(--brand);color:var(--brand)}
@@ -2602,7 +2619,8 @@ html[data-theme=dark] .nf-c{background:var(--surf2)}
 .pcr-p.best{border-color:var(--brand);background:#fff;box-shadow:0 0 0 1px var(--brand),0 16px 34px -22px rgba(0,0,0,.45)}
 .pcr-tag{position:absolute;top:-11px;left:18px;padding:3px 10px;border-radius:999px;background:var(--sun,#f2b632);color:#3a2a00;font:700 .72rem var(--f-b)}
 .pcr-n{font:700 1.15rem var(--f-d);color:#1f2a24}.pcr-n small{font:600 .9rem var(--f-b);color:#56625b}
-.pcr-pr{font:700 2.3rem/1.05 var(--f-d);color:#1f2a24}.pcr-h{color:#56625b;font-size:.84rem;line-height:1.4;padding-top:10px;margin-top:6px;border-top:1px dashed #dfe5df;align-self:stretch}
+.pcr-pr{font:700 2.3rem/1.05 var(--f-d);color:#1f2a24}.pcr-n{font:700 .95rem var(--f-d);color:#2f6a46;margin-top:2px}
+.pcr-h{color:#56625b;font-size:.84rem;line-height:1.4;padding-top:10px;margin-top:6px;border-top:1px dashed #dfe5df;align-self:stretch}
 .pcr-b{margin-top:16px;align-self:stretch;display:flex;align-items:center;justify-content:center;gap:6px;padding:11px;border-radius:12px;background:#eef3ef;color:#1f2a24;font:700 .9rem var(--f-b);transition:background .18s,color .18s}
 .pcr-p:hover .pcr-b,.pcr-p.best .pcr-b{background:var(--brand);color:var(--on-brand)}
 @media (max-width:700px){.pcr-in{padding:20px}.pcr-packs{grid-template-columns:1fr;gap:18px}.pcr-pr{font-size:1.9rem}}
@@ -3080,7 +3098,7 @@ function pipScripted(t,mode,failed){
 const AI_MODELS=[{id:'quick',name:'Pip Quick',cost:1,d:'Fast, simple answers. Best for most questions.'},{id:'smart',name:'Pip Smart',cost:3,d:'Thinks a little longer. Better explanations.'},{id:'deep',name:'Pip Deep',cost:8,d:'Thinks the longest. For tricky questions only.'}];
 const AI_ALLOW={free:50,family:1000};
 const AI_PACKS=[{id:'s',n:500},{id:'m',n:2000},{id:'l',n:6000}];
-const AI_PACK_P={MYR:[5,15,39],SGD:[1.5,4.5,12],USD:[1.25,3.75,9.75],EUR:[1.25,3.75,9.75],GBP:[1,3,8],AUD:[2,6,15],NZD:[2,6.5,17],CAD:[1.75,5.25,13.5],IDR:[17000,52000,135000],THB:[39,119,299],PHP:[69,209,539],VND:[29000,89000,229000],INR:[99,299,779],HKD:[9.5,29,75],JPY:[179,529,1379],KRW:[1600,4800,12500],CNY:[8.5,25,65],AED:[4.5,14,36]};
+const AI_PACK_P={MYR:[49,179,499],SGD:[14.5,54,154],USD:[12.0,45,125],EUR:[12.0,45,125],GBP:[10.0,36,102],AUD:[19.5,72,192],NZD:[19.5,78,218],CAD:[17.0,63,173],IDR:[167000,620000,1725000],THB:[379,1419,3829],PHP:[679,2489,6899],VND:[285000,1060000,2930000],INR:[969,3569,9969],HKD:[93,346,960],JPY:[1749,6309,17639],KRW:[16000,57000,160000],CNY:[83,298,832],AED:[44,167,461]};
 const aiModel=()=>AI_MODELS.find(m=>m.id===((P&&P.aiModel)||'quick'))||AI_MODELS[0];
 const aiAllow=()=>AI_ALLOW[P&&P.plan==='family'?'family':'free'];
 const aiMonth=()=>new Date().toISOString().slice(0,7);
@@ -3454,9 +3472,9 @@ const KID_MAX=3;let KIDS=null;
 let billCycle='month';
 /* ---- Prices in the family's own currency (worked out from the device time zone, changeable on the Plans page).
    The same price points are set on the Stripe prices, so families are charged exactly what they see. ---- */
-const CUR_P={MYR:[[20,35,45],10,'RM'],SGD:[[6,10,13],3,'S$'],USD:[[5,8,10],2.5,'US$'],EUR:[[5,8,10],2.5,'€'],GBP:[[4,7,9],2,'£'],AUD:[[7,12,15],4,'A$'],NZD:[[8,13,17],4.5,'NZ$'],CAD:[[7,11,14],3.5,'C$'],
-  IDR:[[69000,119000,149000],35000,'Rp'],THB:[[159,279,349],79,'฿'],PHP:[[279,479,619],129,'₱'],VND:[[119000,209000,269000],59000,'₫'],INR:[[399,699,899],199,'₹'],HKD:[[39,69,85],19,'HK$'],
-  JPY:[[699,1199,1499],349,'¥'],KRW:[[6500,11000,14500],3300,'₩'],CNY:[[35,59,79],17,'CN¥'],AED:[[19,32,42],9,'AED ']};
+const CUR_P={MYR:[[60,105,135],20,'RM'],SGD:[[18,30,39],6,'S$'],USD:[[15,24,30],5,'US$'],EUR:[[15,24,30],5,'€'],GBP:[[12,21,27],4,'£'],AUD:[[21,36,45],8,'A$'],NZD:[[24,39,51],9,'NZ$'],CAD:[[21,33,42],7,'C$'],
+  IDR:[[205000,355000,445000],70000,'Rp'],THB:[[479,839,1049],159,'฿'],PHP:[[839,1439,1859],259,'₱'],VND:[[355000,625000,805000],118000,'₫'],INR:[[1199,2099,2699],399,'₹'],HKD:[[117,207,255],38,'HK$'],
+  JPY:[[2099,3599,4499],699,'¥'],KRW:[[20000,33000,44000],7000,'₩'],CNY:[[105,177,237],34,'CN¥'],AED:[[57,96,126],18,'AED ']};
 const CUR_N={MYR:'Malaysian ringgit',SGD:'Singapore dollar',USD:'US dollar',EUR:'Euro',GBP:'British pound',AUD:'Australian dollar',NZD:'New Zealand dollar',CAD:'Canadian dollar',IDR:'Indonesian rupiah',THB:'Thai baht',PHP:'Philippine peso',VND:'Vietnamese dong',INR:'Indian rupee',HKD:'Hong Kong dollar',JPY:'Japanese yen',KRW:'Korean won',CNY:'Chinese yuan',AED:'UAE dirham'};
 function curDetect(){
   try{const s=lsGet('ll.cur');if(s&&CUR_P[s])return s}catch(e){}
@@ -3478,7 +3496,7 @@ setCur(curDetect());
 const curSym=()=>CUR_P[CUR][2];
 const curNum=v=>{const z=['JPY','KRW','VND','IDR'].includes(CUR);return(z?Math.round(v):Math.round(v*100)/100).toLocaleString('en',{maximumFractionDigits:z?0:2})};
 const rmTxt=v=>curSym()+curNum(v);
-const famLine=n=>'a month for '+n+(n===1?' child':' children')+(n>1?' (about '+rmTxt(FAM[n]/n)+' each)':'')+'. You save '+rmTxt(FAMW[n]-FAM[n])+' compared with '+rmTxt(FAMW[n])+'.';
+const famLine=n=>'a month for '+n+(n===1?' child':' children')+(n>1?' (about '+rmTxt(FAM[n]/n)+' each)':'')+'. Or '+rmTxt(Math.round(FAM[n]*10/12))+' a month when paid yearly.';
 const AGEL={'3-4':'Age 3 to 4','5-6':'Age 5 to 6','7-8':'Age 7 to 8'};
 /* Exact age: saved with the year it was given, so a child who was 3 in 2026 is 4 in 2027. The age band used by lessons follows it. */
 function ageBand(n){return n<=4?'3-4':n<=6?'5-6':'7-8'}
@@ -5303,10 +5321,22 @@ function abFx(root){
   return()=>{io.disconnect();removeEventListener('scroll',on);removeEventListener('resize',on);cancelAnimationFrame(raf)};
 }
 /* the people behind LahLahLearn: [photo, name, role, Instagram handle, LinkedIn id] */
-const TEAM=[['nay','Nay Myo Thiha','Researcher','o.nax.o',''],['thant','Thant Zaw Aung','Leader & Web Developer','tzaa_za','thant-zaw-aung-5aa5192ab'],['fatima','Fatima Abdullah','Secretary & Treasurer','5ati3a','fatima-abdullah-24135667abc'],['chelsea','Chelsea Choo Minshe','Marketing Lead','3helsea','chelsea-choo-981099366'],['htoo','Htoo Thi Kyi','Content & Media Lead','dumplingboyboy._','']];
+const TEAM=[['nay','Nay Myo Thiha','Researcher','o.nax.o','','I find out what helps children learn, and test our ideas with families.'],['fatima','Fatima Abdullah','Secretary & Treasurer','5ati3a','fatima-abdullah-24135667abc','I keep our plans, meetings and money in order.'],['thant','Thant Zaw Aung','Leader & Web Developer','tzaa_za','thant-zaw-aung-5aa5192ab','I lead the team and build the LahLahLearn app.'],['chelsea','Chelsea Choo Minshe','Marketing Lead','3helsea','chelsea-choo-981099366','I test every page and tell families about us.'],['htoo','Htoo Thi Kyi','Content & Media Lead','dumplingboyboy._','','I make our stories, pictures and videos.']];
 let TEAMGO=false;
+/* team cards: tilt toward the pointer, tap a photo to hear hello */
+function teamFx(root){
+  if(!root)return()=>{};const cards=$$('.tm-c',root),off=[];
+  cards.forEach(c=>{
+    const mv=e=>{if(calmMotion()||e.pointerType==='touch')return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty('--rx',(-y*10).toFixed(2)+'deg');c.style.setProperty('--ry',(x*12).toFixed(2)+'deg');c.style.setProperty('--gx',((x+.5)*100).toFixed(1)+'%');c.style.setProperty('--gy',((y+.5)*100).toFixed(1)+'%')};
+    const lv=()=>{c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')};
+    c.addEventListener('pointermove',mv);c.addEventListener('pointerleave',lv);off.push(()=>{c.removeEventListener('pointermove',mv);c.removeEventListener('pointerleave',lv)})});
+  $$('[data-tm]',root).forEach(b=>b.onclick=()=>{const c=b.closest('.tm-c'),say=$('.tm-say',c),open=say.hidden;
+    $$('.tm-say',root).forEach(x=>x.hidden=true);$$('[data-tm]',root).forEach(x=>{x.setAttribute('aria-expanded','false');x.closest('.tm-c').classList.remove('hi')});
+    if(open){say.hidden=false;b.setAttribute('aria-expanded','true');c.classList.add('hi');try{sfxPop&&sfxPop()}catch(e){}}});
+  return()=>off.forEach(f=>f());
+}
 const TM_IC={ig:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',li:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2M3 13h18"/></svg>'};
-const teamCards=()=>TEAM.map(m=>`<li class="tm-c rv"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="160" height="160" loading="lazy" decoding="async"><b data-notr>${esc(m[1])}</b><small>${esc(m[2])}</small><span class="tm-l">${m[3]?`<a href="https://www.instagram.com/${m[3]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on Instagram" data-notr>${TM_IC.ig}Instagram</a>`:''}${m[4]?`<a href="https://www.linkedin.com/in/${m[4]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on LinkedIn" data-notr>${TM_IC.li}LinkedIn</a>`:''}</span></li>`).join('');
+const teamCards=()=>TEAM.map((m,i)=>`<li class="tm-c rv${m[0]==='thant'?' lead':''}" style="--d:${i}">${m[0]==='thant'?'<span class="tm-badge">Team lead</span>':''}<button class="tm-ph" data-tm="${i}" aria-expanded="false" aria-label="${esc('Say hi to '+m[1])}"><img src="assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="160" height="160" loading="lazy" decoding="async"><span class="tm-wave" aria-hidden="true">Hi!</span></button><span class="tm-say" role="status" hidden>${esc(m[5])}</span><b data-notr>${esc(m[1])}</b><small>${esc(m[2])}</small><span class="tm-l">${m[3]?`<a href="https://www.instagram.com/${m[3]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on Instagram" data-notr>${TM_IC.ig}Instagram</a>`:''}${m[4]?`<a href="https://www.linkedin.com/in/${m[4]}/" target="_blank" rel="noopener" aria-label="${esc(m[1])} on LinkedIn" data-notr>${TM_IC.li}LinkedIn</a>`:''}</span></li>`).join('');
 R.home=()=>{
   const cta=session?'dashboard':'auth-register',ctaT=session?'Open my page':'Register';
   const kinds=[['Predictable','Clear and predictable','Same layout every time.','check','--brand'],['Paced','Short and quick','Small steps, visible timer.','flame','--coral'],['Readable','Easy to read','Big text, wide spacing.','book','--sky'],['Visual','See everything','Hand signs and captions.','hand','--sun']];
@@ -5334,10 +5364,11 @@ R.home=()=>{
      <div class="ab-mb">${[40,62,35,78,55,90,66].map((v,i)=>`<i style="--v:${v}%;--i:${i}"></i>`).join('')}</div>
      <div class="ab-mk"><i style="--w:34%;--c:var(--brand)"></i><i style="--w:22%;--c:var(--sun)"></i><i style="--w:18%;--c:var(--coral)"></i><i style="--w:26%;--c:var(--sky)"></i></div>
      <div class="ab-mg">${[72,48,60].map(v=>`<div><i style="--w:${v}%"></i></div>`).join('')}</div></div></section>
-   <section class="ab-sec ab-team" id="team" aria-labelledby="teamT"><div class="ab-hd rv"><span class="ab-ey">Behind the scenes</span><h2 class="kx" id="teamT" data-notr>${tr('The people behind LahLahLearn')}</h2><p>We are a small student team in Malaysia. Say hello.</p></div><ul class="tm-g">${teamCards()}</ul></section>
+   <section class="ab-sec ab-team" id="team" aria-labelledby="teamT"><div class="ab-hd rv"><span class="ab-ey">Behind the scenes</span><h2 class="kx" id="teamT" data-notr>${tr('The people behind LahLahLearn')}</h2><p>We are a small student team in Malaysia. Tap a photo to say hi.</p></div><ul class="tm-g">${teamCards()}</ul></section>
    <section class="ab-sec ab-faq"><div class="ab-hd rv"><span class="ab-ey">FAQ</span><h2 class="kx" data-notr>${tr('Good questions')}</h2></div>
     <div class="rv">${FAQ.slice(0,3).map(f=>`<details class="acc"><summary>${f[0]}</summary><div class="accb"><p class="muted">${f[1]}</p></div></details>`).join('')}</div></section>
    <section class="ab-cta rv"><h2 class="kx" data-notr>${tr('Every child can do this.')}</h2><button class="btn sun lg" data-go="${cta}">${ctaT} ${ic('arrow',18)}</button></section></div>`;
+  teardowns.push(teamFx($('#team')));
   if(TEAMGO){TEAMGO=false;[80,700].forEach(ms=>setTimeout(()=>{const t=$('#team');if(t&&cur==='home')t.scrollIntoView({block:'start'})},ms))}  /* twice: the pinned sections above change height as they set up */
   teardowns.push(abFx($('.ab')));countUp($('.ab'));teardowns.push(spiral3D($('#abspiral'),{radius:235,verticalGap:64,cardWidth:255,cardAspectRatio:3/2,autoRotate:true,autoSpeed:.08,scrollSensitivity:.0018,smoothing:.05,blurStrength:1.65,bend:.17,fov:44}));
 };
@@ -8352,7 +8383,7 @@ function buddy3D(T,kind){
     [-1,1].forEach(s=>{const k=pm(sph(.13,12,10),GR,I,s*.22,1.15,-.45,1.3,1,1);k.rotation.z=s*.5});pm(sph(.1,12,10),GR,I,0,1.15,-.5);
     body.userData.tail=tailP;
     fx=(t,mv,calm)=>{if(calm){return}tailP.rotation.y=Math.sin(t*(mv?9:2.2))*(mv?.28:.14);head.rotation.z=Math.sin(t*1.4)*.025;head.rotation.x=mv?Math.sin(t*9)*.03:Math.sin(t*1.1)*.012};
-    root.scale.setScalar(.8);
+    root.scale.setScalar(.68);
   }
 
   /* ===================== CLOUD BUNNY ===================== */
@@ -8572,7 +8603,7 @@ function sfxStep(side){
   }catch(e){}
 }
 /* ---- Treasures in the 3D world: hats for the buddy, a butterfly friend, decorations the child places ---- */
-const RW_HAT_Y={pip:[1.4,0,1],cloud:[1.73,.02,.97],fox:[2.2,.02,1.3]};  /* top of each buddy's head: [height, forward, size] */
+const RW_HAT_Y={pip:[1.4,0,1],cloud:[1.73,.02,.97],fox:[1.87,.02,1.1]};  /* top of each buddy's head: [height, forward, size] */
 function rwHatMesh(T,id,k){
   const g=new T.Group(),M=(c,o)=>x3Mat(T,c,Object.assign({roughness:.55},o||{}));let dy=0;
   if(id==='hat-party'){const c=new T.Mesh(new T.ConeGeometry(.27,.64,24),M('#e583ad'));c.position.y=.32;g.add(c);
@@ -9985,7 +10016,7 @@ R.pricing=()=>{
   const cycAmt=m=>billCycle==='year'?Math.round(yr(m)/12):m;
   const SCH_PER=CUR_P[CUR][1],Y=billCycle==='year';if(schN<SCH_MIN)schN=SCH_MIN;
   const schAmt=n=>cycAmt(SCH_PER*n),schSub=n=>Y?`a month, billed ${rmTxt(yr(SCH_PER*n))} a year`:'a month';
-  const famWas=n=>Y?FAM[n]:FAMW[n];
+  const famWas=n=>Y?FAM[n]:0;  /* only show a crossed-out price when there is a real saving (yearly) */
   const famSub=n=>Y?`a month, billed ${rmTxt(yr(FAM[n]))} a year`:'a month';
   const tick='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3.5 8.4l2.8 2.8 6.2-6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const fam=cp==='family'&&on;
@@ -10016,13 +10047,13 @@ R.pricing=()=>{
    <section class="pcr" id="credits" aria-labelledby="pcrT"><div class="pcr-in">
     <div class="pcr-hd"><span class="pcr-ic" aria-hidden="true">${ic('spark',22)}</span><div><h2 id="pcrT">Need more Pip AI?</h2><p>Every plan comes with monthly credits. Top up any time. Bought credits never expire.</p></div></div>
     <ul class="pcr-cost" aria-label="Credits per answer">${AI_MODELS.map((m,i)=>`<li><span class="ai-gl" aria-hidden="true">${[1,2,3].map(j=>`<i class="${j<=i+1?'on':''}" style="height:${j*3+3}px"></i>`).join('')}</span><b>${m.name}</b><span>${m.cost} credit${m.cost>1?'s':''} per answer</span></li>`).join('')}</ul>
-    <div class="pcr-packs">${AI_PACKS.map((k,i)=>{const pr=AI_PACK_P[CUR][i],per=pr/k.n*100,best=i===1;return `<button class="pcr-p${best?' best':''}" data-pack="${k.id}" aria-label="Buy ${k.n.toLocaleString()} credits for ${curSym()}${curNum(pr)}">${best?'<span class="pcr-tag">Most popular</span>':''}<span class="pcr-pr tn">${curSym()}${curNum(pr)}</span><span class="pcr-n tn">${k.n.toLocaleString()} <small>credits</small></span><span class="pcr-h">${['Try it out','Best for most families','For daily Pip chats'][i]} · up to ${Math.round(k.n/AI_MODELS[0].cost).toLocaleString()} answers</span><span class="pcr-b">Buy ${ic('arrow',15)}</span></button>`}).join('')}</div>
+    <div class="pcr-packs">${AI_PACKS.map((k,i)=>{const pr=AI_PACK_P[CUR][i],per=pr/k.n*100,best=i===1;return `<button class="pcr-p${best?' best':''}" data-pack="${k.id}" aria-label="Buy ${k.n.toLocaleString()} credits for ${curSym()}${curNum(pr)}">${best?'<span class="pcr-tag">Most popular</span>':''}<span class="pcr-pr tn">${curSym()}${curNum(pr)}</span><span class="pcr-n tn">${k.n.toLocaleString()} <small>credits</small></span><span class="pcr-n">${['Starter','Popular','Family'][i]}</span><span class="pcr-h">${['Try it out','Best for most families','For daily Pip chats'][i]} · up to ${Math.round(k.n/AI_MODELS[0].cost).toLocaleString()} answers</span><span class="pcr-b">Buy ${ic('arrow',15)}</span></button>`}).join('')}</div>
    </div></section>
    <section class="px-faq" aria-label="Questions"><h2>Questions</h2>${faq.map(f=>`<details class="px-q"><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</section></div>`;
   $$('[data-pack]').forEach(b=>b.onclick=()=>aiBuy(b.dataset.pack));if(R.pricing.arg==='credits'||/credits/.test(location.hash))setTimeout(()=>{const c=$('#credits');c&&c.scrollIntoView({behavior:'smooth',block:'center'})},400);
   $$('[data-cyc]').forEach(b=>b.onclick=()=>{if(b.dataset.cyc===billCycle)return;billCycle=b.dataset.cyc;R.pricing();reveal($('#page'))});
   const pc=$('#plCur');if(pc)pc.onchange=()=>{setCur(pc.value);try{lsSet('ll.cur',CUR)}catch(e){}R.pricing();reveal($('#page'));const p2=$('#plCur');p2&&p2.focus()};
-  $$('.pl-cb').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$('#plT').textContent=curNum(cycAmt(FAM[kn]));$('#plW').textContent=rmTxt(famWas(kn));$('#plS').textContent=famSub(kn)});
+  $$('.pl-cb').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$('#plT').textContent=curNum(cycAmt(FAM[kn]));(()=>{const w=$('#plW');if(w)w.textContent=rmTxt(famWas(kn))})();$('#plS').textContent=famSub(kn)});
   const scDraw=()=>{$('#scN').textContent=schN;$('#scT').textContent=curNum(schAmt(schN));const w=$('#scW');if(w)w.textContent=rmTxt(SCH_PER*schN);$('#scS').textContent=schSub(schN);$$('.sc-b').forEach(x=>x.disabled=(+x.dataset.d<0&&schN<=SCH_MIN)||(+x.dataset.d>0&&schN>=SCH_MAX))};
   $$('.sc-b').forEach(b=>b.onclick=()=>{schN=Math.min(SCH_MAX,Math.max(SCH_MIN,schN+(+b.dataset.d)));scDraw()});scDraw();
   const schoolMail=()=>{location.href='mailto:'+(CFG.contactEmail||'lahlahlearn@gmail.com')+'?subject='+encodeURIComponent('LahLahLearn for schools and clinics')+'&body='+encodeURIComponent(`Hello LahLahLearn,\n\nWe would like the School or clinic plan for ${schN} ${schN===1?'child':'children'} (${rmTxt(SCH_PER*schN)} a month).\n\nName of school or clinic:\nContact person:\nPhone:\n`)};

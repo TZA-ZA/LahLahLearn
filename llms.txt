@@ -11,6 +11,13 @@ Key facts:
 - It supports learning at home; it does not diagnose or treat any condition
 - Contact: lahlahlearn@gmail.com
 
+Team (a student team at Sunway University, Malaysia):
+- Nay Myo Thiha: Researcher
+- Fatima Abdullah: Secretary and Treasurer
+- Thant Zaw Aung: Leader and Web Developer (founder)
+- Chelsea Choo Minshe: Marketing Lead
+- Htoo Thi Kyi: Content and Media Lead
+
 ## Pages
 - [About LahLahLearn](https://lahlahlearn.com/about/): what it is, who it is for, how it works, FAQ, credits
 - [Contact](https://lahlahlearn.com/contact/): email, privacy and data requests, billing help
