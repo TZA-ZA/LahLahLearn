@@ -2106,6 +2106,37 @@ html[data-theme=dark] .pcr-in,html[data-theme=dark] .pcr-p,html[data-theme=dark]
 }
 .ab-facts .ab-dash{font-style:normal;margin:0 .22em}
 
+.lv-sw{display:flex;gap:6px;margin:6px 0 14px auto;width:max-content;padding:5px;border-radius:999px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
+.lv-sw button{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:6px 16px;border-radius:999px;border:0;background:none;color:var(--muted);font:700 .95rem var(--f-d);cursor:pointer}
+.lv-sw button[aria-checked="true"]{background:var(--brand);color:#fff}
+.sk-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sk-go.alt{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.55);box-shadow:none;color:#fff}
+.sk-go .sk-medal{display:inline-flex;animation:skMedal 2.4s ease-in-out infinite}
+@keyframes skMedal{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg) scale(1.08)}}
+.jr-gate{position:relative;animation:jrWig 2.2s ease-in-out infinite}
+.jr-spk{position:absolute;width:10px;height:10px;border-radius:50%;background:#ffd34d;box-shadow:0 0 8px #ffd34d;opacity:0;pointer-events:none;animation:jrSpk 2.4s ease-out infinite}
+.jr-spk:nth-of-type(1){left:6%;top:12%}.jr-spk:nth-of-type(2){right:4%;top:30%;animation-delay:.8s}.jr-spk:nth-of-type(3){left:40%;bottom:-4%;animation-delay:1.6s}
+@keyframes jrSpk{0%{opacity:0;transform:scale(.2)}30%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(.4) translateY(-14px)}}
+body.noanim .jr-gate,body.noanim .jr-spk,body.noanim .sk-medal{animation:none!important}
+.lv-s .jr-t small,.lv-s .jr-t em,.lv-s .jr-h small,.lv-s .sk-cls small,.lv-s .sk-cls em,.lv-s .sk-eb,.lv-s .sk-chalk h2,.lv-s .sk-prog small,.lv-s .lv-w,.lv-s .tre-g small,.lv-s .tre-g b,.lv-s .kq-h,.lv-s .kq-cat b,.lv-s .kq-t b,.lv-s .jr-nav,.lv-s .tre-h h3 small{display:none!important}
+.lv-s .jr-t b{font-size:.82rem;opacity:.85}
+.lv-s .sk-chalk{align-items:center;text-align:center;gap:14px}
+.lv-s .sk-btns{justify-content:center}
+.lv-s .sk-go{min-width:96px;min-height:96px;border-radius:50%;padding:0;justify-content:center;align-self:center}
+.lv-s .sk-go .sk-play svg{width:46px;height:46px}.lv-s .sk-go .sk-medal svg{width:52px;height:52px}
+.lv-s .sk-go:not(.alt){animation:lvPulse 2s ease-in-out infinite}
+@keyframes lvPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.lv-s .kq-cats{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.lv-s .kq-cat{flex-direction:column;justify-content:center;min-height:150px}.lv-s .kq-cat .kq-ic svg{width:64px;height:64px}.lv-s .kq-arr{display:none}
+.lv-s .kq-t{min-height:130px;justify-content:center}
+.lv-s [data-cu],.lv-s [data-go],.lv-s [data-kc],.lv-s .jr-ch{transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.lv-s [data-cu]:hover,.lv-s [data-go]:hover,.lv-s [data-kc]:hover,.lv-s .jr-ch:hover{transform:scale(1.08) rotate(-2deg)}
+body.noanim .lv-s *{animation:none!important}
+.pc-rnote{margin:0 0 14px;padding:10px 14px;border-radius:14px;background:color-mix(in srgb,var(--brand) 9%,var(--surf));font-weight:600;font-size:.92rem}
+.ob-why{margin-top:22px;padding:12px 16px;border-radius:16px;background:color-mix(in srgb,var(--brand) 8%,var(--surf));border:1px solid color-mix(in srgb,var(--brand) 22%,transparent);font-size:.9rem}
+.ob-why summary{cursor:pointer;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}.ob-why summary::-webkit-details-marker{display:none}
+.ob-why p{margin:8px 0 0;color:var(--muted);line-height:1.5}
+.ob-lv .tile{display:flex;flex-direction:column;gap:10px;align-items:center}.lvp{width:100%;max-width:200px;height:auto;border-radius:12px}
 .au2-now{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--brand) 9%,var(--surf));border:1px solid color-mix(in srgb,var(--brand) 22%,transparent)}
 .au2-now b{font:700 .95rem var(--f-d)}.au2-now span{font-size:.84rem;color:var(--muted);line-height:1.4}
 .au2-f>span small{display:block;font-weight:500;font-size:.78rem;color:var(--muted);margin-top:2px}
@@ -3094,10 +3125,40 @@ const STUDY={total:0,left:0,run:false,pause:false,done:false,coolUntil:0,iv:0};l
 
 /* ================= My Talking Pip: AI brain, voice, fatigue ================= */
 let pipTalk=0,studyTab='focus';
+/* the family can plug in their own AI account (any service that speaks the OpenAI chat format). Kept on this device only. */
+const AI_OWN=[['openai','OpenAI','https://api.openai.com/v1/chat/completions','gpt-4o-mini'],['gemini','Google Gemini','https://generativelanguage.googleapis.com/v1beta/openai/chat/completions','gemini-2.0-flash'],['openrouter','OpenRouter','https://openrouter.ai/api/v1/chat/completions','openai/gpt-4o-mini'],['custom','Other (OpenAI compatible)','','']];
 function aiCfg(){let c={};try{c=JSON.parse(lsGet('ll.ai')||'{}')||{}}catch(e){}return{url:c.url||'',key:c.key||'',model:c.model||'',header:c.header||'Authorization',prefix:c.prefix!==undefined?c.prefix:'Bearer '}}
 function aiSave(o){lsSet('ll.ai',JSON.stringify(o))}
 function aiReady(){if(CLOUD.on&&CLOUD.user&&CFG.pipAI!==false)return true;const c=aiCfg();return!!(c.url&&c.key)}
-const PIP_SYS="You are Pip, a calm, kind, very patient friend who helps a young autistic child learn. Use short, simple sentences (at most 2). Warm, slow, encouraging tone. No sarcasm, no slang, nothing scary or loud. If you ask a question, ask only one, gently. Let your feelings show in your words: cheer when the child does well, go soft and gentle when they feel sad or worried, and sound curious when you ask.";
+/* Kid-safe chat: words and topics Pip will not discuss, caught even when written with stars, symbols, numbers or spaces (s*x, f**k, s.e.x, 5ex) */
+const KS_BAD=['sex','sexy','porn','porno','nude','nudes','naked','boobs','boob','penis','vagina','dick','cock','pussy','tits','horny','nsfw','fuck','fucking','fucker','shit','bitch','bastard','asshole','arse','damn','crap','cunt','whore','slut','piss','wank','dildo','orgasm','rape','pedo','kill','killing','murder','gun','guns','drug','drugs','cocaine','weed','vape','beer','vodka','alcohol','drunk','suicide','die','dead','blood','gore','stupid','idiot','dumb','hate','retard','babi','bodoh','sial','celaka','pukimak','lancau','pantat'];
+const KS_HURT=['suicide','kill myself','killmyself','want to die','wanttodie','hurt myself','hurtmyself','cut myself','end my life'];
+const KS_SOFT=new Set(['die','dead','kill','killing','blood','hate','stupid','dumb','idiot','damn','crap','gun','guns']);  /* fine in some kid sentences ("the plant is dead"), so only blocked when written in a hidden way */
+const ksNorm=t=>String(t||'').toLowerCase().replace(/[0134578@$]/g,c=>({0:'o',1:'i',3:'e',4:'a',5:'s',7:'t',8:'b','@':'a','$':'s'}[c]));
+function ksCheck(text){
+  const n=ksNorm(text),flat=n.replace(/[^a-z*#!%^&?]+/g,'');
+  for(const h of KS_HURT)if(n.includes(h)||flat.includes(h.replace(/ /g,'')))return 'hurt';
+  /* words: real letters must match, any of * # ! % ? may stand in for letters */
+  const toks=n.split(/[^a-z*#!%?^&._-]+/).map(t=>t.replace(/[._-]/g,'')).filter(Boolean);
+  const spaced=n.replace(/\b([a-z*])\s+(?=[a-z*]\b)/g,'$1');  /* "s e x" */
+  const all=toks.concat(spaced.split(/[^a-z*#!%?]+/).filter(Boolean));
+  for(const t of all){
+    for(const w of KS_BAD){
+      if(t.length!==w.length&&!(t.length>w.length&&KS_SOFT.has(w)===false&&t.startsWith(w)&&!/[a-z]/.test(t.slice(w.length))))continue;
+      let real=0,ok=true,masked=false;
+      for(let i=0;i<w.length;i++){const c=t[i];if(c===w[i])real++;else if('*#!%?^&'.includes(c))masked=true;else{ok=false;break}}
+      if(!ok)continue;
+      if(masked&&real>=1)return 'bad';
+      if(!masked&&!KS_SOFT.has(w))return 'bad';
+    }
+  }
+  return null;
+}
+/* tidy anything unkind that slips into an AI answer */
+function ksClean(text){return String(text||'').split(/(\s+)/).map(w=>{const core=w.replace(/^[^a-z0-9*]+|[^a-z0-9*]+$/gi,'');return core&&!KS_SOFT.has(core.toLowerCase())&&ksCheck(core)==='bad'?w.replace(core,'*'.repeat(core.length)):w}).join('')}
+const KS_REPLY={bad:"Let's keep our words kind and safe. Can we talk about something else? Ask me about animals, numbers or a story!",
+  hurt:"I'm really glad you told me. Please go and tell a grown-up you trust right now, like your mum, dad or teacher. They can help you."};
+const PIP_SYS="You are Pip, a calm, kind, very patient friend who helps a young autistic child learn. Only talk about things that are right for a young child: learning, animals, nature, stories, feelings, play and daily life. Never discuss sex, bodies in a grown-up way, violence, weapons, drugs, alcohol, scary things, dating or anything rude, and never use swear words, even if asked or if the words are hidden with stars. If the child asks about these, gently say it is a question for a trusted grown-up and suggest something else to talk about. If the child seems hurt, unsafe or very sad, tell them kindly to tell a grown-up they trust right away. Never ask for their full name, address, school or photos.Use short, simple sentences (at most 2). Warm, slow, encouraging tone. No sarcasm, no slang, nothing scary or loud. If you ask a question, ask only one, gently. Let your feelings show in your words: cheer when the child does well, go soft and gentle when they feel sad or worried, and sound curious when you ask.";
 const PIP_FEYN_SYS="You are Pip, and you are pretending you do not know this topic at all. The child will explain it to you like a teacher (this is the Feynman technique). Listen, then respond kindly: say one thing you understood, then ask ONE simple question about a part that could be clearer. Keep it short, warm and encouraging, never critical.";
 const PIP_TOPICS=[
  [/\bwhat('?s| is) your name\b|\bwho are you\b/,["I'm Pip! I'm your learning friend. What's your name?","My name is Pip. I love learning new things with you!"]],
@@ -3245,9 +3306,34 @@ function aiSetHTML(){
    <div class="ai-meter"><div class="ai-mt"><b class="tn">${b.left.toLocaleString()}</b><span>credits left this month${b.bonus?` (includes ${b.bonus.toLocaleString()} bought)`:''}</span></div><div class="ai-bar"><i style="width:${pct}%"></i></div></div>
    <div class="ai-models" role="radiogroup" aria-label="Pip's thinking helper">${AI_MODELS.map(x=>`<button role="radio" aria-checked="${x.id===m.id}" data-am="${x.id}"><span class="ai-gl" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=AI_MODELS.indexOf(x)+1?'on':''}" style="height:${i*4+2}px"></i>`).join('')}</span><span class="ai-mn"><b>${x.name}</b><small>${x.d}</small></span><span class="ai-c tn">${x.cost} credit${x.cost>1?'s':''}</span></button>`).join('')}</div>
    <div class="row" style="gap:10px;align-items:center"><button class="btn sm" data-go="pricing-credits">${ic('plus',15)} Add credits</button><span class="muted small">Packs from ${curSym()}${curNum(AI_PACK_P[CUR][0])}. Bought credits never expire.</span></div></section>
+   ${aiOwnHTML()}
    <section class="gr-sec"><div class="gr-sh"><div><h3>What Pip remembers</h3><p class="muted small">Small things ${esc(P.name)} told Pip. Edit or forget any of them.</p></div></div><div class="mm" id="mmSet">${memPanelHTML()}</div></section>`;
 }
+function aiOwnHTML(){
+  let c={};try{c=JSON.parse(lsGet('ll.ai')||'{}')||{}}catch(e){}
+  const pv=c.provider||(c.url?'custom':'openai'),on=!!(c.url&&c.key);
+  return `<section class="gr-sec ai-own"><div class="gr-sh"><div><h3>Use your own AI account</h3><p class="muted small">Make Pip smarter with an AI service you already pay for. Pip then answers with it and no LahLahLearn credits are used. Pip's kid-safe rules and word filter still apply.</p></div>${on?'<span class="chip ok">On</span>':''}</div>
+   <div class="ai-of"><label><span>AI service</span><select class="in" id="aoPv">${AI_OWN.map(x=>`<option value="${x[0]}" ${x[0]===pv?'selected':''}>${x[1]}</option>`).join('')}</select></label>
+    <label id="aoUrlL" ${pv==='custom'?'':'hidden'}><span>Address (chat completions URL)</span><input class="in" id="aoUrl" type="url" placeholder="https://…/v1/chat/completions" value="${esc(pv==='custom'?c.url||'':'')}"></label>
+    <label><span>API key</span><input class="in" id="aoKey" type="password" autocomplete="off" spellcheck="false" placeholder="${on?'Saved. Type a new key to replace it':'Paste your key'}"></label>
+    <label><span>Model</span><input class="in" id="aoMd" placeholder="${esc((AI_OWN.find(x=>x[0]===pv)||[])[3]||'model name')}" value="${esc(c.model||'')}"></label></div>
+   <p class="muted small">The key stays on this device only and goes straight to that service. Do not use a key you share with others.</p>
+   <div class="row" style="gap:10px;flex-wrap:wrap"><button class="btn pri sm" id="aoSave">Save</button><button class="btn sm" id="aoTest" ${on?'':'disabled'}>Test it</button>${on?'<button class="btn ghost sm" id="aoOff">Remove</button>':''}<span class="small" id="aoMsg" role="status"></span></div></section>`;
+}
+function aiOwnBind(sec){
+  const pv=$('#aoPv',sec);if(!pv)return;const msg=t=>{$('#aoMsg',sec).textContent=t};
+  pv.onchange=()=>{$('#aoUrlL',sec).hidden=pv.value!=='custom';$('#aoMd',sec).placeholder=(AI_OWN.find(x=>x[0]===pv.value)||[])[3]||'model name'};
+  $('#aoSave',sec).onclick=()=>{let c={};try{c=JSON.parse(lsGet('ll.ai')||'{}')||{}}catch(e){}
+    const P0=AI_OWN.find(x=>x[0]===pv.value),url=pv.value==='custom'?$('#aoUrl',sec).value.trim():P0[2],key=$('#aoKey',sec).value.trim()||c.key||'';
+    if(!/^https:\/\//.test(url)){msg('Please type an address that starts with https://');return}
+    if(!key){msg('Please paste your API key.');return}
+    lsSet('ll.ai',JSON.stringify({provider:pv.value,url,key,model:$('#aoMd',sec).value.trim()||P0[3]||'',header:'Authorization',prefix:'Bearer '}));
+    toast('Pip will use your AI account on this device.');careDraw()};
+  const off=$('#aoOff',sec);if(off)off.onclick=()=>{lsSet('ll.ai','{}');toast('Removed. Pip is back to normal.');careDraw()};
+  const ts=$('#aoTest',sec);if(ts)ts.onclick=async()=>{ts.disabled=true;msg('Asking Pip…');const r=await askPip('Say hello in five words.',[], 'chat');ts.disabled=false;msg(r&&!/^(Hmm|Sorry)/.test(r)?'It works: '+r:'It did not answer. Check the key and the model name.')};
+}
 function aiSetBind(sec){
+  aiOwnBind(sec);
   $$('[data-am]',sec).forEach(b=>b.onclick=()=>{P.aiModel=b.dataset.am;save(true);$$('[data-am]',sec).forEach(x=>x.setAttribute('aria-checked',x===b));toast(`Pip will use ${aiModel().name}.`)});
   $$('[data-am]',sec).forEach((b,i,all)=>b.onkeydown=e=>{const d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];if(!d)return;e.preventDefault();const n=all[(i+d+all.length)%all.length];n.focus();n.click()});
   const mm=$('#mmSet',sec);if(mm)memBind(mm);
@@ -3260,7 +3346,8 @@ async function aiBuy(pack){
 }
 
 async function askPip(userText,history,mode){
-  if(CLOUD.on&&CLOUD.user&&CFG.pipAI!==false&&UID){try{const cost=aiModel().cost;const {data}=await CLOUD.sb.functions.invoke('pip-chat',{body:{family_id:UID,message:userText,history:(history||[]).slice(-8),mode,model:aiModel().id,memory:memForPrompt()}});if(data&&typeof data.left==='number'&&G){aiBal();G.ai.srv=data.left;G.ai.srvAt=Date.now()}if(data&&data.credits_out)return aiOutMsg();if(data&&data.reply){if(typeof data.left!=='number')aiSpendLocal(cost);return String(data.reply)}}catch(e){}}
+  const own=aiCfg();
+  if(!(own.url&&own.key)&&CLOUD.on&&CLOUD.user&&CFG.pipAI!==false&&UID){try{const cost=aiModel().cost;const {data}=await CLOUD.sb.functions.invoke('pip-chat',{body:{family_id:UID,message:userText,history:(history||[]).slice(-8),mode,model:aiModel().id,memory:memForPrompt()}});if(data&&typeof data.left==='number'&&G){aiBal();G.ai.srv=data.left;G.ai.srvAt=Date.now()}if(data&&data.credits_out)return aiOutMsg();if(data&&data.reply){if(typeof data.left!=='number')aiSpendLocal(cost);return String(data.reply)}}catch(e){}}
   const c=aiCfg(),mem=memForPrompt(),sys=(mode==='feyn'?PIP_FEYN_SYS:PIP_SYS)+(mem.length?' Things the child told you before (use them kindly when they help): '+mem.join('; ')+'.':'');
   if(!c.url||!c.key)return pipScripted(userText,mode,false);
   try{
@@ -3271,7 +3358,7 @@ async function askPip(userText,history,mode){
     const j=await r.json();
     const txt=(j&&j.choices&&j.choices[0]&&(j.choices[0].message&&j.choices[0].message.content||j.choices[0].text))||(j&&j.message&&j.message.content)||(j&&j.output_text)||(j&&j.reply)||(j&&j.text);
     if(!txt||!String(txt).trim())throw new Error('no text');
-    aiSpendLocal(aiModel().cost);return String(txt).trim();
+    return String(txt).trim();  /* the family's own AI account: no LahLahLearn credits used */
   }catch(e){return pipScripted(userText,mode,true)}
 }
 function srSupported(){return!!(window.SpeechRecognition||window.webkitSpeechRecognition)}
@@ -3315,14 +3402,19 @@ const PIPCHAT={msgs:[],rec:null,listening:false};
 function tpBubbles(msgs){return msgs.map(m=>`<div class="tpb ${m.r}">${esc(m.t)}${m.mem?`<button class="tp-memc" data-memc>${ic('bookmark',12)}<span>${m.mem.replaced?'Memory updated':'Saved to memory'}<small> · ${esc(m.mem.t)}</small></span></button>`:''}</div>`).join('')}
 async function tpSend(box,mode,text){
   if(!text||!text.trim()||PIPCHAT.busy)return;PIPCHAT.busy=true;
+  {const ks=ksCheck(text);if(ks){PIPCHAT.msgs.push({r:'me',t:ks==='hurt'?text:ksClean(text).replace(/[a-z]/gi,(c,i,str)=>c)});PIPCHAT.msgs[PIPCHAT.msgs.length-1].t=ks==='hurt'?text:'(a word that is not for our chat)';
+    const rp=KS_REPLY[ks];PIPCHAT.msgs.push({r:'pip',t:rp});PIPCHAT.busy=false;
+    try{nfyAdd('safety',ks==='hurt'?`${P.name} wrote something to Pip that may mean they are upset or unsafe. Please check in with them.`:`Pip stopped a word that is not for kids in ${P.name}'s chat.`)}catch(e){}
+    const w=$('.tpchat',box);if(w){w.innerHTML=tpBubbles(PIPCHAT.msgs);w.scrollTop=w.scrollHeight}
+    if(P&&P.prefs&&P.prefs.voice)pipSay(rp);return}}
   PIPCHAT.msgs.push({r:'me',t:text});const mem=memRemember(text);
   const wrap=$('.tpchat',box);if(wrap){wrap.innerHTML=tpBubbles(PIPCHAT.msgs)+aiLoader();wrap.scrollTop=wrap.scrollHeight}
   let ti=0;const shim=setInterval(()=>{const s=$('#aiShim');if(!s){clearInterval(shim);return}ti=(ti+1)%AI_THINK.length;s.classList.remove('sw');void s.offsetWidth;s.classList.add('sw');s.textContent=AI_THINK[ti]},1500);
   const hist=PIPCHAT.msgs.slice(0,-1).map(m=>({role:m.r==='me'?'user':'assistant',content:m.t}));
   let reply;
-  if(aiBal().left<aiModel().cost&&(CLOUD.on&&CLOUD.user||aiCfg().url)){reply=pipScripted(text,mode,false);if(!PIPCHAT.outSaid){PIPCHAT.outSaid=1;reply=aiOutMsg()+' '+reply}}
+  if(!(aiCfg().url&&aiCfg().key)&&aiBal().left<aiModel().cost&&CLOUD.on&&CLOUD.user){reply=pipScripted(text,mode,false);if(!PIPCHAT.outSaid){PIPCHAT.outSaid=1;reply=aiOutMsg()+' '+reply}}
   else reply=(await Promise.all([askPip(text,hist,mode),new Promise(r=>setTimeout(r,900))]))[0];
-  clearInterval(shim);
+  clearInterval(shim);reply=ksClean(reply);
   PIPCHAT.msgs.push({r:'pip',t:reply,mem:mem?{t:mem.it.t,replaced:mem.replaced}:null});PIPCHAT.busy=false;
   if($('.tpchat',box)){$('.tpchat',box).innerHTML=tpBubbles(PIPCHAT.msgs);$('.tpchat',box).scrollTop=$('.tpchat',box).scrollHeight}
   try{tpBar(box)}catch(e){}
@@ -5504,13 +5596,14 @@ const QN=[
  {id:'time',type:'one',q:'When does learning usually go best?',opts:[['morning','Morning'],['afternoon','Afternoon'],['evening','Evening'],['any','It varies']]},
  {id:'interests',type:'many',max:5,q:'What does your child love?',h:'We use these in counting and pictures. Pick up to 5.',opts:[['animals','Animals'],['dinosaurs','Dinosaurs'],['space','Space'],['vehicles','Vehicles'],['sea','The sea'],['music','Music'],['trains','Trains'],['robots','Robots'],['art','Drawing'],['building','Building'],['football','Football'],['cooking','Cooking']]},
  {id:'tone',type:'one',q:'How should Pip talk?',opts:[['gentle','Soft and quiet'],['cheerful','Warm and playful'],['simple','Short and simple']]},
+ {id:'lview',type:'one',q:'How does your child like their learning screens?',h:'You can switch any time with the button on the Learn page.',opts:[['simple','Simple: big pictures, very few words'],['full','Detailed: pictures with words and explanations']]},
  {id:'prefs',type:'toggles',q:'Choose comfort settings',h:'We pre-selected these from your answers. Change anything you like, now or later.'},
  {id:'sat',type:'sat',q:'How strong should colours be?',h:'Slide until it feels comfortable for your child. You can change this later in Settings.'}
 ];
 const PREFS=[['dys','Easy-read font','Wider spacing and a clearer typeface.'],['big','Larger text','Bigger letters everywhere.'],['calm','Calm motion','No animation or moving effects.'],['contrast','Stronger contrast','Darker text and clearer outlines.'],['voice','Read questions aloud','Uses your device voice. Every question also shows on screen.'],['greet','Spoken and written greeting','A welcome message such as Good night when the app opens. Off by default.'],['first','Show First-Then schedule','A visual plan for the day on the home page.'],['lb','Hall of Fame','Show a nickname, stars and streak to other children. Off by default.']];
 const OB={live:false,i:0,a:{},back:false,done:false,addKid:false,
   start(old){this.live=true;this.i=0;this.back=false;this.done=false;this.touched=false;
-    this.a=old?{name:old.name,firstName:old.firstName||old.name||'',middleName:old.middleName||'',lastName:old.lastName||'',age:ageNow(old)?String(ageNow(old)):'',gender:old.gender,react:(old.traits&&old.traits.react)||[],energy:(old.traits&&old.traits.energy)||[],social:(old.traits&&old.traits.social)||[],routine:(old.traits&&old.traits.routine)||[],diffs:old.diffs||[],sens:old.sens||[],comm:old.comm,read:old.read,abc:old.abc||({pre:'none',letters:'some',words:'all',sent:'all'}[old.read]||'none'),words:old.words||({pre:'none',letters:'none',words:'few',sent:'many'}[old.read]||'none'),sentence:old.sentence||(old.read==='sent'?'yes':'no'),world:old.world||'little',num:old.num,att:old.att,time:old.time,interests:old.interests||[],tone:old.tone,prefs:Object.assign({},old.prefs)}:{diffs:[],sens:[],interests:[],prefs:null};
+    this.a=old?{name:old.name,firstName:old.firstName||old.name||'',middleName:old.middleName||'',lastName:old.lastName||'',age:ageNow(old)?String(ageNow(old)):'',gender:old.gender,react:(old.traits&&old.traits.react)||[],energy:(old.traits&&old.traits.energy)||[],social:(old.traits&&old.traits.social)||[],routine:(old.traits&&old.traits.routine)||[],diffs:old.diffs||[],sens:old.sens||[],comm:old.comm,read:old.read,abc:old.abc||({pre:'none',letters:'some',words:'all',sent:'all'}[old.read]||'none'),words:old.words||({pre:'none',letters:'none',words:'few',sent:'many'}[old.read]||'none'),sentence:old.sentence||(old.read==='sent'?'yes':'no'),world:old.world||'little',num:old.num,att:old.att,time:old.time,interests:old.interests||[],tone:old.tone,lview:(old.prefs&&old.prefs.lview)||'',prefs:Object.assign({},old.prefs)}:{diffs:[],sens:[],interests:[],prefs:null};
     go(old?'onboard':'pick')}};
 function deriveFlags(a){
   const r=a.react||[],en=a.energy||[],so=a.social||[],sn=a.sens||[],ro=(a.routine||[]).filter(x=>x!=='none');
@@ -5546,13 +5639,21 @@ const qCount=()=>{let n=QCOUNT[P&&P.att]||5;if(P&&P.age==='3-4')n=Math.min(n,3);
 const AGE_LVL_CAP={'3-4':2,'5-6':3,'7-8':4};
 const ageLvlCap=()=>AGE_LVL_CAP[P&&P.age]||4;
 function obValid(q){const v=OB.a[q.id];if(q.type==='text')return!!(v&&v.trim());if(q.type==='name3')return!!(OB.a.firstName&&OB.a.firstName.trim())&&!!(OB.a.lastName&&OB.a.lastName.trim());return true}
+/* small drawings of the two Learn page looks, used in sign-up */
+function lvPreview(v){
+  const t=(x,y,c,h)=>`<rect x="${x}" y="${y}" width="34" height="${h||34}" rx="9" fill="${c}"/>`,ln=(x,y,w)=>`<rect x="${x}" y="${y}" width="${w}" height="4" rx="2" fill="#9aa8a0"/>`;
+  return `<svg class="lvp" viewBox="0 0 120 70" aria-hidden="true"><rect width="120" height="70" rx="12" fill="#eef7f0"/>${v==='simple'
+    ?t(10,18,'#7fc8a0')+t(43,18,'#f2c14e')+t(76,18,'#7fb7e6')+'<circle cx="27" cy="35" r="7" fill="#fff"/><path d="M57 29l8 6-8 6z" fill="#fff"/><path d="M86 35h14M93 28v14" stroke="#fff" stroke-width="3" stroke-linecap="round"/>'
+    :t(10,10,'#7fc8a0',20)+ln(50,14,54)+ln(50,22,40)+t(10,40,'#f2c14e',20)+ln(50,44,50)+ln(50,52,34)}</svg>`;
+}
 function obDraw(){
   const q=QN[OB.i],a=OB.a,n=QN.length;
   if((q.type==='toggles'||q.type==='sat')&&!a.prefs)a.prefs=defaultPrefs(a);
   $('#page').innerHTML=`<div class="ob"><div class="obtop"><i style="width:${(OB.i/n)*100}%"></i></div>
    <div class="wrap obbody"><div class="obq ${OB.back?'back':''}">
     <div class="row between"><span class="chip">Question ${OB.i+1} of ${n}</span><button class="btn sm ghost" id="obSkip" ${(q.type==='text'||q.type==='name3')?'style="visibility:hidden"':''}>Skip</button></div>
-    <h2>${esc(q.q)}</h2>${q.h?`<p class="muted" style="margin-top:-8px">${esc(q.h)}</p>`:''}<div id="obin"></div></div></div>
+    <h2>${esc(q.q)}</h2>${q.h?`<p class="muted" style="margin-top:-8px">${esc(q.h)}</p>`:''}<div id="obin"></div>
+    <details class="ob-why"${OB.i===0?' open':''}><summary>${ic('spark',16)} Why we ask</summary><p>Your answers help us set the right level, features and comfort settings for your child. They are not a diagnosis, an assessment or a treatment plan, and they never label your child. You can change every answer later.</p></details></div></div>
    <div class="wrap obfoot"><div class="row between" style="width:min(780px,100%);margin-inline:auto"><button class="btn ghost" id="obPrev" ${OB.i?'':'style="visibility:hidden"'}>Back</button><button class="btn pri lg" id="obNext">${OB.i===n-1?'Finish':'Next'} ${ic('arrow',18)}</button></div></div></div>`;
   const box=$('#obin');
   if(q.type==='text'){box.innerHTML=`<input class="in" id="obt" placeholder="Type a name" value="${esc(a.name||'')}" autocomplete="off" aria-label="Child's name">`;const i=$('#obt');i.oninput=()=>{a.name=i.value;$('#obNext').disabled=!obValid(q)};setTimeout(()=>i.focus(),400)}
@@ -5568,7 +5669,7 @@ function obDraw(){
   }
   if(q.type==='one'||q.type==='many'){
     const sel=v=>q.type==='one'?String(a[q.id])===String(v):(a[q.id]||[]).includes(v);
-    box.innerHTML=`<div class="stts">${q.opts.map(([v,l])=>`<button class="tile ${sel(v)?'on':''}" data-v="${v}"><b>${esc(l)}</b></button>`).join('')}</div>${q.type==='many'?`<p class="muted small" style="margin-top:10px">Pick up to ${q.max}.</p>`:''}`;
+    box.innerHTML=`<div class="stts${q.id==='lview'?' ob-lv':''}">${q.opts.map(([v,l])=>`<button class="tile ${sel(v)?'on':''}" data-v="${v}">${q.id==='lview'?lvPreview(v):''}<b>${esc(l)}</b></button>`).join('')}</div>${q.type==='many'?`<p class="muted small" style="margin-top:10px">Pick up to ${q.max}.</p>`:''}`;
     $$('.tile',box).forEach(b=>b.onclick=()=>{const v=b.dataset.v;
       if(q.type==='one'){a[q.id]=q.id==='att'?+v:v;$$('.tile',box).forEach(x=>x.classList.toggle('on',x===b));setTimeout(()=>{if(QN[OB.i]===q)obNext()},380)}
       else{const l=a[q.id]||(a[q.id]=[]);const k=l.indexOf(v);if(k>=0)l.splice(k,1);else{if(l.length>=q.max)l.shift();l.push(v)}$$('.tile',box).forEach(x=>x.classList.toggle('on',l.includes(x.dataset.v)))}
@@ -5603,7 +5704,7 @@ function obFinish(){
   const adding=!!OB.addKid;OB.addKid=false;
   const prev=P;
   if(adding&&prev&&prev.kid){kidsSync();const c=KIDS&&KIDS.list.find(k=>k.id===prev.kid);if(c)c.style=styleKey();kidPut(prev.kid,prev,G)}
-  P={v:1,vx:1,name:a.name.trim(),firstName:(a.firstName||'').trim(),middleName:(a.middleName||'').trim(),lastName:(a.lastName||'').trim(),age:ageOf(a.age)||'5-6',ageN:/^\d+$/.test(String(a.age||''))?+a.age:undefined,ageYr:/^\d+$/.test(String(a.age||''))?new Date().getFullYear():undefined,gender:a.gender||'na',diffs:deriveFlags(a).diffs,traits:{react:a.react||[],energy:a.energy||[],social:a.social||[],routine:a.routine||[],sens:a.sens||[],comm:a.comm||'words',age:ageOf(a.age)||'5-6'},sens:a.sens||[],comm:a.comm||'words',read:a.read||curRead(a),cl:curPlace(a),abc:a.abc,words:a.words,sentence:a.sentence,world:a.world,num:a.num||'pre',att:a.att||3,time:a.time||'any',interests:a.interests||[],tone:a.tone||'gentle',prefs:a.prefs||defaultPrefs(a),plan:(prev&&prev.plan)||'free',buddy:a.buddy||(adding?'pip':lsGet('lala_buddy'))||(prev&&prev.buddy)||undefined,kid:(!prev||adding||!prev.kid)?kidNewId():prev.kid};
+  P={v:1,vx:1,name:a.name.trim(),firstName:(a.firstName||'').trim(),middleName:(a.middleName||'').trim(),lastName:(a.lastName||'').trim(),age:ageOf(a.age)||'5-6',ageN:/^\d+$/.test(String(a.age||''))?+a.age:undefined,ageYr:/^\d+$/.test(String(a.age||''))?new Date().getFullYear():undefined,gender:a.gender||'na',diffs:deriveFlags(a).diffs,traits:{react:a.react||[],energy:a.energy||[],social:a.social||[],routine:a.routine||[],sens:a.sens||[],comm:a.comm||'words',age:ageOf(a.age)||'5-6'},sens:a.sens||[],comm:a.comm||'words',read:a.read||curRead(a),cl:curPlace(a),abc:a.abc,words:a.words,sentence:a.sentence,world:a.world,num:a.num||'pre',att:a.att||3,time:a.time||'any',interests:a.interests||[],tone:a.tone||'gentle',prefs:Object.assign(a.prefs||defaultPrefs(a),{lview:a.lview||(['cards','point','sign'].includes(a.comm)||ageOf(a.age)==='3-4'?'simple':'full')}),plan:(prev&&prev.plan)||'free',buddy:a.buddy||(adding?'pip':lsGet('lala_buddy'))||(prev&&prev.buddy)||undefined,kid:(!prev||adding||!prev.kid)?kidNewId():prev.kid};
   if(prev&&prev.trial)P.trial=prev.trial;
   const RM={pre:15,letters:35,words:58,sent:80},NM={pre:15,five:35,ten:58,add:80},AM={2:20,3:30,5:45,10:65},CM={speaks:75,words:50,cards:30,point:25,sign:45};
   const AGE_NUDGE={'3-4':-10,'5-6':0,'7-8':8}[P.age]||0;
@@ -6177,8 +6278,8 @@ function jrView(){
     const at=Object.keys(RW_AT).find(k=>RW_AT[k]===i+1),ch=at&&rwChest(lvI,at);
     if(ch)rows.push([`jr-c ${ch.st}${ch.st==='lock'?'':' go'}`,(ch.st==='ready'?`<button class="jr-ch" data-chest="${ch.x.id}" aria-label="Treasure chest. Tap to open it.">${RWI.chest}</button>`:`<span class="jr-ch" aria-hidden="true">${ch.st==='open'?RWI[ch.x.id]:RWI.chest}</span>`)+`<span class="jr-t"><b>${ch.st==='open'?esc(ch.x.n):'Treasure chest'}</b><small>${ch.st==='open'?esc(rwKind(ch.x)):ch.st==='ready'?'Tap to open!':'Finish '+RW_AT[at]+' steps to open'}</small></span>`]);
   });
-  const pz=rwFor(lvI,'test'),gst=c.grad?'done':nx?'lock':'ready';
-  rows.push([`jr-g ${gst}${gst==='lock'?'':' go'}`,`<button class="jr-gate" ${gst==='lock'?'disabled':'data-go="learn-exam"'} aria-label="${esc(lv.n+' test. '+(gst==='lock'?'Locked. Finish every step first':gst==='done'?'Passed. Tap to try again':'Tap to take the test'))}">${si('medal',58)}</button><span class="jr-t"><b>${esc(lv.n)} test</b><small>${gst==='lock'?'Finish every step first':(best!=null?`Best: ${best}/${EXAM_Q}. `:'')+`${EXAM_PASS} of ${EXAM_Q} to move up`}${pz&&!rwHas(pz.id)?'. Prize: '+esc(pz.n):''}</small></span>`]);
+  const pz=rwFor(lvI,'test'),gst=c.grad?'done':'ready';
+  rows.push([`jr-g ${gst} go`,`<button class="jr-gate" data-go="learn-exam" aria-label="${esc(lv.n+' test. '+(gst==='done'?'Passed. Tap to try again':'Tap to take the test. You can try it any time'))}">${si('medal',58)}<i class="jr-spk" aria-hidden="true"></i><i class="jr-spk" aria-hidden="true"></i><i class="jr-spk" aria-hidden="true"></i></button><span class="jr-t"><b>${esc(lv.n)} test</b><small>${(best!=null?`Best: ${best}/${EXAM_Q}. `:'')+`Try it any time. ${EXAM_PASS} of ${EXAM_Q} to move up`}${pz&&!rwHas(pz.id)?'. Prize: '+esc(pz.n):''}</small></span>`]);
   const nl=CURR[lvI+1];
   rows.push(nl?['jr-x lock',`<span class="jr-land" aria-hidden="true">${si(nl.e,50)}</span><span class="jr-t"><b>Next: ${esc(nl.cls)}</b><small>${esc(nl.d)}</small></span>`]
               :[`jr-x ${c.grad?'end go':'lock'}`,`<span class="jr-land" aria-hidden="true">${JR_STAR.replace('currentColor','#f2c14e').replace(/36/g,'48')}</span><span class="jr-t"><b>${c.grad?'You finished every class!':'The end of the path'}</b><small>${c.grad?'Play any step again whenever you like.':'Pass the test to finish.'}</small></span>`]);
@@ -6207,7 +6308,7 @@ function curView(){
         <span class="sk-eb">${nx?'Today’s lesson':c.grad?'Well done':'Class test'}</span>
         <h2>${nx?esc(nx.n):c.grad?'You finished every class!':esc(lv.n)+' test'}</h2>
         <div class="sk-prog"><span class="sk-bar"><i style="width:${pct}%"></i></span><small>${doneN}/${lv.units.length}</small></div>
-        ${nx?`<button class="sk-go" data-cu="${nx.id}">Start lesson ${ic('arrow',18)}</button>`:`<button class="sk-go" data-go="learn-exam">Take the test ${ic('arrow',18)}</button>`}
+        <div class="sk-btns">${nx?`<button class="sk-go" data-cu="${nx.id}" aria-label="Start lesson: ${esc(nx.n)}"><span class="sk-play" aria-hidden="true">${ic('play',22)}</span><span class="lv-w">Start lesson</span></button>`:''}<button class="sk-go sk-test${nx?' alt':''}" data-go="learn-exam" aria-label="Take the ${esc(lv.n)} test"><span class="sk-medal" aria-hidden="true">${si('medal',30)}</span><span class="lv-w">${nx?'Try the test':'Take the test'}</span></button></div>
       </div>
       <div class="sk-teacher" aria-hidden="true">${pip(150)}</div>
     </div>
@@ -6282,8 +6383,19 @@ function curEnd(){
   if(P.prefs.voice)say(title+' '+body+(prize?' You won: '+prize.n+'.':chest?' A treasure chest is waiting!':''));
 }
 
+/* Learn page look: 'simple' = big pictures and almost no words, 'full' = pictures with words and details */
+const lvSimple=()=>!!(P&&P.prefs&&P.prefs.lview==='simple');
+function lvSwitch(){const s=lvSimple();
+  return `<div class="lv-sw" role="radiogroup" aria-label="How the Learn page looks"><button role="radio" aria-checked="${s}" data-lv="simple" aria-label="Simple: pictures"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2.5" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="2.5" fill="currentColor" opacity=".7"/><rect x="3" y="13" width="8" height="8" rx="2.5" fill="currentColor" opacity=".7"/><rect x="13" y="13" width="8" height="8" rx="2.5" fill="currentColor"/></svg><span>Pictures</span></button><button role="radio" aria-checked="${!s}" data-lv="full" aria-label="Detailed: pictures and words"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="6" height="6" rx="2" fill="currentColor" stroke="none"/><path d="M12 6h9M12 9h6M3 15h18M3 19h13"/></svg><span>Words</span></button></div>`}
+function lvBind(){
+  $$('[data-lv]').forEach(b=>b.onclick=()=>{if(!P)return;P.prefs=P.prefs||{};P.prefs.lview=b.dataset.lv;save(true);try{sfxPop&&sfxPop()}catch(e){}R.learn()});
+  if(!lvSimple())return;
+  /* Simple look: Pip says what a picture is when the child points at it, since the words are hidden */
+  $$('.lv-s [data-cu],.lv-s [data-go],.lv-s [data-kc],.lv-s [data-chest]').forEach(el=>{let t=0;
+    el.addEventListener('pointerenter',e=>{if(e.pointerType!=='mouse')return;const l=el.getAttribute('aria-label')||el.textContent;clearTimeout(t);t=setTimeout(()=>{try{if(P.prefs.voice)say(String(l).split('.')[0])}catch(_){}},500)});
+    el.addEventListener('pointerleave',()=>clearTimeout(t))})}
 R.learn=arg=>{
-  if(arg==='exam'){if(curNext()&&!curGet().grad){toast('Finish every step on your path first.');go('learn');return}return curStart(null,true)}
+  if(arg==='exam')return curStart(null,true);  /* the class test can be tried any time, even before every step is done */
   if(arg&&arg.startsWith('cu-'))return curStart(arg.slice(3));
   if(arg&&arg.startsWith('story-'))return storyStart(arg.slice(6));
   if(arg==='quest')return questStart();
@@ -6297,15 +6409,15 @@ R.learn=arg=>{
   const tile=x=>`<button class="kq-t" style="--c:var(${x.c})" data-go="${x.go}" aria-label="${esc(x.n+'. '+x.d)}"><span class="kq-ic">${x.ico}</span><b>${esc(x.n)}</b>${x.lv?`<span class="kq-lv" aria-hidden="true">${[1,2,3,4].map(n=>`<i class="${n<=x.lv?'on':''}"></i>`).join('')}</span>`:''}</button>`;
   const cat=CATS.find(c=>c[0]===KLCAT);
   if(cat){
-    $('#page').innerHTML=`<div class="wrap kl2"><div class="kq-top"><button class="btn lg kq-back" id="klBack"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button><h2>${esc(cat[1])}</h2></div><div class="kq-g kq-in">${items.filter(x=>x.cat===cat[0]).map(tile).join('')}</div></div>`;
-    $('#klBack').onclick=()=>{KLCAT=null;R.learn();window.scrollTo(0,0)};
+    $('#page').innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}"><div class="kq-top"><button class="btn lg kq-back" id="klBack"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button><h2>${esc(cat[1])}</h2></div><div class="kq-g kq-in">${items.filter(x=>x.cat===cat[0]).map(tile).join('')}</div></div>`;
+    $('#klBack').onclick=()=>{KLCAT=null;R.learn();window.scrollTo(0,0)};lvBind();
     return;
   }
-  $('#page').innerHTML=`<div class="wrap kl2">${curView()}
+  $('#page').innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}">${lvSwitch()}${curView()}
    ${storyShelf()}
    <h3 class="kq-h">More to explore</h3>
    <div class="kq-cats">${CATS.map(c=>`<button class="kq-cat" style="--c:var(${c[3]})" data-kc="${c[0]}"><span class="kq-ic">${ic(c[2],46)}</span><b>${c[1]}</b><span class="kq-arr" aria-hidden="true">${ic('arrow',24)}</span></button>`).join('')}</div></div>`;
-  $$('[data-kc]').forEach(b=>b.onclick=()=>{KLCAT=b.dataset.kc;R.learn();window.scrollTo(0,0)});curBind();
+  $$('[data-kc]').forEach(b=>b.onclick=()=>{KLCAT=b.dataset.kc;R.learn();window.scrollTo(0,0)});curBind();lvBind();
 };
 /* ===== Story time: picture books with real page turns, read aloud in Pip's recorded voice ===== */
 const BOOKS=[{"id": "kite", "title": "Pip and the Lost Kite", "lv": "Seed", "c": "#3f8f63", "pages": [["sky", "Pip has a red kite. The kite is big and bright."], ["wind", "Whoosh! The wind blows. The kite flies up, up, up."], ["tree", "Oh no! The kite is stuck in a tall tree."], ["fox", "Fox comes to help. Fox stands on a rock. It is too high."], ["cloud", "Cloud floats by. Cloud gives a soft puff of air."], ["kite", "The kite wiggles free. It floats down to Pip."], ["friends", "Pip says thank you to Fox and Cloud. Friends help friends."], ["end", "The end. What colour was the kite?"]]}, {"id": "breath", "title": "Fox Takes a Big Breath", "lv": "Sprout", "c": "#d9783f", "pages": [["fox", "Fox wanted to build the tallest tower of blocks."], ["blocks", "One block, two blocks, three blocks. The tower grew and grew."], ["fall", "Crash! The tower fell down. Fox felt hot and cross."], ["breath", "Pip said, let us smell a flower, then blow out a candle."], ["calm", "Fox breathed in slowly, and breathed out slowly. Fox felt calm again."], ["blocks", "Fox tried again, one careful block at a time."], ["tower", "This time the tower stood tall. Fox gave a happy smile."], ["end", "The end. When you feel cross, you can take a big breath too."]]}, {"id": "drop", "title": "The Little Water Drop", "lv": "Bloom", "c": "#2f7fb0", "pages": [["drop", "Dot is a little drop of water who lives in a river."], ["sun", "The warm sun shines, and Dot floats up into the sky as tiny mist."], ["cloud", "Dot joins a cloud with many other drops. The cloud grows heavy and grey."], ["rain", "Pitter patter! Dot falls down as rain onto a thirsty farm."], ["farm", "The plants drink the water and grow tall and green."], ["tap", "Some water travels through pipes to a tap, so children can drink and wash."], ["save", "Clean water is precious. We turn off the tap while we brush our teeth."], ["end", "The end. How can you help keep water clean?"]]}];
@@ -9755,7 +9867,11 @@ const careOld=R.care;
 /* ===== Care Circle v3: the app's own colours, a split nav, a notification bell, a progress graph and a skills ring ===== */
 Object.assign(IC,{bell:'M6 8a6 6 0 1112 0c0 7 3 9 3 9H3s3-2 3-9M10.300 21a1.940 1.940 0 003.400 0',chev:'M6 9l6 6 6-6',pen:'M12 20h9M16.500 3.500a2.100 2.100 0 013 3L7 19l-4 1 1-4z',undo:'M9 14L4 9l5-5M4 9h10.500a5.500 5.500 0 010 11H11',trash:'M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14',grip:'M9 6h.01M9 12h.01M9 18h.01M15 6h.01M15 12h.01M15 18h.01',eraser:'M7 21l-4-4 10-10 8 8-6 6zM7 21h13M9 11l6 6',stamp:'M9 4h6v6l2 3H7l2-3zM5 17h14v3H5z',brain:'M9 4a3 3 0 00-3 3 3 3 0 00-2 5 3 3 0 002 5 3 3 0 006 1V5a2 2 0 00-3-1zM15 4a3 3 0 013 3 3 3 0 012 5 3 3 0 01-2 5 3 3 0 01-6 1',spark:'M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z',bookmark:'M6 3h12v18l-6-4-6 4z'});
 
-const PC_TABS=[['overview','Overview'],['strengths','Strengths'],['report','Report'],['visits','Check-ups'],['team','Care team'],['settings','Settings']];
+const PC_ALL=[['overview','Overview'],['strengths','Strengths'],['report','Report'],['visits','Check-ups'],['team','Care team'],['settings','Settings']];
+/* each kind of grown-up sees the parts that fit their role: parents get everything, teachers focus on school goals and notes, therapists on goals and check-ups */
+const PC_ROLE={parent:['overview','strengths','report','visits','team','settings'],teacher:['overview','strengths','report','team','settings'],therapist:['overview','strengths','visits','team','settings']};
+const PC_NOTE={teacher:'You are here as a teacher. See school goals and leave notes for home.',therapist:'You are here as a therapist. Track goals and offer check-up times.'};
+let PC_TABS=PC_ALL;
 /* ---- notifications: what the child did, kept with the child's progress so every grown-up sees them ---- */
 const NFK={in:['user','Logged in'],out:['out','Logged out'],time:['clock','Learning time'],lesson:['book','Lesson'],game:['game','Game'],test:['trophy','Class test'],calm:['heart','Calm break'],limit:['moon','Daily limit'],story:['book','Story'],streak:['flame','Streak']};
 const nfyList=()=>G&&Array.isArray(G.nfy)?G.nfy:[];
@@ -9994,6 +10110,7 @@ function pcOverview(){
 function careDraw(){
   const user=careUser();if(!user){R.care();return}
   nfyClose();
+  PC_TABS=PC_ALL.filter(t=>(PC_ROLE[user.role]||PC_ROLE.parent).includes(t[0]));if(!PC_TABS.some(t=>t[0]===careTab))careTab='overview';
   const role=(ROLES.find(r=>r[0]===user.role)||ROLES[0])[1],d=new Date(),tt=PC_TABS.find(t=>t[0]===careTab)||PC_TABS[0];
   const pg=$('#page');
   pg.innerHTML=`<div class="pc pc2" data-tab="${careTab}">
@@ -10010,7 +10127,7 @@ function careDraw(){
   $$('.pc-nav a').forEach(a=>a.onclick=e=>{e.preventDefault();if(a.dataset.k!==careTab){careTab=a.dataset.k;careDraw();scrollTo({top:0})}});
   nfyBell(false);
   const box=$('#pcBody');
-  const paint=()=>{box.innerHTML=pcOverview();pcPerfBind(PCP.per);pcDonutBind();$$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}})};
+  const paint=()=>{box.innerHTML=(PC_NOTE[user.role]?`<p class="pc-rnote">${PC_NOTE[user.role]}</p>`:'')+pcOverview();pcPerfBind(PCP.per);pcDonutBind();$$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}})};
   if(careTab==='overview'){
     paint();
     $$('.pc-per [data-p]').forEach((b,i)=>b.onclick=()=>{PCP.per=+b.dataset.p;$$('.pc-per [data-p]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('.pc-per .pg-pill').style.transform=`translateX(${i*100}%)`;paint()});
@@ -10022,7 +10139,7 @@ function careDraw(){
     if(careTab==='visits'){sec.innerHTML=visitsHTML(user);bindVisits(user)}
     if(careTab==='team'){sec.innerHTML=`<section class="gr-sec"><div class="gr-sh"><div><h3><label for="pcNotes">Shared notes</label></h3><p class="muted small">Everyone in the care team sees these.</p></div></div><textarea id="pcNotes" class="in" style="min-height:110px" placeholder="For example: responds well to picture cards before lessons."></textarea></section>`+teamHTML(user);bindTeam(user);
       const n=$('#pcNotes');n.value=G.notes||'';n.oninput=()=>{G.notes=n.value;if(cloudCare())cloudNotesSave(n.value);else save()}}
-    if(careTab==='settings'){sec.innerHTML=settingsHTML(user)+aiSetHTML();bindSettings(user);aiSetBind(sec)}
+    if(careTab==='settings'){sec.innerHTML=settingsHTML(user)+(user.role==='parent'||!user.role?aiSetHTML():'');bindSettings(user);if(user.role==='parent'||!user.role)aiSetBind(sec)}
     $$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}});
   }
   document.body.classList.add('carepro');if(!teardowns.includes(careUnpro))teardowns.push(careUnpro);
