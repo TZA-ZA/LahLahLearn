@@ -6,3 +6,6 @@ verify_jwt = false   # Stripe signs requests instead; the function checks the si
 
 [functions.weekly-report]
 verify_jwt = false   # Called by the daily scheduler with a secret header; parent calls are checked inside.
+
+[functions.feedback]
+verify_jwt = false   # The public feedback form; rate limited inside.
