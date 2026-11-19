@@ -2234,6 +2234,13 @@ body.noanim .hp *,body.noanim .hp{animation:none!important}
 .lk{display:grid;place-items:center;min-height:60vh}.lk-c{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:460px;text-align:center;padding:40px 30px;border-radius:36px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
 .lk-ic{position:relative;display:grid;place-items:center;width:130px;height:130px;border-radius:40px;background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}.lk-ic i{position:absolute;right:-8px;bottom:-8px;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--sun);color:var(--ink);border:4px solid var(--surf)}
 .lk h2{margin:0}
+.px-f li.px-no{opacity:.55;text-decoration:line-through;text-decoration-thickness:1px}.px-f li.px-no svg{color:var(--muted)}
+.ptest{width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 28px;padding:22px 28px;border-radius:26px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,var(--line));background:color-mix(in srgb,var(--brand) 5%,var(--surf))}
+.ptest h3{display:flex;align-items:center;gap:8px;margin:0 0 4px;font:600 1.15rem var(--f-d)}.ptest p{margin:0;max-width:52ch;color:var(--muted);font-size:.92rem}
+.ptest-b{display:flex;flex-wrap:wrap;gap:6px;padding:5px;border-radius:999px;background:var(--surf);border:1px solid var(--line)}
+.ptest-b button{border:0;background:none;padding:9px 16px;border-radius:999px;font:600 .9rem var(--f-b);color:var(--muted);cursor:pointer}
+.ptest-b button[aria-checked="true"]{background:var(--brand);color:#fff}
+.pt-badge{position:fixed;left:14px;bottom:14px;z-index:60;padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg);font:700 .8rem var(--f-b);box-shadow:var(--shadow);cursor:pointer;border:0}
 .lv-i{display:none!important}.lv-s .lv-i{display:inline-flex!important}
 .lv-s .tc-txt p{display:none}.lv-s .tc-txt h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}.lv-s .tc-vis{cursor:pointer}
 .lv-s .tc-vis svg{max-height:340px}.lv-s #tcHear{min-width:64px;min-height:64px;border-radius:50%;justify-content:center}.lv-s #tcHear svg{width:30px;height:30px}
@@ -3328,12 +3335,12 @@ function pipScripted(t,mode,failed){
 }
 /* ===== Pip AI: credits per model, a thinking loader, voice input with a live waveform, and a memory the family can see and edit ===== */
 const AI_MODELS=[{id:'quick',name:'Pip Quick',cost:1,d:'Fast, simple answers. Best for most questions.'},{id:'smart',name:'Pip Smart',cost:3,d:'Thinks a little longer. Better explanations.'},{id:'deep',name:'Pip Deep',cost:8,d:'Thinks the longest. For tricky questions only.'}];
-const AI_ALLOW={free:50,learn:50,family:1000};
-const PLAN_N={free:'Free',learn:'Essentials',family:'Family',school:'School'};const planName=p=>PLAN_N[p||(P&&P.plan)]||'Free';
+const AI_ALLOW={free:0,learn:0,family:1000};
+const PLAN_N={free:'Free',learn:'Essentials',family:'Family',school:'School'};const planName=p=>PLAN_N[p||planNow()]||'Free';
 const AI_PACKS=[{id:'s',n:500},{id:'m',n:2000},{id:'l',n:6000}];
 const AI_PACK_P={MYR:[49,179,499],SGD:[14.5,54,154],USD:[12.0,45,125],EUR:[12.0,45,125],GBP:[10.0,36,102],AUD:[19.5,72,192],NZD:[19.5,78,218],CAD:[17.0,63,173],IDR:[167000,620000,1725000],THB:[379,1419,3829],PHP:[679,2489,6899],VND:[285000,1060000,2930000],INR:[969,3569,9969],HKD:[93,346,960],JPY:[1749,6309,17639],KRW:[16000,57000,160000],CNY:[83,298,832],AED:[44,167,461]};
 const aiModel=()=>AI_MODELS.find(m=>m.id===((P&&P.aiModel)||'quick'))||AI_MODELS[0];
-const aiAllow=()=>P&&P.plan==='learn'?(feat('ai')?AI_ALLOW.family:0):AI_ALLOW[P&&AI_ALLOW[P.plan]?P.plan:'free'];
+const aiAllow=()=>feat('ai')?(planNow()==='school'?300:AI_ALLOW.family):0;
 const aiMonth=()=>new Date().toISOString().slice(0,7);
 function aiBal(){ /* local view of the balance; the server's number wins whenever it sends one */
   if(!G)return{left:0,allow:aiAllow(),bonus:0};
@@ -3763,8 +3770,10 @@ function essNice(v){if(['JPY','KRW','VND','IDR'].includes(CUR)||v>=1000)return v
 const essCur=myr=>essNice(myr*CUR_P[CUR][0][0]/60);
 const essPart=(myr,n)=>essCur(myr*ESS_KIDS[n-1]);
 function essAmt(n,on){on=on||essOn();return essPart(ESS_BASE,n)+ESS_X.filter(x=>on[x[0]]).reduce((a,x)=>a+essPart(x[4],n),0)}
-/* Is a feature part of this family's plan? Only Essentials can switch features off. */
-const feat=k=>!(P&&P.plan==='learn')||!!(P.addons&&P.addons[k]);
+/* Is a feature part of this family's plan? Free has only the daily lessons. Essentials switches the extras on or off. */
+const PLAN_BASIC=[['buddy','Pip, your buddy','spark','Talk and play with Pip.'],['calm','Calm breaks','heart','Breathing breaks with Fox.'],['signs','Picture cards and hand signs','hand','Say things with pictures and signs.'],['games','Memory games','game','Flip the cards and find the pairs.'],['draw','Drawing and tracing','pen','Draw pictures and trace letters.']];
+const planNow=()=>{const t=lsGet('ll.planTest');return t&&PLAN_N[t]?t:(P&&P.plan)||'free'};
+const feat=k=>{const p=planNow();if(p==='free')return false;if(p==='learn'&&ESS_X.some(x=>x[0]===k))return !!(P&&P.addons&&P.addons[k]);return true};
 const CUR_SN={"MYR":14,"SGD":4,"USD":4,"EUR":4,"GBP":3,"AUD":6,"NZD":6,"CAD":5,"IDR":49000,"THB":109,"PHP":179,"VND":83000,"INR":279,"HKD":27,"JPY":489,"KRW":4900,"CNY":24,"AED":13};
 let CUR='MYR',schN=15,schAI=true;const FAM={},FAMW={};const SCH_MIN=15,SCH_MAX=500;
 function setCur(c){CUR=CUR_P[c]?c:'USD';const p=CUR_P[CUR][0];[1,2,3].forEach(n=>{FAM[n]=p[n-1];FAMW[n]=p[n-1]*2})}
@@ -4600,13 +4609,14 @@ function chrome(){
   $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':cur===k)?'on':''}" data-go="${k}" aria-label="${l}">${TLI[k]?`<span class="tli">${ic(TLI[k],20)}</span>`:''}<span class="tlw">${l}</span></button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
   $('#meb').innerHTML=session&&P?(kid?ic('lock',18):ic('gear',18)):ic('user',18);studyUI();$('#meb').className='ibtn'+(cur==='profile'?' on':'');$('#meb').setAttribute('aria-label',session?(kid?'For parents':'Settings'):'Log in');$('#meb').title=session?(kid?'For parents':'Settings'):'Log in';
   {let pl=$('#plock');if(session&&!kid){if(!pl){pl=document.createElement('button');pl.id='plock';pl.className='ibtn';pl.setAttribute('aria-label','Lock the parent area');pl.title='Lock the parent area';pl.innerHTML=ic('unlock',18);pl.onclick=()=>{CU=null;chrome();try{guideSync()}catch(e){}if(['pricing','home','profile','care'].includes(cur))go('dashboard');toast('Parent area locked')};$('#meb').after(pl)}}else if(pl)pl.remove()}
+  {let pb=$('#ptBadge');const pt=lsGet('ll.planTest');if(pt&&session&&PLAN_N[pt]){if(!pb){pb=document.createElement('button');pb.id='ptBadge';pb.className='pt-badge';pb.onclick=()=>{lsDel('ll.planTest');chrome();if(cur==='pricing')R.pricing();else route();toast('Back to your real plan.')};document.body.appendChild(pb)}pb.textContent='Preview: '+PLAN_N[pt]+' plan · tap to stop';pb.title='Stop previewing'}else if(pb)pb.remove()}
   $('#foot').style.display=FULL.includes(cur)||(cur==='explore'&&parseHash().arg)?'none':'';setSync();updateClock();musSync();if(!session&&(HS.cam.on||HS.mic.on)){camStop();micStop()}hsUpdate();
 }
 function resolve(){
   if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy','terms','refunds','cookies'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
   let{base,arg}=parseHash();
   if(!R[base])base=session?'dashboard':'welcome';
-  if(session&&P){const need={explore:'world',study:'ai'}[base];if(need&&!feat(need)&&!(need==='ai'&&aiCfg().url&&aiCfg().key)){arg=need;base='locked'}}
+  if(session&&P){let need={explore:'world',study:'ai',talk:'signs',signs:'signs',play:'games'}[base];if(base==='learn'&&/^make-(draw|write)/.test(arg||''))need='draw';if(need&&!feat(need)&&!(need==='ai'&&aiCfg().url&&aiCfg().key&&planNow()!=='free')){arg=need;base='locked'}}
   if(!session&&!PUBLIC.includes(base)&&base!=='onboard'&&base!=='pick')base='auth';
   if((base==='onboard'||base==='pick')&&!session&&!OB.live)base='auth';
   if(session&&(base==='welcome'||base==='auth')&&!OB.live)base='dashboard';
@@ -4874,7 +4884,8 @@ function calmSound(){ /* soft pad + breath-like air, all made in the browser (no
     off(){if(!ctx)return;const c=ctx;ctx=null;try{master.gain.setTargetAtTime(0,c.currentTime,.2);air.gain.setTargetAtTime(0,c.currentTime,.1);setTimeout(()=>c.close(),700)}catch(e){}},
     get isOn(){return!!ctx}}}
 function openCalm(auto){
-  if(calmOpen)return;calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+CALM_CYC+1000;document.body.classList.add('calming');calmHush();try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
+  if(calmOpen)return;
+  if(!feat('calm')){if(!auto)go('locked-calm');return}calmOpen=true;calmLast=Date.now();wrongRun=0;calmLockUntil=Date.now()+CALM_CYC+1000;document.body.classList.add('calming');calmHush();try{const nd=$('#nudge');nd&&nd.remove()}catch(e){}if(G){G.calm++;if(auto)today().breaks++;save()}
   stopSay();
   const intro=auto?tr(calmWhy==='tired'?'You look a little sleepy. Let us breathe together.':calmWhy==='upset'?'It is okay to feel upset. Let us breathe together.':calmWhy==='breath'?'Your breathing sounds fast. Let us slow down together.':calmWhy==='taps'||calmWhy==='wrong'?'That was tricky! Let us take a calm breath.':"Let's take a deep breath!"):tr("Let's take a deep breath!");
   const sysStill=document.body.classList.contains('noanim')||matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -5942,8 +5953,8 @@ function dashPic(o){
     ['learn','Learn','--coral',`<span class="hpi hp-book">${ic('book',72)}</span>`,'go:learn'],
     feat('world')?['world','3D World','--kb',`<span class="hpi hp-globe">${ic('globe',74)}</span>`,'go:explore-island']:null,
     ['story','Story time','--kb',`<span class="hp-scene">${bkScene(BOOKS[0].pages[0][0],BOOKS[0])}</span><span class="hp-ear">${ic('vol',22)}</span>`,'story'],
-    ['calm','Calm break','--brand2',`<span class="hp-breath"><i></i><i></i><b>${ic('heart',40)}</b></span>`,'calm'],
-    ['draw','Draw','--sun',`<span class="hpi hp-pal">${ic('palette',72)}</span>`,'go:learn-make-draw'],
+    !feat('calm')?null:['calm','Calm break','--brand2',`<span class="hp-breath"><i></i><i></i><b>${ic('heart',40)}</b></span>`,'calm'],
+    !feat('draw')?null:['draw','Draw','--sun',`<span class="hpi hp-pal">${ic('palette',72)}</span>`,'go:learn-make-draw'],
     ['fame','Leaderboard','--brand',`<span class="hpi hp-cup">${ic('trophy',70)}</span>`,'go:together']].filter(Boolean);
   $('#page').innerHTML=`<div class="wrap hp lv-s">
    <section class="hp-sky">
@@ -5968,9 +5979,9 @@ function dashPic(o){
   const cb=$('#chestBtn');if(cb)cb.onclick=()=>{G.chest=o.monK;award(20);save();sfxStar(5,true);toast(starTxt());R.dashboard()};
 }
 /* A feature the family's Essentials plan does not include: a friendly picture, and a way for a grown-up to add it */
-R.locked=arg=>{const x=ESS_X.find(y=>y[0]===arg)||ESS_X[0];
-  $('#page').innerHTML=`<div class="wrap lk"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} It is not switched on in your plan yet. A grown-up can add it on the Plans page.</p>
-   <div class="row" style="justify-content:center;gap:12px"><button class="lpx-back" data-go="dashboard" aria-label="Back home">${BACK_SVG}</button><button class="btn pri lg" data-go="pricing">${ic('plus',18)} Add ${esc(x[1])}</button></div></div></div>`};
+R.locked=arg=>{const x=ESS_X.concat(PLAN_BASIC).find(y=>y[0]===arg)||ESS_X[0];
+  $('#page').innerHTML=`<div class="wrap lk"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} ${planNow()==='free'?'It is not part of the Free plan. A grown-up can choose a plan to unlock it.':'It is not switched on in your plan yet. A grown-up can add it on the Plans page.'}</p>
+   <div class="row" style="justify-content:center;gap:12px"><button class="lpx-back" data-go="dashboard" aria-label="Back home">${BACK_SVG}</button><button class="btn pri lg" data-go="pricing">${ic('plus',18)} ${planNow()==='free'?'See plans':'Add '+esc(x[1])}</button></div></div></div>`};
 R.dashboard=()=>{
   const greet=greetWord();
   const td=today(),goalMin=Math.max(5,P.att),mt=minsToday(),td0=G.mins[todayStr()]||0;
@@ -10416,7 +10427,7 @@ R.pricing=()=>{
   const fam=cp==='family'&&on;
   const cf=cloudLive()&&!CLOUD.readonly&&CLOUD.fam?CLOUD.fam:null,cSub=!!(cf&&cf.has_subscription&&['active','trialing','past_due'].includes(cf.plan_status)),cTrial=!!(cf&&!cSub&&cf.trial_ends_at&&Date.parse(cf.trial_ends_at)>Date.now()),cUsed=!!(cf&&cf.trial_started_at);
   const plans=[
-   {id:'free',n:'Free',d:'For trying at home.',amt:0,sub:'forever',cta:cp==='free'&&on?'Your plan':'Start free',f:['1 child','Daily lessons: letters, numbers, shapes and colours','Pip, a friendly learning buddy','Calm breathing breaks with Fox','Picture cards and hand signs','Memory games, drawing and tracing','50 Pip AI credits a month']},
+   {id:'free',n:'Free',d:'For trying at home.',amt:0,sub:'forever',cta:cp==='free'&&on?'Your plan':'Start free',f:['1 child','Daily lessons: letters, numbers, shapes and colours'],x:['Pip, your learning buddy','Calm breaks','Picture cards and hand signs','Games, drawing and tracing','3D World','Pip AI']},
    {id:'family',n:'Family',d:'Everything, plus Pip AI.',ai:1,amt:cycAmt(FAM[kn]),was:famWas(kn),sub:famSub(kn),cta:cf?(cSub?'Manage plan':cUsed?'Subscribe':'Start 7-day free trial'):fam?'Cancel plan':'Start 7-day free trial',note:cf?(cSub?(cf.cancel_at_period_end?'Ends '+new Date(cf.current_period_end).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):''):cTrial?'Free until '+new Date(cf.trial_ends_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):cUsed?'':'No card needed'):fam?'':'No card needed',f:['Up to 3 children','Every lesson, game and story','The 3D World and all buddies','Pip AI: chat and study, 1,000 credits a month','Care Circle for parents, teachers and therapists','Weekly progress reports by email','Book check-ups with a therapist','Live check-in with calm breaks']},
    {id:'school',n:'School or clinic',d:'For teams of 15 children or more.',ai:schAI?1:0,amt:schAmt(schN),was:Y?SCH_PER*schN:0,sub:schSub(schN),cta:'Contact us',f:[schAI?'Everything in Family, for each child':'Everything in Family except Pip AI',schAI?'300 Pip AI credits per child':'No Pip AI, so it costs less','One Care Circle for your whole team','Teacher and therapist accounts','Weekly reports for every family','Check-up booking across all children','Progress view for each child','Help setting up your team']}];
   const faq=[['What is Essentials?',`A smaller plan you build yourself. It starts at ${rmTxt(essPart(ESS_BASE,1))} a month for 1 child with every lesson, game and story. Then switch on only what you need: ${ESS_X.map(x=>x[1]+' (+'+rmTxt(essPart(x[4],1))+')').join(', ')}. You can change it any time. Family has everything for ${rmTxt(FAM[1])}.`],['Can I add more than one child?',`Yes, up to 3 on one account. Family: ${rmTxt(FAM[1])} for 1, ${rmTxt(FAM[2])} for 2, ${rmTxt(FAM[3])} for 3 a month. Essentials depends on what you switch on.`],['How does the School or clinic plan work?',`It starts at ${SCH_MIN} children. With Pip AI it is ${rmTxt(CUR_P[CUR][1])} per child a month, or ${rmTxt(CUR_SN[CUR])} without Pip AI. Pick how many children you have and press Contact us, and we will set up your team.`],['Can I cancel any time?','Yes. Pip gets a little dramatic about it, but she gets over it.'],['Is progress kept?','Always, on every plan.'],['Do I need a card for the trial?','No. The 7-day trial needs no payment details.'],['Monthly or yearly?','Yearly gives you 2 months free. You can switch back any time.']];
@@ -10428,6 +10439,8 @@ R.pricing=()=>{
     <div class="px-cyc" role="group" aria-label="Billing"><button data-cyc="month" class="${Y?'':'on'}" aria-pressed="${!Y}">Monthly</button><button data-cyc="year" class="${Y?'on':''}" aria-pressed="${Y}">Yearly <small>2 months free</small></button></div>
     <label class="px-cur">${ic('globe',16)}<span>Prices in</span><select id="plCur" aria-label="Currency">${Object.keys(CUR_P).map(c=>`<option value="${c}" ${c===CUR?'selected':''}>${c} · ${CUR_N[c]}</option>`).join('')}</select></label>
    </header>
+   ${on?`<section class="ptest" aria-labelledby="ptH"><div><h3 id="ptH">${ic('spark',18)} Try a plan for free</h3><p>See how the app looks on each plan on this device, without paying. Nothing is charged and your real plan does not change.</p></div>
+    <div class="ptest-b" role="radiogroup" aria-label="Preview plan">${[['','My real plan'],['free','Free'],['learn','Essentials'],['family','Family'],['school','School']].map(([k,l])=>`<button role="radio" data-pt="${k}" aria-checked="${(lsGet('ll.planTest')||'')===k}">${l}</button>`).join('')}</div></section>`:''}
    <div class="px-sheet">${plans.map(p=>`<article class="px-col ${p.id==='family'?'is-fam':''}" aria-label="${p.n} plan">
      <div class="px-top"><h2>${p.n}</h2>${p.id==='family'?'<span class="px-mark">Most chosen</span>':cp===p.id&&on&&p.id!=='school'?'<span class="px-mark">Current</span>':''}</div>
      ${p.ai!=null?`<span class="px-ai ${p.ai?'on':''}">${ic('spark',14)} ${p.ai?'Pip AI included':'No AI'}</span>`:''}
@@ -10437,7 +10450,7 @@ R.pricing=()=>{
      ${p.id==='school'?`<div class="px-kids px-step" role="group" aria-label="Number of children"><span>Children</span><button class="sc-b" data-d="-1" aria-label="One fewer child">&minus;</button><output id="scN" aria-live="polite">${schN}</output><button class="sc-b" data-d="1" aria-label="One more child">+</button></div><p class="px-min">Minimum ${SCH_MIN} children · ${rmTxt(SCH_PER)} per child</p><div class="px-aitg" role="group" aria-label="Pip AI"><button data-sai="1" aria-pressed="${schAI}">With Pip AI</button><button data-sai="0" aria-pressed="${!schAI}">Without AI</button></div>`:''}
      <button class="px-btn" data-plan="${p.id}" ${(p.id==='free'&&cp==='free'&&on)||(p.id==='learn'&&cp==='learn'&&on&&!(cf&&cSub))?'disabled':''}>${p.cta}</button>
      ${p.note?`<p class="px-note">${p.note}</p>`:''}
-     <ul class="px-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
+     <ul class="px-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}${(p.x||[]).map(x=>`<li class="px-no"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
    ${essHTML(kn,Y,yr,cycAmt,cp,on,cf,cSub)}
    <ul class="px-sure"><li>Cancel any time</li><li>Progress always kept</li><li>Made with therapists and teachers</li></ul>
    <section class="pcr" id="credits" aria-labelledby="pcrT"><div class="pcr-in">
@@ -10459,6 +10472,7 @@ R.pricing=()=>{
     const go=$('.es-go'),mine=!!(on&&P&&P.plan==='learn'),same=mine&&ESS_X.every(x=>!!(P.addons||{})[x[0]]===!!essOn()[x[0]]);go.disabled=same;go.textContent=mine?(same?'Your plan':'Update my extras'):'Choose Essentials'};
   $$('[data-ex]').forEach(b=>b.onclick=()=>{const k=b.dataset.ex,o=essOn();o[k]=!o[k];b.setAttribute('aria-checked',o[k]);b.classList.toggle('on',o[k]);try{sfxPop('tick')}catch(e){}essDraw()});
   $$('.es-kid').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.es-kid').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.n===kn));$$('.pl-cb').forEach(x=>{const o=+x.dataset.n===kn;x.classList.toggle('on',o);x.setAttribute('aria-pressed',o)});$('#plT').textContent=curNum(cycAmt(FAM[kn]));$('#plS').textContent=famSub(kn);essDraw()});
+  $$('[data-pt]').forEach(b=>b.onclick=()=>{const k=b.dataset.pt;if(k)lsSet('ll.planTest',k);else lsDel('ll.planTest');if(k==='learn'&&P){P.addons=Object.assign({},essOn());save(true)}chrome();R.pricing();reveal($('#page'));toast(k?'Previewing '+PLAN_N[k]+' on this device. Nothing is charged.':'Back to your real plan.')});
   $$('[data-sai]').forEach(b=>b.onclick=()=>{const v=b.dataset.sai==='1';if(v===schAI)return;schAI=v;R.pricing();reveal($('#page'))});
   const scDraw=()=>{$('#scN').textContent=schN;$('#scT').textContent=curNum(schAmt(schN));const w=$('#scW');if(w)w.textContent=rmTxt(SCH_PER*schN);$('#scS').textContent=schSub(schN);$$('.sc-b').forEach(x=>x.disabled=(+x.dataset.d<0&&schN<=SCH_MIN)||(+x.dataset.d>0&&schN>=SCH_MAX))};
   $$('.sc-b').forEach(b=>b.onclick=()=>{schN=Math.min(SCH_MAX,Math.max(SCH_MIN,schN+(+b.dataset.d)));scDraw()});scDraw();
@@ -10490,7 +10504,7 @@ function essHTML(kn,Y,yr,cycAmt,cp,on,cf,cSub){
    <div class="es-hd"><span class="es-eb">Build your own</span><h2 id="esH">Essentials</h2><p>Every lesson, game and story, for less. Switch on only the extras your family needs. Change them any time.</p></div>
    <div class="es-in">
     <div class="es-list">
-     <div class="es-base"><span class="es-ic">${ic('book',26)}</span><div><b>Lessons, games and stories</b><small>Pictures or Words view, calm breaks, stars and buddies. Always included.</small></div><span class="es-p" id="esBase">${rmTxt(cycAmt(essPart(ESS_BASE,kn)))}</span></div>
+     <div class="es-base"><span class="es-ic">${ic('book',26)}</span><div><b>Lessons, games and stories</b><small>Pip your buddy, calm breaks, picture cards and signs, memory games, drawing and tracing. Always included.</small></div><span class="es-p" id="esBase">${rmTxt(cycAmt(essPart(ESS_BASE,kn)))}</span></div>
      ${ESS_X.map(([k,n,i,d,p])=>`<button class="es-x${o[k]?' on':''}" role="switch" aria-checked="${!!o[k]}" data-ex="${k}"><span class="es-ic">${ic(i,26)}</span><span class="es-t"><b>${n}</b><small>${d}</small></span><span class="es-p">+${rmTxt(cycAmt(essPart(p,kn)))}</span><i class="es-sw" aria-hidden="true"></i></button>`).join('')}
     </div>
     <aside class="es-sum" aria-live="polite">
