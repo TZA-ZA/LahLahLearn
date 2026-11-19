@@ -192,7 +192,7 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
 <div class="card"><h3>Pip, a friendly guide</h3><p>Pip reads aloud, cheers gently and can chat with the child in a safe, age-appropriate way.</p></div>
 <div class="card"><h3>Calm breaks</h3><p>Breathing and quiet moments whenever a child needs one. Everything pauses until they are ready.</p></div>
 <div class="card"><h3>Stories and songs</h3><p>Picture books that read aloud, sing-along songs, drawing, tracing letters and movement games.</p></div>
-<div class="card"><h3>A small 3D world</h3><p>An island to walk around, with places to play and things to decorate with rewards from lessons.</p></div>
+<div class="card"><h3>My World</h3><p>An island to walk around, with places to play and things to decorate with rewards from lessons.</p></div>
 <div class="card"><h3>Care Circle</h3><p>One calm view of progress for the grown-ups, with weekly reports by email.</p></div>
 </div>
 

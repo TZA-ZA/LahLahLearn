@@ -45,3 +45,24 @@ language sql security definer set search_path = public as $$
 $$;
 revoke all on function public.community_report(uuid) from public;
 grant execute on function public.community_report(uuid) to authenticated;
+
+-- each person can report a post once, so one person alone cannot hide a post
+create table if not exists public.community_reports(
+  post_id uuid not null references public.community_posts(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  primary key (post_id, user_id));
+create index if not exists community_reports_user on public.community_reports(user_id);
+alter table public.community_reports enable row level security;
+revoke all on public.community_reports from anon, authenticated;
+create or replace function public.community_report(p_id uuid) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if auth.uid() is null then raise exception 'Please log in.'; end if;
+  insert into public.community_reports(post_id, user_id) values (p_id, auth.uid()) on conflict do nothing;
+  if found then
+    update public.community_posts set reports = reports + 1, hidden = (reports + 1 >= 2) where id = p_id;
+  end if;
+end $$;
+revoke all on function public.community_report(uuid) from public, anon;
+grant execute on function public.community_report(uuid) to authenticated;

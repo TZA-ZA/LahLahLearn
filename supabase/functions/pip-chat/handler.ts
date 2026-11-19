@@ -38,7 +38,7 @@ export const MODELS: Record<string, { cost: number; model: () => string }> = {
   smart: { cost: 3, model: () => optionalEnv("PIP_MODEL_SMART") ?? "claude-sonnet-5-5" },
   deep: { cost: 8, model: () => optionalEnv("PIP_MODEL_DEEP") ?? "claude-opus-5-5" },
 };
-export const ALLOW: Record<string, number> = { free: 50, family: 1000 };
+export const ALLOW: Record<string, number> = { free: 0, family: 1000 };
 const BAD = /\d{3,}|@|street|road|jalan|address|school|password|phone/i;
 export function memoryNote(memory: unknown): string {
   const items = (Array.isArray(memory) ? memory : []).filter((m) => typeof m === "string" && m.trim() && !BAD.test(m)).slice(-12).map((m) => String(m).slice(0, 80));
@@ -72,7 +72,7 @@ export const handler = serveJson(async (req) => {
   const admin = adminClient();
   const { data: fam } = await admin.from("families").select("plan, features").eq("id", b.family_id).maybeSingle();
   // Essentials families get the Family allowance only when they added Pip AI
-  const allow = ALLOW[fam?.plan === "family" || (fam?.plan === "learn" && fam?.features?.ai) ? "family" : "free"];
+  const allow = ALLOW[fam?.plan === "family" || fam?.plan === "school" || (fam?.plan === "learn" && fam?.features?.ai) ? "family" : "free"];
   const month = new Date().toISOString().slice(0, 7);
   if ((b as { action?: string }).action === "balance") {
     const { data } = await admin.rpc("ai_spend", { p_family: b.family_id, p_month: month, p_allow: allow, p_cost: 0 });
