@@ -2241,6 +2241,8 @@ body.noanim .hp *,body.noanim .hp{animation:none!important}
 .ptest-b button{border:0;background:none;padding:9px 16px;border-radius:999px;font:600 .9rem var(--f-b);color:var(--muted);cursor:pointer}
 .ptest-b button[aria-checked="true"]{background:var(--brand);color:#fff}
 .pt-badge{position:fixed;left:14px;bottom:14px;z-index:60;padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg);font:700 .8rem var(--f-b);box-shadow:var(--shadow);cursor:pointer;border:0}
+.hm-sw{display:flex;justify-content:flex-end;margin-bottom:12px}.hm-sw .lv-sw{margin:0}
+.learn-host{scroll-margin-top:90px;margin-top:clamp(24px,4vw,40px)}.learn-host>.wrap{padding-left:0;padding-right:0;padding-top:0;max-width:none;width:100%}
 .lv-i{display:none!important}.lv-s .lv-i{display:inline-flex!important}
 .lv-s .tc-txt p{display:none}.lv-s .tc-txt h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}.lv-s .tc-vis{cursor:pointer}
 .lv-s .tc-vis svg{max-height:340px}.lv-s #tcHear{min-width:64px;min-height:64px;border-radius:50%;justify-content:center}.lv-s #tcHear svg{width:30px;height:30px}
@@ -4602,11 +4604,11 @@ function chrome(){
   const kid=kidMode();kidPrev=kid;document.body.classList.toggle('kid',kid);
   $('#dock').classList.toggle('on',!!(session&&!(CLOUD.helperOnly||CLOUD.readonly)&&!['welcome','auth','onboard','pick','who','helping'].includes(cur)));
   const dockCur=cur==='profile'?'':cur==='explore'&&parseHash().arg==='island'?'explore-island':cur==='explore'||cur==='play'?'explore-island':cur==='world'||cur==='signs'?'learn':cur;
-  $('#dock').innerHTML=DOCK.filter(d=>!(kid&&d[0]==='care')).map(([k,l,i])=>`<button class="dk ${dockCur===k?'on':''}" data-go="${k}" aria-label="${l}">${ic(i,22)}<span>${l}</span></button>`).join('');
-  let links=(session?[['dashboard','My page'],['learn','Learn']].concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[]:[['pricing','Plans'],['home','About'],['team','Our team']]);
+  $('#dock').innerHTML=DOCK.filter(d=>!(kid&&(d[0]==='care'||d[0]==='learn'))).map(([k,l,i])=>`<button class="dk ${dockCur===k||(kid&&k==='dashboard'&&dockCur==='learn')?'on':''}" data-go="${k}" aria-label="${l}">${ic(i,22)}<span>${l}</span></button>`).join('');
+  let links=(session?[['dashboard','My page']].concat(kid?[]:[['learn','Learn']]).concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[]:[['pricing','Plans'],['home','About'],['team','Our team']]);
   if(CLOUD.on&&CLOUD.user){if(CLOUD.helperOnly||CLOUD.readonly)links=[['helping','Children']].concat(CLOUD.readonly?[['care','Care Circle']]:[]);else if(!kid&&cloudHelps().length)links.push(['helping','Children you support'])}
   const TLI={dashboard:'home',learn:'book',who:'users'};document.body.classList.toggle('pics',!!(session&&kid&&typeof lvSimple==='function'&&lvSimple()));
-  $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':cur===k)?'on':''}" data-go="${k}" aria-label="${l}">${TLI[k]?`<span class="tli">${ic(TLI[k],20)}</span>`:''}<span class="tlw">${l}</span></button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
+  $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':k==='dashboard'&&kid?(cur===k||dockCur==='learn'):cur===k)?'on':''}" data-go="${k}" aria-label="${l}">${TLI[k]?`<span class="tli">${ic(TLI[k],20)}</span>`:''}<span class="tlw">${l}</span></button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
   $('#meb').innerHTML=session&&P?(kid?ic('lock',18):ic('gear',18)):ic('user',18);studyUI();$('#meb').className='ibtn'+(cur==='profile'?' on':'');$('#meb').setAttribute('aria-label',session?(kid?'For parents':'Settings'):'Log in');$('#meb').title=session?(kid?'For parents':'Settings'):'Log in';
   {let pl=$('#plock');if(session&&!kid){if(!pl){pl=document.createElement('button');pl.id='plock';pl.className='ibtn';pl.setAttribute('aria-label','Lock the parent area');pl.title='Lock the parent area';pl.innerHTML=ic('unlock',18);pl.onclick=()=>{CU=null;chrome();try{guideSync()}catch(e){}if(['pricing','home','profile','care'].includes(cur))go('dashboard');toast('Parent area locked')};$('#meb').after(pl)}}else if(pl)pl.remove()}
   {let pb=$('#ptBadge');const pt=lsGet('ll.planTest');if(pt&&session&&PLAN_N[pt]){if(!pb){pb=document.createElement('button');pb.id='ptBadge';pb.className='pt-badge';pb.onclick=()=>{lsDel('ll.planTest');chrome();if(cur==='pricing')R.pricing();else route();toast('Back to your real plan.')};document.body.appendChild(pb)}pb.textContent='Preview: '+PLAN_N[pt]+' plan · tap to stop';pb.title='Stop previewing'}else if(pb)pb.remove()}
@@ -5950,11 +5952,11 @@ function streakArt(n){
 function dashPic(o){
   const pct=Math.min(100,Math.round(o.mt/o.goalMin*100)),C=2*Math.PI*104;
   const T=[
-    ['learn','Learn','--coral',`<span class="hpi hp-book">${ic('book',72)}</span>`,'go:learn'],
+    kidMode()?null:['learn','Learn','--coral',`<span class="hpi hp-book">${ic('book',72)}</span>`,'go:learn'],
     feat('world')?['world','3D World','--kb',`<span class="hpi hp-globe">${ic('globe',74)}</span>`,'go:explore-island']:null,
     ['story','Story time','--kb',`<span class="hp-scene">${bkScene(BOOKS[0].pages[0][0],BOOKS[0])}</span><span class="hp-ear">${ic('vol',22)}</span>`,'story'],
     !feat('calm')?null:['calm','Calm break','--brand2',`<span class="hp-breath"><i></i><i></i><b>${ic('heart',40)}</b></span>`,'calm'],
-    !feat('draw')?null:['draw','Draw','--sun',`<span class="hpi hp-pal">${ic('palette',72)}</span>`,'go:learn-make-draw'],
+    !feat('draw')||kidMode()?null:['draw','Draw','--sun',`<span class="hpi hp-pal">${ic('palette',72)}</span>`,'go:learn-make-draw'],
     ['fame','Leaderboard','--brand',`<span class="hpi hp-cup">${ic('trophy',70)}</span>`,'go:together']].filter(Boolean);
   $('#page').innerHTML=`<div class="wrap hp lv-s">
    <section class="hp-sky">
@@ -5983,6 +5985,16 @@ R.locked=arg=>{const x=ESS_X.concat(PLAN_BASIC).find(y=>y[0]===arg)||ESS_X[0];
   $('#page').innerHTML=`<div class="wrap lkd"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} ${planNow()==='free'?'It is not part of the Free plan. A grown-up can choose a plan to unlock it.':'It is not switched on in your plan yet. A grown-up can add it on the Plans page.'}</p>
    <div class="row" style="justify-content:center;gap:12px"><button class="lpx-back" data-go="dashboard" aria-label="Back home">${BACK_SVG}</button><button class="btn pri lg" data-go="pricing">${ic('plus',18)} ${planNow()==='free'?'See plans':'Add '+esc(x[1])}</button></div></div></div>`};
 R.dashboard=()=>{
+  R.dashboard0();
+  if(!kidMode()||!session||!P)return;
+  const pg=$('#page'),w=pg.firstElementChild;
+  /* the Pictures / Words switch sits at the top of the home page */
+  if(w&&!$('.lv-sw',pg)){w.insertAdjacentHTML('afterbegin',`<div class="hm-sw">${lvSwitch()}</div>`)}
+  const h=document.createElement('section');h.id='learnHost';h.className='learn-host';h.setAttribute('aria-label','My lessons');(w||pg).appendChild(h);
+  R.learn('');lvBind();
+  if(LH_GO||KLCAT){LH_GO=false;setTimeout(()=>h.scrollIntoView({behavior:'smooth',block:'start'}),60)}
+};
+R.dashboard0=()=>{
   const greet=greetWord();
   const td=today(),goalMin=Math.max(5,P.att),mt=minsToday(),td0=G.mins[todayStr()]||0;
   const wk=[...Array(7)].map((_,i)=>{const d=new Date(Date.now()-(6-i)*864e5);return{on:G.days.includes(dstr(d)),today:i===6,l:d.toLocaleDateString('en-GB',{weekday:'narrow'})}});
@@ -6594,7 +6606,7 @@ const lvSimple=()=>!!(P&&P.prefs&&P.prefs.lview!=='full');
 function lvSwitch(){const s=lvSimple();
   return `<div class="lv-sw" role="radiogroup" aria-label="How the Learn page looks"><button role="radio" aria-checked="${s}" data-lv="simple" aria-label="Simple: pictures"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2.5" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="2.5" fill="currentColor" opacity=".7"/><rect x="3" y="13" width="8" height="8" rx="2.5" fill="currentColor" opacity=".7"/><rect x="13" y="13" width="8" height="8" rx="2.5" fill="currentColor"/></svg><span class="lv-w">Pictures</span></button><button role="radio" aria-checked="${!s}" data-lv="full" aria-label="Detailed: pictures and words"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="6" height="6" rx="2" fill="currentColor" stroke="none"/><path d="M12 6h9M12 9h6M3 15h18M3 19h13"/></svg><span class="lv-w">Words</span></button></div>`}
 function lvBind(){
-  $$('[data-lv]').forEach(b=>b.onclick=()=>{if(!P)return;P.prefs=P.prefs||{};P.prefs.lview=b.dataset.lv;save(true);try{sfxPop&&sfxPop()}catch(e){}R.learn()});
+  $$('[data-lv]').forEach(b=>b.onclick=()=>{if(!P)return;P.prefs=P.prefs||{};P.prefs.lview=b.dataset.lv;save(true);try{sfxPop&&sfxPop()}catch(e){}if(cur==='dashboard'){chrome();R.dashboard()}else R.learn()});
   if(!lvSimple())return;
   /* Simple look: Pip says what a picture is when the child points at it, since the words are hidden */
   $$('.lv-s [data-cu],.lv-s [data-go],.lv-s [data-kc],.lv-s [data-chest],.lv-s #treGo').forEach(el=>{let t=0;
@@ -6603,22 +6615,23 @@ function lvBind(){
 /* Pictures mode: one big thing to tap, no reading needed. Every picture is spoken when tapped or pointed at (if voice is on). */
 const BACK_SVG='<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M17 8 5 20l12 12v-7.5h9.5a5.5 5.5 0 0 0 0-11H17z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>';
 const LVP_HAND='<svg class="lpx-hand" width="58" height="58" viewBox="0 0 64 64" aria-hidden="true"><path d="M26 30V12a5 5 0 0110 0v14l12 3a6 6 0 014.6 6.9L50 50a8 8 0 01-8 6H32a8 8 0 01-6.3-3L14 38a4.6 4.6 0 016.8-6.2z" fill="#ffe0bd" stroke="#2b2b2b" stroke-width="3" stroke-linejoin="round"/></svg>';
-function lvPicView(CATS){
+function lvPicView(CATS,hosted){
   RWNEW=rwSync();
   const c=curGet(),lvI=Math.max(0,CURR.indexOf(curLv())),lv=CURR[lvI],nx=curNext();
   const dots=lv.units.map(u=>{const d=curUnitDone(u),now=u===nx;return `<i class="${d?'d':now?'n':''}">${d?JR_STAR:''}</i>`}).join('');
   const has=RW.filter(x=>rwHas(x.id)).length;
   return `<section class="lpx" style="--lc:${lv.c}">
-    <div class="lpx-hero">
+    ${hosted?'':`<div class="lpx-hero">
       <span class="lpx-pip" aria-hidden="true">${pip(170)}</span>
       ${nx?`<button class="lpx-play" data-cu="${nx.id}" aria-label="${esc('Play: '+nx.n)}">${ic('play',64)}${LVP_HAND}</button>`
           :`<button class="lpx-play" data-go="learn-exam" aria-label="Test">${si('medal',80)}${LVP_HAND}</button>`}
       ${nx?`<button class="lpx-test" data-go="learn-exam" aria-label="Test">${si('medal',54)}</button>`:''}
-    </div>
+    </div>`}
     <div class="lpx-dots" role="img" aria-label="${lv.units.filter(curUnitDone).length} of ${lv.units.length} done"><span class="lpx-cl" aria-hidden="true">${si(lv.e,40)}</span>${dots}<span class="lpx-cl" aria-hidden="true">${si('medal',34)}</span></div>
     <div class="lpx-grid">
       ${CATS.map(k=>`<button class="lpx-t" style="--c:var(${k[3]})" data-kc="${k[0]}" aria-label="${esc(k[1])}">${ic(k[2],70)}</button>`).join('')}
-      <button class="lpx-t lpx-st" style="--c:var(--kb)" data-kc="story" aria-label="Story time"><span class="lpx-stc" aria-hidden="true">${bkScene(BOOKS[0].pages[0][0],BOOKS[0]).replace('<svg ','<svg preserveAspectRatio="xMidYMid slice" ')}</span><span class="lpx-ear" aria-hidden="true">${ic('vol',24)}</span></button>
+      ${hosted?`<button class="lpx-t" style="--c:var(--sun)" data-go="learn-exam" aria-label="Test">${si('medal',66)}</button>`:''}
+      ${hosted?'':`<button class="lpx-t lpx-st" style="--c:var(--kb)" data-kc="story" aria-label="Story time"><span class="lpx-stc" aria-hidden="true">${bkScene(BOOKS[0].pages[0][0],BOOKS[0]).replace('<svg ','<svg preserveAspectRatio="xMidYMid slice" ')}</span><span class="lpx-ear" aria-hidden="true">${ic('vol',24)}</span></button>`}
       <button class="lpx-t tr" style="--c:var(--sun)" id="treGo" aria-label="${esc('My treasures: '+has)}">${RWI.chest}<span class="lpx-n" aria-hidden="true">${has}</span></button>
     </div>
   </section>`;
@@ -6626,6 +6639,9 @@ function lvPicView(CATS){
 function lvPicStory(){
   return `<div class="lpx-books">${BOOKS.map(s=>`<button class="lpx-bk" data-go="learn-story-${s.id}" style="--bc:${s.c}" aria-label="${esc(s.title)}">${bkScene(s.pages[0][0],s)}<span class="lpx-ear" aria-hidden="true">${ic('vol',26)}</span></button>`).join('')}</div>`;
 }
+/* In kid mode the lesson path is drawn inside the home page (#learnHost); elsewhere it fills the page */
+const LT=()=>$('#learnHost')||$('#page');let LH_GO=false;
+function klTop(){const h=$('#learnHost');if(h)h.scrollIntoView({behavior:'smooth',block:'start'});else window.scrollTo(0,0)}
 R.learn=arg=>{
   if(arg==='exam')return curStart(null,true);  /* the class test can be tried any time, even before every step is done */
   if(arg&&arg.startsWith('cu-'))return curStart(arg.slice(3));
@@ -6636,27 +6652,28 @@ R.learn=arg=>{
   if(arg&&arg.startsWith('make-'))return mkStart(arg.slice(5));
   if(arg==='practice')return practiceStart();
   if(GEN[arg])return lessonStart(arg);
+  if(!arg&&kidMode()&&!$('#learnHost')){LH_GO=true;return go('dashboard')}  /* kids have one home page: lessons live on it */
   const items=klItems(),pick=klPick(items);
   const CATS=[['grow','Feelings and life','smile','--sun'],['discover','Look and learn','book','--coral'],['create','Make and move','palette','--brand2'],['practice','Practice and play','star','--kb']];
   const tile=x=>`<button class="kq-t" style="--c:var(${x.c})" data-go="${x.go}" aria-label="${esc(x.n+'. '+x.d)}"><span class="kq-ic">${x.ico}</span><b>${esc(x.n)}</b>${x.lv?`<span class="kq-lv" aria-hidden="true">${[1,2,3,4].map(n=>`<i class="${n<=x.lv?'on':''}"></i>`).join('')}</span>`:''}</button>`;
   if(KLCAT==='story'&&lvSimple()){
-    $('#page').innerHTML=`<div class="wrap kl2 lv-s"><div class="kq-top"><button class="lpx-back" id="klBack" aria-label="Back">${BACK_SVG}</button></div>${lvPicStory()}</div>`;
-    $('#klBack').onclick=()=>{KLCAT=null;R.learn();window.scrollTo(0,0)};lvBind();return}
+    LT().innerHTML=`<div class="wrap kl2 lv-s"><div class="kq-top"><button class="lpx-back" id="klBack" aria-label="Back">${BACK_SVG}</button></div>${lvPicStory()}</div>`;
+    $('#klBack').onclick=()=>{KLCAT=null;R.learn();klTop()};lvBind();return}
   if(KLCAT==='story')KLCAT=null;
   const cat=CATS.find(c=>c[0]===KLCAT);
   if(cat){
-    $('#page').innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}"><div class="kq-top">${lvSimple()?`<button class="lpx-back" id="klBack" aria-label="Back">${BACK_SVG}</button>`:`<button class="btn lg kq-back" id="klBack"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button>`}${lvSimple()?`<span class="lpx-ct" style="--c:var(${cat[3]})" aria-hidden="true">${ic(cat[2],40)}</span>`:`<h2>${esc(cat[1])}</h2>`}</div><div class="kq-g kq-in">${items.filter(x=>x.cat===cat[0]).map(tile).join('')}</div></div>`;
-    $('#klBack').onclick=()=>{KLCAT=null;R.learn();window.scrollTo(0,0)};lvBind();
+    LT().innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}"><div class="kq-top">${lvSimple()?`<button class="lpx-back" id="klBack" aria-label="Back">${BACK_SVG}</button>`:`<button class="btn lg kq-back" id="klBack"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button>`}${lvSimple()?`<span class="lpx-ct" style="--c:var(${cat[3]})" aria-hidden="true">${ic(cat[2],40)}</span>`:`<h2>${esc(cat[1])}</h2>`}</div><div class="kq-g kq-in">${items.filter(x=>x.cat===cat[0]).map(tile).join('')}</div></div>`;
+    $('#klBack').onclick=()=>{KLCAT=null;R.learn();klTop()};lvBind();
     return;
   }
   if(lvSimple()){
-    $('#page').innerHTML=`<div class="wrap kl2 lv-s">${lvSwitch()}${lvPicView(CATS)}</div>`;
-    $$('[data-kc]').forEach(b=>b.onclick=()=>{KLCAT=b.dataset.kc;R.learn();window.scrollTo(0,0)});curBind();lvBind();return}
-  $('#page').innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}">${lvSwitch()}${curView()}
+    LT().innerHTML=`<div class="wrap kl2 lv-s">${$('#learnHost')?'':lvSwitch()}${lvPicView(CATS,!!$('#learnHost'))}</div>`;
+    $$('[data-kc]').forEach(b=>b.onclick=()=>{KLCAT=b.dataset.kc;R.learn();klTop()});curBind();lvBind();return}
+  LT().innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}">${$('#learnHost')?'':lvSwitch()}${curView()}
    ${storyShelf()}
    <h3 class="kq-h">More to explore</h3>
    <div class="kq-cats">${CATS.map(c=>`<button class="kq-cat" style="--c:var(${c[3]})" data-kc="${c[0]}"><span class="kq-ic">${ic(c[2],46)}</span><b>${c[1]}</b><span class="kq-arr" aria-hidden="true">${ic('arrow',24)}</span></button>`).join('')}</div></div>`;
-  $$('[data-kc]').forEach(b=>b.onclick=()=>{KLCAT=b.dataset.kc;R.learn();window.scrollTo(0,0)});curBind();lvBind();
+  $$('[data-kc]').forEach(b=>b.onclick=()=>{KLCAT=b.dataset.kc;R.learn();klTop()});curBind();lvBind();
 };
 /* ===== Story time: picture books with real page turns, read aloud in Pip's recorded voice ===== */
 const BOOKS=[{"id": "kite", "title": "Pip and the Lost Kite", "lv": "Seed", "c": "#3f8f63", "pages": [["sky", "Pip has a red kite. The kite is big and bright."], ["wind", "Whoosh! The wind blows. The kite flies up, up, up."], ["tree", "Oh no! The kite is stuck in a tall tree."], ["fox", "Fox comes to help. Fox stands on a rock. It is too high."], ["cloud", "Cloud floats by. Cloud gives a soft puff of air."], ["kite", "The kite wiggles free. It floats down to Pip."], ["friends", "Pip says thank you to Fox and Cloud. Friends help friends."], ["end", "The end. What colour was the kite?"]]}, {"id": "breath", "title": "Fox Takes a Big Breath", "lv": "Sprout", "c": "#d9783f", "pages": [["fox", "Fox wanted to build the tallest tower of blocks."], ["blocks", "One block, two blocks, three blocks. The tower grew and grew."], ["fall", "Crash! The tower fell down. Fox felt hot and cross."], ["breath", "Pip said, let us smell a flower, then blow out a candle."], ["calm", "Fox breathed in slowly, and breathed out slowly. Fox felt calm again."], ["blocks", "Fox tried again, one careful block at a time."], ["tower", "This time the tower stood tall. Fox gave a happy smile."], ["end", "The end. When you feel cross, you can take a big breath too."]]}, {"id": "drop", "title": "The Little Water Drop", "lv": "Bloom", "c": "#2f7fb0", "pages": [["drop", "Dot is a little drop of water who lives in a river."], ["sun", "The warm sun shines, and Dot floats up into the sky as tiny mist."], ["cloud", "Dot joins a cloud with many other drops. The cloud grows heavy and grey."], ["rain", "Pitter patter! Dot falls down as rain onto a thirsty farm."], ["farm", "The plants drink the water and grow tall and green."], ["tap", "Some water travels through pipes to a tap, so children can drink and wash."], ["save", "Clean water is precious. We turn off the tap while we brush our teeth."], ["end", "The end. How can you help keep water clean?"]]}];
