@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // One-time Stripe setup for LahLahLearn.
-// Creates three Family products (1, 2, 3 children), six MYR prices (1, 2 or 3 children; monthly or yearly) with the
-// lookup keys the billing function expects, and the webhook endpoint. Safe to run again:
+// Creates the plan products (Family with Pip AI, and Essentials without it; 1, 2, 3 children each), their MYR prices
+// (monthly or yearly) with the lookup keys the billing function expects (family_<n>_<cycle>, learn_<n>_<cycle>),
+// and the webhook endpoint. Prices match CUR_P / CUR_L in index.html. Safe to run again:
 // anything that already exists is reused.
 //
 //   STRIPE_SECRET_KEY=sk_test_... SUPABASE_URL=https://xxxx.supabase.co node scripts/stripe-setup.mjs
@@ -15,17 +16,16 @@ if (!KEY || !SB) {
   process.exit(1);
 }
 
-const PRICES = [
-  // [children, cycle, amount in sen]
-  [1, "month", 2000], [2, "month", 3500], [3, "month", 4500],
-  [1, "year", 20000], [2, "year", 35000], [3, "year", 45000],
-];
-// The same plan in other currencies (Stripe currency_options). Must match CUR_P in index.html.
-const LOCAL = { sgd: [6, 10, 13], usd: [5, 8, 10], eur: [5, 8, 10], gbp: [4, 7, 9], aud: [7, 12, 15], nzd: [8, 13, 17], cad: [7, 11, 14],
-  idr: [69000, 119000, 149000], thb: [159, 279, 349], php: [279, 479, 619], vnd: [119000, 209000, 269000], inr: [399, 699, 899],
-  hkd: [39, 69, 85], jpy: [699, 1199, 1499], krw: [6500, 11000, 14500], cny: [35, 59, 79], aed: [19, 32, 42] };
+const TIERS = {
+  family: { name: "Family", desc: "Everything in LahLahLearn, with Pip AI", myr: [60, 105, 135],
+    local: {"sgd": [18, 30, 39], "usd": [15, 24, 30], "eur": [15, 24, 30], "gbp": [12, 21, 27], "aud": [21, 36, 45], "nzd": [24, 39, 51], "cad": [21, 33, 42], "idr": [205000, 355000, 445000], "thb": [479, 839, 1049], "php": [839, 1439, 1859], "vnd": [355000, 625000, 805000], "inr": [1199, 2099, 2699], "hkd": [117, 207, 255], "jpy": [2099, 3599, 4499], "krw": [20000, 33000, 44000], "cny": [105, 177, 237], "aed": [57, 96, 126]} },
+  learn: { name: "Essentials", desc: "Every lesson and the Care Circle, without Pip AI", myr: [35, 60, 79],
+    local: {"sgd": [10, 17, 23], "usd": [9, 14, 17], "eur": [9, 14, 17], "gbp": [7, 12, 16], "aud": [12, 21, 26], "nzd": [14, 23, 30], "cad": [12, 19, 24], "idr": [119000, 206000, 258000], "thb": [279, 489, 609], "php": [489, 829, 1079], "vnd": [209000, 359000, 469000], "inr": [699, 1199, 1599], "hkd": [68, 120, 150], "jpy": [1199, 2099, 2599], "krw": [12000, 19000, 26000], "cny": [61, 100, 140], "aed": [33, 56, 73]} },
+};
+// [tier, children, cycle, amount in sen]. Yearly = 10 months.
+const PRICES = Object.keys(TIERS).flatMap((t) => [1, 2, 3].flatMap((n) => ["month", "year"].map((c) => [t, n, c, TIERS[t].myr[n - 1] * 100 * (c === "year" ? 10 : 1)])));
 const ZERO_DECIMAL = ["jpy", "krw", "vnd"];
-const localOptions = (n, cycle) => Object.fromEntries(Object.entries(LOCAL).map(([c, v]) => {
+const localOptions = (tier, n, cycle) => Object.fromEntries(Object.entries(TIERS[tier].local).map(([c, v]) => {
   const a = v[n - 1] * (cycle === "year" ? 10 : 1);
   return [c, { unit_amount: ZERO_DECIMAL.includes(c) ? a : a * 100 }];
 }));
@@ -62,34 +62,36 @@ async function stripe(method, path, body) {
 const mode = KEY.startsWith("sk_live") ? "LIVE" : "test";
 console.log(`Stripe ${mode} mode`);
 
-// Products: one per child count (the customer portal needs one price per interval per product)
+// Products: one per tier and child count (the customer portal needs one price per interval per product)
 const products = {};
 const found = await stripe("GET", "products/search?query=" + encodeURIComponent("metadata['app']:'lahlahlearn' AND active:'true'"));
-for (const n of [1, 2, 3]) {
-  products[n] = found.data.find((p) => p.metadata?.children === String(n)) || await stripe("POST", "products", {
-    name: `LahLahLearn Family · ${n} ${n === 1 ? "child" : "children"}`,
-    description: `Everything in LahLahLearn for ${["one", "two", "three"][n - 1]} ${n === 1 ? "child" : "children"}.`,
-    metadata: { app: "lahlahlearn", children: n }, tax_code: "txcd_10103001",
+for (const tier of Object.keys(TIERS)) for (const n of [1, 2, 3]) {
+  const id = `${tier}_${n}`;
+  products[id] = found.data.find((p) => p.metadata?.children === String(n) && (p.metadata?.tier || "family") === tier) || await stripe("POST", "products", {
+    name: `LahLahLearn ${TIERS[tier].name} · ${n} ${n === 1 ? "child" : "children"}`,
+    description: `${TIERS[tier].desc}, for ${["one", "two", "three"][n - 1]} ${n === 1 ? "child" : "children"}.`,
+    metadata: { app: "lahlahlearn", children: n, tier }, tax_code: "txcd_10103001",
   });
-  console.log("product", n, products[n].id);
+  console.log("product", id, products[id].id);
 }
 
 // Prices
-const keys = PRICES.map(([n, c]) => `family_${n}_${c}`);
-const existing = await stripe("GET", "prices?active=true&limit=20&" + keys.map((k) => "lookup_keys[]=" + k).join("&"));
-for (const [n, cycle, amount] of PRICES) {
-  const key = `family_${n}_${cycle}`;
-  const have = existing.data.find((p) => p.lookup_key === key);
-  if (have && have.unit_amount === amount && have.currency === "myr" && have.product === products[n].id) {
-    await stripe("POST", "prices/" + have.id, { currency_options: localOptions(n, cycle) });
+const keys = PRICES.map(([t, n, c]) => `${t}_${n}_${c}`);
+const listPrices = async () => (await Promise.all([keys.slice(0, 10), keys.slice(10)].map((ks) => stripe("GET", "prices?active=true&limit=20&" + ks.map((k) => "lookup_keys[]=" + k).join("&"))))).flatMap((r) => r.data);
+const existing = await listPrices();
+for (const [tier, n, cycle, amount] of PRICES) {
+  const key = `${tier}_${n}_${cycle}`, prod = products[`${tier}_${n}`];
+  const have = existing.find((p) => p.lookup_key === key);
+  if (have && have.unit_amount === amount && have.currency === "myr" && have.product === prod.id) {
+    await stripe("POST", "prices/" + have.id, { currency_options: localOptions(tier, n, cycle) });
     console.log("price", key, have.id, "(exists, local currencies updated)"); continue;
   }
   const p = await stripe("POST", "prices", {
-    product: products[n].id, currency: "myr", unit_amount: amount,
+    product: prod.id, currency: "myr", unit_amount: amount,
     recurring: { interval: cycle }, lookup_key: key, transfer_lookup_key: "true",
-    currency_options: localOptions(n, cycle),
-    nickname: `${n} ${n === 1 ? "child" : "children"}, ${cycle}ly`,
-    metadata: { children: n, cycle },
+    currency_options: localOptions(tier, n, cycle),
+    nickname: `${TIERS[tier].name}, ${n} ${n === 1 ? "child" : "children"}, ${cycle}ly`,
+    metadata: { children: n, cycle, tier },
   });
   console.log("price", key, p.id, "(created)");
 }
@@ -111,7 +113,7 @@ if (hook) {
 }
 
 // Customer portal: let families switch between 1, 2 or 3 children and monthly or yearly, and cancel.
-const prices = (await stripe("GET", "prices?active=true&limit=20&" + keys.map((k) => "lookup_keys[]=" + k).join("&"))).data;
+const prices = await listPrices();
 const cfgs = await stripe("GET", "billing_portal/configurations?is_default=true&limit=1");
 const portal = {
   business_profile: { headline: "Manage your LahLahLearn plan" },
@@ -122,7 +124,7 @@ const portal = {
     subscription_cancel: { enabled: "true", mode: "at_period_end" },
     subscription_update: {
       enabled: "true", default_allowed_updates: { 0: "price" }, proration_behavior: "create_prorations",
-      products: Object.fromEntries([1, 2, 3].map((n, i) => [i, { product: products[n].id, prices: Object.fromEntries(prices.filter((p) => p.product === products[n].id).map((p, j) => [j, p.id])) }])),
+      products: Object.fromEntries(Object.values(products).map((pr, i) => [i, { product: pr.id, prices: Object.fromEntries(prices.filter((p) => p.product === pr.id).map((p, j) => [j, p.id])) }])),
     },
   },
 };

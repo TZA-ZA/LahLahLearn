@@ -17,14 +17,15 @@ export async function applySubscription(admin: SupabaseClient, sub: any, familyH
   if (!fid) { console.warn("subscription without a family", sub?.id); return; }
   const item = sub?.items?.data?.[0];
   const price = item?.price ?? {};
-  const m = /^family_([1-3])_(month|year)$/.exec(price.lookup_key ?? "");
-  const children = m ? Number(m[1]) : Math.min(3, Math.max(1, Number(sub?.metadata?.children) || 1));
-  const cycle = m ? m[2] : price?.recurring?.interval === "year" ? "year" : "month";
+  const m = /^(family|learn)_([1-3])_(month|year)$/.exec(price.lookup_key ?? "");
+  const tier = m ? m[1] : sub?.metadata?.tier === "learn" ? "learn" : "family";
+  const children = m ? Number(m[2]) : Math.min(3, Math.max(1, Number(sub?.metadata?.children) || 1));
+  const cycle = m ? m[3] : price?.recurring?.interval === "year" ? "year" : "month";
   const status = deleted ? "canceled" : (STATUSES.includes(sub.status) ? sub.status : "incomplete");
   const end = sub.current_period_end ?? item?.current_period_end ?? null;
   const live = LIVE.includes(status);
   const { error } = await admin.from("families").update({
-    plan: live ? "family" : "free",
+    plan: live ? tier : "free",
     plan_status: status,
     billing_cycle: cycle,
     paid_children: children,

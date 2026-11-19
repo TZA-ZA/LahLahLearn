@@ -31,7 +31,8 @@ export async function stripe<T = any>(path: string, params?: Record<string, unkn
   return data as T;
 }
 
-export const priceKey = (children: number, cycle: "month" | "year") => `family_${children}_${cycle}`;
+// tier: "family" (with Pip AI) or "learn" (Essentials, no Pip AI)
+export const priceKey = (children: number, cycle: "month" | "year", tier: "family" | "learn" = "family") => `${tier}_${children}_${cycle}`;
 
 function hex(buf: ArrayBuffer): string {
   return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");

@@ -1,4 +1,4 @@
-// POST { action: "checkout" | "portal" | "credits", family_id, children?: 1-3, cycle?: "month" | "year", pack?: "s"|"m"|"l", currency?, return_url? }
+// POST { action: "checkout" | "portal" | "credits", family_id, children?: 1-3, cycle?: "month" | "year", tier?: "family" | "learn", pack?: "s"|"m"|"l", currency?, return_url? }
 // Starts Stripe Checkout for a Family plan, or opens the Stripe customer portal to change or cancel.
 import { HttpError, json, optionalEnv, readJson, serveJson } from "../_shared/http.ts";
 import { adminClient, requireParent, requireUser } from "../_shared/clients.ts";
@@ -23,7 +23,7 @@ function returnBase(candidate: unknown): string {
 export const handler = serveJson(async (req) => {
   if (req.method !== "POST") throw new HttpError(405, "Use POST.");
   const { user, db } = await requireUser(req);
-  const b = await readJson<{ action?: string; family_id?: string; children?: number; cycle?: string; currency?: string; return_url?: string; pack?: string }>(req);
+  const b = await readJson<{ action?: string; family_id?: string; children?: number; cycle?: string; tier?: string; currency?: string; return_url?: string; pack?: string }>(req);
   const fid = await requireParent(db, b.family_id);
   const admin = adminClient();
   const { data: fam, error } = await admin.from("families").select("*").eq("id", fid).single();
@@ -62,7 +62,8 @@ export const handler = serveJson(async (req) => {
 
   const children = Math.min(3, Math.max(1, Math.round(Number(b.children) || 1)));
   const cycle = b.cycle === "year" ? "year" : "month";
-  const key = priceKey(children, cycle);
+  const tier = b.tier === "learn" ? "learn" : "family";
+  const key = priceKey(children, cycle, tier);
   const prices = await stripe<{ data: { id: string }[] }>("prices", { "lookup_keys[]": key, active: "true", limit: 1 }, "GET");
   if (!prices.data.length) throw new HttpError(500, "Plans are not set up in Stripe yet. Run scripts/stripe-setup.mjs.");
 
@@ -85,7 +86,7 @@ export const handler = serveJson(async (req) => {
     cancel_url: `${base}#pricing`,
     metadata: { family_id: fid },
     subscription_data: {
-      metadata: { family_id: fid, children: String(children) },
+      metadata: { family_id: fid, children: String(children), tier },
       // Someone who subscribes during the free week keeps the rest of it: the first charge waits until it ends.
       ...(trialEnd ? { trial_end: trialEnd } : {}),
     },
