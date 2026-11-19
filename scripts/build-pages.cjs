@@ -159,6 +159,10 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
   const teamHtml = '<ul class="team">' + TEAM.map(m => `<li><span class="ph"><img src="../assets/team/${m[0]}.webp" alt="${esc(m[1])}" width="120" height="120" loading="lazy"></span><b>${esc(m[1])}</b><span class="rl">${m[2].split(' · ').map(esc).join('<br>')}</span><span>${esc(m[6])}</span><span>${esc(m[5])}</span><span class="tl">${m[3] ? `<a href="https://www.instagram.com/${m[3]}/" rel="noopener">Instagram</a>` : ''}${m[4] ? `<a href="https://www.linkedin.com/in/${m[4]}/" rel="noopener">LinkedIn</a>` : ''}</span></li>`).join('') + '</ul>';
   /* plain sentences and structured data so search engines can answer "who is the researcher of LahLahLearn" */
   const roleSay = m => `${m[1]} is ${m[0] === 'thant' ? 'the team leader and web developer' : 'the ' + m[2].replace(/\s*[&·]\s*/g, ' and ')} of LahLahLearn.`;
+  const fua = src.indexOf('const FUTURE=['), fub = src.indexOf(']];', fua);
+  const FUTURE = new Function('return ' + src.slice(fua + 'const FUTURE='.length, fub + 2))();
+  const futureHtml = '<ol class="fut">' + FUTURE.map((x, i) => `<li style="--fc:${x[3]}"><div class="fa">${x[4]}</div><div><span class="fn">${String(i + 1).padStart(2, '0')} · Planned</span><h3>${esc(x[1])}</h3><p>${esc(x[2])}</p></div></li>`).join('') + '</ol>' +
+    '<style>.fut{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}.fut li{border:1px solid #e3e8e4;border-radius:22px;overflow:hidden;background:#fff}.fut .fa{background:color-mix(in srgb,var(--fc) 16%,#fff);display:grid;place-items:center;aspect-ratio:4/3}.fut .fa svg{width:84%}.fut li>div:last-child{padding:16px 18px}.fut h3{margin:.2em 0}.fut .fn{font-weight:700;font-size:.8rem;color:var(--fc)}.fut p{margin:0}</style>';
   const teamText = '<p class="team-who">' + TEAM.map(m => esc(roleSay(m))).join(' ') + '</p>';
   const person = m => ({ '@type': 'Person', name: m[1], jobTitle: m[2].replace(/\s*[&·]\s*/g, ' and ') + ' at LahLahLearn', image: `${SITE}/assets/team/${m[0]}.webp`, worksFor: { '@type': 'Organization', name: 'LahLahLearn', url: SITE + '/' }, sameAs: [m[3] ? `https://www.instagram.com/${m[3]}/` : null, m[4] ? `https://www.linkedin.com/in/${m[4]}/` : null].filter(Boolean) });
   const faqHtml = FAQ.map(f => `<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('\n');
@@ -192,12 +196,16 @@ ${cta ? `<div class="sticky"><a class="cta" href="${B}#auth-register">Start free
 <div class="card"><h3>Care Circle</h3><p>One calm view of progress for the grown-ups, with weekly reports by email.</p></div>
 </div>
 
+<h2>Our future plans</h2>
+<p>What we are building next for children, families and schools.</p>
+${futureHtml}
+
 <h2>Plans</h2>
 <p>There is a Free plan, a paid Family plan with a 7-day free trial that needs no payment details, and a School or clinic plan. Prices are shown in your currency on the <a href="../#pricing">Plans</a> page. You can cancel a paid plan at any time; see the <a href="../refunds/">Refund Policy</a>.</p>
 
 <h2>Safety and privacy</h2>
 <ul><li>Accounts are created by a parent or guardian aged 18 or over, who gives consent for the child.</li>
-<li>Children are never asked for an email address, phone number or home address, and children never chat with each other.</li>
+<li>Children are never asked for an email address, phone number or home address, and children never message each other privately. In Kids' corner they share picture posts that are checked for kind words and personal details.</li>
 <li>No advertising, and no advertising or tracking cookies.</li>
 <li>A parent can delete the account and all of the child&rsquo;s data at any time in Settings. A code is emailed to the parent first, to check it is really them.</li></ul>
 <p>Read the full <a href="../privacy/">Privacy Policy</a> and <a href="../terms/">Terms of Service</a>.</p>
