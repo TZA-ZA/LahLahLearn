@@ -2231,9 +2231,9 @@ body.noanim .hp *,body.noanim .hp{animation:none!important}
 .es-link{border:0;background:none;padding:0;color:#e3c88f;font:700 .88rem var(--f-b);text-decoration:underline;cursor:pointer}
 @media(max-width:600px){.es{padding:22px 14px;border-radius:28px}.es-base,.es-x{gap:12px;padding:14px;border-radius:20px}.es-ic{width:44px;height:44px;border-radius:14px}.es-ic svg{width:22px;height:22px}.es-sum{padding:22px}}
 @media(max-width:860px){.es-in{grid-template-columns:1fr}.es-sum{position:static;order:-1}.es-x{grid-template-columns:auto 1fr auto;row-gap:8px}.es-x .es-sw{grid-column:3;grid-row:1}.es-x .es-p{grid-column:2;grid-row:2;justify-self:start}}
-.lk{display:grid;place-items:center;min-height:60vh}.lk-c{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:460px;text-align:center;padding:40px 30px;border-radius:36px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
+.lkd{display:grid;place-items:center;min-height:60vh}.lk-c{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:460px;text-align:center;padding:40px 30px;border-radius:36px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
 .lk-ic{position:relative;display:grid;place-items:center;width:130px;height:130px;border-radius:40px;background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}.lk-ic i{position:absolute;right:-8px;bottom:-8px;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--sun);color:var(--ink);border:4px solid var(--surf)}
-.lk h2{margin:0}
+.lkd h2{margin:0}
 .px-f li.px-no{opacity:.55;text-decoration:line-through;text-decoration-thickness:1px}.px-f li.px-no svg{color:var(--muted)}
 .ptest{width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 28px;padding:22px 28px;border-radius:26px;border:1.5px dashed color-mix(in srgb,var(--brand) 45%,var(--line));background:color-mix(in srgb,var(--brand) 5%,var(--surf))}
 .ptest h3{display:flex;align-items:center;gap:8px;margin:0 0 4px;font:600 1.15rem var(--f-d)}.ptest p{margin:0;max-width:52ch;color:var(--muted);font-size:.92rem}
@@ -2464,9 +2464,9 @@ button.jr-ch{cursor:pointer}.jr-ch svg{width:94%;height:94%;display:block}
 @media(max-width:620px){.jr{--jn:66px;--jy:10px;gap:14px;padding:30px 14px 14px}.jr-s{flex-basis:112px}.jr-s+.jr-s::before{width:calc(112px + 14px - var(--jn) - 8px)}.jr-n{font-size:1.4rem}.jr-me>*{width:42px}}
 .tre{display:flex;flex-direction:column;gap:14px;padding:20px 22px;border-radius:24px;background:var(--paper);border:1px solid var(--line)}
 .tre-h{display:flex;align-items:center;justify-content:space-between;gap:10px 14px;flex-wrap:wrap}.tre-h h3{margin:0;font:700 1.3rem var(--f-d)}
-.tre-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:12px}
+.tre-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;align-items:start}
 .tre-g li{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;padding:12px 8px;border-radius:18px;background:var(--surf);border:1px solid var(--line)}
-.tre-i{width:56px;height:56px;display:grid;place-items:center}.tre-i svg{width:100%;height:100%;display:block}
+.tre-i{width:46px;height:46px;display:grid;place-items:center}.tre-i svg{width:100%;height:100%;display:block}
 .tre-g li.lk .tre-i{filter:grayscale(1) opacity(.35)}
 .tre-g b{font:700 .9rem/1.2 var(--f-d)}.tre-g small{color:var(--muted);font-size:.76rem;font-weight:600}
 .rw-card{gap:12px}.rw-burst{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -5764,14 +5764,14 @@ const QN=[
  {id:'time',type:'one',q:'When does learning usually go best?',opts:[['morning','Morning'],['afternoon','Afternoon'],['evening','Evening'],['any','It varies']]},
  {id:'interests',type:'many',max:5,q:'What does your child love?',h:'We use these in counting and pictures. Pick up to 5.',opts:[['animals','Animals'],['dinosaurs','Dinosaurs'],['space','Space'],['vehicles','Vehicles'],['sea','The sea'],['music','Music'],['trains','Trains'],['robots','Robots'],['art','Drawing'],['building','Building'],['football','Football'],['cooking','Cooking']]},
  {id:'tone',type:'one',q:'How should Pip talk?',opts:[['gentle','Soft and quiet'],['cheerful','Warm and playful'],['simple','Short and simple']]},
- {id:'lview',type:'one',q:'How does your child like their learning screens?',h:'You can switch any time with the button on the Learn page.',opts:[['simple','Simple: big pictures, very few words'],['full','Detailed: pictures with words and explanations']]},
+ {id:'lview',type:'one',q:'How does your child like their learning screens?',h:'You can switch any time with the button on the Learn page.',opts:[['simple','Pictures: big pictures, no words (recommended)'],['full','Detailed: pictures with words and explanations']]},
  {id:'prefs',type:'toggles',q:'Choose comfort settings',h:'We pre-selected these from your answers. Change anything you like, now or later.'},
  {id:'sat',type:'sat',q:'How strong should colours be?',h:'Slide until it feels comfortable for your child. You can change this later in Settings.'}
 ];
 const PREFS=[['dys','Easy-read font','Wider spacing and a clearer typeface.'],['big','Larger text','Bigger letters everywhere.'],['calm','Calm motion','No animation or moving effects.'],['contrast','Stronger contrast','Darker text and clearer outlines.'],['voice','Read questions aloud','Uses your device voice. Every question also shows on screen.'],['greet','Spoken and written greeting','A welcome message such as Good night when the app opens. Off by default.'],['first','Show First-Then schedule','A visual plan for the day on the home page.'],['lb','Hall of Fame','Show a nickname, stars and streak to other children. Off by default.']];
 const OB={live:false,i:0,a:{},back:false,done:false,addKid:false,
   start(old){this.live=true;this.i=0;this.back=false;this.done=false;this.touched=false;
-    this.a=old?{name:old.name,firstName:old.firstName||old.name||'',middleName:old.middleName||'',lastName:old.lastName||'',age:ageNow(old)?String(ageNow(old)):'',gender:old.gender,react:(old.traits&&old.traits.react)||[],energy:(old.traits&&old.traits.energy)||[],social:(old.traits&&old.traits.social)||[],routine:(old.traits&&old.traits.routine)||[],diffs:old.diffs||[],sens:old.sens||[],comm:old.comm,read:old.read,abc:old.abc||({pre:'none',letters:'some',words:'all',sent:'all'}[old.read]||'none'),words:old.words||({pre:'none',letters:'none',words:'few',sent:'many'}[old.read]||'none'),sentence:old.sentence||(old.read==='sent'?'yes':'no'),world:old.world||'little',num:old.num,att:old.att,time:old.time,interests:old.interests||[],tone:old.tone,lview:(old.prefs&&old.prefs.lview)||'',prefs:Object.assign({},old.prefs)}:{diffs:[],sens:[],interests:[],prefs:null};
+    this.a=old?{name:old.name,firstName:old.firstName||old.name||'',middleName:old.middleName||'',lastName:old.lastName||'',age:ageNow(old)?String(ageNow(old)):'',gender:old.gender,react:(old.traits&&old.traits.react)||[],energy:(old.traits&&old.traits.energy)||[],social:(old.traits&&old.traits.social)||[],routine:(old.traits&&old.traits.routine)||[],diffs:old.diffs||[],sens:old.sens||[],comm:old.comm,read:old.read,abc:old.abc||({pre:'none',letters:'some',words:'all',sent:'all'}[old.read]||'none'),words:old.words||({pre:'none',letters:'none',words:'few',sent:'many'}[old.read]||'none'),sentence:old.sentence||(old.read==='sent'?'yes':'no'),world:old.world||'little',num:old.num,att:old.att,time:old.time,interests:old.interests||[],tone:old.tone,lview:(old.prefs&&old.prefs.lview)||'simple',prefs:Object.assign({},old.prefs)}:{diffs:[],sens:[],interests:[],prefs:null};
     go(old?'onboard':'pick')}};
 function deriveFlags(a){
   const r=a.react||[],en=a.energy||[],so=a.social||[],sn=a.sens||[],ro=(a.routine||[]).filter(x=>x!=='none');
@@ -5873,7 +5873,7 @@ function obFinish(){
   const adding=!!OB.addKid;OB.addKid=false;
   const prev=P;
   if(adding&&prev&&prev.kid){kidsSync();const c=KIDS&&KIDS.list.find(k=>k.id===prev.kid);if(c)c.style=styleKey();kidPut(prev.kid,prev,G)}
-  P={v:1,vx:1,name:a.name.trim(),firstName:(a.firstName||'').trim(),middleName:(a.middleName||'').trim(),lastName:(a.lastName||'').trim(),age:ageOf(a.age)||'5-6',ageN:/^\d+$/.test(String(a.age||''))?+a.age:undefined,ageYr:/^\d+$/.test(String(a.age||''))?new Date().getFullYear():undefined,gender:a.gender||'na',diffs:deriveFlags(a).diffs,traits:{react:a.react||[],energy:a.energy||[],social:a.social||[],routine:a.routine||[],sens:a.sens||[],comm:a.comm||'words',age:ageOf(a.age)||'5-6'},sens:a.sens||[],comm:a.comm||'words',read:a.read||curRead(a),cl:curPlace(a),abc:a.abc,words:a.words,sentence:a.sentence,world:a.world,num:a.num||'pre',att:a.att||3,time:a.time||'any',interests:a.interests||[],tone:a.tone||'gentle',prefs:Object.assign(a.prefs||defaultPrefs(a),{lview:a.lview||(['cards','point','sign'].includes(a.comm)||ageOf(a.age)==='3-4'?'simple':'full')}),plan:(prev&&prev.plan)||'free',buddy:a.buddy||(adding?'pip':lsGet('lala_buddy'))||(prev&&prev.buddy)||undefined,kid:(!prev||adding||!prev.kid)?kidNewId():prev.kid};
+  P={v:1,vx:1,name:a.name.trim(),firstName:(a.firstName||'').trim(),middleName:(a.middleName||'').trim(),lastName:(a.lastName||'').trim(),age:ageOf(a.age)||'5-6',ageN:/^\d+$/.test(String(a.age||''))?+a.age:undefined,ageYr:/^\d+$/.test(String(a.age||''))?new Date().getFullYear():undefined,gender:a.gender||'na',diffs:deriveFlags(a).diffs,traits:{react:a.react||[],energy:a.energy||[],social:a.social||[],routine:a.routine||[],sens:a.sens||[],comm:a.comm||'words',age:ageOf(a.age)||'5-6'},sens:a.sens||[],comm:a.comm||'words',read:a.read||curRead(a),cl:curPlace(a),abc:a.abc,words:a.words,sentence:a.sentence,world:a.world,num:a.num||'pre',att:a.att||3,time:a.time||'any',interests:a.interests||[],tone:a.tone||'gentle',prefs:Object.assign(a.prefs||defaultPrefs(a),{lview:a.lview||'simple'}),plan:(prev&&prev.plan)||'free',buddy:a.buddy||(adding?'pip':lsGet('lala_buddy'))||(prev&&prev.buddy)||undefined,kid:(!prev||adding||!prev.kid)?kidNewId():prev.kid};
   if(prev&&prev.trial)P.trial=prev.trial;
   const RM={pre:15,letters:35,words:58,sent:80},NM={pre:15,five:35,ten:58,add:80},AM={2:20,3:30,5:45,10:65},CM={speaks:75,words:50,cards:30,point:25,sign:45};
   const AGE_NUDGE={'3-4':-10,'5-6':0,'7-8':8}[P.age]||0;
@@ -5980,7 +5980,7 @@ function dashPic(o){
 }
 /* A feature the family's Essentials plan does not include: a friendly picture, and a way for a grown-up to add it */
 R.locked=arg=>{const x=ESS_X.concat(PLAN_BASIC).find(y=>y[0]===arg)||ESS_X[0];
-  $('#page').innerHTML=`<div class="wrap lk"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} ${planNow()==='free'?'It is not part of the Free plan. A grown-up can choose a plan to unlock it.':'It is not switched on in your plan yet. A grown-up can add it on the Plans page.'}</p>
+  $('#page').innerHTML=`<div class="wrap lkd"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} ${planNow()==='free'?'It is not part of the Free plan. A grown-up can choose a plan to unlock it.':'It is not switched on in your plan yet. A grown-up can add it on the Plans page.'}</p>
    <div class="row" style="justify-content:center;gap:12px"><button class="lpx-back" data-go="dashboard" aria-label="Back home">${BACK_SVG}</button><button class="btn pri lg" data-go="pricing">${ic('plus',18)} ${planNow()==='free'?'See plans':'Add '+esc(x[1])}</button></div></div></div>`};
 R.dashboard=()=>{
   const greet=greetWord();
@@ -6590,7 +6590,7 @@ function curEnd(){
 }
 
 /* Learn page look: 'simple' = big pictures and almost no words, 'full' = pictures with words and details */
-const lvSimple=()=>!!(P&&P.prefs&&P.prefs.lview==='simple');
+const lvSimple=()=>!!(P&&P.prefs&&P.prefs.lview!=='full');
 function lvSwitch(){const s=lvSimple();
   return `<div class="lv-sw" role="radiogroup" aria-label="How the Learn page looks"><button role="radio" aria-checked="${s}" data-lv="simple" aria-label="Simple: pictures"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2.5" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="2.5" fill="currentColor" opacity=".7"/><rect x="3" y="13" width="8" height="8" rx="2.5" fill="currentColor" opacity=".7"/><rect x="13" y="13" width="8" height="8" rx="2.5" fill="currentColor"/></svg><span class="lv-w">Pictures</span></button><button role="radio" aria-checked="${!s}" data-lv="full" aria-label="Detailed: pictures and words"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="6" height="6" rx="2" fill="currentColor" stroke="none"/><path d="M12 6h9M12 9h6M3 15h18M3 19h13"/></svg><span class="lv-w">Words</span></button></div>`}
 function lvBind(){
