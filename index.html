@@ -1427,6 +1427,7 @@ body.calming .rush,body.calming .cf,body.calming .combo-pop{display:none!importa
 .gr-c .gr-t b{font:600 1.15rem var(--f-d)}.gr-c .gr-t small{color:var(--ink);opacity:.7}
 .gr-pill{position:absolute;top:14px;right:14px;display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:99px;background:var(--surf);font:600 .85rem var(--f-d)}.gr-pill.ok{background:var(--brand);color:var(--on-brand)}
 .gr-sec{background:var(--surf);border:1px solid var(--line);border-radius:30px;padding:clamp(16px,3vw,24px);display:flex;flex-direction:column;gap:16px}
+.tm-hint{margin:0;text-align:center;font-size:.88rem;color:var(--muted)}
 .gr-sh{display:flex;align-items:center;gap:12px}.gr-sh>div{flex:1}.gr-sh h3{margin:0}.gr-sh p{margin:2px 0 0}
 .gr-n{width:36px;height:36px;border-radius:50%;background:var(--brand);color:var(--on-brand);display:grid;place-items:center;font:700 1.05rem var(--f-d);flex:none}
 .gr-say{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:28px;background:var(--surf);border:1px solid var(--line)}.gr-say p{margin:0;font:500 1.15rem var(--f-d)}
@@ -3554,7 +3555,7 @@ const setSync=()=>{const s=$('#syncState');if(!s)return;s.textContent='';s.style
 async function initStore(){
   if(CLOUD.on){
     if(await cloudInit()&&CLOUD.user){
-      try{await cloudContext()}catch(e){try{CLOUD.ctx=JSON.parse(lsGet('lll.ctx')||'null');CLOUD.fam=CLOUD.ctx&&(CLOUD.ctx.memberships||[]).find(m=>m.role==='parent')||null}catch(_){}}
+      try{await cloudContext()}catch(e){try{CLOUD.ctx=JSON.parse(lsGet('lll.ctx')||'null');CLOUD.fam=famPick(CLOUD.ctx&&CLOUD.ctx.memberships)}catch(_){}}
       if(CLOUD.fam)cloudUseFamily();else if(cloudHelps().length)CLOUD.helperOnly=true;
     }
     setSync();return;
@@ -3880,10 +3881,12 @@ function cloudInit(){
     }catch(e){console.warn('Cloud is off:',e);CLOUD.on=false;return false}
   })();
 }
+/* a co-parent may also own an empty family of their own: use the one with children first */
+function famPick(ms){const ps=(ms||[]).filter(m=>m.role==='parent');return ps.find(m=>m.children&&m.children.length)||ps[0]||null}
 async function cloudContext(){
   const {data,error}=await CLOUD.sb.rpc('my_context');if(error)throw error;
   CLOUD.ctx=data;lsSet('lll.ctx',JSON.stringify(data));
-  CLOUD.fam=(data.memberships||[]).find(m=>m.role==='parent')||null;
+  CLOUD.fam=famPick(data.memberships);
   return data;
 }
 const cloudHelps=()=>((CLOUD.ctx&&CLOUD.ctx.memberships)||[]).filter(m=>m.role!=='parent');
@@ -4380,8 +4383,8 @@ function bindTeamCloud(user){
   $$('[data-rm]').forEach(b=>b.onclick=async()=>{const r=await CLOUD.sb.rpc('remove_member',{p_family:UID,p_user:b.dataset.rm});if(r.error){toast(tr('Could not remove. Please try again.'));return}toast(tr('Removed from the Care Circle.'));cloudRefreshCare()});
   $$('[data-rminv]').forEach(b=>b.onclick=async()=>{await CLOUD.sb.from('invites').delete().eq('id',b.dataset.rminv);cloudRefreshCare()});
   $$('[data-cpinv]').forEach(b=>b.onclick=()=>{const l=location.origin+location.pathname+'#join-'+b.dataset.cpinv;try{navigator.clipboard.writeText(l).then(()=>toast(tr('Invite link copied.')),()=>toast(l))}catch(e){toast(l)}});
-  if(!$('#tmadd'))return;let role='therapist';
-  $$('#tmr .cg-a').forEach(b=>b.onclick=()=>{role=b.dataset.r;$$('#tmr .cg-a').forEach(x=>x.classList.toggle('on',x===b))});
+  if(!$('#tmadd'))return;let role='parent';
+  $$('#tmr .cg-a').forEach(b=>b.onclick=()=>{role=b.dataset.r;tmPick(b)});
   $('#tmadd').onclick=async()=>{const m=$('#tmm');m.hidden=false;m.className='gr-tip';const n=$('#tmn').value.trim(),em=$('#tme').value.trim();
     if(!n){m.textContent=tr('Add a name.');return}
     if(!em){m.textContent=tr('Add their email address so we can send the invite.');return}
@@ -9804,18 +9807,20 @@ function bindVisits(user){
     if(cloudCare()){$('#vbook').disabled=true;CLOUD.sb.from('appointments').insert({child_id:P.kid,family_id:UID,starts_at:new Date(when).toISOString(),therapist_user_id:accId||null,therapist_name:name,mode:mo==='online'?'online':'person',note:nt,booked_by_name:user.name||''}).select('id').single().then(r=>{$('#vbook').disabled=false;if(r.error){m.textContent=/duplicate|unique/i.test(r.error.message)?tr('That time was just booked. Please pick another.'):r.error.message;return}cloudInvoke('checkup',{appointment_id:r.data.id,action:'booked'}).catch(()=>{});toast(tr('Check-up booked'));cloudRefreshCare()});return}
     (G.appts=G.appts||[]).push({when,who:name,accId,mode:mo,note:nt,by:user.name});save();toast('Check-up booked');careDraw()};
 }
+const TM_HINT={parent:'Another parent or carer gets the same full portal as you.',teacher:'Can see progress, strengths and reports, and add shared notes.',therapist:'Can see progress and strengths, add notes and offer check-up times.'};
+function tmPick(b){$$('#tmr .cg-a').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-checked',x===b)});const h=$('#tmrh');if(h)h.textContent=TM_HINT[b.dataset.r]||''}
 function teamHTML(user){
   const pt=careAcc(),cl=cloudCare();
-  return `<section class="gr-sec"><div class="gr-sh"><span class="gr-n">1</span><div><h3>Care team</h3><p class="muted small">${cl?tr('Everyone here signs in with their own email.'):'Everyone here has their own PIN.'}</p></div></div>${pt.acc.map(a=>`<div class="vs-r"><span class="vs-d" aria-hidden="true">${ic(ROLES.find(r=>r[0]===a.role)[2],20)}</span><div><b>${esc(a.name)}</b><small>${ROLES.find(r=>r[0]===a.role)[1]}${a.me?' · '+tr('You'):''}${a.email?' · '+esc(a.email):''}</small></div>${user.role==='parent'&&a.id!==user.id&&!a.owner&&!a.me?`<button class="btn sm ghost" data-rm="${a.id}">Remove</button>`:''}</div>`).join('')}${cl&&pt.invites&&pt.invites.length?pt.invites.map(i=>`<div class="vs-r"><span class="vs-d" aria-hidden="true">${ic('chat',18)}</span><div><b>${esc(i.name||i.email)}</b><small>${(ROLES.find(r=>r[0]===i.role)||[0,i.role])[1]} · ${tr('Invited')}${i.name?' · '+esc(i.email):''}</small></div>${user.role==='parent'?`<button class="btn sm ghost" data-cpinv="${esc(i.token)}">${tr('Copy link')}</button><button class="btn sm ghost" data-rminv="${esc(i.id)}">${tr('Cancel')}</button>`:''}</div>`).join(''):''}</section>
-  ${user.role==='parent'?`<section class="gr-sec"><div class="gr-sh"><span class="gr-n">2</span><div><h3>Add a teacher or therapist</h3></div></div><label class="stack" style="gap:4px"><b class="small">Name</b><input class="in" id="tmn"></label><div class="cg-who" id="tmr">${ROLES.slice(1).map((r,i)=>`<button class="cg-a ${i===1?'on':''}" data-r="${r[0]}"><span>${ic(r[2],20)}</span><b>${r[1]}</b></button>`).join('')}</div><label class="stack" style="gap:4px"><b class="small">Email</b><input class="in" id="tme" type="email"></label>${cl?`<p class="muted small" style="margin:0">${tr('We email them a link to join. They sign in with their own email, so no PIN is needed.')}</p>`:`<label class="stack" style="gap:4px"><b class="small">Give them a 4-digit PIN</b><input class="in" id="tmp" type="password" inputmode="numeric" maxlength="4"></label>`}<p class="gr-tip" id="tmm" hidden></p><button class="btn pri" id="tmadd">${cl?tr('Send invite'):'Add'}</button></section>`:''}
+  return `<section class="gr-sec"><div class="gr-sh"><span class="gr-n">1</span><div><h3>Care team</h3><p class="muted small">${cl?tr('Everyone here signs in with their own email.'):'Everyone here has their own PIN.'}</p></div></div>${pt.acc.map(a=>`<div class="vs-r"><span class="vs-d" aria-hidden="true">${ic(ROLES.find(r=>r[0]===a.role)[2],20)}</span><div><b>${esc(a.name)}</b><small>${ROLES.find(r=>r[0]===a.role)[1]}${a.me?' · '+tr('You'):''}${a.email?' · '+esc(a.email):''}</small></div>${user.role==='parent'&&a.id!==user.id&&!a.owner&&!a.me&&a!==pt.acc[0]?`<button class="btn sm ghost" data-rm="${a.id}">Remove</button>`:''}</div>`).join('')}${cl&&pt.invites&&pt.invites.length?pt.invites.map(i=>`<div class="vs-r"><span class="vs-d" aria-hidden="true">${ic('chat',18)}</span><div><b>${esc(i.name||i.email)}</b><small>${(ROLES.find(r=>r[0]===i.role)||[0,i.role])[1]} · ${tr('Invited')}${i.name?' · '+esc(i.email):''}</small></div>${user.role==='parent'?`<button class="btn sm ghost" data-cpinv="${esc(i.token)}">${tr('Copy link')}</button><button class="btn sm ghost" data-rminv="${esc(i.id)}">${tr('Cancel')}</button>`:''}</div>`).join(''):''}</section>
+  ${user.role==='parent'?`<section class="gr-sec"><div class="gr-sh"><span class="gr-n">2</span><div><h3>Add someone to the Care Circle</h3></div></div><label class="stack" style="gap:4px"><b class="small">Name</b><input class="in" id="tmn"></label><div class="cg-who" id="tmr" role="radiogroup" aria-label="Who are they?">${ROLES.map((r,i)=>`<button type="button" class="cg-a ${i===0?'on':''}" role="radio" aria-checked="${i===0}" data-r="${r[0]}"><span>${ic(r[2],20)}</span><b>${r[1]}</b></button>`).join('')}</div><p class="tm-hint" id="tmrh" aria-live="polite">${TM_HINT.parent}</p><label class="stack" style="gap:4px"><b class="small">Email</b><input class="in" id="tme" type="email"></label>${cl?`<p class="muted small" style="margin:0">${tr('We email them a link to join. They sign in with their own email, so no PIN is needed.')}</p>`:`<label class="stack" style="gap:4px"><b class="small">Give them a 4-digit PIN</b><input class="in" id="tmp" type="password" inputmode="numeric" maxlength="4"></label>`}<p class="gr-tip" id="tmm" hidden></p><button class="btn pri" id="tmadd">${cl?tr('Send invite'):'Add'}</button></section>`:''}
   <section class="gr-sec"><div class="gr-sh"><span class="gr-n">!</span><div><h3>Privacy</h3></div></div><p class="muted">Care Circle data stays on this device. The portal locks itself after 15 minutes. Anyone who does not know a PIN cannot open it.</p><button class="btn" id="tmlock">${ic('out',16)} Lock now</button></section>`;
 }
 function bindTeam(user){
   if(cloudCare()){bindTeamCloud(user);return}
   $('#tmlock').onclick=careLock;
   $$('[data-rm]').forEach(b=>b.onclick=()=>{const p=portalGet();p.acc=p.acc.filter(a=>a.id!==b.dataset.rm);portalSet(p);careDraw()});
-  if(!$('#tmadd'))return;let role='therapist';
-  $$('#tmr .cg-a').forEach(b=>b.onclick=()=>{role=b.dataset.r;$$('#tmr .cg-a').forEach(x=>x.classList.toggle('on',x===b))});
+  if(!$('#tmadd'))return;let role='parent';
+  $$('#tmr .cg-a').forEach(b=>b.onclick=()=>{role=b.dataset.r;tmPick(b)});
   $('#tmadd').onclick=async()=>{const m=$('#tmm');m.hidden=false;m.className='gr-tip';const n=$('#tmn').value.trim(),pin=$('#tmp').value;if(!n){m.textContent='Add a name.';return}if($('#tme').value.trim()&&!(await emailGate($('#tme'),null,$('#tmadd')))){m.textContent='Please check the email address, or leave it empty.';return}if(!/^\d{4}$/.test(pin)){m.textContent='The PIN needs 4 numbers.';return}
     const salt=rnd(8),h=await pinHash(pin,salt),code=recCode(),rs=rnd(8),rh=await pinHash(code,rs),p=portalGet();p.acc.push({id:rnd(6),name:n,role,email:$('#tme').value.trim(),salt,h,rs,rh,slots:[]});portalSet(p);
     m.className='gr-tip ok';m.innerHTML='Added. Their recovery code is <b data-notr>'+code+'</b>. Give it to them.';setTimeout(careDraw,5000)};
