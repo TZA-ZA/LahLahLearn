@@ -32,6 +32,9 @@ export async function stripe<T = any>(path: string, params?: Record<string, unkn
 }
 
 // tier: "family" (with Pip AI) or "learn" (Essentials, no Pip AI)
+// Essentials add-ons: each one is its own Stripe price, added as an extra line on the subscription.
+export const FEATURES = ["world", "care", "reports", "checkups", "ai"] as const;
+export const addonKey = (feature: string, children: number, cycle: "month" | "year") => `addon_${feature}_${children}_${cycle}`;
 export const priceKey = (children: number, cycle: "month" | "year", tier: "family" | "learn" = "family") => `${tier}_${children}_${cycle}`;
 
 function hex(buf: ArrayBuffer): string {

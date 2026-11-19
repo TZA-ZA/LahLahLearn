@@ -16,11 +16,17 @@ if (!KEY || !SB) {
   process.exit(1);
 }
 
+// Essentials: a base price plus optional extras. Must match ESS_BASE / ESS_X / ESS_KIDS / essNice in index.html.
+const ESS_BASE = 25, ESS_KIDS = [1, 1.75, 2.25];
+const ADDONS = { world: ["3D World", 8], care: ["Care Circle", 8], reports: ["Weekly reports", 5], checkups: ["Check-ups", 5], ai: ["Pip AI", 15] };
+const BIG = ["jpy", "krw", "vnd", "idr"];
+const essNice = (c, v) => (BIG.includes(c) || v >= 1000) ? (v >= 10000 ? Math.round(v / 500) * 500 : Math.round(v / 10) * 10) : Math.round(v);
+const essMyr = (myr) => ESS_KIDS.map((k) => essNice("myr", myr * k));
+const FAMILY_LOCAL = {"sgd": [18, 30, 39], "usd": [15, 24, 30], "eur": [15, 24, 30], "gbp": [12, 21, 27], "aud": [21, 36, 45], "nzd": [24, 39, 51], "cad": [21, 33, 42], "idr": [205000, 355000, 445000], "thb": [479, 839, 1049], "php": [839, 1439, 1859], "vnd": [355000, 625000, 805000], "inr": [1199, 2099, 2699], "hkd": [117, 207, 255], "jpy": [2099, 3599, 4499], "krw": [20000, 33000, 44000], "cny": [105, 177, 237], "aed": [57, 96, 126]};
+const essLocal = (myr) => Object.fromEntries(Object.entries(FAMILY_LOCAL).map(([c, v]) => [c, ESS_KIDS.map((k) => essNice(c, myr * v[0] / 60 * k))]));
 const TIERS = {
-  family: { name: "Family", desc: "Everything in LahLahLearn, with Pip AI", myr: [60, 105, 135],
-    local: {"sgd": [18, 30, 39], "usd": [15, 24, 30], "eur": [15, 24, 30], "gbp": [12, 21, 27], "aud": [21, 36, 45], "nzd": [24, 39, 51], "cad": [21, 33, 42], "idr": [205000, 355000, 445000], "thb": [479, 839, 1049], "php": [839, 1439, 1859], "vnd": [355000, 625000, 805000], "inr": [1199, 2099, 2699], "hkd": [117, 207, 255], "jpy": [2099, 3599, 4499], "krw": [20000, 33000, 44000], "cny": [105, 177, 237], "aed": [57, 96, 126]} },
-  learn: { name: "Essentials", desc: "Every lesson and the Care Circle, without Pip AI", myr: [35, 60, 79],
-    local: {"sgd": [10, 17, 23], "usd": [9, 14, 17], "eur": [9, 14, 17], "gbp": [7, 12, 16], "aud": [12, 21, 26], "nzd": [14, 23, 30], "cad": [12, 19, 24], "idr": [119000, 206000, 258000], "thb": [279, 489, 609], "php": [489, 829, 1079], "vnd": [209000, 359000, 469000], "inr": [699, 1199, 1599], "hkd": [68, 120, 150], "jpy": [1199, 2099, 2599], "krw": [12000, 19000, 26000], "cny": [61, 100, 140], "aed": [33, 56, 73]} },
+  family: { name: "Family", desc: "Everything in LahLahLearn, with Pip AI", myr: [60, 105, 135], local: FAMILY_LOCAL },
+  learn: { name: "Essentials", desc: "Every lesson, game and story (extras added separately)", myr: essMyr(ESS_BASE), local: essLocal(ESS_BASE) },
 };
 // [tier, children, cycle, amount in sen]. Yearly = 10 months.
 const PRICES = Object.keys(TIERS).flatMap((t) => [1, 2, 3].flatMap((n) => ["month", "year"].map((c) => [t, n, c, TIERS[t].myr[n - 1] * 100 * (c === "year" ? 10 : 1)])));
@@ -64,7 +70,7 @@ console.log(`Stripe ${mode} mode`);
 
 // Products: one per tier and child count (the customer portal needs one price per interval per product)
 const products = {};
-const found = await stripe("GET", "products/search?query=" + encodeURIComponent("metadata['app']:'lahlahlearn' AND active:'true'"));
+const found = await stripe("GET", "products/search?limit=100&query=" + encodeURIComponent("metadata['app']:'lahlahlearn' AND active:'true'"));
 for (const tier of Object.keys(TIERS)) for (const n of [1, 2, 3]) {
   const id = `${tier}_${n}`;
   products[id] = found.data.find((p) => p.metadata?.children === String(n) && (p.metadata?.tier || "family") === tier) || await stripe("POST", "products", {
@@ -94,6 +100,25 @@ for (const [tier, n, cycle, amount] of PRICES) {
     metadata: { children: n, cycle, tier },
   });
   console.log("price", key, p.id, "(created)");
+}
+
+// Essentials extras: one product each, one price per child count and cycle (lookup key addon_<k>_<n>_<cycle>)
+const addKeys = Object.keys(ADDONS).flatMap((k) => [1, 2, 3].flatMap((n) => ["month", "year"].map((c) => `addon_${k}_${n}_${c}`)));
+const haveAdd = [];
+for (let i = 0; i < addKeys.length; i += 10) haveAdd.push(...(await stripe("GET", "prices?active=true&limit=10&" + addKeys.slice(i, i + 10).map((k) => "lookup_keys[]=" + k).join("&"))).data);
+for (const [k, [label, myr]] of Object.entries(ADDONS)) {
+  const prod = found.data.find((p) => p.metadata?.addon === k) || await stripe("POST", "products", {
+    name: `LahLahLearn Essentials extra · ${label}`, metadata: { app: "lahlahlearn", addon: k }, tax_code: "txcd_10103001",
+  });
+  const local = essLocal(myr), base = essMyr(myr);
+  for (const n of [1, 2, 3]) for (const cycle of ["month", "year"]) {
+    const key = `addon_${k}_${n}_${cycle}`, mult = cycle === "year" ? 10 : 1, amount = base[n - 1] * 100 * mult;
+    const opts = Object.fromEntries(Object.entries(local).map(([c, v]) => [c, { unit_amount: (ZERO_DECIMAL.includes(c) ? 1 : 100) * v[n - 1] * mult }]));
+    const have = haveAdd.find((p) => p.lookup_key === key);
+    if (have && have.unit_amount === amount && have.product === prod.id) { await stripe("POST", "prices/" + have.id, { currency_options: opts }); console.log("price", key, "(exists)"); continue; }
+    const p = await stripe("POST", "prices", { product: prod.id, currency: "myr", unit_amount: amount, recurring: { interval: cycle }, lookup_key: key, transfer_lookup_key: "true", currency_options: opts, nickname: `${label}, ${n} ${n === 1 ? "child" : "children"}, ${cycle}ly`, metadata: { addon: k, children: n, cycle } });
+    console.log("price", key, p.id, "(created)");
+  }
 }
 
 // Webhook

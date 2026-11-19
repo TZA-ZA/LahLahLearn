@@ -15,9 +15,12 @@ export async function applySubscription(admin: SupabaseClient, sub: any, familyH
     fid = data?.id ?? null;
   }
   if (!fid) { console.warn("subscription without a family", sub?.id); return; }
-  const item = sub?.items?.data?.[0];
+  // deno-lint-ignore no-explicit-any
+  const all: any[] = sub?.items?.data ?? [];
+  const item = all.find((i) => /^(family|learn)_/.test(i?.price?.lookup_key ?? "")) ?? all[0];
   const price = item?.price ?? {};
   const m = /^(family|learn)_([1-3])_(month|year)$/.exec(price.lookup_key ?? "");
+  const addons = all.map((i) => /^addon_([a-z]+)_[1-3]_(month|year)$/.exec(i?.price?.lookup_key ?? "")?.[1]).filter(Boolean) as string[];
   const tier = m ? m[1] : sub?.metadata?.tier === "learn" ? "learn" : "family";
   const children = m ? Number(m[2]) : Math.min(3, Math.max(1, Number(sub?.metadata?.children) || 1));
   const cycle = m ? m[3] : price?.recurring?.interval === "year" ? "year" : "month";
@@ -26,6 +29,7 @@ export async function applySubscription(admin: SupabaseClient, sub: any, familyH
   const live = LIVE.includes(status);
   const { error } = await admin.from("families").update({
     plan: live ? tier : "free",
+    features: live && tier === "learn" ? Object.fromEntries(addons.map((f) => [f, true])) : {},
     plan_status: status,
     billing_cycle: cycle,
     paid_children: children,

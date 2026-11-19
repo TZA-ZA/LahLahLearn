@@ -2142,7 +2142,6 @@ body.noanim .lv-s *{animation:none!important}
 .snd-tg[aria-pressed="false"]{color:var(--muted);background:color-mix(in srgb,var(--coral) 14%,var(--surf))}
 .snd-tg:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
 .au2{position:relative}.au2 .snd-tg{position:absolute;top:8px;right:24px;z-index:5}
-@media(min-width:1181px){.px-sheet.n4{grid-template-columns:1fr 1fr 1.12fr 1fr}}
 .px .px-col:not(.is-fam) .px-kids .pl-cb{border-color:var(--line);color:var(--ink)}.px .px-col:not(.is-fam) .px-kids .pl-cb.on{background:var(--brand);color:#fff;border-color:var(--brand)}.px .px-col:not(.is-fam) .pl-calc>span{color:var(--muted)}
 .px-ai{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:4px 10px;border-radius:999px;font:700 .8rem var(--f-d);background:color-mix(in srgb,var(--muted) 14%,transparent);color:var(--muted)}
 .px-ai.on{background:color-mix(in srgb,var(--brand) 16%,transparent);color:var(--brand)}
@@ -2150,7 +2149,91 @@ body.noanim .lv-s *{animation:none!important}
 .px-aitg{display:flex;gap:4px;padding:4px;border-radius:999px;border:1px solid var(--line);width:max-content}
 .px-aitg button{border:0;background:none;padding:6px 12px;border-radius:999px;font:700 .82rem var(--f-d);color:var(--muted);cursor:pointer}
 .px-aitg button[aria-pressed="true"]{background:var(--brand);color:#fff}
-@media(max-width:1180px) and (min-width:861px){.px-sheet.n4{grid-template-columns:1fr 1fr}.px-sheet.n4 .px-col{border-left:0!important;border-top:1px solid var(--line)}}
+/* ---- Pictures home ---- */
+.tli{display:none}
+body.pics .tli{display:inline-flex}body.pics .tlw,body.pics .dk span,body.pics .calmfab span{display:none}
+body.pics #topnav .tl{min-width:56px;justify-content:center}
+.hp{display:flex;flex-direction:column;gap:clamp(18px,3vw,28px)}
+.hp-sky{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:clamp(16px,5vw,70px);min-height:clamp(300px,40vw,380px);padding:24px;border-radius:40px;background:linear-gradient(180deg,#8ecbf0,#cfeaf5 62%,#f3f7e2);border:3px solid #fff;box-shadow:0 20px 40px -26px rgba(0,0,0,.4)}
+.hp-sun{position:absolute;top:26px;right:9%;width:70px;height:70px;border-radius:50%;background:#ffd34d;box-shadow:0 0 0 14px rgba(255,211,77,.35),0 0 0 30px rgba(255,211,77,.15);animation:hpSun 6s ease-in-out infinite}
+.hp-cl{position:absolute;width:120px;height:40px;border-radius:40px;background:#fff;opacity:.9;animation:hpCloud 38s linear infinite}
+.hp-cl::before,.hp-cl::after{content:"";position:absolute;background:#fff;border-radius:50%}.hp-cl::before{width:56px;height:56px;left:18px;top:-26px}.hp-cl::after{width:42px;height:42px;left:62px;top:-16px}
+.hp-cl.a{top:46px;left:-130px}.hp-cl.b{top:110px;left:-130px;transform:scale(.7);animation-duration:52s;animation-delay:-20s}
+.hp-hill{position:absolute;left:-10%;right:-10%;bottom:-60px;height:140px;border-radius:50%;background:#9fd58b}
+.hp-sp{position:absolute;width:16px;height:16px;background:#fff;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:hpTw 2.4s ease-in-out infinite}
+.hp-sp.s1{top:30%;left:12%}.hp-sp.s2{top:18%;left:58%;animation-delay:.8s}.hp-sp.s3{top:62%;right:16%;animation-delay:1.5s}
+.hp-bud{position:relative;z-index:1;border:0;background:none;padding:0;cursor:pointer;animation:hpBob 3s ease-in-out infinite}
+.hp-bud.hop{animation:hpHop .6s cubic-bezier(.3,1.6,.5,1)}
+.hp-bub{position:absolute;top:6px;right:-34px;display:flex;align-items:flex-end;gap:4px;padding:12px 14px;border-radius:22px 22px 22px 6px;background:#fff;box-shadow:0 8px 18px -10px rgba(0,0,0,.35)}
+.hp-bub i{width:8px;border-radius:4px;background:var(--brand);animation:hpWave 1s ease-in-out infinite}.hp-bub i:nth-child(1){height:10px}.hp-bub i:nth-child(2){height:20px;animation-delay:.15s}.hp-bub i:nth-child(3){height:14px;animation-delay:.3s}
+.hp-go{position:relative;z-index:1;display:grid;place-items:center;width:clamp(180px,26vw,240px);height:clamp(180px,26vw,240px);border:0;border-radius:50%;background:none;cursor:pointer;padding:0}
+.hp-ring{position:absolute;inset:0;width:100%;height:100%}
+.hp-play{display:grid;place-items:center;width:72%;height:72%;border-radius:50%;background:var(--brand);color:#fff;box-shadow:0 10px 0 color-mix(in srgb,var(--brand) 65%,#000),0 20px 34px -12px rgba(0,0,0,.4);animation:lvPulse 2s ease-in-out infinite;transition:transform .2s}
+.hp-play svg{margin-left:10%}.hp-go:active .hp-play{transform:translateY(6px)}
+.hp-go .lpx-hand{right:2px;bottom:4px}
+.hp-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(14px,3vw,30px)}
+.hp-stars{display:inline-flex;align-items:center;gap:8px;padding:8px 18px 8px 10px;border-radius:999px;background:var(--surf);box-shadow:var(--shadow);font:800 1.6rem var(--f-d)}
+.hp-st{display:grid;color:#f2c14e;animation:hpSpin 6s linear infinite}.hp-st svg{width:40px;height:40px}
+.hp-fl{display:inline-flex;gap:6px;padding:8px 14px;border-radius:999px;background:var(--surf);box-shadow:var(--shadow)}
+.hp-fl i{display:grid;color:var(--line)}.hp-fl i.on{color:#ff8a3d;animation:hpFlick 1.4s ease-in-out infinite}.hp-fl i.now{outline:3px dashed color-mix(in srgb,#ff8a3d 60%,transparent);outline-offset:3px;border-radius:50%}
+.hp-chest{border:0;background:none;cursor:pointer;animation:hpWig 1.2s ease-in-out infinite}.hp-chest svg{width:76px;height:76px}
+.hp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.6vw,26px)}
+.hp-t{position:relative;display:grid;place-items:center;aspect-ratio:4/3;overflow:hidden;border:0;border-radius:34px;cursor:pointer;color:var(--ink);background:color-mix(in srgb,var(--c) 30%,var(--surf));box-shadow:0 8px 0 color-mix(in srgb,var(--c) 70%,#000 12%),0 18px 30px -20px rgba(0,0,0,.4);animation:hpIn .5s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(var(--i)*70ms);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.hp-t:hover,.hp-t:focus-visible{transform:scale(1.05) rotate(-1.5deg)}.hp-t:active{transform:translateY(6px)}
+.hp-t:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.hpi{display:grid}.hp-book{animation:hpBounce 2.2s ease-in-out infinite}.hp-globe{animation:hpSpin 9s linear infinite}.hp-pal{animation:hpWig 2.6s ease-in-out infinite}.hp-cup{animation:hpShine 2.8s ease-in-out infinite}
+.hp-scene{position:absolute;inset:0}.hp-scene .bk-art{position:absolute;inset:0;border-radius:0}
+.hp-ear{position:absolute;right:12px;bottom:12px;display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--brand);color:#fff;animation:hpWave 1.6s ease-in-out infinite}
+.hp-breath{position:relative;display:grid;place-items:center;width:130px;height:130px}
+.hp-breath i{position:absolute;inset:0;border-radius:50%;background:color-mix(in srgb,var(--c) 45%,#fff);animation:hpBreath 5s ease-in-out infinite}.hp-breath i+i{inset:18px;animation-delay:.4s;opacity:.8}
+.hp-breath b{position:relative;display:grid;color:var(--coral)}
+@keyframes hpBob{50%{transform:translateY(-10px)}}@keyframes hpHop{40%{transform:translateY(-34px) scale(1.05)}}
+@keyframes hpWave{50%{transform:scaleY(.5)}}@keyframes hpSun{50%{transform:scale(1.08)}}
+@keyframes hpCloud{to{transform:translateX(calc(100vw + 260px))}}@keyframes hpTw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+@keyframes hpSpin{to{transform:rotate(360deg)}}@keyframes hpBounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-12px) rotate(-4deg)}}
+@keyframes hpWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+@keyframes hpShine{0%,100%{transform:scale(1);filter:none}50%{transform:scale(1.1);filter:drop-shadow(0 0 10px #ffd34d)}}
+@keyframes hpBreath{0%,100%{transform:scale(.7)}50%{transform:scale(1)}}@keyframes hpFlick{50%{transform:scale(1.15) rotate(-4deg)}}
+@keyframes hpIn{from{opacity:0;transform:scale(.7) translateY(20px)}}
+@media(max-width:700px){.hp-grid{grid-template-columns:repeat(2,1fr)}.hp-sky{flex-direction:column-reverse;gap:6px}.hp-bud svg{width:150px;height:auto}.hp-bub{right:-10px}}
+body.noanim .hp *,body.noanim .hp{animation:none!important}
+.px{max-width:1180px!important;gap:clamp(36px,5vw,64px)!important}
+.px-sheet{gap:0}.px-col{gap:18px!important;padding:clamp(32px,3.6vw,48px) clamp(26px,3vw,40px)!important}
+.px-f{gap:14px!important}.px-f li{font-size:1rem!important;line-height:1.5!important}
+.es{width:100%;display:flex;flex-direction:column;gap:28px;padding:clamp(28px,4vw,52px);border-radius:36px;background:var(--surf);border:1px solid var(--line);box-shadow:0 30px 60px -44px rgba(0,0,0,.35)}
+.es-hd{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.es-hd h2{margin:0;font:500 clamp(2rem,4vw,2.8rem)/1.05 var(--f-d);letter-spacing:-.02em}
+.es-hd p{margin:0;max-width:52ch;color:var(--muted);font-size:1.05rem}
+.es-eb{font:700 .78rem var(--f-b);letter-spacing:.12em;text-transform:uppercase;color:var(--px-brass)}
+.es-in{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(20px,3vw,40px);align-items:start}
+.es-list{display:flex;flex-direction:column;gap:14px}
+.es-base,.es-x{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:16px;padding:18px 20px;border-radius:24px;border:1.5px solid var(--line);background:var(--bg);text-align:left;color:var(--ink);font:inherit}
+.es-base{grid-template-columns:auto 1fr auto;background:color-mix(in srgb,var(--brand) 7%,var(--surf));border-style:dashed}
+.es-base b,.es-t b{display:block;font:600 1.08rem var(--f-d)}.es-base small,.es-t small{display:block;margin-top:3px;color:var(--muted);font-size:.9rem;line-height:1.4}
+.es-x{cursor:pointer;transition:border-color .2s,background .2s,transform .15s}
+.es-x:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--brand) 50%,var(--line))}
+.es-x.on{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 9%,var(--surf))}
+.es-x:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.es-ic{display:grid;place-items:center;width:54px;height:54px;border-radius:18px;background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}
+.es-x:not(.on) .es-ic{background:color-mix(in srgb,var(--muted) 12%,var(--surf));color:var(--muted)}
+.es-p{font:700 1rem var(--f-d);white-space:nowrap}.es-x:not(.on) .es-p{color:var(--muted)}
+.es-sw{position:relative;width:52px;height:30px;border-radius:999px;background:var(--line);transition:background .2s}
+.es-sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+.es-x.on .es-sw{background:var(--brand)}.es-x.on .es-sw::after{transform:translateX(22px)}
+.es-sum{position:sticky;top:90px;display:flex;flex-direction:column;gap:14px;padding:30px;border-radius:30px;background:linear-gradient(170deg,var(--px-pine2),var(--px-pine) 60%);color:#f1f5ef;box-shadow:0 30px 60px -30px rgba(18,40,30,.55)}
+.es-sum .es-eb{color:#e3c88f}.es-sum .px-sub{color:#bcd0c3}
+.es-kids{display:flex;align-items:center;gap:8px}.es-kids span{margin-left:8px;color:#bcd0c3;font-size:.9rem}
+.es-kid{width:42px;height:42px;border-radius:50%;border:1px solid rgba(232,206,150,.45);background:transparent;color:#f1f5ef;font:600 1rem var(--f-d);cursor:pointer}
+.es-kid[aria-pressed="true"]{background:#e3c88f;color:var(--px-pine);border-color:#e3c88f}
+.es-n{margin:0;color:#bcd0c3;font-size:.92rem}
+.es-sum .px-btn{background:#e3c88f;border-color:#e3c88f;color:#1b2f25}.es-sum .px-btn:hover:not(:disabled){background:#f0d9a4;color:#1b2f25}
+.es-tip{display:flex;gap:8px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.1);font-size:.88rem;line-height:1.45}.es-tip[hidden]{display:none}.es-tip svg{flex:none;color:#e3c88f;margin-top:2px}
+.es-link{border:0;background:none;padding:0;color:#e3c88f;font:700 .88rem var(--f-b);text-decoration:underline;cursor:pointer}
+@media(max-width:600px){.es{padding:22px 14px;border-radius:28px}.es-base,.es-x{gap:12px;padding:14px;border-radius:20px}.es-ic{width:44px;height:44px;border-radius:14px}.es-ic svg{width:22px;height:22px}.es-sum{padding:22px}}
+@media(max-width:860px){.es-in{grid-template-columns:1fr}.es-sum{position:static;order:-1}.es-x{grid-template-columns:auto 1fr auto;row-gap:8px}.es-x .es-sw{grid-column:3;grid-row:1}.es-x .es-p{grid-column:2;grid-row:2;justify-self:start}}
+.lk{display:grid;place-items:center;min-height:60vh}.lk-c{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:460px;text-align:center;padding:40px 30px;border-radius:36px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
+.lk-ic{position:relative;display:grid;place-items:center;width:130px;height:130px;border-radius:40px;background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}.lk-ic i{position:absolute;right:-8px;bottom:-8px;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--sun);color:var(--ink);border:4px solid var(--surf)}
+.lk h2{margin:0}
 .lv-i{display:none!important}.lv-s .lv-i{display:inline-flex!important}
 .lv-s .tc-txt p{display:none}.lv-s .tc-txt h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}.lv-s .tc-vis{cursor:pointer}
 .lv-s .tc-vis svg{max-height:340px}.lv-s #tcHear{min-width:64px;min-height:64px;border-radius:50%;justify-content:center}.lv-s #tcHear svg{width:30px;height:30px}
@@ -2181,7 +2264,12 @@ body.noanim .lv-s *{animation:none!important}
 .lpx-bk{aspect-ratio:400/260}.lpx-bk .bk-art{position:absolute;inset:0;border-radius:0}
 .lpx-ear{position:absolute;right:10px;bottom:10px;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--bc);color:#fff}
 .lv-s .kq-in{grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr))}.lv-s .kq-in .kq-t{min-height:200px}.lv-s .kq-in .kq-ic svg{width:70px;height:70px}
-.lpx-back{min-width:72px;min-height:72px;border-radius:50%;padding:0;justify-content:center}
+.lpx-back{display:grid;place-items:center;width:78px;height:78px;padding:0;border:4px solid #fff;border-radius:50%;background:var(--brand);color:#fff;cursor:pointer;box-shadow:0 7px 0 color-mix(in srgb,var(--brand) 65%,#000),0 16px 28px -14px rgba(0,0,0,.4);transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.lpx-back svg{width:40px;height:40px}
+.lpx-back:hover,.lpx-back:focus-visible{transform:translateX(-4px) scale(1.06)}.lpx-back:hover svg{animation:lpxNudge .7s ease-in-out infinite}
+.lpx-back:active{transform:translateY(5px);box-shadow:0 2px 0 color-mix(in srgb,var(--brand) 65%,#000)}
+.lpx-back:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@keyframes lpxNudge{50%{transform:translateX(-5px)}}
 .lpx-ct{display:grid;place-items:center;width:72px;height:72px;border-radius:24px;background:color-mix(in srgb,var(--c) 34%,var(--surf))}
 .lv-s .lv-sw button{padding:6px 12px}
 @keyframes lvpBob{50%{transform:translateY(-8px)}}
@@ -3245,7 +3333,7 @@ const PLAN_N={free:'Free',learn:'Essentials',family:'Family',school:'School'};co
 const AI_PACKS=[{id:'s',n:500},{id:'m',n:2000},{id:'l',n:6000}];
 const AI_PACK_P={MYR:[49,179,499],SGD:[14.5,54,154],USD:[12.0,45,125],EUR:[12.0,45,125],GBP:[10.0,36,102],AUD:[19.5,72,192],NZD:[19.5,78,218],CAD:[17.0,63,173],IDR:[167000,620000,1725000],THB:[379,1419,3829],PHP:[679,2489,6899],VND:[285000,1060000,2930000],INR:[969,3569,9969],HKD:[93,346,960],JPY:[1749,6309,17639],KRW:[16000,57000,160000],CNY:[83,298,832],AED:[44,167,461]};
 const aiModel=()=>AI_MODELS.find(m=>m.id===((P&&P.aiModel)||'quick'))||AI_MODELS[0];
-const aiAllow=()=>AI_ALLOW[P&&AI_ALLOW[P.plan]?P.plan:'free'];
+const aiAllow=()=>P&&P.plan==='learn'?(feat('ai')?AI_ALLOW.family:0):AI_ALLOW[P&&AI_ALLOW[P.plan]?P.plan:'free'];
 const aiMonth=()=>new Date().toISOString().slice(0,7);
 function aiBal(){ /* local view of the balance; the server's number wins whenever it sends one */
   if(!G)return{left:0,allow:aiAllow(),bonus:0};
@@ -3354,7 +3442,7 @@ function tpModelBind(box){
 }
 function aiSetHTML(){
   const b=aiBal(),m=aiModel(),pct=Math.min(100,b.left/Math.max(1,b.allow+b.bonus)*100);
-  return `<section class="gr-sec ai-set"><div class="gr-sh"><div><h3>Pip AI</h3><p class="muted small">Each answer from Pip's thinking helper uses credits. ${planName()} includes ${aiAllow().toLocaleString()} credits a month.${P.plan!=='family'?' Family gives 1,000, or use your own AI account below.':''}</p></div></div>
+  return `<section class="gr-sec ai-set"><div class="gr-sh"><div><h3>Pip AI</h3><p class="muted small">Each answer from Pip's thinking helper uses credits. ${planName()} includes ${aiAllow().toLocaleString()} credits a month.${aiAllow()<1000?' Family, or Essentials with Pip AI, gives 1,000. You can also use your own AI account below.':''}</p></div></div>
    <div class="ai-meter"><div class="ai-mt"><b class="tn">${b.left.toLocaleString()}</b><span>credits left this month${b.bonus?` (includes ${b.bonus.toLocaleString()} bought)`:''}</span></div><div class="ai-bar"><i style="width:${pct}%"></i></div></div>
    <div class="ai-models" role="radiogroup" aria-label="Pip's thinking helper">${AI_MODELS.map(x=>`<button role="radio" aria-checked="${x.id===m.id}" data-am="${x.id}"><span class="ai-gl" aria-hidden="true">${[1,2,3].map(i=>`<i class="${i<=AI_MODELS.indexOf(x)+1?'on':''}" style="height:${i*4+2}px"></i>`).join('')}</span><span class="ai-mn"><b>${x.name}</b><small>${x.d}</small></span><span class="ai-c tn">${x.cost} credit${x.cost>1?'s':''}</span></button>`).join('')}</div>
    <div class="row" style="gap:10px;align-items:center"><button class="btn sm" data-go="pricing-credits">${ic('plus',15)} Add credits</button><span class="muted small">Packs from ${curSym()}${curNum(AI_PACK_P[CUR][0])}. Bought credits never expire.</span></div></section>
@@ -3666,11 +3754,20 @@ function curDetect(){
   const R2={MY:'MYR',SG:'SGD',US:'USD',GB:'GBP',AU:'AUD',NZ:'NZD',CA:'CAD',ID:'IDR',TH:'THB',PH:'PHP',VN:'VND',IN:'INR',HK:'HKD',JP:'JPY',KR:'KRW',CN:'CNY',AE:'AED',DE:'EUR',FR:'EUR',ES:'EUR',IT:'EUR',NL:'EUR',IE:'EUR',PT:'EUR',AT:'EUR',BE:'EUR',FI:'EUR'};
   return R2[reg]||'USD';
 }
-/* Essentials = every lesson and the Care Circle, without Pip AI (about 40% less). School without Pip AI is 30% less.
-   The same numbers are in scripts/stripe-setup.mjs. */
-const CUR_L={"MYR":[35,60,79],"SGD":[10,17,23],"USD":[9,14,17],"EUR":[9,14,17],"GBP":[7,12,16],"AUD":[12,21,26],"NZD":[14,23,30],"CAD":[12,19,24],"IDR":[119000,206000,258000],"THB":[279,489,609],"PHP":[489,829,1079],"VND":[209000,359000,469000],"INR":[699,1199,1599],"HKD":[68,120,150],"JPY":[1199,2099,2599],"KRW":[12000,19000,26000],"CNY":[61,100,140],"AED":[33,56,73]},CUR_SN={"MYR":14,"SGD":4,"USD":4,"EUR":4,"GBP":3,"AUD":6,"NZD":6,"CAD":5,"IDR":49000,"THB":109,"PHP":179,"VND":83000,"INR":279,"HKD":27,"JPY":489,"KRW":4900,"CNY":24,"AED":13};
-let CUR='MYR',schN=15,schAI=true;const FAM={},FAMW={},LRN={};const SCH_MIN=15,SCH_MAX=500;
-function setCur(c){CUR=CUR_P[c]?c:'USD';const p=CUR_P[CUR][0];[1,2,3].forEach(n=>{FAM[n]=p[n-1];FAMW[n]=p[n-1]*2;LRN[n]=CUR_L[CUR][n-1]})}
+/* Essentials = build your own plan: a lower base price, and parents switch extras on or off.
+   Prices are in MYR for 1 child a month and scale to other currencies by the Family price. The same numbers are in scripts/stripe-setup.mjs. */
+const ESS_BASE=25,ESS_X=[['world','3D World','globe','Walk, play and decorate an island with Pip.',8],['care','Care Circle','users','Share progress with teachers and therapists.',8],['reports','Weekly reports','chart','A progress report by email every week.',5],['checkups','Check-ups','heart','Book check-ups with a therapist.',5],['ai','Pip AI','spark','Chat and study with Pip. 1,000 AI credits a month.',15]];
+const ESS_KIDS=[1,1.75,2.25];let ESS=null;
+const essOn=()=>ESS||(ESS=Object.fromEntries(ESS_X.map(x=>[x[0],!!(P&&P.plan==='learn'&&P.addons&&P.addons[x[0]])])));
+function essNice(v){if(['JPY','KRW','VND','IDR'].includes(CUR)||v>=1000)return v>=10000?Math.round(v/500)*500:Math.round(v/10)*10;return Math.round(v)}
+const essCur=myr=>essNice(myr*CUR_P[CUR][0][0]/60);
+const essPart=(myr,n)=>essCur(myr*ESS_KIDS[n-1]);
+function essAmt(n,on){on=on||essOn();return essPart(ESS_BASE,n)+ESS_X.filter(x=>on[x[0]]).reduce((a,x)=>a+essPart(x[4],n),0)}
+/* Is a feature part of this family's plan? Only Essentials can switch features off. */
+const feat=k=>!(P&&P.plan==='learn')||!!(P.addons&&P.addons[k]);
+const CUR_SN={"MYR":14,"SGD":4,"USD":4,"EUR":4,"GBP":3,"AUD":6,"NZD":6,"CAD":5,"IDR":49000,"THB":109,"PHP":179,"VND":83000,"INR":279,"HKD":27,"JPY":489,"KRW":4900,"CNY":24,"AED":13};
+let CUR='MYR',schN=15,schAI=true;const FAM={},FAMW={};const SCH_MIN=15,SCH_MAX=500;
+function setCur(c){CUR=CUR_P[c]?c:'USD';const p=CUR_P[CUR][0];[1,2,3].forEach(n=>{FAM[n]=p[n-1];FAMW[n]=p[n-1]*2})}
 setCur(curDetect());
 const curSym=()=>CUR_P[CUR][2];
 const curNum=v=>{const z=['JPY','KRW','VND','IDR'].includes(CUR);return(z?Math.round(v):Math.round(v*100)/100).toLocaleString('en',{maximumFractionDigits:z?0:2})};
@@ -3947,7 +4044,7 @@ const cloudHelps=()=>((CLOUD.ctx&&CLOUD.ctx.memberships)||[]).filter(m=>m.role!=
 function cloudApplyPlan(){
   const f=CLOUD.fam;if(!f||!P||CLOUD.readonly)return;
   const live=['active','trialing','past_due'].includes(f.plan_status)&&f.has_subscription;
-  P.plan=f.plan==='free'?'free':f.plan==='learn'?'learn':'family';
+  P.plan=f.plan==='free'?'free':f.plan==='learn'?'learn':'family';if(P.plan==='learn')P.addons=Object.assign({},f.features||{});
   const end=f.trial_ends_at?Date.parse(f.trial_ends_at):0;
   P.trial=!live&&end>Date.now()?{start:Date.parse(f.trial_started_at)||Date.now(),end,keep:false}:null;
   if(live)delete P.trialEnded;
@@ -4449,8 +4546,8 @@ function bindTeamCloud(user){
       setTimeout(cloudRefreshCare,d.emailed?2500:20000)}
     catch(e){m.textContent=e.message}finally{$('#tmadd').disabled=false}};
 }
-async function cloudCheckout(children,cycle,tier){
-  try{const d=await cloudInvoke('billing',{action:'checkout',family_id:UID,children,cycle,tier:tier||'family',currency:CUR,return_url:location.origin+location.pathname});if(d&&d.url)location.href=d.url}
+async function cloudCheckout(children,cycle,tier,features){
+  try{const d=await cloudInvoke('billing',{action:'checkout',family_id:UID,children,cycle,tier:tier||'family',features:features||[],currency:CUR,return_url:location.origin+location.pathname});if(d&&d.url)location.href=d.url}
   catch(e){toast(e.message)}
 }
 async function cloudPortal(){
@@ -4499,7 +4596,8 @@ function chrome(){
   $('#dock').innerHTML=DOCK.filter(d=>!(kid&&d[0]==='care')).map(([k,l,i])=>`<button class="dk ${dockCur===k?'on':''}" data-go="${k}" aria-label="${l}">${ic(i,22)}<span>${l}</span></button>`).join('');
   let links=(session?[['dashboard','My page'],['learn','Learn']].concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[]:[['pricing','Plans'],['home','About'],['team','Our team']]);
   if(CLOUD.on&&CLOUD.user){if(CLOUD.helperOnly||CLOUD.readonly)links=[['helping','Children']].concat(CLOUD.readonly?[['care','Care Circle']]:[]);else if(!kid&&cloudHelps().length)links.push(['helping','Children you support'])}
-  $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':cur===k)?'on':''}" data-go="${k}">${l}</button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
+  const TLI={dashboard:'home',learn:'book',who:'users'};document.body.classList.toggle('pics',!!(session&&kid&&typeof lvSimple==='function'&&lvSimple()));
+  $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':cur===k)?'on':''}" data-go="${k}" aria-label="${l}">${TLI[k]?`<span class="tli">${ic(TLI[k],20)}</span>`:''}<span class="tlw">${l}</span></button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
   $('#meb').innerHTML=session&&P?(kid?ic('lock',18):ic('gear',18)):ic('user',18);studyUI();$('#meb').className='ibtn'+(cur==='profile'?' on':'');$('#meb').setAttribute('aria-label',session?(kid?'For parents':'Settings'):'Log in');$('#meb').title=session?(kid?'For parents':'Settings'):'Log in';
   {let pl=$('#plock');if(session&&!kid){if(!pl){pl=document.createElement('button');pl.id='plock';pl.className='ibtn';pl.setAttribute('aria-label','Lock the parent area');pl.title='Lock the parent area';pl.innerHTML=ic('unlock',18);pl.onclick=()=>{CU=null;chrome();try{guideSync()}catch(e){}if(['pricing','home','profile','care'].includes(cur))go('dashboard');toast('Parent area locked')};$('#meb').after(pl)}}else if(pl)pl.remove()}
   $('#foot').style.display=FULL.includes(cur)||(cur==='explore'&&parseHash().arg)?'none':'';setSync();updateClock();musSync();if(!session&&(HS.cam.on||HS.mic.on)){camStop();micStop()}hsUpdate();
@@ -4508,6 +4606,7 @@ function resolve(){
   if(CLOUD.on&&CLOUD.user&&(CLOUD.helperOnly||CLOUD.readonly)){let{base,arg}=parseHash();if(!['helping','care','home','join','billing','privacy','terms','refunds','cookies'].includes(base)||(base==='care'&&!CLOUD.readonly))base='helping';return{base,arg}}
   let{base,arg}=parseHash();
   if(!R[base])base=session?'dashboard':'welcome';
+  if(session&&P){const need={explore:'world',study:'ai'}[base];if(need&&!feat(need)&&!(need==='ai'&&aiCfg().url&&aiCfg().key)){arg=need;base='locked'}}
   if(!session&&!PUBLIC.includes(base)&&base!=='onboard'&&base!=='pick')base='auth';
   if((base==='onboard'||base==='pick')&&!session&&!OB.live)base='auth';
   if(session&&(base==='welcome'||base==='auth')&&!OB.live)base='dashboard';
@@ -5836,6 +5935,42 @@ function streakArt(n){
    <path d="M60 74c4 6 9 10 9 16a9 9 0 01-18 0c0-6 5-10 9-16z" fill="${c3}"/>
    </svg>`,{w:2.2,wob:3,noTex:1});
 }
+/* Pictures home: no words at all. Every picture moves a little and is spoken when tapped (if voice is on). */
+function dashPic(o){
+  const pct=Math.min(100,Math.round(o.mt/o.goalMin*100)),C=2*Math.PI*104;
+  const T=[
+    ['learn','Learn','--coral',`<span class="hpi hp-book">${ic('book',72)}</span>`,'go:learn'],
+    feat('world')?['world','3D World','--kb',`<span class="hpi hp-globe">${ic('globe',74)}</span>`,'go:explore-island']:null,
+    ['story','Story time','--kb',`<span class="hp-scene">${bkScene(BOOKS[0].pages[0][0],BOOKS[0])}</span><span class="hp-ear">${ic('vol',22)}</span>`,'story'],
+    ['calm','Calm break','--brand2',`<span class="hp-breath"><i></i><i></i><b>${ic('heart',40)}</b></span>`,'calm'],
+    ['draw','Draw','--sun',`<span class="hpi hp-pal">${ic('palette',72)}</span>`,'go:learn-make-draw'],
+    ['fame','Leaderboard','--brand',`<span class="hpi hp-cup">${ic('trophy',70)}</span>`,'go:together']].filter(Boolean);
+  $('#page').innerHTML=`<div class="wrap hp lv-s">
+   <section class="hp-sky">
+    <i class="hp-sun" aria-hidden="true"></i><i class="hp-cl a" aria-hidden="true"></i><i class="hp-cl b" aria-hidden="true"></i><i class="hp-sp s1" aria-hidden="true"></i><i class="hp-sp s2" aria-hidden="true"></i><i class="hp-sp s3" aria-hidden="true"></i><i class="hp-hill" aria-hidden="true"></i>
+    <button class="hp-bud" id="kpBuddy" aria-label="${esc(o.HI)}">${buddySVG(buddy(),210,o.goalOk?'cheer':'hello')}<span class="hp-bub" aria-hidden="true"><i></i><i></i><i></i></span></button>
+    <button class="hp-go" data-go="learn" aria-label="Play">
+     <svg class="hp-ring" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="104" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="16"/><circle cx="120" cy="120" r="104" fill="none" stroke="#ffd34d" stroke-width="16" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-pct/100)}" transform="rotate(-90 120 120)"/></svg>
+     <span class="hp-play">${o.goalOk?si('medal',80):'<svg width="80" height="80" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>'}</span>${LVP_HAND}</button>
+   </section>
+   <div class="hp-row">
+    <span class="hp-stars" role="img" aria-label="${G.pts} stars"><span class="hp-st">${JR_STAR}</span><b class="tn">${G.pts}</b></span>
+    <span class="hp-fl" role="img" aria-label="${o.stk} days in a row">${o.cwk.map(d=>`<i class="${d.on?'on':''}${d.today?' now':''}">${ic('flame',26)}</i>`).join('')}</span>
+    ${o.cOpen?`<button class="hp-chest" id="chestBtn" aria-label="Open the treasure chest">${RWI.chest}</button>`:''}
+   </div>
+   <div class="hp-grid">${T.map((t,i)=>`<button class="hp-t" style="--c:var(${t[2]});--i:${i}" data-hp="${t[4]}" aria-label="${esc(t[1])}">${t[3]}</button>`).join('')}</div>
+  </div>`;
+  const spk=el=>{try{if(P.prefs.voice)say(el.getAttribute('aria-label'))}catch(e){}};
+  $$('[data-hp]').forEach(b=>b.onclick=()=>{sfxStar(1+Math.floor(Math.random()*4));const a=b.dataset.hp;
+    if(a.startsWith('go:'))return go(a.slice(3));if(a==='story'){KLCAT='story';go('learn');return}if(a==='calm'){G.breaks++;today().breaks++;save();openCalm()}});
+  $$('.hp-t,.hp-go').forEach(el=>{let t=0;el.addEventListener('pointerenter',e=>{if(e.pointerType!=='mouse')return;clearTimeout(t);t=setTimeout(()=>spk(el),450)});el.addEventListener('pointerleave',()=>clearTimeout(t))});
+  const kb=$('#kpBuddy');kb.onclick=()=>{kb.classList.remove('hop');void kb.offsetWidth;kb.classList.add('hop');sfxStar(1+Math.floor(Math.random()*5));try{say(o.HI)}catch(e){}};
+  const cb=$('#chestBtn');if(cb)cb.onclick=()=>{G.chest=o.monK;award(20);save();sfxStar(5,true);toast(starTxt());R.dashboard()};
+}
+/* A feature the family's Essentials plan does not include: a friendly picture, and a way for a grown-up to add it */
+R.locked=arg=>{const x=ESS_X.find(y=>y[0]===arg)||ESS_X[0];
+  $('#page').innerHTML=`<div class="wrap lk"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} It is not switched on in your plan yet. A grown-up can add it on the Plans page.</p>
+   <div class="row" style="justify-content:center;gap:12px"><button class="lpx-back" data-go="dashboard" aria-label="Back home">${BACK_SVG}</button><button class="btn pri lg" data-go="pricing">${ic('plus',18)} Add ${esc(x[1])}</button></div></div></div>`};
 R.dashboard=()=>{
   const greet=greetWord();
   const td=today(),goalMin=Math.max(5,P.att),mt=minsToday(),td0=G.mins[todayStr()]||0;
@@ -5845,6 +5980,7 @@ R.dashboard=()=>{
   const HI=goalOk?'You did it! Want to play more?':SAYS[weak.id],stk=effStreak(G),into=starsToday(),plants=plantCount();
   const _mon=new Date();_mon.setDate(_mon.getDate()-((_mon.getDay()+6)%7));const monK=dstr(_mon);
   const cwk=[...Array(7)].map((_,i)=>{const d=new Date(_mon);d.setDate(_mon.getDate()+i);return{on:(G.mins[dstr(d)]||0)>=STREAK_SEC,l:d.toLocaleDateString('en-GB',{weekday:'narrow'}),today:dstr(d)===todayStr()}}),cn=cwk.filter(d=>d.on).length,cOpen=cn>=5&&G.chest!==monK,cDone=G.chest===monK;
+  if(typeof lvSimple==='function'&&lvSimple())return dashPic({HI,stk,cwk,cOpen,cDone,monK,goalMin,mt,goalOk});
   const sched=[['First','book','Learn','learn',td.lessons>0],['Then','game','Play','play',td.games>0],['Then','heart','Calm break','calm',td.breaks>0||G.calm>0&&false]];
   $('#page').innerHTML=`<div class="wrap stack" style="gap:22px">
    <section class="dsky" aria-label="Welcome"><i class="dsky-orb" aria-hidden="true"></i><div class="dsky-sky" aria-hidden="true"><i class="c1"></i><i class="c2"></i><i class="c3"></i></div><i class="dsky-hill h1" aria-hidden="true"></i><i class="dsky-hill h2" aria-hidden="true"></i><i class="kp-sp s1" aria-hidden="true"></i><i class="kp-sp s2" aria-hidden="true"></i><i class="kp-sp s3" aria-hidden="true"></i>
@@ -6454,6 +6590,7 @@ function lvBind(){
     el.addEventListener('pointerenter',e=>{if(e.pointerType!=='mouse')return;const l=el.getAttribute('aria-label')||el.textContent;clearTimeout(t);t=setTimeout(()=>{try{if(P.prefs.voice)say(String(l).split('.')[0])}catch(_){}},500)});
     el.addEventListener('pointerleave',()=>clearTimeout(t))})}
 /* Pictures mode: one big thing to tap, no reading needed. Every picture is spoken when tapped or pointed at (if voice is on). */
+const BACK_SVG='<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M17 8 5 20l12 12v-7.5h9.5a5.5 5.5 0 0 0 0-11H17z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>';
 const LVP_HAND='<svg class="lpx-hand" width="58" height="58" viewBox="0 0 64 64" aria-hidden="true"><path d="M26 30V12a5 5 0 0110 0v14l12 3a6 6 0 014.6 6.9L50 50a8 8 0 01-8 6H32a8 8 0 01-6.3-3L14 38a4.6 4.6 0 016.8-6.2z" fill="#ffe0bd" stroke="#2b2b2b" stroke-width="3" stroke-linejoin="round"/></svg>';
 function lvPicView(CATS){
   RWNEW=rwSync();
@@ -6492,12 +6629,12 @@ R.learn=arg=>{
   const CATS=[['grow','Feelings and life','smile','--sun'],['discover','Look and learn','book','--coral'],['create','Make and move','palette','--brand2'],['practice','Practice and play','star','--kb']];
   const tile=x=>`<button class="kq-t" style="--c:var(${x.c})" data-go="${x.go}" aria-label="${esc(x.n+'. '+x.d)}"><span class="kq-ic">${x.ico}</span><b>${esc(x.n)}</b>${x.lv?`<span class="kq-lv" aria-hidden="true">${[1,2,3,4].map(n=>`<i class="${n<=x.lv?'on':''}"></i>`).join('')}</span>`:''}</button>`;
   if(KLCAT==='story'&&lvSimple()){
-    $('#page').innerHTML=`<div class="wrap kl2 lv-s"><div class="kq-top"><button class="btn lg kq-back lpx-back" id="klBack" aria-label="Back"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',30)}</span></button></div>${lvPicStory()}</div>`;
+    $('#page').innerHTML=`<div class="wrap kl2 lv-s"><div class="kq-top"><button class="lpx-back" id="klBack" aria-label="Back">${BACK_SVG}</button></div>${lvPicStory()}</div>`;
     $('#klBack').onclick=()=>{KLCAT=null;R.learn();window.scrollTo(0,0)};lvBind();return}
   if(KLCAT==='story')KLCAT=null;
   const cat=CATS.find(c=>c[0]===KLCAT);
   if(cat){
-    $('#page').innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}"><div class="kq-top"><button class="btn lg kq-back${lvSimple()?' lpx-back':''}" id="klBack" aria-label="Back"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',lvSimple()?30:22)}</span>${lvSimple()?'':' Back'}</button>${lvSimple()?`<span class="lpx-ct" style="--c:var(${cat[3]})" aria-hidden="true">${ic(cat[2],40)}</span>`:`<h2>${esc(cat[1])}</h2>`}</div><div class="kq-g kq-in">${items.filter(x=>x.cat===cat[0]).map(tile).join('')}</div></div>`;
+    $('#page').innerHTML=`<div class="wrap kl2${lvSimple()?' lv-s':''}"><div class="kq-top">${lvSimple()?`<button class="lpx-back" id="klBack" aria-label="Back">${BACK_SVG}</button>`:`<button class="btn lg kq-back" id="klBack"><span style="display:inline-flex;transform:rotate(180deg)">${ic('arrow',22)}</span> Back</button>`}${lvSimple()?`<span class="lpx-ct" style="--c:var(${cat[3]})" aria-hidden="true">${ic(cat[2],40)}</span>`:`<h2>${esc(cat[1])}</h2>`}</div><div class="kq-g kq-in">${items.filter(x=>x.cat===cat[0]).map(tile).join('')}</div></div>`;
     $('#klBack').onclick=()=>{KLCAT=null;R.learn();window.scrollTo(0,0)};lvBind();
     return;
   }
@@ -10208,7 +10345,7 @@ function pcOverview(){
 function careDraw(){
   const user=careUser();if(!user){R.care();return}
   nfyClose();
-  PC_TABS=PC_ALL.filter(t=>(PC_ROLE[user.role]||PC_ROLE.parent).includes(t[0]));if(!PC_TABS.some(t=>t[0]===careTab))careTab='overview';
+  PC_TABS=PC_ALL.filter(t=>(PC_ROLE[user.role]||PC_ROLE.parent).includes(t[0])&&(m=>!m||feat(m))({report:'reports',visits:'checkups',team:'care'}[t[0]]));if(!PC_TABS.some(t=>t[0]===careTab))careTab='overview';
   const role=(ROLES.find(r=>r[0]===user.role)||ROLES[0])[1],d=new Date(),tt=PC_TABS.find(t=>t[0]===careTab)||PC_TABS[0];
   const pg=$('#page');
   pg.innerHTML=`<div class="pc pc2" data-tab="${careTab}">
@@ -10275,16 +10412,14 @@ R.pricing=()=>{
   const schAmt=n=>cycAmt(SCH_PER*n),schSub=n=>Y?`a month, billed ${rmTxt(yr(SCH_PER*n))} a year`:'a month';
   const famWas=n=>Y?FAM[n]:0;  /* only show a crossed-out price when there is a real saving (yearly) */
   const famSub=n=>Y?`a month, billed ${rmTxt(yr(FAM[n]))} a year`:'a month';
-  const lrnSub=n=>Y?`a month, billed ${rmTxt(yr(LRN[n]))} a year`:'a month';
   const tick='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3.5 8.4l2.8 2.8 6.2-6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const fam=cp==='family'&&on;
   const cf=cloudLive()&&!CLOUD.readonly&&CLOUD.fam?CLOUD.fam:null,cSub=!!(cf&&cf.has_subscription&&['active','trialing','past_due'].includes(cf.plan_status)),cTrial=!!(cf&&!cSub&&cf.trial_ends_at&&Date.parse(cf.trial_ends_at)>Date.now()),cUsed=!!(cf&&cf.trial_started_at);
   const plans=[
    {id:'free',n:'Free',d:'For trying at home.',amt:0,sub:'forever',cta:cp==='free'&&on?'Your plan':'Start free',f:['1 child','Daily lessons: letters, numbers, shapes and colours','Pip, a friendly learning buddy','Calm breathing breaks with Fox','Picture cards and hand signs','Memory games, drawing and tracing','50 Pip AI credits a month']},
-   {id:'learn',n:'Essentials',d:'Every lesson, without Pip AI.',ai:0,amt:cycAmt(LRN[kn]),was:Y?LRN[kn]:0,sub:lrnSub(kn),cta:cp==='learn'&&on?(cf&&cSub?'Manage plan':'Your plan'):'Choose Essentials',note:cp==='learn'&&on?'':'Pay less if you do not need AI',f:['Up to 3 children','Every lesson, game and story','The 3D World and all buddies','Pictures or Words learning view','Live check-in with calm breaks','Care Circle for parents, teachers and therapists','Weekly progress reports by email','Book check-ups with a therapist','A taste of Pip AI: 50 credits a month','Free, unlimited Pip AI with your own AI account']},
-   {id:'family',n:'Family',d:'Everything, plus Pip AI.',ai:1,amt:cycAmt(FAM[kn]),was:famWas(kn),sub:famSub(kn),cta:cf?(cSub?'Manage plan':cUsed?'Subscribe':'Start 7-day free trial'):fam?'Cancel plan':'Start 7-day free trial',note:cf?(cSub?(cf.cancel_at_period_end?'Ends '+new Date(cf.current_period_end).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):''):cTrial?'Free until '+new Date(cf.trial_ends_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):cUsed?'':'No card needed'):fam?'':'No card needed',f:['Everything in Essentials','Chat and study with Pip, our AI buddy','1,000 Pip AI credits a month (20× more)','Pip remembers what your child likes','Smart help with homework and questions','Up to 3 children']},
-   {id:'school',n:'School or clinic',d:'For teams of 15 children or more.',ai:schAI?1:0,amt:schAmt(schN),was:Y?SCH_PER*schN:0,sub:schSub(schN),cta:'Contact us',f:[schAI?'Everything in Family, for each child':'Everything in Essentials, for each child',schAI?'300 Pip AI credits per child':'No Pip AI, so it costs less','One Care Circle for your whole team','Teacher and therapist accounts','Weekly reports for every family','Check-up booking across all children','Progress view for each child','Help setting up your team']}];
-  const faq=[['What is the difference between Essentials and Family?',`They have the same lessons, 3D World, Care Circle and reports. Family adds Pip AI: chatting and studying with Pip, and 1,000 AI credits a month. Essentials costs less (${rmTxt(LRN[1])} instead of ${rmTxt(FAM[1])} a month for 1 child) and gives 50 credits to try Pip AI. With Essentials you can also connect your own AI account in Settings for unlimited Pip AI.`],['Can I add more than one child?',`Yes, up to 3 on one account. Family: ${rmTxt(FAM[1])} for 1, ${rmTxt(FAM[2])} for 2, ${rmTxt(FAM[3])} for 3 a month. Essentials: ${rmTxt(LRN[1])}, ${rmTxt(LRN[2])} and ${rmTxt(LRN[3])}.`],['How does the School or clinic plan work?',`It starts at ${SCH_MIN} children. With Pip AI it is ${rmTxt(CUR_P[CUR][1])} per child a month, or ${rmTxt(CUR_SN[CUR])} without Pip AI. Pick how many children you have and press Contact us, and we will set up your team.`],['Can I cancel any time?','Yes. Pip gets a little dramatic about it, but she gets over it.'],['Is progress kept?','Always, on every plan.'],['Do I need a card for the trial?','No. The 7-day trial needs no payment details.'],['Monthly or yearly?','Yearly gives you 2 months free. You can switch back any time.']];
+   {id:'family',n:'Family',d:'Everything, plus Pip AI.',ai:1,amt:cycAmt(FAM[kn]),was:famWas(kn),sub:famSub(kn),cta:cf?(cSub?'Manage plan':cUsed?'Subscribe':'Start 7-day free trial'):fam?'Cancel plan':'Start 7-day free trial',note:cf?(cSub?(cf.cancel_at_period_end?'Ends '+new Date(cf.current_period_end).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):''):cTrial?'Free until '+new Date(cf.trial_ends_at).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):cUsed?'':'No card needed'):fam?'':'No card needed',f:['Up to 3 children','Every lesson, game and story','The 3D World and all buddies','Pip AI: chat and study, 1,000 credits a month','Care Circle for parents, teachers and therapists','Weekly progress reports by email','Book check-ups with a therapist','Live check-in with calm breaks']},
+   {id:'school',n:'School or clinic',d:'For teams of 15 children or more.',ai:schAI?1:0,amt:schAmt(schN),was:Y?SCH_PER*schN:0,sub:schSub(schN),cta:'Contact us',f:[schAI?'Everything in Family, for each child':'Everything in Family except Pip AI',schAI?'300 Pip AI credits per child':'No Pip AI, so it costs less','One Care Circle for your whole team','Teacher and therapist accounts','Weekly reports for every family','Check-up booking across all children','Progress view for each child','Help setting up your team']}];
+  const faq=[['What is Essentials?',`A smaller plan you build yourself. It starts at ${rmTxt(essPart(ESS_BASE,1))} a month for 1 child with every lesson, game and story. Then switch on only what you need: ${ESS_X.map(x=>x[1]+' (+'+rmTxt(essPart(x[4],1))+')').join(', ')}. You can change it any time. Family has everything for ${rmTxt(FAM[1])}.`],['Can I add more than one child?',`Yes, up to 3 on one account. Family: ${rmTxt(FAM[1])} for 1, ${rmTxt(FAM[2])} for 2, ${rmTxt(FAM[3])} for 3 a month. Essentials depends on what you switch on.`],['How does the School or clinic plan work?',`It starts at ${SCH_MIN} children. With Pip AI it is ${rmTxt(CUR_P[CUR][1])} per child a month, or ${rmTxt(CUR_SN[CUR])} without Pip AI. Pick how many children you have and press Contact us, and we will set up your team.`],['Can I cancel any time?','Yes. Pip gets a little dramatic about it, but she gets over it.'],['Is progress kept?','Always, on every plan.'],['Do I need a card for the trial?','No. The 7-day trial needs no payment details.'],['Monthly or yearly?','Yearly gives you 2 months free. You can switch back any time.']];
   const price=(p)=>`<div class="px-price">${p.was?`<s class="px-was" id="${p.id==='family'?'plW':p.id==='school'?'scW':p.id==='learn'?'lrW':''}">${rmTxt(p.was)}</s>`:''}<span class="px-rm">${curSym().trim()}</span><b class="tn" ${p.id==='family'?'id="plT"':p.id==='school'?'id="scT"':p.id==='learn'?'id="lrT"':''}>${curNum(p.amt)}</b></div><p class="px-sub" ${p.id==='family'?'id="plS"':p.id==='school'?'id="scS"':p.id==='learn'?'id="lrS"':''}>${p.sub}</p>`;
   $('#page').innerHTML=`<div class="px">
    <header class="px-head">
@@ -10293,7 +10428,7 @@ R.pricing=()=>{
     <div class="px-cyc" role="group" aria-label="Billing"><button data-cyc="month" class="${Y?'':'on'}" aria-pressed="${!Y}">Monthly</button><button data-cyc="year" class="${Y?'on':''}" aria-pressed="${Y}">Yearly <small>2 months free</small></button></div>
     <label class="px-cur">${ic('globe',16)}<span>Prices in</span><select id="plCur" aria-label="Currency">${Object.keys(CUR_P).map(c=>`<option value="${c}" ${c===CUR?'selected':''}>${c} · ${CUR_N[c]}</option>`).join('')}</select></label>
    </header>
-   <div class="px-sheet n4">${plans.map(p=>`<article class="px-col ${p.id==='family'?'is-fam':''}" aria-label="${p.n} plan">
+   <div class="px-sheet">${plans.map(p=>`<article class="px-col ${p.id==='family'?'is-fam':''}" aria-label="${p.n} plan">
      <div class="px-top"><h2>${p.n}</h2>${p.id==='family'?'<span class="px-mark">Most chosen</span>':cp===p.id&&on&&p.id!=='school'?'<span class="px-mark">Current</span>':''}</div>
      ${p.ai!=null?`<span class="px-ai ${p.ai?'on':''}">${ic('spark',14)} ${p.ai?'Pip AI included':'No AI'}</span>`:''}
      <p class="px-d">${p.d}</p>
@@ -10303,6 +10438,7 @@ R.pricing=()=>{
      <button class="px-btn" data-plan="${p.id}" ${(p.id==='free'&&cp==='free'&&on)||(p.id==='learn'&&cp==='learn'&&on&&!(cf&&cSub))?'disabled':''}>${p.cta}</button>
      ${p.note?`<p class="px-note">${p.note}</p>`:''}
      <ul class="px-f">${p.f.map(x=>`<li>${tick}<span>${x}</span></li>`).join('')}</ul></article>`).join('')}</div>
+   ${essHTML(kn,Y,yr,cycAmt,cp,on,cf,cSub)}
    <ul class="px-sure"><li>Cancel any time</li><li>Progress always kept</li><li>Made with therapists and teachers</li></ul>
    <section class="pcr" id="credits" aria-labelledby="pcrT"><div class="pcr-in">
     <div class="pcr-hd"><span class="pcr-ic" aria-hidden="true">${ic('spark',22)}</span><div><h2 id="pcrT">Need more Pip AI?</h2><p>Every plan comes with monthly credits. Top up any time. Bought credits never expire.</p></div></div>
@@ -10313,29 +10449,61 @@ R.pricing=()=>{
   $$('[data-pack]').forEach(b=>b.onclick=()=>aiBuy(b.dataset.pack));if(R.pricing.arg==='credits'||/credits/.test(location.hash))setTimeout(()=>{const c=$('#credits');c&&c.scrollIntoView({behavior:'smooth',block:'center'})},400);
   $$('[data-cyc]').forEach(b=>b.onclick=()=>{if(b.dataset.cyc===billCycle)return;billCycle=b.dataset.cyc;R.pricing();reveal($('#page'))});
   const pc=$('#plCur');if(pc)pc.onchange=()=>{setCur(pc.value);try{lsSet('ll.cur',CUR)}catch(e){}R.pricing();reveal($('#page'));const p2=$('#plCur');p2&&p2.focus()};
-  $$('.pl-cb').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$$('.pl-cb').forEach(x=>{const o=+x.dataset.n===kn;x.classList.toggle('on',o);x.setAttribute('aria-pressed',o)});$('#plT').textContent=curNum(cycAmt(FAM[kn]));(()=>{const w=$('#plW');if(w)w.textContent=rmTxt(famWas(kn))})();$('#plS').textContent=famSub(kn);$('#lrT').textContent=curNum(cycAmt(LRN[kn]));(()=>{const w=$('#lrW');if(w)w.textContent=rmTxt(LRN[kn])})();$('#lrS').textContent=lrnSub(kn)});
+  $$('.pl-cb').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.pl-cb').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$$('.pl-cb').forEach(x=>{const o=+x.dataset.n===kn;x.classList.toggle('on',o);x.setAttribute('aria-pressed',o)});$('#plT').textContent=curNum(cycAmt(FAM[kn]));(()=>{const w=$('#plW');if(w)w.textContent=rmTxt(famWas(kn))})();$('#plS').textContent=famSub(kn);essDraw()});
+  const essDraw=()=>{const a=essAmt(kn),f1=FAM[kn];$('#esT').textContent=curNum(cycAmt(a));$('#esS').textContent=Y?`a month, billed ${rmTxt(yr(a))} a year`:'a month';$('#esK').textContent=kn===1?'1 child':kn+' children';
+    $$('[data-ex]').forEach(b=>{const k=b.dataset.ex,x=ESS_X.find(y=>y[0]===k);$('.es-p',b).textContent='+'+rmTxt(cycAmt(essPart(x[4],kn)))});
+    $('#esBase').textContent=rmTxt(cycAmt(essPart(ESS_BASE,kn)));
+    const n=ESS_X.filter(x=>essOn()[x[0]]).length,sv=a-f1;$('#esN').textContent=n+' of '+ESS_X.length+' extras';
+    const t=$('#esTip');t.hidden=sv<0;if(sv>=0)t.innerHTML=`${ic('star',16)} <span>Family has everything for ${rmTxt(cycAmt(f1))}${sv>0?`, ${rmTxt(cycAmt(sv))} less`:''}. <button class="es-link" data-plan="family">Choose Family</button></span>`;
+    $$('#esTip [data-plan]').forEach(b=>b.onclick=planClick);
+    const go=$('.es-go'),mine=!!(on&&P&&P.plan==='learn'),same=mine&&ESS_X.every(x=>!!(P.addons||{})[x[0]]===!!essOn()[x[0]]);go.disabled=same;go.textContent=mine?(same?'Your plan':'Update my extras'):'Choose Essentials'};
+  $$('[data-ex]').forEach(b=>b.onclick=()=>{const k=b.dataset.ex,o=essOn();o[k]=!o[k];b.setAttribute('aria-checked',o[k]);b.classList.toggle('on',o[k]);try{sfxPop('tick')}catch(e){}essDraw()});
+  $$('.es-kid').forEach(b=>b.onclick=()=>{kn=+b.dataset.n;$$('.es-kid').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.n===kn));$$('.pl-cb').forEach(x=>{const o=+x.dataset.n===kn;x.classList.toggle('on',o);x.setAttribute('aria-pressed',o)});$('#plT').textContent=curNum(cycAmt(FAM[kn]));$('#plS').textContent=famSub(kn);essDraw()});
   $$('[data-sai]').forEach(b=>b.onclick=()=>{const v=b.dataset.sai==='1';if(v===schAI)return;schAI=v;R.pricing();reveal($('#page'))});
   const scDraw=()=>{$('#scN').textContent=schN;$('#scT').textContent=curNum(schAmt(schN));const w=$('#scW');if(w)w.textContent=rmTxt(SCH_PER*schN);$('#scS').textContent=schSub(schN);$$('.sc-b').forEach(x=>x.disabled=(+x.dataset.d<0&&schN<=SCH_MIN)||(+x.dataset.d>0&&schN>=SCH_MAX))};
   $$('.sc-b').forEach(b=>b.onclick=()=>{schN=Math.min(SCH_MAX,Math.max(SCH_MIN,schN+(+b.dataset.d)));scDraw()});scDraw();
   const schoolMail=()=>{location.href='mailto:'+(CFG.contactEmail||'lahlahlearn@gmail.com')+'?subject='+encodeURIComponent('LahLahLearn for schools and clinics')+'&body='+encodeURIComponent(`Hello LahLahLearn,\n\nWe would like the School or clinic plan ${schAI?'with':'without'} Pip AI for ${schN} ${schN===1?'child':'children'} (${rmTxt(SCH_PER*schN)} a month).\n\nName of school or clinic:\nContact person:\nPhone:\n`)};
-  $$('[data-plan]').forEach(b=>b.onclick=()=>{
+  function planClick(){const b=this;
     if(b.dataset.plan==='school'){schoolMail();return}
     if(!session){go('auth-register');return}
     const id=b.dataset.plan;
     if(cf){
       if(id==='free'){if(cSub)cloudPortal();else toast(tr('You are on Free.'));return}
-      if(id==='learn'){if(cSub){cloudPortal();return}cloudCheckout(kn,billCycle,'learn');return}
+      if(id==='learn'){const fs=ESS_X.filter(x=>essOn()[x[0]]).map(x=>x[0]);
+        if(cSub&&cf.plan==='learn'){b.disabled=true;cloudInvoke('billing',{action:'features',family_id:UID,features:fs}).then(async()=>{await cloudContext();cloudApplyPlan();save(true);ESS=null;R.pricing();reveal($('#page'));toast(tr('Your extras are updated.'))}).catch(e=>{b.disabled=false;toast(e.message)});return}
+        if(cSub){cloudPortal();return}cloudCheckout(kn,billCycle,'learn',fs);return}
       if(id==='family'){if(cSub){cloudPortal();return}if(cUsed){cloudCheckout(kn,billCycle);return}
         CLOUD.sb.rpc('start_trial',{p_family:UID}).then(async r=>{if(r.error||!r.data||!r.data.ok){toast(tr('Could not start the trial. Please try again.'));return}await cloudContext();cloudApplyPlan();save(true);R.pricing();reveal($('#page'));trialSync();toast(tr('Your 7-day free trial has started. No payment needed.'))});return}
       location.href='mailto:'+(CFG.contactEmail||'lahlahlearn@gmail.com')+'?subject='+encodeURIComponent('LahLahLearn for schools and clinics');return}
     if(id==='free'){P.plan='free';save(true);R.pricing();reveal($('#page'));toast('You are on Free.');return}
-    if(id==='learn'){P.plan='learn';P.billCycle=billCycle;P.trial=null;save(true);R.pricing();reveal($('#page'));toast('You are on Essentials. Pip AI has 50 credits a month to try, or connect your own AI account in Settings.');return}
+    if(id==='learn'){P.plan='learn';P.addons=Object.assign({},essOn());P.billCycle=billCycle;P.trial=null;save(true);R.pricing();reveal($('#page'));toast('You are on Essentials. You can change the extras any time.');return}
     if(id==='family'){
       if(P.plan==='family'){cancelFlow();return}
       P.plan='family';P.billCycle=billCycle;P.trial={start:Date.now(),end:Date.now()+7*864e5,keep:false};save(true);R.pricing();reveal($('#page'));trialSync();toast('Your 7-day free trial has started. No payment needed.');return}
     toast('We will be in touch (demo).');
-  });
+  }
+  $$('[data-plan]').forEach(b=>b.onclick=planClick);essDraw();
 };
+function essHTML(kn,Y,yr,cycAmt,cp,on,cf,cSub){
+  const o=essOn(),a=essAmt(kn),mine=cp==='learn'&&on,same=mine&&ESS_X.every(x=>!!(P.addons||{})[x[0]]===!!o[x[0]]);
+  return `<section class="es" aria-labelledby="esH">
+   <div class="es-hd"><span class="es-eb">Build your own</span><h2 id="esH">Essentials</h2><p>Every lesson, game and story, for less. Switch on only the extras your family needs. Change them any time.</p></div>
+   <div class="es-in">
+    <div class="es-list">
+     <div class="es-base"><span class="es-ic">${ic('book',26)}</span><div><b>Lessons, games and stories</b><small>Pictures or Words view, calm breaks, stars and buddies. Always included.</small></div><span class="es-p" id="esBase">${rmTxt(cycAmt(essPart(ESS_BASE,kn)))}</span></div>
+     ${ESS_X.map(([k,n,i,d,p])=>`<button class="es-x${o[k]?' on':''}" role="switch" aria-checked="${!!o[k]}" data-ex="${k}"><span class="es-ic">${ic(i,26)}</span><span class="es-t"><b>${n}</b><small>${d}</small></span><span class="es-p">+${rmTxt(cycAmt(essPart(p,kn)))}</span><i class="es-sw" aria-hidden="true"></i></button>`).join('')}
+    </div>
+    <aside class="es-sum" aria-live="polite">
+     <span class="es-eb">Your Essentials</span>
+     <div class="es-kids" role="group" aria-label="Number of children">${[1,2,3].map(n=>`<button class="es-kid" data-n="${n}" aria-pressed="${n===kn}">${n}</button>`).join('')}<span id="esK">${kn===1?'1 child':kn+' children'}</span></div>
+     <div class="px-price"><span class="px-rm">${curSym().trim()}</span><b class="tn" id="esT">${curNum(cycAmt(a))}</b></div>
+     <p class="px-sub" id="esS">${Y?`a month, billed ${rmTxt(yr(a))} a year`:'a month'}</p>
+     <p class="es-n" id="esN"></p>
+     <button class="px-btn es-go" data-plan="learn" ${same?'disabled':''}>${mine?(same?'Your plan':'Update my extras'):'Choose Essentials'}</button>
+     <p class="es-tip" id="esTip" hidden></p>
+    </aside>
+   </div></section>`;
+}
 
 
 let CONFIRM='',setTab='comfort';

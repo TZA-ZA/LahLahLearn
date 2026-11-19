@@ -52,8 +52,9 @@ export const handler = serveJson(async (req) => {
   if (!message && b.action !== "balance") throw new HttpError(400, "Say something to Pip first.");
 
   const admin = adminClient();
-  const { data: fam } = await admin.from("families").select("plan").eq("id", b.family_id).maybeSingle();
-  const allow = ALLOW[fam?.plan === "family" ? "family" : "free"];
+  const { data: fam } = await admin.from("families").select("plan, features").eq("id", b.family_id).maybeSingle();
+  // Essentials families get the Family allowance only when they added Pip AI
+  const allow = ALLOW[fam?.plan === "family" || (fam?.plan === "learn" && fam?.features?.ai) ? "family" : "free"];
   const month = new Date().toISOString().slice(0, 7);
   if ((b as { action?: string }).action === "balance") {
     const { data } = await admin.rpc("ai_spend", { p_family: b.family_id, p_month: month, p_allow: allow, p_cost: 0 });

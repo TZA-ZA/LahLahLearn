@@ -1,9 +1,9 @@
-// POST { action: "checkout" | "portal" | "credits", family_id, children?: 1-3, cycle?: "month" | "year", tier?: "family" | "learn", pack?: "s"|"m"|"l", currency?, return_url? }
+// POST { action: "checkout" | "portal" | "credits" | "features", family_id, features?: string[] (Essentials add-ons), children?: 1-3, cycle?: "month" | "year", tier?: "family" | "learn", pack?: "s"|"m"|"l", currency?, return_url? }
 // Starts Stripe Checkout for a Family plan, or opens the Stripe customer portal to change or cancel.
 import { HttpError, json, optionalEnv, readJson, serveJson } from "../_shared/http.ts";
 import { adminClient, requireParent, requireUser } from "../_shared/clients.ts";
 import { siteUrl } from "../_shared/email.ts";
-import { priceKey, stripe } from "../_shared/stripe.ts";
+import { addonKey, FEATURES, priceKey, stripe } from "../_shared/stripe.ts";
 
 // Currencies set up on every plan price (Stripe currency_options). The family pays in the currency shown to them.
 const CURRENCIES = ["myr", "sgd", "usd", "eur", "gbp", "aud", "nzd", "cad", "idr", "thb", "php", "vnd", "inr", "hkd", "jpy", "krw", "cny", "aed"];
@@ -23,7 +23,7 @@ function returnBase(candidate: unknown): string {
 export const handler = serveJson(async (req) => {
   if (req.method !== "POST") throw new HttpError(405, "Use POST.");
   const { user, db } = await requireUser(req);
-  const b = await readJson<{ action?: string; family_id?: string; children?: number; cycle?: string; tier?: string; currency?: string; return_url?: string; pack?: string }>(req);
+  const b = await readJson<{ action?: string; family_id?: string; children?: number; cycle?: string; tier?: string; features?: string[]; currency?: string; return_url?: string; pack?: string }>(req);
   const fid = await requireParent(db, b.family_id);
   const admin = adminClient();
   const { data: fam, error } = await admin.from("families").select("*").eq("id", fid).single();
@@ -31,6 +31,31 @@ export const handler = serveJson(async (req) => {
   const base = returnBase(b.return_url);
 
   const live = ["active", "trialing", "past_due"].includes(fam.plan_status) && fam.stripe_subscription_id;
+  const wantFeatures = (Array.isArray(b.features) ? b.features : []).filter((f): f is string => (FEATURES as readonly string[]).includes(f));
+  const lookup = async (keys: string[]) => {
+    const r = await stripe<{ data: { id: string; lookup_key: string }[] }>("prices", { lookup_keys: keys, active: "true", limit: 10 }, "GET");
+    const miss = keys.filter((k) => !r.data.some((p) => p.lookup_key === k));
+    if (miss.length) throw new HttpError(500, "Plans are not set up in Stripe yet. Run scripts/stripe-setup.mjs.");
+    return Object.fromEntries(r.data.map((p) => [p.lookup_key, p.id]));
+  };
+
+  // Essentials families switch add-ons on or off without a new checkout: change the lines on their subscription.
+  if (b.action === "features") {
+    if (!live || fam.plan !== "learn") throw new HttpError(400, "Choose Essentials first.");
+    // deno-lint-ignore no-explicit-any
+    const sub = await stripe<any>(`subscriptions/${fam.stripe_subscription_id}`, undefined, "GET");
+    const m = /^learn_([1-3])_(month|year)$/.exec(sub.items.data.map((i: { price: { lookup_key: string } }) => i.price.lookup_key).find((k: string) => /^learn_/.test(k ?? "")) ?? "");
+    if (!m) throw new HttpError(400, "This subscription is not Essentials.");
+    const n = Number(m[1]), cyc = m[2] as "month" | "year";
+    const want = wantFeatures.map((f) => addonKey(f, n, cyc));
+    const ids = want.length ? await lookup(want) : {};
+    const items: Record<string, unknown>[] = [];
+    for (const it of sub.items.data) if (/^addon_/.test(it.price.lookup_key ?? "") && !want.includes(it.price.lookup_key)) items.push({ id: it.id, deleted: "true" });
+    for (const k of want) if (!sub.items.data.some((it: { price: { lookup_key: string } }) => it.price.lookup_key === k)) items.push({ price: ids[k], quantity: 1 });
+    if (items.length) await stripe(`subscriptions/${sub.id}`, { items, proration_behavior: "create_prorations" });
+    await admin.from("families").update({ features: Object.fromEntries(wantFeatures.map((f) => [f, true])) }).eq("id", fid);
+    return json({ ok: true });
+  }
   if (b.action === "portal" || (b.action === "checkout" && live)) {
     if (!fam.stripe_customer_id) throw new HttpError(400, "There is no subscription to manage yet.");
     const portal = await stripe("billing_portal/sessions", { customer: fam.stripe_customer_id, return_url: `${base}#pricing` });
@@ -64,8 +89,8 @@ export const handler = serveJson(async (req) => {
   const cycle = b.cycle === "year" ? "year" : "month";
   const tier = b.tier === "learn" ? "learn" : "family";
   const key = priceKey(children, cycle, tier);
-  const prices = await stripe<{ data: { id: string }[] }>("prices", { "lookup_keys[]": key, active: "true", limit: 1 }, "GET");
-  if (!prices.data.length) throw new HttpError(500, "Plans are not set up in Stripe yet. Run scripts/stripe-setup.mjs.");
+  const addKeys = tier === "learn" ? wantFeatures.map((f) => addonKey(f, children, cycle)) : [];
+  const ids = await lookup([key, ...addKeys]);
 
   let customer = fam.stripe_customer_id as string | null;
   if (!customer) {
@@ -80,13 +105,13 @@ export const handler = serveJson(async (req) => {
     mode: "subscription",
     customer,
     client_reference_id: fid,
-    line_items: [{ price: prices.data[0].id, quantity: 1 }],
+    line_items: [key, ...addKeys].map((k) => ({ price: ids[k], quantity: 1 })),
     allow_promotion_codes: "true",
     success_url: `${base}#billing-success`,
     cancel_url: `${base}#pricing`,
     metadata: { family_id: fid },
     subscription_data: {
-      metadata: { family_id: fid, children: String(children), tier },
+      metadata: { family_id: fid, children: String(children), tier, features: wantFeatures.join(",") },
       // Someone who subscribes during the free week keeps the rest of it: the first charge waits until it ends.
       ...(trialEnd ? { trial_end: trialEnd } : {}),
     },
