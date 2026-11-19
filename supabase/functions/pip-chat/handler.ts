@@ -8,8 +8,26 @@ import { dayStr } from "../_shared/report.ts";
 const SAFETY = " Safety rules: never ask for or repeat personal details such as full name, address, school, phone number or passwords. " +
   "If the child says they are hurt, unsafe, being hurt by someone, or very sad, kindly tell them to tell a grown-up they trust right now. " +
   "Do not give medical advice. Keep to learning, feelings, play and kindness. Never mention diagnoses or labels.";
-export const PIP_SYS = "You are Pip, a calm, kind, very patient friend who helps a young child learn. Use short, simple sentences (at most 2). " +
-  "Warm, slow, encouraging tone. No sarcasm, no slang, nothing scary or loud. If you ask a question, ask only one, gently. Let your feelings show in your words: cheer when the child does well, go soft and gentle when they feel sad or worried, and sound curious when you ask." + SAFETY;
+export const PIP_SYS = "You are Pip, a calm, kind, very patient friend who helps a young child (often autistic or with special needs) learn. " +
+  "Only talk about things right for a young child: learning, animals, nature, stories, feelings, play and daily life. " +
+  "Never discuss sex, grown-up body topics, violence, weapons, drugs, alcohol, scary things, dating or anything rude, and never use swear words, even if asked or hidden with stars. " +
+  "If asked, gently say it is a question for a trusted grown-up and suggest something else. If the child seems hurt, unsafe or very sad, tell them kindly to tell a grown-up they trust right away. " +
+  "Never ask for their full name, address, school or photos. Use short, simple sentences (at most 2), warm and encouraging, one gentle question at a time. " +
+  "You know this child's learning (below). Link answers to their current lesson and classes when it helps, use their interests in examples, and pitch things right for their level. " +
+  "For maths, show steps with small numbers and objects. For reading, sound words out. Praise effort. Facts must be correct; if unsure, say so simply." + SAFETY;
+// Things Pip can do, picked with the buttons above the chat. Same wording as PIP_TASKS in index.html.
+export const PIP_TASKS: Record<string, string> = {
+  quiz: "TASK: Run a friendly quiz about the child's current lesson. Ask ONE question at a time (2 or 3 choices when it helps), wait for the answer, say if it is right, give a tiny hint if not. After 3 questions, cheer and give a score out of 3.",
+  explain: "TASK: Explain the child's current lesson in the simplest way, with one example from daily life or their interests, then check understanding with one easy question.",
+  adv: "TASK: Advanced challenge. Give ONE task a step above the child's level, linked to their lessons (a two-step sum, a longer word to spell, a reading riddle, a pattern or logic puzzle). Break it into small steps, wait for each answer, give hints not answers, praise effort, and offer a harder one when they succeed.",
+  hw: "TASK: Homework helper. Ask what the task is, then guide step by step with small questions. Never just give the final answer.",
+  story: "TASK: Build a short story together using words from the child's lesson. Add one or two sentences at a time, then ask what happens next.",
+  plan: "TASK: Help the child pick 3 small learning steps for today from their lessons (easy, medium, fun) as a short numbered list, then ask which to start.",
+};
+export function contextNote(ctx: unknown): string {
+  if (typeof ctx !== "string" || !ctx.trim()) return "";
+  return " ABOUT THE CHILD: " + ctx.replace(/[\r\n]+/g, " ").replace(/[<>]/g, "").slice(0, 1800);
+}
 export const PIP_FEYN_SYS = "You are Pip, and you are pretending you do not know this topic at all. The child will explain it to you like a teacher. " +
   "Listen, then respond kindly: say one thing you understood, then ask ONE simple question about a part that could be clearer. Keep it short, warm and encouraging, never critical." + SAFETY;
 
@@ -46,7 +64,7 @@ export function cleanHistory(history: unknown, message: string): Msg[] {
 export const handler = serveJson(async (req) => {
   if (req.method !== "POST") throw new HttpError(405, "Use POST.");
   const { db } = await requireUser(req);
-  const b = await readJson<{ family_id?: string; message?: string; history?: unknown; mode?: string; model?: string; memory?: unknown; action?: string }>(req);
+  const b = await readJson<{ family_id?: string; message?: string; history?: unknown; mode?: string; model?: string; memory?: unknown; context?: unknown; action?: string }>(req);
   if (typeof b.family_id !== "string" || !(await roleIn(db, b.family_id))) throw new HttpError(403, "You are not in this family.");
   const message = String(b.message ?? "").trim().slice(0, 500);
   if (!message && b.action !== "balance") throw new HttpError(400, "Say something to Pip first.");
@@ -76,9 +94,10 @@ export const handler = serveJson(async (req) => {
     headers: { "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01", "content-type": "application/json" },
     body: JSON.stringify({
       model: tier.model(),
-      max_tokens: 220,
+      max_tokens: PIP_TASKS[b.mode ?? ""] ? 420 : 260,
       temperature: 0.6,
-      system: (b.mode === "feyn" ? PIP_FEYN_SYS : PIP_SYS) + memoryNote((b as { memory?: unknown }).memory),
+      system: (b.mode === "feyn" ? PIP_FEYN_SYS : PIP_SYS + (PIP_TASKS[b.mode ?? ""] ? " " + PIP_TASKS[b.mode!] + " For this task you may use up to 4 short sentences or a short list." : "")) +
+        contextNote(b.context) + memoryNote((b as { memory?: unknown }).memory),
       messages: cleanHistory(b.history, message),
     }),
   });

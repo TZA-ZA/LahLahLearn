@@ -2243,6 +2243,66 @@ body.noanim .hp *,body.noanim .hp{animation:none!important}
 .pt-badge{position:fixed;left:14px;bottom:14px;z-index:60;padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg);font:700 .8rem var(--f-b);box-shadow:var(--shadow);cursor:pointer;border:0}
 .hm-sw{display:flex;justify-content:flex-end;margin-bottom:12px}.hm-sw .lv-sw{margin:0}
 .learn-host{scroll-margin-top:90px;margin-top:clamp(24px,4vw,40px)}.learn-host>.wrap{padding-left:0;padding-right:0;padding-top:0;max-width:none;width:100%}
+.tp-tasks{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:thin}
+.tp-task{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surf);color:var(--ink);font:600 .88rem var(--f-b);cursor:pointer;transition:transform .15s,border-color .2s}
+.tp-task:hover{transform:translateY(-2px);border-color:var(--brand)}.tp-task.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.al-dev{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:14px 16px;border-radius:18px;background:var(--bg);border:1px solid var(--line);font-weight:600}
+.al-dot{width:12px;height:12px;border-radius:50%;background:var(--muted)}.al-dot.on{background:#3cb371;box-shadow:0 0 0 5px rgba(60,179,113,.2)}
+.al-desc{margin:4px 0 0;color:var(--muted);font-size:.9rem;line-height:1.5}
+.al-list{display:flex;flex-direction:column;gap:8px}
+.al-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;border:1px solid var(--line);background:var(--surf);cursor:pointer}
+.al-t b{display:block;font:600 1rem var(--f-d)}.al-t small{display:block;color:var(--muted);font-size:.85rem;line-height:1.4}
+.al-row .es-ic{width:42px;height:42px;border-radius:14px}
+.sw-in{appearance:none;width:50px;height:28px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;transition:background .2s;flex:none}
+.sw-in::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.25);transition:transform .2s}
+.sw-in:checked{background:var(--brand)}.sw-in:checked::after{transform:translateX(22px)}.sw-in:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.sw-cts{display:flex;flex-direction:column;gap:10px}.sw-ct{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.al-note{display:flex;gap:8px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--sun) 18%,var(--surf));margin:0}
+@media(max-width:560px){.sw-ct{grid-template-columns:1fr}}
+.sw-badge{position:fixed;left:12px;bottom:12px;z-index:55;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;border:0;background:#1f6f4a;color:#fff;font:700 .78rem var(--f-b);box-shadow:var(--shadow);cursor:pointer;opacity:.9}
+.sw-badge.off{background:var(--muted)}
+.sw-ov{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px;background:rgba(20,30,40,.55);backdrop-filter:blur(6px)}
+.sw-card{display:flex;flex-direction:column;align-items:center;gap:16px;width:min(560px,100%);padding:28px 22px;border-radius:36px;background:var(--surf);text-align:center;box-shadow:0 30px 70px -20px rgba(0,0,0,.5);animation:hpIn .4s cubic-bezier(.3,1.5,.5,1)}
+.sw-card h2{margin:0;font:700 clamp(1.8rem,5vw,2.6rem) var(--f-d)}
+.sw-ring{position:relative;width:110px;height:110px}.sw-ring svg{width:100%;height:100%}.sw-ring b{position:absolute;inset:0;display:grid;place-items:center;font:800 2rem var(--f-d)}
+.sw-btns{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
+.sw-ok,.sw-help{display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 10px;border:0;border-radius:30px;color:#fff;font:800 1.3rem var(--f-d);cursor:pointer;box-shadow:0 8px 0 rgba(0,0,0,.2)}
+.sw-ok{background:#2f9e5b;animation:lvPulse 1.6s ease-in-out infinite}.sw-help{background:#e0483e}
+.sw-ok:focus-visible,.sw-help:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+.sw-calls{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;width:100%}
+.sw-call{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 10px;border-radius:24px;background:#2f9e5b;color:#fff;text-decoration:none}.sw-call b{font:800 1.2rem var(--f-d)}.sw-call small{opacity:.85}
+.sw-call.sos{background:#e0483e}
+.sw-em .sw-card{border:6px solid #e0483e}
+.cm{display:flex;flex-direction:column;gap:22px;max-width:1080px}
+.cm-hd{display:flex;flex-direction:column;gap:6px}.cm-hd h1{margin:0;font:600 clamp(2rem,4vw,2.8rem)/1.05 var(--f-d)}.cm-hd p{margin:0;max-width:60ch}
+.cm-tabs{display:flex;flex-wrap:wrap;gap:6px;padding:5px;border-radius:999px;background:var(--surf);border:1px solid var(--line);width:max-content;max-width:100%}
+.cm-tabs button{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:10px 18px;border-radius:999px;font:600 .95rem var(--f-b);color:var(--muted);cursor:pointer}
+.cm-tabs button[aria-selected="true"]{background:var(--brand);color:#fff}
+.cm-note{display:flex;gap:8px;align-items:center;margin:0;padding:10px 14px;border-radius:14px;background:color-mix(in srgb,var(--sun) 20%,var(--surf));font-size:.9rem}
+.cm-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;align-items:start}
+.cm-new,.cm-fb{display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:28px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--shadow)}
+.cm-new{position:sticky;top:90px}.cm-new h2,.cm-fb h2{margin:0;font:600 1.3rem var(--f-d)}
+.cm-stks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cm-stks button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border-radius:18px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:600 .78rem/1.2 var(--f-b);cursor:pointer;text-align:center}
+.cm-stks button[aria-checked="true"]{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,var(--surf));color:var(--brand)}
+.cm-stars{display:flex;gap:4px}.cm-stars button{border:0;background:none;font-size:2rem;line-height:1;color:var(--line);cursor:pointer;padding:2px}
+.cm-stars button[aria-checked="true"],.cm-stars button:has(~ button[aria-checked="true"]){color:#f2b72e}
+.cm-list{display:flex;flex-direction:column;gap:12px}
+.cm-p{display:flex;flex-direction:column;gap:8px;padding:18px 20px;border-radius:22px;background:var(--surf);border:1px solid var(--line)}
+.cm-p.kid{border-left:6px solid var(--brand)}
+.cm-ph{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.cm-ph b{font:600 1rem var(--f-d)}
+.cm-av{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:color-mix(in srgb,var(--brand) 16%,var(--surf));color:var(--brand);font:700 1rem var(--f-d)}
+.cm-rt{margin-left:auto;color:#f2b72e;letter-spacing:1px}.cm-rt i{color:var(--line);font-style:normal}
+.cm-stk{display:inline-flex;align-items:center;gap:8px;margin:0;padding:8px 14px;border-radius:999px;background:color-mix(in srgb,var(--sun) 25%,var(--surf));font-weight:700;width:max-content;max-width:100%}
+.cm-b{margin:0;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.cm-pa{display:flex;justify-content:flex-end;gap:8px}.cm-pa:empty{display:none}
+.cm-x{border:0;background:none;color:var(--muted);font:600 .82rem var(--f-b);cursor:pointer;text-decoration:underline}
+.cm-empty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 20px;border-radius:24px;border:2px dashed var(--line);color:var(--muted);text-align:center}
+.fb-k{display:flex;flex-wrap:wrap;gap:8px}.fb-k label{cursor:pointer}.fb-k input{position:absolute;opacity:0;pointer-events:none}
+.fb-k span{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--line);font-weight:600}
+.fb-k input:checked+span{background:var(--brand);border-color:var(--brand);color:#fff}.fb-k input:focus-visible+span{outline:3px solid var(--brand);outline-offset:2px}
+.fb-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:820px){.cm-in{grid-template-columns:1fr}.cm-new{position:static}.fb-2{grid-template-columns:1fr}}
 .lv-i{display:none!important}.lv-s .lv-i{display:inline-flex!important}
 .lv-s .tc-txt p{display:none}.lv-s .tc-txt h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}.lv-s .tc-vis{cursor:pointer}
 .lv-s .tc-vis svg{max-height:340px}.lv-s #tcHear{min-width:64px;min-height:64px;border-radius:50%;justify-content:center}.lv-s #tcHear svg{width:30px;height:30px}
@@ -3308,6 +3368,29 @@ const KS_REPLY={bad:"Let's keep our words kind and safe. Can we talk about somet
   hurt:"I'm really glad you told me. Please go and tell a grown-up you trust right now, like your mum, dad or teacher. They can help you."};
 const PIP_SYS="You are Pip, a calm, kind, very patient friend who helps a young autistic child learn. Only talk about things that are right for a young child: learning, animals, nature, stories, feelings, play and daily life. Never discuss sex, bodies in a grown-up way, violence, weapons, drugs, alcohol, scary things, dating or anything rude, and never use swear words, even if asked or if the words are hidden with stars. If the child asks about these, gently say it is a question for a trusted grown-up and suggest something else to talk about. If the child seems hurt, unsafe or very sad, tell them kindly to tell a grown-up they trust right away. Never ask for their full name, address, school or photos.Use short, simple sentences (at most 2). Warm, slow, encouraging tone. No sarcasm, no slang, nothing scary or loud. If you ask a question, ask only one, gently. Let your feelings show in your words: cheer when the child does well, go soft and gentle when they feel sad or worried, and sound curious when you ask.";
 const PIP_FEYN_SYS="You are Pip, and you are pretending you do not know this topic at all. The child will explain it to you like a teacher (this is the Feynman technique). Listen, then respond kindly: say one thing you understood, then ask ONE simple question about a part that could be clearer. Keep it short, warm and encouraging, never critical.";
+/* ---- What Pip knows about this child's learning, so answers fit their lessons (sent with every message; no names or places) ---- */
+const PIP_TASKS={
+ quiz:['Quiz me','star',"Quiz me on my lesson!","TASK: Run a friendly quiz about the child's current lesson. Ask ONE question at a time (picture-friendly, with 2 or 3 choices when it helps), wait for the answer, say if it is right, give a tiny hint if not, then ask the next. After 3 questions, cheer and give a score out of 3."],
+ explain:['Explain my lesson','book',"Can you explain my lesson?","TASK: Explain the child's current lesson in the simplest way, with one example from daily life or their interests, then check understanding with one easy question."],
+ adv:['Challenge me','trophy',"Give me a challenge!","TASK: Advanced challenge. Give ONE task a step above the child's level, linked to their lessons (for example: a two-step sum, spelling a longer word, a short reading riddle, a pattern or logic puzzle, ordering steps, comparing amounts). Break it into small steps, wait for each answer, give hints instead of answers, and praise effort. If they get it right, offer a slightly harder one."],
+ hw:['Homework help','pen',"Can you help with my homework?","TASK: Homework helper. Ask what the task is, then guide step by step with small questions. Never just give the final answer; help the child find it. Check each step kindly."],
+ story:['Make a story','spark',"Let's make a story together!","TASK: Build a short story together using words from the child's lesson. Add one or two sentences at a time, then ask the child what happens next."],
+ plan:['Plan my day','clock',"Help me plan my learning today.","TASK: Help the child pick 3 small learning steps for today from their lessons (one easy, one medium, one fun), as a short numbered list, then ask which one to start."]};
+function pipCtx(){
+  try{
+    const c=curGet(),lv=curLv(),nx=curNext(),age=(P&&(P.ageN||P.age))||'',done=lv.units.filter(curUnitDone).map(u=>u.n);
+    const lvls=CURR.map(L=>`${L.cls} (${L.d}): ${L.units.filter(u=>u.n).map(u=>u.n).join(', ')}`).join(' | ');
+    const ints=(P&&P.interests||[]).slice(0,5).join(', ');
+    const lines=[`Child: age ${age}, first name ${P&&P.firstName||P&&P.name||'friend'}.`,`Class: ${lv.cls}, ${done.length} of ${lv.units.length} steps done.`,
+      nx?`Current lesson: "${nx.n}" (${nx.d||''}).`:'They finished every lesson in this class; the class test is next.',
+      done.length?`Finished: ${done.slice(-6).join(', ')}.`:'',ints?`Likes: ${ints}.`:'',
+      P&&P.comm?`Communicates best with: ${P.comm}.`:'',P&&P.read?`Reading: ${P.read}.`:'',P&&P.num?`Numbers: ${P.num}.`:'',
+      `Stars: ${G?G.pts:0}. Lessons done in all: ${G?G.lessons:0}.`,
+      `LahLahLearn lessons by class: ${lvls}.`];
+    return lines.filter(Boolean).join(' ').slice(0,1800);
+  }catch(e){return ''}
+}
+const PIP_SMART=" You know this child's learning (below). Link answers to their current lesson and classes when it helps, use their interests in examples, and pitch things just right for their level. For maths, show the steps with small numbers and objects. For reading, sound words out (c-a-t). Praise effort, not only right answers. Facts must be correct; if you are not sure, say so simply.";
 const PIP_TOPICS=[
  [/\bwhat('?s| is) your name\b|\bwho are you\b/,["I'm Pip! I'm your learning friend. What's your name?","My name is Pip. I love learning new things with you!"]],
  [/\bhow are you\b|\bhow('?r| are) you doing\b/,["I'm feeling happy and calm today, thank you for asking! How are you feeling?","I'm good, like a sunny day! How about you?"]],
@@ -3323,7 +3406,34 @@ const PIP_TOPICS=[
  [/\bwhy\b/,["That's a great 'why' question! Things often happen because of a reason — what do you think it could be?","Good question! Let's think about it together, one small step at a time."]],
  [/\bletters?\b|\balphabet\b|\bread(ing)?\b/,["Letters make words! A is for apple. What letter does your name start with?","Reading is like magic — tiny marks turn into stories!"]],
 ];
+/* Without an AI account Pip can still run the task buttons: questions come from the child's own class, and answers are checked */
+function pipTaskLocal(t,mode){
+  const lv=curLv(),nx=curNext(),hard=mode==='adv',L=CURR.indexOf(lv),q=PIPCHAT.lq;
+  const num=String(t).match(/-?\d+/),said=String(t).toLowerCase().trim();
+  if(q&&q.mode===mode){
+    const ok=q.num!=null?(num&&+num[0]===q.num):said.replace(/[^a-z]/g,'')===q.ans;
+    PIPCHAT.lq=null;q.n=(q.n||0)+1;q.sc=(q.sc||0)+(ok?1:0);
+    const lead=ok?pick(['Yes! That is right!','Brilliant, you got it!','Correct! Well done!']):`Good try! The answer is ${q.num!=null?q.num:q.ans.toUpperCase()}.`;
+    if(mode==='quiz'&&q.n>=3)return `${lead} You scored ${q.sc} out of 3. ${q.sc===3?'Amazing!':'You are learning so well!'}`;
+    return lead+' '+pipTaskQ(mode,hard,L,q);
+  }
+  if(mode==='quiz'||mode==='adv')return (mode==='adv'?'Here is a challenge, one step at a time. ':'Quiz time! 3 questions. ')+pipTaskQ(mode,hard,L,{n:0,sc:0});
+  if(mode==='explain')return nx?`Your lesson is "${nx.n}". ${nx.d||''} Let's try it together: tap Start lesson on your home page, and I will cheer you on!`:`You finished every lesson in ${lv.cls}! The class test is next. You can do it!`;
+  if(mode==='plan'){const ups=lv.units.filter(u=>!curUnitDone(u)).slice(0,2).map(u=>u.n);return `Here is a plan: 1. ${ups[0]||'Your class test'}. 2. ${ups[1]||'A story with Pip'}. 3. A fun game or drawing. Which one first?`}
+  if(mode==='story')return `Once upon a time, a little ${pick(['fox','bunny','turtle','owl'])} found a ${pick(['shiny star','red kite','tiny seed','blue shell'])}. What happens next?`;
+  if(mode==='hw')return 'I can help! Tell me the question one bit at a time, and we will solve it together, step by step.';
+  return null;
+}
+function pipTaskQ(mode,hard,L,prev){
+  const R=n=>1+Math.floor(Math.random()*n),lvl=Math.min(2,L+(hard?1:0));let q;
+  if(lvl===0&&Math.random()<.5){const w=pick(['cat','sun','dog','hat','bus','pig']);q={txt:`What letter does "${w}" start with?`,ans:w[0]}}
+  else if(lvl===0){const a=R(4),b=R(4);q={txt:`What is ${a} + ${b}?`,num:a+b}}
+  else if(lvl===1){const a=R(9),b=R(9);q=Math.random()<.5?{txt:`What is ${a+b} − ${b}?`,num:a}:{txt:`What is ${a} + ${b}?`,num:a+b}}
+  else{const a=R(5),b=R(5),c=R(9);q=Math.random()<.5?{txt:`Try this two-step one: ${a} × ${b}, then add ${c}. What do you get?`,num:a*b+c}:{txt:`Pip has ${a*b} apples and shares them with ${b} friends. How many does each friend get?`,num:a}}
+  PIPCHAT.lq=Object.assign(prev||{},q,{mode});return q.txt;
+}
 function pipScripted(t,mode,failed){
+  if(PIP_TASKS[mode]){const r=pipTaskLocal(t,mode);if(r)return r}
   const s=(t||'').toLowerCase();
   const pre=failed?"I couldn't reach my thinking helper just now, but I'm still here with you. ":"";
   if(/^(hi|hello|hey)\b/.test(s))return pre+"Hi friend! I'm so happy to talk with you. What shall we learn today?";
@@ -3496,13 +3606,13 @@ async function aiBuy(pack){
 
 async function askPip(userText,history,mode){
   const own=aiCfg();
-  if(!(own.url&&own.key)&&CLOUD.on&&CLOUD.user&&CFG.pipAI!==false&&UID){try{const cost=aiModel().cost;const {data}=await CLOUD.sb.functions.invoke('pip-chat',{body:{family_id:UID,message:userText,history:(history||[]).slice(-8),mode,model:aiModel().id,memory:memForPrompt()}});if(data&&typeof data.left==='number'&&G){aiBal();G.ai.srv=data.left;G.ai.srvAt=Date.now()}if(data&&data.credits_out)return aiOutMsg();if(data&&data.reply){if(typeof data.left!=='number')aiSpendLocal(cost);return String(data.reply)}}catch(e){}}
-  const c=aiCfg(),mem=memForPrompt(),sys=(mode==='feyn'?PIP_FEYN_SYS:PIP_SYS)+(mem.length?' Things the child told you before (use them kindly when they help): '+mem.join('; ')+'.':'');
+  if(!(own.url&&own.key)&&CLOUD.on&&CLOUD.user&&CFG.pipAI!==false&&UID){try{const cost=aiModel().cost;const {data}=await CLOUD.sb.functions.invoke('pip-chat',{body:{family_id:UID,message:userText,history:(history||[]).slice(-8),mode,model:aiModel().id,memory:memForPrompt(),context:pipCtx()}});if(data&&typeof data.left==='number'&&G){aiBal();G.ai.srv=data.left;G.ai.srvAt=Date.now()}if(data&&data.credits_out)return aiOutMsg();if(data&&data.reply){if(typeof data.left!=='number')aiSpendLocal(cost);return String(data.reply)}}catch(e){}}
+  const c=aiCfg(),mem=memForPrompt(),tk=PIP_TASKS[mode],sys=(mode==='feyn'?PIP_FEYN_SYS:PIP_SYS+PIP_SMART+(tk?' '+tk[3]+' For this task you may use up to 4 short sentences or a short list.':''))+' ABOUT THE CHILD: '+pipCtx()+(mem.length?' Things the child told you before (use them kindly when they help): '+mem.join('; ')+'.':'');
   if(!c.url||!c.key)return pipScripted(userText,mode,false);
   try{
     const msgs=[{role:'system',content:sys},...((history||[]).slice(-8)),{role:'user',content:userText}];
     const headers={'Content-Type':'application/json'};headers[c.header||'Authorization']=(c.prefix||'')+c.key;
-    const r=await fetch(c.url,{method:'POST',headers,body:JSON.stringify({model:c.model||'default',messages:msgs,max_tokens:220,temperature:.6})});
+    const r=await fetch(c.url,{method:'POST',headers,body:JSON.stringify({model:c.model||'default',messages:msgs,max_tokens:tk?420:260,temperature:.6})});
     if(!r.ok)throw new Error('http '+r.status);
     const j=await r.json();
     const txt=(j&&j.choices&&j.choices[0]&&(j.choices[0].message&&j.choices[0].message.content||j.choices[0].text))||(j&&j.message&&j.message.content)||(j&&j.output_text)||(j&&j.reply)||(j&&j.text);
@@ -3591,6 +3701,7 @@ function studyView(box){
    <p id="sdone" class="muted small" style="text-align:center;min-height:1.2em" aria-live="polite"></p>
    <div class="tp-bar"><span class="tp-mw"><button class="tp-model" id="tpModel" aria-haspopup="true" aria-expanded="false" aria-controls="tpMp" title="${esc(aiModel().d)}">${tpModelIn()}</button><div class="tp-mp" id="tpMp" role="radiogroup" aria-label="Pip's thinking helper" hidden></div></span><span class="tp-cr tn" id="tpCr"></span><button class="tp-memb" id="tpMem" aria-expanded="false" aria-controls="tpMm">${ic('bookmark',15)}<span>Pip remembers</span><b class="tn" id="tpMemN"></b></button></div>
    <div class="tp-split"><div class="tpchat-wrap"><div class="tpchat" id="tpchat">${tpBubbles(PIPCHAT.msgs)}</div></div><aside class="mm tp-mm" id="tpMm" hidden aria-label="What Pip remembers"></aside></div>
+   <div class="tp-tasks" role="group" aria-label="Things Pip can do">${Object.entries(PIP_TASKS).map(([k,t])=>`<button class="tp-task${PIPCHAT.task===k?' on':''}" data-task="${k}" aria-pressed="${PIPCHAT.task===k}">${ic(t[1],15)}<span>${t[0]}</span></button>`).join('')}</div>
    <div class="tp-vr" id="tpVr" hidden></div>
    <div class="row" style="gap:8px;flex-wrap:nowrap"><input id="tpin" class="in" placeholder="Talk to Pip..." aria-label="Message to Pip" autocomplete="off">
     <button class="btn ${srSupported()?'sun':'ghost'} micbtn" id="tpmic" ${srSupported()?'':'disabled'} aria-label="Speak to Pip" title="${srSupported()?'Hold to talk':'Voice not supported here'}">${ic('mic',22)}</button>
@@ -3599,10 +3710,11 @@ function studyView(box){
   const off=trackTyping($('#tpin',box));teardowns.push(off);
   const tiv=setInterval(()=>{const el=$('#tpbud',box);if(el)el.classList.toggle('on',!!pipTalk)},150);teardowns.push(()=>clearInterval(tiv));
   teardowns.push(mountPipMascot($('#tp3d',box),{onPoke:()=>pipSay(PIP_POKES[Math.floor(Math.random()*PIP_POKES.length)])}));
-  const send=()=>{const v=$('#tpin',box).value;$('#tpin',box).value='';tpSend(box,'teach',v)};
+  const send=()=>{const v=$('#tpin',box).value;$('#tpin',box).value='';tpSend(box,PIPCHAT.task||'teach',v)};
+  $$('[data-task]',box).forEach(b=>b.onclick=()=>{const k=b.dataset.task,on=PIPCHAT.task!==k;PIPCHAT.task=on?k:null;$$('[data-task]',box).forEach(x=>{const o=x.dataset.task===PIPCHAT.task;x.classList.toggle('on',o);x.setAttribute('aria-pressed',o)});if(on)tpSend(box,k,PIP_TASKS[k][2])});
   $('#tpgo',box).onclick=send;
   $('#tpin',box).onkeydown=e=>{if(e.key==='Enter')send()};
-  const vr=voiceRec($('#tpVr',box),{onSend:t=>tpSend(box,'teach',t)});
+  const vr=voiceRec($('#tpVr',box),{onSend:t=>tpSend(box,PIPCHAT.task||'teach',t)});
   const micSync=()=>{const on=vr.mode()==='rec',mb=$('#tpmic',box);if(!mb)return;mb.classList.toggle('on',on);mb.innerHTML=on?'<span class="tp-stop" aria-hidden="true"></span>':ic('mic',22);mb.setAttribute('aria-label',on?'Stop recording':'Speak to Pip')};
   $('#tpmic',box).onclick=async()=>{await vr.toggle();micSync();const iv=setInterval(()=>{if(vr.mode()!=='rec'){clearInterval(iv);micSync()}},300)};
   teardowns.push(()=>vr.stop());
@@ -4577,7 +4689,7 @@ function greetShow(){
   el.onclick=shut;$('button',el).focus();setTimeout(shut,6500);
   try{if(typeof say==='function'&&!calmOpen)say('Hi '+P.name+', welcome to LahLahLearn. '+w+'!')}catch(e){}
 }
-const PUBLIC=['welcome','auth','home','team','pricing','join','privacy','terms','refunds','cookies'],FULL=['welcome','onboard','pick','who'];
+const PUBLIC=['welcome','auth','home','team','pricing','community','join','privacy','terms','refunds','cookies'],FULL=['welcome','onboard','pick','who'];
 const DOCK=[['dashboard','Home','home'],['learn','Learn','book'],['explore-island','3D World','globe'],['together','Leaderboard','trophy'],['care','Care Circle','chart']];
 const parseHash=()=>{const h=(location.hash||'').slice(1),i=h.indexOf('-');return i<0?{base:h,arg:''}:{base:h.slice(0,i),arg:h.slice(i+1)}};
 const go=r=>{if(('#'+r)===location.hash)route();else location.hash=r};
@@ -4605,9 +4717,9 @@ function chrome(){
   $('#dock').classList.toggle('on',!!(session&&!(CLOUD.helperOnly||CLOUD.readonly)&&!['welcome','auth','onboard','pick','who','helping'].includes(cur)));
   const dockCur=cur==='profile'?'':cur==='explore'&&parseHash().arg==='island'?'explore-island':cur==='explore'||cur==='play'?'explore-island':cur==='world'||cur==='signs'?'learn':cur;
   $('#dock').innerHTML=DOCK.filter(d=>!(kid&&(d[0]==='care'||d[0]==='learn'))).map(([k,l,i])=>`<button class="dk ${dockCur===k||(kid&&k==='dashboard'&&dockCur==='learn')?'on':''}" data-go="${k}" aria-label="${l}">${ic(i,22)}<span>${l}</span></button>`).join('');
-  let links=(session?[['dashboard','My page']].concat(kid?[]:[['learn','Learn']]).concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[]:[['pricing','Plans'],['home','About'],['team','Our team']]);
+  let links=(session?[['dashboard','My page']].concat(kid?[]:[['learn','Learn']]).concat(KIDS&&KIDS.list.length>1?[['who','Switch child']]:[]):[]).concat(session&&!kid?[['care','Care Circle']]:[]).concat(kid?[['community','Friends']]:[['pricing','Plans'],['community','Community'],['home','About'],['team','Our team']]);
   if(CLOUD.on&&CLOUD.user){if(CLOUD.helperOnly||CLOUD.readonly)links=[['helping','Children']].concat(CLOUD.readonly?[['care','Care Circle']]:[]);else if(!kid&&cloudHelps().length)links.push(['helping','Children you support'])}
-  const TLI={dashboard:'home',learn:'book',who:'users'};document.body.classList.toggle('pics',!!(session&&kid&&typeof lvSimple==='function'&&lvSimple()));
+  const TLI={dashboard:'home',learn:'book',who:'users',community:'users'};document.body.classList.toggle('pics',!!(session&&kid&&typeof lvSimple==='function'&&lvSimple()));
   $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':k==='dashboard'&&kid?(cur===k||dockCur==='learn'):cur===k)?'on':''}" data-go="${k}" aria-label="${l}">${TLI[k]?`<span class="tli">${ic(TLI[k],20)}</span>`:''}<span class="tlw">${l}</span></button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
   $('#meb').innerHTML=session&&P?(kid?ic('lock',18):ic('gear',18)):ic('user',18);studyUI();$('#meb').className='ibtn'+(cur==='profile'?' on':'');$('#meb').setAttribute('aria-label',session?(kid?'For parents':'Settings'):'Log in');$('#meb').title=session?(kid?'For parents':'Settings'):'Log in';
   {let pl=$('#plock');if(session&&!kid){if(!pl){pl=document.createElement('button');pl.id='plock';pl.className='ibtn';pl.setAttribute('aria-label','Lock the parent area');pl.title='Lock the parent area';pl.innerHTML=ic('unlock',18);pl.onclick=()=>{CU=null;chrome();try{guideSync()}catch(e){}if(['pricing','home','profile','care'].includes(cur))go('dashboard');toast('Parent area locked')};$('#meb').after(pl)}}else if(pl)pl.remove()}
@@ -4624,7 +4736,7 @@ function resolve(){
   if(session&&(base==='welcome'||base==='auth')&&!OB.live)base='dashboard';
   return{base,arg};
 }
-const PAGE_TITLE={welcome:'LahLahLearn - Fun, calm learning app for kids',home:'About LahLahLearn - Calm learning made for your child',team:'Our team - the people behind LahLahLearn',pricing:'Plans and prices - LahLahLearn',auth:'Log in or register - LahLahLearn',privacy:'Privacy Policy - LahLahLearn',terms:'Terms of Service - LahLahLearn',refunds:'Refund Policy - LahLahLearn',cookies:'Cookie Policy - LahLahLearn',dashboard:'My page - LahLahLearn',learn:'Learn - LahLahLearn',explore:'Play - LahLahLearn',care:'Care Circle - LahLahLearn',profile:'Settings - LahLahLearn',together:'Together - LahLahLearn',journey:'My journey - LahLahLearn'};
+const PAGE_TITLE={community:'Community - LahLahLearn',welcome:'LahLahLearn - Fun, calm learning app for kids',home:'About LahLahLearn - Calm learning made for your child',team:'Our team - the people behind LahLahLearn',pricing:'Plans and prices - LahLahLearn',auth:'Log in or register - LahLahLearn',privacy:'Privacy Policy - LahLahLearn',terms:'Terms of Service - LahLahLearn',refunds:'Refund Policy - LahLahLearn',cookies:'Cookie Policy - LahLahLearn',dashboard:'My page - LahLahLearn',learn:'Learn - LahLahLearn',explore:'Play - LahLahLearn',care:'Care Circle - LahLahLearn',profile:'Settings - LahLahLearn',together:'Together - LahLahLearn',journey:'My journey - LahLahLearn'};
 function render(base,arg){
   teardowns.forEach(f=>{try{f()}catch(e){}});teardowns=[];
   const pg=$('#page');pg.className='page'+(FULL.includes(base)?' full':'');pg.dataset.r=base;pg.innerHTML='';
@@ -4976,7 +5088,7 @@ function autoCalm(why){
   if(Date.now()-calmLast<(helper?4*60000:CALM_GAP))return false;
   const ac=G.autoCalmN||(G.autoCalmN={}),d=todayStr();if((ac[d]||0)>=(helper?6:CALM_DAY))return false;
   if(['care','profile','auth','onboard','pricing','privacy','terms','welcome'].includes(cur))return false;
-  ac[d]=(ac[d]||0)+1;calmWhy=why;save();openCalm(true);return true;
+  ac[d]=(ac[d]||0)+1;calmWhy=why;save();openCalm(true);try{if(['upset','breath','taps','tired','focus'].includes(why)||helper)nfyAdd('upset',`${P.name} seemed ${why==='tired'?'tired':'upset'}, so a calm break started.`)}catch(e){}return true;
 }
 /* many fast taps in a row usually means frustration: offer the calm break */
 (()=>{let taps=[];document.addEventListener('pointerdown',e=>{if(!session||!G||calmOpen||!kidMode()||e.pointerType==='mouse'&&e.button!==0)return;
@@ -5957,6 +6069,7 @@ function dashPic(o){
     ['story','Story time','--kb',`<span class="hp-scene">${bkScene(BOOKS[0].pages[0][0],BOOKS[0])}</span><span class="hp-ear">${ic('vol',22)}</span>`,'story'],
     !feat('calm')?null:['calm','Calm break','--brand2',`<span class="hp-breath"><i></i><i></i><b>${ic('heart',40)}</b></span>`,'calm'],
     !feat('draw')||kidMode()?null:['draw','Draw','--sun',`<span class="hpi hp-pal">${ic('palette',72)}</span>`,'go:learn-make-draw'],
+    ['friends','Friends','--sun',`<span class="hpi hp-book">${ic('users',70)}</span>`,'go:community'],
     ['fame','Leaderboard','--brand',`<span class="hpi hp-cup">${ic('trophy',70)}</span>`,'go:together']].filter(Boolean);
   $('#page').innerHTML=`<div class="wrap hp lv-s">
    <section class="hp-sky">
@@ -5980,6 +6093,85 @@ function dashPic(o){
   const kb=$('#kpBuddy');kb.onclick=()=>{kb.classList.remove('hop');void kb.offsetWidth;kb.classList.add('hop');sfxStar(1+Math.floor(Math.random()*5));try{say(o.HI)}catch(e){}};
   const cb=$('#chestBtn');if(cb)cb.onclick=()=>{G.chest=o.monK;award(20);save();sfxStar(5,true);toast(starTxt());R.dashboard()};
 }
+
+/* ===== Community: Kids' corner, Parents' voices and a feedback form. Posts are public, so they are filtered for unkind words and personal details. ===== */
+const CM={board:null,posts:{},local:false,loading:false};
+const CM_STK=[['star','I finished a lesson!'],['book','I love story time!'],['heart','I feel happy today'],['trophy','I passed my class test!'],['globe','I decorated my 3D world'],['spark','I learned something new']];
+const CM_PII=/(\d[\d\s-]{5,}\d|@|https?:\/\/|www\.|\.com\b|whatsapp|instagram|tiktok|telegram|snapchat|my address|i live (at|in)|my school is|meet me|phone)/i;
+const cmLS=()=>{try{return JSON.parse(lsGet('ll.cm')||'{}')}catch(e){return{}}};
+function cmCheck(t){if(!t||!t.trim())return 'Please write something first.';const k=ksCheck(t);if(k==='hurt')return 'hurt';if(k)return 'Please use kind words.';if(CM_PII.test(t))return 'Please do not share phone numbers, emails, links or where you live.';return ''}
+async function cmLoad(b){
+  CM.loading=true;
+  if(typeof cloudLive==='function'&&cloudLive()||(CLOUD&&CLOUD.sb)){
+    try{const r=await CLOUD.sb.from('community_posts').select('id,board,author_id,author_name,avatar,sticker,body,rating,created_at').eq('board',b).order('created_at',{ascending:false}).limit(60);
+      if(r.error)throw r.error;CM.local=false;CM.posts[b]=r.data||[];CM.loading=false;return}catch(e){CM.local=true}
+  }else CM.local=true;
+  CM.posts[b]=(cmLS()[b]||[]);CM.loading=false;
+}
+async function cmPost(b,row){
+  if(!CM.local&&CLOUD&&CLOUD.sb&&CLOUD.user){const r=await CLOUD.sb.from('community_posts').insert(row);if(r.error)throw new Error(r.error.message||'Could not post');return}
+  const all=cmLS();all[b]=[Object.assign({id:'l'+Date.now(),created_at:new Date().toISOString(),author_id:'me'},row)].concat(all[b]||[]).slice(0,60);lsSet('ll.cm',JSON.stringify(all));
+}
+const cmName=()=>{const fn=(P&&(P.firstName||P.name)||'').trim();if(kidMode())return (fn?fn[0].toUpperCase()+'.':'A friend')+' with '+((BUDDIES.find(x=>x[0]===buddy())||[0,'Pip'])[1]);return fn.split(' ')[0]||'A parent'};
+function cmPostHTML(p,b){
+  const st=CM_STK.find(x=>x[0]===p.sticker),mine=CLOUD&&CLOUD.user&&p.author_id===CLOUD.user.id||p.author_id==='me';
+  return `<article class="cm-p${b==='kids'?' kid':''}"><div class="cm-ph"><span class="cm-av" aria-hidden="true">${b==='kids'?ic(st?st[0]:'smile',22):esc((p.author_name||'?')[0])}</span><b>${esc(p.author_name)}</b><time class="muted small" datetime="${esc(p.created_at)}">${nfyAgo(Date.parse(p.created_at))}</time>${p.rating?`<span class="cm-rt" aria-label="${p.rating} out of 5 stars">${'★'.repeat(p.rating)}<i>${'★'.repeat(5-p.rating)}</i></span>`:''}</div>
+   ${st?`<p class="cm-stk">${ic(st[0],18)} ${esc(st[1])}</p>`:''}${p.body&&p.body!==(st&&st[1])?`<p class="cm-b">${esc(p.body)}</p>`:''}
+   <div class="cm-pa">${mine&&!CM.local?`<button class="cm-x" data-cdel="${esc(p.id)}">Delete</button>`:''}${!mine&&!CM.local&&CLOUD&&CLOUD.user?`<button class="cm-x" data-crep="${esc(p.id)}">Report</button>`:''}</div></article>`;
+}
+R.community=arg=>{
+  const kid=kidMode();const b=CM.board||(kid?'kids':(arg==='kids'?'kids':'parents'));CM.board=b;
+  const canPost=!!session&&(b==='kids'?kid:!kid),posts=CM.posts[b];
+  if(!posts&&!CM.loading){cmLoad(b).then(()=>{if(cur==='community')R.community(arg)})}
+  $('#page').innerHTML=`<div class="wrap cm">
+   <header class="cm-hd"><span class="es-eb">Community</span><h1>${kid?'Friends and ideas':'LahLahLearn community'}</h1><p class="muted">${kid?'Share what you learned. Be kind, and never share where you live.':'See what children are learning, read what families think, and tell us how to make LahLahLearn better.'}</p></header>
+   <div class="cm-tabs" role="tablist" aria-label="Boards">
+    <button role="tab" aria-selected="${b==='kids'}" data-cb="kids">${ic('smile',18)} Kids' corner</button>
+    <button role="tab" aria-selected="${b==='parents'}" data-cb="parents">${ic('heart',18)} Parents' voices</button>
+    ${kid?'':`<button role="tab" aria-selected="${b==='feedback'}" data-cb="feedback">${ic('pen',18)} Send feedback</button>`}</div>
+   ${CM.local&&b!=='feedback'?`<p class="cm-note">${ic('spark',14)} The online community is opening soon. For now, posts are saved on this device only.</p>`:''}
+   ${b==='feedback'?cmFeedbackHTML():`<div class="cm-in">
+    <section class="cm-new" aria-labelledby="cmNh">${canPost?(b==='kids'?`<h2 id="cmNh">Share something</h2><div class="cm-stks" role="radiogroup" aria-label="Pick a picture">${CM_STK.map((x,i)=>`<button role="radio" aria-checked="${i===0}" data-stk="${x[0]}" aria-label="${esc(x[1])}">${ic(x[0],28)}<span class="lv-w">${esc(x[1])}</span></button>`).join('')}</div><textarea class="in" id="cmT" maxlength="200" rows="2" placeholder="Add a few words (you can skip this)"></textarea>`
+       :`<h2 id="cmNh">Share your experience</h2><div class="cm-stars" role="radiogroup" aria-label="Your rating">${[1,2,3,4,5].map(n=>`<button role="radio" aria-checked="${n===5}" data-rt="${n}" aria-label="${n} star${n>1?'s':''}">★</button>`).join('')}</div><textarea class="in" id="cmT" maxlength="500" rows="4" placeholder="What has LahLahLearn been like for your family?"></textarea>`)+`<div class="row between" style="gap:10px"><small class="muted">Posting as <b>${esc(cmName())}</b>. Everyone can read this.</small><button class="btn pri" id="cmGo">${ic('arrow',16)} Post</button></div><p class="small" id="cmM" role="status" aria-live="polite"></p>`
+       :`<h2 id="cmNh">${b==='kids'?'Kids post from their own home page':'Want to share?'}</h2><p class="muted small">${!session?'Log in to post. Anyone can read.':b==='kids'?'Children share from their own home page. Grown-ups can read along.':'Grown-ups post from the parent portal (unlock it with your PIN).'}</p>${!session?'<button class="btn pri" data-go="auth">Log in</button>':''}`}</section>
+    <section class="cm-list" aria-live="polite" aria-busy="${!posts}">${!posts?'<p class="muted">Loading…</p>':posts.length?posts.map(p=>cmPostHTML(p,b)).join(''):`<div class="cm-empty">${ic(b==='kids'?'smile':'heart',40)}<p>No posts yet. ${canPost?'Be the first to share!':''}</p></div>`}</section>
+   </div>`}</div>`;
+  $$('[data-cb]').forEach(x=>x.onclick=()=>{CM.board=x.dataset.cb;R.community()});
+  let stk=CM_STK[0][0],rt=5;
+  $$('[data-stk]').forEach(x=>x.onclick=()=>{stk=x.dataset.stk;$$('[data-stk]').forEach(y=>y.setAttribute('aria-checked',y===x));try{if(P.prefs.voice)say(x.getAttribute('aria-label'))}catch(e){}});
+  $$('[data-rt]').forEach(x=>x.onclick=()=>{rt=+x.dataset.rt;$$('[data-rt]').forEach(y=>y.setAttribute('aria-checked',+y.dataset.rt===rt))});
+  const go=$('#cmGo');if(go)go.onclick=async()=>{
+    const t=$('#cmT').value.trim(),m=$('#cmM'),body=t||(b==='kids'?CM_STK.find(x=>x[0]===stk)[1]:'');
+    const err=cmCheck(body);if(err==='hurt'){m.textContent='Please talk to a grown-up you trust right now.';nfyAdd('safety',`${P.name} wrote something in Friends that may mean they are upset. Please check in with them.`);return}if(err){m.textContent=err;return}
+    go.disabled=true;m.textContent='Posting…';
+    try{await cmPost(b,{board:b,author_name:cmName(),body,sticker:b==='kids'?stk:null,rating:b==='parents'?rt:null});CM.posts[b]=null;try{sfxStar(4)}catch(e){}toast(b==='kids'?'Shared! Well done.':'Thank you for sharing.');R.community()}catch(e){go.disabled=false;m.textContent=e.message}};
+  $$('[data-cdel]').forEach(x=>x.onclick=async()=>{const r=await CLOUD.sb.from('community_posts').delete().eq('id',x.dataset.cdel);if(r.error)return toast(r.error.message);CM.posts[b]=null;R.community()});
+  $$('[data-crep]').forEach(x=>x.onclick=async()=>{const r=await CLOUD.sb.rpc('community_report',{p_id:x.dataset.crep});if(r.error)return toast(r.error.message);x.textContent='Reported';x.disabled=true;toast('Thank you. We will check it.')});
+  cmFeedbackBind();if(kid)lvBind();
+};
+function cmFeedbackHTML(){
+  return `<section class="cm-fb" aria-labelledby="fbH"><h2 id="fbH">Send feedback to LahLahLearn</h2><p class="muted">Ideas, problems or kind words: it goes straight to our team. We read every message.</p>
+   <form id="fbF" name="feedback" class="stack" style="gap:12px" novalidate>
+    <p hidden><label>Leave empty <input name="bot-field"></label></p>
+    <div class="fb-k" role="radiogroup" aria-label="Kind of feedback">${[['idea','Idea','spark'],['problem','Problem','shield'],['praise','Praise','heart'],['other','Other','pen']].map(([k,l,i],n)=>`<label><input type="radio" name="kind" value="${k}" ${n===0?'checked':''}><span>${ic(i,16)} ${l}</span></label>`).join('')}</div>
+    <div class="fb-2"><label class="stack" style="gap:4px"><b class="small">Your name</b><input class="in" name="name" maxlength="60" autocomplete="name" value="${esc(session&&P&&!kidMode()?'':'')}"></label>
+    <label class="stack" style="gap:4px"><b class="small">Email (so we can reply, optional)</b><input class="in" type="email" name="email" maxlength="120" autocomplete="email" value="${esc(CLOUD&&CLOUD.user&&CLOUD.user.email||'')}"></label></div>
+    <label class="stack" style="gap:4px"><b class="small">Message</b><textarea class="in" name="message" rows="5" maxlength="2000" required></textarea></label>
+    <div class="row between" style="gap:10px;flex-wrap:wrap"><small class="muted">Or email <a href="mailto:lahlahlearn@gmail.com">lahlahlearn@gmail.com</a></small><button class="btn pri" type="submit">${ic('arrow',16)} Send feedback</button></div>
+    <p class="small" id="fbM" role="status" aria-live="polite"></p></form></section>`;
+}
+function cmFeedbackBind(){
+  const f=$('#fbF');if(!f)return;
+  f.onsubmit=async e=>{e.preventDefault();const d=new FormData(f),m=$('#fbM');
+    if(!String(d.get('message')||'').trim()){m.textContent='Please write a message.';return}
+    const em=String(d.get('email')||'').trim();if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){m.textContent='Please check the email address.';return}
+    d.set('form-name','feedback');d.set('page',location.href.split('#')[0]);const btn=$('button[type=submit]',f);btn.disabled=true;m.textContent='Sending…';
+    try{const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(d).toString()});if(!r.ok)throw new Error(r.status);
+      f.reset();m.textContent='Thank you! Your feedback reached the LahLahLearn team.';toast('Feedback sent. Thank you!')}
+    catch(err){const body=encodeURIComponent(`${d.get('kind')}: ${d.get('message')}\n\nFrom: ${d.get('name')||''} ${em}`);m.innerHTML=`We could not send it from here. <a href="mailto:lahlahlearn@gmail.com?subject=LahLahLearn%20feedback&body=${body}">Send it by email instead</a>.`}
+    finally{btn.disabled=false}};
+}
+
 /* A feature the family's Essentials plan does not include: a friendly picture, and a way for a grown-up to add it */
 R.locked=arg=>{const x=ESS_X.concat(PLAN_BASIC).find(y=>y[0]===arg)||ESS_X[0];
   $('#page').innerHTML=`<div class="wrap lkd"><div class="lk-c"><span class="lk-ic" aria-hidden="true">${ic(x[2],64)}<i>${ic('lock',26)}</i></span><h2>${esc(x[1])}</h2><p class="muted">${esc(x[3])} ${planNow()==='free'?'It is not part of the Free plan. A grown-up can choose a plan to unlock it.':'It is not switched on in your plan yet. A grown-up can add it on the Plans page.'}</p>
@@ -9372,6 +9564,90 @@ const FM_BASE='https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/
 /* detailed face model: MediaPipe Face Landmarker with 52 expression scores (blendshapes); the older Face Mesh is the fallback */
 const TV_BASE='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/';let FL_P=null;
 function loadFL(){if(FL_P)return FL_P;FL_P=(async()=>{const v=await import(TV_BASE+'vision_bundle.mjs');const fs=await v.FilesetResolver.forVisionTasks(TV_BASE+'wasm');const mk=d=>v.FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',delegate:d},runningMode:'VIDEO',numFaces:1,outputFaceBlendshapes:true,minFaceDetectionConfidence:.5,minFacePresenceConfidence:.5,minTrackingConfidence:.5});try{return await mk('GPU')}catch(e){return await mk('CPU')}})();FL_P.catch(()=>{FL_P=null});return FL_P}
+/* ===== Safety watch: full-body fall detection on the device. Frames are read in memory and dropped; nothing is recorded or uploaded. ===== */
+/* swStep is pure (no camera, no DOM) so it can be tested: feed it {t, lm} each frame (lm = 33 pose points or null) and it returns 'fall', 'still' or null */
+function swNew(){return{h:[],drop:0,downSince:0,lostSince:0,lastSeen:0,fired:0,stillBase:null}}
+function swStep(S,f){
+  const t=f.t,lm=f.lm;S.h=S.h.filter(x=>t-x.t<3000);
+  const ok=lm&&[11,12,23,24].every(i=>lm[i]&&(lm[i].visibility==null||lm[i].visibility>.5));
+  if(S.fired&&t-S.fired<60000){if(ok)S.lastSeen=t;return null}  /* one alarm a minute at most */
+  if(!ok){
+    if(!S.lostSince)S.lostSince=t;
+    /* a fast drop and then the body leaves the picture: treat as a possible fall after 3 s */
+    if(S.drop&&S.lostSince-S.drop<1200&&t-S.lostSince>3000){S.fired=t;S.drop=0;S.lostSince=0;return'fall'}
+    return null;
+  }
+  S.lostSince=0;S.lastSeen=t;
+  const shY=(lm[11].y+lm[12].y)/2,hpY=(lm[23].y+lm[24].y)/2,shX=(lm[11].x+lm[12].x)/2,hpX=(lm[23].x+lm[24].x)/2;
+  const ang=Math.atan2(Math.abs(shX-hpX),hpY-shY)*180/Math.PI;  /* 0 = standing or sitting up, 90 = lying flat */
+  const vis=lm.filter(p=>p&&(p.visibility==null||p.visibility>.5)),xs=vis.map(p=>p.x),ys=vis.map(p=>p.y);
+  const w=Math.max(...xs)-Math.min(...xs),hh=Math.max(...ys)-Math.min(...ys),cy=(shY+hpY)/2;
+  const down=ang>60||(vis.length>12&&w>hh*1.25);
+  S.h.push({t,cy,down,up:ang<35,sx:shX,sy:shY});
+  /* a quick drop: the middle of the body falls by over 18% of the picture height within 1.5 s from an upright pose */
+  const was=S.h.find(x=>x.up&&t-x.t<1500&&cy-x.cy>.18);if(was&&!S.drop)S.drop=t;
+  if(S.drop&&t-S.drop>6000&&!S.downSince)S.drop=0;
+  /* "down" must hold in at least 70% of the frames for 2.5 s */
+  const win=S.h.filter(x=>t-x.t<=2500),dn=win.filter(x=>x.down).length/Math.max(1,win.length);
+  if(down&&!S.downSince)S.downSince=t;
+  if(!down&&dn<.5){S.downSince=0;S.stillBase=null}
+  if(S.downSince&&S.drop&&t-S.downSince>=2500&&dn>=.7&&S.downSince-S.drop<2500){S.fired=t;S.drop=0;S.downSince=0;return'fall'}
+  /* lying very still for 45 s (no fall seen): ask too, more gently */
+  if(S.downSince&&dn>=.85){
+    if(!S.stillBase)S.stillBase={t,sx:shX,sy:shY};
+    if(Math.hypot(shX-S.stillBase.sx,shY-S.stillBase.sy)>.04)S.stillBase={t,sx:shX,sy:shY};
+    if(t-S.stillBase.t>45000){S.fired=t;S.downSince=0;S.stillBase=null;return'still'}
+  }
+  return null;
+}
+let PL_P=null;
+function loadPL(){if(PL_P)return PL_P;PL_P=(async()=>{const v=await import(TV_BASE+'vision_bundle.mjs');const fs=await v.FilesetResolver.forVisionTasks(TV_BASE+'wasm');const mk=d=>v.PoseLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',delegate:d},runningMode:'VIDEO',numPoses:1,minPoseDetectionConfidence:.5,minPosePresenceConfidence:.5,minTrackingConfidence:.5});try{return await mk('GPU')}catch(e){return await mk('CPU')}})();PL_P.catch(()=>{PL_P=null});return PL_P}
+const SW={on:false,stream:null,own:false,vid:null,pl:null,timer:0,S:null,ask:false,err:''};
+const swWanted=()=>!!(session&&P&&P.safety&&P.safety.on&&kidMode()&&!document.hidden&&!['auth','onboard','welcome','care','pricing'].includes(cur));
+async function swStart(){
+  if(SW.on)return;SW.on=true;SW.err='';swBadge();
+  try{
+    if(HS.cam.on&&HS.cam.stream){SW.stream=HS.cam.stream;SW.own=false}
+    else{SW.stream=await navigator.mediaDevices.getUserMedia({video:{width:640,height:480,facingMode:'user'},audio:false});SW.own=true}
+    SW.vid=document.createElement('video');SW.vid.muted=true;SW.vid.playsInline=true;SW.vid.srcObject=SW.stream;await SW.vid.play();
+    SW.pl=await loadPL();SW.S=swNew();
+    const tick=()=>{if(!SW.on)return;try{if(SW.vid.readyState>=2&&!SW.ask){const r=SW.pl.detectForVideo(SW.vid,performance.now());const e=swStep(SW.S,{t:Date.now(),lm:r&&r.landmarks&&r.landmarks[0]||null});if(e)swAsk(e)}}catch(e){}SW.timer=setTimeout(tick,160)};tick();
+  }catch(e){SW.err=e&&e.name==='NotAllowedError'?'camera':'load';swStop();swBadge()}
+}
+function swStop(){SW.on=false;clearTimeout(SW.timer);if(SW.own&&SW.stream)SW.stream.getTracks().forEach(t=>t.stop());SW.stream=null;SW.vid=null;swBadge()}
+function swSync(){if(swWanted())swStart();else if(SW.on)swStop();else swBadge()}
+setInterval(swSync,4000);document.addEventListener('visibilitychange',swSync);
+function swBadge(){let b=$('#swBadge');const show=!!(session&&P&&P.safety&&P.safety.on&&kidMode());
+  if(!show){if(b)b.remove();return}
+  if(!b){b=document.createElement('button');b.id='swBadge';b.className='sw-badge';b.onclick=()=>toast(SW.err==='camera'?'Safety watch needs the camera. Ask a grown-up to allow it.':'Safety watch is on. The camera checks you are safe. Nothing is recorded.');document.body.appendChild(b)}
+  b.classList.toggle('off',!SW.on);b.innerHTML=`${ic('shield',16)}<span>${SW.on?'Safety watch':'Safety watch is off'}</span>`;b.setAttribute('aria-label',SW.on?'Safety watch is on':'Safety watch could not start')}
+let SW_BEEP=0;
+function swAsk(kind,test){
+  if(SW.ask)return;SW.ask=true;const nm=P.name,ctx=kind==='fall'?'may have fallen':'has been lying very still';
+  const o=document.createElement('div');o.className='sw-ov';o.setAttribute('role','alertdialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','swQ');
+  o.innerHTML=`<div class="sw-card"><span class="sw-pip" aria-hidden="true">${pip(140)}</span><h2 id="swQ">Are you okay?</h2>
+   <div class="sw-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="10"/><circle id="swArc" cx="60" cy="60" r="52" fill="none" stroke="var(--coral)" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" transform="rotate(-90 60 60)"/></svg><b id="swN" class="tn">20</b></div>
+   <div class="sw-btns"><button class="sw-ok" id="swOk" aria-label="I am okay">${ic('check',54)}<span>I'm okay</span></button><button class="sw-help" id="swHelp" aria-label="I need help">${ic('shield',50)}<span>Help</span></button></div></div>`;
+  document.body.appendChild(o);setTimeout(()=>$('#swOk').focus(),50);
+  try{say('Are you okay? Tap the green button if you are okay.')}catch(e){}
+  let n=20;const beep=()=>{try{sfxStar(3,true)}catch(e){}};beep();
+  const iv=setInterval(()=>{n--;const el=$('#swN');if(el)el.textContent=n;const a=$('#swArc');if(a)a.style.strokeDashoffset=326.7*(1-n/20);if(n%4===0)beep();if(n<=0){done('timeout')}},1000);
+  const done=how=>{clearInterval(iv);o.remove();SW.ask=false;
+    if(test){if(how!=='ok')swHelp(true);return}
+    if(how==='ok'){nfyAdd('danger',`Safety watch thought ${nm} ${ctx}. ${nm} tapped "I'm okay".`);toast('Great! Keep going.');return}
+    nfyAdd('danger',`${nm} ${ctx} and ${how==='timeout'?'did not answer':'asked for help'}. Please check on ${nm} now.`);swHelp()};
+  $('#swOk').onclick=()=>done('ok');$('#swHelp').onclick=()=>done('asked');
+}
+function swHelp(test){
+  const cts=(P.safety&&P.safety.contacts)||[];
+  const o=document.createElement('div');o.className='sw-ov sw-em';o.setAttribute('role','alertdialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','swH');
+  o.innerHTML=`<div class="sw-card"><h2 id="swH">Help is on the way</h2><p>Your grown-ups have been told. Tap a picture to call.</p>
+   <div class="sw-calls">${cts.map(c=>`<a class="sw-call" href="tel:${esc(c.p.replace(/[^\d+]/g,''))}">${ic('user',30)}<b>${esc(c.n||'Call')}</b><small>${esc(c.p)}</small></a>`).join('')}<a class="sw-call sos" href="tel:999">${ic('shield',30)}<b>999</b><small>Emergency</small></a></div>
+   <button class="btn lg" id="swClose">${ic('check',20)} I'm okay now</button></div>`;
+  document.body.appendChild(o);
+  let k=0;const loud=setInterval(()=>{try{sfxStar(5,true)}catch(e){}if(++k>8)clearInterval(loud)},1500);
+  $('#swClose').onclick=()=>{clearInterval(loud);o.remove();if(!test)nfyAdd('danger',`${P.name} says they are okay now.`)};
+}
 const HS={
   cam:{on:false,state:'off',err:'',stream:null,vid:null,fm:null,timer:0,busy:false,recent:[],mood:[],upset:false,base:null,eyes:[],yawns:[],yawnT:0,last:0,cool:0,saved:0,tired:false,perclos:0},
   mic:{on:false,state:'off',err:'',stream:null,ctx:null,an:null,env:[],ts:[],timer:0,eval:0,fast:0,bpm:null,cool:0,tick:0}
@@ -10136,16 +10412,79 @@ const PC_ROLE={parent:['overview','strengths','report','visits','team','settings
 const PC_NOTE={teacher:'You are here as a teacher. See school goals and leave notes for home.',therapist:'You are here as a therapist. Track goals and offer check-up times.'};
 let PC_TABS=PC_ALL;
 /* ---- notifications: what the child did, kept with the child's progress so every grown-up sees them ---- */
-const NFK={in:['user','Logged in'],out:['out','Logged out'],time:['clock','Learning time'],lesson:['book','Lesson'],game:['game','Game'],test:['trophy','Class test'],calm:['heart','Calm break'],limit:['moon','Daily limit'],story:['book','Story'],streak:['flame','Streak']};
+const NFK={danger:['shield','Danger alert'],safety:['shield','Safety'],upset:['heart','Not calm'],in:['user','Logged in'],out:['out','Logged out'],time:['clock','Learning time'],lesson:['book','Lesson'],game:['game','Game'],test:['trophy','Class test'],calm:['heart','Calm break'],limit:['moon','Daily limit'],story:['book','Story'],streak:['flame','Streak']};
 const nfyList=()=>G&&Array.isArray(G.nfy)?G.nfy:[];
 const nfyUnread=()=>{const r=+((G&&G.nfyR)||0);return nfyList().filter(n=>n.t>r).length};
 function nfyAdd(k,m){
   if(!G||(typeof CLOUD!=='undefined'&&CLOUD.readonly))return;
   G.nfy=Array.isArray(G.nfy)?G.nfy:[];
-  G.nfy.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:Date.now(),k,m});
+  const n={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),t:Date.now(),k,m};
+  G.nfy.unshift(n);
   if(G.nfy.length>60)G.nfy.length=60;
-  save();nfyBell(true);
+  save(['danger','safety','upset'].includes(k));nfyBell(true);nfyPush(n,P&&P.name);
 }
+/* ---- Alerts on grown-ups' devices. Parents choose which kinds they get; the list in the portal keeps everything. ---- */
+const NFG=[['danger','Danger and falls','shield','Safety watch thinks your child may have fallen or be in danger.',['danger']],
+ ['safety','Unsafe words with Pip','shield','Your child typed words that are not safe or may be upset.',['safety']],
+ ['upset','Not calm','heart','Your child seemed upset and a calm break started.',['upset','calm']],
+ ['learning','Lessons and tests','book','Lessons, games, stories, class tests and streaks.',['lesson','game','test','story','streak']],
+ ['time','Time and daily limit','clock','Learning time and when the daily limit is reached.',['time','limit']],
+ ['login','Log in and log out','user','When your child starts or stops learning.',['in','out']]];
+const nfyGroup=k=>(NFG.find(g=>g[4].includes(k))||[])[0];
+const nfyWants=k=>{const g=nfyGroup(k),off=(P&&P.prefs&&P.prefs.nfyOff)||{};return !g||!off[g]};
+const pushOn=()=>lsGet('ll.push')==='1'&&'Notification' in window&&Notification.permission==='granted';
+let PUSHED=null;const pushedSet=()=>PUSHED||(PUSHED=new Set((lsGet('ll.pushIds')||'').split(',').filter(Boolean)));
+async function nfyPush(n,who){
+  if(!n||!pushOn()||!nfyWants(n.k))return;
+  const S=pushedSet();if(S.has(n.id))return;S.add(n.id);lsSet('ll.pushIds',[...S].slice(-120).join(','));
+  const big=n.k==='danger'||n.k==='safety',title=(big?'⚠ ':'')+(NFK[n.k]?NFK[n.k][1]:'LahLahLearn')+(who?' · '+who:'');
+  const opt={body:n.m,tag:n.id,icon:'icon-192.png',badge:'favicon-48.png',requireInteraction:big,renotify:big,vibrate:big?[300,120,300,120,300]:[120],data:{url:'/#care'}};
+  try{const r=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(r){await r.showNotification(title,opt);return}}catch(e){}
+  try{new Notification(title,opt)}catch(e){}
+}
+async function pushEnable(){
+  if(!('Notification' in window)){toast('This browser cannot show alerts. Try Chrome, Edge or Safari on a phone or computer.');return false}
+  let p=Notification.permission;if(p==='default')p=await Notification.requestPermission();
+  if(p!=='granted'){toast('Alerts are blocked. Allow notifications for this site in your browser settings.');return false}
+  try{if('serviceWorker' in navigator&&location.protocol.startsWith('http'))await navigator.serviceWorker.register('sw.js')}catch(e){}
+  lsSet('ll.push','1');lsSet('ll.pushT',String(Date.now()));return true;
+}
+/* a grown-up's phone or computer checks the family's children every 30 seconds while LahLahLearn is open (even in the background) */
+setInterval(async()=>{
+  if(!pushOn()||typeof cloudLive!=='function'||!cloudLive()||!UID)return;
+  try{
+    const sb=CLOUD.sb,since=+(lsGet('ll.pushT')||Date.now());
+    const kids=cthrow(await sb.from('children').select('id,profile').eq('family_id',UID)).data||[];if(!kids.length)return;
+    const rows=cthrow(await sb.from('progress').select('child_id,nfy:data->nfy').in('child_id',kids.map(k=>k.id))).data||[];
+    let top=since;
+    rows.forEach(r=>{const nm=((kids.find(k=>k.id===r.child_id)||{}).profile||{}).name||'';(Array.isArray(r.nfy)?r.nfy:[]).filter(n=>n&&n.t>since).sort((a,b)=>a.t-b.t).forEach(n=>{top=Math.max(top,n.t);nfyPush(n,nm)})});
+    lsSet('ll.pushT',String(top));
+  }catch(e){}
+},30000);
+function alertSetHTML(){
+  const on=pushOn(),off=(P&&P.prefs&&P.prefs.nfyOff)||{},sf=P&&P.safety||{};
+  return `<section class="gr-sec al-sec"><div class="gr-sh"><span class="gr-ico">${ic('bell',22)}</span><div><h3>Alerts</h3><p class="al-desc">Get a notification on this phone or computer when something happens. Choose which kinds you want.</p></div></div>
+   <div class="al-dev"><span class="al-dot ${on?'on':''}" aria-hidden="true"></span><span>${on?'Alerts are on for this device.':'Alerts are off for this device.'}</span><button class="btn ${on?'ghost':'pri'} sm" id="alDev">${on?'Turn off here':'Turn on alerts here'}</button>${on?'<button class="btn ghost sm" id="alTest">Send a test</button>':''}</div>
+   <div class="al-list">${NFG.map(([k,n,i,d])=>`<label class="al-row"><span class="es-ic">${ic(i,20)}</span><span class="al-t"><b>${n}</b><small>${d}</small></span><input type="checkbox" class="sw-in" data-alg="${k}" ${off[k]?'':'checked'} aria-label="${esc(n)} alerts"></label>`).join('')}</div>
+  </section>
+  <section class="gr-sec al-sec" id="swSec"><div class="gr-sh"><span class="gr-ico">${ic('shield',22)}</span><div><h3>Safety watch</h3><p class="al-desc">While your child learns, the camera looks for a fall or your child lying still on the floor. If it sees one, it asks your child "Are you okay?". If there is no answer in 20 seconds, it alerts you and shows your emergency contacts on the screen.</p></div></div>
+   <label class="al-row"><span class="es-ic">${ic('shield',20)}</span><span class="al-t"><b>Use Safety watch on my child's device</b><small>The video stays on the device. Nothing is recorded, saved or sent; only the alert is shared with you. Your child sees a small "Safety watch" badge while it is on.</small></span><input type="checkbox" class="sw-in" id="swOn" ${sf.on?'checked':''} aria-label="Use Safety watch"></label>
+   <div class="sw-cts"><b class="small">Emergency contacts</b><p class="muted small" style="margin:0">Shown on your child's screen with a call button if help is needed.</p>
+    ${[0,1,2].map(i=>{const c=(sf.contacts||[])[i]||{};return `<div class="sw-ct"><input class="in" data-ctn="${i}" placeholder="${i?'Name, e.g. Grandma':'Name, e.g. Mum'}" value="${esc(c.n||'')}" aria-label="Contact ${i+1} name"><input class="in" data-ctp="${i}" type="tel" inputmode="tel" placeholder="Phone number" value="${esc(c.p||'')}" aria-label="Contact ${i+1} phone"></div>`}).join('')}
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn pri sm" id="swSave">Save Safety watch</button><button class="btn ghost sm" id="swTry">See what my child sees</button></div><p class="muted small" id="swMsg" aria-live="polite" style="margin:0"></p>
+   </div>
+   <p class="muted small al-note">${ic('spark',14)} Safety watch helps, but it can miss a fall or raise a false alarm (for example when a child lies down to play). It is not a medical or emergency device and does not replace a grown-up nearby. In an emergency, call 999 (Malaysia) or your local number.</p>
+  </section>`;
+}
+function alertSetBind(sec,redo){
+  const d=$('#alDev',sec);if(d)d.onclick=async()=>{if(pushOn()){lsDel('ll.push');toast('Alerts are off for this device.')}else if(await pushEnable())toast('Alerts are on for this device.');redo()};
+  const t=$('#alTest',sec);if(t)t.onclick=()=>{const n={id:'test'+Date.now(),t:Date.now(),k:'danger',m:'This is a test alert from LahLahLearn. Real alerts look like this.'};nfyPush(n,P&&P.name)};
+  $$('[data-alg]',sec).forEach(c=>c.onchange=()=>{P.prefs=P.prefs||{};const o=P.prefs.nfyOff=P.prefs.nfyOff||{};if(c.checked)delete o[c.dataset.alg];else o[c.dataset.alg]=true;save(true)});
+  const tr2=$('#swTry',sec);if(tr2)tr2.onclick=()=>swAsk('fall',true);
+  const sv=$('#swSave',sec);if(sv)sv.onclick=()=>{const cts=[0,1,2].map(i=>({n:$(`[data-ctn="${i}"]`,sec).value.trim().slice(0,40),p:$(`[data-ctp="${i}"]`,sec).value.replace(/[^\d+ ()-]/g,'').trim().slice(0,24)})).filter(c=>c.p);
+    P.safety={on:$('#swOn',sec).checked,contacts:cts};save(true);$('#swMsg',sec).textContent=P.safety.on?(cts.length?'Saved. Safety watch is on.':'Saved. Add at least one phone number so help can be called.'):'Saved. Safety watch is off.';swSync()};
+}
+
 function nfyBell(ring){
   const b=$('#pcBell');if(!b)return;const n=nfyUnread(),d=$('.pc-dot',b);
   b.setAttribute('aria-label',n?`Notifications, ${n} new`:'Notifications');
@@ -10402,7 +10741,7 @@ function careDraw(){
     if(careTab==='visits'){sec.innerHTML=visitsHTML(user);bindVisits(user)}
     if(careTab==='team'){sec.innerHTML=`<section class="gr-sec"><div class="gr-sh"><div><h3><label for="pcNotes">Shared notes</label></h3><p class="muted small">Everyone in the care team sees these.</p></div></div><textarea id="pcNotes" class="in" style="min-height:110px" placeholder="For example: responds well to picture cards before lessons."></textarea></section>`+teamHTML(user);bindTeam(user);
       const n=$('#pcNotes');n.value=G.notes||'';n.oninput=()=>{G.notes=n.value;if(cloudCare())cloudNotesSave(n.value);else save()}}
-    if(careTab==='settings'){const pa=user.role==='parent'||!user.role;sec.innerHTML=settingsHTML(user)+(pa?aiSetHTML():aiOwnHTML());bindSettings(user);if(pa)aiSetBind(sec);else aiOwnBind(sec)}
+    if(careTab==='settings'){const pa=user.role==='parent'||!user.role;sec.innerHTML=settingsHTML(user)+(pa?alertSetHTML():'')+(pa?aiSetHTML():aiOwnHTML());bindSettings(user);if(pa){alertSetBind(sec,careDraw);aiSetBind(sec)}else aiOwnBind(sec)}
     $$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}});
   }
   document.body.classList.add('carepro');if(!teardowns.includes(careUnpro))teardowns.push(careUnpro);
@@ -10863,4 +11202,5 @@ function spiral3D(stage,o={}){
 })();
 })();
 </script>
+<form name="feedback" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true"><input name="bot-field"><input name="kind"><input name="name"><input name="email"><textarea name="message"></textarea><input name="page"></form>
 </body></html>
