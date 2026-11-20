@@ -2359,6 +2359,85 @@ body.jr-full #foot,body.jr-full #dock,body.jr-full header.top,body.jr-full #swBa
 .fu-c.in{animation:fuDeal .7s cubic-bezier(.2,1.3,.4,1) both}
 @keyframes fuDeal{from{opacity:0;transform:translateY(80px) rotate(calc(var(--d,1)*6deg)) scale(.92)}}
 @media(max-width:640px){.fu-c{flex-direction:column!important;top:calc(80px + var(--i)*10px)}.fu-c .fu-art{flex-basis:auto;aspect-ratio:16/9}}
+.swp{display:flex;flex-direction:column;gap:20px}
+.swp-hero{position:relative;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:clamp(16px,3vw,32px);padding:clamp(22px,3.5vw,36px);border-radius:32px;color:#fff;background:linear-gradient(135deg,#5b6b7a,#3f4c58);overflow:hidden;transition:background .5s}
+.swp-hero.on{background:linear-gradient(135deg,#2f9e6b,#1e6f55 60%,#1a5d48)}
+.swp-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08)}
+.swp-art{width:clamp(120px,18vw,170px)}.swf{width:100%;height:auto;display:block}
+.swf-scan{animation:swScan 2.6s ease-in-out infinite}.swp-hero:not(.on) .swf-scan{display:none}
+.swp-hero.on .swf-sh{animation:swGlow 2.6s ease-in-out infinite}
+@keyframes swScan{0%,100%{transform:translateY(0)}50%{transform:translateY(118px)}}@keyframes swGlow{50%{fill:rgba(255,255,255,.3)}}
+.swp-hc{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px}.swp-hc h3{margin:0;font:700 clamp(1.6rem,3vw,2.2rem) var(--f-d);color:#fff}.swp-hc p{margin:0;max-width:44ch;opacity:.92;line-height:1.5}
+.swp-pill{width:max-content;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.2);font:800 .78rem var(--f-b);letter-spacing:.08em;text-transform:uppercase}
+.swp-hero.on .swp-pill{background:#7ff0b2;color:#0f4a36}
+.swp-tg{display:flex;align-items:center;gap:12px;margin-top:6px;padding:12px 16px;border-radius:18px;background:rgba(255,255,255,.14);cursor:pointer;width:max-content;max-width:100%;font-weight:700}
+.swp-tg .sw-in{background:rgba(255,255,255,.35)}.swp-tg .sw-in:checked{background:#7ff0b2}
+.sw-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sw-step{position:relative;display:flex;flex-direction:column;gap:6px;padding:20px 18px;border-radius:24px;background:var(--surf);border:1px solid var(--line)}
+.sw-sn{position:absolute;top:14px;right:16px;font:800 1.6rem var(--f-d);color:color-mix(in srgb,var(--brand) 25%,var(--surf))}
+.sw-si{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}
+.sw-step b{font:700 1.05rem var(--f-d)}.sw-step small{color:var(--muted);line-height:1.4}
+.swp-cts{display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:26px;background:var(--surf);border:1px solid var(--line)}
+.swp-ch h4{margin:0;font:700 1.1rem var(--f-d)}.swp-ch small{color:var(--muted)}
+.swp-cl{display:flex;flex-direction:column;gap:10px}
+.swp-c{display:grid;grid-template-columns:44px 1fr 1fr 1.3fr;align-items:center;gap:8px;padding:8px;border-radius:18px;background:var(--bg)}
+.swp-av{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb,var(--brand) 18%,var(--surf));color:var(--brand);font:800 1.1rem var(--f-d)}
+.swp-act{display:flex;flex-wrap:wrap;gap:10px}
+.swp-notes{display:flex;flex-direction:column;gap:8px}.swp-notes p{display:flex;gap:8px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:16px;background:var(--bg);color:var(--muted);font-size:.9rem;line-height:1.45}.swp-notes svg{flex:none;margin-top:2px}
+@media(max-width:700px){.swp-hero{grid-template-columns:1fr;text-align:left}.swp-art{width:110px}.sw-steps{grid-template-columns:1fr}.swp-c{grid-template-columns:44px 1fr}.swp-c input[data-ctp],.swp-c input[data-cte]{grid-column:2}}
+.cm{gap:26px!important}
+.cm-hero{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:clamp(24px,4vw,44px);border-radius:36px;overflow:hidden;color:#fff;background:linear-gradient(135deg,var(--brand),color-mix(in srgb,var(--brand) 55%,#3f86d8))}
+.cm-hero::before{content:"";position:absolute;inset:auto -40px -80px auto;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.1)}
+.cm-hc{position:relative;display:flex;flex-direction:column;gap:8px;max-width:560px}.cm-hc h1{margin:0;font:700 clamp(2rem,4.4vw,3rem)/1.05 var(--f-d);color:#fff}.cm-hc p{margin:0;opacity:.92;font-size:1.05rem;line-height:1.5}
+.cm-eb{width:max-content;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.2);font:800 .76rem var(--f-b);letter-spacing:.1em;text-transform:uppercase}
+.cm-art{position:relative;flex:none;width:clamp(150px,24vw,250px);height:auto}
+.cm-tabs{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px!important;padding:0!important;border:0!important;background:none!important;width:100%!important;border-radius:0!important}
+.cm-tabs button{display:flex!important;align-items:center;gap:14px!important;padding:16px 18px!important;border-radius:24px!important;border:2px solid var(--line)!important;background:var(--surf)!important;color:var(--ink)!important;text-align:left;transition:transform .2s,border-color .2s}
+.cm-tabs button:hover{transform:translateY(-2px)}.cm-tabs button>svg{flex:none;padding:10px;width:44px;height:44px;border-radius:16px;background:color-mix(in srgb,var(--brand) 12%,var(--surf));color:var(--brand)}
+.cm-tabs button span{display:flex;flex-direction:column}.cm-tabs button b{font:700 1.05rem var(--f-d)}.cm-tabs button small{color:var(--muted);font-weight:500}
+.cm-tabs button[aria-selected="true"]{border-color:var(--brand)!important;background:color-mix(in srgb,var(--brand) 8%,var(--surf))!important;box-shadow:0 10px 24px -16px var(--brand)}
+.cm-tabs button[aria-selected="true"]>svg{background:var(--brand);color:#fff}
+.cm-in{grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr)!important;gap:clamp(18px,3vw,30px)!important}
+.cm-new{border-radius:30px!important;padding:26px!important;gap:14px!important}
+.cm-stks{gap:10px!important}
+.cm-stks button{position:relative;padding:14px 8px!important;border-radius:22px!important;border:2px solid transparent!important;background:color-mix(in srgb,var(--c) 12%,var(--surf))!important;color:var(--ink)!important;transition:transform .2s cubic-bezier(.3,1.6,.5,1)}
+.cm-stks button:hover{transform:translateY(-3px) rotate(-2deg)}
+.cs-ic{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--c);color:#fff;box-shadow:0 5px 0 color-mix(in srgb,var(--c) 70%,#000)}
+.cm-stks button[aria-checked="true"]{border-color:var(--c)!important;background:color-mix(in srgb,var(--c) 22%,var(--surf))!important;transform:scale(1.04)}
+.cm-stks button[aria-checked="true"]::after{content:"✓";position:absolute;top:6px;right:8px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;font:800 .8rem var(--f-b)}
+.cm-go{width:100%;justify-content:center;min-height:54px;font-size:1.05rem}.cm-as{text-align:center}
+.cm-lk{display:grid;place-items:center;width:62px;height:62px;border-radius:20px;background:color-mix(in srgb,var(--brand) 14%,var(--surf));color:var(--brand)}
+.cm-stars button{font-size:2.4rem!important;transition:transform .15s}.cm-stars button:hover{transform:scale(1.15)}
+.cm-stars button[data-on="1"]{color:#f2b72e!important}
+.cm-feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.cm-in.parents .cm-feed{grid-template-columns:1fr}
+.ck{position:relative;display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:26px;background:color-mix(in srgb,var(--c) 14%,var(--surf));border:2px solid color-mix(in srgb,var(--c) 30%,transparent);animation:hpIn .45s cubic-bezier(.3,1.5,.5,1) both;animation-delay:calc(min(var(--i),8)*50ms);transition:transform .2s}
+.ck:hover{transform:translateY(-3px) rotate(-.6deg)}
+.ck-ic{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:var(--c);color:#fff;box-shadow:0 6px 0 color-mix(in srgb,var(--c) 70%,#000)}
+.ck-t{margin:0;font:700 1.15rem/1.3 var(--f-d)}.ck-b{margin:0;padding:10px 14px;border-radius:16px 16px 16px 4px;background:var(--surf);line-height:1.45;overflow-wrap:anywhere}
+.ck-f{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:auto;font-size:.88rem}.ck-f b{font-weight:700}.ck-f time,.cp-f time{color:var(--muted);font-size:.82rem}.ck-f .cm-pa{margin-left:auto}
+.cp{display:flex;flex-direction:column;gap:12px;padding:24px 26px;border-radius:26px;background:var(--surf);border:1px solid var(--line);box-shadow:0 18px 40px -34px rgba(0,0,0,.4);animation:hpIn .45s ease both;animation-delay:calc(min(var(--i),8)*50ms)}
+.cmr-st{color:#f2b72e;letter-spacing:2px;font-size:1.15rem}.cmr-st i{color:var(--line);font-style:normal}
+.cp-q{position:relative;margin:0;padding-left:30px;font-size:1.08rem;line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}
+.cp-q::before{content:"“";position:absolute;left:-2px;top:-14px;font:700 3.4rem/1 Georgia,serif;color:color-mix(in srgb,var(--brand) 45%,transparent)}
+.cp-f{display:flex;align-items:center;gap:12px}.cp-f>span:nth-child(2){display:flex;flex-direction:column}.cp-f .cm-pa{margin-left:auto}
+.cp-av{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand),#3f86d8);color:#fff;font:800 1.05rem var(--f-d)}
+.cm-sum{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;margin-bottom:14px;padding:20px 24px;border-radius:26px;background:var(--surf);border:1px solid var(--line)}
+.cm-avg{display:flex;flex-direction:column;align-items:center;gap:2px}.cm-avg b{font:800 2.8rem/1 var(--f-d)}.cm-avg small{color:var(--muted)}
+.cm-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}.cm-bars li{display:grid;grid-template-columns:32px 1fr 26px;align-items:center;gap:8px;font-size:.85rem}
+.cm-bars i{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.cm-bars em{display:block;height:100%;background:#f2b72e;border-radius:99px}
+.cm-fb{display:grid!important;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:0!important;padding:0!important;overflow:hidden;border-radius:32px!important}
+.fb-side{display:flex;flex-direction:column;gap:10px;padding:clamp(24px,4vw,40px);color:#fff;background:linear-gradient(160deg,#8a5fd0,#3f86d8)}
+.fb-side h2{margin:0;font:700 1.8rem var(--f-d);color:#fff}.fb-side p{margin:0;opacity:.92;line-height:1.5}.fb-side a{color:#fff}
+.fb-big{display:grid;place-items:center;width:76px;height:76px;border-radius:24px;background:rgba(255,255,255,.18);animation:hpWig 3s ease-in-out infinite}
+.fb-or{margin-top:auto!important;font-size:.92rem}
+.fb-form{display:flex;flex-direction:column;gap:16px;padding:clamp(22px,3.5vw,36px)}
+.fb-k{display:grid!important;grid-template-columns:repeat(4,1fr);gap:10px!important}
+.fb-k label{display:block}.fb-k span{display:flex!important;width:100%;box-sizing:border-box;flex-direction:column;align-items:center;justify-content:center;gap:6px!important;padding:14px 6px!important;border-radius:20px!important;border:2px solid var(--line)!important;color:var(--c);text-align:center}
+.fb-k span b{color:var(--ink);font-weight:700}
+.fb-k input:checked+span{background:color-mix(in srgb,var(--c) 14%,var(--surf))!important;border-color:var(--c)!important;color:var(--c)!important}
+.fb-send{align-self:flex-end;min-height:52px;padding-inline:28px}
+@media(max-width:820px){.cm-hero{flex-direction:column;align-items:flex-start}.cm-art{width:170px;align-self:flex-end;margin-top:-30px}.cm-fb{grid-template-columns:1fr}.fb-k{grid-template-columns:repeat(2,1fr)}.cm-in{grid-template-columns:1fr!important}}
 .lv-i{display:none!important}.lv-s .lv-i{display:inline-flex!important}
 .lv-s .tc-txt p{display:none}.lv-s .tc-txt h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}.lv-s .tc-vis{cursor:pointer}
 .lv-s .tc-vis svg{max-height:340px}.lv-s #tcHear{min-width:64px;min-height:64px;border-radius:50%;justify-content:center}.lv-s #tcHear svg{width:30px;height:30px}
@@ -2642,10 +2721,10 @@ html[data-theme=dark] .tc-vis{background:color-mix(in srgb,var(--brand) 12%,var(
   .tc-in{grid-template-columns:1fr}.tc-vis{min-height:160px}.tc{padding:18px}.tc-pip{display:none}}
 /* ===== Learning path (Seed, Sprout, Bloom) ===== */
 .cp{--lc:#57b97a;display:flex;flex-direction:column;gap:18px;margin:6px 0 30px}
-.cp-steps{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:8px}
-.cp-st{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:18px;background:var(--surf);border:1.5px solid var(--line);opacity:.55;min-width:0}
-.cp-st span{font-size:1.6rem;line-height:1}.cp-st b{display:block;font:700 1rem var(--f-d)}.cp-st small{display:block;font-size:.76rem;color:var(--muted)}
-.cp-st.on{opacity:1;border-color:var(--lc);box-shadow:0 10px 24px -16px var(--lc)}.cp-st.ok{opacity:1}.cp-st.ok b::after{content:" ✓";color:var(--brand)}
+.cmr-steps{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:8px}
+.cmr-st{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:18px;background:var(--surf);border:1.5px solid var(--line);opacity:.55;min-width:0}
+.cmr-st span{font-size:1.6rem;line-height:1}.cmr-st b{display:block;font:700 1rem var(--f-d)}.cmr-st small{display:block;font-size:.76rem;color:var(--muted)}
+.cmr-st.on{opacity:1;border-color:var(--lc);box-shadow:0 10px 24px -16px var(--lc)}.cmr-st.ok{opacity:1}.cmr-st.ok b::after{content:" ✓";color:var(--brand)}
 .cp-ln{flex:1;height:3px;min-width:12px;border-radius:3px;background:var(--line)}
 .cp-head{display:flex;align-items:center;gap:18px}.cp-head .cp-bar{flex:1;max-width:320px}
 .cp-head h2{margin:2px 0 0;font:700 clamp(1.5rem,3.4vw,2rem)/1.15 var(--f-d)}
@@ -2672,7 +2751,7 @@ html[data-theme=dark] .tc-vis{background:color-mix(in srgb,var(--brand) 12%,var(
 .cq-read{margin:0;padding:14px 18px;border-radius:18px;background:var(--surf2,rgba(0,0,0,.04));font:600 clamp(1.15rem,3vw,1.45rem)/1.5 var(--f-d)}
 .cu-end h2{margin:0;font:700 1.7rem var(--f-d)}.cu-conf{font-size:3rem;animation:cuPop .8s ease}
 @keyframes cuPop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-@media (max-width:640px){.cp-st{padding:8px 10px;gap:6px}.cp-st span{font-size:1.3rem}.cp-head{flex-direction:column;align-items:stretch;gap:8px}.cp-head .cp-bar{max-width:none}
+@media (max-width:640px){.cmr-st{padding:8px 10px;gap:6px}.cmr-st span{font-size:1.3rem}.cp-head{flex-direction:column;align-items:stretch;gap:8px}.cp-head .cp-bar{max-width:none}
   .cp-next{flex-direction:column;align-items:flex-start;padding:20px}.cp-next .btn{margin-top:4px}}
 /* delete account: sad Pip */
 .dl-card{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;max-width:480px;width:calc(100vw - 32px);max-height:calc(calc(100dvh / var(--z,1)) - 32px);overflow:auto;padding:26px 24px 20px!important}
@@ -6224,33 +6303,40 @@ async function cmPost(b,row){
   const all=cmLS();all[b]=[Object.assign({id:'l'+Date.now(),created_at:new Date().toISOString(),author_id:'me'},row)].concat(all[b]||[]).slice(0,60);lsSet('ll.cm',JSON.stringify(all));
 }
 const cmName=()=>{const fn=(P&&(P.firstName||P.name)||'').trim();if(kidMode())return (fn?fn[0].toUpperCase()+'.':'A friend')+' with '+((BUDDIES.find(x=>x[0]===buddy())||[0,'Pip'])[1]);return fn.split(' ')[0]||'A parent'};
-function cmPostHTML(p,b){
+const CM_COL={star:'#f2b72e',book:'#3f86d8',heart:'#e86aa6',trophy:'#e8873a',globe:'#2f9e6b',spark:'#8a5fd0'};
+function cmPostHTML(p,b,i){
   const st=CM_STK.find(x=>x[0]===p.sticker),mine=CLOUD&&CLOUD.user&&p.author_id===CLOUD.user.id||p.author_id==='me';
-  return `<article class="cm-p${b==='kids'?' kid':''}"><div class="cm-ph"><span class="cm-av" aria-hidden="true">${b==='kids'?ic(st?st[0]:'smile',22):esc((p.author_name||'?')[0])}</span><b>${esc(p.author_name)}</b><time class="muted small" datetime="${esc(p.created_at)}">${nfyAgo(Date.parse(p.created_at))}</time>${p.rating?`<span class="cm-rt" aria-label="${p.rating} out of 5 stars">${'★'.repeat(p.rating)}<i>${'★'.repeat(5-p.rating)}</i></span>`:''}</div>
-   ${st?`<p class="cm-stk">${ic(st[0],18)} ${esc(st[1])}</p>`:''}${p.body&&p.body!==(st&&st[1])?`<p class="cm-b">${esc(p.body)}</p>`:''}
-   <div class="cm-pa">${mine&&!CM.local?`<button class="cm-x" data-cdel="${esc(p.id)}">Delete</button>`:''}${!mine&&!CM.local&&CLOUD&&CLOUD.user?`<button class="cm-x" data-crep="${esc(p.id)}">Report</button>`:''}</div></article>`;
+  const acts=`<div class="cm-pa">${mine&&!CM.local?`<button class="cm-x" data-cdel="${esc(p.id)}">Delete</button>`:''}${!mine&&!CM.local&&CLOUD&&CLOUD.user?`<button class="cm-x" data-crep="${esc(p.id)}" aria-label="Report this post">Report</button>`:''}</div>`;
+  const when=`<time datetime="${esc(p.created_at)}">${nfyAgo(Date.parse(p.created_at))}</time>`;
+  if(b==='kids'){const c=CM_COL[p.sticker]||'#2f9e6b',extra=p.body&&p.body!==(st&&st[1]);
+    return `<article class="ck" style="--c:${c};--i:${i}"><span class="ck-ic" aria-hidden="true">${ic(st?st[0]:'smile',34)}</span><p class="ck-t">${esc(st?st[1]:p.body)}</p>${extra?`<p class="ck-b">“${esc(p.body)}”</p>`:''}<footer class="ck-f"><b>${esc(p.author_name)}</b>${when}${acts}</footer></article>`}
+  return `<article class="cp" style="--i:${i}"><div class="cmr-st" aria-label="${p.rating||5} out of 5 stars">${'★'.repeat(p.rating||5)}<i>${'★'.repeat(5-(p.rating||5))}</i></div><blockquote class="cp-q">${esc(p.body)}</blockquote><footer class="cp-f"><span class="cp-av" aria-hidden="true">${esc((p.author_name||'?')[0].toUpperCase())}</span><span><b>${esc(p.author_name)}</b>${when}</span>${acts}</footer></article>`;
 }
+function cmSummary(posts){
+  const r=posts.filter(p=>p.rating),n=r.length;if(!n)return '';const avg=r.reduce((a,p)=>a+p.rating,0)/n;
+  return `<div class="cm-sum"><div class="cm-avg"><b class="tn">${avg.toFixed(1)}</b><span class="cmr-st" aria-hidden="true">${'★'.repeat(Math.round(avg))}<i>${'★'.repeat(5-Math.round(avg))}</i></span><small>${n} review${n>1?'s':''}</small></div>
+   <ul class="cm-bars" aria-label="Ratings">${[5,4,3,2,1].map(k=>{const c=r.filter(p=>p.rating===k).length;return `<li><span>${k}★</span><i><em style="width:${Math.round(c/n*100)}%"></em></i><small>${c}</small></li>`}).join('')}</ul></div>`;
+}
+const CM_ART=`<svg class="cm-art" viewBox="0 0 260 180" aria-hidden="true"><g class="fu-bob"><path d="M18 30h120a14 14 0 0114 14v40a14 14 0 01-14 14H64l-22 18V98H18A14 14 0 014 84V44a14 14 0 0114-14z" fill="#fff"/><circle cx="48" cy="64" r="7" fill="#f2b72e"/><circle cx="76" cy="64" r="7" fill="#e86aa6"/><circle cx="104" cy="64" r="7" fill="#3f86d8"/></g><g class="fu-bob b"><path d="M118 92h124a14 14 0 0114 14v36a14 14 0 01-14 14h-12v18l-22-18h-90a14 14 0 01-14-14v-36a14 14 0 0114-14z" fill="rgba(255,255,255,.85)"/><path d="M146 124l7 7 15-15" stroke="#2f9e6b" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M186 113l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z" fill="#f2b72e"/></g><path class="fu-tw" d="M226 30l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#fff"/></svg>`;
 R.community=arg=>{
   const kid=kidMode();const b=CM.board||(kid?'kids':(arg==='kids'?'kids':'parents'));CM.board=b;
   const canPost=!!session&&(b==='kids'?kid:!kid),posts=CM.posts[b];
-  if(!posts&&!CM.loading){cmLoad(b).then(()=>{if(cur==='community')R.community(arg)})}
-  $('#page').innerHTML=`<div class="wrap cm">
-   <header class="cm-hd"><span class="es-eb">Community</span><h1>${kid?'Friends and ideas':'LahLahLearn community'}</h1><p class="muted">${kid?'Share what you learned. Be kind, and never share where you live.':'See what children are learning, read what families think, and tell us how to make LahLahLearn better.'}</p></header>
-   <div class="cm-tabs" role="tablist" aria-label="Boards">
-    <button role="tab" aria-selected="${b==='kids'}" data-cb="kids">${ic('smile',18)} Kids' corner</button>
-    <button role="tab" aria-selected="${b==='parents'}" data-cb="parents">${ic('heart',18)} Parents' voices</button>
-    ${kid?'':`<button role="tab" aria-selected="${b==='feedback'}" data-cb="feedback">${ic('pen',18)} Send feedback</button>`}</div>
-   ${CM.local&&b!=='feedback'?`<p class="cm-note">${ic('spark',14)} The online community is opening soon. For now, posts are saved on this device only.</p>`:''}
-   ${b==='feedback'?cmFeedbackHTML():`<div class="cm-in">
-    <section class="cm-new" aria-labelledby="cmNh">${canPost?(b==='kids'?`<h2 id="cmNh">Share something</h2><div class="cm-stks" role="radiogroup" aria-label="Pick a picture">${CM_STK.map((x,i)=>`<button role="radio" aria-checked="${i===0}" data-stk="${x[0]}" aria-label="${esc(x[1])}">${ic(x[0],28)}<span class="lv-w">${esc(x[1])}</span></button>`).join('')}</div><textarea class="in" id="cmT" maxlength="200" rows="2" placeholder="Add a few words (you can skip this)"></textarea>`
-       :`<h2 id="cmNh">Share your experience</h2><div class="cm-stars" role="radiogroup" aria-label="Your rating">${[1,2,3,4,5].map(n=>`<button role="radio" aria-checked="${n===5}" data-rt="${n}" aria-label="${n} star${n>1?'s':''}">★</button>`).join('')}</div><textarea class="in" id="cmT" maxlength="500" rows="4" placeholder="What has LahLahLearn been like for your family?"></textarea>`)+`<div class="row between" style="gap:10px"><small class="muted">Posting as <b>${esc(cmName())}</b>. Everyone can read this.</small><button class="btn pri" id="cmGo">${ic('arrow',16)} Post</button></div><p class="small" id="cmM" role="status" aria-live="polite"></p>`
-       :`<h2 id="cmNh">${b==='kids'?'Kids post from their own home page':'Want to share?'}</h2><p class="muted small">${!session?'Log in to post. Anyone can read.':b==='kids'?'Children share from their own home page. Grown-ups can read along.':'Grown-ups post from the parent portal (unlock it with your PIN).'}</p>${!session?'<button class="btn pri" data-go="auth">Log in</button>':''}`}</section>
-    <section class="cm-list" aria-live="polite" aria-busy="${!posts}">${!posts?'<p class="muted">Loading…</p>':posts.length?posts.map(p=>cmPostHTML(p,b)).join(''):`<div class="cm-empty">${ic(b==='kids'?'smile':'heart',40)}<p>No posts yet. ${canPost?'Be the first to share!':''}</p></div>`}</section>
+  if(!posts&&!CM.loading&&b!=='feedback'){cmLoad(b).then(()=>{if(cur==='community')R.community(arg)})}
+  const tabs=[['kids','smile',"Kids' corner",'What children learned'],['parents','heart',"Parents' voices",'Reviews from families']].concat(kid?[]:[['feedback','pen','Send feedback','Straight to our team']]);
+  $('#page').innerHTML=`<div class="wrap cm${kid&&lvSimple()?' lv-s':''}">
+   <header class="cm-hero"><div class="cm-hc"><span class="cm-eb">Community</span><h1>${kid?'Friends and ideas':'LahLahLearn community'}</h1><p>${kid?'Share what you learned. Be kind, and never share where you live.':'See what children learn, read what families think, and tell us your ideas.'}</p></div>${CM_ART}</header>
+   <div class="cm-tabs" role="tablist" aria-label="Boards">${tabs.map(([k,i,t,d])=>`<button role="tab" aria-selected="${b===k}" data-cb="${k}">${ic(i,22)}<span><b>${t}</b><small class="lv-w">${d}</small></span></button>`).join('')}</div>
+   ${CM.local&&b!=='feedback'?`<p class="cm-note">${ic('spark',14)} You are offline, so posts are saved on this device for now.</p>`:''}
+   ${b==='feedback'?cmFeedbackHTML():`<div class="cm-in ${b}">
+    <section class="cm-new" aria-labelledby="cmNh">${canPost?(b==='kids'?`<h2 id="cmNh">Share something</h2><div class="cm-stks" role="radiogroup" aria-label="Pick a picture">${CM_STK.map((x,i)=>`<button role="radio" aria-checked="${i===0}" data-stk="${x[0]}" style="--c:${CM_COL[x[0]]}" aria-label="${esc(x[1])}"><span class="cs-ic">${ic(x[0],26)}</span><span class="lv-w">${esc(x[1])}</span></button>`).join('')}</div><textarea class="in" id="cmT" maxlength="200" rows="2" placeholder="Add a few words (you can skip this)"></textarea>`
+       :`<h2 id="cmNh">Share your experience</h2><div class="cm-stars" role="radiogroup" aria-label="Your rating">${[1,2,3,4,5].map(n=>`<button role="radio" aria-checked="${n===5}" data-on="1" data-rt="${n}" aria-label="${n} star${n>1?'s':''}">★</button>`).join('')}</div><textarea class="in" id="cmT" maxlength="500" rows="4" placeholder="What has LahLahLearn been like for your family?"></textarea>`)+`<button class="btn pri cm-go" id="cmGo">${ic('arrow',18)} <span>Post</span></button><small class="muted cm-as">Posting as <b>${esc(cmName())}</b>. Everyone can read this.</small><p class="small" id="cmM" role="status" aria-live="polite"></p>`
+       :`<span class="cm-lk" aria-hidden="true">${ic(b==='kids'?'smile':'heart',30)}</span><h2 id="cmNh">${b==='kids'?'Kids share from their home page':'Want to share?'}</h2><p class="muted small">${!session?'Log in to post. Anyone can read.':b==='kids'?'Children post from their own home page. Grown-ups can read along.':'Unlock the parent portal with your PIN to post.'}</p>${!session?'<button class="btn pri" data-go="auth">Log in</button>':''}`}</section>
+    <section class="cm-list" aria-live="polite" aria-busy="${!posts}">${b==='parents'&&posts?cmSummary(posts):''}<div class="cm-feed">${!posts?'<p class="muted">Loading…</p>':posts.length?posts.map((p,i)=>cmPostHTML(p,b,i)).join(''):`<div class="cm-empty">${ic(b==='kids'?'smile':'heart',40)}<p>No posts yet. ${canPost?'Be the first to share!':''}</p></div>`}</div></section>
    </div>`}</div>`;
   $$('[data-cb]').forEach(x=>x.onclick=()=>{CM.board=x.dataset.cb;R.community()});
   let stk=CM_STK[0][0],rt=5;
-  $$('[data-stk]').forEach(x=>x.onclick=()=>{stk=x.dataset.stk;$$('[data-stk]').forEach(y=>y.setAttribute('aria-checked',y===x));try{if(P.prefs.voice)say(x.getAttribute('aria-label'))}catch(e){}});
-  $$('[data-rt]').forEach(x=>x.onclick=()=>{rt=+x.dataset.rt;$$('[data-rt]').forEach(y=>y.setAttribute('aria-checked',+y.dataset.rt===rt))});
+  $$('[data-stk]').forEach(x=>x.onclick=()=>{stk=x.dataset.stk;$$('[data-stk]').forEach(y=>y.setAttribute('aria-checked',y===x));try{sfxPop('tick')}catch(e){}try{if(P.prefs.voice)say(x.getAttribute('aria-label'))}catch(e){}});
+  $$('[data-rt]').forEach(x=>x.onclick=()=>{rt=+x.dataset.rt;$$('[data-rt]').forEach(y=>{y.setAttribute('aria-checked',+y.dataset.rt===rt);y.dataset.on=+y.dataset.rt<=rt?'1':''})});
   const go=$('#cmGo');if(go)go.onclick=async()=>{
     const t=$('#cmT').value.trim(),m=$('#cmM'),body=t||(b==='kids'?CM_STK.find(x=>x[0]===stk)[1]:'');
     const err=cmCheck(body);if(err==='hurt'){m.textContent='Please talk to a grown-up you trust right now.';nfyAdd('safety',`${P.name} wrote something in Friends that may mean they are upset. Please check in with them.`);return}if(err){m.textContent=err;return}
@@ -6261,15 +6347,15 @@ R.community=arg=>{
   cmFeedbackBind();if(kid)lvBind();
 };
 function cmFeedbackHTML(){
-  return `<section class="cm-fb" aria-labelledby="fbH"><h2 id="fbH">Send feedback to LahLahLearn</h2><p class="muted">Ideas, problems or kind words: it goes straight to our team. We read every message.</p>
-   <form id="fbF" name="feedback" class="stack" style="gap:12px" novalidate>
+  return `<section class="cm-fb" aria-labelledby="fbH"><aside class="fb-side"><span class="fb-big" aria-hidden="true">${ic('pen',40)}</span><h2 id="fbH">Tell us anything</h2><p>Ideas, problems or kind words. It goes straight to our team, and we read every message.</p><p class="fb-or">Or email <a href="mailto:lahlahlearn@gmail.com">lahlahlearn@gmail.com</a></p></aside>
+   <form id="fbF" name="feedback" class="fb-form" novalidate>
     <p hidden><label>Leave empty <input name="bot-field"></label></p>
-    <div class="fb-k" role="radiogroup" aria-label="Kind of feedback">${[['idea','Idea','spark'],['problem','Problem','shield'],['praise','Praise','heart'],['other','Other','pen']].map(([k,l,i],n)=>`<label><input type="radio" name="kind" value="${k}" ${n===0?'checked':''}><span>${ic(i,16)} ${l}</span></label>`).join('')}</div>
-    <div class="fb-2"><label class="stack" style="gap:4px"><b class="small">Your name</b><input class="in" name="name" maxlength="60" autocomplete="name" value="${esc(session&&P&&!kidMode()?'':'')}"></label>
-    <label class="stack" style="gap:4px"><b class="small">Email (so we can reply, optional)</b><input class="in" type="email" name="email" maxlength="120" autocomplete="email" value="${esc(CLOUD&&CLOUD.user&&CLOUD.user.email||'')}"></label></div>
-    <label class="stack" style="gap:4px"><b class="small">Message</b><textarea class="in" name="message" rows="5" maxlength="2000" required></textarea></label>
-    <div class="row between" style="gap:10px;flex-wrap:wrap"><small class="muted">Or email <a href="mailto:lahlahlearn@gmail.com">lahlahlearn@gmail.com</a></small><button class="btn pri" type="submit">${ic('arrow',16)} Send feedback</button></div>
-    <p class="small" id="fbM" role="status" aria-live="polite"></p></form></section>`;
+    <div class="fb-k" role="radiogroup" aria-label="Kind of feedback">${[['idea','Idea','spark','#8a5fd0'],['problem','Problem','shield','#e0483e'],['praise','Praise','heart','#e86aa6'],['other','Other','pen','#3f86d8']].map(([k,l,i,c],n)=>`<label style="--c:${c}"><input type="radio" name="kind" value="${k}" ${n===0?'checked':''}><span>${ic(i,22)}<b>${l}</b></span></label>`).join('')}</div>
+    <div class="fb-2"><label class="stack" style="gap:6px"><b class="small">Your name</b><input class="in" name="name" maxlength="60" autocomplete="name"></label>
+    <label class="stack" style="gap:6px"><b class="small">Email (optional, so we can reply)</b><input class="in" type="email" name="email" maxlength="120" autocomplete="email" value="${esc(CLOUD&&CLOUD.user&&CLOUD.user.email||'')}"></label></div>
+    <label class="stack" style="gap:6px"><b class="small">Message</b><textarea class="in" name="message" rows="5" maxlength="2000" required placeholder="What should we know?"></textarea></label>
+    <button class="btn pri fb-send" type="submit">${ic('arrow',18)} Send feedback</button>
+    <p class="small" id="fbM" role="status" aria-live="polite" style="margin:0"></p></form></section>`;
 }
 function cmFeedbackBind(){
   const f=$('#fbF');if(!f)return;
@@ -10598,9 +10684,9 @@ const careOld=R.care;
 /* ===== Care Circle v3: the app's own colours, a split nav, a notification bell, a progress graph and a skills ring ===== */
 Object.assign(IC,{bell:'M6 8a6 6 0 1112 0c0 7 3 9 3 9H3s3-2 3-9M10.300 21a1.940 1.940 0 003.400 0',chev:'M6 9l6 6 6-6',pen:'M12 20h9M16.500 3.500a2.100 2.100 0 013 3L7 19l-4 1 1-4z',undo:'M9 14L4 9l5-5M4 9h10.500a5.500 5.500 0 010 11H11',trash:'M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14',grip:'M9 6h.01M9 12h.01M9 18h.01M15 6h.01M15 12h.01M15 18h.01',eraser:'M7 21l-4-4 10-10 8 8-6 6zM7 21h13M9 11l6 6',stamp:'M9 4h6v6l2 3H7l2-3zM5 17h14v3H5z',brain:'M9 4a3 3 0 00-3 3 3 3 0 00-2 5 3 3 0 002 5 3 3 0 006 1V5a2 2 0 00-3-1zM15 4a3 3 0 013 3 3 3 0 012 5 3 3 0 01-2 5 3 3 0 01-6 1',spark:'M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z',bookmark:'M6 3h12v18l-6-4-6 4z'});
 
-const PC_ALL=[['overview','Overview'],['strengths','Strengths'],['report','Report'],['visits','Check-ups'],['team','Care team'],['settings','Settings']];
+const PC_ALL=[['overview','Overview'],['strengths','Strengths'],['report','Report'],['visits','Check-ups'],['team','Care team'],['safety','Safety'],['settings','Settings']];
 /* each kind of grown-up sees the parts that fit their role: parents get everything, teachers focus on school goals and notes, therapists on goals and check-ups */
-const PC_ROLE={parent:['overview','strengths','report','visits','team','settings'],teacher:['overview','strengths','report','team','settings'],therapist:['overview','strengths','visits','team','settings']};
+const PC_ROLE={parent:['overview','strengths','report','visits','team','safety','settings'],teacher:['overview','strengths','report','team','settings'],therapist:['overview','strengths','visits','team','settings']};
 const PC_NOTE={teacher:'You are here as a teacher. See school goals and leave notes for home.',therapist:'You are here as a therapist. Track goals and offer check-up times.'};
 let PC_TABS=PC_ALL;
 /* ---- notifications: what the child did, kept with the child's progress so every grown-up sees them ---- */
@@ -10661,14 +10747,29 @@ function alertSetHTML(full=true){
    <div class="al-dev"><span class="al-dot ${on?'on':''}" aria-hidden="true"></span><span>${on?'Alerts are on for this device.':'Alerts are off for this device.'}</span><button class="btn ${on?'ghost':'pri'} sm" id="alDev">${on?'Turn off here':'Turn on alerts here'}</button>${on?'<button class="btn ghost sm" id="alTest">Send a test</button>':''}</div>
    <div class="al-list">${NFG.map(([k,n,i,d])=>`<label class="al-row"><span class="es-ic">${ic(i,20)}</span><span class="al-t"><b>${n}</b><small>${d}</small></span><input type="checkbox" class="sw-in" data-alg="${k}" ${off[k]?'':'checked'} aria-label="${esc(n)} alerts"></label>`).join('')}</div>
   </section>
-  ${full?`<section class="gr-sec al-sec" id="swSec"><div class="gr-sh"><span class="gr-ico">${ic('shield',22)}</span><div><h3>Safety watch</h3><p class="al-desc">While your child learns, the camera looks for a fall or your child lying still on the floor. If it sees one, it asks your child "Are you okay?". If there is no answer in 20 seconds, it alerts you and shows your emergency contacts on the screen.</p></div></div>
-   <label class="al-row"><span class="es-ic">${ic('shield',20)}</span><span class="al-t"><b>Use Safety watch on my child's device</b><small>The video stays on the device. Nothing is recorded, saved or sent; only the alert is shared with you. Your child sees a small "Safety watch" badge while it is on.</small></span><input type="checkbox" class="sw-in" id="swOn" ${sf.on?'checked':''} aria-label="Use Safety watch"></label>
-   <div class="sw-cts"><b class="small">Emergency contacts</b><p class="muted small" style="margin:0">Shown on your child's screen with a call button if help is needed. Contacts with an email, and every parent on the account, also get an email alert.</p>
-    ${[0,1,2].map(i=>{const c=(sf.contacts||[])[i]||{};return `<div class="sw-ct"><input class="in" data-ctn="${i}" placeholder="${i?'Name, e.g. Grandma':'Name, e.g. Mum'}" value="${esc(c.n||'')}" aria-label="Contact ${i+1} name"><input class="in" data-ctp="${i}" type="tel" inputmode="tel" placeholder="Phone number" value="${esc(c.p||'')}" aria-label="Contact ${i+1} phone"><input class="in" data-cte="${i}" type="email" placeholder="Email (gets an alert)" value="${esc(c.e||'')}" aria-label="Contact ${i+1} email"></div>`}).join('')}
-    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn pri sm" id="swSave">Save Safety watch</button><button class="btn ghost sm" id="swTry">See what my child sees</button><button class="btn ghost sm" id="swCam">${ic('shield',15)} Check the camera</button></div><p class="muted small" id="swMsg" aria-live="polite" style="margin:0"></p>
+  ${full?safetyHTML():''}`;
+}
+/* Safety watch panel: what it does, on/off, emergency contacts, camera check */
+const SW_FIG='<svg class="swf" viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="swg" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="100" r="92" fill="url(#swg)"/><path class="swf-sh" d="M100 18l64 24v46c0 44-28 76-64 92-36-16-64-48-64-92V42z" fill="rgba(255,255,255,.18)" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><g stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none"><circle cx="100" cy="62" r="11" fill="#fff"/><path d="M100 75v40M100 85l-22 14M100 85l22 14M100 115l-16 30M100 115l16 30"/></g><g fill="#ffd34d"><circle cx="100" cy="62" r="4"/><circle cx="78" cy="99" r="4"/><circle cx="122" cy="99" r="4"/><circle cx="100" cy="115" r="4"/><circle cx="84" cy="145" r="4"/><circle cx="116" cy="145" r="4"/></g><rect class="swf-scan" x="40" y="40" width="120" height="6" rx="3" fill="#7ff0b2" opacity=".85"/></svg>';
+function safetyHTML(){
+  const sf=P&&P.safety||{},on=!!sf.on,cts=sf.contacts||[];
+  const step=(n,i,t,d)=>`<li class="sw-step"><span class="sw-sn">${n}</span><span class="sw-si">${ic(i,24)}</span><b>${t}</b><small>${d}</small></li>`;
+  return `<section class="swp" id="swSec" aria-labelledby="swH">
+   <div class="swp-hero ${on?'on':''}">
+    <div class="swp-art">${SW_FIG}</div>
+    <div class="swp-hc"><span class="swp-pill" id="swPill">${on?'On':'Off'}</span><h3 id="swH">Safety watch</h3><p>Looks after your child while they learn. If they fall or lie still, it checks on them and tells you.</p>
+     <label class="swp-tg"><input type="checkbox" class="sw-in" id="swOn" ${on?'checked':''}><span>Use Safety watch on my child's device</span></label></div>
    </div>
-   <p class="muted small al-note">${ic('spark',14)} Safety watch helps, but it can miss a fall or raise a false alarm (for example when a child lies down to play). It is not a medical or emergency device and does not replace a grown-up nearby. In an emergency, call 999 (Malaysia) or your local number.</p>
-  </section>`:''}`;
+   <ol class="sw-steps">${step(1,'user','Sees the whole body','Head to feet, near or far.')}${step(2,'heart','Asks "Are you okay?"','Big buttons, 20 seconds to answer.')}${step(3,'bell','Calls the family','Alert, email and call buttons.')}</ol>
+   <div class="swp-cts"><div class="swp-ch"><h4>Emergency contacts</h4><small>Shown on your child's screen with a call button. Anyone with an email gets an alert too.</small></div>
+    <div class="swp-cl">${[0,1,2].map(i=>{const c=cts[i]||{};return `<div class="swp-c"><span class="swp-av" aria-hidden="true">${c.n?esc(c.n[0].toUpperCase()):ic('user',20)}</span>
+      <input class="in" data-ctn="${i}" placeholder="${['Mum','Dad','Grandma'][i]}" value="${esc(c.n||'')}" aria-label="Contact ${i+1} name">
+      <input class="in" data-ctp="${i}" type="tel" inputmode="tel" placeholder="Phone" value="${esc(c.p||'')}" aria-label="Contact ${i+1} phone">
+      <input class="in" data-cte="${i}" type="email" placeholder="Email (optional)" value="${esc(c.e||'')}" aria-label="Contact ${i+1} email"></div>`}).join('')}</div></div>
+   <div class="swp-act"><button class="btn pri" id="swSave">${ic('check',16)} Save</button><button class="btn ghost" id="swCam">${ic('user',16)} Check the camera</button><button class="btn ghost" id="swTry">${ic('heart',16)} See what my child sees</button></div>
+   <p class="small" id="swMsg" role="status" aria-live="polite" style="margin:0"></p>
+   <div class="swp-notes"><p>${ic('lock',15)} <span>The video stays on the device. Nothing is recorded, saved or sent.</span></p><p>${ic('spark',15)} <span>It can miss a fall or raise a false alarm. It does not replace a grown-up nearby. In an emergency call 999.</span></p></div>
+  </section>`;
 }
 function alertSetBind(sec,redo){
   const d=$('#alDev',sec);if(d)d.onclick=async()=>{if(pushOn()){lsDel('ll.push');toast('Alerts are off for this device.')}else if(await pushEnable())toast('Alerts are on for this device.');redo()};
@@ -10676,6 +10777,8 @@ function alertSetBind(sec,redo){
   $$('[data-alg]',sec).forEach(c=>c.onchange=()=>{const o=nfyOffGet();if(c.checked)delete o[c.dataset.alg];else o[c.dataset.alg]=true;lsSet('ll.nfyOff',JSON.stringify(o))});
   const tr2=$('#swTry',sec);if(tr2)tr2.onclick=()=>swAsk('fall',true);
   const cm=$('#swCam',sec);if(cm)cm.onclick=swCamCheck;
+  const so=$('#swOn',sec);if(so)so.onchange=()=>{const h=$('.swp-hero',sec);if(h)h.classList.toggle('on',so.checked);const pl=$('#swPill',sec);if(pl)pl.textContent=so.checked?'On':'Off'};
+  $$('[data-ctn]',sec).forEach(x=>x.oninput=()=>{const a=x.closest('.swp-c').querySelector('.swp-av');if(a)a.innerHTML=x.value.trim()?esc(x.value.trim()[0].toUpperCase()):ic('user',20)});
   const sv=$('#swSave',sec);if(sv)sv.onclick=()=>{const cts=[0,1,2].map(i=>({n:$(`[data-ctn="${i}"]`,sec).value.trim().slice(0,40),p:$(`[data-ctp="${i}"]`,sec).value.replace(/[^\d+ ()-]/g,'').trim().slice(0,24),e:(v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)?v:'')($(`[data-cte="${i}"]`,sec).value.trim().slice(0,120))})).filter(c=>c.p||c.e);
     P.safety={on:$('#swOn',sec).checked,contacts:cts};save(true);$('#swMsg',sec).textContent=P.safety.on?(cts.length?'Saved. Safety watch is on.':'Saved. Add at least one phone number so help can be called.'):'Saved. Safety watch is off.';swSync()};
 }
@@ -10821,7 +10924,7 @@ function rollSet(el,s){const old=el.querySelector('.rn');const len=old?old.child
   const cs=[...el.querySelector('.rn').children];String(s).split('').forEach((c,i)=>{const n=cs[i];if(!n)return;if(n.classList.contains('rn-d'))requestAnimationFrame(()=>{n.firstElementChild.style.transform=`translateY(-${+c*10}%)`});else n.textContent=c});
   const sr=el.parentElement&&el.parentElement.querySelector('.sr');if(sr)sr.textContent=s}
 /* ---- Care Circle overview, laid out like a finance dashboard: sidebar, four summary cards, progress chart, practice donut, skills table, smart tips ---- */
-const PC_ICON={overview:'home',strengths:'star',report:'chart',visits:'clock',team:'users',settings:'gear'};
+const PC_ICON={overview:'home',strengths:'star',report:'chart',visits:'clock',team:'users',safety:'shield',settings:'gear'};
 const PCP={per:30};
 const SK_C=['--brand','--c-sun','--c-coral','--c-sky','--c-violet','--c-teal','--c-rose'];
 const pcSum=a=>a.reduce((t,x)=>t+x.v,0);
@@ -10936,7 +11039,8 @@ function careDraw(){
     if(careTab==='visits'){sec.innerHTML=visitsHTML(user);bindVisits(user)}
     if(careTab==='team'){sec.innerHTML=`<section class="gr-sec"><div class="gr-sh"><div><h3><label for="pcNotes">Shared notes</label></h3><p class="muted small">Everyone in the care team sees these.</p></div></div><textarea id="pcNotes" class="in" style="min-height:110px" placeholder="For example: responds well to picture cards before lessons."></textarea></section>`+teamHTML(user);bindTeam(user);
       const n=$('#pcNotes');n.value=G.notes||'';n.oninput=()=>{G.notes=n.value;if(cloudCare())cloudNotesSave(n.value);else save()}}
-    if(careTab==='settings'){const pa=user.role==='parent'||!user.role;sec.innerHTML=settingsHTML(user)+alertSetHTML(pa)+(pa?aiSetHTML():aiOwnHTML());bindSettings(user);alertSetBind(sec,careDraw);if(pa)aiSetBind(sec);else aiOwnBind(sec)}
+    if(careTab==='safety'){sec.innerHTML=safetyHTML();alertSetBind(sec,careDraw)}
+    if(careTab==='settings'){const pa=user.role==='parent'||!user.role;sec.innerHTML=settingsHTML(user)+alertSetHTML(false)+(pa?aiSetHTML():aiOwnHTML());bindSettings(user);alertSetBind(sec,careDraw);if(pa)aiSetBind(sec);else aiOwnBind(sec)}
     $$('[data-k]',box).forEach(b=>{b.onclick=()=>{careTab=b.dataset.k;careDraw();scrollTo({top:0})}});
   }
   document.body.classList.add('carepro');if(!teardowns.includes(careUnpro))teardowns.push(careUnpro);
