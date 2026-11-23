@@ -271,6 +271,26 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 }
 @media (prefers-reduced-motion:reduce){.pulse,.burst::before,.ld-b,.has::after,#uw::after,.wig .cheer{animation:none}#speedo i{transition:none}}
 
+
+/* the full-screen introduction page */
+.introp{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;overflow:auto;background:radial-gradient(120% 90% at 50% 0%,#bfe9ff 0%,#8fd3f5 45%,#5fb8e8 100%);transition:opacity .45s}
+.introp.out{opacity:0;pointer-events:none}
+.introp::before{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:radial-gradient(70% 120% at 50% 100%,#8fd47a 0 60%,transparent 61%);pointer-events:none}
+.introp .reel{position:relative;width:min(900px,100%);padding:22px 22px 18px}
+.introp .reel .stage{height:min(54dvh,430px)}
+.introp .reel h2{font-size:clamp(26px,4.4vw,40px)}
+.ip-skip{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;z-index:2;font-size:18px;padding:10px 18px;background:#fff}
+.reel .sc.op{gap:6px}.reel .opc{width:min(220px,46vw);height:auto;filter:drop-shadow(0 10px 0 rgba(0,0,0,.12))}
+.reel .sc.on .opc{animation:opIn 1.2s cubic-bezier(.3,1.6,.5,1) both}.reel .sc.on .opl{animation:opLid 2.4s ease-in-out 1s infinite;transform-origin:100px 78px}
+.reel .ops{animation:opTw 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes opIn{0%{transform:scale(.2) translateY(60px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes opLid{0%,60%,100%{transform:none}75%{transform:rotate(-8deg) translateY(-6px)}}
+@keyframes opTw{50%{transform:scale(.4);opacity:.3}}
+.reel .rays.gold{background:repeating-conic-gradient(rgba(255,200,40,.5) 0 8deg,transparent 8deg 16deg)}
+.reel .opt{margin:0;font-weight:800;font-size:clamp(16px,2.4vw,20px);color:#7a4a22;text-align:center}
+.reel .opw{font-size:28px;letter-spacing:4px}
+.op-card .opc{width:180px;height:auto;display:block;margin:0 auto}
+@media (prefers-reduced-motion:reduce){.introp *{animation-duration:.01s!important;animation-iteration-count:1!important}}
 /* animated welcome reel: islands, their games, then the big trophy */
 .card.reel{width:min(640px,100%);padding:18px 18px 16px;overflow:hidden}
 .reel .stage{position:relative;height:300px;margin:4px 0 10px}
@@ -527,7 +547,7 @@ const STICKERS=[
  ...ZONES.map((Z,i)=>['z-'+Z.id,Z.name,Z.icon,'places']),
  ...ZONES.map((Z,i)=>['b-'+Z.id,'All '+Z.name+' babies home','💞','babies']),
  ['x-three','First 3 stars','⭐','badges'],['x-ten','Ten 3-star games','🌟','badges'],['x-swim','Swimmer','🏊','badges'],['x-dive','Deep diver','🤿','badges'],['x-jump','Super jumper','🦘','badges'],
- ['x-chest','Treasure hunter','💰','badges'],['x-drive','Little driver','🚗','badges'],['x-row','Rowing star','🚣','badges'],['x-shop','Dress up','👗','badges'],['x-quest','Quest hero','📜','badges'],['x-week','7 days of gifts','📅','badges'],['x-journey','Journey done','🏆','badges']];
+ ['x-chest','Treasure hunter','💰','badges'],['x-drive','Little driver','🚗','badges'],['x-row','Rowing star','🚣','badges'],['x-shop','Dress up','👗','badges'],['x-quest','Quest hero','📜','badges'],['x-week','7 days of gifts','📅','badges'],['x-journey','Journey done','🏆','badges'],['x-onepiece','One Piece Treasure','👑','badges']];
 const STK=Object.fromEntries(STICKERS.map(s=>[s[0],s]));
 const STK_CATS=[['friends','Friends'],['sea','Sea life'],['places','Places'],['babies','Babies'],['badges','Badges']];
 
@@ -2726,6 +2746,7 @@ function updFinds(dt){
   if(c.open){c.sp.material.opacity=Math.max(0,c.sp.material.opacity-dt);return}const can=c.zi<=em;c.sp.material.opacity=can?.5+Math.sin(TIME*3+c.i)*.25:0;
   if(Math.hypot(c.x-P.x,c.z-P.z)<1.9&&Math.abs(P.y-c.y)<(c.uw?2.2:1.2)&&!modalOpen()){if(!can){if(!c.told){c.told=1;toast('This chest opens later on your journey.');sfx('tick')}return}c.open=true;c.anim=0;S.chests.push(c.i);save();confetti(c.x,c.y+1.2,c.z,40);sfx('chest');addXP(20);if(S.chests.length>=6)giveSticker('x-chest');if(c.uw)giveSticker('f-ship');
    const it=randomItem(c.uw?400:c.y>0?300:200);if(it){giveItem(it.id);revealItem(it.id,c.uw?'Sunken treasure!':'Treasure chest!')}else revealCoins(c.uw?80:40,'Treasure chest!');if(c.uw||c.y>0)addGems(c.uw?2:1)}});
+ updTreasure(P,em);
  W.pearls.forEach(p=>{if(p.got)return;p.top.rotation.x=-.5-Math.abs(Math.sin(TIME*.8+p.i))*.4;if(p.zi>em){p.gs.material.opacity=0;p.pr.visible=false;return}p.pr.visible=true;p.gs.material.opacity=.45+Math.sin(TIME*2+p.i)*.2;
   if(P.mode==='dive'&&Math.hypot(p.x-P.x,p.z-P.z)<1.4&&Math.abs(P.y-p.y)<1.8){p.got=true;p.pr.visible=false;p.gs.material.opacity=0;S.pearls.push(p.i);save();giveSticker('f-pearl');addGems(1);addCoins(5);floatScreen('+1 💎 Pearl!',p.x,p.y+1.2,p.z,'#bff0ff')}});
  const gf=W.gift;if(gf&&gf.visible){gf.position.y=Math.abs(Math.sin(TIME*2))*.2;gf.rotation.y+=dt*.8;
@@ -2802,6 +2823,7 @@ function openMap(){
   const n=nextStop();STOPS.forEach((st,i)=>{const cx=X(st.pos[0]),cz=Z(st.pos[1]),r=Math.max(11,2.2*k);x.fillStyle=i in S.done?'#ffc21a':i===n?ZONES[st.zone].stone:'#e2e7e4';x.strokeStyle='#fff';x.lineWidth=2;x.beginPath();x.arc(cx,cz,r,0,TAU);x.fill();x.stroke();
    if(r>8){x.fillStyle=i in S.done||i===n?'#fff':'#8a948e';x.font=`700 ${Math.round(r)}px Fredoka,OpenMojiColor,system-ui,sans-serif`;x.fillText(String(i+1),cx,cz+1)}});
   x.font=Math.max(26,Math.round(k*6))+'px '+EMOJI_FONT;x.fillText('🏰',X(CASTLE_POS[0]),Z(CASTLE_POS[1]));x.fillText('🏡',X(GARDEN.c[0]),Z(GARDEN.c[1]));x.fillText('🗼',X(62*WSC),Z(-100*WSC));
+  if(OP.m){const em2=earnedMax();if(em2>=NZ-1&&!opGone()){x.fillText(S.treasure&&S.treasure.won?'👑':'🏴‍☠️',X(OP.x),Z(OP.z));x.strokeStyle='#c2453b';x.lineWidth=4;const q=Math.max(8,k*1.6),cx=X(OP.x),cy=Z(OP.z)+q*2.2;x.beginPath();x.moveTo(cx-q,cy-q);x.lineTo(cx+q,cy+q);x.moveTo(cx+q,cy-q);x.lineTo(cx-q,cy+q);x.stroke()}else if(!opGone()){x.globalAlpha=.5;x.fillText('❓',X(OP.x+9),Z(OP.z-7));x.globalAlpha=1}}
   box.scrollLeft=X(PL.x)-bw/2;box.scrollTop=Z(PL.z)-bh/2;
   {let dn=null,mv=0;box.onpointerdown=e=>{if(e.pointerType!=='mouse')return;dn=[e.clientX,e.clientY,box.scrollLeft,box.scrollTop];mv=0;box.classList.add('drag')};box.onpointermove=e=>{if(!dn)return;const dx=e.clientX-dn[0],dy=e.clientY-dn[1];mv=Math.max(mv,Math.hypot(dx,dy));box.scrollLeft=dn[2]-dx;box.scrollTop=dn[3]-dy};
    const up=()=>{dn=null;box.classList.remove('drag')};box.onpointerup=up;box.onpointerleave=up;box.addEventListener('click',e=>{if(mv>6){e.stopPropagation();e.preventDefault();mv=0}},true)}
@@ -2918,24 +2940,100 @@ function wiggleBreak(done){let n=20;S.stats.breaks++;save();
  const fin=g=>{clearInterval(iv);PL.dance=0;hideOv();if(g){addCoins(5);sfx('star',3)}done()};$('#wgOk').onclick=()=>fin(true);$('#wgSkip').onclick=()=>fin(false)}
 /* ================= welcome ================= */
 /* the welcome reel: who you are, every island and its games, the road, then the big trophy and gifts at the end */
-function reelHTML(final){const isl=ZONES.map((z,k)=>`<div class="it" style="--i:${k}"><span class="n">${k+1}</span><b>${z.icon}</b><small>${PLAN[k].map(p=>`<span>${p[2]}</span>`).join('')}</small></div>`).join(''),
+/* The One Piece Treasure art: a glowing golden chest */
+const OP_SVG=`<svg class="opc" viewBox="0 0 200 170" aria-hidden="true"><defs><radialGradient id="opg" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fff6c4"/><stop offset=".6" stop-color="#ffd23f" stop-opacity=".55"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient><linearGradient id="opw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9773c"/><stop offset="1" stop-color="#7a4a22"/></linearGradient></defs>
+ <circle cx="100" cy="88" r="84" fill="url(#opg)"/><g class="opl"><path d="M40 78 Q40 36 100 36 Q160 36 160 78 Z" fill="url(#opw)" stroke="#5a3415" stroke-width="4"/><path d="M40 78 Q40 36 100 36 Q160 36 160 78" fill="none" stroke="#ffd23f" stroke-width="9"/><path d="M92 36v42M108 36v42" stroke="#ffd23f" stroke-width="7"/></g>
+ <rect x="40" y="76" width="120" height="66" rx="8" fill="url(#opw)" stroke="#5a3415" stroke-width="4"/><path d="M40 92h120M40 126h120" stroke="#ffd23f" stroke-width="7"/><path d="M92 76v66M108 76v66" stroke="#ffd23f" stroke-width="7"/>
+ <rect x="86" y="88" width="28" height="30" rx="5" fill="#ffd23f" stroke="#5a3415" stroke-width="3"/><circle cx="100" cy="100" r="4.5" fill="#5a3415"/><path d="M100 103v8" stroke="#5a3415" stroke-width="3"/>
+ <g fill="#fff8d0"><path class="ops" d="M30 40l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><path class="ops" style="animation-delay:.5s" d="M172 30l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z"/><path class="ops" style="animation-delay:1s" d="M168 120l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></g></svg>`;
+function reelHTML(final,page){const isl=ZONES.map((z,k)=>`<div class="it" style="--i:${k}"><span class="n">${k+1}</span><b>${z.icon}</b><small>${PLAN[k].map(p=>`<span>${p[2]}</span>`).join('')}</small></div>`).join(''),
  games=[...new Set(PLAN.flat().filter(p=>!LEARN_TYPES.includes(p[0])).map(p=>p[2]))].slice(0,10).map((g,i)=>`<div class="g1" style="--i:${i}">${g}</div>`).join(''),
- cf=Array.from({length:18},(_,i)=>`<i class="cf" style="--i:${i};left:${4+i*5.3}%;background:${['#ff6b6b','#ffd23f','#5aa8ff','#7bd389','#ff8fc8','#c9a7ff'][i%6]}"></i>`).join('');
- return`<div class="card reward reel" role="dialog" aria-modal="true" aria-label="Welcome"><i class="tape"></i><div class="stage">
+ cf=Array.from({length:18},(_,i)=>`<i class="cf" style="--i:${i};left:${4+i*5.3}%;background:${['#ff6b6b','#ffd23f','#5aa8ff','#7bd389','#ff8fc8','#c9a7ff'][i%6]}"></i>`).join(''),
+ opDone=S.treasure&&S.treasure.won;
+ return`<div class="card reward reel" role="dialog" aria-modal="true" aria-label="Welcome">${page?'':'<i class="tape"></i>'}<div class="stage">
  <div class="sc" data-s="0"><div class="hero" style="display:flex;align-items:flex-end;gap:2px">${ART('b-cloud',90,110)}${ART('b-pip',112,136)}${ART('b-fox',90,110)}</div><h2>🌈 The Island Journey</h2></div>
  <div class="sc" data-s="1"><div class="isl">${isl}</div></div>
  <div class="sc" data-s="2"><div class="games">${games}</div><div class="road"><svg viewBox="0 0 620 120" preserveAspectRatio="none" aria-hidden="true"><path d="M20 90 C 120 10, 220 110, 320 50 S 520 20, 600 70" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/><path d="M20 90 C 120 10, 220 110, 320 50 S 520 20, 600 70" fill="none" stroke="#e2c896" stroke-width="8" stroke-dasharray="2 16" stroke-linecap="round"/><text x="600" y="60" font-size="38" text-anchor="middle">🏰</text></svg><span class="car">🚗</span></div></div>
  <div class="sc" data-s="3">${cf}<div class="rays"></div><div class="trophy">🏆</div><div class="gifts">${['🎁','👑','🌟','🎁'].map((g,i)=>`<span style="--i:${i}">${g}</span>`).join('')}</div><h2>${final?'You did it!':'A big surprise at the end!'}</h2></div>
- </div><div class="dots">${[0,1,2,3].map(i=>`<i data-d="${i}"></i>`).join('')}</div>
+ <div class="sc op" data-s="4"><div class="rays gold"></div>${OP_SVG}<h2>🏴‍☠️ One Piece Treasure</h2><p class="opt">${opDone?'👑 You found it first!':final?'Now find it! Under the sea, near the castle.':'Only ONE explorer in the whole world can find it.'}</p><div class="opw">🌍 ➜ 🧒 ➜ 👑</div></div>
+ </div><div class="dots">${[0,1,2,3,4].map(i=>`<i data-d="${i}"></i>`).join('')}</div>
  <div class="rowc"><button class="btn" id="wSkip" aria-label="Next">${ICON('play',22)}</button><button class="btn go pulse" data-focus id="wGo" aria-label="Let's go">${ICON('play',28)}<span class="lb">Let's go!</span></button></div></div>`}
-function reelRun(final,onGo){showOv(reelHTML(final));const SAY=['The Island Journey!','Eight islands, forty games!','Drive, swim and play all the way to the castle!',final?'You did it! Here is your trophy!':'Get to the end for a big trophy and surprise gifts!'];
- let i=-1,tm=0;const sc=[...document.querySelectorAll('#ov .reel .sc')],dt=[...document.querySelectorAll('#ov .reel .dots i')];
- const show=n=>{i=n;sc.forEach((e,k)=>{e.classList.toggle('on',k===n);e.classList.toggle('off',k<n)});dt.forEach((e,k)=>e.classList.toggle('on',k===n));try{speak(SAY[n])}catch(e){}sfx(n===3?'star':'pop');clearTimeout(tm);if(n<3)tm=setTimeout(()=>show(n+1),n===2?3800:3200)};
- dt.forEach((d,k)=>d.onclick=()=>show(k));$('#wSkip').onclick=()=>show(Math.min(3,i+1));$('#wGo').onclick=()=>{clearTimeout(tm);auInit();onGo()};show(0)}
-function welcome(){
- if(!S.welcomed)enqueue(done=>{reelRun(false,()=>{S.welcomed=1;save();hideOv();afterQueue=()=>{if(!S.settings.picked)enqueue(d=>pickMode(d));calendar();afterQueue=()=>walkToStop(nextStop())};done()})});
- else{enqueue(done=>reelRun(false,()=>{hideOv();done()}));if(!S.settings.picked)enqueue(d=>pickMode(d));calendar();if(MODE().pops>0)setTimeout(()=>{say(S.daily.gift?'Welcome back!':'Welcome back! A gift is in your garden.',3600)},900)}
+function reelBind(root,final,onGo){const SAY=['The Island Journey!','Eight islands, forty games!','Drive, swim and play all the way to the castle!',final?'You did it! Here is your trophy!':'Get to the end for a big trophy and surprise gifts!',final?'Now find the One Piece Treasure!':'The One Piece Treasure! Only one explorer in the whole world can find it. Will it be you?'];
+ let i=-1,tm=0;const sc=[...root.querySelectorAll('.reel .sc')],dt=[...root.querySelectorAll('.reel .dots i')],L=sc.length-1;
+ const show=n=>{i=n;sc.forEach((e,k)=>{e.classList.toggle('on',k===n);e.classList.toggle('off',k<n)});dt.forEach((e,k)=>e.classList.toggle('on',k===n));try{speak(SAY[n])}catch(e){}try{sfx(n>=3?'star':'pop')}catch(e){}clearTimeout(tm);if(n<L)tm=setTimeout(()=>show(n+1),n===2?3800:3300)};
+ dt.forEach((d,k)=>d.onclick=()=>show(k));root.querySelector('#wSkip').onclick=()=>show(Math.min(L,i+1));root.querySelector('#wGo').onclick=()=>{clearTimeout(tm);try{auInit()}catch(e){}onGo()};
+ const sk=root.querySelector('#wSkipAll');if(sk)sk.onclick=()=>{clearTimeout(tm);try{speechSynthesis.cancel()}catch(e){}onGo()};show(0)}
+function reelRun(final,onGo){showOv(reelHTML(final));reelBind($('#ov'),final,onGo)}
+/* the introduction page: shows every time the journey opens, straight away, while the islands load behind it */
+let INTRO_DONE=null;
+function introPage(){const el=document.createElement('div');el.id='intro';el.className='introp';
+ el.innerHTML=`<button class="btn ip-skip" id="wSkipAll">Skip <span aria-hidden="true">⏭</span></button>${reelHTML(false,true)}`;document.body.appendChild(el);
+ INTRO_DONE=new Promise(res=>{reelBind(el,false,()=>{el.classList.add('out');setTimeout(()=>el.remove(),450);res()})});
+ setTimeout(()=>{const g=el.querySelector('#wGo');try{g&&g.focus({preventScroll:true})}catch(e){}},80);
 }
+function welcome(){
+ const go=()=>{
+  if(!S.welcomed){S.welcomed=1;save();if(!S.settings.picked)enqueue(d=>pickMode(d));calendar();afterQueue=()=>walkToStop(nextStop());if(!qBusy)runQueue()}
+  else{if(!S.settings.picked)enqueue(d=>pickMode(d));calendar();if(MODE().pops>0)setTimeout(()=>{say(S.daily.gift?'Welcome back!':'Welcome back! A gift is in your garden.',3600)},900)}};
+ if(INTRO_DONE)INTRO_DONE.then(go);else go();
+}
+
+/* ================= The One Piece Treasure =================
+   One golden chest under the sea near the castle. It can only be opened once you reach the last island.
+   The app (when the journey runs inside LahLahLearn) asks the server, so only the first explorer in the world wins it. */
+const OP={x:0,y:-4,z:0,m:null,beam:null,sp:null,st:null,asked:0,told:0,wait:0};
+function buildTreasure(){
+ const zi=NZ-1,Z=ZONES[zi],p=zoneSpot(zi,{water:1,hmin:-4.4,hmax:-2.6,d0:Z.r+6,d1:Z.r+28,clear:3});
+ OP.x=p[0];OP.z=p[1];OP.y=terrainH(p[0],p[1]);
+ const m=chestMesh();m.scale.setScalar(1.9);m.position.set(OP.x,OP.y,OP.z);m.rotation.y=SR()*TAU;
+ m.traverse(o=>{if(o.isMesh){o.material=o.material.clone();o.material.color.lerp(new T.Color('#ffcf3a'),.5);o.material.metalness=.55;o.material.roughness=.28;o.material.emissive=new T.Color('#4a2c00');o.material.emissiveIntensity=.35}});
+ scene.add(m);OP.m=m;if(S.treasure&&S.treasure.won)m.userData.lid.rotation.x=-1.9;
+ const bm=new T.MeshBasicMaterial({color:0xffd23f,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide});
+ OP.beam=new T.Mesh(new T.CylinderGeometry(.7,1.6,46,18,1,true),bm);OP.beam.position.set(OP.x,OP.y+23,OP.z);scene.add(OP.beam);
+ OP.sp=sprite(glowTex(255,210,80),7,{blending:T.AdditiveBlending,opacity:0});OP.sp.position.set(OP.x,OP.y+2.2,OP.z);scene.add(OP.sp);
+ emit('treasure-ask');
+}
+function opGone(){return !!(OP.st&&OP.st.found&&!OP.st.mine&&!(S.treasure&&S.treasure.won))}
+function updTreasure(P,em){
+ if(!OP.m)return;const can=em>=NZ-1,won=S.treasure&&S.treasure.won,gone=opGone();
+ OP.beam.material.opacity=can&&!won&&!gone?.16+Math.sin(TIME*2)*.06:0;OP.beam.rotation.y+=.01;
+ OP.sp.material.opacity=can&&!gone?.55+Math.sin(TIME*3)*.25:0;
+ const d=Math.hypot(OP.x-P.x,OP.z-P.z);
+ if(d<2.8&&Math.abs(P.y-OP.y)<3.2&&!modalOpen()){
+  if(!can){if(!OP.told){OP.told=1;toast('🏴‍☠️ The One Piece Treasure! It opens when you reach the last island.',4200);sfx('tick')}return}
+  if(won){if(!OP.told){OP.told=1;toast('👑 Your One Piece Treasure. You found it first!',4200)}return}
+  if(gone){if(!OP.told){OP.told=1;toast('🏴‍☠️ '+(OP.st.name||'Another explorer')+' found this treasure first.',4200)}return}
+  if(!OP.asked){OP.asked=1;opFound()}
+ }else if(d>7){OP.told=0;if(!OP.wait)OP.asked=0}
+}
+function opFound(){
+ OP.m.userData.lid.rotation.x=-.6;sfx('chest');confetti(OP.x,OP.y+2,OP.z,60);
+ const inApp=window.parent&&window.parent!==window;
+ if(!inApp){opCard('found-local');return}
+ OP.wait=1;emit('treasure-found',{zone:earnedMax()});toast('🏴‍☠️ Checking the treasure map…',6000);
+ clearTimeout(OP.to);OP.to=setTimeout(()=>{if(OP.wait){OP.wait=0;opCard('offline')}},9000);
+}
+function opResult(d){
+ OP.wait=0;clearTimeout(OP.to);
+ if(d.error||d.offline){opCard(d.offline?'offline':'error',d);return}
+ OP.st={found:true,name:d.name,at:d.at,mine:!!d.won};
+ if(d.won){S.treasure={won:1,at:d.at||new Date().toISOString(),name:d.name};OP.m.userData.lid.rotation.x=-1.9;save();giveSticker('x-onepiece');addCoins(500);addGems(20);opCard('won',d)}
+ else{OP.m.userData.lid.rotation.x=0;addCoins(30);opCard('lost',d)}
+}
+function opCard(kind,d){
+ const when=d&&d.at?new Date(d.at).toLocaleDateString():'';
+ const T2={won:['You found it first!','You are the ONE explorer in the whole world who found the One Piece Treasure!','+500 🪙  +20 💎  👑'],
+  lost:['Found already!',(d&&d.name||'Another explorer')+' found it first'+(when?' on '+when:'')+'. Here are 30 coins for a great search!','+30 🪙'],
+  'found-local':['You found it!','Open the 3D Journey in LahLahLearn to claim the One Piece Treasure.',''],
+  offline:['Almost!','We could not check the treasure map right now. Come back and try again.',''],
+  error:['Almost!','We could not check the treasure map right now. Come back and try again.','']}[kind]||['',''];
+ enqueue(done=>{showOv(`<div class="card reward op-card"><i class="tape"></i>${OP_SVG}<h2>${kind==='won'?'👑 ':''}${esc(T2[0])}</h2><p>${esc(T2[1])}</p>${T2[2]?`<p><b>${T2[2]}</b></p>`:''}<button class="btn go" data-focus id="opOk">${ICON('check',24)}<span class="lb">OK</span></button></div>`);
+  if(kind==='won')confettiCard();try{speak(T2[0]+' '+T2[1])}catch(e){}
+  $('#opOk').onclick=()=>{hideOv();if(kind!=='won')OP.asked=0;done()}});
+}
+window.addEventListener('message',e=>{const d=e.data;if(!d||d.source!=='lahlah-app'||e.source!==window.parent)return;
+ if(d.type==='treasure-status'&&!d.offline&&!d.error){OP.st={found:!!d.found,name:d.name,at:d.at,mine:!!d.mine};if(d.mine&&!(S.treasure&&S.treasure.won)){S.treasure={won:1,at:d.at,name:d.name};save();if(OP.m)OP.m.userData.lid.rotation.x=-1.9}}
+ else if(d.type==='treasure-result')opResult(d)});
 function buildButterflies(N){const cols=['#ff9fcb','#ffd34d','#9ad7ff','#c9a7ff'],bf=[];N=Math.round((N||10)*(MODE().minimal?.5:1));
  for(let i=0;i<N;i++){const g=new T.Group(),mt=basic(cols[i%4],{side:T.DoubleSide}),w=[1,-1].map(s=>{const p=new T.Group(),m=new T.Mesh(new T.CircleGeometry(.17,8),mt);m.rotation.x=-Math.PI/2;m.position.x=.15*s;p.add(m);g.add(p);return p});scene.add(g);
   const Z=ZONES[[0,0,0,1,7,7,6,4,0,1,2,3,5,4][i%14]];bf.push({g,w,cx:Z.c[0]+rand(-10,10),cz:Z.c[1]+rand(-10,10),r:rand(1,2.5),sp:rand(.35,.7),ph:rand(0,6),h:rand(1,2)})}
@@ -2975,7 +3073,7 @@ function init(){
  const L=$('#ldmsg'),step=m=>{if(L)L.textContent=m};
  step('Making the sea…');buildSky();buildWater();buildIslands();buildPath();reserve(START[0],START[1],3);
  step('Building the islands…');buildStops();buildTransitions();buildLandmarks();buildPlatforms();buildGarden();buildBabies();buildChests();buildPearls();buildSigns();
- step('Planting trees…');buildDecor();buildCoins();buildFish();buildAnimals();buildButterflies();
+ step('Planting trees…');buildDecor();buildCoins();buildFish();buildAnimals();buildButterflies();buildTreasure();
  zoneGroups();makePlayer();setupInput();questInit();applyMode(true);hud();jcard(true);applyMagic();rideBtn();todBtn();
  $('#bshop').onclick=()=>{auInit();$('#shop').hidden?openShop():closeShop()};$('#bmap').onclick=()=>{auInit();openMap()};$('#mini').onclick=()=>{auInit();openMap()};$('#bset').onclick=()=>{auInit();openSettings()};
  $('#bquest').onclick=()=>{auInit();$('#panel').hidden?openQuests():closePanel()};$('#balbum').onclick=()=>{auInit();$('#panel').hidden?openAlbum():closePanel()};
@@ -3000,6 +3098,7 @@ function fontsReady(ms){const F=document.fonts;if(!F||!F.load)return Promise.res
  return Promise.race([all,new Promise(r=>setTimeout(r,ms||2000))])}
 (function dailyReset(){const d=todayStr();if(S.daily.d!==d){S.daily={d,coins:{},gift:0,hello:{}};save()}if(!S.daily.hello)S.daily.hello={}})();
 window.LahLahJourney=window.LahLahJourney||{};
+try{introPage()}catch(e){console.warn(e)}
 loadThree().then(TH=>fontsReady(2200).then(()=>{T=TH;try{init()}catch(e){console.error(e);$('#ldmsg').textContent='Something went wrong: '+e.message}})).catch(()=>{$('#ldmsg').textContent='Could not load the 3D engine. Check the internet connection and refresh.'});
 })();
 </script>
