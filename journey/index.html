@@ -542,6 +542,18 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 <script>
 (function(){
 'use strict';
+/* ================= language: use the app's dictionary (Bahasa Melayu or Chinese) when the journey runs inside LahLahLearn ================= */
+const APPTR=(()=>{try{const t=window.parent!==window&&window.parent.LL_TR;return t&&typeof t.tr==='function'?t:null}catch(e){return null}})();
+const LNG=()=>{try{return APPTR?APPTR.lang():'en'}catch(e){return 'en'}};
+const T_=x=>{try{return APPTR&&LNG()!=='en'?APPTR.tr(String(x)):x}catch(e){return x}};
+(()=>{if(!APPTR||LNG()==='en')return;document.documentElement.lang=LNG()==='zh'?'zh-Hans':'ms';
+  const done=new WeakMap(),AT=['aria-label','title','placeholder','alt'];let busy=false,tm=0;
+  const walk=root=>{busy=true;try{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>{const p=n.parentNode;return p&&/^(SCRIPT|STYLE)$/.test(p.nodeName)?2:1}});let n;
+    while((n=w.nextNode())){const r=done.get(n),o=(r&&n.data===r.t)?r.o:n.data,t=T_(o);if(t!==n.data)n.data=t;if(t!==o)done.set(n,{o,t})}
+    if(root.querySelectorAll)root.querySelectorAll(AT.map(a=>'['+a+']').join(',')).forEach(e=>AT.forEach(a=>{const v=e.getAttribute(a);if(v){const t=T_(v);if(t!==v)e.setAttribute(a,t)}}))}finally{busy=false}};
+  const go=()=>{clearTimeout(tm);tm=setTimeout(()=>walk(document.body),20)};
+  const start=()=>{walk(document.body);new MutationObserver(()=>{if(!busy)go()}).observe(document.body,{subtree:true,childList:true,characterData:true})};
+  if(document.body)start();else addEventListener('DOMContentLoaded',start)})();
 /* ================= helpers ================= */
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
@@ -969,7 +981,7 @@ function setVol(){if(!AU.ctx)return;AU.sfx.gain.value=S.settings.sfx?MODE().snd:
 function underwaterAudio(on){if(AU.lp)AU.lp.frequency.value=on?500:MODE().gentle?2400:20000}
 function speak(text){
  if(!S.settings.voice||!window.speechSynthesis||!text)return;
- try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(noEmo(String(text).replace(/<[^>]+>/g,'')));u.rate=MODE().rate;u.pitch=MODE().gentle?1.02:1.15;u.lang='en-GB';speechSynthesis.speak(u);return u}catch(e){}
+ try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(noEmo(T_(String(text).replace(/<[^>]+>/g,''))));u.rate=MODE().rate;u.pitch=MODE().gentle?1.02:1.15;u.lang=LNG()==='ms'?'ms-MY':LNG()==='zh'?'zh-CN':'en-GB';{const vs=speechSynthesis.getVoices(),v=vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(u.lang.slice(0,2).toLowerCase()));if(v&&LNG()!=='en')u.voice=v}speechSynthesis.speak(u);return u}catch(e){}
 }
 /* Read Along: show the spoken words and light each one up as it is read (timed fallback when the voice gives no word events) */
 function speakHL(text,el){const clean=noEmo(String(text).replace(/<[^>]+>/g,''));if(!el){speak(clean);return}
