@@ -89,6 +89,7 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 #jump{right:22px;bottom:calc(var(--jh) + 34px + env(safe-area-inset-bottom,0px));width:96px;height:96px;background:var(--sun)}
 #dive{right:128px;bottom:calc(var(--jh) + 30px + env(safe-area-inset-bottom,0px));width:76px;height:76px;background:var(--sky)}#dive.up{background:var(--mint)}
 #dance{right:22px;bottom:calc(var(--jh) + 144px + env(safe-area-inset-bottom,0px));width:60px;height:60px;background:var(--lilac)}
+#tele{left:18px;top:calc(150px + env(safe-area-inset-top,0px));width:64px;height:64px;background:#e7d8ff;font-size:13px}#tele b{font-size:26px;line-height:1}
 #ride{right:128px;bottom:calc(var(--jh) + 116px + env(safe-area-inset-bottom,0px));width:74px;height:74px;background:#ffc9a8}#ride.on{background:var(--paper)}
 #drift{right:22px;bottom:calc(var(--jh) + 34px + env(safe-area-inset-bottom,0px));width:98px;height:98px;background:#c9b3ff}#drift.dn{background:#b39cf5}
 .rbtn .key{position:absolute;bottom:-11px;left:50%;transform:translateX(-50%);font:700 .64rem/1 var(--f);background:var(--ink);color:#fff;border-radius:6px;padding:3px 6px;white-space:nowrap;letter-spacing:.03em}
@@ -98,7 +99,7 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 #speedo i{position:absolute;left:50%;bottom:6px;width:5px;height:34px;margin-left:-2.5px;background:var(--ink);border-radius:3px;transform-origin:50% 100%;transform:rotate(-90deg);transition:transform .15s}
 #speedo::after{content:"";position:absolute;left:50%;bottom:2px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--coral);border:2.5px solid var(--ink)}
 #breath{left:50%;top:calc(140px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;gap:6px;padding:8px 12px;border-radius:20px;background:rgba(255,250,240,.85);border:3px solid var(--ink)}
-#breath i{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--ink);background:#e7f4fb}#breath i.on{background:radial-gradient(circle at 35% 35%,#fff,#9fe4ff)}
+#breath i{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--ink);background:#e7f4fb}#breath i.on{background:radial-gradient(circle at 35% 35%,#fff,#9fe4ff)}#breath{align-items:center}#breath .bl{font:800 14px Fredoka,system-ui,sans-serif;margin-right:4px}#breath.refill{background:rgba(232,255,240,.92)}#breath.refill i.on{background:radial-gradient(circle at 35% 35%,#fff,#8fe0b0)}#breath.refill i:not(.on){animation:brIn .9s ease-in-out infinite}@keyframes brIn{50%{transform:scale(1.18)}}
 #hint{left:12px;bottom:12px;font-family:var(--hand);font-size:1rem;color:#fff;text-shadow:0 2px 0 rgba(59,44,34,.7);pointer-events:none;max-width:260px}
 /* challenge scoreboard */
 #chud{left:50%;top:calc(80px + env(safe-area-inset-top,0px));transform:translateX(-50%) rotate(-.6deg);display:flex;align-items:center;gap:10px;padding:6px 8px 6px 14px;font-weight:700;font-size:1.3rem;white-space:nowrap;border-radius:var(--r2)}
@@ -283,7 +284,45 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .is-n{display:flex;flex-direction:column;gap:8px;text-align:left}.is-n span{font-size:24px;font-weight:800}.is-n small{display:block;font-size:13px;font-weight:700;opacity:.7}
 .is-stops{list-style:none;margin:6px 0;padding:0;display:grid;gap:6px}.is-stops li{display:flex;align-items:center;gap:10px;padding:6px 12px;border-radius:14px;background:var(--sand,#fff6dc)}.is-stops li span{font-size:24px}.is-stops li b{flex:1;text-align:left}
 .isum h3{margin:10px 0 4px}.is-tr{list-style:none;margin:0;padding:0;display:grid;gap:6px}.is-tr li{display:flex;flex-direction:column;gap:2px;padding:8px 12px;border-radius:12px;background:#fff1e6;text-align:left}.jt-q{font-weight:700}.jt-a{font-weight:800;color:#1f8a5b}
+.spd{position:fixed;right:132px;bottom:calc(var(--jh,0px) + 22px + env(safe-area-inset-bottom,0px));width:150px;height:118px;border-radius:24px;background:linear-gradient(160deg,rgba(29,42,58,.92),rgba(14,22,34,.92));border:3px solid var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;padding:8px 8px 6px;box-shadow:0 8px 0 rgba(0,0,0,.18)}
+.spd svg{width:120px;height:72px}.spd b{position:absolute;top:58px;font:800 24px/1 Fredoka,system-ui,sans-serif;font-variant-numeric:tabular-nums}.spd small{position:absolute;top:84px;font:700 11px Fredoka,system-ui,sans-serif;opacity:.7}
+.spd #spdG2{position:absolute;left:10px;bottom:8px;font:800 13px Fredoka,system-ui,sans-serif;background:rgba(255,255,255,.15);border-radius:8px;padding:1px 7px}.spd #spdG2::before{content:"G"}
+.spd i{position:absolute;right:10px;bottom:8px;font:800 13px Fredoka,system-ui,sans-serif;font-style:normal;border:2px solid rgba(255,255,255,.3);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;opacity:.35}.spd i.on{opacity:1;background:#ff4d4d;border-color:#ff4d4d}
+#spdN{transform-origin:60px 70px;transition:transform .08s linear}
+.roamb{position:fixed;left:50%;top:84px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:8px 10px 8px 16px;border-radius:999px;background:#fff;border:3px solid var(--ink);box-shadow:0 6px 0 rgba(0,0,0,.15);font-size:15px;z-index:8;white-space:nowrap}
+.roamb .btn{padding:6px 14px;font-size:15px}@media(max-width:600px){.roamb b{font-size:13px;white-space:normal}.spd{bottom:170px;transform:scale(.85);transform-origin:bottom right}}
+.tp{max-width:620px}.tp h2{margin:0 0 4px}.tp-s{margin:0 0 14px;opacity:.75}.tp-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.tp-b{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border-radius:18px;border:3px solid var(--ink);background:linear-gradient(160deg,#fff,#f1e9ff);font:700 14px Fredoka,system-ui,sans-serif;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.14);transition:transform .12s}
+.tp-b b{font-size:34px;line-height:1}.tp-b:hover{transform:translateY(-3px)}.tp-b.lk{opacity:.5;filter:grayscale(.8);cursor:not-allowed}
+.mp-card{max-width:440px;text-align:center}.mp-card .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.mp-art{display:flex;justify-content:center;margin:4px 0 8px}
+.mp-sl{display:grid;grid-template-columns:repeat(2,46px);gap:4px;padding:6px;border-radius:12px;background:#e8d3a4;border:3px solid #8a5a2b}.mp-sl i{display:grid;place-items:center;width:46px;height:46px;border-radius:8px;background:rgba(255,255,255,.35);border:2px dashed #8a5a2b;font:800 18px Fredoka,system-ui,sans-serif;font-style:normal;color:#8a5a2b}
+.mp-sl i.on{background:#f3dfb0;border-style:solid;font-size:24px}.mp-sl i.hi{outline:3px solid #ffd23f;animation:mpHi 1s ease-in-out infinite}@keyframes mpHi{50%{transform:scale(1.08)}}
+.mmp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0}.mmp .mp-sl{grid-template-columns:repeat(4,34px)}.mmp .mp-sl i{width:34px;height:34px;font-size:14px}
 /* ===== intro film ===== */
+.fm-end{align-items:flex-end!important;padding-bottom:7%;background:linear-gradient(transparent 55%,rgba(0,0,0,.5))!important}.fm.ended .fm-sub{opacity:0}
+.fm-end .btn{font-size:clamp(18px,2.4vw,26px);padding:14px 34px;box-shadow:0 8px 0 rgba(0,0,0,.25),0 0 0 6px rgba(255,255,255,.35)}
+.s5{background:linear-gradient(#8fd3ff,#d9f3ff)}
+.fm-flow{position:absolute;left:50%;top:9%;transform:translateX(-50%);display:flex;align-items:center;gap:clamp(6px,1.4vw,16px)}
+.fm-st{display:flex;flex-direction:column;align-items:center;gap:4px;padding:clamp(8px,1.4vw,14px) clamp(10px,2vw,20px);border-radius:20px;background:#fff;border:4px solid #1d2a3a;box-shadow:0 6px 0 rgba(0,0,0,.18);font:800 clamp(12px,1.6vw,18px) Fredoka,system-ui,sans-serif;color:#1d2a3a;opacity:.35;transform:scale(.9);transition:.4s}
+.fm-st b{font-size:clamp(26px,4vw,46px);line-height:1}.fm-ar{font-style:normal;font:900 clamp(18px,3vw,34px) Fredoka,sans-serif;color:#1d2a3a;opacity:.5}
+.s5.on .st1{animation:fmLit .5s ease .3s forwards}.s5.on .st2{animation:fmLit .5s ease 2.2s forwards}.s5.on .st3{animation:fmLit .5s ease 4s forwards}@keyframes fmLit{to{opacity:1;transform:scale(1.06);background:#fff7c2}}
+.fm-keys{position:absolute;left:14%;bottom:27%;display:flex;flex-direction:column;align-items:center;gap:6px}.fm-kr{display:flex;gap:6px}
+.fm-k{display:grid;place-items:center;width:clamp(40px,5.4vw,62px);height:clamp(40px,5.4vw,62px);border-radius:12px;background:linear-gradient(#fff,#e6ebf0);border:3px solid #1d2a3a;box-shadow:0 6px 0 #1d2a3a;font:800 clamp(16px,2vw,24px) Fredoka,sans-serif;color:#1d2a3a}.fm-k.wide{width:clamp(150px,18vw,220px)}
+.s5.on .fm-k[data-k=w]{animation:fmPress .5s ease 6.1s 2}.s5.on .fm-k[data-k=s]{animation:fmPress .5s ease 7.2s 1}.s5.on .fm-k[data-k=a]{animation:fmPress .5s ease 7.8s 1}.s5.on .fm-k[data-k=d]{animation:fmPress .5s ease 8.3s 1}.s5.on .fm-k[data-k=sp]{animation:fmPress .9s ease 9.3s 2}
+@keyframes fmPress{40%{transform:translateY(5px);box-shadow:0 1px 0 #1d2a3a;background:#ffd23f}}
+.fm-mini{position:absolute;right:14%;bottom:27%;width:clamp(140px,20vw,240px)}.fm-mini svg{width:100%;height:auto}
+.s5.on .fm-mini{animation:fmMini 6s ease-in-out 6s forwards}@keyframes fmMini{0%{transform:none}17%{transform:translateX(30px)}30%{transform:translateX(-10px)}40%{transform:translateX(-10px) rotate(-10deg)}50%{transform:translateX(-10px) rotate(10deg)}60%{transform:translateX(40px)}72%{transform:translateX(60px) rotate(-18deg)}100%{transform:translateX(60px) rotate(-18deg)}}
+.fm-skid{position:absolute;left:-10%;bottom:4%;width:60%;height:8px;border-radius:6px;background:repeating-linear-gradient(90deg,#444 0 10px,transparent 10px 16px);opacity:0}.s5.on .fm-skid{animation:fmSkid 1s ease 9.4s forwards}@keyframes fmSkid{to{opacity:.6}}
+.s6{background:radial-gradient(90% 80% at 50% 50%,#ffe9b8,#d9a85a)}
+.fm-pcs{position:absolute;left:50%;top:46%;width:clamp(220px,34vmin,380px);aspect-ratio:1;transform:translate(-50%,-50%)}
+.fm-pc{position:absolute;width:50%;height:50%;background:#f3dfb0;border:4px solid #8a5a2b;display:grid;place-items:center;font-size:clamp(26px,5vmin,50px);opacity:0}
+.fm-pc em{font-style:normal}.fm-pc.p0{left:0;top:0;border-radius:14px 0 0 0;--fx:-160%;--fy:-120%}.fm-pc.p1{right:0;top:0;border-radius:0 14px 0 0;--fx:160%;--fy:-120%}.fm-pc.p2{left:0;bottom:0;border-radius:0 0 0 14px;--fx:-160%;--fy:120%}.fm-pc.p3{right:0;bottom:0;border-radius:0 0 14px 0;--fx:160%;--fy:120%}
+.s6.on .fm-pc{animation:fmPc .9s cubic-bezier(.3,1.4,.5,1) forwards;animation-delay:calc(.4s + var(--k)*.8s)}@keyframes fmPc{from{opacity:0;transform:translate(var(--fx),var(--fy)) rotate(25deg)}to{opacity:1;transform:none}}
+.fm-trail{position:absolute;inset:0;width:100%;height:100%;opacity:0}.s6.on .fm-trail{animation:fmLit2 .8s ease 7s forwards}
+.fm-x{position:absolute;right:20%;top:14%;font:900 clamp(34px,7vmin,70px) Fredoka,sans-serif;font-style:normal;color:#d62828;opacity:0;transform:scale(3)}.s6.on .fm-x{animation:fmX .6s cubic-bezier(.3,1.6,.5,1) 7.6s forwards}@keyframes fmX{to{opacity:1;transform:scale(1)}}@keyframes fmLit2{to{opacity:1}}
+.fm-chal{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);display:flex;gap:18px}.fm-chal span{font-size:clamp(28px,5vmin,52px);opacity:0}.s6.on .fm-chal span{animation:fmPop .5s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(4.2s + var(--i)*.4s)}@keyframes fmPop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
+@media(max-width:640px){.fm-keys{left:4%;transform:scale(.8);transform-origin:bottom left}.fm-mini{right:4%}.fm-flow{top:6%}}
+
 .introp.fmw{padding:0}
 #intro{padding:0;background:#0d1b2a}
 .fm{position:relative;width:100%;height:100%;display:flex;flex-direction:column;color:#fff}
@@ -348,8 +387,8 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .fm-road{position:absolute;left:0;right:0;bottom:0;height:16%;background:#6b6f76;overflow:hidden}.fm-road i{position:absolute;left:0;width:300%;top:45%;height:8px;background:repeating-linear-gradient(90deg,#ffe36b 0 60px,transparent 60px 120px)}
 .s2.on .fm-road i{animation:fmPan 2s linear infinite}
 .fm-car{position:absolute;left:-30%;bottom:9%;width:clamp(150px,30vmin,320px);height:auto;filter:drop-shadow(0 8px 0 rgba(0,0,0,.2))}
-.s2.on .fm-car{animation:fmDrive 7s cubic-bezier(.4,0,.3,1) forwards,fmBump .35s ease-in-out infinite}@keyframes fmDrive{0%{left:-30%}45%{left:30%}100%{left:62%}}@keyframes fmBump{50%{margin-bottom:3px}}
-.fm-wh{transform-origin:44px 54px}.s2.on .fm-wh{animation:fmSpin .35s linear infinite}@keyframes fmSpin{to{transform:rotate(360deg)}}
+.s2.on .fm-car{animation:fmDrive 6.5s cubic-bezier(.25,.1,.25,1) forwards,fmBump .4s ease-in-out 0s 14}@keyframes fmDrive{0%{left:-30%}100%{left:58%}}@keyframes fmBump{50%{margin-bottom:3px}}
+.fm-wh,.fm-mw{transform-box:fill-box;transform-origin:50% 50%}.s2.on .fm-wh{animation:fmSpin .4s linear 0s 10,fmSpin .9s linear 4s 3}@keyframes fmSpin{to{transform:rotate(360deg)}}
 .fm-dust{position:absolute;left:28%;bottom:10%}.fm-dust i{position:absolute;width:3vmin;height:3vmin;border-radius:50%;background:rgba(255,255,255,.8);opacity:0}.s2.on .fm-dust i{animation:fmDust 1s ease-out infinite}.fm-dust i:nth-child(2){animation-delay:.33s!important}.fm-dust i:nth-child(3){animation-delay:.66s!important}
 @keyframes fmDust{0%{opacity:.8;transform:translate(0,0) scale(.5)}100%{opacity:0;transform:translate(-80px,-30px) scale(1.6)}}
 /* chapter 4: the prize */
@@ -363,7 +402,7 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .s3.on .fm-gifts span{animation:fmDrop 1s cubic-bezier(.5,0,.5,1.4) forwards;animation-delay:calc(2s + var(--i)*.25s)}@keyframes fmDrop{to{transform:none}}
 .fm-fw{position:absolute;width:0;height:0}.fm-fw i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--c);opacity:0}
 .s3.on .fm-fw i{animation:fmBurst 1.6s ease-out infinite;animation-delay:calc(1.2s + var(--k)*.5s)}@keyframes fmBurst{0%{opacity:1;transform:rotate(var(--a)) translateX(0)}100%{opacity:0;transform:rotate(var(--a)) translateX(16vmin)}}
-/* chapter 5: the Rainbow Crown under the sea */
+/* chapter 5: the Starlight Crown under the sea */
 .fm-deep{position:absolute;inset:0;background:linear-gradient(#2fb4e0,#0b5d8f 55%,#06304f)}
 .fm-rays i{position:absolute;top:-10%;width:12%;height:90%;background:linear-gradient(rgba(255,255,255,.35),transparent);transform-origin:top;filter:blur(2px)}
 .fm-rays i:nth-child(1){left:12%;transform:rotate(14deg)}.fm-rays i:nth-child(2){left:36%;transform:rotate(6deg)}.fm-rays i:nth-child(3){left:58%;transform:rotate(-6deg)}.fm-rays i:nth-child(4){left:80%;transform:rotate(-14deg)}
@@ -484,10 +523,12 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 <button class="hud rbtn" id="jump" hidden aria-label="Jump" data-ic="up" data-s="40"><span>Jump</span></button>
 <button class="hud rbtn" id="dive" hidden aria-label="Dive" data-ic="dive" data-s="34"><span>Dive</span></button>
 <button class="hud rbtn" id="dance" aria-label="Dance" data-ic="note" data-s="32"></button>
+<button class="hud rbtn" id="tele" aria-label="Teleport"><b>✨</b><span>Teleport</span><span class="key">T</span></button>
 <button class="hud rbtn" id="ride" aria-label="Ride a car or a boat"><b></b><span>Car</span><span class="key">R</span></button>
-<button class="hud rbtn" id="drift" hidden aria-label="Drift: hold it down while you turn" data-ic="drift" data-s="42"><span>Drift</span><span class="key">Space</span></button>
-<div class="hud" id="speedo" hidden aria-hidden="true"><svg viewBox="0 0 100 56"><defs><linearGradient id="spg" x1="0" x2="1"><stop offset="0" stop-color="#8fd6a9"/><stop offset=".55" stop-color="#ffd15c"/><stop offset="1" stop-color="#ff8a76"/></linearGradient></defs><path d="M12 50A38 38 0 0 1 88 50" fill="none" stroke="#3b2c22" stroke-width="13" stroke-linecap="round"/><path d="M12 50A38 38 0 0 1 88 50" fill="none" stroke="url(#spg)" stroke-width="8" stroke-linecap="round"/></svg><i></i></div>
-<div class="hud" id="hint">Arrows or WASD to move · In a ride: W go, S brake and back, A D steer · Space jump or drift · Q dive · R car or boat · E play</div>
+<button class="hud rbtn" id="drift" hidden aria-label="Handbrake: hold to stop, steer to drift" data-ic="drift" data-s="42"><span>Brake</span><span class="key">Space</span></button>
+<div class="hud spd" id="gauge" hidden aria-hidden="true"><svg viewBox="0 0 120 80"><path d="M14 70 A48 48 0 0 1 106 70" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="9" stroke-linecap="round"/><path id="spdArc" d="M14 70 A48 48 0 0 1 106 70" fill="none" stroke="url(#spdG)" stroke-width="9" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/><defs><linearGradient id="spdG"><stop offset="0" stop-color="#7bd389"/><stop offset=".6" stop-color="#ffd23f"/><stop offset="1" stop-color="#ff6b6b"/></linearGradient></defs><line id="spdN" x1="60" y1="70" x2="60" y2="28" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="70" r="6" fill="#fff"/></svg><b id="spdV">0</b><small>km/h</small><i id="spdHB">P</i></div>
+<div class="hud roamb" id="roamb" hidden><span>🔒</span><b>Play 1 game to explore freely today</b><button class="btn go" id="roamGo">🎮 Go</button></div>
+<div class="hud" id="hint">Arrows or WASD to move · In a ride: W go, S back, A D steer, Space handbrake (steer to drift) · Q dive · R car or boat · E play</div>
 <div id="bub" hidden></div>
 <div id="banner"></div>
 <div id="toast" role="status"></div>
@@ -577,6 +618,7 @@ const ITEMS=[
  {id:'b-pip',cat:'buddy',name:'Pip',icon:'🐰',stars:0,desc:'Leafy bunny'},{id:'b-cloud',cat:'buddy',name:'Cloud',icon:'☁️',stars:150,desc:'Sleepy cloud bunny'},{id:'b-fox',cat:'buddy',name:'Fox',icon:'🦊',stars:30,desc:'Cosy little fox'},
  {id:'r-car-red',cat:'car',name:'Red racer',icon:'🚗',price:0,col:'#ff5a5a'},{id:'r-car-blue',cat:'car',name:'Blue buggy',icon:'🚙',price:90,col:'#4f9bff'},{id:'r-car-jeep',cat:'car',name:'Jungle jeep',icon:'🛻',price:180,col:'#7bb35a',style:'jeep'},
  {id:'r-car-ice',cat:'car',name:'Ice-cream van',icon:'🍦',price:280,col:'#ffd6ea',style:'ice'},{id:'r-car-star',cat:'car',name:'Star racer',icon:'🏎️',gems:8,col:'#ffd23f',style:'star'},
+ {id:'r-pony',cat:'car',name:'Pony',icon:'🐴',price:150,col:'#c98b5a',style:'pony',mane:'#5a3b24'},{id:'r-horse',cat:'car',name:'Horse',icon:'🐎',price:320,col:'#6b4a33',style:'horse',mane:'#2b1d14'},{id:'r-unicorn',cat:'car',name:'Unicorn',icon:'🦄',gems:10,col:'#ffffff',style:'unicorn',mane:'rainbow'},
  {id:'r-boat-row',cat:'boat',name:'Rowing boat',icon:'🚣',price:0,col:'#c48a52'},{id:'r-boat-blue',cat:'boat',name:'Sky boat',icon:'⛵',price:120,col:'#7cc8ff'},{id:'r-boat-duck',cat:'boat',name:'Duck boat',icon:'🦆',price:220,col:'#ffd23f',style:'duck'},
  {id:'r-boat-swan',cat:'boat',name:'Swan boat',icon:'🦢',gems:6,col:'#ffffff',style:'swan'},
  {id:'h-none',cat:'hat',name:'No hat',icon:'🙂',price:0},{id:'h-party',cat:'hat',name:'Party hat',icon:'🥳',price:30},{id:'h-flower',cat:'hat',name:'Flower crown',icon:'🌸',price:45},
@@ -598,7 +640,7 @@ const ITEMS=[
  {id:'d-fountain',cat:'decor',name:'Fountain',icon:'⛲',price:180},{id:'d-rainbow',cat:'decor',name:'Rainbow arch',icon:'🌈',price:240},
  {id:'d-trophy',cat:'decor',name:'Star trophy',icon:'🏆',price:0,special:'Finish the journey to win this!'}];
 const ITEM=Object.fromEntries(ITEMS.map(x=>[x.id,x]));
-const CATS=[['buddy','Friends','🐰'],['hat','Hats','🎩'],['car','Cars','🚗'],['boat','Boats','🚣'],['pet','Pets','🦋'],['trail','Trails','✨'],['gear','Gear','🤿'],['home','Home','🏡'],['decor','Garden','🌷']];
+const CATS=[['buddy','Friends','🐰'],['hat','Hats','🎩'],['car','Rides','🚗'],['boat','Boats','🚣'],['pet','Pets','🦋'],['trail','Trails','✨'],['gear','Gear','🤿'],['home','Home','🏡'],['decor','Garden','🌷']];
 const ZONE_PRIZE=['h-party','p-butterfly','g-float','t-bubble','h-flower','h-beanie','t-leaf','h-crown'];
 const DECOR_SLOT={'d-flowers':0,'d-balloons':1,'d-swing':2,'d-windmill':3,'d-snowman':4,'d-pool':5,'d-fountain':6,'d-trophy':7};
 /* ================= play styles =================
@@ -653,7 +695,7 @@ const STICKERS=[
  ...ZONES.map((Z,i)=>['z-'+Z.id,Z.name,Z.icon,'places']),
  ...ZONES.map((Z,i)=>['b-'+Z.id,'All '+Z.name+' babies home','💞','babies']),
  ['x-three','First 3 stars','⭐','badges'],['x-ten','Ten 3-star games','🌟','badges'],['x-swim','Swimmer','🏊','badges'],['x-dive','Deep diver','🤿','badges'],['x-jump','Super jumper','🦘','badges'],
- ['x-chest','Treasure hunter','💰','badges'],['x-drive','Little driver','🚗','badges'],['x-row','Rowing star','🚣','badges'],['x-shop','Dress up','👗','badges'],['x-quest','Quest hero','📜','badges'],['x-week','7 days of gifts','📅','badges'],['x-journey','Journey done','🏆','badges'],['x-onepiece','Rainbow Crown Treasure','👑','badges']];
+ ['x-chest','Treasure hunter','💰','badges'],['x-drive','Little driver','🚗','badges'],['x-row','Rowing star','🚣','badges'],['x-shop','Dress up','👗','badges'],['x-quest','Quest hero','📜','badges'],['x-week','7 days of gifts','📅','badges'],['x-journey','Journey done','🏆','badges'],['x-onepiece','Lost Starlight Crown','👑','badges']];
 const STK=Object.fromEntries(STICKERS.map(s=>[s[0],s]));
 const STK_CATS=[['friends','Friends'],['sea','Sea life'],['places','Places'],['babies','Babies'],['badges','Badges']];
 
@@ -903,6 +945,12 @@ const SFX={
 const GENTLE={boing(){tone(240,.4,{type:'sine',slide:360,vol:.08,att:.05})},wrong(){tone(330,.35,{type:'sine',slide:300,vol:.05,att:.05})},fanfare(){SFX.chime()},firework(){},pop(){SFX.tick()},bonk(){SFX.tick()},
  splash(){noiseHit(.5,600,{vol:.06,q:.4,lp:1})},level(){SFX.chime()},magic(){SFX.chime()},chest(){SFX.chime()},jump(){tone(330,.18,{type:'sine',slide:440,vol:.06})},land(){},horn(){tone(440,.25,{type:'sine',vol:.06})},
  star(n){const s=[523,659,784];for(let i=0;i<Math.min(3,n||3);i++)tone(s[i],.5,{type:'sine',vol:.06,when:i*.2,att:.04})},baa(v){tone(370,.6,{type:'sine',vol:.03*(v==null?1:v),slide:330,att:.08})},plank(){SFX.tick()},quack(){tone(520,.12,{type:'sine',vol:.04,slide:420})},boost(){tone(440,.4,{type:'sine',vol:.05,slide:660,att:.05})},coin(){tone(1046,.18,{type:'sine',vol:.05})},peep(v){tone(1800,.08,{slide:2200,vol:.025*(v==null?1:v)})},whoosh(){noiseHit(.6,500,{vol:.05,q:.3,lp:1})}};
+/* real horns: a two-note car horn, a deep boat horn, and a pony neigh */
+function honk(){auInit();if(!AU.ctx||!PL)return;const c=AU.ctx,t=c.currentTime,v=Math.max(.35,MODE().snd||1),out=c.createGain();out.gain.value=1;out.connect(AU.sfx);
+ const pony=PL.veh&&PL.veh.userData.pony,boat=PL.vk==='boat';
+ if(pony){const o=c.createOscillator(),l=c.createOscillator(),lg=c.createGain(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(700,t);o.frequency.linearRampToValueAtTime(980,t+.15);o.frequency.exponentialRampToValueAtTime(420,t+.8);l.frequency.value=22;lg.gain.value=60;l.connect(lg);lg.connect(o.frequency);const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=1100;f.Q.value=1.4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16*v,t+.05);g.gain.exponentialRampToValueAtTime(.0001,t+.85);o.connect(f);f.connect(g);g.connect(out);o.start(t);l.start(t);o.stop(t+.9);l.stop(t+.9);say('Neigh! 🐴',1200);return}
+ const fr=boat?[98,147]:[392,494],dur=boat?1.1:.42;fr.forEach(hz=>{[0,4].forEach(dt=>{const o=c.createOscillator(),g=c.createGain();o.type=boat?'sawtooth':'square';o.frequency.value=hz+dt;const f=c.createBiquadFilter();f.type='lowpass';f.frequency.value=boat?700:2200;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime((boat?.11:.07)*v,t+.03);g.gain.setValueAtTime((boat?.11:.07)*v,t+dur-.08);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(f);f.connect(g);g.connect(out);o.start(t);o.stop(t+dur+.02)})});
+ say(boat?'Toot toot! 🚢':'Beep beep! 🚗',1200)}
 function sfx(n,a){try{if(MODE().gentle&&GENTLE[n])return GENTLE[n](a);SFX[n]&&SFX[n](a)}catch(e){}}
 /* soft background tune: C-G-Am-F, pentatonic plucks */
 const MUS_CH=[[48,55,64],[43,55,62],[45,52,60],[41,53,60]],MUS_MEL=[76,74,72,74,76,79,76,74,72,69,72,74,72,67,69,72];
@@ -2107,6 +2155,30 @@ function carMesh(it){
  const seatG=new T.Group();seatG.position.set(-.34,.9,-.25);b.add(seatG);
  g.userData={b,wheels,steer,swr,seat:seatG,kind:'car'};return shadowed(g,true,false);
 }
+
+/* ponies, horses and unicorns: ridden like the car, with trotting legs, a nodding head and hoof sounds */
+function ponyMesh(it){
+ const g=new T.Group(),b=new T.Group();g.add(b);const st=it.style,sc=st==='horse'?1.12:st==='unicorn'?1.05:.9,col=it.col,M=c=>std(c,{roughness:.55}),body=M(col),dark=M('#2b2b33');
+ const RB=['#ff6b6b','#ffb84d','#ffe066','#7bd389','#5aa8ff','#b388ff'],mc=i=>it.mane==='rainbow'?RB[i%RB.length]:it.mane;
+ b.scale.setScalar(sc);
+ const tr=add(new T.SphereGeometry(1,22,16),body,0,1.25,0,b);tr.scale.set(.52,.56,1.08);
+ const neck=add(new T.CylinderGeometry(.2,.32,1.05,14),body,0,1.78,.86,b);neck.rotation.x=.62;
+ const hd=new T.Group();hd.position.set(0,2.2,1.2);b.add(hd);
+ const sk=add(new T.SphereGeometry(1,18,14),body,0,0,0,hd);sk.scale.set(.25,.27,.42);sk.rotation.x=.45;
+ add(new T.SphereGeometry(.19,14,10),M(st==='unicorn'?'#ffe1ef':'#e8c9a8'),0,-.14,.36,hd).scale.set(1,.85,1.05);
+ [-1,1].forEach(s=>{add(new T.SphereGeometry(.055,10,8),dark,s*.17,.06,.2,hd);add(new T.SphereGeometry(.02,6,5),basic('#fff'),s*.18,.08,.25,hd);const e=add(new T.ConeGeometry(.07,.2,8),body,s*.1,.3,-.06,hd);e.rotation.z=-s*.25;add(new T.SphereGeometry(.025,6,5),dark,s*.06,-.2,.52,hd)});
+ if(st==='unicorn'){const h=add(new T.ConeGeometry(.055,.46,12),std('#ffd23f',{metalness:.5,roughness:.25,emissive:0x553300,emissiveIntensity:.3}),0,.38,.16,hd);h.rotation.x=.5}
+ for(let i=0;i<9;i++){const t=i/8;add(new T.SphereGeometry(.12-.03*t,10,8),M(mc(i)),0,2.4-t*.75+(i%2)*.04,1.06-t*.62,b)}
+ const tl=new T.CatmullRomCurve3([new T.Vector3(0,1.42,-1.02),new T.Vector3(0,1.3,-1.32),new T.Vector3(0,.95,-1.42),new T.Vector3(0,.62,-1.3)]);
+ if(it.mane==='rainbow')RB.forEach((c,i)=>add(new T.TubeGeometry(tl,12,.05,6),M(c),(i-2.5)*.04,0,0,b));else add(new T.TubeGeometry(tl,12,.13,8),M(it.mane),0,0,0,b);
+ add(new T.CylinderGeometry(.5,.5,.12,18,1,false,0,Math.PI),M('#c0392b'),0,1.76,-.08,b).rotation.set(0,Math.PI/2,Math.PI/2);
+ add(new T.BoxGeometry(.66,.05,.6),M('#7a2a20'),0,1.8,-.08,b);[-1,1].forEach(s=>{add(new T.BoxGeometry(.02,.4,.02),dark,s*.5,1.5,-.05,b);add(new T.TorusGeometry(.07,.02,6,12),std('#c8ccd2',{metalness:.7,roughness:.3}),s*.5,1.28,-.05,b)});
+ const legs=[[-.3,.68,0],[.3,.68,Math.PI],[-.3,-.66,Math.PI],[.3,-.66,0]].map(([x,z,ph])=>{const up=new T.Group();up.position.set(x,1.05,z);b.add(up);add(new T.CylinderGeometry(.12,.1,.5,10),body,0,-.25,0,up);
+  const lo=new T.Group();lo.position.y=-.5;up.add(lo);add(new T.CylinderGeometry(.09,.08,.48,10),body,0,-.24,0,lo);add(new T.CylinderGeometry(.11,.12,.1,10),dark,0,-.5,0,lo);return{up,lo,ph}});
+ const seatG=new T.Group();seatG.position.set(0,1.88,-.1);b.add(seatG);
+ g.userData={b,wheels:[],steer:[],seat:seatG,kind:'car',pony:true,legs,hd,sc};return shadowed(g,true,false);
+}
+function hoof(){if(!AU.ctx||!MODE().snd)return;const c=AU.ctx,o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.type='triangle';o.frequency.setValueAtTime(380,t);o.frequency.exponentialRampToValueAtTime(110,t+.06);g.gain.setValueAtTime(.09*MODE().snd,t);g.gain.exponentialRampToValueAtTime(.001,t+.08);o.connect(g);g.connect(AU.sfx);o.start(t);o.stop(t+.09)}
 /* a real hull: round-bilge sections from the stern to a sharp bow, waterline paint and a transom */
 function hullGeo(L,B,keel,sheer,col,bot){const N=26,M=16,pos=[],cl=[],idx=[],c1=new T.Color(col),c2=new T.Color(bot),c3=new T.Color('#ffffff'),ring=[];
  for(let i=0;i<=N;i++){const t=i/N*2-1,z=t*L/2,w=t>0?B/2*Math.pow(Math.max(0,1-t*t),.6):B/2*(1-.3*t*t),ky=keel+(t>0?.4*Math.pow(t,3):.06*t*t),sh=sheer+(t>0?.24*t*t:.08*t*t);
@@ -2136,8 +2208,16 @@ function rideBoatMesh(it){
 }
 function updSkid(v){if(!AU.ctx||!AU.noise)return;if(!AU.skid&&v>0){const c=AU.ctx,s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=AU.noise;s.loop=true;f.type='bandpass';f.frequency.value=1300;f.Q.value=.8;g.gain.value=0;s.connect(f);f.connect(g);g.connect(AU.sfx);s.start();AU.skid={g,f}}
  if(AU.skid){AU.skid.g.gain.value+=(v*MODE().snd-AU.skid.g.gain.value)*.2}}
-function updEngine(on,sp){if(!AU.ctx)return;if(on&&!AU.eng){const c=AU.ctx,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.value=60;f.type='lowpass';f.frequency.value=320;g.gain.value=0;o.connect(f);f.connect(g);g.connect(AU.sfx);o.start();AU.eng={o,g}}
- if(AU.eng){const t=on?(.012+sp*.0028)*MODE().snd:0;AU.eng.g.gain.value+=(t-AU.eng.g.gain.value)*.15;AU.eng.o.frequency.value=55+sp*7}}
+/* engine: two oscillators with a filter that opens with the revs, gears that drop the pitch as you speed up, and tyre squeal when sliding or on the handbrake */
+function updEngine(on,sp,slip,hb){if(!AU.ctx)return;const c=AU.ctx;
+ if(on&&!AU.eng){const o1=c.createOscillator(),o2=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o1.type='sawtooth';o2.type='square';o1.frequency.value=55;o2.frequency.value=27;f.type='lowpass';f.frequency.value=380;f.Q.value=3;g.gain.value=0;o1.connect(f);o2.connect(f);f.connect(g);g.connect(AU.sfx);o1.start();o2.start();
+  const nb=c.createBuffer(1,c.sampleRate,c.sampleRate),d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=c.createBufferSource();n.buffer=nb;n.loop=true;const nf=c.createBiquadFilter();nf.type='bandpass';nf.frequency.value=2300;nf.Q.value=6;const ng=c.createGain();ng.gain.value=0;n.connect(nf);nf.connect(ng);ng.connect(AU.sfx);n.start();AU.eng={o1,o2,f,g,ng}}
+ if(!AU.eng)return;const E=AU.eng,vol=MODE().snd;
+ if(!on){E.g.gain.value+=(0-E.g.gain.value)*.2;E.ng.gain.value*=.8;return}
+ const gear=Math.min(4,Math.floor(sp/3.4)),rpm=(sp-gear*3.4)/3.4,hz=48+rpm*70+gear*10+(sp<.2?Math.sin(TIME*30)*2:0);
+ E.o1.frequency.value+=(hz-E.o1.frequency.value)*.25;E.o2.frequency.value=E.o1.frequency.value/2;E.f.frequency.value=300+rpm*900+gear*120;
+ const tg=(.035+Math.min(1,sp/10)*.045)*vol;E.g.gain.value+=(tg-E.g.gain.value)*.15;
+ const sq=(hb||(slip>.22&&sp>3))?Math.min(.06,(.02+slip*.08))*vol:0;E.ng.gain.value+=(sq-E.ng.gain.value)*.25}
 
 /* ================= player: walking, swimming, diving, driving, rowing ================= */
 /* footprints in sand and snow, tyre tracks behind the car; they slowly fade */
@@ -2173,9 +2253,9 @@ function dressUp(){
 function setVehicle(k,quiet){
  if(PL.veh){scene.remove(PL.veh);PL.veh=null}
  if(!k){PL.vk=null;if(PL.g.parent!==scene){scene.add(PL.g)}PL.g.scale.setScalar(1);PL.g.position.set(PL.x,PL.y,PL.z);PL.g.rotation.set(0,PL.face,0);updEngine(false,0);return}
- const it=ITEM[S.equip[k]]||ITEM[k==='car'?'r-car-red':'r-boat-row'];PL.veh=k==='car'?carMesh(it):rideBoatMesh(it);scene.add(PL.veh);PL.vk=k;PL.head=PL.face;
+ const it=ITEM[S.equip[k]]||ITEM[k==='car'?'r-car-red':'r-boat-row'];PL.veh=k==='car'?(/pony|horse|unicorn/.test(it.style||'')?ponyMesh(it):carMesh(it)):rideBoatMesh(it);scene.add(PL.veh);PL.vk=k;PL.head=PL.face;
  PL.veh.userData.seat.add(PL.g);PL.g.position.set(0,0,0);PL.g.rotation.set(0,0,0);PL.g.scale.setScalar(.72);PL.veh.position.set(PL.x,PL.y,PL.z);PL.veh.rotation.y=PL.head;
- if(!quiet){sfx(k==='car'?'horn':'splash');puff(PL.x,PL.y+.6,PL.z)}
+ if(!quiet){if(k==='car')honk();else sfx('splash');puff(PL.x,PL.y+.6,PL.z)}
 }
 function puff(x,y,z){const t=trailTex('t-sparkle'),n=Math.round(10*MODE().fx)+3;for(let i=0;i<n;i++){const a=i/n*TAU;particle(t,x,y,z,{vx:Math.cos(a)*2,vz:Math.sin(a)*2,vy:rand(.5,2),life:.7,s:.6,s1:.2,col:'#ffffff',add:true})}}
 function toggleRide(){if(!PL||PL.frozen||CH)return;auInit();
@@ -2201,11 +2281,22 @@ function stopWalking(){if(PL){PL.walk=null;PL.tap=null}}
 function walkToStop(i){if(!PL)return;PL.tap=null;PL.walk={target:W.stopIdx[i],stop:i,phase:'join'};PL.lastIdx=nearestIdx(PL.x,PL.z);jcard(true)}
 function teleport(x,z,face){if(PL.vk)setVehicle(null);PL.walk=null;PL.tap=null;PL.x=x;PL.z=z;const h=terrainH(x,z);PL.mode=h<Y_W-.7?'swim':'ground';PL.y=PL.mode==='swim'?SWIM_Y:Math.max(0,h);PL.vy=0;PL.vx=PL.vz=0;PL.vs=0;if(face!=null)PL.face=face;PL.trailHist.length=0;PL.lastIdx=nearestIdx(x,z);
  PL.g.position.set(PL.x,PL.y,PL.z);CAM.pos.set(x+Math.sin(CAM.yaw)*10,8,z+Math.cos(CAM.yaw)*10);CAM.look.set(x,1.5,z);tapMark(x,z);rideBtn()}
+
+/* ---- play one game a day before exploring freely; the speedometer while driving ---- */
+const dayKey=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
+const roamOK=()=>S.roamDay===dayKey()||QS.get('demo')==='1';
+let roamT=0;function roamNudge(){const n=performance.now();if(n-roamT<4500)return;roamT=n;toast('🎮 Play one game first. Then you can explore anywhere today!',3800);try{sfx('tick')}catch(e){}}
+function updHudExtra(){const P=PL;if(!P)return;
+ const rb=$('#roamb');if(rb){const show=!roamOK()&&!modalOpen()&&!CH;if(rb.hidden===show)rb.hidden=!show}
+ const sp=$('#gauge');if(!sp)return;const on=P.vk==='car'&&P.veh&&!P.veh.userData.pony&&!CH;if(sp.hidden===on)sp.hidden=!on;if(!on)return;
+ const v=Math.abs(P.vs),kmh=Math.round(v*9),f=Math.min(1,v/14);$('#spdV').textContent=kmh;$('#spdN').style.transform=`rotate(${-90+f*180}deg)`;$('#spdArc').setAttribute('stroke-dasharray',`${(f*100).toFixed(1)} 100`);$('#spdHB').classList.toggle('on',!!INPUT.drift)}
 function updatePlayer(dt){
  const P=PL,calm=REDUCED||MODE().gentle;let mx=0,mz=0,auto=false;
  const k=INPUT.keys,f=((k.w||k.arrowup)?1:0)-((k.s||k.arrowdown)?1:0)-INPUT.joy.y,r=((k.d||k.arrowright)?1:0)-((k.a||k.arrowleft)?1:0)+INPUT.joy.x;
  const locked=P.frozen||CAM.ovr||modalOpen()||(CH&&CH.runner);
- if(!locked&&(Math.abs(f)>.08||Math.abs(r)>.08)){stopWalking();const sy=Math.sin(CAM.yaw),cy=Math.cos(CAM.yaw);mx=-sy*f+cy*r;mz=-cy*f-sy*r;const l=Math.hypot(mx,mz);if(l>1){mx/=l;mz/=l}}
+ updHudExtra();
+ if(!locked&&(Math.abs(f)>.08||Math.abs(r)>.08)&&!roamOK())roamNudge();
+ else if(!locked&&(Math.abs(f)>.08||Math.abs(r)>.08)){stopWalking();const sy=Math.sin(CAM.yaw),cy=Math.cos(CAM.yaw);mx=-sy*f+cy*r;mz=-cy*f-sy*r;const l=Math.hypot(mx,mz);if(l>1){mx/=l;mz/=l}}
  else if(!locked&&P.walk){auto=true;const Pp=W.path,w=P.walk;
   if(w.phase==='join'&&Math.hypot(P.x-GARDEN.c[0],P.z-GARDEN.c[1])<GARDEN.r+.3&&!w.gate){w.gate=[GARDEN.c[0]+Math.cos(GARDEN.open)*(GARDEN.r+1.6),GARDEN.c[1]+Math.sin(GARDEN.open)*(GARDEN.r+1.6)];P.lastIdx=nearestIdx(w.gate[0],w.gate[1])}
   if(w.phase==='join'){const j=w.gate||Pp[P.lastIdx],dx=j[0]-P.x,dz=j[1]-P.z,d=Math.hypot(dx,dz);
@@ -2231,6 +2322,8 @@ function updatePlayer(dt){
    a=accMax*Math.max(0,1-P.vs/Math.max(cap,.1))*(al>-.2?1:.4);if(P.vs>cap)a-=(P.vs-cap)*(car?2.2:.9)}
   else a-=Math.sign(P.vs)*(car?(dr?.6:2.6):.45);
   a-=Math.sign(P.vs)*(car?(.3+.012*P.vs*P.vs):(.18+.02*P.vs*P.vs));
+  /* Space is the handbrake: it locks the back wheels, so the car slows hard and slides if you steer */
+  if(!auto&&!locked&&INPUT.drift){const bf=car?8.5:3.2;a=-Math.sign(P.vs)*Math.min(bf,Math.abs(P.vs)/Math.max(dt,1e-3))}
   if(car)a-=9.8*Math.sin(P.pitchS||0)*.65;
   const v0=P.vs;let nv=P.vs+a*dt;if(!man||Math.abs(thr)<=.05){if(v0>=0&&nv<0||v0<=0&&nv>0)nv=0;if(!man)nv=Math.max(0,nv)}if(Math.abs(nv)<.03&&Math.abs(thr)<=.05)nv=0;P.vs=nv;P.along=(P.vs-v0)/Math.max(dt,1e-3);
   if(auto){const turn=8;P.head+=clamp(e,-turn*dt,turn*dt);P.stA=clamp(e,-.55,.55);yaw=(P.head-(P._ph??P.head))/Math.max(dt,1e-3)}
@@ -2270,21 +2363,25 @@ function updatePlayer(dt){
   if(Y_W-fh<.65){P.mode='ground';P.y=fh;sfx('step');rideBtn()}
   else{const tgt=SWIM_Y+(calm?0:Math.sin(TIME*2.4)*.05);P.y=P.y<tgt-.05?Math.min(tgt,P.y+dt*3):tgt;
    if(wantJump&&P.y>SWIM_Y-.2){P.vy=6.8;P.mode='air';sfx('jump');S.stats.jumps++;questAdd('jump',1)}
-   else if(wantDive&&Y_W-fh>1.5){P.mode='dive';P.diveT=DIVE_T();sfx('bubble');S.stats.dives++;questAdd('dive',1);splash(P.x,P.z,false);if(S.stats.dives>=10)giveSticker('x-dive')}
+   else if(wantDive&&Y_W-fh>1.5&&(P.air==null||P.air>=1.5)){P.mode='dive';if(P.air==null)P.air=DIVE_T();P.diveT=P.air;sfx('bubble');S.stats.dives++;questAdd('dive',1);splash(P.x,P.z,false);if(S.stats.dives>=10)giveSticker('x-dive')}
+   else if(wantDive&&Y_W-fh>1.5){say('Catch your breath first! 🫧',1600,true)}
    if(sp>.6){P.bubT-=dt;if(P.bubT<0){P.bubT=.5;sfx('swim')}}}}
- else if(P.mode==='dive'){const[fh]=floorAt(P.x,P.z,P.y,.2);P.diveT-=dt;const tgt=Math.max(fh+.35,SWIM_Y-3.1);P.y+=(tgt-P.y)*Math.min(1,dt*2.2);
+ else if(P.mode==='dive'){const[fh]=floorAt(P.x,P.z,P.y,.2);P.air=Math.max(0,(P.air==null?DIVE_T():P.air)-dt);P.diveT=P.air;const tgt=Math.max(fh+.35,SWIM_Y-3.1);P.y+=(tgt-P.y)*Math.min(1,dt*2.2);
   P.bubT-=dt;if(P.bubT<0){P.bubT=.35;particle(trailTex('t-bubble'),P.x+rand(-.2,.2),P.y+1.1,P.z+rand(-.2,.2),{vy:1.6,life:1.4,s:.22,s1:.35,col:'#ffffff',uw:1})}
-  if(P.diveT<=0||wantDive||Y_W-fh<1.2||wantJump){P.mode='swim';sfx('bubble')}}
+  if(P.diveT<=0||wantDive||Y_W-fh<1.2||wantJump){if(P.diveT<=0){say('Out of air! Swim up and breathe 🫧',2200,true)}P.mode='swim';sfx('bubble')}}
+ /* air comes back by itself whenever you are not under water: full again in about 4 seconds */
+ if(P.mode!=='dive'){const mx=DIVE_T();if(P.air==null)P.air=mx;if(P.air<mx){P.air=Math.min(mx,P.air+dt*mx/4);if(P.air>=mx)sfx('pop')}}
  breathHud();
  /* the ride */
  const u=P.g.userData,g=P.g;
  if(P.veh){const V=P.veh,vu=V.userData;V.rotation.order="YXZ";V.position.set(P.x,P.y,P.z);V.rotation.y=P.head;
-  if(vu.kind==='car'){vu.wheels.forEach(w=>{w.rotation.x+=P.vs*dt/.36});vu.steer.forEach(w=>{w.rotation.y=P.steer});if(vu.swr)vu.swr.rotation.z=-P.steer*2.4;
+  if(vu.kind==='car'){vu.wheels.forEach(w=>{w.rotation.x+=P.vs*dt/.36});
+   if(vu.pony){const sp=Math.abs(P.vs),amp=Math.min(.75,sp*.11),prev=P.gaitP||0;P.gaitP=prev+sp*dt*1.15;vu.legs.forEach(L=>{const a=Math.sin(P.gaitP*TAU*.5+L.ph);L.up.rotation.x=a*amp;L.lo.rotation.x=Math.max(0,-Math.cos(P.gaitP*TAU*.5+L.ph))*amp*1.3});vu.hd.rotation.x=Math.sin(P.gaitP*TAU)*.08*Math.min(1,sp/3);if(sp>.6&&Math.floor(P.gaitP*2)!==Math.floor(prev*2))hoof()}vu.steer.forEach(w=>{w.rotation.y=P.steer});if(vu.swr)vu.swr.rotation.z=-P.steer*2.4;
    if(P._py!=null&&Math.abs(P.vs)>.2){const run=Math.abs(P.vs)*dt,ps=clamp(Math.atan2((P.y-P._py)*Math.sign(P.vs),Math.max(run,.01)),-.4,.4);P.pitchS=(P.pitchS||0)+(ps-(P.pitchS||0))*Math.min(1,dt*6)}else if(Math.abs(P.vs)<=.2)P.pitchS=(P.pitchS||0)*.9;
    const SU=P.susp||(P.susp={r:0,rv:0,p:0,pv:0,h:0,hv:0}),rT=clamp(-(P.vs*(P.yawR||0))*.011-P.slip*.16,-.13,.13),pT=clamp(-(P.along||0)*.012,-.07,.07),k=calm?30:70,c=calm?11:7.5;
    SU.rv+=((rT-SU.r)*k-SU.rv*c)*dt;SU.r+=SU.rv*dt;SU.pv+=((pT-SU.p)*k-SU.pv*c)*dt;SU.p+=SU.pv*dt;vu.b.rotation.z=SU.r;vu.b.rotation.x=SU.p-(P.pitchS||0)*.15;V.rotation.x=-(P.pitchS||0);
    if(P.drifting){P.smT=(P.smT||0)-dt;if(P.smT<=0){P.smT=.05/Math.max(.25,MODE().fx);const c=Math.cos(P.head),s=Math.sin(P.head);[-.88,.88].forEach(lx=>{const lz=-.95;particle(trailTex('t-bubble'),P.x+lx*c+lz*s,P.y+.2,P.z-lx*s+lz*c,{vy:.6,vx:rand(-.4,.4),vz:rand(-.4,.4),life:.9,s:.45,s1:1.4,col:'#eeeae4'})})}}
-   if(P.boostT>0&&Math.random()<.5*MODE().fx)particle(trailTex('t-sparkle'),P.x-Math.sin(P.head)*1.8,P.y+.5,P.z-Math.cos(P.head)*1.8,{vy:.3,life:.4,s:.5,s1:.1,col:'#ffd15c',add:true});vu.b.position.y=calm?0:Math.abs(Math.sin(TIME*18))*.008*Math.min(1,P.vs/4)+Math.abs(SU.r)*.12;updEngine(true,Math.abs(P.vs));
+   if(P.boostT>0&&Math.random()<.5*MODE().fx)particle(trailTex('t-sparkle'),P.x-Math.sin(P.head)*1.8,P.y+.5,P.z-Math.cos(P.head)*1.8,{vy:.3,life:.4,s:.5,s1:.1,col:'#ffd15c',add:true});vu.b.position.y=calm?0:Math.abs(Math.sin(TIME*18))*.008*Math.min(1,P.vs/4)+Math.abs(SU.r)*.12+(vu.pony?Math.abs(Math.sin((P.gaitP||0)*TAU*.5))*.07*Math.min(1,Math.abs(P.vs)/3):0);updEngine(!vu.pony,Math.abs(P.vs),Math.abs(P.slip||0),!!INPUT.drift&&Math.abs(P.vs)>1.5);
    if(P.vs>3&&Math.random()<.25*MODE().fx)particle(trailTex('t-sparkle'),P.x-Math.sin(P.head)*1.7,P.y+.4,P.z-Math.cos(P.head)*1.7,{vy:.4,life:.6,s:.35,s1:.7,col:'#e8e8e8'})}
   else{updEngine(false,0);if(P.drifting&&Math.random()<.6*MODE().fx){const sd=Math.sign(P.slip)||1,c=Math.cos(P.head),s=Math.sin(P.head);particle(trailTex('t-sparkle'),P.x+sd*1.1*c,Y_W+.15,P.z-sd*1.1*s,{vx:sd*c*2.2,vz:-sd*s*2.2,vy:1.6,g:7,life:.6,s:.35,s1:.15,col:'#ffffff'})}
    vu.b.rotation.y=-P.slip*.15;P.rowP+=dt*(1.5+P.vs*.5);const st=Math.sin(P.rowP*2.4);vu.oars.forEach((o,i)=>{o.rotation.y=(i?-1:1)*st*.55;o.rotation.z=(i?-1:1)*(Math.cos(P.rowP*2.4)>0?.18:-.05)});{const wr=calm?0:Math.sin(TIME*1.3+P.x*.1)*.045,wp=calm?0:Math.sin(TIME*1.7+P.z*.1)*.03,bowUp=-Math.min(.09,P.vs*.012)-clamp((P.along||0)*.02,-.04,.05),lean=clamp(-P.vs*(P.yawR||0)*.02,-.1,.1);vu.b.rotation.z+=(wr+lean-vu.b.rotation.z)*Math.min(1,dt*3);vu.b.rotation.x+=(wp+bowUp-vu.b.rotation.x)*Math.min(1,dt*2.5)}if(vu.b.userData.sail)vu.b.userData.sail.rotation.y=-Math.PI/2+clamp(P.slip*2+(P.yawR||0)*.15,-.5,.5);
@@ -2320,9 +2417,9 @@ function updatePlayer(dt){
  const hst=P.trailHist,last=hst[hst.length-1];if(!last||Math.hypot(last[0]-P.x,last[1]-P.z)>.25){hst.push([P.x,P.z]);if(hst.length>200)hst.shift()}
  zoneVisit();
 }
-function speedo(){const e=$('#speedo');if(!e||e.hidden)return;const v=Math.round(Math.abs(PL.vs)*4)/4;if(e.dataset.v===String(v))return;e.dataset.v=v;const n=e.querySelector('i');if(n)n.style.transform=`rotate(${-90+clamp(v/14,0,1)*180}deg)`;e.classList.toggle('boost',PL.boostT>0)}
+function speedo(){return;const e=$('#speedo');if(!e||e.hidden)return;const v=Math.round(Math.abs(PL.vs)*4)/4;if(e.dataset.v===String(v))return;e.dataset.v=v;const n=e.querySelector('i');if(n)n.style.transform=`rotate(${-90+clamp(v/14,0,1)*180}deg)`;e.classList.toggle('boost',PL.boostT>0)}
 const hsl=(h,s,l)=>`hsl(${Math.round(h*360)},${Math.round(s*100)}%,${Math.round(l*100)}%)`;
-function breathHud(){const b=$('#breath');if(PL.mode==='dive'){b.hidden=false;const n=Math.ceil(PL.diveT/DIVE_T()*6);if(b.dataset.n!=String(n)){b.dataset.n=n;b.innerHTML=Array.from({length:6},(_,k)=>`<i class="${k<n?'on':''}"></i>`).join('')}}else b.hidden=true;
+function breathHud(){const b=$('#breath');if(!b||!PL)return;const mx=DIVE_T(),air=PL.air==null?mx:PL.air,isDv=PL.mode==='dive';if(isDv||air<mx-.01){b.hidden=false;b.classList.toggle('refill',!isDv);const n=Math.ceil(air/mx*6-1e-6),key=n+(isDv?'d':'r');if(b.dataset.n!==key){b.dataset.n=key;b.innerHTML=`<span class="bl">${isDv?'Air':'Breathing in…'}</span>`+Array.from({length:6},(_,k)=>`<i class="${k<n?'on':''}"></i>`).join('')}}else b.hidden=true;
  const dv=$('#dive');const show=PL.mode==='swim'||PL.mode==='dive';if(dv.hidden===show){dv.hidden=!show}dv.classList.toggle('up',PL.mode==='dive');dv.querySelector('span').textContent=PL.mode==='dive'?'Up':'Dive';
  if((PL._rb||'')!==PL.mode+PL.vk){PL._rb=PL.mode+PL.vk;rideBtn()}}
 let lastZone=-1;
@@ -2362,6 +2459,8 @@ function setupInput(){
   if((k==='q'||k==='shift'||k==='c')&&!e.repeat){INPUT.dive=true;return}
   if(k==='f'&&!e.repeat){danceNow();return}
   if(k==='r'&&!e.repeat){toggleRide();return}
+  if(k==='h'&&!e.repeat){if(PL&&PL.vk)honk();return}
+  if(k==='t'&&!e.repeat){openTeleport();return}
   if((k==='e'||k==='enter')&&!(e.target.matches&&e.target.matches('button'))){const b=$('#jplay')||$('#jgo');if(b)b.click()}
   if(k==='m')openMap();if(k==='b')openShop()});
  addEventListener('keyup',e=>{delete INPUT.keys[e.key.toLowerCase()];if(e.code==='Space'||e.key===' ')INPUT.drift=false});
@@ -2384,11 +2483,13 @@ function setupInput(){
  const btn=(id,fn)=>{const b=$(id);b.addEventListener('pointerdown',e=>{e.preventDefault();auInit();fn();b.classList.add('dn')});['pointerup','pointercancel','pointerleave'].forEach(n=>b.addEventListener(n,()=>b.classList.remove('dn')));b.addEventListener('click',e=>{if(e.detail===0)fn()})};
  btn('#jump',()=>{INPUT.jump=true});
  /* Drift is held down, like the Space bar */
+ $('#tele').onclick=()=>{auInit();openTeleport()};
+ $('#roamGo').onclick=()=>{auInit();const n=nextStop();if(stopOpen(n))walkToStop(n)};
  const dv=$('#drift');dv.addEventListener('pointerdown',e=>{e.preventDefault();auInit();INPUT.drift=true;dv.classList.add('dn');try{dv.setPointerCapture(e.pointerId)}catch(_){}});
  ['pointerup','pointercancel','lostpointercapture'].forEach(n=>dv.addEventListener(n,()=>{INPUT.drift=false;dv.classList.remove('dn')}));btn('#dive',()=>{INPUT.dive=true});btn('#dance',danceNow);btn('#ride',toggleRide);
  addEventListener('resize',onResize);
 }
-function danceNow(){if(!PL)return;if(PL.vk){sfx(PL.vk==='car'?'horn':'swim');say(PL.vk==='car'?'Beep beep!':'Splish splash!',1200);return}if(PL.dance>0)return;PL.dance=2.2;sfx('star',5);confetti(PL.x,PL.y+1.5,PL.z,16);const t=trailTex('t-note');for(let i=0;i<6;i++)particle(t,PL.x+rand(-.6,.6),PL.y+1.6,PL.z+rand(-.6,.6),{vy:1.4,vx:rand(-.5,.5),life:1.2,s:.4,s1:.2,col:'#ffffff'})}
+function danceNow(){if(!PL)return;if(PL.vk){honk();return}if(PL.dance>0)return;PL.dance=2.2;sfx('star',5);confetti(PL.x,PL.y+1.5,PL.z,16);const t=trailTex('t-note');for(let i=0;i<6;i++)particle(t,PL.x+rand(-.6,.6),PL.y+1.6,PL.z+rand(-.6,.6),{vy:1.4,vx:rand(-.5,.5),life:1.2,s:.4,s1:.2,col:'#ffffff'})}
 const RAY={rc:null,pl:null,v:null};
 function onTap(cx,cy){
  if(CAM.ovr||modalOpen()||PL.frozen)return;
@@ -2398,6 +2499,7 @@ function onTap(cx,cy){
  if(CH&&CH.tapables){const hits=RAY.rc.intersectObjects(CH.tapables,true);if(hits.length&&CH.onTapHit)CH.onTapHit(hits[0].object);return}
  RAY.pl.constant=0;let hit=RAY.rc.ray.intersectPlane(RAY.pl,new T.Vector3());if(hit&&terrainH(hit.x,hit.z)<-.05){RAY.pl.constant=-Y_W;hit=RAY.rc.ray.intersectPlane(RAY.pl,new T.Vector3())}if(!hit)return;
  for(let i=0;i<N_STOPS;i++){const s=STOPS[i];if(Math.hypot(s.pos[0]-hit.x,s.pos[1]-hit.z)<2.4){if(stopOpen(i)&&Math.hypot(PL.x-s.pos[0],PL.z-s.pos[1])<3.6&&!CH){playStop(i);return}if(stopOpen(i)&&!CH){walkToStop(i);return}if(!CH){toast('Stop '+(i+1)+' opens later. Next is stop '+(nextStop()+1)+'.');sfx('tick')}}}
+ if(!roamOK()){roamNudge();return}
  stopWalking();PL.tap=[clamp(hit.x,BOUND.x0,BOUND.x1),clamp(hit.z,BOUND.z0,BOUND.z1)];tapMark(hit.x,hit.z);
 }
 function tapMark(x,z){const t=trailTex('t-sparkle'),y=Math.max(terrainH(x,z),Y_W)+.15;for(let i=0;i<8;i++){const a=i/8*TAU;particle(t,x+Math.cos(a)*.5,y,z+Math.sin(a)*.5,{vx:Math.cos(a)*.8,vz:Math.sin(a)*.8,life:.5,s:.4,s1:.1,col:'#ffffff',add:true})}}
@@ -2507,11 +2609,11 @@ function jxExplain(t,cur,pickedT,rightT){
 }
 function zsRec(st,cur,ok,rightT){const z=S.zsum||(S.zsum={}),Z=z[st.zone]||(z[st.zone]={r:0,w:0,it:[]});ok?Z.r++:Z.w++;if(!ok&&Z.it.length<12)Z.it.push({s:st.idx,q:plainT(cur.p).slice(0,80),a:String(rightT||'')})}
 function runQuiz(st,done){
- const l=diff(),R0=MODE().rounds,R=QZ[st.t]===QZ.order||QZ[st.t]===QZ.spell?Math.min(4,R0):R0;let r=0,miss=0,cur=null,busy=false,seqN=0;
+ const l=Math.min(3,diff()+(st.hard||0)),R0=MODE().rounds+(st.hard?1:0),R=QZ[st.t]===QZ.order||QZ[st.t]===QZ.spell?Math.min(4,R0):R0;let r=0,miss=0,cur=null,busy=false,seqN=0;
  const optT=o=>{if(o.t)return String(o.t);let m=/class="num">([^<]+)</.exec(o.h);if(m)return m[1];m=/<small>([^<]+)<\/small>/.exec(o.h);if(m)return m[1];m=/aria-label="([^"]+)"/.exec(o.h);return m?m[1]:''};
  const draw=()=>{cur=QZ[st.t](l,st);busy=false;seqN=cur.pre||0;const last=MODE().plan&&r===R-1&&R>1;const Z=ZONES[st.zone],rd=MODE().read;if(rd)cur.p=cur.p.replace(/\b([A-Z]{2,})\b/g,(m,w)=>w.toLowerCase());
   showOv(`<div class="card quiz" role="dialog" aria-modal="true" aria-label="${esc(stopName(st))}" style="--zc:${Z.stone}"><button class="x" aria-label="Close">${ICON('x',22)}</button>
-   <div class="qh"><span class="em">${st.i}</span><div><b>${esc(stopName(st))}${last?'<span class="last1">Last one!</span>':''}</b><small class="w2only">${Z.icon} ${esc(Z.name)} · stop ${st.idx+1}</small></div><span class="qd">${Array.from({length:R},(_,k)=>`<i class="${k<r?'on':''}"></i>`).join('')}</span></div>
+   <div class="qh"><span class="em">${st.i}</span><div><b>${esc(stopName(st))}${last?'<span class="last1">Last one!</span>':''}</b><small class="w2only">${st.label?esc(st.label):`${Z.icon} ${esc(Z.name)} · stop ${st.idx+1}`}</small></div><span class="qd">${Array.from({length:R},(_,k)=>`<i class="${k<r?'on':''}"></i>`).join('')}</span></div>
    <div class="qp"><span>${cur.p}</span><button class="hear" aria-label="Hear it again">${ICON('speaker',30)}</button><button class="hint" aria-label="Hint">💡</button></div>${rd?'<div class="rl" id="rl"></div>':''}
    <div class="qs">${cur.stage||''}</div>
    <div class="jx" id="jx" aria-live="polite" hidden></div>
@@ -2806,6 +2908,7 @@ function finishStop(i,stars){
  if(first){coins=10+stars*6;xp=stars*12;S.done[i]=stars;gain=stars;if(stars===3)gems=1}
  else{gain=Math.max(0,stars-prev);coins=3+stars*2+gain*4;xp=stars*4;if(stars>prev)S.done[i]=stars}
  S.starTotal+=gain;S.stats.stops++;questAdd('stops',1);if(stars===3){S.stats.three++;questAdd('three',1);giveSticker('x-three');if(S.stats.three>=10)giveSticker('x-ten')}
+ if(S.roamDay!==dayKey()){S.roamDay=dayKey();setTimeout(()=>{toast('🗺️ You can explore anywhere today!',3800)},1600)}
  save();drawStopSign(i);if(first&&i+1<N_STOPS)drawStopSign(i+1);
  emit('stop-complete',{index:i,number:i+1,game:st.t,name:st.n,stars,first,round:S.round});
  const zoneDone=first&&st.last&&STOPS.filter(s=>s.zone===st.zone).every(s=>s.idx in S.done),finale=zoneDone&&st.zone===NZ-1;
@@ -2921,6 +3024,15 @@ function jcard(force){
  requestAnimationFrame(()=>document.documentElement.style.setProperty('--jh',el.offsetHeight+'px'));
 }
 /* far away? fly there in a puff of magic instead of a long walk */
+
+/* teleport: jump straight to any island you have opened, the garden or the castle */
+function openTeleport(){if(!PL||modalOpen()||CH)return;if(typeof roamOK==='function'&&!roamOK()){roamNudge();return}
+ const spots=[['🏡','Your garden',()=>[GARDEN.c[0]+Math.cos(GARDEN.open)*(GARDEN.r+2),GARDEN.c[1]+Math.sin(GARDEN.open)*(GARDEN.r+2)],true]];
+ ZONES.forEach((z,i)=>{const st=STOPS.find(s=>s.zone===i);spots.push([z.icon,z.name,()=>{const k=W.stopIdx[st.idx],b=W.path[Math.max(0,k-10)];return[b[0],b[1]]},zoneOpen(i)])});
+ spots.push(['🏰','The castle',()=>{const b=W.path[W.path.length-12]||W.path[W.path.length-1];return[b[0],b[1]]},zoneOpen(NZ-1)]);
+ showOv(`<div class="card tp" role="dialog" aria-modal="true" aria-label="Teleport"><button class="x" aria-label="Close">${ICON('x',22)}</button><h2>✨ Teleport</h2><p class="tp-s">Where do you want to go?</p><div class="tp-g">${spots.map((p,i)=>`<button class="tp-b${p[3]?'':' lk'}" data-i="${i}" ${p[3]?'':'aria-disabled="true"'}><b>${p[3]?p[0]:'🔒'}</b><span>${esc(p[1])}</span></button>`).join('')}</div></div>`);
+ $('#ov .x').onclick=()=>hideOv();
+ document.querySelectorAll('#ov .tp-b').forEach(b=>b.onclick=()=>{const p=spots[+b.dataset.i];if(!p[3]){toast('🔒 Reach this island first!');sfx('tick');return}hideOv();flash();sfx('whoosh');const [x,z]=p[2]();teleport(x,z);setTimeout(()=>{puff(PL.x,PL.y+.6,PL.z);say('Whoosh! '+p[1]+'!',1800,true)},120)})}
 function goToStop(i){const st=STOPS[i],d=Math.hypot(PL.x-st.pos[0],PL.z-st.pos[1]);if(d>85&&zoneOpen(st.zone)){flash();sfx('whoosh');const k=W.stopIdx[i],b=W.path[Math.max(0,k-14)];teleport(b[0],b[1]);setTimeout(()=>walkToStop(i),350)}else walkToStop(i)}
 function updStops(dt){
  const P=PL,n=nextStop();let near=-1;
@@ -2959,6 +3071,7 @@ function openMap(){
  if(modalOpen())return;closeDrawer();const o=$('#mapov');o.hidden=false;const nx=MAGIC[S.magic+1];
  o.innerHTML=`<div class="card map" role="dialog" aria-modal="true" aria-label="World map"><button class="x" aria-label="Close">${ICON('x',22)}</button><h2>${ICON('map',40)} The Islands</h2><div class="mscroll"><canvas id="mapc"></canvas></div><div class="mhint" aria-hidden="true"><i>⬆️</i><i>⬇️</i><span class="w2only">Scroll</span> · 👆 <span class="w2only">Tap a stop</span></div>
   <div class="mstat"><span>${ICON('star',24)} ${S.starTotal}</span><span title="Babies home">${ICON('heart',24)} ${S.babies.length}/${W.babies.length}</span><span title="Chests">${ICON('chest',24)} ${S.chests.length}/${W.chests.length}</span><span title="Pearls">${ICON('pearl',24)} ${S.pearls.length}/${W.pearls.length}</span></div>
+  <div class="mmp"><b>🗺️ Map pieces ${piecesN()}/4</b>${mpSlots()}<small class="w2only">${piecesN()>=4?'Find the red X and dive!':'Look for 📜 on the islands'}</small></div>
   <div class="mmag"><b>${ICON('sparkle',22)} World Magic ${S.magic}/8</b><div class="mbar">${Array.from({length:8},(_,k)=>`<i class="${k<S.magic?'on':''}"></i>`).join('')}</div><small class="w2only">${nx?'Next: '+esc(nx[2])+' '+nx[1]:'The world is full of magic!'}</small></div></div>`;
  $('#mapov .x').onclick=closeMap;o.onclick=e=>{if(e.target===o)closeMap()};
  const cv=$('#mapc'),box=$('#mapov .mscroll');requestAnimationFrame(()=>{const minX=WEXT.x0-12,maxX=WEXT.x1+12,minZ=WEXT.z0-12,maxZ=WEXT.z1+16,bw=box.clientWidth,bh=box.clientHeight,k=Math.max(bw/(maxX-minX)*1.3,bh/(maxZ-minZ)),w=Math.round((maxX-minX)*k),h=Math.round((maxZ-minZ)*k),d=Math.min(devicePixelRatio||1,2),ox=0,oz=0,X=v=>ox+(v-minX)*k,Z=v=>oz+(v-minZ)*k;
@@ -2972,7 +3085,8 @@ function openMap(){
   const n=nextStop();STOPS.forEach((st,i)=>{const cx=X(st.pos[0]),cz=Z(st.pos[1]),r=Math.max(11,2.2*k);x.fillStyle=i in S.done?'#ffc21a':i===n?ZONES[st.zone].stone:'#e2e7e4';x.strokeStyle='#fff';x.lineWidth=2;x.beginPath();x.arc(cx,cz,r,0,TAU);x.fill();x.stroke();
    if(r>8){x.fillStyle=i in S.done||i===n?'#fff':'#8a948e';x.font=`700 ${Math.round(r)}px Fredoka,OpenMojiColor,system-ui,sans-serif`;x.fillText(String(i+1),cx,cz+1)}});
   x.font=Math.max(26,Math.round(k*6))+'px '+EMOJI_FONT;x.fillText('🏰',X(CASTLE_POS[0]),Z(CASTLE_POS[1]));x.fillText('🏡',X(GARDEN.c[0]),Z(GARDEN.c[1]));x.fillText('🗼',X(62*WSC),Z(-100*WSC));
-  if(OP.m){const em2=earnedMax();if(em2>=NZ-1&&!opGone()){x.fillText(S.treasure&&S.treasure.won?'👑':'💎',X(OP.x),Z(OP.z));x.strokeStyle='#c2453b';x.lineWidth=4;const q=Math.max(8,k*1.6),cx=X(OP.x),cy=Z(OP.z)+q*2.2;x.beginPath();x.moveTo(cx-q,cy-q);x.lineTo(cx+q,cy+q);x.moveTo(cx+q,cy-q);x.lineTo(cx-q,cy+q);x.stroke()}else if(!opGone()){x.globalAlpha=.5;x.fillText('❓',X(OP.x+9),Z(OP.z-7));x.globalAlpha=1}}
+  MP.list.forEach(m=>{if(!hasPiece(m.k)&&zoneOpen(m.zi)){x.fillText('📜',X(m.x),Z(m.z))}});
+  if(OP.m){const em2=earnedMax();if(piecesN()>=4&&em2>=NZ-1&&!opGone()){x.fillText(S.treasure&&S.treasure.won?'👑':'💎',X(OP.x),Z(OP.z));x.strokeStyle='#c2453b';x.lineWidth=4;const q=Math.max(8,k*1.6),cx=X(OP.x),cy=Z(OP.z)+q*2.2;x.beginPath();x.moveTo(cx-q,cy-q);x.lineTo(cx+q,cy+q);x.moveTo(cx+q,cy-q);x.lineTo(cx-q,cy+q);x.stroke()}else if(!opGone()){x.globalAlpha=.5;x.fillText('❓',X(OP.x+9),Z(OP.z-7));x.globalAlpha=1}}
   box.scrollLeft=X(PL.x)-bw/2;box.scrollTop=Z(PL.z)-bh/2;
   {let dn=null,mv=0;box.onpointerdown=e=>{if(e.pointerType!=='mouse')return;dn=[e.clientX,e.clientY,box.scrollLeft,box.scrollTop];mv=0;box.classList.add('drag')};box.onpointermove=e=>{if(!dn)return;const dx=e.clientX-dn[0],dy=e.clientY-dn[1];mv=Math.max(mv,Math.hypot(dx,dy));box.scrollLeft=dn[2]-dx;box.scrollTop=dn[3]-dy};
    const up=()=>{dn=null;box.classList.remove('drag')};box.onpointerup=up;box.onpointerleave=up;box.addEventListener('click',e=>{if(mv>6){e.stopPropagation();e.preventDefault();mv=0}},true)}
@@ -3089,7 +3203,7 @@ function wiggleBreak(done){let n=20;S.stats.breaks++;save();
  const fin=g=>{clearInterval(iv);PL.dance=0;hideOv();if(g){addCoins(5);sfx('star',3)}done()};$('#wgOk').onclick=()=>fin(true);$('#wgSkip').onclick=()=>fin(false)}
 /* ================= welcome ================= */
 /* the welcome reel: who you are, every island and its games, the road, then the big trophy and gifts at the end */
-/* The Rainbow Crown Treasure art: a glowing golden chest */
+/* The Lost Starlight Crown art: a glowing golden chest */
 const OP_SVG=`<svg class="opc" viewBox="0 0 200 170" aria-hidden="true"><defs><radialGradient id="opg" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fff6c4"/><stop offset=".6" stop-color="#ffd23f" stop-opacity=".55"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient><linearGradient id="opw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9773c"/><stop offset="1" stop-color="#7a4a22"/></linearGradient></defs>
  <circle cx="100" cy="88" r="84" fill="url(#opg)"/><g class="opl"><path d="M40 78 Q40 36 100 36 Q160 36 160 78 Z" fill="url(#opw)" stroke="#5a3415" stroke-width="4"/><path d="M40 78 Q40 36 100 36 Q160 36 160 78" fill="none" stroke="#ffd23f" stroke-width="9"/><path d="M92 36v42M108 36v42" stroke="#ffd23f" stroke-width="7"/></g>
  <rect x="40" y="76" width="120" height="66" rx="8" fill="url(#opw)" stroke="#5a3415" stroke-width="4"/><path d="M40 92h120M40 126h120" stroke="#ffd23f" stroke-width="7"/><path d="M92 76v66M108 76v66" stroke="#ffd23f" stroke-width="7"/>
@@ -3104,10 +3218,10 @@ function reelHTML(final,page){const isl=ZONES.map((z,k)=>`<div class="it" style=
  <div class="sc" data-s="1"><div class="isl">${isl}</div></div>
  <div class="sc" data-s="2"><div class="games">${games}</div><div class="road"><svg viewBox="0 0 620 120" preserveAspectRatio="none" aria-hidden="true"><path d="M20 90 C 120 10, 220 110, 320 50 S 520 20, 600 70" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/><path d="M20 90 C 120 10, 220 110, 320 50 S 520 20, 600 70" fill="none" stroke="#e2c896" stroke-width="8" stroke-dasharray="2 16" stroke-linecap="round"/><text x="600" y="60" font-size="38" text-anchor="middle">🏰</text></svg><span class="car">🚗</span></div></div>
  <div class="sc" data-s="3">${cf}<div class="rays"></div><div class="trophy">🏆</div><div class="gifts">${['🎁','👑','🌟','🎁'].map((g,i)=>`<span style="--i:${i}">${g}</span>`).join('')}</div><h2>${final?'You did it!':'A big surprise at the end!'}</h2></div>
- <div class="sc op" data-s="4"><div class="rays gold"></div>${OP_SVG}<h2>💎 Rainbow Crown Treasure</h2><p class="opt">${opDone?'👑 You found it first!':final?'Now find it! Under the sea, near the castle.':'Only ONE explorer in the whole world can find it.'}</p><div class="opw">🌍 ➜ 🧒 ➜ 👑</div></div>
+ <div class="sc op" data-s="4"><div class="rays gold"></div>${OP_SVG}<h2>💎 Lost Starlight Crown</h2><p class="opt">${opDone?'👑 You found it first!':final?'Now find it! Under the sea, near the castle.':'Only ONE explorer in the whole world can find it.'}</p><div class="opw">🌍 ➜ 🧒 ➜ 👑</div></div>
  </div><div class="dots">${[0,1,2,3,4].map(i=>`<i data-d="${i}"></i>`).join('')}</div>
  <div class="rowc"><button class="btn" id="wSkip" aria-label="Next">${ICON('play',22)}</button><button class="btn go pulse" data-focus id="wGo" aria-label="Let's go">${ICON('play',28)}<span class="lb">Let's go!</span></button></div></div>`}
-function reelBind(root,final,onGo){const SAY=['The Island Journey!','Eight islands, forty games!','Drive, swim and play all the way to the castle!',final?'You did it! Here is your trophy!':'Get to the end for a big trophy and surprise gifts!',final?'Now find the Rainbow Crown Treasure!':'The Rainbow Crown Treasure! Only one explorer in the whole world can find it. Will it be you?'];
+function reelBind(root,final,onGo){const SAY=['The Island Journey!','Eight islands, forty games!','Drive, swim and play all the way to the castle!',final?'You did it! Here is your trophy!':'Get to the end for a big trophy and surprise gifts!',final?'Now find the Lost Starlight Crown!':'The Lost Starlight Crown! Only one explorer in the whole world can find it. Will it be you?'];
  let i=-1,tm=0;const sc=[...root.querySelectorAll('.reel .sc')],dt=[...root.querySelectorAll('.reel .dots i')],L=sc.length-1;
  const show=n=>{i=n;sc.forEach((e,k)=>{e.classList.toggle('on',k===n);e.classList.toggle('off',k<n)});dt.forEach((e,k)=>e.classList.toggle('on',k===n));try{speak(SAY[n])}catch(e){}try{sfx(n>=3?'star':'pop')}catch(e){}clearTimeout(tm);if(n<L)tm=setTimeout(()=>show(n+1),n===2?3800:3300)};
  dt.forEach((d,k)=>d.onclick=()=>show(k));root.querySelector('#wSkip').onclick=()=>show(Math.min(L,i+1));root.querySelector('#wGo').onclick=()=>{clearTimeout(tm);try{auInit()}catch(e){}onGo()};
@@ -3115,8 +3229,8 @@ function reelBind(root,final,onGo){const SAY=['The Island Journey!','Eight islan
 function reelRun(final,onGo){showOv(reelHTML(final));reelBind($('#ov'),final,onGo)}
 /* the introduction page: shows every time the journey opens, straight away, while the islands load behind it */
 /* ================= The introduction film: plays every time the journey opens =================
-   Five short chapters drawn live (sky, islands, the road, the trophy, the Rainbow Crown), with a player bar like a real video. */
-const FM_CH=[['🌅','Hello',6500],['🏝️','8 islands',7000],['🚗','The road',7000],['🏆','The prize',6000],['👑','Rainbow Crown',7500]];
+   Five short chapters drawn live (sky, islands, the road, the trophy, the Starlight Crown), with a player bar like a real video. */
+const FM_CH=[['🌅','Hello',6000],['🏝️','8 islands',6500],['🚗','The road',6500],['🎮','How to play',12000],['🗺️','Map pieces',10500],['🏆','The prize',5500],['👑','Starlight Crown',7500]];
 function filmHTML(){
  const won=S.treasure&&S.treasure.won;
  const isl=ZONES.map((z,k)=>{const a=-.9+k*.26,x=14+k*10.4,y=70-Math.sin(k*.9)*22-k*3;return`<div class="fm-is" style="--i:${k};left:${x}%;top:${y}%;--g:${z.ground};--e:${z.edge}"><i></i><b>${z.icon}</b><span class="fm-ig">${PLAN[k].slice(0,3).map(p=>`<em>${p[2]}</em>`).join('')}</span></div>`}).join('');
@@ -3128,38 +3242,40 @@ function filmHTML(){
    <div class="fm-buds"><span style="--i:0">${ART('b-cloud',96,116)}</span><span style="--i:1">${ART('b-pip',122,148)}</span><span style="--i:2">${ART('b-fox',96,116)}</span></div><h1 class="fm-t1">${'The Island Journey'.split('').map((c,i)=>`<span style="--i:${i}">${c===' '?'&nbsp;':c}</span>`).join('')}</h1></section>
   <section class="fm-sc s1"><div class="fm-map"><svg class="fm-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M14 70 C 24 40, 30 66, 36 52 S 52 38, 56 50 S 70 34, 78 40 S 90 30, 94 26" fill="none" stroke="#fff" stroke-width=".8" stroke-dasharray="2 2"/></svg>${isl}</div></section>
   <section class="fm-sc s2"><div class="fm-sky day"></div><div class="fm-castle">🏰</div><div class="fm-hill h1"></div><div class="fm-hill h2"></div><div class="fm-road"><i></i></div>
-   <svg class="fm-car" viewBox="0 0 160 80" aria-hidden="true"><path d="M14 52 Q12 34 34 32 L54 30 Q66 12 92 14 Q112 16 122 32 L146 36 Q154 40 152 52 Z" fill="#ff5a5a" stroke="#7a1f1f" stroke-width="3"/><path d="M62 30 Q70 18 90 19 Q104 20 112 31 Z" fill="#cfefff" stroke="#7a1f1f" stroke-width="2"/><circle cx="104" cy="18" r="10" fill="#7fd39c"/><circle cx="101" cy="16" r="2" fill="#222"/><circle cx="108" cy="16" r="2" fill="#222"/><g class="fm-wh"><circle cx="44" cy="54" r="13" fill="#2b2b33"/><circle cx="44" cy="54" r="6" fill="#ddd"/><path d="M44 44v20M34 54h20" stroke="#999" stroke-width="2"/></g><g class="fm-wh" style="transform-origin:122px 54px"><circle cx="122" cy="54" r="13" fill="#2b2b33"/><circle cx="122" cy="54" r="6" fill="#ddd"/><path d="M122 44v20M112 54h20" stroke="#999" stroke-width="2"/></g><circle cx="150" cy="42" r="4" fill="#fff6b0"/></svg>
+   <svg class="fm-car" viewBox="0 0 160 80" aria-hidden="true"><path d="M14 52 Q12 34 34 32 L54 30 Q66 12 92 14 Q112 16 122 32 L146 36 Q154 40 152 52 Z" fill="#ff5a5a" stroke="#7a1f1f" stroke-width="3"/><path d="M62 30 Q70 18 90 19 Q104 20 112 31 Z" fill="#cfefff" stroke="#7a1f1f" stroke-width="2"/><circle cx="104" cy="18" r="10" fill="#7fd39c"/><circle cx="101" cy="16" r="2" fill="#222"/><circle cx="108" cy="16" r="2" fill="#222"/><g class="fm-wh"><circle cx="44" cy="54" r="13" fill="#2b2b33"/><circle cx="44" cy="54" r="6" fill="#ddd"/><path d="M44 44v20M34 54h20" stroke="#999" stroke-width="2"/></g><g class="fm-wh"><circle cx="122" cy="54" r="13" fill="#2b2b33"/><circle cx="122" cy="54" r="6" fill="#ddd"/><path d="M122 44v20M112 54h20" stroke="#999" stroke-width="2"/></g><circle cx="150" cy="42" r="4" fill="#fff6b0"/></svg>
    <div class="fm-dust"><i></i><i></i><i></i></div></section>
+  <section class="fm-sc s5"><div class="fm-sky day"></div><div class="fm-hill h1"></div><div class="fm-flow"><div class="fm-st st1"><b>📚</b><span>Learn 1 lesson</span></div><i class="fm-ar">➜</i><div class="fm-st st2"><b>🎮</b><span>Play 1 game</span></div><i class="fm-ar">➜</i><div class="fm-st st3"><b>🗺️</b><span>Explore!</span></div></div><div class="fm-keys"><div class="fm-kr"><span class="fm-k " data-k="w"><b>W</b></span></div><div class="fm-kr"><span class="fm-k " data-k="a"><b>A</b></span><span class="fm-k " data-k="s"><b>S</b></span><span class="fm-k " data-k="d"><b>D</b></span></div><div class="fm-kr"><span class="fm-k wide" data-k="sp"><b>Space</b></span></div></div><div class="fm-mini"><svg viewBox="0 0 120 70" aria-hidden="true"><rect x="10" y="22" width="100" height="30" rx="12" fill="#ff5a5a" stroke="#7a1f1f" stroke-width="3"/><path d="M34 22 Q44 6 64 6 Q80 6 88 22Z" fill="#cfefff" stroke="#7a1f1f" stroke-width="2.5"/><g class="fm-mw"><circle cx="32" cy="54" r="10" fill="#2b2b33"/><circle cx="32" cy="54" r="4" fill="#ddd"/></g><g class="fm-mw"><circle cx="88" cy="54" r="10" fill="#2b2b33"/><circle cx="88" cy="54" r="4" fill="#ddd"/></g></svg><i class="fm-skid"></i></div></section><section class="fm-sc s6"><div class="fm-parch"></div><div class="fm-pcs"><span class="fm-pc p0" style="--k:0"><em>🌴</em></span><span class="fm-pc p1" style="--k:1"><em>⛰️</em></span><span class="fm-pc p2" style="--k:2"><em>🌊</em></span><span class="fm-pc p3" style="--k:3"><em>🌋</em></span><i class="fm-x">✕</i><svg class="fm-trail" viewBox="0 0 100 100" aria-hidden="true"><path d="M12 84 C 30 60, 20 40, 44 44 S 70 30, 72 26" fill="none" stroke="#a0522d" stroke-width="2.4" stroke-dasharray="4 4"/></svg></div><div class="fm-chal"><span style="--i:0">🧩</span><span style="--i:1">🐉</span><span style="--i:2">🫧</span></div></section>
   <section class="fm-sc s3"><div class="fm-stage"></div>${fw}<div class="fm-spot"></div><div class="fm-tro"><span class="fm-shine"></span>🏆</div><div class="fm-gifts">${['🎁','🎉','🎁','⭐','🎁'].map((g,i)=>`<span style="--i:${i}">${g}</span>`).join('')}</div></section>
   <section class="fm-sc s4"><div class="fm-deep"></div><div class="fm-rays"><i></i><i></i><i></i><i></i></div>${bub}<span class="fm-fish f1">🐠</span><span class="fm-fish f2">🐟</span><span class="fm-fish f3">🐡</span><div class="fm-chest">${OP_SVG}<span class="fm-crown">👑</span></div></section>
   <div class="fm-bars"><i></i><i></i></div>
   <p class="fm-sub" id="fmSub" aria-live="polite"></p>
   <button class="fm-skip" id="fmSkip">Skip <span aria-hidden="true">⏭</span></button>
-  <div class="fm-end" id="fmEnd" hidden><button class="btn go pulse" id="fmGo">${ICON('play',28)}<span class="lb">Let's go!</span></button><button class="btn" id="fmAgain">${ICON('play',22)}<span class="lb">Watch again</span></button></div>
+  <div class="fm-end" id="fmEnd" hidden><button class="btn go pulse" id="fmGo">${ICON('play',28)}<span class="lb">Let's go!</span></button></div>
  </div>
  <div class="fm-ctl"><button class="fm-pp" id="fmPP" aria-label="Pause">❚❚</button><div class="fm-prog" id="fmProg">${FM_CH.map((c,i)=>`<button class="fm-seg" data-c="${i}" style="flex:${c[2]}" aria-label="${c[1]}"><i></i><span>${c[0]} <small>${c[1]}</small></span></button>`).join('')}</div><span class="fm-tm" id="fmTm">0:00</span><button class="fm-pp" id="fmMute" aria-label="Sound">🔊</button></div>
  </div>`}
-const FM_SUB=['Hello, explorer!','8 islands. 40 games.','Drive, sail and swim to the castle.','A big trophy and gifts at the end!',()=>S.treasure&&S.treasure.won?'You found the Rainbow Crown first!':'The Rainbow Crown Treasure. Only ONE explorer in the world can find it!'];
+const FM_SUB=['Hello, explorer!','8 islands. 40 games.','Drive, ride a pony, sail and swim to the castle.',['First, do one Learn lesson in the app.','Then play one game. Now you can explore anywhere!','W goes. S goes back. A and D steer.','Space is the brake. Steer while braking to drift!'],['Find 4 map pieces on 4 islands. Look for 📜','Win a challenge to take each piece.','4 pieces make the map. A red X shows the way!'],'A big trophy and gifts at the castle!',()=>S.treasure&&S.treasure.won?'You found the Lost Starlight Crown first!':'Dive to the X and beat the Crown Guardian. Only ONE explorer in the world can win the crown!'];
 let INTRO_DONE=null;
 function introPage(){
+ emit('intro',{on:true});
  const el=document.createElement('div');el.id='intro';el.className='introp';el.innerHTML=filmHTML();document.body.appendChild(el);
  const fm=el.querySelector('#fm'),sc=[...el.querySelectorAll('.fm-sc')],seg=[...el.querySelectorAll('.fm-seg')],TOT=FM_CH.reduce((a,c)=>a+c[2],0),starts=FM_CH.map((c,i)=>FM_CH.slice(0,i).reduce((a,x)=>a+x[2],0));
- let t=0,last=performance.now(),playing=true,cur=-1,muted=!!(S.settings&&S.settings.muted),raf=0,ended=false;
+ let subP=-1,t=0,last=performance.now(),playing=true,cur=-1,muted=!!(S.settings&&S.settings.muted),raf=0,ended=false;
  const sub=el.querySelector('#fmSub'),tm=el.querySelector('#fmTm'),pp=el.querySelector('#fmPP');
  const setCh=i=>{if(i===cur)return;cur=i;sc.forEach((e,k)=>{e.classList.remove('on');if(k===i){void e.offsetWidth;e.classList.add('on')}});seg.forEach((g,k)=>g.classList.toggle('done',k<i));
-   const tx=typeof FM_SUB[i]==='function'?FM_SUB[i]():FM_SUB[i];sub.textContent=tx;sub.classList.remove('in');void sub.offsetWidth;sub.classList.add('in');if(!muted){try{speechSynthesis.cancel();speak(tx)}catch(e){}try{sfx(i>=3?'star':'pop')}catch(e){}}};
+   subP=-1;subShow(i,0);try{if(!muted)sfx(i>=5?'star':'pop')}catch(e){}};
+ const subShow=(i,k)=>{const raw=typeof FM_SUB[i]==='function'?FM_SUB[i]():FM_SUB[i],tx=Array.isArray(raw)?raw[k]:raw;if(k===subP)return;subP=k;sub.textContent=tx;sub.classList.remove('in');void sub.offsetWidth;sub.classList.add('in');if(!muted){try{speechSynthesis.cancel();speak(tx)}catch(e){}}};
  const fin=()=>{ended=true;playing=false;fm.classList.add('paused','ended');el.querySelector('#fmEnd').hidden=false;pp.textContent='▶';setTimeout(()=>el.querySelector('#fmGo').focus({preventScroll:true}),50)};
  const tick=now=>{if(!el.isConnected)return;if(playing){t+=now-last;if(t>=TOT){t=TOT;fin()}}last=now;
-   let i=0;while(i<FM_CH.length-1&&t>=starts[i+1])i++;setCh(i);
+   let i=0;while(i<FM_CH.length-1&&t>=starts[i+1])i++;setCh(i);{const raw=FM_SUB[i];if(Array.isArray(raw)){const k=Math.min(raw.length-1,Math.floor((t-starts[i])/FM_CH[i][2]*raw.length));if(k!==subP)subShow(i,k)}}
    seg.forEach((g,k)=>g.querySelector('i').style.width=(Math.min(1,Math.max(0,(t-starts[k])/FM_CH[k][2]))*100)+'%');
    const s=Math.floor(t/1000);tm.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / ${Math.floor(TOT/60000)}:${String(Math.round(TOT/1000)%60).padStart(2,'0')}`;raf=requestAnimationFrame(tick)};
  const play=v=>{if(ended&&v){t=0;ended=false;cur=-1;el.querySelector('#fmEnd').hidden=true;fm.classList.remove('ended')}playing=v;fm.classList.toggle('paused',!v);pp.textContent=v?'❚❚':'▶';pp.setAttribute('aria-label',v?'Pause':'Play');if(!v)try{speechSynthesis.cancel()}catch(e){}};
  pp.onclick=()=>play(!playing);
  el.querySelector('#fmMute').onclick=e=>{muted=!muted;e.currentTarget.textContent=muted?'🔇':'🔊';if(muted)try{speechSynthesis.cancel()}catch(x){}};
  seg.forEach((g,k)=>g.onclick=()=>{t=starts[k];cur=-1;if(ended){ended=false;el.querySelector('#fmEnd').hidden=true;fm.classList.remove('ended')}play(true)});
- el.querySelector('#fmAgain').onclick=()=>play(true);
  fm.querySelector('.fm-screen').addEventListener('click',e=>{if(e.target.closest('button'))return;if(!ended)play(!playing)});
- INTRO_DONE=new Promise(res=>{const done=()=>{cancelAnimationFrame(raf);try{speechSynthesis.cancel()}catch(e){}try{auInit()}catch(e){}el.classList.add('out');setTimeout(()=>el.remove(),450);res()};
+ INTRO_DONE=new Promise(res=>{const done=()=>{cancelAnimationFrame(raf);try{speechSynthesis.cancel()}catch(e){}try{auInit()}catch(e){}el.classList.add('out');setTimeout(()=>el.remove(),450);emit('intro',{on:false});res()};
    el.querySelector('#fmSkip').onclick=done;el.querySelector('#fmGo').onclick=done;
    el.addEventListener('keydown',e=>{if(e.key==='Escape')done();else if(e.key===' '&&!e.target.closest('button')){e.preventDefault();if(!ended)play(!playing)}})});
  if(matchMedia('(prefers-reduced-motion: reduce)').matches)fm.classList.add('rm');
@@ -3172,7 +3288,7 @@ function welcome(){
  if(INTRO_DONE)INTRO_DONE.then(go);else go();
 }
 
-/* ================= The Rainbow Crown Treasure =================
+/* ================= The Lost Starlight Crown =================
    One golden chest under the sea near the castle. It can only be opened once you reach the last island.
    The app (when the journey runs inside LahLahLearn) asks the server, so only the first explorer in the world wins it. */
 const OP={x:0,y:-4,z:0,m:null,beam:null,sp:null,st:null,asked:0,told:0,wait:0};
@@ -3187,17 +3303,47 @@ function buildTreasure(){
  OP.sp=sprite(glowTex(255,210,80),7,{blending:T.AdditiveBlending,opacity:0});OP.sp.position.set(OP.x,OP.y+2.2,OP.z);scene.add(OP.sp);
  emit('treasure-ask');
 }
+
+/* ---- the 4 map pieces: each sits on a glowing stone on its own island and is won with a harder challenge.
+   With all 4 the map shows the X, the crown's light switches on, and the Crown Guardian asks one last challenge. ---- */
+const MP_Z=[1,3,5,6],MP_GAME=['count','shapes','bigger','spell'],MP={list:[]};
+const piecesN=()=>(S.mapP||[]).length,hasPiece=k=>(S.mapP||[]).includes(k);
+function pieceTex(k){return canvasTex(256,256,(x,w,h)=>{x.fillStyle='#f3dfb0';x.beginPath();const jag=(a,b,c,d)=>{x.lineTo(a,b);for(let i=1;i<6;i++)x.lineTo(a+(c-a)*i/6+(i%2?6:-6),b+(d-b)*i/6+(i%2?-6:6));x.lineTo(c,d)};x.moveTo(10,10);jag(10,10,246,10);jag(246,10,246,246);jag(246,246,10,246);jag(10,246,10,10);x.fill();
+ x.strokeStyle='#8a5a2b';x.lineWidth=6;x.stroke();x.strokeStyle='#c98a4a';x.lineWidth=5;x.setLineDash([12,10]);x.beginPath();x.moveTo(k%2?0:256,k<2?60:200);x.bezierCurveTo(128,40+k*30,90,220-k*20,k%2?256:0,150);x.stroke();x.setLineDash([]);
+ x.font='bold 64px Fredoka,system-ui,sans-serif';x.fillStyle='#8a5a2b';x.textAlign='center';x.textBaseline='middle';x.fillText(String(k+1),128,128);x.font='40px '+EMOJI_FONT;x.fillText(['🌴','⛰️','🌊','🌋'][k],128,200)})}
+function buildPieces(){MP.list=MP_Z.map((zi,k)=>{const p=zoneSpot(zi,{clear:3,pm:4,d0:5}),y=Math.max(0,terrainH(p[0],p[1])),g=new T.Group();g.position.set(p[0],y,p[1]);
+  const st=std('#b9b3a6',{roughness:.9});add(new T.CylinderGeometry(.9,1.1,.7,10),st,0,.35,0,g);add(new T.CylinderGeometry(.7,.9,.25,10),std('#d8d2c4',{roughness:.8}),0,.82,0,g);
+  const pc=new T.Group();pc.position.y=2.1;g.add(pc);const m=new T.Mesh(new T.PlaneGeometry(1.5,1.5),new T.MeshBasicMaterial({map:pieceTex(k),transparent:true,side:T.DoubleSide}));pc.add(m);
+  [-1,1].forEach(s=>{const r=add(new T.CylinderGeometry(.09,.09,1.6,10),std('#a0672f',{roughness:.6}),s*.78,0,0,pc)});
+  const gl=sprite(glowTex(255,220,120),3.6,{blending:T.AdditiveBlending,opacity:.6});gl.position.y=2.1;g.add(gl);scene.add(g);return{k,zi,x:p[0],z:p[1],y,g,pc,gl,asked:0}})}
+function updPieces(P){MP.list.forEach(m=>{const got=hasPiece(m.k),open=zoneOpen(m.zi);m.g.visible=open&&!got;if(!m.g.visible)return;m.pc.rotation.y+=.02;m.pc.position.y=2.1+Math.sin(TIME*2+m.k)*.15;m.gl.material.opacity=.45+Math.sin(TIME*3+m.k)*.2;
+  const d=Math.hypot(m.x-P.x,m.z-P.z);if(d<2.6&&!modalOpen()&&!CH&&!m.asked){m.asked=1;pieceChallenge(m)}else if(d>6)m.asked=0})}
+function pieceChallenge(m){stopWalking();if(PL.vk)toggleRide();sfx('magic');
+ showOv(`<div class="card reward mp-card" role="dialog" aria-modal="true" aria-label="Map piece ${m.k+1}"><div class="mp-art">${mpSlots(m.k)}</div><h2>🗺️ Map piece ${m.k+1} of 4</h2><p>Win this challenge to take the piece. It is a bit harder than a normal stop!</p><div class="row"><button class="btn go" data-focus id="mpGo">${ICON('play',24)}<span class="lb">Start</span></button><button class="btn" id="mpNo"><span class="lb">Later</span></button></div></div>`);
+ try{speak('Map piece '+(m.k+1)+' of 4! Win this challenge to take it.')}catch(e){}
+ $('#mpNo').onclick=()=>hideOv();
+ $('#mpGo').onclick=()=>{hideOv();const st={t:MP_GAME[m.k],zone:m.zi,idx:-1,i:'🗺️',n:'Map piece challenge',label:'Map piece '+(m.k+1)+' of 4',hard:1};
+  runQuiz(st,stars=>{if(stars>=2){S.mapP=[...new Set([...(S.mapP||[]),m.k])].sort();save();emit('map-piece',{piece:m.k+1,total:piecesN()});confetti(m.x,m.y+2,m.z,50);sfx('star',5);addCoins(40);
+    const n=piecesN();enqueue(done=>{showOv(`<div class="card reward mp-card"><div class="mp-art">${mpSlots()}</div><h2>${n>=4?'The map is complete!':'You got map piece '+(m.k+1)+'!'}</h2><p>${n>=4?'Look at the map: a red X shows where the Lost Starlight Crown is hiding. Dive deep near the last island to find it.':'You have '+n+' of 4 pieces. Find the others on other islands.'}</p><p><b>+40 🪙</b></p><button class="btn go" data-focus id="mpOk">${ICON('check',24)}<span class="lb">OK</span></button></div>`);try{speak(n>=4?'The map is complete! Look for the red X.':'You have '+n+' of 4 map pieces!')}catch(e){}$('#mpOk').onclick=()=>{hideOv();done()}})}
+   else{toast('So close! Try again to win the map piece 💪',3600);m.asked=0}})}}
+function mpSlots(hi){return`<div class="mp-sl">${[0,1,2,3].map(k=>`<i class="${hasPiece(k)?'on':''}${k===hi?' hi':''}">${hasPiece(k)?['🌴','⛰️','🌊','🌋'][k]:k+1}</i>`).join('')}</div>`}
+/* the Crown Guardian: one last, harder challenge before the chest opens */
+function guardian(){stopWalking();
+ showOv(`<div class="card reward mp-card" role="dialog" aria-modal="true" aria-label="Crown Guardian"><div class="mp-art"><span style="font-size:64px">🐉</span></div><h2>The Crown Guardian</h2><p>"Only a clever explorer may open this chest. Win my challenge!"</p><div class="row"><button class="btn go" data-focus id="gdGo">${ICON('play',24)}<span class="lb">I'm ready</span></button><button class="btn" id="gdNo"><span class="lb">Later</span></button></div></div>`);
+ try{speak('I am the Crown Guardian. Only a clever explorer may open this chest. Win my challenge!')}catch(e){}
+ $('#gdNo').onclick=()=>{hideOv();OP.asked=0};
+ $('#gdGo').onclick=()=>{hideOv();runQuiz({t:pick(['count','bigger','shapes']),zone:NZ-1,idx:-1,i:'🐉',n:'Crown Guardian',label:'The last challenge',hard:2},stars=>{if(stars>=2)opFound();else{toast('The Guardian says: try again, brave explorer!',3600);OP.asked=0}})}}
 function opGone(){return !!(OP.st&&OP.st.found&&!OP.st.mine&&!(S.treasure&&S.treasure.won))}
 function updTreasure(P,em){
- if(!OP.m)return;const can=em>=NZ-1,won=S.treasure&&S.treasure.won,gone=opGone();
+ if(!OP.m)return;updPieces(P);const pcs=piecesN(),hid=pcs<4&&!(S.treasure&&S.treasure.won);OP.m.visible=!hid;if(hid){OP.beam.material.opacity=0;OP.sp.material.opacity=0;return}const can=em>=NZ-1,won=S.treasure&&S.treasure.won,gone=opGone();
  OP.beam.material.opacity=can&&!won&&!gone?.16+Math.sin(TIME*2)*.06:0;OP.beam.rotation.y+=.01;
  OP.sp.material.opacity=can&&!gone?.55+Math.sin(TIME*3)*.25:0;
  const d=Math.hypot(OP.x-P.x,OP.z-P.z);
  if(d<2.8&&Math.abs(P.y-OP.y)<3.2&&!modalOpen()){
-  if(!can){if(!OP.told){OP.told=1;toast('💎 The Rainbow Crown Treasure! It opens when you reach the last island.',4200);sfx('tick')}return}
-  if(won){if(!OP.told){OP.told=1;toast('👑 Your Rainbow Crown Treasure. You found it first!',4200)}return}
+  if(!can){if(!OP.told){OP.told=1;toast('💎 The Lost Starlight Crown! It opens when you reach the last island.',4200);sfx('tick')}return}
+  if(won){if(!OP.told){OP.told=1;toast('👑 Your Lost Starlight Crown. You found it first!',4200)}return}
   if(gone){if(!OP.told){OP.told=1;toast('💎 '+(OP.st.name||'Another explorer')+' found this treasure first.',4200)}return}
-  if(!OP.asked){OP.asked=1;opFound()}
+  if(!OP.asked){OP.asked=1;guardian()}
  }else if(d>7){OP.told=0;if(!OP.wait)OP.asked=0}
 }
 function opFound(){
@@ -3216,9 +3362,9 @@ function opResult(d){
 }
 function opCard(kind,d){
  const when=d&&d.at?new Date(d.at).toLocaleDateString():'';
- const T2={won:['You found it first!','You are the ONE explorer in the whole world who found the Rainbow Crown Treasure!','+500 🪙  +20 💎  👑'],
+ const T2={won:['You found it first!','You are the ONE explorer in the whole world who found the Lost Starlight Crown!','+500 🪙  +20 💎  👑'],
   lost:['Found already!',(d&&d.name||'Another explorer')+' found it first'+(when?' on '+when:'')+'. Here are 30 coins for a great search!','+30 🪙'],
-  'found-local':['You found it!','Open the 3D Journey in LahLahLearn to claim the Rainbow Crown Treasure.',''],
+  'found-local':['You found it!','Open the 3D Journey in LahLahLearn to claim the Lost Starlight Crown.',''],
   offline:['Almost!','We could not check the treasure map right now. Come back and try again.',''],
   error:['Almost!','We could not check the treasure map right now. Come back and try again.','']}[kind]||['',''];
  enqueue(done=>{showOv(`<div class="card reward op-card"><i class="tape"></i>${OP_SVG}<h2>${kind==='won'?'👑 ':''}${esc(T2[0])}</h2><p>${esc(T2[1])}</p>${T2[2]?`<p><b>${T2[2]}</b></p>`:''}<button class="btn go" data-focus id="opOk">${ICON('check',24)}<span class="lb">OK</span></button></div>`);
@@ -3267,7 +3413,7 @@ function init(){
  const L=$('#ldmsg'),step=m=>{if(L)L.textContent=m};
  step('Making the sea…');buildSky();buildWater();buildIslands();buildPath();reserve(START[0],START[1],3);
  step('Building the islands…');buildStops();buildTransitions();buildLandmarks();buildPlatforms();buildGarden();buildBabies();buildChests();buildPearls();buildSigns();
- step('Planting trees…');buildDecor();buildCoins();buildFish();buildAnimals();buildButterflies();buildTreasure();
+ step('Planting trees…');buildDecor();buildCoins();buildFish();buildAnimals();buildButterflies();buildTreasure();buildPieces();
  zoneGroups();makePlayer();setupInput();questInit();applyMode(true);hud();jcard(true);applyMagic();rideBtn();todBtn();
  $('#bshop').onclick=()=>{auInit();$('#shop').hidden?openShop():closeShop()};$('#bmap').onclick=()=>{auInit();openMap()};$('#mini').onclick=()=>{auInit();openMap()};$('#bset').onclick=()=>{auInit();openSettings()};
  $('#bquest').onclick=()=>{auInit();$('#panel').hidden?openQuests():closePanel()};$('#balbum').onclick=()=>{auInit();$('#panel').hidden?openAlbum():closePanel()};

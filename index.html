@@ -2367,7 +2367,7 @@ body.noanim .hp *,body.noanim .hp{animation:none!important}
 body.jr-full #foot,body.jr-full #dock,body.jr-full header.top,body.jr-full #swBadge,body.jr-full #ptBadge{display:none!important}
 .jr-wrap{position:fixed;inset:0;z-index:40;background:#bfe8f7}
 .jr-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.jr-back{position:absolute;left:14px;bottom:14px;z-index:2;width:64px;height:64px}.jr-back svg{width:32px;height:32px}
+.jr-back{position:absolute;left:14px;bottom:14px;z-index:2;width:64px;height:64px;transition:opacity .3s}.jr-wrap.intro .jr-back{opacity:0;pointer-events:none}.jr-back svg{width:32px;height:32px}
 .sw-cc{width:min(720px,100%)}.sw-cv{position:relative;width:100%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:#111}
 .sw-cv video,.sw-cv canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
 .sw-st{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;width:100%;text-align:left}.sw-st li{display:flex;align-items:center;gap:8px;font-weight:600}.sw-st li:empty{display:none}
@@ -6557,7 +6557,7 @@ R.myworld=()=>{
 /* The 3D Journey is its own page (journey/index.html) shown full screen inside the app, so calm breaks, time limits and the grown-up lock still work.
    It tells us when a stop is finished, and the child gets stars here too. */
 let JR_ON=false;
-/* The Rainbow Crown Treasure: ask the server who found it, and claim it for this child (first in the world wins) */
+/* The Lost Starlight Crown: ask the server who found it, and claim it for this child (first in the world wins) */
 async function jrTreasure(type){
   const f=$('#jrF'),send=m=>{try{if(f&&f.contentWindow)f.contentWindow.postMessage(Object.assign({source:'lahlah-app'},m),location.origin)}catch(e){}};
   const rt=type==='treasure-found'?'treasure-result':'treasure-status';
@@ -6569,7 +6569,7 @@ async function jrTreasure(type){
     let r=await CLOUD.sb.rpc('treasure_claim',{p_child:P.kid,p_name:nm});
     if(r.error&&/last island/i.test(r.error.message||'')){await new Promise(z=>setTimeout(z,2500));jrKeep();clearTimeout(saveT);await flush();r=await CLOUD.sb.rpc('treasure_claim',{p_child:P.kid,p_name:nm})}
     if(r.error)throw r.error;const v=r.data||{};send({type:rt,won:!!v.won,name:v.name,at:v.at});
-    if(v.won){award(100);save();nfyAdd('game',`${P.name} found the Rainbow Crown Treasure in the 3D Journey, first in the whole world!`)}
+    if(v.won){award(100);save();nfyAdd('game',`${P.name} found the Lost Starlight Crown in the 3D Journey, first in the whole world!`)}
   }catch(e){console.warn('treasure',e);send({type:rt,error:true})}
 }
 const JR_KEY='lahlah.journey.v2';
@@ -6578,7 +6578,7 @@ R.journey=()=>{
   if(playLocked())return playGate();
   try{if(G&&G.journey)localStorage.setItem(JR_KEY,G.journey);else if(G)localStorage.removeItem(JR_KEY)}catch(e){}
   JR_ON=true;document.body.classList.add('jr-full');
-  $('#page').innerHTML=`<div class="jr-wrap"><iframe id="jrF" title="3D Journey" src="journey/index.html" allow="autoplay; fullscreen; gamepad; accelerometer; gyroscope" allowfullscreen></iframe>
+  $('#page').innerHTML=`<div class="jr-wrap"><iframe id="jrF" aria-label="3D Journey" src="journey/index.html" allow="autoplay; fullscreen; gamepad; accelerometer; gyroscope" allowfullscreen></iframe>
    <button class="lpx-back jr-back" data-go="myworld" aria-label="Back to My World">${BACK_SVG}</button></div>`;
   setTimeout(()=>{try{$('#jrF').focus()}catch(e){}},300);
 };
@@ -6592,6 +6592,8 @@ window.addEventListener('message',e=>{
     else if(d.type==='journey-complete'){award(30);save();nfyAdd('game',`${P.name} finished a whole 3D Journey!`)}
     else if(d.type==='sticker'){toast('New sticker: '+(d.name||''))}
     else if(d.type==='treasure-ask'||d.type==='treasure-found')jrTreasure(d.type)
+    else if(d.type==='intro'){const w=$('.jr-wrap');if(w)w.classList.toggle('intro',!!d.on)}
+    else if(d.type==='map-piece'){nfyAdd('game',`${P.name} found map piece ${d.piece} of 4 in the 3D Journey.`)}
   }catch(x){}
 });
 

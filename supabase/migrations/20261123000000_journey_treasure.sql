@@ -1,4 +1,4 @@
--- The Rainbow Crown Treasure in the 3D Journey: one chest for the whole world.
+-- The Lost Starlight Crown in the 3D Journey: one hidden chest for the whole world (4 map pieces, then the Crown Guardian).
 -- The first child who reaches it wins it; everyone else sees who found it first.
 create table if not exists public.journey_treasure (
   id          int primary key default 1 check (id = 1),
@@ -33,6 +33,7 @@ language plpgsql security definer set search_path = public as $$
 declare
   fid uuid;
   zone int;
+  pieces int;
   nm text;
   r public.journey_treasure%rowtype;
 begin
@@ -45,6 +46,14 @@ begin
   exception when others then zone := 0;
   end;
   if coalesce(zone, 0) < 7 then raise exception 'Reach the last island first.'; end if;
+  -- all 4 map pieces must be in the saved journey too
+  begin
+    select count(distinct x.value) into pieces
+    from public.progress p, jsonb_array_elements_text(((p.data->>'journey')::jsonb)->'mapP') x
+    where p.child_id = p_child;
+  exception when others then pieces := 0;
+  end;
+  if coalesce(pieces, 0) < 4 then raise exception 'Collect all 4 map pieces first.'; end if;
   nm := btrim(coalesce(p_name, ''));
   if nm !~ '^[[:alpha:][:space:].''-]{1,40}$' then nm := 'A young explorer'; end if;
 
