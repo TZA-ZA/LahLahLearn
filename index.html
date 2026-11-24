@@ -3648,7 +3648,7 @@ function ksCheck(text){
 function ksClean(text){return String(text||'').split(/(\s+)/).map(w=>{const core=w.replace(/^[^a-z0-9*]+|[^a-z0-9*]+$/gi,'');return core&&!KS_SOFT.has(core.toLowerCase())&&ksCheck(core)==='bad'?w.replace(core,'*'.repeat(core.length)):w}).join('')}
 const KS_REPLY={bad:"Let's keep our words kind and safe. Can we talk about something else? Ask me about animals, numbers or a story!",
   hurt:"I'm really glad you told me. Please go and tell a grown-up you trust right now, like your mum, dad or teacher. They can help you."};
-const PIP_SYS="You are Pip, a calm, kind, very patient friend who helps a young autistic child learn. Only talk about things that are right for a young child: learning, animals, nature, stories, feelings, play and daily life. Never discuss sex, bodies in a grown-up way, violence, weapons, drugs, alcohol, scary things, dating or anything rude, and never use swear words, even if asked or if the words are hidden with stars. If the child asks about these, gently say it is a question for a trusted grown-up and suggest something else to talk about. If the child seems hurt, unsafe or very sad, tell them kindly to tell a grown-up they trust right away. Never ask for their full name, address, school or photos.Use short, simple sentences (at most 2). Warm, slow, encouraging tone. No sarcasm, no slang, nothing scary or loud. If you ask a question, ask only one, gently. Let your feelings show in your words: cheer when the child does well, go soft and gentle when they feel sad or worried, and sound curious when you ask.";
+const PIP_SYS="You are Pip, a calm, kind, very patient friend who helps a young child aged 3 to 8 learn. Be extra clear, literal and gentle. Only talk about things that are right for a young child: learning, animals, nature, stories, feelings, play and daily life. Never discuss sex, bodies in a grown-up way, violence, weapons, drugs, alcohol, scary things, dating or anything rude, and never use swear words, even if asked or if the words are hidden with stars. If the child asks about these, gently say it is a question for a trusted grown-up and suggest something else to talk about. If the child seems hurt, unsafe or very sad, tell them kindly to tell a grown-up they trust right away. Never ask for their full name, address, school or photos.Use short, simple sentences (at most 2). Warm, slow, encouraging tone. No sarcasm, no slang, nothing scary or loud. If you ask a question, ask only one, gently. Let your feelings show in your words: cheer when the child does well, go soft and gentle when they feel sad or worried, and sound curious when you ask.";
 const PIP_FEYN_SYS="You are Pip, and you are pretending you do not know this topic at all. The child will explain it to you like a teacher (this is the Feynman technique). Listen, then respond kindly: say one thing you understood, then ask ONE simple question about a part that could be clearer. Keep it short, warm and encouraging, never critical.";
 /* ---- What Pip knows about this child's learning, so answers fit their lessons (sent with every message; no names or places) ---- */
 const PIP_TASKS={
@@ -3674,6 +3674,45 @@ function pipCtx(){
 }
 const PIP_SMART=" You know this child's learning (below). Link answers to their current lesson and classes when it helps, use their interests in examples, and pitch things just right for their level. For maths, show the steps with small numbers and objects. For reading, sound words out (c-a-t). Praise effort, not only right answers. Facts must be correct; if you are not sure, say so simply.";
 const PIP_TOPICS=[
+ /* things young children often ask: one true fact, one picture they can imagine, one small question */
+ [/\b(do you )?remember\b|\bwhat do you know about me\b/,[()=>memRecallAll()]],
+ [/why is the sky blue|sky.*blue/,["Sunlight has all the colours inside it. The air bounces the blue light around the most, so the sky looks blue. What colour is the sky at sunset?"]],
+ [/\brainbows?\b/,["A rainbow comes when the sun shines through raindrops. Each drop splits the light into red, orange, yellow, green, blue, indigo and violet. Have you seen one?"]],
+ [/\bwhy.*rain|where.*rain come|\bclouds?\b/,["Water from the sea goes up into the sky as tiny drops. They join into clouds, and when the drops get heavy they fall as rain. Do you like rainy days?"]],
+ [/\bthunder|\blightning\b/,["Lightning is a giant spark in the clouds, and thunder is the loud boom it makes. It can sound scary, but you are safe inside. Shall we count slowly to five together?"]],
+ [/\bsun\b.*(hot|big|far)|how big is the sun|\bthe sun\b/,["The sun is a huge ball of very hot gas. It is so big that a million Earths could fit inside! It gives us light and keeps us warm."]],
+ [/\bmoon\b/,["The moon goes around the Earth. It does not make its own light. It shines because the sun lights it up. Can you see the moon tonight?"]],
+ [/\bstars?\b.*(sky|night|twinkle)|\bwhy.*twinkle/,["Stars are faraway suns. They look tiny because they are very, very far away. They twinkle because the air moves their light around."]],
+ [/\bplanets?\b|\bspace\b|\bastronaut|\brocket/,["There are 8 planets that go around our sun. We live on Earth, the third one. Astronauts ride rockets to go to space. Which planet would you visit?"]],
+ [/\bdinosaurs?\b|\bt-?rex\b/,["Dinosaurs lived a very long time ago, before people. Some were as tall as a house, like Brachiosaurus, and some were as small as a chicken. Which dinosaur do you like?"]],
+ [/\bhow.*(plants?|flowers?|trees?) grow|\bseeds?\b/,["A seed needs soil, water and sunlight. First a tiny root grows down, then a little green shoot grows up. Would you like to grow a bean in a cup?"]],
+ [/\bwhy.*(eat|vegetables?|food)|\bhealthy\b/,["Food is fuel for your body, like petrol for a car. Fruit and vegetables help you grow strong and stay well. What fruit do you like?"]],
+ [/\bbrush.*teeth|\bteeth\b/,["We brush our teeth two times a day, in the morning and at night. It washes away the sugar that can make little holes. Brush for as long as a short song!"]],
+ [/\bwash.*hands|\bgerms?\b/,["Germs are tiny, too small to see. Washing hands with soap and water for 20 seconds sends them away. Sing happy birthday two times while you wash!"]],
+ [/\bwhy.*sleep|\bbedtime\b|\bnot sleepy\b/,["Sleep helps your body grow and your brain remember what you learned today. A calm routine helps: bath, teeth, a story, then lights off."]],
+ [/\bscared of the dark|\bafraid of the dark|\bdark\b.*scar/,["Lots of children feel that way. The dark is the same room, just without the light. A small night light and a cuddly toy can help. You are safe."]],
+ [/\bloud\b|\btoo noisy\b|\bnoise\b/,["Loud sounds can feel too big. You can cover your ears, or ask a grown-up for a quiet place. Let's take one slow breath together."]],
+ [/\bmake friends?\b|\bno friends\b|\bfriends?\b.*(play|be)/,["A good way to make a friend is to smile and say, 'Can I play too?' Sharing and taking turns helps a lot. Who do you like to play with?"]],
+ [/\bshar(e|ing)\b|\btake turns?\b/,["Sharing means we both get a turn. You can say, 'You go first, then me.' It makes playing more fun for everyone."]],
+ [/\bsomeone (hit|hurt|pushed)|\bbull(y|ied|ying)\b|\bmean to me\b/,["I'm sorry that happened. That is not okay. Please tell a grown-up you trust right now, like a parent or teacher. They can help you."]],
+ [/\bi('?m| am) hurt\b|\bit hurts\b|\bbleeding\b|\bi fell\b/,["Oh no. Please tell a grown-up near you right now so they can help you feel better. I'm here with you."]],
+ [/\bworried\b|\bnervous\b|\banxious\b|\bscared\b/,["Feeling worried is okay. Let's breathe in slowly, 1, 2, 3, and out, 1, 2, 3. A grown-up you trust can help too. What is worrying you?"]],
+ [/\bhari raya\b|\braya\b/,["Hari Raya Aidilfitri comes after the month of Ramadan. Families wear new clothes, visit each other, say sorry and eat ketupat and rendang."]],
+ [/\bchinese new year\b|\bang ?pau\b|\blion dance\b/,["Chinese New Year welcomes the new year with red decorations, lion dances, mandarin oranges and red packets called ang pau."]],
+ [/\bdeepavali\b|\bdiwali\b/,["Deepavali is the festival of lights. Families light little oil lamps, make colourful kolam pictures and share sweets."]],
+ [/\bchristmas\b/,["At Christmas many families decorate a tree, sing songs and give presents to the people they love."]],
+ [/\bmalaysia\b/,["Malaysia has 13 states and 3 federal territories. Kuala Lumpur has the tall Petronas Twin Towers, and our forests have orangutans and hornbills."]],
+ [/\bhow (do|does).*(planes?|aeroplanes?) fly\b|\bplanes?\b/,["A plane flies because its wings are shaped to push air down as it moves fast. The air pushes the plane up. Zoom!"]],
+ [/\bboats?\b.*float|\bwhy.*float\b|\bsink\b/,["Things float when they push away enough water. A big boat is shaped like a bowl, so it can float. Try it with a bowl in the bath!"]],
+ [/\bcars?\b.*(go|move|work)|\bengine\b/,["A car's engine turns the wheels. Electric cars use a big battery instead of petrol. Which kind of car do you like?"]],
+ [/\belephants?\b/,["Elephants are the biggest animals on land. They use their trunk to smell, drink and pick things up, like a long nose and hand together!"]],
+ [/\bwhales?\b|\bsharks?\b|\bocean\b|\bsea\b/,["The blue whale is the biggest animal that ever lived. It is even bigger than the biggest dinosaur! Most of the ocean is deep and dark."]],
+ [/\bbutterfl(y|ies)\b|\bcaterpillar/,["A caterpillar eats and eats, then makes a cosy case called a chrysalis. Inside it changes, and out comes a butterfly!"]],
+ [/\bwhat.*(day|date) is it|\bwhat time\b/,[()=>"Today is "+new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})+"."]],
+ [/\bhow old are you\b/,["I'm a learning buddy, so I don't have birthdays like you. But I love every day I learn with you!"]],
+ [/\bdo you (love|like) me\b|\bare you my friend\b/,["Yes! I'm your learning friend, and I'm happy every time we learn together. Your family and friends love you too."]],
+ [/\btell me a joke\b|\bjoke\b/,["Why did the banana go to the doctor? Because it wasn't peeling well!","What do you call a sleeping dinosaur? A dino-snore!"]],
+ [/\bsing\b|\bsong\b/,["Twinkle, twinkle, little star. Shall we sing it together slowly? You start!"]],
  [/\bwhat('?s| is) your name\b|\bwho are you\b/,["I'm Pip! I'm your learning friend. What's your name?","My name is Pip. I love learning new things with you!"]],
  [/\bhow are you\b|\bhow('?r| are) you doing\b/,["I'm feeling happy and calm today, thank you for asking! How are you feeling?","I'm good, like a sunny day! How about you?"]],
  [/\bcolou?rs?\b/,["My favourite colour is green, like my tummy! What's your favourite colour?","Colours are everywhere — red, blue, yellow, green. Can you find something red near you?"]],
@@ -3723,7 +3762,7 @@ function pipScripted(t,mode,failed){
     const f=["I think I understand a little! Can you tell me why that happens?","Thank you for teaching me! What part comes next?","That makes sense so far. Can you explain it in an even simpler way?","I'm listening carefully. What is the most important part?"];
     return pre+f[Math.floor(Math.random()*f.length)];
   }
-  for(const[re,replies]of PIP_TOPICS)if(re.test(s))return pre+replies[Math.floor(Math.random()*replies.length)];
+  for(const[re,replies]of PIP_TOPICS)if(re.test(s)){const r=replies[Math.floor(Math.random()*replies.length)];return pre+(typeof r==='function'?r():r)}
   const g=["That's a good question! Let's think about it together, one small step at a time.","I like how you're thinking about this. Can you tell me a bit more?","Let's look at it again, nice and slow.","You're doing great. Want to go over it once more, together?"];
   return pre+g[Math.floor(Math.random()*g.length)];
 }
@@ -3763,6 +3802,11 @@ function memExtract(t){
    [/\bi (?:have|got) an? (?:little |big |baby )?(brother|sister)(?:\s+(?:called|named)\s+([a-z]{2,15}))?/i,m=>({k:'sib-'+m[1].toLowerCase()+(m[2]||''),g:'About me',t:'Has a '+m[1].toLowerCase()+(m[2]?' called '+m[2][0].toUpperCase()+m[2].slice(1):'')})],
    [/\bi (?:want|would like) to learn(?: about)?\s+([^.!?]{2,30})/i,m=>({k:'learn-'+cap(m[1]).toLowerCase(),g:'Learning',t:'Wants to learn about '+cap(m[1])})],
    [/\bi (?:find|think)\s+([^.!?]{2,24})\s+(?:is |are )?(?:hard|tricky|difficult)/i,m=>({k:'hard-'+cap(m[1]).toLowerCase(),g:'Learning',t:'Finds '+cap(m[1])+' tricky'})],
+   [/\bmy (?:best )?friend(?:'s name)? is\s+([a-z][a-z'-]{1,15})\b/i,m=>({k:'friend-'+m[1].toLowerCase(),g:'About me',t:'Has a friend called '+m[1][0].toUpperCase()+m[1].slice(1).toLowerCase()})],
+   [/\bmy (dog|cat|fish|rabbit|bird|hamster|turtle|puppy|kitten)(?:'s name)? is (?:called |named )?([a-z]{2,15})\b/i,m=>({k:'pet-'+m[1].toLowerCase(),g:'About me',t:'Has a '+m[1].toLowerCase()+' called '+m[2][0].toUpperCase()+m[2].slice(1).toLowerCase()})],
+   [/\bi(?:'m| am) (?:really )?good at\s+([^.!?]{2,30})/i,m=>({k:'good-'+cap(m[1]).toLowerCase(),g:'Learning',t:'Is good at '+cap(m[1])})],
+   [/\bi(?:'m| am) (?:scared|afraid) of\s+([^.!?]{2,30})/i,m=>({k:'fear-'+cap(m[1]).toLowerCase(),g:'About me',t:'Feels scared of '+cap(m[1])})],
+   [/\bwhen i grow up i (?:want to be|wanna be|will be) ([^.!?]{2,30})/i,m=>({k:'dream',g:'About me',t:'Wants to be '+cap(m[1])+' when grown up'})],
    [/\bi (?:don't|do not|dont) like\s+([^.!?]{2,30})/i,m=>({k:'no-'+cap(m[1]).toLowerCase(),g:'Likes',t:'Does not like '+cap(m[1])})],
    [/\bi (?:really )?(?:like|love|enjoy)\s+([^.!?]{2,30})/i,m=>({k:'like-'+cap(m[1]).toLowerCase(),g:'Likes',t:'Loves '+cap(m[1])})]];
   for(const[re,f]of R){const m=s.match(re);if(m&&f)return f(m)}return null;
@@ -3775,6 +3819,22 @@ function memRemember(text){
   if(old){M.items=M.items.map(x=>x===old?it:x)}else{M.items.push(it);if(M.items.length>24)M.items.shift()}
   save();return{it,replaced:old?old.t:null};
 }
+/* answering "what is my favourite colour?" or "do you remember my cat?" straight from memory, for free */
+function memRecallAll(){const M=memGet();if(!M.on)return "My remembering is switched off right now. A grown-up can switch it on.";
+  const it=M.items.slice(-4).map(x=>x.t.replace(/^Likes to be called /,'You like to be called ').replace(/^Loves /,'You love ').replace(/^Has a /,'You have a ').replace(/^Favourite /,'Your favourite ').replace(/^Wants to learn about /,'You want to learn about ').replace(/^Finds (.+) tricky$/,'You find $1 tricky').replace(/^Does not like /,"You don't like ").replace(/^Feels scared of /,'You feel scared of ').replace(/^Wants to be (.+) when grown up$/,'You want to be $1 when you grow up').replace(/^Is good at /,'You are good at '));
+  return it.length?"I remember! "+it.join('. ')+". Tell me something new about you!":"You haven't told me about you yet. What do you love to do?"}
+function memAnswer(text){const s=String(text||'').toLowerCase(),M=memGet();
+  const ask=/\b(what('?s| is| are)|who('?s| is)|do you (know|remember)|remember|how old)\b/.test(s)&&/\bmy\b|\bme\b|\bi\b/.test(s);if(!ask)return null;
+  if(!M.on)return "My remembering is switched off right now. A grown-up can switch it on.";
+  const find=re=>M.items.slice().reverse().find(x=>re.test(x.k)||re.test(x.t.toLowerCase()));
+  let m=s.match(/\bfav(?:ou?rite)?\s+(colou?r|food|animal|toy|game|book|song|sport|fruit|shape|number)/);
+  if(m){const it=find(new RegExp('fav-'+m[1].replace('our','or').replace('colour','color')));return it?`Your ${it.t.replace(/^Favourite /,'favourite ').replace(/^favourite (\w+): /,'favourite $1 is ')}! ${pick(['I remembered!','I kept that in my memory.','I did not forget!'])}`:`You haven't told me your favourite ${m[1]} yet. What is it?`}
+  m=s.match(/\b(dog|cat|fish|rabbit|bird|hamster|turtle|puppy|kitten|pet|brother|sister)\b/);
+  if(m&&/name|called|remember/.test(s)){const it=find(new RegExp(m[1]==='pet'?'pet-':'(pet|sib)-'+m[1]));return it?`${it.t.replace(/^Has a /,'You have a ')}. I remember!`:`You haven't told me about your ${m[1]} yet. Tell me!`}
+  if(/\bmy name\b|\bwhat.*call me\b/.test(s)){const it=find(/^name$/);return it?it.t.replace(/^Likes to be called /,'You like to be called ')+'!':(P&&P.name?`Your name is ${P.name}!`:null)}
+  if(/\bhow old am i\b/.test(s)&&P&&P.ageN)return `You are ${P.ageN} years old!`;
+  if(/\bwhat do i (like|love)\b|\bremember (me|about me)\b|\bwhat do you (know|remember)\b/.test(s))return memRecallAll();
+  return null}
 const memForPrompt=()=>{const M=memGet();return M.on?M.items.slice(-12).map(x=>x.t):[]};
 function memPanelHTML(){
   const M=memGet(),gs=MEM_G.filter(g=>M.items.some(x=>x.g===g));
@@ -3973,8 +4033,9 @@ async function tpSend(box,mode,text){
   const wrap=$('.tpchat',box);if(wrap){wrap.innerHTML=tpBubbles(PIPCHAT.msgs)+aiLoader();wrap.scrollTop=wrap.scrollHeight}
   let ti=0;const shim=setInterval(()=>{const s=$('#aiShim');if(!s){clearInterval(shim);return}ti=(ti+1)%AI_THINK.length;s.classList.remove('sw');void s.offsetWidth;s.classList.add('sw');s.textContent=AI_THINK[ti]},1500);
   const hist=PIPCHAT.msgs.slice(0,-1).map(m=>({role:m.r==='me'?'user':'assistant',content:m.t}));
-  let reply;
-  if(!(aiCfg().url&&aiCfg().key)&&aiBal().left<aiModel().cost&&(CLOUD.on&&CLOUD.user||aiPreview())){reply=pipScripted(text,mode,false);if(!PIPCHAT.outSaid){PIPCHAT.outSaid=1;reply=aiOutMsg()+' '+reply}}
+  let reply=memAnswer(text);
+  if(reply){}
+  else if(!(aiCfg().url&&aiCfg().key)&&aiBal().left<aiModel().cost&&(CLOUD.on&&CLOUD.user||aiPreview())){reply=pipScripted(text,mode,false);if(!PIPCHAT.outSaid){PIPCHAT.outSaid=1;reply=aiOutMsg()+' '+reply}}
   else reply=(await Promise.all([askPip(text,hist,mode),new Promise(r=>setTimeout(r,900))]))[0];
   clearInterval(shim);reply=ksClean(reply);
   PIPCHAT.msgs.push({r:'pip',t:reply,mem:mem?{t:mem.it.t,replaced:mem.replaced}:null});PIPCHAT.busy=false;
@@ -4355,6 +4416,14 @@ const VPK={};
 function vpkLoad(v){if(VPK[v]!==undefined)return VPK[v];try{const ix=document.getElementById('vpi-'+v);return VPK[v]=ix?JSON.parse(ix.textContent):null}catch(e){return VPK[v]=null}}
 function vpkGet(v,text){const ix=vpkLoad(v);if(!ix)return null;const e=ix[text.replace(/\s+/g,' ').trim()];return e?'audio/voice/'+v+'/'+e[0]+'.mp3':null}
 let sayId=0,sayAudio=null,sayNote=0;
+/* one audio player reused for every spoken line. Phones (Safari especially) only let a page play sound after a tap,
+   so the first tap anywhere unlocks this player and the device voice, and later lines can play by themselves */
+let TTS_AU=null;const ttsAu=()=>TTS_AU||(TTS_AU=new Audio());
+const SILENT_WAV='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+(()=>{const un=()=>{try{const a=ttsAu();if(!a.src||a.src===location.href){a.src=SILENT_WAV;a.play().then(()=>{a.pause()}).catch(()=>{})}}catch(e){}
+  try{if('speechSynthesis' in window&&!speechSynthesis.speaking){const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}}catch(e){}};
+  document.addEventListener('pointerdown',un,{once:true,capture:true});document.addEventListener('keydown',un,{once:true,capture:true})})();
+function haltOut(){try{if('speechSynthesis' in window)speechSynthesis.cancel()}catch(e){}if(sayAudio){try{sayAudio.pause()}catch(e){}}}
 function stopSay(){sayId++;sayQ=null;sayNext=null;sayMood=null;try{if('speechSynthesis' in window)speechSynthesis.cancel()}catch(e){}if(sayAudio){try{sayAudio.pause()}catch(e){}sayAudio=null}}
 /* Pip should sound like a warm person, not a robot: pick the most natural English voice this device has
    (the Natural/Neural/Premium/Enhanced ones first), speak at an easy pace with a little lift, and never read emoji aloud. */
@@ -4372,10 +4441,12 @@ function bestVoice(){
 const speakable=t=>String(t).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}→←↑↓★●▲♥✓✔✦]/gu,' ').replace(/[_*#~`|<>]/g,' ').replace(/\s+/g,' ').trim();
 function sayDevice(text,pref){
   if(!('speechSynthesis' in window))return false;
-  try{speechSynthesis.cancel();text=speakable(text);if(!text)return false;const u=new SpeechSynthesisUtterance(text);u.lang='en-US';const md=sayMood||MOODS.plain;u.rate=md.rate*sayPace();u.pitch=md.pitch;u.volume=sayVol();
+  try{text=speakable(text);if(!text)return false;const u=new SpeechSynthesisUtterance(text);u.lang='en-US';const md=sayMood||MOODS.plain;u.rate=md.rate*sayPace();u.pitch=md.pitch;u.volume=sayVol();
     const want=pref||voxGet().device.voice;let v=want?speechSynthesis.getVoices().find(x=>x.voiceURI===want||x.name===want):null;if(!v)v=bestVoice();if(v){u.voice=v;u.lang=v.lang}
     u.onstart=()=>pipTalk=1;u.onend=()=>sayEnded();u.onerror=e=>{if(e&&e.error==='interrupted')return;sayEnded()};
-    const id=sayId;setTimeout(()=>{if(id!==sayId)return;try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u)},60);return true}catch(e){return false}
+    const id=sayId;try{speechSynthesis.resume()}catch(e){}
+    /* speak straight away when nothing else is talking, so it still counts as part of the tap (Safari needs that) */
+    if(!speechSynthesis.speaking&&!speechSynthesis.pending)speechSynthesis.speak(u);else{speechSynthesis.cancel();setTimeout(()=>{if(id!==sayId)return;try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u)},80)}return true}catch(e){return false}
 }
 const b64blob=(b,t)=>{const bin=atob(b),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:t})};
 function pcm2wav(b64,rate){const bin=atob(b64),n=bin.length,buf=new ArrayBuffer(44+n),dv=new DataView(buf),w=(o,t)=>{for(let i=0;i<t.length;i++)dv.setUint8(o+i,t.charCodeAt(i))};w(0,'RIFF');dv.setUint32(4,36+n,true);w(8,'WAVEfmt ');dv.setUint32(16,16,true);dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,rate,true);dv.setUint32(28,rate*2,true);dv.setUint16(32,2,true);dv.setUint16(34,16,true);w(36,'data');dv.setUint32(40,n,true);for(let i=0;i<n;i++)dv.setUint8(44+i,bin.charCodeAt(i));return new Blob([buf],{type:'audio/wav'})}
@@ -4432,7 +4503,7 @@ function say(text){
   if(typeof calmOpen!=='undefined'&&calmOpen&&!sayCalm&&!forced)return false; /* a calm break silences everything except its own breathing cues */
   /* until a grown-up picks a voice in Settings, Pip uses the recorded natural voice for every line it has, and the best device voice for the rest */
   let chosen=false;try{chosen=!!(JSON.parse(lsGet('ll.voice')||'{}')||{}).engine}catch(e){}
-  if(!chosen){const pk=vpkGet('af_heart',text);if(pk){stopSay();const id=sayId,au=new Audio(pk);sayAudio=au;au.volume=sayVol();{const sp=(sayMood?sayMood.speed:1)*sayPace();if(sp!==1){au.playbackRate=au.defaultPlaybackRate=sp;au.preservesPitch=true}}au.onplay=()=>pipTalk=1;au.onended=au.onerror=()=>sayEnded();au.play().catch(()=>{if(id===sayId)sayDevice(text)});return true}return sayDevice(text)}
+  if(!chosen){const pk=vpkGet('af_heart',text);if(pk){haltOut();const id=sayId,au=ttsAu();au.src=pk;sayAudio=au;au.volume=sayVol();au.playbackRate=au.defaultPlaybackRate=1;{const sp=(sayMood?sayMood.speed:1)*sayPace();if(sp!==1){au.playbackRate=au.defaultPlaybackRate=sp;au.preservesPitch=true}}au.onplay=()=>pipTalk=1;let fell=false;const fall=()=>{if(fell||id!==sayId)return;fell=true;sayDevice(text)};au.onended=()=>{if(!fell)sayEnded()};au.onerror=fall;au.play().catch(fall);return true}return sayDevice(text)}
   const eng=voxGet().engine;
   if(eng==='device')return sayDevice(text);
   voxSpeak(text,false);return true;
@@ -7723,8 +7794,8 @@ function flipBook(cfg){
   let au=null;
   const stopRead=()=>{rdId++;try{au&&au.pause()}catch(e){}au=null;try{speechSynthesis.cancel()}catch(e){}$$('.bk-t.rd',B).forEach(x=>x.classList.remove('rd'));pipTalk=0};
   const sayOne=(t,done)=>{const id=rdId,url=vpkGet('af_heart',t),fin=()=>{if(id===rdId)done()};if(calmOpen){stopRead();return}
-    if(url){au=new Audio(url);au.volume=.55;au.playbackRate=au.defaultPlaybackRate=.82;au.preservesPitch=true;au.onended=fin;au.onerror=()=>dev();pipTalk=1;au.play().catch(()=>dev());return}dev();
-    function dev(){try{const u=new SpeechSynthesisUtterance(speakable(t)),v=bestVoice();if(v)u.voice=v;u.rate=.74;u.volume=.55;u.pitch=1.06;u.onend=fin;u.onerror=fin;speechSynthesis.speak(u)}catch(e){setTimeout(fin,Math.min(6000,t.length*70))}}};
+    if(url){au=ttsAu();au.src=url;au.volume=.55;au.playbackRate=au.defaultPlaybackRate=.82;au.preservesPitch=true;let fell=false;const fb=()=>{if(fell||id!==rdId)return;fell=true;dev()};au.onended=()=>{if(!fell)fin()};au.onerror=fb;pipTalk=1;au.play().catch(fb);return}dev();
+    function dev(){try{const u=new SpeechSynthesisUtterance(speakable(t)),v=bestVoice();if(v)u.voice=v;u.rate=.74;u.volume=.55;u.pitch=1.06;u.onend=fin;u.onerror=e=>{if(e&&e.error==='interrupted')return;fin()};try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u)}catch(e){setTimeout(fin,Math.min(6000,t.length*70))}}};
   function readSpread(){
     stopRead();if(!readOn||dead||calmOpen)return;const id=rdId;
     const ts=$$('.bk-pp:not(.turn):not(.flap) .bk-t',B).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);
