@@ -272,6 +272,112 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 @media (prefers-reduced-motion:reduce){.pulse,.burst::before,.ld-b,.has::after,#uw::after,.wig .cheer{animation:none}#speedo i{transition:none}}
 
 
+
+.jx{display:flex;gap:10px;align-items:flex-start;margin:8px 0 2px;padding:10px 14px;border-radius:16px;border:3px solid var(--ink);font-weight:700;text-align:left;animation:jxIn .35s cubic-bezier(.3,1.6,.5,1)}
+.jx span{font-size:24px;line-height:1}.jx p{margin:0;font-size:1rem;line-height:1.35}.jx b{display:inline-block;margin-top:2px;font-weight:800}
+.jx.no{background:#fff1e6}.jx.ok{background:#e6f9ec}.jx.hint{background:#fff8d6}@keyframes jxIn{from{opacity:0;transform:translateY(8px)}}
+.qp .hint{margin-left:6px;border:0;background:#fff3c4;border-radius:50%;width:46px;height:46px;font-size:22px;cursor:pointer;flex:none}
+.isum{width:min(560px,100%)}.is-row{display:flex;align-items:center;justify-content:center;gap:18px;margin:6px 0}
+.is-ring{--p:0;width:118px;height:118px;border-radius:50%;display:grid;place-items:center;align-content:center;background:conic-gradient(#3fbf86 calc(var(--p)*1%),#ffe2cc 0);position:relative}
+.is-ring::before{content:"";position:absolute;inset:12px;border-radius:50%;background:#fff}.is-ring b,.is-ring small{position:relative}.is-ring b{font-size:28px}.is-ring small{font-size:12px;font-weight:700;opacity:.7}
+.is-n{display:flex;flex-direction:column;gap:8px;text-align:left}.is-n span{font-size:24px;font-weight:800}.is-n small{display:block;font-size:13px;font-weight:700;opacity:.7}
+.is-stops{list-style:none;margin:6px 0;padding:0;display:grid;gap:6px}.is-stops li{display:flex;align-items:center;gap:10px;padding:6px 12px;border-radius:14px;background:var(--sand,#fff6dc)}.is-stops li span{font-size:24px}.is-stops li b{flex:1;text-align:left}
+.isum h3{margin:10px 0 4px}.is-tr{list-style:none;margin:0;padding:0;display:grid;gap:6px}.is-tr li{display:flex;flex-direction:column;gap:2px;padding:8px 12px;border-radius:12px;background:#fff1e6;text-align:left}.jt-q{font-weight:700}.jt-a{font-weight:800;color:#1f8a5b}
+/* ===== intro film ===== */
+.introp.fmw{padding:0}
+#intro{padding:0;background:#0d1b2a}
+.fm{position:relative;width:100%;height:100%;display:flex;flex-direction:column;color:#fff}
+.fm-screen{position:relative;flex:1;overflow:hidden;background:#000;cursor:pointer}
+.fm-sc{position:absolute;inset:0;opacity:0;transition:opacity .9s ease,transform 1.2s ease;transform:scale(1.06)}
+.fm-sc.on{opacity:1;transform:none}
+.fm.paused .fm-sc *,.fm.paused .fm-bars *,.fm.paused .fm-sub{animation-play-state:paused!important}
+.fm-bars i{position:absolute;left:0;right:0;height:7%;background:#000;z-index:5;animation:fmBar 1.4s ease-out both}.fm-bars i:first-child{top:0;transform-origin:top}.fm-bars i:last-child{bottom:0;transform-origin:bottom}
+@keyframes fmBar{from{transform:scaleY(2)}to{transform:scaleY(1)}}
+.fm-sub{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);z-index:6;margin:0;max-width:86%;text-align:center;font:800 clamp(18px,2.8vw,32px)/1.2 Fredoka,system-ui,sans-serif;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 18px rgba(0,0,0,.4);padding:6px 16px;border-radius:14px;background:rgba(0,0,0,.28)}
+.fm-sub.in{animation:fmSub .6s cubic-bezier(.3,1.5,.5,1)}@keyframes fmSub{from{opacity:0;transform:translate(-50%,16px)}}
+.fm-skip{position:absolute;top:calc(7% + 12px);right:16px;z-index:7;font:800 17px Fredoka,system-ui,sans-serif;color:#1d2a23;background:#fff;border:0;border-radius:999px;padding:10px 18px;box-shadow:0 6px 0 rgba(0,0,0,.2);cursor:pointer}
+.fm-end{position:absolute;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;background:rgba(0,0,0,.35)}
+.fm-end[hidden]{display:none}
+.fm-ctl{display:flex;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:#0d1b2a}
+.fm-pp{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:#fff;color:#1d2a23;font-size:18px;font-weight:800;cursor:pointer}
+.fm-prog{flex:1;display:flex;gap:6px;min-width:0}
+.fm-seg{position:relative;height:44px;border:0;padding:0;background:none;cursor:pointer;color:#cfe3f5;text-align:left}
+.fm-seg::before{content:"";position:absolute;left:0;right:0;top:4px;height:8px;border-radius:5px;background:rgba(255,255,255,.22)}
+.fm-seg i{position:absolute;left:0;top:4px;height:8px;width:0;border-radius:5px;background:#ffd23f}
+.fm-seg span{position:absolute;left:2px;top:16px;white-space:nowrap;font:700 13px Fredoka,system-ui,sans-serif;overflow:hidden;max-width:100%}
+.fm-seg small{font-size:12px;opacity:.8}
+.fm-tm{flex:none;font:700 13px ui-monospace,monospace;color:#cfe3f5;min-width:84px;text-align:right}
+@media(max-width:640px){.fm-seg small{display:none}.fm-tm{display:none}}
+/* chapter 1: sunrise */
+.fm-sky{position:absolute;inset:0;background:linear-gradient(#ff9a76,#ffd29a 45%,#bfe9ff 70%)}
+.s0.on .fm-sky{animation:fmDawn 6s ease forwards}@keyframes fmDawn{to{filter:hue-rotate(-25deg) brightness(1.15);background:linear-gradient(#6fc3ff,#bfe9ff 60%,#e8f8ff)}}
+.fm-sky.day{background:linear-gradient(#6fc3ff,#c9efff 70%)}
+.fm-sun{position:absolute;left:62%;top:60%;width:15vmin;height:15vmin;border-radius:50%;background:radial-gradient(#fff7c2,#ffd23f 60%,#ffb02e);box-shadow:0 0 60px 20px rgba(255,210,63,.55)}
+.s0.on .fm-sun{animation:fmSun 6s ease-out forwards}@keyframes fmSun{to{top:10%}}
+.fm-cl{position:absolute;height:8vmin;width:24vmin;border-radius:99px;background:#fff;opacity:.9;box-shadow:6vmin -3vmin 0 -1vmin #fff,-5vmin -2vmin 0 -2vmin #fff}
+.fm-cl.c1{top:16%;left:-30%}.fm-cl.c2{top:28%;left:-50%;transform:scale(.7)}.fm-cl.c3{top:8%;left:-70%;transform:scale(1.2)}
+.fm-sc.on .fm-cl{animation:fmCloud 14s linear forwards}.fm-cl.c2{animation-duration:10s!important}@keyframes fmCloud{to{left:110%}}
+.fm-sea{position:absolute;left:0;right:0;bottom:0;height:38%;background:linear-gradient(#3fa9e6,#1f6fb3);overflow:hidden}
+.fm-sea i{position:absolute;left:-50%;width:200%;height:30px;top:-12px;background:radial-gradient(circle at 25px 0,transparent 20px,#3fa9e6 21px) repeat-x;background-size:50px 30px;animation:fmWave 3s linear infinite}
+.fm-sea i+i{top:8px;opacity:.5;animation-duration:5s;animation-direction:reverse}@keyframes fmWave{to{transform:translateX(50px)}}
+.fm-sand{position:absolute;left:-10%;right:-10%;bottom:-14%;height:34%;border-radius:50% 50% 0 0;background:#f3dfa2;box-shadow:inset 0 10px 0 #e9cf86}
+.fm-buds{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);display:flex;align-items:flex-end;gap:2vmin}
+.fm-buds span{display:block;width:clamp(70px,14vmin,150px);opacity:0}.fm-buds svg{width:100%;height:auto}
+.s0.on .fm-buds span{animation:fmPop .8s cubic-bezier(.3,1.7,.5,1) forwards,fmBob 1.6s ease-in-out infinite;animation-delay:calc(1.2s + var(--i)*.35s),calc(2.2s + var(--i)*.2s)}
+@keyframes fmPop{0%{opacity:0;transform:translateY(80px) scale(.5)}100%{opacity:1;transform:none}}@keyframes fmBob{50%{transform:translateY(-10px)}}
+.fm-t1{position:absolute;left:0;right:0;top:20%;margin:0;text-align:center;font:900 clamp(32px,7vw,84px) Fredoka,system-ui,sans-serif;color:#fff;text-shadow:0 5px 0 #e8883a,0 10px 24px rgba(0,0,0,.25)}
+.fm-t1 span{display:inline-block;opacity:0}.s0.on .fm-t1 span{animation:fmLet .5s cubic-bezier(.3,1.8,.5,1) forwards;animation-delay:calc(2.6s + var(--i)*.06s)}@keyframes fmLet{from{opacity:0;transform:translateY(-40px) rotate(-20deg)}to{opacity:1;transform:none}}
+/* chapter 2: flight over the islands */
+.s1{background:radial-gradient(120% 90% at 50% 40%,#5cc3f0,#2a86c9 70%,#1b5f97)}
+.fm-map{position:absolute;inset:-10%;transform-origin:20% 70%}
+.s1.on .fm-map{animation:fmFly 7s ease-in-out forwards}@keyframes fmFly{0%{transform:scale(1.9) translate(12%,-8%)}100%{transform:scale(1) translate(0,0)}}
+.fm-route{position:absolute;inset:0;width:100%;height:100%}
+.s1.on .fm-route path{stroke-dashoffset:200;animation:fmDash 6s linear forwards}@keyframes fmDash{to{stroke-dashoffset:0}}
+.fm-is{position:absolute;transform:translate(-50%,-50%) scale(0);width:12vmin;height:9vmin}
+.s1.on .fm-is{animation:fmIs .7s cubic-bezier(.3,1.7,.5,1) forwards;animation-delay:calc(.6s + var(--i)*.62s)}@keyframes fmIs{to{transform:translate(-50%,-50%) scale(1)}}
+.fm-is i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(var(--g) 55%,var(--e) 70%,#f3dfa2 72%,#f3dfa2 82%,transparent 84%);box-shadow:0 0 0 1.2vmin rgba(255,255,255,.25)}
+.fm-is b{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-size:4.6vmin}
+.fm-ig{position:absolute;left:50%;top:100%;transform:translateX(-50%);display:flex;gap:2px;font-size:2.6vmin;white-space:nowrap}
+.fm-ig em{font-style:normal;background:#fff;border-radius:999px;padding:1px 3px;opacity:0}.s1.on .fm-ig em{animation:fmPop .4s ease forwards;animation-delay:calc(1s + var(--i)*.62s)}
+/* chapter 3: the road */
+.fm-castle{position:absolute;right:8%;top:26%;font-size:10vmin;transform-origin:bottom}.s2.on .fm-castle{animation:fmGrow 7s ease-in forwards}@keyframes fmGrow{from{transform:scale(.5)}to{transform:scale(1.5)}}
+.fm-hill{position:absolute;left:0;width:300%;border-radius:50% 50% 0 0}
+.fm-hill.h1{bottom:22%;height:40%;background:repeating-radial-gradient(circle at 50% 100%,#8fd47a 0 30%,#7cc468 30% 31%);background:radial-gradient(60% 100% at 25% 100%,#9bdc86 99%,transparent),radial-gradient(60% 100% at 75% 100%,#8fd47a 99%,transparent)}
+.fm-hill.h2{bottom:14%;height:26%;background:radial-gradient(40% 100% at 20% 100%,#6fbf5c 99%,transparent),radial-gradient(40% 100% at 60% 100%,#6fbf5c 99%,transparent),radial-gradient(40% 100% at 95% 100%,#6fbf5c 99%,transparent)}
+.s2.on .fm-hill.h1{animation:fmPan 14s linear forwards}.s2.on .fm-hill.h2{animation:fmPan 7s linear forwards}@keyframes fmPan{to{transform:translateX(-50%)}}
+.fm-road{position:absolute;left:0;right:0;bottom:0;height:16%;background:#6b6f76;overflow:hidden}.fm-road i{position:absolute;left:0;width:300%;top:45%;height:8px;background:repeating-linear-gradient(90deg,#ffe36b 0 60px,transparent 60px 120px)}
+.s2.on .fm-road i{animation:fmPan 2s linear infinite}
+.fm-car{position:absolute;left:-30%;bottom:9%;width:clamp(150px,30vmin,320px);height:auto;filter:drop-shadow(0 8px 0 rgba(0,0,0,.2))}
+.s2.on .fm-car{animation:fmDrive 7s cubic-bezier(.4,0,.3,1) forwards,fmBump .35s ease-in-out infinite}@keyframes fmDrive{0%{left:-30%}45%{left:30%}100%{left:62%}}@keyframes fmBump{50%{margin-bottom:3px}}
+.fm-wh{transform-origin:44px 54px}.s2.on .fm-wh{animation:fmSpin .35s linear infinite}@keyframes fmSpin{to{transform:rotate(360deg)}}
+.fm-dust{position:absolute;left:28%;bottom:10%}.fm-dust i{position:absolute;width:3vmin;height:3vmin;border-radius:50%;background:rgba(255,255,255,.8);opacity:0}.s2.on .fm-dust i{animation:fmDust 1s ease-out infinite}.fm-dust i:nth-child(2){animation-delay:.33s!important}.fm-dust i:nth-child(3){animation-delay:.66s!important}
+@keyframes fmDust{0%{opacity:.8;transform:translate(0,0) scale(.5)}100%{opacity:0;transform:translate(-80px,-30px) scale(1.6)}}
+/* chapter 4: the prize */
+.s3{background:radial-gradient(80% 70% at 50% 60%,#3b2a6b,#140c2e)}
+.fm-stage{position:absolute;left:20%;right:20%;bottom:12%;height:10%;border-radius:50%;background:radial-gradient(#ffd23f,#e8883a 60%,transparent 70%);opacity:.6}
+.fm-spot{position:absolute;left:30%;right:30%;top:-10%;bottom:12%;background:linear-gradient(rgba(255,240,180,.0),rgba(255,240,180,.35));clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);opacity:0}.s3.on .fm-spot{animation:fmFade 1s ease .3s forwards}@keyframes fmFade{to{opacity:1}}
+.fm-tro{position:absolute;left:50%;bottom:16%;transform:translateX(-50%) translateY(120%);font-size:30vmin;line-height:1;overflow:hidden;filter:drop-shadow(0 0 30px rgba(255,210,63,.6))}
+.s3.on .fm-tro{animation:fmRise 1.6s cubic-bezier(.2,1.4,.4,1) .6s forwards}@keyframes fmRise{to{transform:translateX(-50%) translateY(0)}}
+.fm-shine{position:absolute;top:0;bottom:0;left:-60%;width:30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg)}.s3.on .fm-shine{animation:fmShine 2s ease 2.2s infinite}@keyframes fmShine{to{left:130%}}
+.fm-gifts{position:absolute;left:0;right:0;bottom:12%;display:flex;justify-content:center;gap:16vmin}.fm-gifts span{font-size:8vmin;transform:translateY(-120vh)}
+.s3.on .fm-gifts span{animation:fmDrop 1s cubic-bezier(.5,0,.5,1.4) forwards;animation-delay:calc(2s + var(--i)*.25s)}@keyframes fmDrop{to{transform:none}}
+.fm-fw{position:absolute;width:0;height:0}.fm-fw i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--c);opacity:0}
+.s3.on .fm-fw i{animation:fmBurst 1.6s ease-out infinite;animation-delay:calc(1.2s + var(--k)*.5s)}@keyframes fmBurst{0%{opacity:1;transform:rotate(var(--a)) translateX(0)}100%{opacity:0;transform:rotate(var(--a)) translateX(16vmin)}}
+/* chapter 5: the Rainbow Crown under the sea */
+.fm-deep{position:absolute;inset:0;background:linear-gradient(#2fb4e0,#0b5d8f 55%,#06304f)}
+.fm-rays i{position:absolute;top:-10%;width:12%;height:90%;background:linear-gradient(rgba(255,255,255,.35),transparent);transform-origin:top;filter:blur(2px)}
+.fm-rays i:nth-child(1){left:12%;transform:rotate(14deg)}.fm-rays i:nth-child(2){left:36%;transform:rotate(6deg)}.fm-rays i:nth-child(3){left:58%;transform:rotate(-6deg)}.fm-rays i:nth-child(4){left:80%;transform:rotate(-14deg)}
+.s4.on .fm-rays i{animation:fmRay 4s ease-in-out infinite alternate}@keyframes fmRay{to{opacity:.4}}
+.fm-bb{position:absolute;bottom:-5%;width:var(--s);height:var(--s);border-radius:50%;border:2px solid rgba(255,255,255,.7);opacity:0}.s4.on .fm-bb{animation:fmBub 5s linear infinite;animation-delay:calc(var(--k)*.37s)}@keyframes fmBub{0%{opacity:.9;transform:translateY(0)}100%{opacity:0;transform:translateY(-110vh) translateX(20px)}}
+.fm-fish{position:absolute;font-size:6vmin}.fm-fish.f1{top:24%;left:-10%}.fm-fish.f2{top:40%;left:110%;transform:scaleX(-1)}.fm-fish.f3{top:62%;left:-10%}
+.s4.on .fm-fish.f1{animation:fmSwimR 9s linear forwards}.s4.on .fm-fish.f3{animation:fmSwimR 12s linear 1s forwards}.s4.on .fm-fish.f2{animation:fmSwimL 10s linear .5s forwards}
+@keyframes fmSwimR{to{left:110%}}@keyframes fmSwimL{to{left:-10%}}
+.fm-chest{position:absolute;left:50%;bottom:26%;transform:translateX(-50%) scale(.3);opacity:0;width:clamp(180px,34vmin,360px)}.fm-chest .opc{width:100%;height:auto}
+.s4.on .fm-chest{animation:fmChest 1.6s cubic-bezier(.3,1.5,.5,1) .5s forwards}@keyframes fmChest{to{transform:translateX(-50%) scale(1);opacity:1}}
+.s4.on .fm-chest .opl{animation:fmLid 1s ease 2.4s forwards;transform-origin:40px 78px}@keyframes fmLid{to{transform:rotate(-38deg) translate(-6px,-10px)}}
+.fm-crown{position:absolute;left:50%;top:36%;transform:translate(-50%,0) scale(0);font-size:13vmin;filter:drop-shadow(0 0 20px #ffd23f)}
+.s4.on .fm-crown{animation:fmCrown 1.4s cubic-bezier(.3,1.7,.5,1) 3s forwards}@keyframes fmCrown{to{transform:translate(-50%,-90%) scale(1)}}
+.fm.rm .fm-sc *{animation:none!important;opacity:1!important;transform:none!important}
 /* the full-screen introduction page */
 .introp{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;overflow:auto;background:radial-gradient(120% 90% at 50% 0%,#bfe9ff 0%,#8fd3f5 45%,#5fb8e8 100%);transition:opacity .45s}
 .introp.out{opacity:0;pointer-events:none}
@@ -475,7 +581,7 @@ const ITEMS=[
  {id:'r-boat-swan',cat:'boat',name:'Swan boat',icon:'🦢',gems:6,col:'#ffffff',style:'swan'},
  {id:'h-none',cat:'hat',name:'No hat',icon:'🙂',price:0},{id:'h-party',cat:'hat',name:'Party hat',icon:'🥳',price:30},{id:'h-flower',cat:'hat',name:'Flower crown',icon:'🌸',price:45},
  {id:'h-beanie',cat:'hat',name:'Snow beanie',icon:'🧶',price:70},{id:'h-cap',cat:'hat',name:'Propeller cap',icon:'🧢',price:90},{id:'h-cowboy',cat:'hat',name:'Cowboy hat',icon:'🤠',price:110},
- {id:'h-pirate',cat:'hat',name:'Pirate hat',icon:'🏴‍☠️',price:130},{id:'h-wizard',cat:'hat',name:'Wizard hat',icon:'🧙',price:170},{id:'h-top',cat:'hat',name:'Top hat',icon:'🎩',price:200},
+ {id:'h-pirate',cat:'hat',name:'Pirate hat',icon:'💎',price:130},{id:'h-wizard',cat:'hat',name:'Wizard hat',icon:'🧙',price:170},{id:'h-top',cat:'hat',name:'Top hat',icon:'🎩',price:200},
  {id:'h-horn',cat:'hat',name:'Unicorn horn',icon:'🦄',gems:5},{id:'h-crown',cat:'hat',name:'Golden crown',icon:'👑',price:350},
  {id:'p-none',cat:'pet',name:'No pet',icon:'🙂',price:0},{id:'p-butterfly',cat:'pet',name:'Butterfly',icon:'🦋',price:70},{id:'p-bee',cat:'pet',name:'Bumble bee',icon:'🐝',price:110},
  {id:'p-star',cat:'pet',name:'Star sprite',icon:'⭐',price:180},{id:'p-jelly',cat:'pet',name:'Jellyfish',icon:'🎐',gems:4},{id:'p-dragon',cat:'pet',name:'Baby dragon',icon:'🐉',gems:10},
@@ -547,7 +653,7 @@ const STICKERS=[
  ...ZONES.map((Z,i)=>['z-'+Z.id,Z.name,Z.icon,'places']),
  ...ZONES.map((Z,i)=>['b-'+Z.id,'All '+Z.name+' babies home','💞','babies']),
  ['x-three','First 3 stars','⭐','badges'],['x-ten','Ten 3-star games','🌟','badges'],['x-swim','Swimmer','🏊','badges'],['x-dive','Deep diver','🤿','badges'],['x-jump','Super jumper','🦘','badges'],
- ['x-chest','Treasure hunter','💰','badges'],['x-drive','Little driver','🚗','badges'],['x-row','Rowing star','🚣','badges'],['x-shop','Dress up','👗','badges'],['x-quest','Quest hero','📜','badges'],['x-week','7 days of gifts','📅','badges'],['x-journey','Journey done','🏆','badges'],['x-onepiece','One Piece Treasure','👑','badges']];
+ ['x-chest','Treasure hunter','💰','badges'],['x-drive','Little driver','🚗','badges'],['x-row','Rowing star','🚣','badges'],['x-shop','Dress up','👗','badges'],['x-quest','Quest hero','📜','badges'],['x-week','7 days of gifts','📅','badges'],['x-journey','Journey done','🏆','badges'],['x-onepiece','Rainbow Crown Treasure','👑','badges']];
 const STK=Object.fromEntries(STICKERS.map(s=>[s[0],s]));
 const STK_CATS=[['friends','Friends'],['sea','Sea life'],['places','Places'],['babies','Babies'],['badges','Badges']];
 
@@ -2375,25 +2481,67 @@ const QZ={
   const S2=pick(FEEL_S),k=FACES.find(f=>f[1]===S2[2]),others=shuffle(FACES.filter(f=>f!==k)).slice(0,2);
   return{p:`<span class="bigemo">${S2[0]}</span> ${S2[1]} How do you feel?`,say:S2[1]+' How do you feel?',opts:shuffle([k].concat(others)).map(f=>({h:labBtn(f[0],f[1]),ok:f===k}))}}
 };
+/* ---- why it is right, why it is wrong, and a hint (no answer is taken away) ---- */
+const SHAPE_FACT={circle:'A circle is round and has no corners.',square:'A square has 4 sides that are all the same.',triangle:'A triangle has 3 sides and 3 corners.',star:'A star has 5 points.',heart:'A heart is round at the top and pointy at the bottom.',diamond:'A diamond has 4 sides and stands on a point.',oval:'An oval is like a stretched circle.',rectangle:'A rectangle has 4 sides: 2 long and 2 short.',hexagon:'A hexagon has 6 sides.',moon:'A moon shape is curved like a smile.'};
+const COL_THING={red:'an apple',blue:'the sky',yellow:'the sun',green:'grass',purple:'grapes',orange:'an orange',pink:'a flamingo'};
+const plainT=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+function jxExplain(t,cur,pickedT,rightT){
+ const P=plainT(cur.p),num=x=>+x;let why='',wrong='',hint='';
+ if(t==='count'){const m=/(\d+) \+ (\d+)/.exec(P);if(m){why=`${m[1]} + ${m[2]} = ${rightT}. Start at ${m[1]} and count on ${m[2]} more.`;hint=`Start at ${m[1]}, then count on with your fingers.`}else{why=`There are ${rightT}. Touch each one and count.`;hint='Touch each one with your finger and count out loud.'}
+  if(pickedT!=null){const d=num(pickedT)-num(rightT);wrong=`${pickedT} is ${Math.abs(d)} too ${d>0?'many':'few'}.`}}
+ else if(t==='bigger'){if(/[0-9]/.test(rightT)){const big=/BIGGER/i.test(P);why=`${rightT} is ${big?'bigger':'smaller'}. When we count, ${big?rightT+' comes later':rightT+' comes first'}.`;hint='Count up from 1. The number you say later is bigger.';if(pickedT!=null)wrong=`${pickedT} is ${big?'smaller':'bigger'} than ${rightT}.`}
+  else{why='Look at how much space each one takes.';hint='Compare their sizes side by side.';wrong='Look again at the sizes.'}}
+ else if(t==='order'){why='Numbers go from the smallest to the biggest.';hint='Find the smallest number first. Then the next one.';wrong=pickedT!=null?`${pickedT} is not next. Which number is the smallest one left?`:''}
+ else if(t==='shapes'){const k=(/Find the (\w+)/.exec(P)||[])[1];why=SHAPE_FACT[k]||'Look at the sides and corners.';hint=SHAPE_FACT[k]||'Count the sides and corners.';if(pickedT)wrong=`That one is a ${pickedT}. ${SHAPE_FACT[pickedT]||''}`}
+ else if(t==='colours'){const k=((/Tap the (\w+)/i.exec(P)||[])[1]||'').toLowerCase();why=`${k} like ${COL_THING[k]||'this'}.`;hint=`Think of ${COL_THING[k]||'something '+k}.`;if(pickedT)wrong=`That balloon is ${pickedT}, like ${COL_THING[pickedT]||'something else'}.`}
+ else if(t==='shadow'){why='The shadow has the same outline.';hint='Look at the outline: ears, tail, legs.';wrong='That shadow has a different outline.'}
+ else if(t==='letters'){why=`Big ${rightT.toUpperCase()} and little ${rightT.toLowerCase()} are the same letter.`;hint='Big and little letters make the same sound.';if(pickedT)wrong=`${pickedT} is a different letter.`}
+ else if(t==='sounds'){const w=(/^(\S+ )?(\w+) starts with/.exec(P)||[])[2]||'';why=`${w} starts with ${rightT}: ${rightT.toLowerCase()}… ${w.toLowerCase()}.`;hint=`Say ${w} slowly. Listen to the very first sound.`;if(pickedT)wrong=`${w} does not start with ${pickedT}.`}
+ else if(t==='spell'){why='Each letter matches a sound in the word.';hint='Say the word slowly and listen for each sound.';if(pickedT)wrong=`${pickedT} is not the next letter. Say the word again slowly.`}
+ else if(t==='opp'){const w=(/opposite of (\w+)/i.exec(P)||[])[1]||'';why=`${rightT} is the opposite of ${w.toLowerCase()}.`;hint='Opposites are as different as can be, like hot and cold.';if(pickedT)wrong=`${pickedT} is not the opposite of ${w.toLowerCase()}.`}
+ else if(t==='odd'){why='The others belong together. This one does not.';hint='Find what the others have in common.';wrong='That one goes with the others. Look for the one that is different.'}
+ else if(t==='pattern'){why='The pattern repeats, so this comes next.';hint='Say the pattern out loud and keep going.';wrong='That breaks the pattern. Say it out loud from the start.'}
+ else if(t==='world'){why=`${rightT} is kind to people, animals or our planet.`;hint='Which choice is kind and safe?';if(pickedT)wrong=`${pickedT} is not a kind choice.`}
+ else if(t==='feelings'){why=`That face looks ${rightT}.`;hint='Look at the eyes and the mouth.';if(pickedT)wrong=`That face looks ${pickedT}.`}
+ return{why,wrong,hint};
+}
+function zsRec(st,cur,ok,rightT){const z=S.zsum||(S.zsum={}),Z=z[st.zone]||(z[st.zone]={r:0,w:0,it:[]});ok?Z.r++:Z.w++;if(!ok&&Z.it.length<12)Z.it.push({s:st.idx,q:plainT(cur.p).slice(0,80),a:String(rightT||'')})}
 function runQuiz(st,done){
  const l=diff(),R0=MODE().rounds,R=QZ[st.t]===QZ.order||QZ[st.t]===QZ.spell?Math.min(4,R0):R0;let r=0,miss=0,cur=null,busy=false,seqN=0;
  const optT=o=>{if(o.t)return String(o.t);let m=/class="num">([^<]+)</.exec(o.h);if(m)return m[1];m=/<small>([^<]+)<\/small>/.exec(o.h);if(m)return m[1];m=/aria-label="([^"]+)"/.exec(o.h);return m?m[1]:''};
  const draw=()=>{cur=QZ[st.t](l,st);busy=false;seqN=cur.pre||0;const last=MODE().plan&&r===R-1&&R>1;const Z=ZONES[st.zone],rd=MODE().read;if(rd)cur.p=cur.p.replace(/\b([A-Z]{2,})\b/g,(m,w)=>w.toLowerCase());
   showOv(`<div class="card quiz" role="dialog" aria-modal="true" aria-label="${esc(stopName(st))}" style="--zc:${Z.stone}"><button class="x" aria-label="Close">${ICON('x',22)}</button>
    <div class="qh"><span class="em">${st.i}</span><div><b>${esc(stopName(st))}${last?'<span class="last1">Last one!</span>':''}</b><small class="w2only">${Z.icon} ${esc(Z.name)} · stop ${st.idx+1}</small></div><span class="qd">${Array.from({length:R},(_,k)=>`<i class="${k<r?'on':''}"></i>`).join('')}</span></div>
-   <div class="qp"><span>${cur.p}</span><button class="hear" aria-label="Hear it again">${ICON('speaker',30)}</button></div>${rd?'<div class="rl" id="rl"></div>':''}
+   <div class="qp"><span>${cur.p}</span><button class="hear" aria-label="Hear it again">${ICON('speaker',30)}</button><button class="hint" aria-label="Hint">💡</button></div>${rd?'<div class="rl" id="rl"></div>':''}
    <div class="qs">${cur.stage||''}</div>
+   <div class="jx" id="jx" aria-live="polite" hidden></div>
    <div class="qo" style="--c:${cur.cols||Math.min(3,cur.opts.length)}">${cur.opts.map((o,k)=>{const t=rd?optT(o):'';return`<button data-k="${k}">${o.h}${t?`<span class="os" data-say="${esc(t)}" aria-label="Hear ${esc(t)}">${ICON('speaker',20)}</span>`:''}</button>`}).join('')}</div></div>`);
   const hearIt=()=>{const s=(last?'Last one! ':'')+cur.say;rd?speakHL(s,$('#rl')):speak(s)};hearIt();
   $('#ov .x').onclick=()=>{hideOv();speak('');done(0)};$('#ov .hear').onclick=hearIt;
-  const win=()=>{busy=true;r++;const q=$$('#ov .qd i')[r-1];if(q)q.classList.add('on');if(MODE().instant)addCoins(1,innerWidth/2,innerHeight*.28);speak(pick(['Yes!','Great!','Well done!','You got it!','Super!','Amazing!']));confettiCard();
-   setTimeout(()=>{if(r>=R){hideOv();done(miss===0?3:miss<=2?2:1)}else draw()},cur.seq?1000:850)};
+  const rightO=cur.opts.find(o=>o.ok),rightT=rightO?optT(rightO):'',jx=(html,cls)=>{const b=$('#jx');if(!b)return;b.hidden=false;b.className='jx '+cls;b.innerHTML=html};let firstTry=true;
+  $('#ov .hint').onclick=()=>{const e=jxExplain(st.t,cur,null,rightT);jx(`<span>💡</span><p>${esc(e.hint)}</p>`,'hint');speak(e.hint)};
+  const win=()=>{busy=true;r++;if(!cur.seq){const e=jxExplain(st.t,cur,null,rightT);if(e.why)jx(`<span>✅</span><p>${esc(e.why)}</p>`,'ok')}zsRec(st,cur,firstTry,rightT);const q=$$('#ov .qd i')[r-1];if(q)q.classList.add('on');if(MODE().instant)addCoins(1,innerWidth/2,innerHeight*.28);speak(pick(['Yes!','Great!','Well done!','You got it!','Super!','Amazing!']));confettiCard();
+   setTimeout(()=>{if(r>=R){hideOv();done(miss===0?3:miss<=2?2:1)}else draw()},cur.seq?1000:1900)};
   $$('#ov .qo button').forEach(b=>b.onclick=e=>{const sp=e&&e.target&&e.target.closest&&e.target.closest('.os');if(sp){speak(sp.dataset.say);return}if(busy)return;const o=cur.opts[+b.dataset.k];
    if(cur.seq){if(b.classList.contains('ok'))return;if(o.o===seqN){b.classList.add('ok');b.disabled=true;sfx('note',seqN);const sl=$$('#ov .slots i')[seqN];if(sl){sl.textContent=o.v;sl.classList.add('on')}seqN++;if(seqN>=(cur.pre||0)+cur.opts.filter(x=>x.o>=0).length){sfx('right');win()}}
-    else{miss++;b.classList.remove('no');void b.offsetWidth;b.classList.add('no');sfx('wrong');setTimeout(()=>b.classList.remove('no'),450)}return}
+    else{miss++;firstTry=false;b.classList.remove('no');void b.offsetWidth;b.classList.add('no');sfx('wrong');setTimeout(()=>b.classList.remove('no'),450);const e=jxExplain(st.t,cur,o.v,rightT);jx(`<span>🤔</span><p>${esc(e.wrong)} <b>💡 ${esc(e.hint)}</b></p>`,'no')}return}
    if(o.ok){b.classList.add('ok');sfx('right');win()}
-   else if(!b.classList.contains('no')){miss++;b.classList.add('no');sfx('wrong');speak('Try again!')}})};
+   else if(!b.classList.contains('no')){miss++;firstTry=false;b.classList.add('no');sfx('wrong');const e=jxExplain(st.t,cur,optT(o),rightT);jx(`<span>🤔</span><p>${esc(e.wrong||'Not that one.')}<br><b>💡 ${esc(e.hint)}</b></p>`,'no');speak((e.wrong||'Not that one.')+' '+e.hint+' Try again!')}})};
  draw();
+}
+
+/* ---- end of each island: what went right first time and the tricky ones to look at again ---- */
+function islandSummary(zi,done){
+ const Z=ZONES[zi],D=(S.zsum||{})[zi]||{r:0,w:0,it:[]},tot=D.r+D.w,pct=tot?Math.round(D.r/tot*100):100;
+ const stops=STOPS.filter(s=>s.zone===zi).map(s=>`<li><span>${s.i}</span><b>${esc(stopName(s))}</b><em>${'⭐'.repeat(S.done[s.idx]||0)}</em></li>`).join('');
+ const tricky=D.it.slice(-5).map(x=>`<li><span class="jt-q">${esc(x.q)}</span><span class="jt-a">✅ ${esc(x.a)}</span></li>`).join('');
+ showOv(`<div class="card reward isum" role="dialog" aria-modal="true" aria-label="${esc(Z.name)} summary"><i class="tape"></i><h2>${Z.icon} ${esc(Z.name)}</h2>
+  <div class="is-row"><div class="is-ring" style="--p:${pct}"><b>${pct}%</b><small>first try</small></div><div class="is-n"><span class="ok">✅ ${D.r}<small>right first time</small></span><span class="no">🤔 ${D.w}<small>tried again</small></span></div></div>
+  <ul class="is-stops">${stops}</ul>
+  ${tricky?`<h3>Tricky ones</h3><ul class="is-tr">${tricky}</ul>`:'<p class="mut"><b>No tricky ones. Brilliant!</b></p>'}
+  <button class="btn go pulse" data-focus id="isOk">${ICON('arrow',24)}<span class="lb">Keep going</span></button></div>`);
+ speak(`${Z.name} done! You got ${D.r} right first time${D.w?' and tried again '+D.w+(D.w===1?' time':' times'):''}.`);
+ $('#isOk').onclick=()=>{hideOv();done()};
 }
 function confettiCard(){const c=$('#ov .card');if(!c)return;for(let i=0;i<14;i++){const s=document.createElement('i');s.className='cf';s.style.left=rand(10,90)+'%';s.style.background=pick(['#ff6b6b','#ffd23f','#7bd389','#6ec6ff','#c792ea']);s.style.setProperty('--dx',rand(-80,80)+'px');s.style.animationDelay=rand(0,.15)+'s';c.appendChild(s);setTimeout(()=>s.remove(),1100)}}
 function runMemory(st,done){
@@ -2674,6 +2822,7 @@ function finishStop(i,stars){
   $('#rsNext').onclick=()=>{hideOv();if(!zoneDone)afterQueue=()=>{const n=nextStop();if(n!==i&&stopOpen(n))walkToStop(n)};done()};
   $('#rsAgain').onclick=()=>{hideOv();afterQueue=()=>playStop(i);done()};
  });
+ if(zoneDone)enqueue(d=>islandSummary(st.zone,d));
  if(zoneDone){const prize=ZONE_PRIZE[st.zone],pop=MODE().pops>0;if(prize&&!S.owned[prize]){giveItem(prize);if(pop)revealItem(prize,ZONES[st.zone].name+' treasure!')}else if(pop)revealCoins(50,ZONES[st.zone].name+' treasure!');else addCoins(50);
   if(st.zone<NZ-1&&S.bridges<=st.zone)enqueue(done=>buildTransScene(st.zone,done));
   if(S.magic<st.zone+1)enqueue(done=>magicUp(st.zone+1,done));
@@ -2823,7 +2972,7 @@ function openMap(){
   const n=nextStop();STOPS.forEach((st,i)=>{const cx=X(st.pos[0]),cz=Z(st.pos[1]),r=Math.max(11,2.2*k);x.fillStyle=i in S.done?'#ffc21a':i===n?ZONES[st.zone].stone:'#e2e7e4';x.strokeStyle='#fff';x.lineWidth=2;x.beginPath();x.arc(cx,cz,r,0,TAU);x.fill();x.stroke();
    if(r>8){x.fillStyle=i in S.done||i===n?'#fff':'#8a948e';x.font=`700 ${Math.round(r)}px Fredoka,OpenMojiColor,system-ui,sans-serif`;x.fillText(String(i+1),cx,cz+1)}});
   x.font=Math.max(26,Math.round(k*6))+'px '+EMOJI_FONT;x.fillText('🏰',X(CASTLE_POS[0]),Z(CASTLE_POS[1]));x.fillText('🏡',X(GARDEN.c[0]),Z(GARDEN.c[1]));x.fillText('🗼',X(62*WSC),Z(-100*WSC));
-  if(OP.m){const em2=earnedMax();if(em2>=NZ-1&&!opGone()){x.fillText(S.treasure&&S.treasure.won?'👑':'🏴‍☠️',X(OP.x),Z(OP.z));x.strokeStyle='#c2453b';x.lineWidth=4;const q=Math.max(8,k*1.6),cx=X(OP.x),cy=Z(OP.z)+q*2.2;x.beginPath();x.moveTo(cx-q,cy-q);x.lineTo(cx+q,cy+q);x.moveTo(cx+q,cy-q);x.lineTo(cx-q,cy+q);x.stroke()}else if(!opGone()){x.globalAlpha=.5;x.fillText('❓',X(OP.x+9),Z(OP.z-7));x.globalAlpha=1}}
+  if(OP.m){const em2=earnedMax();if(em2>=NZ-1&&!opGone()){x.fillText(S.treasure&&S.treasure.won?'👑':'💎',X(OP.x),Z(OP.z));x.strokeStyle='#c2453b';x.lineWidth=4;const q=Math.max(8,k*1.6),cx=X(OP.x),cy=Z(OP.z)+q*2.2;x.beginPath();x.moveTo(cx-q,cy-q);x.lineTo(cx+q,cy+q);x.moveTo(cx+q,cy-q);x.lineTo(cx-q,cy+q);x.stroke()}else if(!opGone()){x.globalAlpha=.5;x.fillText('❓',X(OP.x+9),Z(OP.z-7));x.globalAlpha=1}}
   box.scrollLeft=X(PL.x)-bw/2;box.scrollTop=Z(PL.z)-bh/2;
   {let dn=null,mv=0;box.onpointerdown=e=>{if(e.pointerType!=='mouse')return;dn=[e.clientX,e.clientY,box.scrollLeft,box.scrollTop];mv=0;box.classList.add('drag')};box.onpointermove=e=>{if(!dn)return;const dx=e.clientX-dn[0],dy=e.clientY-dn[1];mv=Math.max(mv,Math.hypot(dx,dy));box.scrollLeft=dn[2]-dx;box.scrollTop=dn[3]-dy};
    const up=()=>{dn=null;box.classList.remove('drag')};box.onpointerup=up;box.onpointerleave=up;box.addEventListener('click',e=>{if(mv>6){e.stopPropagation();e.preventDefault();mv=0}},true)}
@@ -2940,7 +3089,7 @@ function wiggleBreak(done){let n=20;S.stats.breaks++;save();
  const fin=g=>{clearInterval(iv);PL.dance=0;hideOv();if(g){addCoins(5);sfx('star',3)}done()};$('#wgOk').onclick=()=>fin(true);$('#wgSkip').onclick=()=>fin(false)}
 /* ================= welcome ================= */
 /* the welcome reel: who you are, every island and its games, the road, then the big trophy and gifts at the end */
-/* The One Piece Treasure art: a glowing golden chest */
+/* The Rainbow Crown Treasure art: a glowing golden chest */
 const OP_SVG=`<svg class="opc" viewBox="0 0 200 170" aria-hidden="true"><defs><radialGradient id="opg" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#fff6c4"/><stop offset=".6" stop-color="#ffd23f" stop-opacity=".55"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient><linearGradient id="opw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9773c"/><stop offset="1" stop-color="#7a4a22"/></linearGradient></defs>
  <circle cx="100" cy="88" r="84" fill="url(#opg)"/><g class="opl"><path d="M40 78 Q40 36 100 36 Q160 36 160 78 Z" fill="url(#opw)" stroke="#5a3415" stroke-width="4"/><path d="M40 78 Q40 36 100 36 Q160 36 160 78" fill="none" stroke="#ffd23f" stroke-width="9"/><path d="M92 36v42M108 36v42" stroke="#ffd23f" stroke-width="7"/></g>
  <rect x="40" y="76" width="120" height="66" rx="8" fill="url(#opw)" stroke="#5a3415" stroke-width="4"/><path d="M40 92h120M40 126h120" stroke="#ffd23f" stroke-width="7"/><path d="M92 76v66M108 76v66" stroke="#ffd23f" stroke-width="7"/>
@@ -2955,21 +3104,66 @@ function reelHTML(final,page){const isl=ZONES.map((z,k)=>`<div class="it" style=
  <div class="sc" data-s="1"><div class="isl">${isl}</div></div>
  <div class="sc" data-s="2"><div class="games">${games}</div><div class="road"><svg viewBox="0 0 620 120" preserveAspectRatio="none" aria-hidden="true"><path d="M20 90 C 120 10, 220 110, 320 50 S 520 20, 600 70" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round"/><path d="M20 90 C 120 10, 220 110, 320 50 S 520 20, 600 70" fill="none" stroke="#e2c896" stroke-width="8" stroke-dasharray="2 16" stroke-linecap="round"/><text x="600" y="60" font-size="38" text-anchor="middle">🏰</text></svg><span class="car">🚗</span></div></div>
  <div class="sc" data-s="3">${cf}<div class="rays"></div><div class="trophy">🏆</div><div class="gifts">${['🎁','👑','🌟','🎁'].map((g,i)=>`<span style="--i:${i}">${g}</span>`).join('')}</div><h2>${final?'You did it!':'A big surprise at the end!'}</h2></div>
- <div class="sc op" data-s="4"><div class="rays gold"></div>${OP_SVG}<h2>🏴‍☠️ One Piece Treasure</h2><p class="opt">${opDone?'👑 You found it first!':final?'Now find it! Under the sea, near the castle.':'Only ONE explorer in the whole world can find it.'}</p><div class="opw">🌍 ➜ 🧒 ➜ 👑</div></div>
+ <div class="sc op" data-s="4"><div class="rays gold"></div>${OP_SVG}<h2>💎 Rainbow Crown Treasure</h2><p class="opt">${opDone?'👑 You found it first!':final?'Now find it! Under the sea, near the castle.':'Only ONE explorer in the whole world can find it.'}</p><div class="opw">🌍 ➜ 🧒 ➜ 👑</div></div>
  </div><div class="dots">${[0,1,2,3,4].map(i=>`<i data-d="${i}"></i>`).join('')}</div>
  <div class="rowc"><button class="btn" id="wSkip" aria-label="Next">${ICON('play',22)}</button><button class="btn go pulse" data-focus id="wGo" aria-label="Let's go">${ICON('play',28)}<span class="lb">Let's go!</span></button></div></div>`}
-function reelBind(root,final,onGo){const SAY=['The Island Journey!','Eight islands, forty games!','Drive, swim and play all the way to the castle!',final?'You did it! Here is your trophy!':'Get to the end for a big trophy and surprise gifts!',final?'Now find the One Piece Treasure!':'The One Piece Treasure! Only one explorer in the whole world can find it. Will it be you?'];
+function reelBind(root,final,onGo){const SAY=['The Island Journey!','Eight islands, forty games!','Drive, swim and play all the way to the castle!',final?'You did it! Here is your trophy!':'Get to the end for a big trophy and surprise gifts!',final?'Now find the Rainbow Crown Treasure!':'The Rainbow Crown Treasure! Only one explorer in the whole world can find it. Will it be you?'];
  let i=-1,tm=0;const sc=[...root.querySelectorAll('.reel .sc')],dt=[...root.querySelectorAll('.reel .dots i')],L=sc.length-1;
  const show=n=>{i=n;sc.forEach((e,k)=>{e.classList.toggle('on',k===n);e.classList.toggle('off',k<n)});dt.forEach((e,k)=>e.classList.toggle('on',k===n));try{speak(SAY[n])}catch(e){}try{sfx(n>=3?'star':'pop')}catch(e){}clearTimeout(tm);if(n<L)tm=setTimeout(()=>show(n+1),n===2?3800:3300)};
  dt.forEach((d,k)=>d.onclick=()=>show(k));root.querySelector('#wSkip').onclick=()=>show(Math.min(L,i+1));root.querySelector('#wGo').onclick=()=>{clearTimeout(tm);try{auInit()}catch(e){}onGo()};
  const sk=root.querySelector('#wSkipAll');if(sk)sk.onclick=()=>{clearTimeout(tm);try{speechSynthesis.cancel()}catch(e){}onGo()};show(0)}
 function reelRun(final,onGo){showOv(reelHTML(final));reelBind($('#ov'),final,onGo)}
 /* the introduction page: shows every time the journey opens, straight away, while the islands load behind it */
+/* ================= The introduction film: plays every time the journey opens =================
+   Five short chapters drawn live (sky, islands, the road, the trophy, the Rainbow Crown), with a player bar like a real video. */
+const FM_CH=[['🌅','Hello',6500],['🏝️','8 islands',7000],['🚗','The road',7000],['🏆','The prize',6000],['👑','Rainbow Crown',7500]];
+function filmHTML(){
+ const won=S.treasure&&S.treasure.won;
+ const isl=ZONES.map((z,k)=>{const a=-.9+k*.26,x=14+k*10.4,y=70-Math.sin(k*.9)*22-k*3;return`<div class="fm-is" style="--i:${k};left:${x}%;top:${y}%;--g:${z.ground};--e:${z.edge}"><i></i><b>${z.icon}</b><span class="fm-ig">${PLAN[k].slice(0,3).map(p=>`<em>${p[2]}</em>`).join('')}</span></div>`}).join('');
+ const fw=Array.from({length:3},(_,k)=>`<span class="fm-fw" style="--k:${k};left:${20+k*30}%;top:${18+(k%2)*14}%">${Array.from({length:12},(_,j)=>`<i style="--a:${j*30}deg;--c:${['#ff6b6b','#ffd23f','#5aa8ff','#7bd389'][j%4]}"></i>`).join('')}</span>`).join('');
+ const bub=Array.from({length:14},(_,k)=>`<i class="fm-bb" style="--k:${k};left:${(k*37)%100}%;--s:${6+(k*7)%14}px"></i>`).join('');
+ return`<div class="fm" id="fm" role="dialog" aria-modal="true" aria-label="The Island Journey introduction">
+ <div class="fm-screen">
+  <section class="fm-sc s0"><div class="fm-sky"></div><div class="fm-sun"></div><div class="fm-cl c1"></div><div class="fm-cl c2"></div><div class="fm-cl c3"></div><div class="fm-sea"><i></i><i></i></div><div class="fm-sand"></div>
+   <div class="fm-buds"><span style="--i:0">${ART('b-cloud',96,116)}</span><span style="--i:1">${ART('b-pip',122,148)}</span><span style="--i:2">${ART('b-fox',96,116)}</span></div><h1 class="fm-t1">${'The Island Journey'.split('').map((c,i)=>`<span style="--i:${i}">${c===' '?'&nbsp;':c}</span>`).join('')}</h1></section>
+  <section class="fm-sc s1"><div class="fm-map"><svg class="fm-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M14 70 C 24 40, 30 66, 36 52 S 52 38, 56 50 S 70 34, 78 40 S 90 30, 94 26" fill="none" stroke="#fff" stroke-width=".8" stroke-dasharray="2 2"/></svg>${isl}</div></section>
+  <section class="fm-sc s2"><div class="fm-sky day"></div><div class="fm-castle">🏰</div><div class="fm-hill h1"></div><div class="fm-hill h2"></div><div class="fm-road"><i></i></div>
+   <svg class="fm-car" viewBox="0 0 160 80" aria-hidden="true"><path d="M14 52 Q12 34 34 32 L54 30 Q66 12 92 14 Q112 16 122 32 L146 36 Q154 40 152 52 Z" fill="#ff5a5a" stroke="#7a1f1f" stroke-width="3"/><path d="M62 30 Q70 18 90 19 Q104 20 112 31 Z" fill="#cfefff" stroke="#7a1f1f" stroke-width="2"/><circle cx="104" cy="18" r="10" fill="#7fd39c"/><circle cx="101" cy="16" r="2" fill="#222"/><circle cx="108" cy="16" r="2" fill="#222"/><g class="fm-wh"><circle cx="44" cy="54" r="13" fill="#2b2b33"/><circle cx="44" cy="54" r="6" fill="#ddd"/><path d="M44 44v20M34 54h20" stroke="#999" stroke-width="2"/></g><g class="fm-wh" style="transform-origin:122px 54px"><circle cx="122" cy="54" r="13" fill="#2b2b33"/><circle cx="122" cy="54" r="6" fill="#ddd"/><path d="M122 44v20M112 54h20" stroke="#999" stroke-width="2"/></g><circle cx="150" cy="42" r="4" fill="#fff6b0"/></svg>
+   <div class="fm-dust"><i></i><i></i><i></i></div></section>
+  <section class="fm-sc s3"><div class="fm-stage"></div>${fw}<div class="fm-spot"></div><div class="fm-tro"><span class="fm-shine"></span>🏆</div><div class="fm-gifts">${['🎁','🎉','🎁','⭐','🎁'].map((g,i)=>`<span style="--i:${i}">${g}</span>`).join('')}</div></section>
+  <section class="fm-sc s4"><div class="fm-deep"></div><div class="fm-rays"><i></i><i></i><i></i><i></i></div>${bub}<span class="fm-fish f1">🐠</span><span class="fm-fish f2">🐟</span><span class="fm-fish f3">🐡</span><div class="fm-chest">${OP_SVG}<span class="fm-crown">👑</span></div></section>
+  <div class="fm-bars"><i></i><i></i></div>
+  <p class="fm-sub" id="fmSub" aria-live="polite"></p>
+  <button class="fm-skip" id="fmSkip">Skip <span aria-hidden="true">⏭</span></button>
+  <div class="fm-end" id="fmEnd" hidden><button class="btn go pulse" id="fmGo">${ICON('play',28)}<span class="lb">Let's go!</span></button><button class="btn" id="fmAgain">${ICON('play',22)}<span class="lb">Watch again</span></button></div>
+ </div>
+ <div class="fm-ctl"><button class="fm-pp" id="fmPP" aria-label="Pause">❚❚</button><div class="fm-prog" id="fmProg">${FM_CH.map((c,i)=>`<button class="fm-seg" data-c="${i}" style="flex:${c[2]}" aria-label="${c[1]}"><i></i><span>${c[0]} <small>${c[1]}</small></span></button>`).join('')}</div><span class="fm-tm" id="fmTm">0:00</span><button class="fm-pp" id="fmMute" aria-label="Sound">🔊</button></div>
+ </div>`}
+const FM_SUB=['Hello, explorer!','8 islands. 40 games.','Drive, sail and swim to the castle.','A big trophy and gifts at the end!',()=>S.treasure&&S.treasure.won?'You found the Rainbow Crown first!':'The Rainbow Crown Treasure. Only ONE explorer in the world can find it!'];
 let INTRO_DONE=null;
-function introPage(){const el=document.createElement('div');el.id='intro';el.className='introp';
- el.innerHTML=`<button class="btn ip-skip" id="wSkipAll">Skip <span aria-hidden="true">⏭</span></button>${reelHTML(false,true)}`;document.body.appendChild(el);
- INTRO_DONE=new Promise(res=>{reelBind(el,false,()=>{el.classList.add('out');setTimeout(()=>el.remove(),450);res()})});
- setTimeout(()=>{const g=el.querySelector('#wGo');try{g&&g.focus({preventScroll:true})}catch(e){}},80);
+function introPage(){
+ const el=document.createElement('div');el.id='intro';el.className='introp';el.innerHTML=filmHTML();document.body.appendChild(el);
+ const fm=el.querySelector('#fm'),sc=[...el.querySelectorAll('.fm-sc')],seg=[...el.querySelectorAll('.fm-seg')],TOT=FM_CH.reduce((a,c)=>a+c[2],0),starts=FM_CH.map((c,i)=>FM_CH.slice(0,i).reduce((a,x)=>a+x[2],0));
+ let t=0,last=performance.now(),playing=true,cur=-1,muted=!!(S.settings&&S.settings.muted),raf=0,ended=false;
+ const sub=el.querySelector('#fmSub'),tm=el.querySelector('#fmTm'),pp=el.querySelector('#fmPP');
+ const setCh=i=>{if(i===cur)return;cur=i;sc.forEach((e,k)=>{e.classList.remove('on');if(k===i){void e.offsetWidth;e.classList.add('on')}});seg.forEach((g,k)=>g.classList.toggle('done',k<i));
+   const tx=typeof FM_SUB[i]==='function'?FM_SUB[i]():FM_SUB[i];sub.textContent=tx;sub.classList.remove('in');void sub.offsetWidth;sub.classList.add('in');if(!muted){try{speechSynthesis.cancel();speak(tx)}catch(e){}try{sfx(i>=3?'star':'pop')}catch(e){}}};
+ const fin=()=>{ended=true;playing=false;fm.classList.add('paused','ended');el.querySelector('#fmEnd').hidden=false;pp.textContent='▶';setTimeout(()=>el.querySelector('#fmGo').focus({preventScroll:true}),50)};
+ const tick=now=>{if(!el.isConnected)return;if(playing){t+=now-last;if(t>=TOT){t=TOT;fin()}}last=now;
+   let i=0;while(i<FM_CH.length-1&&t>=starts[i+1])i++;setCh(i);
+   seg.forEach((g,k)=>g.querySelector('i').style.width=(Math.min(1,Math.max(0,(t-starts[k])/FM_CH[k][2]))*100)+'%');
+   const s=Math.floor(t/1000);tm.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / ${Math.floor(TOT/60000)}:${String(Math.round(TOT/1000)%60).padStart(2,'0')}`;raf=requestAnimationFrame(tick)};
+ const play=v=>{if(ended&&v){t=0;ended=false;cur=-1;el.querySelector('#fmEnd').hidden=true;fm.classList.remove('ended')}playing=v;fm.classList.toggle('paused',!v);pp.textContent=v?'❚❚':'▶';pp.setAttribute('aria-label',v?'Pause':'Play');if(!v)try{speechSynthesis.cancel()}catch(e){}};
+ pp.onclick=()=>play(!playing);
+ el.querySelector('#fmMute').onclick=e=>{muted=!muted;e.currentTarget.textContent=muted?'🔇':'🔊';if(muted)try{speechSynthesis.cancel()}catch(x){}};
+ seg.forEach((g,k)=>g.onclick=()=>{t=starts[k];cur=-1;if(ended){ended=false;el.querySelector('#fmEnd').hidden=true;fm.classList.remove('ended')}play(true)});
+ el.querySelector('#fmAgain').onclick=()=>play(true);
+ fm.querySelector('.fm-screen').addEventListener('click',e=>{if(e.target.closest('button'))return;if(!ended)play(!playing)});
+ INTRO_DONE=new Promise(res=>{const done=()=>{cancelAnimationFrame(raf);try{speechSynthesis.cancel()}catch(e){}try{auInit()}catch(e){}el.classList.add('out');setTimeout(()=>el.remove(),450);res()};
+   el.querySelector('#fmSkip').onclick=done;el.querySelector('#fmGo').onclick=done;
+   el.addEventListener('keydown',e=>{if(e.key==='Escape')done();else if(e.key===' '&&!e.target.closest('button')){e.preventDefault();if(!ended)play(!playing)}})});
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)fm.classList.add('rm');
+ raf=requestAnimationFrame(tick);setTimeout(()=>{try{el.querySelector('#fmSkip').focus({preventScroll:true})}catch(e){}},80);
 }
 function welcome(){
  const go=()=>{
@@ -2978,7 +3172,7 @@ function welcome(){
  if(INTRO_DONE)INTRO_DONE.then(go);else go();
 }
 
-/* ================= The One Piece Treasure =================
+/* ================= The Rainbow Crown Treasure =================
    One golden chest under the sea near the castle. It can only be opened once you reach the last island.
    The app (when the journey runs inside LahLahLearn) asks the server, so only the first explorer in the world wins it. */
 const OP={x:0,y:-4,z:0,m:null,beam:null,sp:null,st:null,asked:0,told:0,wait:0};
@@ -3000,9 +3194,9 @@ function updTreasure(P,em){
  OP.sp.material.opacity=can&&!gone?.55+Math.sin(TIME*3)*.25:0;
  const d=Math.hypot(OP.x-P.x,OP.z-P.z);
  if(d<2.8&&Math.abs(P.y-OP.y)<3.2&&!modalOpen()){
-  if(!can){if(!OP.told){OP.told=1;toast('🏴‍☠️ The One Piece Treasure! It opens when you reach the last island.',4200);sfx('tick')}return}
-  if(won){if(!OP.told){OP.told=1;toast('👑 Your One Piece Treasure. You found it first!',4200)}return}
-  if(gone){if(!OP.told){OP.told=1;toast('🏴‍☠️ '+(OP.st.name||'Another explorer')+' found this treasure first.',4200)}return}
+  if(!can){if(!OP.told){OP.told=1;toast('💎 The Rainbow Crown Treasure! It opens when you reach the last island.',4200);sfx('tick')}return}
+  if(won){if(!OP.told){OP.told=1;toast('👑 Your Rainbow Crown Treasure. You found it first!',4200)}return}
+  if(gone){if(!OP.told){OP.told=1;toast('💎 '+(OP.st.name||'Another explorer')+' found this treasure first.',4200)}return}
   if(!OP.asked){OP.asked=1;opFound()}
  }else if(d>7){OP.told=0;if(!OP.wait)OP.asked=0}
 }
@@ -3010,7 +3204,7 @@ function opFound(){
  OP.m.userData.lid.rotation.x=-.6;sfx('chest');confetti(OP.x,OP.y+2,OP.z,60);
  const inApp=window.parent&&window.parent!==window;
  if(!inApp){opCard('found-local');return}
- OP.wait=1;emit('treasure-found',{zone:earnedMax()});toast('🏴‍☠️ Checking the treasure map…',6000);
+ OP.wait=1;emit('treasure-found',{zone:earnedMax()});toast('💎 Checking the treasure map…',6000);
  clearTimeout(OP.to);OP.to=setTimeout(()=>{if(OP.wait){OP.wait=0;opCard('offline')}},9000);
 }
 function opResult(d){
@@ -3022,9 +3216,9 @@ function opResult(d){
 }
 function opCard(kind,d){
  const when=d&&d.at?new Date(d.at).toLocaleDateString():'';
- const T2={won:['You found it first!','You are the ONE explorer in the whole world who found the One Piece Treasure!','+500 🪙  +20 💎  👑'],
+ const T2={won:['You found it first!','You are the ONE explorer in the whole world who found the Rainbow Crown Treasure!','+500 🪙  +20 💎  👑'],
   lost:['Found already!',(d&&d.name||'Another explorer')+' found it first'+(when?' on '+when:'')+'. Here are 30 coins for a great search!','+30 🪙'],
-  'found-local':['You found it!','Open the 3D Journey in LahLahLearn to claim the One Piece Treasure.',''],
+  'found-local':['You found it!','Open the 3D Journey in LahLahLearn to claim the Rainbow Crown Treasure.',''],
   offline:['Almost!','We could not check the treasure map right now. Come back and try again.',''],
   error:['Almost!','We could not check the treasure map right now. Come back and try again.','']}[kind]||['',''];
  enqueue(done=>{showOv(`<div class="card reward op-card"><i class="tape"></i>${OP_SVG}<h2>${kind==='won'?'👑 ':''}${esc(T2[0])}</h2><p>${esc(T2[1])}</p>${T2[2]?`<p><b>${T2[2]}</b></p>`:''}<button class="btn go" data-focus id="opOk">${ICON('check',24)}<span class="lb">OK</span></button></div>`);

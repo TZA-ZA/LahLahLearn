@@ -1,4 +1,4 @@
--- The One Piece Treasure in the 3D Journey: one chest for the whole world.
+-- The Rainbow Crown Treasure in the 3D Journey: one chest for the whole world.
 -- The first child who reaches it wins it; everyone else sees who found it first.
 create table if not exists public.journey_treasure (
   id          int primary key default 1 check (id = 1),

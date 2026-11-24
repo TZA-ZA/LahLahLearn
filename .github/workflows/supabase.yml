@@ -6,7 +6,7 @@
 #   SUPABASE_ACCESS_TOKEN   personal access token from supabase.com/dashboard/account/tokens
 #   SUPABASE_PROJECT_REF    vuhvvzmmnndrgxoywfem
 #   SUPABASE_DB_PASSWORD    Project Settings > Database > Reset database password
-# Server settings (Stripe keys, cron secret, site URL, admin emails) live in Supabase Vault as app.<NAME>;
+# Server settings (cron secret, site URL, admin emails) live in Supabase Vault as app.<NAME>;
 # function secrets with the same names override them. RESEND_API_KEY, EMAIL_FROM and ANTHROPIC_API_KEY
 # can be added either way.
 name: Backend

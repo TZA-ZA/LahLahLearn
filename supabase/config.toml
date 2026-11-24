@@ -2,7 +2,7 @@
 project_id = "lahlahlearn"
 
 [functions.stripe-webhook]
-verify_jwt = false   # Stripe signs requests instead; the function checks the signature.
+verify_jwt = false   # Stub only: payments are switched off.
 
 [functions.weekly-report]
 verify_jwt = false   # Called by the daily scheduler with a secret header; parent calls are checked inside.

@@ -1,11 +1,10 @@
 // Deleting an account takes two calls, so nobody can wipe a family from an unlocked screen alone:
 //   POST { action: "request" }             — emails a 6-digit code to the account's own address (valid 15 minutes)
 //   POST { confirm: "DELETE", code: "…" }  — checks the code, then deletes the family (children, progress, notes,
-//                                            check-ups), cancels billing and removes the login.
+//                                            check-ups) and removes the login.
 import { esc, HttpError, json, readJson, serveJson } from "../_shared/http.ts";
 import { adminClient, requireUser } from "../_shared/clients.ts";
 import { layout, sendMail } from "../_shared/email.ts";
-import { stripe } from "../_shared/stripe.ts";
 
 const TTL_MIN = 15, MAX_TRIES = 5, RESEND_WAIT_S = 60;
 
@@ -73,10 +72,7 @@ export const handler = serveJson(async (req) => {
     throw new HttpError(400, "That code is not right. Please check the email and try again.");
   }
 
-  const { data: fam } = await admin.from("families").select("id, stripe_subscription_id, plan_status").eq("owner_id", user.id).maybeSingle();
-  if (fam?.stripe_subscription_id && ["active", "trialing", "past_due", "unpaid", "paused"].includes(fam.plan_status)) {
-    try { await stripe(`subscriptions/${fam.stripe_subscription_id}`, undefined, "DELETE"); } catch (e) { console.error("cancel failed", e); }
-  }
+  const { data: fam } = await admin.from("families").select("id").eq("owner_id", user.id).maybeSingle();
   if (fam) await admin.from("families").delete().eq("id", fam.id);
   const { error } = await admin.auth.admin.deleteUser(user.id);
   if (error) throw new HttpError(500, "Your data was removed, but the login could not be deleted. Please contact us.");
