@@ -308,7 +308,7 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .s5.on .st1{animation:fmLit .5s ease .3s forwards}.s5.on .st2{animation:fmLit .5s ease 2.2s forwards}.s5.on .st3{animation:fmLit .5s ease 4s forwards}@keyframes fmLit{to{opacity:1;transform:scale(1.06);background:#fff7c2}}
 .fm-keys{position:absolute;left:14%;bottom:27%;display:flex;flex-direction:column;align-items:center;gap:6px}.fm-kr{display:flex;gap:6px}
 .fm-k{display:grid;place-items:center;width:clamp(40px,5.4vw,62px);height:clamp(40px,5.4vw,62px);border-radius:12px;background:linear-gradient(#fff,#e6ebf0);border:3px solid #1d2a3a;box-shadow:0 6px 0 #1d2a3a;font:800 clamp(16px,2vw,24px) Fredoka,sans-serif;color:#1d2a3a}.fm-k.wide{width:clamp(150px,18vw,220px)}
-.s5.on .fm-k[data-k=w]{animation:fmPress .5s ease 6.1s 2}.s5.on .fm-k[data-k=s]{animation:fmPress .5s ease 7.2s 1}.s5.on .fm-k[data-k=a]{animation:fmPress .5s ease 7.8s 1}.s5.on .fm-k[data-k=d]{animation:fmPress .5s ease 8.3s 1}.s5.on .fm-k[data-k=sp]{animation:fmPress .9s ease 9.3s 2}
+.s5.on .fm-k[data-k=w]{animation:fmPress .55s ease 6.0s 2}.s5.on .fm-k[data-k=s]{animation:fmPress .6s ease 7.1s 1}.s5.on .fm-k[data-k=a]{animation:fmPress .6s ease 7.7s 1}.s5.on .fm-k[data-k=d]{animation:fmPress .5s ease 8.3s 1}.s5.on .fm-k[data-k=sp]{animation:fmPress 1s ease 9.3s 1}
 @keyframes fmPress{40%{transform:translateY(5px);box-shadow:0 1px 0 #1d2a3a;background:#ffd23f}}
 .fm-mini{position:absolute;right:14%;bottom:27%;width:clamp(140px,20vw,240px)}.fm-mini svg{width:100%;height:auto}
 .s5.on .fm-mini{animation:fmMini 6s ease-in-out 6s forwards}@keyframes fmMini{0%{transform:none}17%{transform:translateX(30px)}30%{transform:translateX(-10px)}40%{transform:translateX(-10px) rotate(-10deg)}50%{transform:translateX(-10px) rotate(10deg)}60%{transform:translateX(40px)}72%{transform:translateX(60px) rotate(-18deg)}100%{transform:translateX(60px) rotate(-18deg)}}
@@ -361,7 +361,7 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .fm-sea i+i{top:8px;opacity:.5;animation-duration:5s;animation-direction:reverse}@keyframes fmWave{to{transform:translateX(50px)}}
 .fm-sand{position:absolute;left:-10%;right:-10%;bottom:-14%;height:34%;border-radius:50% 50% 0 0;background:#f3dfa2;box-shadow:inset 0 10px 0 #e9cf86}
 .fm-buds{position:absolute;left:50%;bottom:10%;transform:translateX(-50%);display:flex;align-items:flex-end;gap:2vmin}
-.fm-buds span{display:block;width:clamp(70px,14vmin,150px);opacity:0}.fm-buds svg{width:100%;height:auto}
+.fm-buds span{display:block;width:clamp(90px,17vmin,190px);opacity:0}.fm-buds svg{width:100%;height:auto}
 .s0.on .fm-buds span{animation:fmPop .8s cubic-bezier(.3,1.7,.5,1) forwards,fmBob 1.6s ease-in-out infinite;animation-delay:calc(1.2s + var(--i)*.35s),calc(2.2s + var(--i)*.2s)}
 @keyframes fmPop{0%{opacity:0;transform:translateY(80px) scale(.5)}100%{opacity:1;transform:none}}@keyframes fmBob{50%{transform:translateY(-10px)}}
 .fm-t1{position:absolute;left:0;right:0;top:20%;margin:0;text-align:center;font:900 clamp(32px,7vw,84px) Fredoka,system-ui,sans-serif;color:#fff;text-shadow:0 5px 0 #e8883a,0 10px 24px rgba(0,0,0,.25)}
@@ -494,9 +494,25 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .fm-trees i::before{content:"";position:absolute;left:-60%;right:-60%;bottom:28%;height:80%;border-radius:50% 50% 45% 45%;background:radial-gradient(circle at 35% 30%,#8fe08a,#3fa35a 70%);box-shadow:inset -6px -6px 0 rgba(0,0,0,.08)}
 .s2.on .fm-trees{animation:fmPan 5s linear forwards}
 .fm-car{filter:drop-shadow(0 10px 6px rgba(0,0,0,.22))!important;z-index:2}
-.fm-pony{position:absolute;left:-40%;bottom:12%;font-size:clamp(40px,10vmin,90px);transform:scaleX(-1)}.s2.on .fm-pony{animation:fmPony 6.5s cubic-bezier(.25,.1,.25,1) .5s forwards,fmTrot .35s ease-in-out .5s 16}
-@keyframes fmPony{from{left:-40%}to{left:30%}}@keyframes fmTrot{50%{margin-bottom:10px}}
+.fm-pony{position:absolute;left:-40%;bottom:11%;width:clamp(110px,22vmin,230px);z-index:2}.fm-pony svg{width:100%;height:auto;display:block;overflow:visible}
+.hz-leg{transform-box:fill-box;transform-origin:50% 0}.s2.on .hz-fl,.s2.on .hz-br{animation:hzStep .5s ease-in-out infinite}.s2.on .hz-fr,.s2.on .hz-bl{animation:hzStep .5s ease-in-out -.25s infinite}@keyframes hzStep{0%,100%{transform:rotate(22deg)}50%{transform:rotate(-22deg)}}
+.hz-tail{transform-box:fill-box;transform-origin:100% 0}.s2.on .hz-tail{animation:hzTail .9s ease-in-out infinite}@keyframes hzTail{50%{transform:rotate(-12deg)}}.s2.on .fm-pony{animation:fmPony 6.5s cubic-bezier(.25,.1,.25,1) .5s forwards,fmTrot .35s ease-in-out .5s 16}
+@keyframes fmPony{from{left:-40%}to{left:30%}}@keyframes fmTrot{50%{transform:translateY(-6px)}}
 .fm[data-ch="2"] .fm-sub,.fm[data-ch="6"] .fm-sub{bottom:auto;top:9%}.fm-car{width:clamp(170px,34vmin,360px)!important}
+.fm-pad{position:absolute;right:8%;bottom:22%;width:clamp(220px,34vw,460px)}.fm-pad svg{width:100%;height:auto;display:block;border-radius:18px;border:4px solid #1d2a3a;box-shadow:0 8px 0 rgba(0,0,0,.18)}
+.fm-act{position:absolute;left:50%;top:-18px;transform:translateX(-50%);padding:6px 14px;border-radius:999px;background:#1d2a3a;color:#fff;font:800 clamp(13px,1.6vw,18px) Fredoka,system-ui,sans-serif;white-space:nowrap;opacity:0;transition:opacity .2s}.fm-act.on{opacity:1}
+.fm[data-ch="1"] .fm-sub{bottom:auto;top:9%}.fm[data-ch="0"] .fm-buds{bottom:11%}.fm[data-ch="0"] .fm-sub{bottom:auto;top:36%}
+@media(max-width:640px){.fm-pad{right:3%;bottom:30%;width:46vw}}
+
+/* a cleaner HUD: icons without labels (names stay as tooltips and for screen readers), frosted glass panels, softer shadows */
+.ib .lb,.rbtn>span:not(.key),.dt .lb{display:none}#hint{display:none!important}
+.rbtn,.ib{border:1.5px solid rgba(255,255,255,.85)!important;box-shadow:0 6px 18px -6px rgba(10,30,50,.45),inset 0 1px 0 rgba(255,255,255,.7)!important;background-color:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3)}
+.rbtn.dn{transform:translateY(2px) scale(.96)}.rbtn b{font-size:28px!important}
+.panel,#jcard,.roamb{background:rgba(255,255,255,.8)!important;border:1.5px solid rgba(255,255,255,.9)!important;box-shadow:0 10px 30px -12px rgba(10,30,50,.45)!important;-webkit-backdrop-filter:blur(12px) saturate(1.3);backdrop-filter:blur(12px) saturate(1.3)}
+.rbtn .key{background:rgba(29,42,58,.75);bottom:-8px;font-size:.58rem}
+#jcard .jtx b{font-size:1.15rem}#jcard .jtx small:empty{display:none}
+.roamb{padding:6px 6px 6px 14px;gap:8px}.roamb .btn{width:44px;height:44px;padding:0;border-radius:50%;font-size:20px}
+.spd{background:linear-gradient(160deg,rgba(29,42,58,.78),rgba(14,22,34,.78))!important;border:1.5px solid rgba(255,255,255,.35)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 </style>
 </head>
 <body>
@@ -539,7 +555,7 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 <button class="hud rbtn" id="ride" aria-label="Ride a car or a boat"><b></b><span>Car</span><span class="key">R</span></button>
 <button class="hud rbtn" id="drift" hidden aria-label="Handbrake: hold to stop, steer to drift" data-ic="drift" data-s="42"><span>Brake</span><span class="key">Space</span></button>
 <div class="hud spd" id="gauge" hidden aria-hidden="true"><svg viewBox="0 0 120 80"><path d="M14 70 A48 48 0 0 1 106 70" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="9" stroke-linecap="round"/><path id="spdArc" d="M14 70 A48 48 0 0 1 106 70" fill="none" stroke="url(#spdG)" stroke-width="9" stroke-linecap="round" pathLength="100" stroke-dasharray="0 100"/><defs><linearGradient id="spdG"><stop offset="0" stop-color="#7bd389"/><stop offset=".6" stop-color="#ffd23f"/><stop offset="1" stop-color="#ff6b6b"/></linearGradient></defs><line id="spdN" x1="60" y1="70" x2="60" y2="28" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="70" r="6" fill="#fff"/></svg><b id="spdV">0</b><small>km/h</small><i id="spdHB">P</i></div>
-<div class="hud roamb" id="roamb" hidden><span>🔒</span><b>Play 1 game to explore freely today</b><button class="btn go" id="roamGo">🎮 Go</button></div>
+<div class="hud roamb" id="roamb" hidden><span>🔒</span><b>Play 1 game</b><button class="btn go" id="roamGo" aria-label="Go to the next game">🎮</button></div>
 <div class="hud" id="hint">Arrows or WASD to move · In a ride: W go, S back, A D steer, Space handbrake (steer to drift) · Q dive · R car or boat · E play</div>
 <div id="bub" hidden></div>
 <div id="banner"></div>
@@ -1193,7 +1209,11 @@ function causticMat(m){m.onBeforeCompile=sh=>{sh.uniforms.uT=UT;sh.uniforms.uCau
  sh.fragmentShader='uniform float uT;\nuniform float uCaus;\nvarying vec3 vWp;\n'+CAUS_F+'\n'+sh.fragmentShader.replace('#include <output_fragment>','float uwD=clamp((-0.45-vWp.y)/5.0,0.0,1.0);\nif(vWp.y<-0.42){float cs=causT(vWp.xz,uT)*uCaus*(1.0-uwD*0.6)*(1.0-smoothstep(-0.9,-0.42,vWp.y));outgoingLight+=diffuseColor.rgb*cs*0.55;outgoingLight=mix(outgoingLight,outgoingLight*vec3(0.55,0.86,0.95),uwD);}\n#include <output_fragment>')};
  m.customProgramCacheKey=()=>'caus';W.swayMats.push(m);return m}
 /* ================= islands ================= */
-function detailTex(){const t=canvasTex(256,256,x=>{x.fillStyle='#ffffff';x.fillRect(0,0,256,256);for(let i=0;i<900;i++){const v=Math.random()<.5?0:255,a=Math.random()*.07;x.fillStyle=`rgba(${v},${v},${v},${a})`;const px=Math.random()*256,py=Math.random()*256,r=1+Math.random()*7;x.beginPath();x.arc(px,py,r,0,TAU);x.fill()}});t.wrapS=t.wrapT=T.RepeatWrapping;return t}
+/* ground detail: soft light and dark patches plus thousands of tiny blade strokes, tiled across the islands */
+function detailTex(){const t=canvasTex(512,512,x=>{x.fillStyle='#ffffff';x.fillRect(0,0,512,512);
+ for(let i=0;i<260;i++){const v=Math.random()<.5?0:255,a=.025+Math.random()*.05,px=Math.random()*512,py=Math.random()*512,r=8+Math.random()*30;const g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,`rgba(${v},${v},${v},${a})`);g.addColorStop(1,`rgba(${v},${v},${v},0)`);x.fillStyle=g;x.fillRect(px-r,py-r,r*2,r*2)}
+ x.lineCap='round';for(let i=0;i<9000;i++){const px=Math.random()*512,py=Math.random()*512,l=2+Math.random()*5,a=-Math.PI/2+(Math.random()-.5)*.9,dk=Math.random()<.6;x.strokeStyle=dk?`rgba(20,60,10,${.05+Math.random()*.08})`:`rgba(255,255,220,${.05+Math.random()*.08})`;x.lineWidth=.6+Math.random()*.8;x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*l,py+Math.sin(a)*l);x.stroke()}});
+ t.wrapS=t.wrapT=T.RepeatWrapping;try{if(typeof renderer!=='undefined'&&renderer)t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy())}catch(e){}return t}
 function buildIslands(){
  const tex=detailTex(),cA=new T.Color(),cB=new T.Color(),cw=new T.Color('#b9a883'),cd=new T.Color('#6f9c9a');
  ZONES.forEach((Z,i)=>{
@@ -1202,7 +1222,7 @@ function buildIslands(){
   const geo=new T.LatheGeometry(pts,i===3?120:160),pos=geo.attributes.position,n=pos.count,col=new Float32Array(n*3),uv=new Float32Array(n*2);
   const G=new T.Color(Z.ground),E=new T.Color(Z.edge),Sd=new T.Color(Z.sand);
   for(let v=0;v<n;v++){const x=pos.getX(v),y=pos.getY(v),z=pos.getZ(v),d=Math.hypot(x,z);
-   if(y>-.01&&d<=r-1.2){cA.copy(G);const j=1+(Math.random()-.5)*.04;cA.multiplyScalar(j)}
+   if(y>-.01&&d<=r-1.2){cA.copy(G);const wx=x+Z.c[0],wz=z+Z.c[1],nz=Math.sin(wx*.13+Math.cos(wz*.09)*2)*Math.cos(wz*.11-wx*.05),j=1+nz*.07+(Math.random()-.5)*.03;cA.multiplyScalar(j);if(nz>.4)cA.offsetHSL(-.015,.03,.01)}
    else if(y>-.01){cA.copy(G).lerp(E,smooth(r-1.2,r,d))}
    else if(y>-1.4){cA.copy(Sd).lerp(cw,smooth(-.3,-1.4,y)*.35)}
    else{cA.copy(Sd).lerp(cw,.5);cB.copy(cd);cA.lerp(cB,smooth(-1.4,-5,y))}
@@ -1347,9 +1367,14 @@ function buildSigns(){
  signBoard(START[0]+2.8,START[1]+1,a0+Math.PI,'Start the journey!','🗺️');
  TRANS.forEach((b,k)=>{const Z=ZONES[k+1],px=-b.uz,pz=b.ux,x=b.B[0]+b.ux*2.4+px*3,z=b.B[1]+b.uz*2.4+pz*3;if(terrainH(x,z)>-.05)signBoard(x,z,Math.atan2(-b.ux,-b.uz),Z.name,Z.icon)});
  const P=W.path,i=3,dx=P[i+1][0]-P[i-1][0],dz=P[i+1][1]-P[i-1][1],ang=Math.atan2(dx,dz),g=new T.Group();g.position.set(P[i][0],0,P[i][1]);g.rotation.y=ang;scene.add(g);
- const pm=std('#ff8fb8');[-2,2].forEach(x=>{add(new T.CylinderGeometry(.16,.18,3.4,10),pm,x,1.7,0,g).castShadow=true;collider(P[i][0]+Math.cos(ang)*x,P[i][1]-Math.sin(ang)*x,.3)});
- ['#ff6b6b','#ffb347','#ffe066','#7bd389','#6ec6ff','#b39ddb'].forEach((c,k)=>{const t=add(new T.TorusGeometry(2,.09,8,30,Math.PI),std(c),0,3.4+k*.17,0,g);t.scale.set(1+k*.04,1+k*.04,1)});
+ const pm=std('#ff8fb8',{transparent:true}),am=[pm],pts=[];[-2,2].forEach(x=>{add(new T.CylinderGeometry(.16,.18,3.4,10),pm,x,1.7,0,g).castShadow=true;const wx=P[i][0]+Math.cos(ang)*x,wz=P[i][1]-Math.sin(ang)*x;pts.push([wx,wz]);collider(wx,wz,.3)});
+ ['#ff6b6b','#ffb347','#ffe066','#7bd389','#6ec6ff','#b39ddb'].forEach((c,k)=>{const m=std(c,{transparent:true});am.push(m);const t=add(new T.TorusGeometry(2,.09,8,30,Math.PI),m,0,3.4+k*.17,0,g);t.scale.set(1+k*.04,1+k*.04,1)});
+ W.fades=(W.fades||[]).concat([{pts,mats:am,o:1}]);
 }
+/* anything standing between the camera and the child fades out, so the player is never hidden behind a pole */
+function fadeOccluders(dt){if(!W.fades||!PL||!camera)return;const cx=camera.position.x,cz=camera.position.z,px=PL.x,pz=PL.z,dx=px-cx,dz=pz-cz,L2=dx*dx+dz*dz||1;
+ W.fades.forEach(f=>{let hide=false;for(const[x,z]of f.pts){const t=((x-cx)*dx+(z-cz)*dz)/L2;if(t<=0||t>=1.02)continue;const qx=cx+dx*t,qz=cz+dz*t;if(Math.hypot(x-qx,z-qz)<1.1){hide=true;break}}
+  const tg=hide?.22:1;f.o+=(tg-f.o)*Math.min(1,dt*8);f.mats.forEach(m=>{m.opacity=f.o;m.depthWrite=f.o>.95})})}
 
 /* ================= platforms ================= */
 function platMesh(p){
@@ -1815,12 +1840,18 @@ function setQuality(){if(!renderer)return;const q=GFX(),dpr=devicePixelRatio||1;
  renderer.shadowMap.enabled=q!=='low';const ms=q==='high'?2048:1024;if(sunL.shadow.mapSize.x!==ms){sunL.shadow.mapSize.set(ms,ms);if(sunL.shadow.map){sunL.shadow.map.dispose();sunL.shadow.map=null}}
  const on=renderer.shadowMap.enabled;if(W._shOn!==undefined&&W._shOn!==on)scene.traverse(o=>{if(!o.isMesh||!o.material)return;(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{if(!m.isShaderMaterial)m.needsUpdate=true})});W._shOn=on;onResize()}
 function buildGrass(){
- FX.grass=[];const q=GFX(),dens=q==='high'?1:.5,geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute([-.07,0,0,.07,0,0,0,.55,0],3));geo.computeVertexNormals();
- ZONES.forEach((Z,zi)=>{if(!Z.grass)return;const n=Math.round(5200*dens*Math.pow(Z.r/26,1.5)),pts=[];let g=0;
+ /* each tuft is three thin, curved blades: dark at the root and light at the tip, so the lawn has depth like real grass */
+ FX.grass=[];const q=GFX(),dens=q==='high'?1:.5,pos=[],col=[];
+ for(let b=0;b<3;b++){const a=b/3*TAU+Math.random()*.6,lean=.08+Math.random()*.12,h=.24+Math.random()*.16,w=.03+Math.random()*.012,dx=Math.cos(a),dz=Math.sin(a),ox=dx*.05,oz=dz*.05,sx=-dz*w,sz=dx*w;
+  const seg=[[0,1,.5],[.5,.6,.82],[1,0,1.12]];for(let k=0;k<2;k++){const[t0,w0,c0]=seg[k],[t1,w1,c1]=seg[k+1],y0=h*t0,y1=h*t1,l0=lean*t0*t0,l1=lean*t1*t1;
+   const A=[ox+dx*l0-sx*w0,y0,oz+dz*l0-sz*w0],B=[ox+dx*l0+sx*w0,y0,oz+dz*l0+sz*w0],C=[ox+dx*l1-sx*w1,y1,oz+dz*l1-sz*w1],D=[ox+dx*l1+sx*w1,y1,oz+dz*l1+sz*w1];
+   pos.push(...A,...B,...C,...B,...D,...C);col.push(c0,c0,c0,c0,c0,c0,c1,c1,c1,c0,c0,c0,c1,c1,c1,c1,c1,c1)}}
+ const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('color',new T.Float32BufferAttribute(col,3));geo.computeVertexNormals();
+ ZONES.forEach((Z,zi)=>{if(!Z.grass)return;const n=Math.round(6500*dens*Math.pow(Z.r/26,1.5)),pts=[];let g=0;
   while(pts.length<n&&g++<n*3){const a=Math.random()*TAU,d=Math.sqrt(Math.random())*(Z.r-.9),x=Z.c[0]+Math.cos(a)*d,z=Z.c[1]+Math.sin(a)*d;
    if(pathDist(x,z,2)<1.75)continue;if(STOPS.some(s=>s.zone===zi&&Math.hypot(s.pos[0]-x,s.pos[1]-z)<2.6))continue;if(zi===0&&Math.hypot(x-GARDEN.c[0],z-GARDEN.c[1])<GARDEN.r)continue;pts.push([x,z])}
   const base=new T.Color(Z.grass),c2=new T.Color(Z.ground),tmp=new T.Color();
-  const m=inst(geo,swayMatL(lam(0xffffff,{side:T.DoubleSide}),.16),pts,(o,p,i)=>{o.position.set(p[0],0,p[1]);o.rotation.y=Math.random()*TAU;const s=.6+Math.random()*.8;o.scale.set(s,s*(.7+Math.random()*.6),s);tmp.copy(base).lerp(c2,Math.random()*.6);return tmp});
+  const m=inst(geo,swayMatL(lam(0xffffff,{side:T.DoubleSide,vertexColors:true}),.2),pts,(o,p,i)=>{o.position.set(p[0],0,p[1]);o.rotation.y=Math.random()*TAU;const s=.7+Math.random()*.7;o.scale.set(s,s*(.75+Math.random()*.6),s);tmp.copy(base).lerp(c2,Math.random()*.45).offsetHSL((Math.random()-.5)*.03,0,(Math.random()-.5)*.06);return tmp});
   m.castShadow=false;m.receiveShadow=true;FX.grass.push(m)});
 }
 function wingBird(){const g=new T.Group(),m=basic('#3a3a48',{side:T.DoubleSide}),w=[1,-1].map(s=>{const p=new T.Group();const t=new T.Mesh(new T.BufferGeometry().setAttribute('position',new T.Float32BufferAttribute([0,0,-.2,0,0,.2,s*1,0,0],3)),m);p.add(t);g.add(p);return p});g.userData.w=w;return g}
@@ -2326,18 +2357,24 @@ function teleport(x,z,face){if(PL.vk)setVehicle(null);PL.walk=null;PL.tap=null;P
 /* ---- play one game a day before exploring freely; the speedometer while driving ---- */
 const dayKey=()=>{const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()};
 const roamOK=()=>S.roamDay===dayKey()||QS.get('demo')==='1';
-let roamT=0;function roamNudge(){const n=performance.now();if(n-roamT<4500)return;roamT=n;toast('🎮 Play one game first. Then you can explore anywhere today!',3800);try{sfx('tick')}catch(e){}}
+let roamT=0;function roamNudge(){const n=performance.now();if(n-roamT<4500)return;roamT=n;toast('🎮 Play the next game to open the whole map!',3800);try{sfx('tick')}catch(e){}}
 function updHudExtra(){const P=PL;if(!P)return;
  const rb=$('#roamb');if(rb){const show=!roamOK()&&!modalOpen()&&!CH;if(rb.hidden===show)rb.hidden=!show}
  const sp=$('#gauge');if(!sp)return;const on=P.vk==='car'&&P.veh&&!P.veh.userData.pony&&!CH;if(sp.hidden===on)sp.hidden=!on;if(!on)return;
  const v=Math.abs(P.vs),kmh=Math.round(v*9),f=Math.min(1,v/14);$('#spdV').textContent=kmh;$('#spdN').style.transform=`rotate(${-90+f*180}deg)`;$('#spdArc').setAttribute('stroke-dasharray',`${(f*100).toFixed(1)} 100`);$('#spdHB').classList.toggle('on',!!INPUT.drift)}
+/* before the first game of the day you can move freely along the road up to the next stop,
+   but not wander off across the islands; after one game everything opens */
+function roamClamp(){const P=PL;if(!P||roamOK()||P.walk){if(P){P.okX=P.x;P.okZ=P.z}return}
+ const n=nextStop(),lim=(W.stopIdx[n]==null?W.path.length-1:W.stopIdx[n])+14,i=nearestIdx(P.x,P.z),q=W.path[i],d=Math.hypot(P.x-q[0],P.z-q[1]);
+ const ok=d<9&&i<=lim||Math.hypot(P.x-GARDEN.c[0],P.z-GARDEN.c[1])<GARDEN.r+3;
+ if(ok){P.okX=P.x;P.okZ=P.z;return}
+ if(P.okX!=null){P.x=P.okX;P.z=P.okZ;if(P.vs)P.vs*=-.2;if(P.vx!=null){P.vx=0;P.vz=0}}roamNudge()}
 function updatePlayer(dt){
  const P=PL,calm=REDUCED||MODE().gentle;let mx=0,mz=0,auto=false;
  const k=INPUT.keys,f=((k.w||k.arrowup)?1:0)-((k.s||k.arrowdown)?1:0)-INPUT.joy.y,r=((k.d||k.arrowright)?1:0)-((k.a||k.arrowleft)?1:0)+INPUT.joy.x;
  const locked=P.frozen||CAM.ovr||modalOpen()||(CH&&CH.runner);
  updHudExtra();
- if(!locked&&(Math.abs(f)>.08||Math.abs(r)>.08)&&!roamOK())roamNudge();
- else if(!locked&&(Math.abs(f)>.08||Math.abs(r)>.08)){stopWalking();const sy=Math.sin(CAM.yaw),cy=Math.cos(CAM.yaw);mx=-sy*f+cy*r;mz=-cy*f-sy*r;const l=Math.hypot(mx,mz);if(l>1){mx/=l;mz/=l}}
+ if(!locked&&(Math.abs(f)>.08||Math.abs(r)>.08)){stopWalking();const sy=Math.sin(CAM.yaw),cy=Math.cos(CAM.yaw);mx=-sy*f+cy*r;mz=-cy*f-sy*r;const l=Math.hypot(mx,mz);if(l>1){mx/=l;mz/=l}}
  else if(!locked&&P.walk){auto=true;const Pp=W.path,w=P.walk;
   if(w.phase==='join'&&Math.hypot(P.x-GARDEN.c[0],P.z-GARDEN.c[1])<GARDEN.r+.3&&!w.gate){w.gate=[GARDEN.c[0]+Math.cos(GARDEN.open)*(GARDEN.r+1.6),GARDEN.c[1]+Math.sin(GARDEN.open)*(GARDEN.r+1.6)];P.lastIdx=nearestIdx(w.gate[0],w.gate[1])}
   if(w.phase==='join'){const j=w.gate||Pp[P.lastIdx],dx=j[0]-P.x,dz=j[1]-P.z,d=Math.hypot(dx,dz);
@@ -2382,7 +2419,10 @@ function updatePlayer(dt){
  const sp=Math.hypot(P.vx,P.vz),step=wet||P.mode==='boat'?1.35:.45;
  if(sp>.01){let nx=P.x+P.vx*dt,nz=P.z+P.vz*dt;
   if(!(auto&&P.walk&&P.walk.phase==='path'))[nx,nz]=pushOut(nx,nz,P.y,P.vk==='car'?.45:step,inV?1.05:.42);
-  const moved=Math.hypot(nx-P.x,nz-P.z);if(P.tap&&moved<sp*dt*.2){P.stuck+=dt;if(P.stuck>.5){P.tap=null;P.stuck=0}}else P.stuck=0;
+  const moved=Math.hypot(nx-P.x,nz-P.z);
+  /* hitting something solid in a ride: the car loses its speed and bounces back a little, like a real bump */
+  if(inV&&!auto&&Math.abs(P.vs)>2.2&&moved<sp*dt*.45){const hit=Math.abs(P.vs);P.vs*=-.25;P.vx*=-.25;P.vz*=-.25;P.bumpT=.35;if(hit>4){try{sfx('bump')}catch(e){}if(typeof shake==='function')shake(.25)}}
+  if(P.tap&&moved<sp*dt*.2){P.stuck+=dt;if(P.stuck>.5){P.tap=null;P.stuck=0}}else P.stuck=0;
   if(wet||inV){P.swimAcc+=moved;if(P.swimAcc>1){const d=P.swimAcc;P.swimAcc=0;if(P.vk==='car'){S.stats.drive+=d;questAdd('drive',d);if(S.stats.drive>=250)giveSticker('x-drive')}else if(P.vk==='boat'){S.stats.row+=d;questAdd('row',d);if(S.stats.row>=180)giveSticker('x-row')}else{S.stats.swim+=d;questAdd('swim',d);if(S.stats.swim>=200)giveSticker('x-swim')}}}
   P.x=nx;P.z=nz;if(!inV&&sp>.5)P.face=Math.atan2(P.vx,P.vz)}
  /* vertical */
@@ -2544,7 +2584,6 @@ function onTap(cx,cy){
  if(CH&&CH.tapables){const hits=RAY.rc.intersectObjects(CH.tapables,true);if(hits.length&&CH.onTapHit)CH.onTapHit(hits[0].object);return}
  RAY.pl.constant=0;let hit=RAY.rc.ray.intersectPlane(RAY.pl,new T.Vector3());if(hit&&terrainH(hit.x,hit.z)<-.05){RAY.pl.constant=-Y_W;hit=RAY.rc.ray.intersectPlane(RAY.pl,new T.Vector3())}if(!hit)return;
  for(let i=0;i<N_STOPS;i++){const s=STOPS[i];if(Math.hypot(s.pos[0]-hit.x,s.pos[1]-hit.z)<2.4){if(stopOpen(i)&&Math.hypot(PL.x-s.pos[0],PL.z-s.pos[1])<3.6&&!CH){playStop(i);return}if(stopOpen(i)&&!CH){walkToStop(i);return}if(!CH){toast('Stop '+(i+1)+' opens later. Next is stop '+(nextStop()+1)+'.');sfx('tick')}}}
- if(!roamOK()){roamNudge();return}
  stopWalking();PL.tap=[clamp(hit.x,BOUND.x0,BOUND.x1),clamp(hit.z,BOUND.z0,BOUND.z1)];tapMark(hit.x,hit.z);
 }
 function tapMark(x,z){const t=trailTex('t-sparkle'),y=Math.max(terrainH(x,z),Y_W)+.15;for(let i=0;i<8;i++){const a=i/8*TAU;particle(t,x+Math.cos(a)*.5,y,z+Math.sin(a)*.5,{vx:Math.cos(a)*.8,vz:Math.sin(a)*.8,life:.5,s:.4,s1:.1,col:'#ffffff',add:true})}}
@@ -3061,10 +3100,10 @@ function jcard(force){
  const segs=ZONES.map((Z,k)=>{const ss=STOPS.filter(s=>s.zone===k),d=ss.filter(s=>s.idx in S.done).length;return`<span class="sg${d===ss.length?' full':''}${STOPS[n].zone===k?' cur':''}" title="${esc(Z.name)}"><i style="width:${d/ss.length*100}%"></i><em>${Z.icon}</em></span>`}).join('');
  let em,title,sub,btns='';
  if(CH){const st=CH.st;em=st.i;title=stopName(st);sub='Playing now!'}
- else if(near>=0&&stopOpen(near)){const st=STOPS[near],dn=near in S.done;em=st.i;title='Stop '+(near+1)+': '+stopName(st);sub=dn?'You got '+ICON('star',18).repeat(S.done[near])+' Play again?':LEARN_TYPES.includes(st.t)?'A learning game':'An action game';btns=`<button class="btn go pulse" id="jplay" aria-label="Play">${ICON('play',30)}<span class="lb">Play!</span></button>`}
- else{const st=STOPS[n];em=st.i;title=walking?'On the way…':(n===N_STOPS-1?'Next: the Rainbow Castle!':'Next: stop '+(n+1)+' of '+N_STOPS);sub=esc(stopName(st)+' · '+ZONES[st.zone].name);btns=walking?`<button class="btn" id="jstop" aria-label="Stop">${ICON('hand',26)}<span class="lb">Stop</span></button>`:`<button class="btn sun pulse" id="jgo" aria-label="Go there">${ICON('feet',30)}<span class="lb">Go there</span></button>`}
+ else if(near>=0&&stopOpen(near)){const st=STOPS[near],dn=near in S.done;em=st.i;title=stopName(st);sub=dn?ICON('star',18).repeat(S.done[near]):'';btns=`<button class="btn go pulse" id="jplay" aria-label="Play">${ICON('play',30)}<span class="lb">Play!</span></button>`}
+ else{const st=STOPS[n];em=st.i;title=walking?'On the way…':(n===N_STOPS-1?'🏰':(n+1)+' / '+N_STOPS);sub=esc(stopName(st)+' · '+ZONES[st.zone].name);btns=walking?`<button class="btn" id="jstop" aria-label="Stop">${ICON('hand',26)}<span class="lb">Stop</span></button>`:`<button class="btn sun pulse" id="jgo" aria-label="Go there">${ICON('feet',30)}<span class="lb">Go</span></button>`}
  const ns=STOPS[n],nn=MODE().nowNext&&!CH?`<div class="nn"><span class="tg">Now</span><span>${ns.i} ${esc(stopName(ns))}</span><span class="tg nx">Next</span><span>${n+1<N_STOPS?STOPS[n+1].i:'🏰'}</span></div>`:'';
- el.innerHTML=`<div class="jtop"><span class="jn">${ICON('map',24)}<span class="w1up">Journey ${S.round}</span></span><div class="segs">${segs}</div></div><div class="jmain"><div class="jem">${em}</div><div class="jtx"><b class="w1up">${esc(title)}</b><small class="w2only">${sub}</small></div>${btns}</div>${nn}`;
+ el.innerHTML=`<div class="jtop"><span class="jn">${ICON('map',22)}</span><div class="segs">${segs}</div></div><div class="jmain"><div class="jem">${em}</div><div class="jtx"><b class="w1up">${esc(title)}</b><small class="w2only">${sub}</small></div>${btns}</div>${nn}`;
  const pb=$('#jplay');if(pb)pb.onclick=()=>playStop(near);const gb=$('#jgo');if(gb)gb.onclick=()=>{auInit();goToStop(n)};const sb=$('#jstop');if(sb)sb.onclick=()=>{stopWalking();jcard(true)};
  requestAnimationFrame(()=>document.documentElement.style.setProperty('--jh',el.offsetHeight+'px'));
 }
@@ -3278,14 +3317,17 @@ function reelRun(final,onGo){showOv(reelHTML(final));reelBind($('#ov'),final,onG
 const FM_CH=[['🌅','Hello',6000],['🏝️','8 islands',6500],['🚗','The road',6500],['🎮','How to play',12000],['🗺️','Map pieces',10500],['🏆','The prize',5500],['👑','Starlight Crown',7500]];
 function filmHTML(){
  const won=S.treasure&&S.treasure.won;
- const isl=ZONES.map((z,k)=>{const a=-.9+k*.26,x=14+k*10.4,y=70-Math.sin(k*.9)*22-k*3;return`<div class="fm-is" style="--i:${k};left:${x}%;top:${y}%;--g:${z.ground};--e:${z.edge}"><i></i><b>${z.icon}</b><span class="fm-ig">${PLAN[k].slice(0,3).map(p=>`<em>${p[2]}</em>`).join('')}</span></div>`}).join('');
+ const IP=ZONES.map((z,k)=>[12+k*(76/(ZONES.length-1)),66-Math.sin(k*.9)*18-k*2.6]);
+ /* a smooth route that passes through the middle of every island */
+ const route=IP.map((p,k)=>{if(!k)return`M${p[0].toFixed(1)} ${p[1].toFixed(1)}`;const p0=IP[k-2]||IP[k-1],p1=IP[k-1],p3=IP[k+1]||p;const c1=[p1[0]+(p[0]-p0[0])/6,p1[1]+(p[1]-p0[1])/6],c2=[p[0]-(p3[0]-p1[0])/6,p[1]-(p3[1]-p1[1])/6];return`C${c1[0].toFixed(1)} ${c1[1].toFixed(1)},${c2[0].toFixed(1)} ${c2[1].toFixed(1)},${p[0].toFixed(1)} ${p[1].toFixed(1)}`}).join(' ');
+ const isl=ZONES.map((z,k)=>{const x=IP[k][0],y=IP[k][1];return`<div class="fm-is" style="--i:${k};left:${x}%;top:${y}%;--g:${z.ground};--e:${z.edge}"><i></i><b>${z.icon}</b><span class="fm-ig">${PLAN[k].slice(0,3).map(p=>`<em>${p[2]}</em>`).join('')}</span></div>`}).join('');
  const fw=Array.from({length:3},(_,k)=>`<span class="fm-fw" style="--k:${k};left:${20+k*30}%;top:${18+(k%2)*14}%">${Array.from({length:12},(_,j)=>`<i style="--a:${j*30}deg;--c:${['#ff6b6b','#ffd23f','#5aa8ff','#7bd389'][j%4]}"></i>`).join('')}</span>`).join('');
  const bub=Array.from({length:14},(_,k)=>`<i class="fm-bb" style="--k:${k};left:${(k*37)%100}%;--s:${6+(k*7)%14}px"></i>`).join('');
  return`<div class="fm" id="fm" role="dialog" aria-modal="true" aria-label="The Island Journey introduction">
  <div class="fm-screen">
   <section class="fm-sc s0"><div class="fm-sky"></div><div class="fm-sun"></div><div class="fm-cl c1"></div><div class="fm-cl c2"></div><div class="fm-cl c3"></div><div class="fm-sea"><i></i><i></i></div><div class="fm-sand"></div>
    <div class="fm-buds"><span style="--i:0">${ART('b-cloud',96,116)}</span><span style="--i:1">${ART('b-pip',122,148)}</span><span style="--i:2">${ART('b-fox',96,116)}</span></div><h1 class="fm-t1">${'The Island Journey'.split('').map((c,i)=>`<span style="--i:${i}">${c===' '?'&nbsp;':c}</span>`).join('')}</h1></section>
-  <section class="fm-sc s1"><div class="fm-map"><svg class="fm-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M14 70 C 24 40, 30 66, 36 52 S 52 38, 56 50 S 70 34, 78 40 S 90 30, 94 26" fill="none" stroke="#fff" stroke-width=".8" stroke-dasharray="2 2"/></svg>${isl}</div></section>
+  <section class="fm-sc s1"><div class="fm-map"><svg class="fm-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="${route}" fill="none" stroke="#fff" stroke-width=".9" stroke-dasharray="2 2" stroke-linecap="round"/></svg>${isl}</div></section>
   <section class="fm-sc s2"><div class="fm-sky day"></div><div class="fm-castle">🏰</div><div class="fm-hill h1"></div><div class="fm-hill h2"></div><div class="fm-road"><i></i></div>
    <svg class="fm-car" viewBox="0 0 220 110" aria-hidden="true"><defs><linearGradient id="fmCb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a80"/><stop offset=".45" stop-color="#ff4b4b"/><stop offset="1" stop-color="#c62828"/></linearGradient><linearGradient id="fmGl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8f7ff"/><stop offset="1" stop-color="#8fcdf2"/></linearGradient><radialGradient id="fmRim"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#9aa3ad"/></radialGradient></defs>
 <ellipse cx="110" cy="100" rx="96" ry="7" fill="rgba(0,0,0,.18)"/>
@@ -3299,9 +3341,20 @@ function filmHTML(){
 <g class="fm-wh"><circle cx="56" cy="80" r="17" fill="#22252b"/><circle cx="56" cy="80" r="10" fill="url(#fmRim)" stroke="#555" stroke-width="1.5"/><path d="M56 71v18M47 80h18M50 74l12 12M62 74l-12 12" stroke="#6b7480" stroke-width="2"/><circle cx="56" cy="80" r="3" fill="#444"/></g>
 <g class="fm-wh"><circle cx="166" cy="80" r="17" fill="#22252b"/><circle cx="166" cy="80" r="10" fill="url(#fmRim)" stroke="#555" stroke-width="1.5"/><path d="M166 71v18M157 80h18M160 74l12 12M172 74l-12 12" stroke="#6b7480" stroke-width="2"/><circle cx="166" cy="80" r="3" fill="#444"/></g></svg>
 <div class="fm-trees"><i style="--k:0;left:0%"></i><i style="--k:1;left:14%"></i><i style="--k:2;left:28%"></i><i style="--k:3;left:42%"></i><i style="--k:4;left:56%"></i><i style="--k:5;left:70%"></i><i style="--k:6;left:84%"></i><i style="--k:7;left:98%"></i><i style="--k:8;left:112%"></i><i style="--k:9;left:126%"></i><i style="--k:10;left:140%"></i><i style="--k:11;left:154%"></i><i style="--k:12;left:168%"></i><i style="--k:13;left:182%"></i><i style="--k:14;left:196%"></i><i style="--k:15;left:210%"></i></div>
-<span class="fm-pony" aria-hidden="true">🐎</span>
+<div class="fm-pony" aria-hidden="true"><svg viewBox="0 0 160 120"><g class="hz-tail"><path d="M30 44 Q8 50 10 78 Q18 66 30 58Z" fill="#4a2e1a"/></g>
+<g class="hz-leg hz-bl"><path d="M38 66 l-2 36 l8 0 l2 -34z" fill="#8a5a33"/><rect x="34" y="100" width="12" height="6" rx="2" fill="#2b1d14"/></g>
+<g class="hz-leg hz-fl"><path d="M100 66 l-2 36 l8 0 l2 -34z" fill="#8a5a33"/><rect x="96" y="100" width="12" height="6" rx="2" fill="#2b1d14"/></g>
+<path d="M28 44 Q30 28 56 30 L96 30 Q114 30 116 48 L114 70 Q100 78 70 76 Q40 78 32 68 Z" fill="#a8703f"/>
+<path d="M104 36 Q112 14 128 8 L138 12 Q146 22 142 30 L132 34 Q126 40 120 54 Z" fill="#a8703f"/>
+<path d="M104 34 Q112 14 128 6 Q124 16 116 26 Q112 34 110 44Z" fill="#4a2e1a"/><circle cx="133" cy="17" r="2.2" fill="#1b1410"/><path d="M128 6 l4 -6 l3 7z" fill="#a8703f"/>
+<path d="M60 30 Q66 24 76 30 L76 46 L60 46Z" fill="#c0392b"/><path d="M58 46 L80 46" stroke="#7a2a20" stroke-width="3"/>
+<g class="hz-leg hz-br"><path d="M44 66 l-2 36 l8 0 l2 -34z" fill="#a8703f"/><rect x="40" y="100" width="12" height="6" rx="2" fill="#2b1d14"/></g>
+<g class="hz-leg hz-fr"><path d="M106 66 l-2 36 l8 0 l2 -34z" fill="#a8703f"/><rect x="102" y="100" width="12" height="6" rx="2" fill="#2b1d14"/></g></svg></div>
    <div class="fm-dust"><i></i><i></i><i></i></div></section>
-  <section class="fm-sc s5"><div class="fm-sky day"></div><div class="fm-hill h1"></div><div class="fm-flow"><div class="fm-st st1"><b>📚</b><span>Learn 1 lesson</span></div><i class="fm-ar">➜</i><div class="fm-st st2"><b>🎮</b><span>Play 1 game</span></div><i class="fm-ar">➜</i><div class="fm-st st3"><b>🗺️</b><span>Explore!</span></div></div><div class="fm-keys"><div class="fm-kr"><span class="fm-k " data-k="w"><b>W</b></span></div><div class="fm-kr"><span class="fm-k " data-k="a"><b>A</b></span><span class="fm-k " data-k="s"><b>S</b></span><span class="fm-k " data-k="d"><b>D</b></span></div><div class="fm-kr"><span class="fm-k wide" data-k="sp"><b>Space</b></span></div></div><div class="fm-mini"><svg viewBox="0 0 120 70" aria-hidden="true"><rect x="10" y="22" width="100" height="30" rx="12" fill="#ff5a5a" stroke="#7a1f1f" stroke-width="3"/><path d="M34 22 Q44 6 64 6 Q80 6 88 22Z" fill="#cfefff" stroke="#7a1f1f" stroke-width="2.5"/><g class="fm-mw"><circle cx="32" cy="54" r="10" fill="#2b2b33"/><circle cx="32" cy="54" r="4" fill="#ddd"/></g><g class="fm-mw"><circle cx="88" cy="54" r="10" fill="#2b2b33"/><circle cx="88" cy="54" r="4" fill="#ddd"/></g></svg><i class="fm-skid"></i></div></section><section class="fm-sc s6"><div class="fm-parch"></div><div class="fm-pcs"><span class="fm-pc p0" style="--k:0"><em>🌴</em></span><span class="fm-pc p1" style="--k:1"><em>⛰️</em></span><span class="fm-pc p2" style="--k:2"><em>🌊</em></span><span class="fm-pc p3" style="--k:3"><em>🌋</em></span><i class="fm-x">✕</i><svg class="fm-trail" viewBox="0 0 100 100" aria-hidden="true"><path d="M12 84 C 30 60, 20 40, 44 44 S 70 30, 72 26" fill="none" stroke="#a0522d" stroke-width="2.4" stroke-dasharray="4 4"/></svg></div><div class="fm-chal"><span style="--i:0">🧩</span><span style="--i:1">🐉</span><span style="--i:2">🫧</span></div></section>
+  <section class="fm-sc s5"><div class="fm-sky day"></div><div class="fm-hill h1"></div><div class="fm-flow"><div class="fm-st st1"><b>📚</b><span>Learn 1 lesson</span></div><i class="fm-ar">➜</i><div class="fm-st st2"><b>🎮</b><span>Play 1 game</span></div><i class="fm-ar">➜</i><div class="fm-st st3"><b>🗺️</b><span>Explore!</span></div></div><div class="fm-keys"><div class="fm-kr"><span class="fm-k " data-k="w"><b>W</b></span></div><div class="fm-kr"><span class="fm-k " data-k="a"><b>A</b></span><span class="fm-k " data-k="s"><b>S</b></span><span class="fm-k " data-k="d"><b>D</b></span></div><div class="fm-kr"><span class="fm-k wide" data-k="sp"><b>Space</b></span></div></div><div class="fm-pad"><svg viewBox="0 0 100 70" aria-hidden="true"><defs><pattern id="fmGr" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#86cf6e"/><path d="M1 5 l1 -3 M4 6 l.6 -3" stroke="#5fae4e" stroke-width=".6"/></pattern></defs>
+<rect width="100" height="70" rx="8" fill="url(#fmGr)"/><path d="M14 64 L14 22 Q14 8 30 8 L72 8 Q88 8 88 24 L88 40 Q88 52 76 52 L56 52" fill="none" stroke="#6b717c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 64 L14 22 Q14 8 30 8 L72 8 Q88 8 88 24 L88 40 Q88 52 76 52 L56 52" fill="none" stroke="#fff" stroke-width=".8" stroke-dasharray="3 3"/>
+<path class="fm-skids" d="" fill="none" stroke="#2b2b33" stroke-width="1.3" stroke-linecap="round" opacity=".55"/>
+<g class="fm-tcar"><rect x="-4.5" y="-7.5" width="9" height="15" rx="3" fill="#ff4b4b" stroke="#7a1414" stroke-width=".8"/><rect x="-3.4" y="-4.6" width="6.8" height="3.6" rx="1" fill="#bfe6ff"/><rect x="-3.2" y="2.4" width="6.4" height="2.6" rx="1" fill="#9fd3f2"/><rect x="-5.6" y="-5.6" width="1.6" height="3.4" rx=".6" fill="#222"/><rect x="4" y="-5.6" width="1.6" height="3.4" rx=".6" fill="#222"/><rect x="-5.6" y="2.6" width="1.6" height="3.4" rx=".6" fill="#222"/><rect x="4" y="2.6" width="1.6" height="3.4" rx=".6" fill="#222"/><circle cx="-2.6" cy="-7.4" r=".9" fill="#fff6b0"/><circle cx="2.6" cy="-7.4" r=".9" fill="#fff6b0"/></g></svg><b class="fm-act"></b></div></section><section class="fm-sc s6"><div class="fm-parch"></div><div class="fm-pcs"><span class="fm-pc p0" style="--k:0"><em>🌴</em></span><span class="fm-pc p1" style="--k:1"><em>⛰️</em></span><span class="fm-pc p2" style="--k:2"><em>🌊</em></span><span class="fm-pc p3" style="--k:3"><em>🌋</em></span><i class="fm-x">✕</i><svg class="fm-trail" viewBox="0 0 100 100" aria-hidden="true"><path d="M12 84 C 30 60, 20 40, 44 44 S 70 30, 72 26" fill="none" stroke="#a0522d" stroke-width="2.4" stroke-dasharray="4 4"/></svg></div><div class="fm-chal"><span style="--i:0">🧩</span><span style="--i:1">🐉</span><span style="--i:2">🫧</span></div></section>
   <section class="fm-sc s3"><div class="fm-stage"></div>${fw}<div class="fm-spot"></div><div class="fm-tro"><span class="fm-shine"></span>🏆</div><div class="fm-gifts">${['🎁','🎉','🎁','⭐','🎁'].map((g,i)=>`<span style="--i:${i}">${g}</span>`).join('')}</div></section>
   <section class="fm-sc s4"><div class="fm-deep"></div><div class="fm-rays"><i></i><i></i><i></i><i></i></div>${bub}<span class="fm-fish f1">🐠</span><span class="fm-fish f2">🐟</span><span class="fm-fish f3">🐡</span><div class="fm-chest">${OP_SVG}<span class="fm-crown">👑</span></div></section>
   <div class="fm-bars"><i></i><i></i></div>
@@ -3349,6 +3402,18 @@ function faEngine(d){const c=FA.ctx,t=faNow(),o=c.createOscillator(),g=c.createG
  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.08,t+.4);g.gain.setValueAtTime(.08,t+d-.6);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(f);f.connect(g);g.connect(FA.out);o.start(t);o.stop(t+d+.05)}
 function faFanfare(){const t=faNow();[[523.3,0],[659.3,.15],[784,.3],[1046.5,.45],[784,.75],[1046.5,.9]].forEach(([f,d])=>{faTone(f,t+d,.5,{type:'sawtooth',v:.07,dest:FA.out});faTone(f,t+d,.5,{type:'triangle',v:.18,dest:FA.out})})}
 function faBubbles(){const t=faNow();for(let k=0;k<7;k++)faTone(300+Math.random()*500,t+k*.13,.12,{type:'sine',glide:900+Math.random()*600,v:.15,dest:FA.out})}
+
+/* the "how to play" chapter: a car seen from above does what each key does, on the same beat as the key presses */
+const FM_DRV=[[0,14,60,0,''],[6000,14,60,0,''],[7100,14,34,0,'W  Go!'],[7700,14,44,0,'S  Back'],[8300,22,12,40,'A  Turn left'],[8800,42,8,90,'D  Turn right'],[9300,66,8,90,''],[10300,84,30,190,'Space  Brake and drift!'],[12000,84,30,190,'']];
+function fmDrive(el,ct){const g=el.querySelector('.fm-tcar');if(!g)return;let k=0;while(k<FM_DRV.length-2&&ct>FM_DRV[k+1][0])k++;
+ const a=FM_DRV[k],b=FM_DRV[k+1],u=Math.max(0,Math.min(1,(ct-a[0])/Math.max(1,b[0]-a[0]))),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
+ /* turns follow a curve: the car rotates first, then moves where it points */
+ const x=a[1]+(b[1]-a[1])*e,y=a[2]+(b[2]-a[2])*e,an=a[3]+(b[3]-a[3])*Math.min(1,e*1.3);
+ g.setAttribute('transform',`translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${an.toFixed(1)})`);
+ const lab=el.querySelector('.fm-act'),txt0=ct>a[0]&&ct<=b[0]+150?b[4]:'',txt=txt0?txt0.split('  ')[0]+'  '+T_(txt0.split('  ')[1]):'';if(lab){if(lab.textContent!==txt)lab.textContent=txt;lab.classList.toggle('on',!!txt)}
+ const sk=el.querySelector('.fm-skids');if(sk){if(ct<9300){if(sk.dataset.n){sk.setAttribute('d','');sk.dataset.n=''}}else if(ct<10400){const pts=(sk.dataset.p||'').split(';').filter(Boolean);const r=an*Math.PI/180;
+   [[-4.8,5],[4.8,5]].forEach(([ox,oy],j)=>{pts.push(j+','+(x+ox*Math.cos(r)-oy*Math.sin(r)).toFixed(1)+','+(y+ox*Math.sin(r)+oy*Math.cos(r)).toFixed(1))});sk.dataset.p=pts.slice(-160).join(';');sk.dataset.n='1';
+   const L=[[],[]];pts.slice(-160).forEach(q=>{const[j,px,py]=q.split(',');L[+j].push(px+' '+py)});sk.setAttribute('d',L.filter(l=>l.length>1).map(l=>'M'+l.join(' L')).join(' '))}}}
 function introPage(){
  emit('intro',{on:true});
  const el=document.createElement('div');el.id='intro';el.className='introp';el.innerHTML=filmHTML();document.body.appendChild(el);
@@ -3360,7 +3425,7 @@ function introPage(){
  const subShow=(i,k)=>{const raw=typeof FM_SUB[i]==='function'?FM_SUB[i]():FM_SUB[i],tx=Array.isArray(raw)?raw[k]:raw;if(k===subP)return;subP=k;sub.textContent=tx;sub.classList.remove('in');void sub.offsetWidth;sub.classList.add('in');if(!muted){try{speechSynthesis.cancel();speak(tx)}catch(e){}}};
  const fin=()=>{ended=true;playing=false;fm.classList.add('paused','ended');el.querySelector('#fmEnd').hidden=false;pp.textContent='▶';setTimeout(()=>el.querySelector('#fmGo').focus({preventScroll:true}),50)};
  const tick=now=>{if(!el.isConnected)return;if(playing){t+=now-last;if(t>=TOT){t=TOT;fin()}}last=now;
-   let i=0;while(i<FM_CH.length-1&&t>=starts[i+1])i++;setCh(i);{const raw=FM_SUB[i];if(Array.isArray(raw)){const k=Math.min(raw.length-1,Math.floor((t-starts[i])/FM_CH[i][2]*raw.length));if(k!==subP)subShow(i,k)}}
+   let i=0;while(i<FM_CH.length-1&&t>=starts[i+1])i++;setCh(i);if(i===3)fmDrive(el,t-starts[3]);{const raw=FM_SUB[i];if(Array.isArray(raw)){const k=Math.min(raw.length-1,Math.floor((t-starts[i])/FM_CH[i][2]*raw.length));if(k!==subP)subShow(i,k)}}
    if(playing&&!muted&&FA.on&&FA.ctx&&FA.ctx.state==='running'){faSched();const ct=t-starts[i];(FA_FX[i]||[]).forEach(([ms,fn],j)=>{if(ct>=ms&&ct<ms+400&&!FA.fired[j]){FA.fired[j]=1;try{fn()}catch(e){}}})}
    seg.forEach((g,k)=>g.querySelector('i').style.width=(Math.min(1,Math.max(0,(t-starts[k])/FM_CH[k][2]))*100)+'%');
    const s=Math.floor(t/1000);tm.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / ${Math.floor(TOT/60000)}:${String(Math.round(TOT/1000)%60).padStart(2,'0')}`;raf=requestAnimationFrame(tick)};
@@ -3487,7 +3552,7 @@ function updZoneGroups(dt){if(!W.zg||(W.zgT-=dt)>0)return;W.zgT=.4;const lim=GFX
 let TIME=0,clock=null;
 function loop(){
  requestAnimationFrame(loop);if(document.hidden)return;const dt=Math.min(clock.getDelta(),.05);TIME+=dt;UT.value=TIME;
- if(CH&&CH.runner)updChallenge(dt);else{updatePlayer(dt);updChallenge(dt)}
+ if(CH&&CH.runner)updChallenge(dt);else{updatePlayer(dt);roamClamp();fadeOccluders(dt);updChallenge(dt)}
  updZoneGroups(dt);updFinds(dt);updPrints(dt);updAnimals(dt);updFish(dt);updStops(dt);updCrumbs();updateCamera(dt);updSky(dt);
  W.anims.forEach(f=>f(dt,TIME));Object.values(W.decor).forEach(m=>m.userData.anim&&m.userData.anim(dt,TIME));updParticles(dt);updConfetti(dt);
  if((mmT+=dt)>.08){mmT=0;if(!$('#mini').hidden)drawMini()}
