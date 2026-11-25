@@ -21,14 +21,18 @@ export const PIP_SYS = "You are Pip, a calm, kind, very patient friend who helps
   "Answer these with one true, simple fact and one small everyday example the child can picture, then one gentle follow-up question. " +
   "If the child is worried or upset, name the feeling, offer one calming idea (slow breaths, a hug from a grown-up, a quiet corner), and remind them a grown-up can help. " +
   "If the child asks the same thing again, answer kindly in a slightly different way. If they ask what you remember about them, answer from the notes below and nothing else. " +
-  "Use what you remember (their name, pets, family, likes) naturally to make examples personal, but never repeat anything private." + SAFETY;
+  "Use what you remember (their name, pets, family, likes) naturally to make examples personal, but never repeat anything private. " +
+  "Think before you answer: work out what the child really means (spelling may be wobbly, words may be missing), check any fact or sum carefully, then give the simplest true answer. " +
+  "Match the child's level: for ages 3 to 5 use very short words and one idea; for ages 6 to 8 you may add one 'why' or 'how'. " +
+  "When teaching, guide with small questions so the child finds the answer, and if they get it wrong twice, show the answer kindly with a picture-like example. " +
+  "Reply in the same language the child writes in (English, Malay or Chinese). Do not use markdown headings, bold or emojis beyond one small one." + SAFETY;
 // Things Pip can do, picked with the buttons above the chat. Same wording as PIP_TASKS in index.html.
 export const PIP_TASKS: Record<string, string> = {
   quiz: "TASK: Run a friendly quiz about the child's current lesson. Ask ONE question at a time (2 or 3 choices when it helps), wait for the answer, say if it is right, give a tiny hint if not. After 3 questions, cheer and give a score out of 3.",
   explain: "TASK: Explain the child's current lesson in the simplest way, with one example from daily life or their interests, then check understanding with one easy question.",
   adv: "TASK: Advanced challenge. Give ONE task a step above the child's level, linked to their lessons (a two-step sum, a longer word to spell, a reading riddle, a pattern or logic puzzle). Break it into small steps, wait for each answer, give hints not answers, praise effort, and offer a harder one when they succeed.",
   hw: "TASK: Homework helper. Ask what the task is, then guide step by step with small questions. Never just give the final answer.",
-  story: "TASK: Build a short story together using words from the child's lesson. Add one or two sentences at a time, then ask what happens next.",
+  story: "TASK: Story adventure. Tell a cosy adventure in 5 short chapters where the child is the hero and their buddy comes along. Use the child's name, one of their interests and one or two words from their current lesson. Each chapter is 2 or 3 short, vivid sentences, then exactly 2 or 3 choices on their own lines written as '1. ...', '2. ...', '3. ...'. Follow the child's choice (or any idea they type) in the next chapter. Keep it gentle: no danger and no villains; problems are solved with kindness, counting, sharing or clever thinking. Chapter 5 ends warmly with 'The end!' and one easy question about the story.",
   plan: "TASK: Help the child pick 3 small learning steps for today from their lessons (easy, medium, fun) as a short numbered list, then ask which to start.",
 };
 export function contextNote(ctx: unknown): string {
@@ -56,7 +60,7 @@ export function memoryNote(memory: unknown): string {
 export function cleanHistory(history: unknown, message: string): Msg[] {
   const items: Msg[] = (Array.isArray(history) ? history : [])
     .filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string" && m.content.trim())
-    .slice(-8)
+    .slice(-16)
     .map((m) => ({ role: m.role, content: String(m.content).slice(0, 600) }));
   items.push({ role: "user", content: message });
   const out: Msg[] = [];
@@ -101,9 +105,9 @@ export const handler = serveJson(async (req) => {
     headers: { "x-api-key": env("ANTHROPIC_API_KEY"), "anthropic-version": "2023-06-01", "content-type": "application/json" },
     body: JSON.stringify({
       model: tier.model(),
-      max_tokens: PIP_TASKS[b.mode ?? ""] ? 420 : 260,
-      temperature: 0.6,
-      system: (b.mode === "feyn" ? PIP_FEYN_SYS : PIP_SYS + (PIP_TASKS[b.mode ?? ""] ? " " + PIP_TASKS[b.mode!] + " For this task you may use up to 4 short sentences or a short list." : "")) +
+      max_tokens: b.mode === "story" ? 650 : PIP_TASKS[b.mode ?? ""] ? 450 : 320,
+      temperature: b.mode === "story" ? 0.85 : 0.6,
+      system: (b.mode === "feyn" ? PIP_FEYN_SYS : PIP_SYS + (PIP_TASKS[b.mode ?? ""] ? " " + PIP_TASKS[b.mode!] + (b.mode === "story" ? "" : " For this task you may use up to 4 short sentences or a short list.") : "")) +
         contextNote(b.context) + memoryNote((b as { memory?: unknown }).memory),
       messages: cleanHistory(b.history, message),
     }),
