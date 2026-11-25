@@ -66,6 +66,12 @@
 .dn2-soc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center}
 .dn2-ig{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;color:#fff;font-weight:800;text-decoration:none;background:linear-gradient(45deg,#f9ce34,#ee2a7b 45%,#6228d7)}
 .px-demo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:1080px;margin:0 auto 18px;padding:14px 18px;border-radius:22px;background:linear-gradient(120deg,#eafbef,#fff8e1);border:1px solid #cfe9d6}.px-demo>div{flex:1;min-width:220px;display:flex;flex-direction:column}.px-demo span{color:var(--muted);font-size:.9rem}.px-demo-i{font-size:28px}
+.brk-sl{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:18px;background:var(--surf2);border:1px solid var(--line)}.brk-sl label{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brk-sl output{font-weight:800;color:var(--brand);background:var(--surf);border:1px solid var(--line);border-radius:999px;padding:3px 12px;min-width:84px;text-align:center}
+.brk-sl input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:999px;background:linear-gradient(90deg,var(--brand) var(--p,0%),color-mix(in srgb,var(--brand) 15%,var(--surf)) var(--p,0%));outline-offset:4px;cursor:pointer}
+.brk-sl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:4px solid var(--brand);box-shadow:0 3px 8px rgba(0,0,0,.2)}
+.brk-sl input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:4px solid var(--brand)}
+.brk-ticks{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}.brk-use{display:flex;flex-direction:column;gap:6px}.brk-bar{height:10px;border-radius:999px;background:var(--surf2);overflow:hidden;border:1px solid var(--line)}.brk-bar i{display:block;height:100%;background:linear-gradient(90deg,#7bd389,#ffd23f)}
 </style></head><body>
 <div id="splash" aria-hidden="true"><div class="sp-in"><img class="sp-logo" src="assets/img/logo-full.webp" alt="LahLahLearn" width="360" height="171"><div class="sp-m">Empowering a brighter future for every child</div><div class="sp-d"><i></i><i></i><i></i></div></div></div>
 <style>#splash{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:linear-gradient(#e8f6ee,#fdf6df);transition:opacity .45s}#splash.out{opacity:0;pointer-events:none}.sp-in{text-align:center}.sp-logo{display:block;width:min(360px,calc(78vw / var(--z,1)));height:auto;margin:0 auto 6px;filter:drop-shadow(0 12px 18px rgba(60,80,60,.25))}@keyframes splf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@media (prefers-reduced-motion:reduce){.sp-logo{animation:none}}.sp-w{display:flex;gap:2px;justify-content:center;font:800 clamp(2.4rem,calc(11vw / var(--z,1)),4.6rem)/1 ui-rounded,"Baloo 2","Fredoka",system-ui,sans-serif}.sp-w span{color:var(--c);display:inline-block;animation:spb 1.1s ease-in-out infinite;animation-delay:calc(var(--i)*.09s);text-shadow:0 4px 0 rgba(0,0,0,.08)}.sp-m{margin-top:10px;font:600 1.05rem ui-rounded,system-ui,sans-serif;color:#3b4a40}.sp-d{display:flex;gap:8px;justify-content:center;margin-top:22px}.sp-d i{width:12px;height:12px;border-radius:50%;background:#2f8a5b;opacity:.35;animation:spd 1.2s infinite}.sp-d i:nth-child(2){animation-delay:.2s}.sp-d i:nth-child(3){animation-delay:.4s}@keyframes spb{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-16px) rotate(-6deg)}60%{transform:translateY(0) rotate(3deg)}}@keyframes spd{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}@media (prefers-reduced-motion:reduce){.sp-w span,.sp-d i{animation:none}.sp-d i{opacity:.7}}</style>
@@ -3825,7 +3831,7 @@ const AI_PACK_P={MYR:[49,179,499],SGD:[14.5,54,154],USD:[12.0,45,125],EUR:[12.0,
 const aiModel=()=>AI_MODELS.find(m=>m.id===((P&&P.aiModel)||'quick'))||AI_MODELS[0];
 const aiAllow=()=>feat('ai')?(planNow()==='school'?300:AI_ALLOW.family):0;
 const aiMonth=()=>new Date().toISOString().slice(0,7);
-const aiPreview=()=>!!lsGet('ll.planTest');
+const aiPreview=()=>false;
 function aiBal(){ /* local view of the balance; the server's number wins whenever it sends one */
   if(!G)return{left:0,allow:aiAllow(),bonus:0};
   /* plan preview: credits follow the plan being previewed, counted on this device only */
@@ -4300,7 +4306,9 @@ const essPart=(myr,n)=>essCur(myr*ESS_KIDS[n-1]);
 function essAmt(n,on){on=on||essOn();return essPart(ESS_BASE,n)+ESS_X.filter(x=>on[x[0]]).reduce((a,x)=>a+essPart(x[4],n),0)}
 /* Is a feature part of this family's plan? Free has only the daily lessons. Essentials switches the extras on or off. */
 const PLAN_BASIC=[['buddy','Pip, your buddy','spark','Talk and play with Pip.'],['calm','Calm breaks','heart','Breathing breaks with Fox.'],['signs','Picture cards and hand signs','hand','Say things with pictures and signs.'],['games','Memory games','game','Flip the cards and find the pairs.'],['draw','Drawing and tracing','pen','Draw pictures and trace letters.']];
-const planNow=()=>{const t=lsGet('ll.planTest');return t&&PLAN_N[t]?t:(P&&P.plan)||'free'};
+/* the old "preview a plan" mode is gone now that every plan is free to switch on */
+try{localStorage.removeItem('ll.planTest')}catch(e){}
+const planNow=()=>(P&&P.plan)||'free';
 const feat=k=>{const p=planNow();if(p==='free')return false;if(p==='learn'&&ESS_X.some(x=>x[0]===k))return !!(P&&P.addons&&P.addons[k]);return true};
 const CUR_SN={"MYR":14,"SGD":4,"USD":4,"EUR":4,"GBP":3,"AUD":6,"NZD":6,"CAD":5,"IDR":49000,"THB":109,"PHP":179,"VND":83000,"INR":279,"HKD":27,"JPY":489,"KRW":4900,"CNY":24,"AED":13};
 let CUR='MYR',schN=15,schAI=true;const FAM={},FAMW={};const SCH_MIN=15,SCH_MAX=500;
@@ -4482,6 +4490,7 @@ function bestVoice(){
   if(BESTV&&speechSynthesis.getVoices().includes(BESTV))return BESTV;
   const vs=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang)||v.lang==='en');if(!vs.length)return null;
   const sc=v=>{const n=v.name;let s=0;
+    if(v.localService)s+=45; /* online voices (like Chrome's Google voices) can fail silently, so voices on the device come first */
     if(/natural|neural/i.test(n))s+=60;if(/premium|enhanced|siri/i.test(n))s+=50;if(/^Google (US|UK) English/i.test(n))s+=35;
     if(/Ava|Samantha|Allison|Susan|Joelle|Nicky|Zoe|Serena|Kate|Moira|Tessa|Karen|Aria|Jenny|Ana|Emma|Libby|Sonia|Michelle|Clara/i.test(n))s+=20;
     if(/en[-_](US|GB|AU)/i.test(v.lang))s+=8;if(/compact|eloquence|espeak|robot|Fred|Albert|Zarvox|Trinoids|Bad News|Bells|Boing|Bubbles|Cellos|Wobble|Whisper|Junior|Ralph|Kathy|Organ|Hysterical/i.test(n))s-=80;
@@ -4493,7 +4502,7 @@ function sayDevice(text,pref){
   if(!('speechSynthesis' in window))return false;
   try{text=speakable(text);if(!text)return false;const u=new SpeechSynthesisUtterance(text);u.lang='en-US';const md=sayMood||MOODS.plain;u.rate=md.rate*sayPace();u.pitch=md.pitch;u.volume=sayVol();
     const want=pref||voxGet().device.voice;let v=want?speechSynthesis.getVoices().find(x=>x.voiceURI===want||x.name===want):null;if(!v)v=bestVoice();if(v){u.voice=v;u.lang=v.lang}
-    u.onstart=()=>pipTalk=1;u.onend=()=>sayEnded();u.onerror=e=>{if(e&&e.error==='interrupted')return;sayEnded()};
+    u.onstart=()=>{pipTalk=1;sayStarted=Date.now()};u.onend=()=>sayEnded();u.onerror=e=>{if(e&&e.error==='interrupted')return;sayEnded()};
     const id=sayId;try{speechSynthesis.resume()}catch(e){}
     /* speak straight away when nothing else is talking, so it still counts as part of the tap (Safari needs that) */
     if(!speechSynthesis.speaking&&!speechSynthesis.pending)speechSynthesis.speak(u);else{speechSynthesis.cancel();setTimeout(()=>{if(id!==sayId)return;try{speechSynthesis.resume()}catch(e){}speechSynthesis.speak(u)},80)}return true}catch(e){return false}
@@ -4533,7 +4542,7 @@ async function voxSpeak(text,strict){
     if(!packed&&!blob&&eng==='kokoro'&&KSTAT.state!=='ready'){kokoroGet().catch(()=>{});if(!strict){sayDevice(text,v.device.voice);return}}
     if(!packed&&!blob){blob=await VFETCH[eng](text,c);if(!blob||!blob.size)throw new Error('No audio came back');vcPut(key,blob)}
     if(id!==sayId)return;
-    const au=new Audio(packed||URL.createObjectURL(blob)),rate=eng==='kokoro'&&!packed?Math.pow(2,(KST[c.voice]||0)/12):1;const md=sayMood,keep=rate===1,base=(packed&&c.voice==='am_puck'?1:keep?.85:rate*.88)*sayPace(),pr=md?base*md.speed:base;au.volume=sayVol();au.preservesPitch=keep;au.mozPreservesPitch=keep;au.webkitPreservesPitch=keep;au.defaultPlaybackRate=pr;au.playbackRate=pr;sayAudio=au;au.onended=()=>{if(!packed)try{URL.revokeObjectURL(au.src)}catch(e){}sayEnded()};au.onerror=()=>sayEnded();await au.play();
+    const au=new Audio(packed||URL.createObjectURL(blob)),rate=eng==='kokoro'&&!packed?Math.pow(2,(KST[c.voice]||0)/12):1;const md=sayMood,keep=rate===1,base=(packed&&c.voice==='am_puck'?1:keep?.85:rate*.88)*sayPace(),pr=md?base*md.speed:base;au.volume=sayVol();au.preservesPitch=keep;au.mozPreservesPitch=keep;au.webkitPreservesPitch=keep;au.defaultPlaybackRate=pr;au.playbackRate=pr;sayAudio=au;au.addEventListener('play',()=>{sayStarted=Date.now()});au.onended=()=>{if(!packed)try{URL.revokeObjectURL(au.src)}catch(e){}sayEnded()};au.onerror=()=>sayEnded();await au.play();
   }catch(e){
     if(id!==sayId)return;
     if(strict)throw e;
@@ -4546,14 +4555,18 @@ let sayCalm=0,sayForceUntil=0;
 /* "Hear it" buttons: the child asked to hear it, so it plays even when sounds are muted, one sentence at a time so long text is never cut off */
 function hear(text){text=String(text||'').replace(/<[^>]+>/g,' ').replace(/_{2,}/g,' blank ').replace(/\s+/g,' ').trim();if(!text)return false;
   if(!('speechSynthesis' in window)&&!window.Audio){toast(tr('Your device cannot read aloud here.'));return false}
-  stopSay();sayForceUntil=Date.now()+text.length*120+6000;try{speechSynthesis.resume()}catch(e){}pipSay(text);return true}
+  stopSay();sayForceUntil=Date.now()+text.length*120+6000;try{speechSynthesis.resume()}catch(e){}const t0=Date.now(),id0=sayId;pipSay(text);
+  /* watchdog: if nothing has started playing after a moment, read it with the plainest device voice, and say so if even that fails */
+  clearTimeout(hear.t);hear.t=setTimeout(()=>{if(sayStarted>=t0||sayId!==id0)return;try{stopSay();const u=new SpeechSynthesisUtterance(speakable(text));u.lang='en-US';u.rate=.95;u.volume=1;u.onstart=()=>{sayStarted=Date.now()};speechSynthesis.speak(u);
+    setTimeout(()=>{if(sayStarted<t0)toast(tr('No sound came out. Please check the volume, or pick a voice in Settings.'))},2500)}catch(e){toast(tr('Your device cannot read aloud here.'))}},1600);return true}
+let sayStarted=0;
 function say(text){
   const forced=Date.now()<sayForceUntil;
   if(!text||(!forced&&typeof sndMuted==='function'&&sndMuted()))return false;
   if(typeof calmOpen!=='undefined'&&calmOpen&&!sayCalm&&!forced)return false; /* a calm break silences everything except its own breathing cues */
   /* until a grown-up picks a voice in Settings, Pip uses the recorded natural voice for every line it has, and the best device voice for the rest */
   let chosen=false;try{chosen=!!(JSON.parse(lsGet('ll.voice')||'{}')||{}).engine}catch(e){}
-  if(!chosen){const pk=vpkGet('af_heart',text);if(pk){haltOut();const id=sayId,au=ttsAu();au.src=pk;sayAudio=au;au.volume=sayVol();au.playbackRate=au.defaultPlaybackRate=1;{const sp=(sayMood?sayMood.speed:1)*sayPace();if(sp!==1){au.playbackRate=au.defaultPlaybackRate=sp;au.preservesPitch=true}}au.onplay=()=>pipTalk=1;let fell=false;const fall=()=>{if(fell||id!==sayId)return;fell=true;sayDevice(text)};au.onended=()=>{if(!fell)sayEnded()};au.onerror=fall;au.play().catch(fall);return true}return sayDevice(text)}
+  if(!chosen){const pk=vpkGet('af_heart',text);if(pk){haltOut();const id=sayId,au=ttsAu();au.src=pk;sayAudio=au;au.volume=sayVol();au.playbackRate=au.defaultPlaybackRate=1;{const sp=(sayMood?sayMood.speed:1)*sayPace();if(sp!==1){au.playbackRate=au.defaultPlaybackRate=sp;au.preservesPitch=true}}au.onplay=()=>{pipTalk=1;sayStarted=Date.now()};let fell=false;const fall=()=>{if(fell||id!==sayId)return;fell=true;sayDevice(text)};au.onended=()=>{if(!fell)sayEnded()};au.onerror=fall;au.play().catch(fall);return true}return sayDevice(text)}
   const eng=voxGet().engine;
   if(eng==='device')return sayDevice(text);
   voxSpeak(text,false);return true;
@@ -5184,7 +5197,7 @@ function chrome(){
   $('#topnav').innerHTML=links.map(([k,l])=>`<button class="tl ${(k==='learn'?dockCur==='learn':k==='dashboard'&&kid?(cur===k||dockCur==='learn'):cur===k)?'on':''}" data-go="${k}" aria-label="${l}">${TLI[k]?`<span class="tli">${ic(TLI[k],20)}</span>`:''}<span class="tlw">${l}</span></button>`).join('');document.body.classList.toggle('inworld',cur==='explore');document.body.classList.toggle('scene',!['explore','onboard','pick','who','learn','talk','signs','play','world'].includes(cur));
   $('#meb').innerHTML=session&&P?(kid?ic('lock',18):ic('gear',18)):ic('user',18);studyUI();$('#meb').className='ibtn'+(cur==='profile'?' on':'');$('#meb').setAttribute('aria-label',session?(kid?'For parents':'Settings'):'Log in');$('#meb').title=session?(kid?'For parents':'Settings'):'Log in';
   {let pl=$('#plock');if(session&&!kid){if(!pl){pl=document.createElement('button');pl.id='plock';pl.className='ibtn';pl.setAttribute('aria-label','Lock the parent area');pl.title='Lock the parent area';pl.innerHTML=ic('unlock',18);pl.onclick=()=>{CU=null;chrome();try{guideSync()}catch(e){}if(['pricing','home','profile','care'].includes(cur))go('dashboard');toast('Parent area locked')};$('#meb').after(pl)}}else if(pl)pl.remove()}
-  {let pb=$('#ptBadge');const pt=lsGet('ll.planTest');if(pt&&session&&PLAN_N[pt]){if(!pb){pb=document.createElement('button');pb.id='ptBadge';pb.className='pt-badge';pb.onclick=()=>{lsDel('ll.planTest');chrome();if(cur==='pricing')R.pricing();else route();toast('Back to your real plan.')};document.body.appendChild(pb)}pb.textContent='Preview: '+PLAN_N[pt]+' plan · tap to stop';pb.title='Stop previewing'}else if(pb)pb.remove()}
+  {let pb=$('#ptBadge');const pt=null;if(pt&&session&&PLAN_N[pt]){if(!pb){pb=document.createElement('button');pb.id='ptBadge';pb.className='pt-badge';pb.onclick=()=>{lsDel('ll.planTest');chrome();if(cur==='pricing')R.pricing();else route();toast('Back to your real plan.')};document.body.appendChild(pb)}pb.textContent='Preview: '+PLAN_N[pt]+' plan · tap to stop';pb.title='Stop previewing'}else if(pb)pb.remove()}
   $('#foot').style.display=FULL.includes(cur)||(cur==='explore'&&parseHash().arg)?'none':'';setSync();updateClock();musSync();if(!session&&(HS.cam.on||HS.mic.on)){camStop();micStop()}hsUpdate();
 }
 function resolve(){
@@ -5588,28 +5601,34 @@ const brkState=()=>G?(G.brk||(G.brk={u:0,end:0})):{u:0,end:0};
 function breakSetHTML(){const c=brkCfg(),st=brkState(),left=Math.max(0,Math.ceil((st.end-Date.now())/60000)),leftS=left>=60?Math.floor(left/60)+' h '+(left%60)+' min':left+' min',nx=Math.max(0,Math.ceil(c.every-(st.u||0)/60));
   return `<section class="gr-sec" id="brkSec"><div class="gr-sh"><span class="gr-n">2</span><div><h3>Screen breaks</h3><p class="muted small">After some screen time, the app pauses so ${esc(P.name)} can rest their eyes and move. It starts again by itself when the break ends.</p></div></div>
    <label class="row" style="gap:14px;flex-wrap:nowrap;cursor:pointer"><input type="checkbox" id="brkOn" role="switch" ${c.on?'checked':''}><b>Use screen breaks</b></label>
-   <div class="stack" style="gap:6px"><b class="small">A break after every</b><div class="cg-who" id="brkE">${BRK_EVERY.map(([v,l])=>`<button class="cg-a ${v===c.every?'on':''}" data-v="${v}"><b>${l}</b></button>`).join('')}</div></div>
-   <div class="stack" style="gap:6px"><b class="small">Each break lasts</b><div class="cg-who" id="brkL">${BRK_LEN.map(([v,l])=>`<button class="cg-a ${v===c.len?'on':''}" data-v="${v}"><b>${l}</b></button>`).join('')}</div></div>
-   <p class="muted small" style="margin:0">During a break the whole app for ${esc(P.name)} is paused. Only the grown-up area (Care Circle, with your PIN) still opens.</p>
-   <div class="brk-rule"><span aria-hidden="true">📚➜🌍</span><span><b>Learn first, then play</b><br><small class="muted">My World and the 3D Journey open after one lesson each day, and lock again the next morning. This is always on.</small></span></div>
-   <div class="row" style="gap:10px">${st.end>Date.now()?`<span class="chip sun">On a break: ${leftS} left</span><button class="btn sm" id="brkEnd">End the break now</button>`:c.on?`<span class="chip">Next break in about ${nx} min of screen time</span>`:''}<span class="muted small" id="brkM" aria-live="polite"></span></div></section>`}
+   <div class="brk-sl"><label for="brkE"><b>Screen time before a break</b><output id="brkEo">${brkFmt(c.every)}</output></label><input type="range" id="brkE" min="0" max="${BRK_USE.length-1}" step="1" value="${brkIdx(BRK_USE,c.every)}" aria-valuetext="${brkFmt(c.every)}"><div class="brk-ticks"><span>5 min</span><span>2 h</span></div></div>
+   <div class="brk-sl"><label for="brkL"><b>Each break lasts</b><output id="brkLo">${brkFmt(c.len)}</output></label><input type="range" id="brkL" min="0" max="${BRK_REST.length-1}" step="1" value="${brkIdx(BRK_REST,c.len)}" aria-valuetext="${brkFmt(c.len)}"><div class="brk-ticks"><span>5 min</span><span>Until tomorrow</span></div></div>
+   <p class="muted small" style="margin:0">During a break the whole app for ${esc(P.name)} is paused. Only the grown-up area (Care Circle) still opens.</p>
+   ${c.on&&!(st.end>Date.now())?`<div class="brk-use"><div class="brk-bar"><i style="width:${Math.min(100,Math.round((st.u||0)/60/c.every*100))}%"></i></div><small class="muted">${Math.floor((st.u||0)/60)} of ${c.every} min used. Next break in about ${nx} min of screen time.</small></div>`:''}
+   <div class="row" style="gap:10px">${st.end>Date.now()?`<span class="chip sun">On a break: ${leftS} left</span><button class="btn sm" id="brkEnd">End the break now</button>`:c.on?`<button class="btn sm ghost" id="brkNow">Start a break now</button>`:''}<span class="muted small" id="brkM" aria-live="polite"></span></div></section>`}
+const BRK_USE=[5,10,15,20,25,30,40,45,60,75,90,105,120],BRK_REST=[5,10,15,20,30,45,60,90,120,180,240,300,-1];
+const brkIdx=(arr,v)=>{let b=0;arr.forEach((x,i)=>{if(Math.abs(x-v)<Math.abs(arr[b]-v)||x===v)b=i});return b};
+const brkFmt=m=>m<0?tr('Until tomorrow'):m<60?m+' min':Math.floor(m/60)+' h'+(m%60?' '+(m%60)+' min':'');
 function breakSetBind(){const sec=$('#brkSec');if(!sec)return;const upd=k=>{P.brk=Object.assign(brkCfg(),k);save(true);const m=$('#brkM');if(m)m.textContent=tr('Saved.')};
   $('#brkOn').onchange=e=>{upd({on:e.target.checked});(SET_REDRAW||careDraw)()};
-  $$('#brkE .cg-a').forEach(b=>b.onclick=()=>{upd({every:+b.dataset.v});$$('#brkE .cg-a').forEach(x=>x.classList.toggle('on',x===b))});
-  $$('#brkL .cg-a').forEach(b=>b.onclick=()=>{upd({len:+b.dataset.v});$$('#brkL .cg-a').forEach(x=>x.classList.toggle('on',x===b))});
+  const sl=(id,arr,key)=>{const r=$('#'+id),o=$('#'+id+'o');if(!r)return;const show=()=>{const v=arr[+r.value];o.textContent=brkFmt(v);r.setAttribute('aria-valuetext',brkFmt(v));r.style.setProperty('--p',(+r.value/(arr.length-1)*100)+'%')};show();r.oninput=show;r.onchange=()=>{upd({[key]:arr[+r.value]});const st=brkState();if(key==='every'&&st.u>=arr[+r.value]*60)st.u=Math.max(0,arr[+r.value]*60-30)}};
+  sl('brkE',BRK_USE,'every');sl('brkL',BRK_REST,'len');
+  const bn=$('#brkNow');if(bn)bn.onclick=()=>{const c=brkCfg(),st=brkState();st.u=0;st.tot=brkLenMs(c);st.end=Date.now()+st.tot;save(true);toast(tr('Break started. It shows on the child screens.'));(SET_REDRAW||careDraw)()};
   const e=$('#brkEnd');if(e)e.onclick=()=>{const st=brkState();st.end=0;st.u=0;save(true);const o=$('#brkov');if(o)o.remove();(SET_REDRAW||careDraw)();toast(tr('The break is over.'))}}
 const BRK_SKIP=['welcome','auth','onboard','pick','who','care','profile','pricing','privacy','terms','refunds','cookies','home','team'];
+let brkLast=0;
 function breakTick(){
-  if(!session||!G||!P||!kidMode()||document.hidden)return;const c=brkCfg(),st=brkState();
+  const now=Date.now(),dt=brkLast?Math.min(5,Math.round((now-brkLast)/1000)):1;brkLast=now;
+  if(!session||!G||!P||document.hidden)return;const c=brkCfg(),st=brkState();
   if(!c.on){if(st.end)st.end=0;return}
   if(st.end>Date.now()){breakShow();return}
   if(BRK_SKIP.includes(cur)||calmOpen)return;
-  st.u=(st.u||0)+1;if(st.u%15===0)save();
+  st.u=(st.u||0)+dt;if(st.u%15<dt)save();
   if(st.u>=c.every*60){st.u=0;st.tot=brkLenMs(c);st.end=Date.now()+st.tot;save(true);try{nfyAdd('time',`${P.name} started a screen break (${(BRK_LEN.find(x=>x[0]===c.len)||[0,c.len+' min'])[1]}).`)}catch(e){}breakShow()}
 }
 function breakShow(){
   const st=brkState();let ov=$('#brkov');
-  if(!(st.end>Date.now())||!kidMode()||cur==='care'){if(ov)ov.remove();return}
+  if(!(st.end>Date.now())||BRK_SKIP.includes(cur)){if(ov)ov.remove();return}
   const c=brkCfg(),left=Math.max(0,st.end-Date.now()),tot=st.tot||brkLenMs(c)||1,hh=Math.floor(left/3600000),mm=Math.floor(left/60000)%60,ss=Math.floor(left/1000)%60;
   if(!ov){ov=document.createElement('div');ov.id='brkov';ov.className='brkov';ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Screen break');
     ov.innerHTML=`<div class="brk-card"><div class="brk-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="10"/><circle class="brk-arc" cx="60" cy="60" r="52" fill="none" stroke="#ffd23f" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" transform="rotate(-90 60 60)"/></svg><b id="brkT"></b></div>
@@ -7236,18 +7255,18 @@ const CW=[['cat','🐱'],['dog','🐶'],['sun','☀️'],['bus','🚌'],['fish',
 const CABC='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 /* Seed class exam: harder, exam-style questions with four choices, mixing letters, sounds, words, numbers, shapes and feelings */
-const uniq4=(ans,pool)=>{const o=[];for(const x of shuffle(pool))if(x!==ans&&!o.includes(x)&&o.length<3)o.push(x);return o};
+const uniq4=(ans,pool)=>{const o=[];for(const x of shuffle(pool))if(x!==ans&&!o.includes(x)&&o.length<2)o.push(x);return o};
 const SEED_EXAM=[
  ()=>{const i=1+Math.floor(Math.random()*23),A=CABC[i-1],C=CABC[i+1],B=CABC[i];return CQ(`Which letter goes in the gap? ${A} _ ${C}`,`<span class="bigword">${A} _ ${C}</span>`,B,uniq4(B,CABC),`Which letter goes in the gap between ${A} and ${C}?`)},
  ()=>{const i=Math.floor(Math.random()*24),L=CABC[i+1];return CQ(`Which letter comes BEFORE ${CABC[i+2]||'Z'}?`,'',L,uniq4(L,CABC.slice(Math.max(0,i-2),i+5)),`Which letter comes before ${CABC[i+2]||'Z'}?`)},
  ()=>{const[w,e]=pick(CW),end=w[w.length-1],o=uniq4(e,CW.filter(x=>x[0][x[0].length-1]!==end).map(x=>x[1]));return CQ(`Which one ENDS with the sound "${end}"?`,'',e,o,`Which picture ends with the sound ${end}?`,'read','emoji')},
- ()=>{const[w]=pick(CW.filter(x=>x[0].length===3)),bad=[w[1]+w[0]+w[2],w[0]+w[2]+w[1],w[2]+w[1]+w[0]].filter(x=>x!==w);return CQ('Which word is spelled correctly?',cqPic(pick(CW.filter(x=>x[0]===w))[1],''),w,[...new Set(bad)].slice(0,3),'Which word is spelled correctly?')},
+ ()=>{const[w]=pick(CW.filter(x=>x[0].length===3)),bad=[w[1]+w[0]+w[2],w[0]+w[2]+w[1],w[2]+w[1]+w[0]].filter(x=>x!==w);return CQ('Which word is spelled correctly?',cqPic(pick(CW.filter(x=>x[0]===w))[1],''),w,shuffle([...new Set(bad)]).slice(0,2),'Which word is spelled correctly?')},
  ()=>{const a=1+Math.floor(Math.random()*5),b=1+Math.floor(Math.random()*4),n=a+b;return CQ(`${a} + ${b} = ?`,`<span class="cq-row">${'🍎'.repeat(a)} + ${'🍎'.repeat(b)}</span>`,String(n),uniq4(String(n),[n-2,n-1,n+1,n+2].filter(x=>x>0).map(String)),`What is ${a} plus ${b}?`,'num')},
  ()=>{const a=4+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*3),n=a-b;return CQ(`${a} take away ${b} is…`,`<span class="cq-row">${'🎈'.repeat(a)}</span>`,String(n),uniq4(String(n),[n-1,n+1,n+2,a].map(String)),`What is ${a} take away ${b}?`,'num')},
  ()=>{const n=2+Math.floor(Math.random()*8);return CQ(`Which number comes just AFTER ${n}?`,'',String(n+1),uniq4(String(n+1),[n-1,n,n+2,n+3].map(String)),`Which number comes just after ${n}?`,'num')},
- ()=>{const xs=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,4),big=Math.max(...xs);return CQ('Which number is the BIGGEST?','',String(big),xs.filter(x=>x!==big).map(String),'Which number is the biggest?','num')},
+ ()=>{const xs=shuffle([1,2,3,4,5,6,7,8,9]).slice(0,3),big=Math.max(...xs);return CQ('Which number is the BIGGEST?','',String(big),xs.filter(x=>x!==big).map(String),'Which number is the biggest?','num')},
  ()=>{const S=[['triangle',3],['square',4],['circle',0],['rectangle',4]],[n,k]=pick(S.filter(x=>x[1])),ans=String(k);return CQ(`How many sides does a ${n} have?`,'',ans,uniq4(ans,['0','2','3','4','5']),`How many sides does a ${n} have?`,'pat')},
- ()=>{const G=[['🍎','🍌','🍇','🚗'],['🐶','🐱','🐰','🌳'],['🔴','🔵','🟢','⭐'],['🚗','🚌','🚲','🍰']].map(x=>x.slice()),g=pick(G);return CQ('Which one does NOT belong?',`<span class="cq-row">${shuffle(g).join(' ')}</span>`,g[3],g.slice(0,3),'Which one does not belong with the others?','pat','emoji')},
+ ()=>{const G=[['🍎','🍌','🍇','🚗'],['🐶','🐱','🐰','🌳'],['🔴','🔵','🟢','⭐'],['🚗','🚌','🚲','🍰']].map(x=>x.slice()),g=pick(G),two=shuffle(g.slice(0,3)).slice(0,2);return CQ('Which one does NOT belong?',`<span class="cq-row">${shuffle([...two,g[3]]).join(' ')}</span>`,g[3],two,'Which one does not belong with the others?','pat','emoji')},
  ()=>{const P=[['🔴🔵🔴🔵🔴','🔵'],['⭐⭐🌙⭐⭐','🌙'],['🐱🐶🐱🐶🐱','🐶'],['1 2 3 1 2','3']],[q,a]=pick(P);return CQ('What comes next in the pattern?',`<span class="cq-row">${q} ?</span>`,a,uniq4(a,/\d/.test(a)?['1','2','3','4']:['🔴','🔵','⭐','🌙','🐱','🐶']),'What comes next in the pattern?','pat',/\d/.test(a)?'':'emoji')},
  ()=>{const F=[['Your toy breaks.','sad'],['You get a present.','happy'],['Someone takes your snack.','angry'],['You hear a big bang in the dark.','scared'],['It is time for bed.','tired']],[q,a]=pick(F);return CQ(`${q} How might you feel?`,'',a,uniq4(a,F.map(x=>x[1])),`${q} How might you feel?`,'feel')}];
 const CBANK={
