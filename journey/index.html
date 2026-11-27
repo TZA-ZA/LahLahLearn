@@ -561,6 +561,25 @@ h2,h3,.hand{font-family:var(--hand);font-weight:400;letter-spacing:.01em}
 .sp2 #spdGr.sh{animation:gearSh2 .35s ease-out}@keyframes gearSh2{0%{transform:scale(1.35);opacity:.6}100%{transform:scale(1);opacity:1}}
 .sp2 .sp2-d{position:absolute;left:0;right:0;top:124px;display:flex;flex-direction:column;align-items:center;line-height:1;color:#fff}.sp2 .sp2-d b{position:static!important;font:600 21px/1 'Barlow','Segoe UI',system-ui,sans-serif!important;font-variant-numeric:tabular-nums;letter-spacing:.02em}.sp2 .sp2-d small{position:static!important;font:600 9px/1.2 system-ui,sans-serif!important;color:#9aa7b5;letter-spacing:.08em;text-transform:lowercase}
 .sp2 i#spdHB{position:absolute;right:auto!important;left:calc(50% - 56px)!important;bottom:auto!important;top:128px!important;transform:none;width:18px!important;height:18px!important;font-size:10px!important}
+/* phones turned sideways: short screens get the controls in the bottom corners, a smaller trip card in the middle,
+   and room left for the notch on either side */
+@media (max-height:500px) and (orientation:landscape){
+ :root{--jh:0px}
+ #top{left:max(10px,env(safe-area-inset-left,0px));right:max(10px,env(safe-area-inset-right,0px));top:6px}
+ #top>div{gap:5px}
+ #jcard{width:min(420px,calc(100% - 360px));min-width:300px;padding:6px 10px 8px;gap:5px;transform:translateX(-50%) scale(.8);transform-origin:bottom center;bottom:calc(6px + env(safe-area-inset-bottom,0px))}
+ #joy{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:112px;height:112px}
+ #joy i{width:48px;height:48px;margin:-24px}
+ #jump,#drift{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(30px + env(safe-area-inset-bottom,0px));width:76px;height:76px}
+ #dive{right:calc(max(16px,env(safe-area-inset-right,0px)) + 92px);bottom:calc(30px + env(safe-area-inset-bottom,0px));width:58px;height:58px}
+ #ride{right:calc(max(16px,env(safe-area-inset-right,0px)) + 92px);bottom:calc(46px + env(safe-area-inset-bottom,0px));width:56px;height:56px}
+ #dance,body.drv #dance{right:max(28px,env(safe-area-inset-right,0px));bottom:calc(132px + env(safe-area-inset-bottom,0px))!important;width:52px;height:52px}
+ #mini{width:80px;height:80px;top:calc(80px + env(safe-area-inset-top,0px));margin-top:0!important;right:max(12px,env(safe-area-inset-right,0px))}
+ #goal{top:62px;left:max(10px,env(safe-area-inset-left,0px));max-width:230px}
+ #tele{top:118px;left:max(14px,env(safe-area-inset-left,0px));width:52px;height:52px}#tele b{font-size:20px}
+ #setp{top:56px;max-height:calc(100vh - 70px);overflow:auto}
+ #ov>*{max-height:calc(100vh - 16px);overflow:auto}
+}
 .drv #goal{display:none!important}.drv #tele{top:calc(272px + env(safe-area-inset-top,0px))!important}
 .drv #dance{bottom:calc(var(--jh) + 176px + env(safe-area-inset-bottom,0px))!important}
 @media(max-width:600px){.spd.sp2{transform:scale(.78)!important;transform-origin:top left}.drv #tele{top:calc(230px + env(safe-area-inset-top,0px))!important}}
@@ -982,9 +1001,9 @@ function auInit(){
  const c=AU.ctx,m=c.createGain();m.gain.value=.9;m.connect(c.destination);
  AU.sfx=c.createGain();AU.sfx.gain.value=S.settings.sfx?MODE().snd:0;AU.sfx.connect(m);
  AU.lp=c.createBiquadFilter();AU.lp.type='lowpass';AU.lp.frequency.value=20000;AU.lp.connect(m);
- AU.mus=c.createGain();AU.mus.gain.value=0;AU.mus.connect(AU.lp);AU.lp.frequency.value=MODE().gentle?2400:20000;
+ AU.mus=c.createGain();AU.mus.gain.value=S.settings.music?.12*MODE().mus:0;AU.mus.connect(AU.lp);AU.lp.frequency.value=MODE().gentle?2400:20000;
  const n=c.sampleRate*.6,b=c.createBuffer(1,n,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;AU.noise=b;
- /* no background music in the journey: only the sounds of what the child does */
+ setInterval(musTick,90);
 }
 function tone(f,dur,o){
  if(!AU.ctx)return;o=o||{};const c=AU.ctx,t0=c.currentTime+(o.when||0),g=c.createGain(),os=c.createOscillator();
@@ -1046,7 +1065,7 @@ function honk(){auInit();if(!AU.ctx||!PL)return;const c=AU.ctx,t=c.currentTime,v
 function sfx(n,a){try{if(MODE().gentle&&GENTLE[n])return GENTLE[n](a);SFX[n]&&SFX[n](a)}catch(e){}}
 /* soft background tune: C-G-Am-F, pentatonic plucks */
 const MUS_CH=[[48,55,64],[43,55,62],[45,52,60],[41,53,60]],MUS_MEL=[76,74,72,74,76,79,76,74,72,69,72,74,72,67,69,72];
-function musTick(){return;
+function musTick(){
  if(!AU.ctx||!S.settings.music||document.hidden)return;
  const c=AU.ctx,beat=.3;if(AU.musT<c.currentTime)AU.musT=c.currentTime+.05;
  while(AU.musT<c.currentTime+.4){
@@ -1057,7 +1076,7 @@ function musTick(){return;
   AU.musT+=beat;
  }
 }
-function setVol(){if(!AU.ctx)return;AU.sfx.gain.value=S.settings.sfx?MODE().snd:0;AU.mus.gain.value=0;underwaterAudio(false)}
+function setVol(){if(!AU.ctx)return;AU.sfx.gain.value=S.settings.sfx?MODE().snd:0;AU.mus.gain.value=S.settings.music?.12*MODE().mus:0;underwaterAudio(false)}
 function underwaterAudio(on){if(AU.lp)AU.lp.frequency.value=on?500:MODE().gentle?2400:20000}
 function speak(text){
  if(!S.settings.voice||!window.speechSynthesis||!text)return;
@@ -1266,22 +1285,39 @@ function detailTex(){const t=canvasTex(512,512,x=>{x.fillStyle='#ffffff';x.fillR
  for(let i=0;i<260;i++){const v=Math.random()<.5?0:255,a=.025+Math.random()*.05,px=Math.random()*512,py=Math.random()*512,r=8+Math.random()*30;const g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,`rgba(${v},${v},${v},${a})`);g.addColorStop(1,`rgba(${v},${v},${v},0)`);x.fillStyle=g;x.fillRect(px-r,py-r,r*2,r*2)}
  x.lineCap='round';for(let i=0;i<9000;i++){const px=Math.random()*512,py=Math.random()*512,l=2+Math.random()*5,a=-Math.PI/2+(Math.random()-.5)*.9,dk=Math.random()<.6;x.strokeStyle=dk?`rgba(20,60,10,${.05+Math.random()*.08})`:`rgba(255,255,220,${.05+Math.random()*.08})`;x.lineWidth=.6+Math.random()*.8;x.beginPath();x.moveTo(px,py);x.lineTo(px+Math.cos(a)*l,py+Math.sin(a)*l);x.stroke()}});
  t.wrapS=t.wrapT=T.RepeatWrapping;try{if(typeof renderer!=='undefined'&&renderer)t.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy())}catch(e){}return t}
+/* a lawn seen from above: soft patches of yellower and bluer green, thousands of short blades pointing every way,
+   each with a lit side and a shaded side, small gaps of soil, clover leaves and a few tiny flowers.
+   It is drawn in light greys and greens and multiplied by each island's own ground colour. */
+function lawnTex(){const S2=1024,t=canvasTex(S2,S2,x=>{x.fillStyle='#e4ebdc';x.fillRect(0,0,S2,S2);
+ const blob=(px,py,r,c,a)=>{for(const ox of [-S2,0,S2])for(const oy of [-S2,0,S2]){const g=x.createRadialGradient(px+ox,py+oy,0,px+ox,py+oy,r);g.addColorStop(0,`rgba(${c},${a})`);g.addColorStop(1,`rgba(${c},0)`);x.fillStyle=g;x.fillRect(px+ox-r,py+oy-r,r*2,r*2)}};
+ for(let i=0;i<90;i++)blob(Math.random()*S2,Math.random()*S2,60+Math.random()*140,['255,250,200','190,215,170','120,150,90','235,240,215'][i%4],.12+Math.random()*.12);
+ for(let i=0;i<900;i++)blob(Math.random()*S2,Math.random()*S2,4+Math.random()*9,'70,60,35',.10+Math.random()*.12);
+ x.lineCap='round';const L=-.75;
+ for(let i=0;i<52000;i++){const px=Math.random()*S2,py=Math.random()*S2,l=3+Math.random()*8,a=Math.random()*TAU,ca=Math.cos(a),sa=Math.sin(a),w=.8+Math.random()*1.3,k=Math.random();
+  const base=k<.45?[62,98,40]:k<.8?[104,140,62]:k<.95?[150,170,88]:[190,180,120];
+  x.lineWidth=w;x.strokeStyle=`rgba(${base[0]*.55|0},${base[1]*.55|0},${base[2]*.55|0},${.35+Math.random()*.25})`;x.beginPath();x.moveTo(px+1,py+1);x.lineTo(px+1+ca*l,py+1+sa*l);x.stroke();
+  x.strokeStyle=`rgba(${base[0]},${base[1]},${base[2]},${.45+Math.random()*.3})`;x.beginPath();x.moveTo(px,py);x.lineTo(px+ca*l,py+sa*l);x.stroke();
+  if(Math.random()<.35){x.lineWidth=w*.45;x.strokeStyle=`rgba(240,250,210,${.25+Math.random()*.3})`;x.beginPath();x.moveTo(px+Math.cos(L)*.6,py+Math.sin(L)*.6);x.lineTo(px+ca*l*.8+Math.cos(L)*.6,py+sa*l*.8+Math.sin(L)*.6);x.stroke()}}
+ for(let i=0;i<160;i++){const px=Math.random()*S2,py=Math.random()*S2;for(let j=0;j<3;j++){const a=j*TAU/3+Math.random(),r=2.4;x.fillStyle='rgba(70,115,50,.55)';x.beginPath();x.arc(px+Math.cos(a)*r,py+Math.sin(a)*r,2.6,0,TAU);x.fill();x.fillStyle='rgba(200,225,170,.35)';x.beginPath();x.arc(px+Math.cos(a)*r-.6,py+Math.sin(a)*r-.6,1.1,0,TAU);x.fill()}}
+ for(let i=0;i<70;i++){const px=Math.random()*S2,py=Math.random()*S2;x.fillStyle=Math.random()<.6?'rgba(255,255,250,.9)':'rgba(255,225,90,.9)';x.beginPath();x.arc(px,py,1.4,0,TAU);x.fill()};
+ /* a small plain corner, used for the beach and sea floor so no blades show there */x.fillStyle='#ece9e2';x.fillRect(0,0,20,20)});
+ t.wrapS=t.wrapT=T.RepeatWrapping;try{if(typeof renderer!=='undefined'&&renderer)t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy())}catch(e){}return t}
 function buildIslands(){
- const tex=detailTex(),cA=new T.Color(),cB=new T.Color(),cw=new T.Color('#b9a883'),cd=new T.Color('#6f9c9a');
+ const tex=detailTex(),lawn=GFX()==='low'?null:lawnTex(),cA=new T.Color(),cB=new T.Color(),cw=new T.Color('#b9a883'),cd=new T.Color('#6f9c9a');
  ZONES.forEach((Z,i)=>{
   const sh=Z.deep>4?16:30,r=Z.r,ds=[0,r*.06,r*.13,r*.2,r*.28,r*.36,r*.44,r*.52,r*.6,r*.68,r*.76,r*.84,r*.92,r-1.2,r-.5,r,r+.5,r+1,r+1.6,r+2.3,r+3.1,r+3.8,r+4.5];[.2,.4,.6,.8,1].forEach(f=>ds.push(r+4.5+sh*f));ds.push(r+4.5+sh+5,r+4.5+sh+10,r+4.5+sh+12);
   const pts=ds.map((d,k)=>new T.Vector2(Math.max(.01,d),k===ds.length-1?-6.4:hIsl(Z.c[0]+d,Z.c[1],Z))).reverse();
   const geo=new T.LatheGeometry(pts,i===3?120:160),pos=geo.attributes.position,n=pos.count,col=new Float32Array(n*3),uv=new Float32Array(n*2);
   /* under a lawn the soil reads darker and greener, so the blades blend into it */
-  const G=new T.Color(Z.ground),E=new T.Color(Z.edge),Sd=new T.Color(Z.sand);if(Z.grass&&(S.settings.grass||'full')!=='off')G.lerp(new T.Color(Z.grass),.7).multiplyScalar(.66);
+  const G=new T.Color(Z.ground),E=new T.Color(Z.edge),Sd=new T.Color(Z.sand),lw=Z.grass&&lawn;if(Z.grass&&(S.settings.grass||'off')!=='off')G.lerp(new T.Color(Z.grass),.55).lerp(new T.Color('#5b5a2e'),.18).multiplyScalar(.6);else if(lw)G.lerp(new T.Color(Z.grass),.35).multiplyScalar(1.22);
   for(let v=0;v<n;v++){const x=pos.getX(v),y=pos.getY(v),z=pos.getZ(v),d=Math.hypot(x,z);
    if(y>-.01&&d<=r-1.2){cA.copy(G);const wx=x+Z.c[0],wz=z+Z.c[1],nz=Math.sin(wx*.13+Math.cos(wz*.09)*2)*Math.cos(wz*.11-wx*.05),j=1+nz*.07+(Math.random()-.5)*.03;cA.multiplyScalar(j);if(nz>.4)cA.offsetHSL(-.015,.03,.01)}
    else if(y>-.01){cA.copy(G).lerp(E,smooth(r-1.2,r,d))}
    else if(y>-1.4){cA.copy(Sd).lerp(cw,smooth(-.3,-1.4,y)*.35)}
    else{cA.copy(Sd).lerp(cw,.5);cB.copy(cd);cA.lerp(cB,smooth(-1.4,-5,y))}
-   col[v*3]=cA.r;col[v*3+1]=cA.g;col[v*3+2]=cA.b;uv[v*2]=(x+Z.c[0])*.11;uv[v*2+1]=(z+Z.c[1])*.11}
+   col[v*3]=cA.r;col[v*3+1]=cA.g;col[v*3+2]=cA.b;const us=lw?.16:.11;if(lw&&(d>r+.4||y<-.05)){uv[v*2]=.0098;uv[v*2+1]=.9902}else{uv[v*2]=(x+Z.c[0])*us;uv[v*2+1]=(z+Z.c[1])*us}}
   geo.setAttribute('color',new T.BufferAttribute(col,3));geo.setAttribute('uv',new T.BufferAttribute(uv,2));
-  const m=add(geo,causticMat(lam(0xffffff,{vertexColors:true,map:tex})),Z.c[0],0,Z.c[1]);m.receiveShadow=true;
+  const m=add(geo,causticMat(lam(0xffffff,{vertexColors:true,map:lw?lawn:tex})),Z.c[0],0,Z.c[1]);m.receiveShadow=true;
  });
 }
 
@@ -2034,93 +2070,116 @@ function applyMagic(){
 function setQuality(){if(!renderer)return;const q=GFX(),dpr=devicePixelRatio||1;renderer.setPixelRatio(q==='low'?1:q==='med'?Math.min(dpr,1.5):Math.min(dpr,2));
  renderer.shadowMap.enabled=q!=='low';const ms=q==='high'?2048:1024;if(sunL.shadow.mapSize.x!==ms){sunL.shadow.mapSize.set(ms,ms);if(sunL.shadow.map){sunL.shadow.map.dispose();sunL.shadow.map=null}}
  const on=renderer.shadowMap.enabled;if(W._shOn!==undefined&&W._shOn!==on)scene.traverse(o=>{if(!o.isMesh||!o.material)return;(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{if(!m.isShaderMaterial)m.needsUpdate=true})});W._shOn=on;onResize()}
-/* ===== Grass: real blades, each a thin curved strip shaped and lit on the GPU.
-   Built in 8 m squares near the camera only. Wind rolls across in waves, blades lean away from the player,
-   tips catch the sun and glow when it is behind them, cloud shadows drift over, and the far edge thins out so there is no hard line. ===== */
+/* ===== Grass: a real meadow. Thin blades in many greens, some dry, in clumps of different heights.
+   Each blade is a curved strip shaped and lit on the GPU: rounded so light rolls across it, dark at the roots,
+   a soft shine and glow from the sun, real shadows from trees, the car and the player, and wind that moves in gusts.
+   Built in 8 m squares near the camera. Each square holds its blades in random order, so drawing only the first part
+   gives a thinner, even spread further away. ===== */
 const GR={chunks:[],mat:null,geo:null,dens:0,far:30,t:0,tick:0,bl:null};
-const grassOn=()=>GFX()!=='low'&&(S.settings.grass||'full')!=='off'&&modeKey()!=='simple';
+const grassOn=()=>GFX()!=='low'&&(S.settings.grass||'off')!=='off'&&modeKey()!=='simple';
 function grassClear(){GR.chunks.forEach(c=>{if(c.m){scene.remove(c.m);c.m.geometry.dispose()}});GR.chunks=[];FX.grass=null}
 const GR_VS=`attribute vec4 aP;attribute vec4 aV;attribute vec3 aC;
 uniform float uT,uFar,uWind;uniform vec3 uPl,uCam;
-varying float vH,vG,vCv;varying vec3 vC,vN,vWP;
+varying float vH,vG,vX;varying vec3 vC,vN,vWP,vSide;
+#include <common>
+#include <shadowmap_pars_vertex>
 #include <fog_pars_vertex>
 void main(){
- float h=position.y;vec2 b=aP.xy;float d=distance(b,uCam.xz);float fade=1.0-smoothstep(uFar*.6,uFar,d);float ht=aP.w*fade;
+ float h=position.y;vec2 b=aP.xy;float d=distance(b,uCam.xz);float fade=1.0-smoothstep(uFar*.7,uFar,d);float ht=aP.w*fade;
  float c=cos(aP.z),s=sin(aP.z);vec3 side=vec3(c,0.,-s),fwd=vec3(s,0.,c);
- float g=sin(uT*.85-dot(b,vec2(.11,.045)))*.5+.5;g=g*g*g;
- float fl=sin(uT*3.1+aV.w*6.2831+b.x*.7+b.y*.5)*.08;
- vec3 bend=vec3(.93,0.,.37)*(uWind*(.15+g*.9)+fl)+fwd*aV.y;
- vec2 dp=b-uPl.xz;float pd=length(dp);float push=(1.-smoothstep(.2,1.5,pd))*(1.-step(1.8,abs(uPl.y)));
- bend+=vec3(dp.x,0.,dp.y)/max(pd,.05)*push*1.3;
+ float g=sin(uT*.7-dot(b,vec2(.09,.04)))*.5+.5;g=g*g*(3.-2.*g);g*=g;
+ float g2=sin(uT*1.9+b.x*.31-b.y*.23)*.5+.5;
+ float fl=sin(uT*(2.4+aV.w*1.6)+aV.w*6.2831)*.05;
+ vec3 bend=vec3(.93,0.,.37)*(uWind*(.10+g*.55+g2*.12)+fl)+fwd*aV.y;
+ vec2 dp=b-uPl.xz;float pd=length(dp);float push=(1.-smoothstep(.15,1.2,pd))*(1.-step(1.8,abs(uPl.y)));
+ bend+=vec3(dp.x,0.,dp.y)/max(pd,.05)*push*1.4;
  float bl=length(bend),ys=inversesqrt(1.+bl*bl*h*h);
- vec3 p=vec3(b.x,0.,b.y)+side*position.x*aV.x*(.45+.55*fade)+(vec3(0.,h,0.)+bend*h*h)*ht*ys;
- vN=normalize(cross(side,vec3(bend.x*2.*h,1.,bend.z*2.*h)));
- vH=h;vC=aC;vG=g;vCv=aV.z;vWP=p;
- vec4 mvPosition=viewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mvPosition;
+ float wd=aV.x*(1.0+fade*.0)*(1.0+smoothstep(uFar*.35,uFar,d)*1.6);
+ vec3 p=vec3(b.x,0.,b.y)+side*position.x*wd+(vec3(0.,h,0.)+bend*h*h)*ht*ys;
+ vN=normalize(cross(side,vec3(bend.x*2.*h,1.,bend.z*2.*h)));vSide=side;vX=position.x/max(abs(position.x),1e-3)*min(1.,abs(position.x)*4.);
+ vH=h;vC=aC;vG=g;vWP=p;
+ vec4 worldPosition=vec4(p,1.);vec3 transformedNormal=(viewMatrix*vec4(0.,1.,0.,0.)).xyz;
+ #include <shadowmap_vertex>
+ vec4 mvPosition=viewMatrix*worldPosition;gl_Position=projectionMatrix*mvPosition;
  #include <fog_vertex>
 }`;
 const GR_FS=`uniform vec3 uSunDir,uSunCol,uSky,uGnd;uniform float uT;uniform vec3 uBl[12];
-varying float vH,vG,vCv;varying vec3 vC,vN,vWP;
+varying float vH,vG,vX;varying vec3 vC,vN,vWP,vSide;
+#include <common>
+#include <packing>
+#include <shadowmap_pars_fragment>
 #include <fog_pars_fragment>
 void main(){
- vec3 base=vC*1.05;vec3 root=base*vec3(.28,.40,.16);vec3 tip=mix(base*1.15,vec3(.42,.72,.10),.3+vCv*.35);
- vec3 col=mix(root,base,smoothstep(0.,.5,vH));col=mix(col,tip,smoothstep(.5,1.,vH));col*=.88+vCv*.24;col=max(mix(vec3(dot(col,vec3(.3,.59,.11))),col,1.3),0.);
- vec3 V=normalize(cameraPosition-vWP);vec3 N=normalize(vN);if(dot(N,V)<0.)N=-N;N=normalize(N+vec3(0.,1.1,0.));
- float ndl=max(dot(N,uSunDir),0.);vec3 amb=mix(uGnd,uSky,N.y*.5+.5);
- float cl=sin(vWP.x*.035+uT*.05)*sin(vWP.z*.042-uT*.04)+sin(vWP.x*.011-vWP.z*.013+uT*.02);float sh=mix(.6,1.,smoothstep(-.6,.4,cl));
- for(int i=0;i<12;i++){vec3 q=uBl[i];if(q.z>0.){float dd=distance(vWP.xz,q.xy)/q.z;sh*=mix(.5,1.,smoothstep(.55,1.05,dd));}}
- vec3 lit=col*(amb*.8+uSunCol*ndl*sh*1.1);
- float tr=pow(max(dot(-V,uSunDir),0.),3.)*vH*sh;lit+=tip*uSunCol*tr*.5;
- lit+=uSunCol*vec3(.85,1.,.65)*vH*vH*(.03+vG*.1)*sh;
- lit*=mix(.42,1.,smoothstep(0.,.35,vH));
+ vec3 col=vC;
+ vec3 tip=mix(col,col*vec3(1.12,1.1,.82)+vec3(.02,.02,0.),.6);
+ col=mix(col*.7,col,smoothstep(0.,.45,vH));col=mix(col,tip,smoothstep(.6,1.,vH));
+ vec3 V=normalize(cameraPosition-vWP);vec3 N=normalize(vN);if(dot(N,V)<0.)N=-N;
+ N=normalize(N+vSide*vX*.55+vec3(0.,.35,0.));
+ float shd=1.;
+ #if defined(USE_SHADOWMAP) && NUM_DIR_LIGHT_SHADOWS > 0
+ shd=getShadow(directionalShadowMap[0],directionalLightShadows[0].shadowMapSize,directionalLightShadows[0].shadowBias,directionalLightShadows[0].shadowRadius,vDirectionalShadowCoord[0]);
+ #endif
+ float cl=sin(vWP.x*.035+uT*.05)*sin(vWP.z*.042-uT*.04)+sin(vWP.x*.011-vWP.z*.013+uT*.02);float sh=mix(.72,1.,smoothstep(-.6,.4,cl))*mix(.38,1.,shd);
+ for(int i=0;i<12;i++){vec3 q=uBl[i];if(q.z>0.){float dd=distance(vWP.xz,q.xy)/q.z;sh*=mix(.55,1.,smoothstep(.55,1.05,dd));}}
+ float ndl=max(dot(N,uSunDir),0.)*.85+.15;vec3 amb=mix(uGnd,uSky,N.y*.5+.5);
+ vec3 lit=col*(amb*.85+uSunCol*ndl*sh*1.08);
+ vec3 H=normalize(uSunDir+V);float spec=pow(max(dot(N,H),0.),28.)*.18*sh*smoothstep(.2,.9,vH);lit+=uSunCol*spec*vec3(.9,1.,.8);
+ float tr=pow(max(dot(-V,uSunDir),0.),4.)*smoothstep(.3,1.,vH)*sh;lit+=col*vec3(1.,1.15,.6)*uSunCol*tr*.55;
+ lit+=uSunCol*col*vH*vH*vG*.12*sh;
+ lit*=mix(.42,1.,smoothstep(0.,.4,vH));
  gl_FragColor=vec4(lit,1.);
  #include <tonemapping_fragment>
  #include <encodings_fragment>
  #include <fog_fragment>
 }`;
 function grassInit(){
- if(!GR.geo){const Wd=[1,.88,.7,.46,.22],pos=[],idx=[];Wd.forEach((w,i)=>{const y=i/4.4;pos.push(-.5*w,y,0,.5*w,y,0)});pos.push(0,1,0);
-  for(let i=0;i<4;i++){const a=i*2;idx.push(a,a+1,a+3,a,a+3,a+2)}idx.push(8,9,10);
+ if(!GR.geo){const Wd=[1,.92,.8,.62,.4,.18],pos=[],idx=[];Wd.forEach((w,i)=>{const y=i/5.6;pos.push(-.5*w,y,0,.5*w,y,0)});pos.push(0,1,0);
+  for(let i=0;i<5;i++){const a=i*2;idx.push(a,a+1,a+3,a,a+3,a+2)}idx.push(10,11,12);
   GR.geo=new T.BufferGeometry();GR.geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));GR.geo.setIndex(idx)}
  if(!GR.mat){const bl=[];for(let i=0;i<12;i++)bl.push(new T.Vector3(0,0,0));GR.bl=bl;
-  GR.mat=new T.ShaderMaterial({uniforms:T.UniformsUtils.merge([T.UniformsLib.fog,{uT:{value:0},uPl:{value:new T.Vector3()},uCam:{value:new T.Vector3()},uFar:{value:30},uWind:{value:.35},uSunDir:{value:new T.Vector3(.3,.8,.4)},uSunCol:{value:new T.Color(1,1,1)},uSky:{value:new T.Color(.6,.7,.8)},uGnd:{value:new T.Color(.3,.4,.2)},uBl:{value:bl}}]),vertexShader:GR_VS,fragmentShader:GR_FS,fog:true,side:T.DoubleSide});
+  GR.mat=new T.ShaderMaterial({uniforms:T.UniformsUtils.merge([T.UniformsLib.lights,T.UniformsLib.fog,{uT:{value:0},uPl:{value:new T.Vector3()},uCam:{value:new T.Vector3()},uFar:{value:30},uWind:{value:.35},uSunDir:{value:new T.Vector3(.3,.8,.4)},uSunCol:{value:new T.Color(1,1,1)},uSky:{value:new T.Color(.6,.7,.8)},uGnd:{value:new T.Color(.3,.4,.2)},uBl:{value:bl}}]),vertexShader:GR_VS,fragmentShader:GR_FS,fog:true,lights:true,side:T.DoubleSide});
   GR.mat.uniforms.uBl.value=bl}}
 function buildGrass(){
  grassClear();if(!grassOn())return;grassInit();FX.grass=GR.chunks;
- const q=GFX(),gs=S.settings.grass||'full';GR.dens=(q==='high'?48:20)*(gs==='light'?.35:1);GR.far=q==='high'?32:22;GR.mat.uniforms.uFar.value=GR.far;
+ const q=GFX(),gs=S.settings.grass||'off';GR.dens=(q==='high'?130:60)*(gs==='light'?.35:1);GR.far=q==='high'?34:24;GR.mat.uniforms.uFar.value=GR.far;
  const C=8;ZONES.forEach((Z,zi)=>{if(!Z.grass)return;const r=Z.r-.9,n=Math.ceil(r/C);
   for(let a=-n;a<n;a++)for(let b=-n;b<n;b++){const x0=Z.c[0]+a*C,z0=Z.c[1]+b*C,cx=x0+C/2,cz=z0+C/2;
    const nx=Math.max(x0,Math.min(Z.c[0],x0+C)),nz=Math.max(z0,Math.min(Z.c[1],z0+C));if(Math.hypot(nx-Z.c[0],nz-Z.c[1])>r)continue;
-   GR.chunks.push({zi,x0,z0,cx,cz,m:null,built:false})}});
- /* the squares around the camera are made straight away, the rest as the player travels */
+   GR.chunks.push({zi,x0,z0,cx,cz,m:null,built:false,n:0})}});
  if(camera){const cp=camera.position;GR.chunks.forEach(ch=>{if(Math.hypot(ch.cx-cp.x,ch.cz-cp.z)<GR.far+7)grassChunk(ch)})}
 }
+/* the meadow's colours: deep, fresh and yellow greens, with a few dry and straw blades, all leaning towards the island's own grass colour */
+const GR_PAL=['#4c7a2a','#5b8a2f','#6a9a35','#7aa83c','#8cb246','#9fb853','#b5b462','#c2ab6c'];
 function grassChunk(ch){
- ch.built=true;const Z=ZONES[ch.zi],C=8,r=Z.r-.9,N=Math.round(GR.dens*C*C),base=new T.Color(Z.grass),tmp=new T.Color();
- /* where grass may grow, sampled on a half-metre grid: off the paths (thinning near the edge), the stops and the garden */
+ ch.built=true;const Z=ZONES[ch.zi],C=8,r=Z.r-.9,N=Math.round(GR.dens*C*C),base=new T.Color(Z.grass),tmp=new T.Color(),pal=GR_PAL.map(h=>new T.Color(h)),lilac=base.r>base.g;
  const G=16,mk=new Float32Array(G*G);for(let gy=0;gy<G;gy++)for(let gx=0;gx<G;gx++){const x=ch.x0+(gx+.5)*C/G,z=ch.z0+(gy+.5)*C/G;let v=1;
-  if(Math.hypot(x-Z.c[0],z-Z.c[1])>r)v=0;else{const pd=pathDist(x,z,3);if(pd<1.9)v=0;else if(pd<3)v=(pd-1.9)/1.1;
+  if(Math.hypot(x-Z.c[0],z-Z.c[1])>r)v=0;else{const pd=pathDist(x,z,3);if(pd<1.75)v=0;else if(pd<3.2)v=Math.pow((pd-1.75)/1.45,1.4);
    if(v>0&&STOPS.some(s=>s.zone===ch.zi&&Math.hypot(s.pos[0]-x,s.pos[1]-z)<2.6))v=0;if(v>0&&ch.zi===0&&Math.hypot(x-GARDEN.c[0],z-GARDEN.c[1])<GARDEN.r)v=0}mk[gy*G+gx]=v}
  const P=[],V=[],Cc=[];
  for(let i=0;i<N;i++){const x=ch.x0+Math.random()*C,z=ch.z0+Math.random()*C,v=mk[Math.min(G-1,Math.floor((z-ch.z0)/C*G))*G+Math.min(G-1,Math.floor((x-ch.x0)/C*G))];if(v<=0||Math.random()>v)continue;
-  const nz=Math.sin(x*.23+Math.cos(z*.17)*1.8)*Math.cos(z*.21-x*.08),pk=Math.max(0,Math.min(1,(nz+.5)/.9));if(Math.random()>.72+.28*pk)continue;
-  const tall=.26+pk*.36,h=(tall+Math.random()*.22)*(.55+.45*v);
-  P.push(x,z,Math.random()*TAU,h);V.push(.05+Math.random()*.035,(Math.random()-.5)*.5,Math.random(),Math.random());
-  tmp.copy(base).offsetHSL((Math.random()-.5)*.035,(Math.random()-.5)*.08,(Math.random()-.5)*.06);Cc.push(tmp.r,tmp.g,tmp.b)}
+  /* clumps: a slow wave for tall and short areas, a faster one for tufts, and a third for drier patches */
+  const n1=Math.sin(x*.21+Math.cos(z*.17)*1.8)*Math.cos(z*.19-x*.07),n2=Math.sin(x*1.3+z*.9)*Math.sin(z*1.1-x*.6),n3=Math.sin(x*.09-z*.06+1.7)*Math.cos(z*.08+x*.05);
+  const tall=Math.max(0,Math.min(1,(n1+.4)/.9)),tuft=n2*.5+.5,dry=Math.max(0,n3-.25)*1.6;
+  if(Math.random()>.55+.45*tall)continue;
+  const h=(.16+tall*.34+tuft*.12+Math.pow(Math.random(),2)*.22)*(.45+.55*v);
+  P.push(x,z,Math.random()*TAU,h);V.push(.022+Math.random()*.022+tall*.008,(Math.random()-.5)*.55,Math.random(),Math.random());
+  let k=Math.floor(Math.pow(Math.random(),1.3)*5+tall*1.2+dry*3);k=Math.max(0,Math.min(pal.length-1,k));if(Math.random()<.04+dry*.15)k=pal.length-1-Math.floor(Math.random()*2);
+  tmp.copy(pal[k]);if(lilac)tmp.lerp(base,.75);else tmp.lerp(base,.18);tmp.offsetHSL((Math.random()-.5)*.02,(Math.random()-.5)*.06,(Math.random()-.5)*.05);Cc.push(tmp.r,tmp.g,tmp.b)}
  const n=P.length/4;if(!n)return;
  const g=new T.InstancedBufferGeometry();g.index=GR.geo.index;g.setAttribute('position',GR.geo.attributes.position);
  g.setAttribute('aP',new T.InstancedBufferAttribute(new Float32Array(P),4));g.setAttribute('aV',new T.InstancedBufferAttribute(new Float32Array(V),4));g.setAttribute('aC',new T.InstancedBufferAttribute(new Float32Array(Cc),3));
- g.instanceCount=n;g.boundingSphere=new T.Sphere(new T.Vector3(ch.cx,.4,ch.cz),C*.75+1.5);g.boundingBox=new T.Box3(new T.Vector3(ch.x0-1,0,ch.z0-1),new T.Vector3(ch.x0+C+1,1.2,ch.z0+C+1));
- const m=new T.Mesh(g,GR.mat);m.frustumCulled=true;m.castShadow=false;m.receiveShadow=false;m.matrixAutoUpdate=false;m.updateMatrix();scene.add(m);ch.m=m}
+ g.instanceCount=n;ch.n=n;g.boundingSphere=new T.Sphere(new T.Vector3(ch.cx,.4,ch.cz),C*.75+1.5);g.boundingBox=new T.Box3(new T.Vector3(ch.x0-1,0,ch.z0-1),new T.Vector3(ch.x0+C+1,1.2,ch.z0+C+1));
+ const m=new T.Mesh(g,GR.mat);m.frustumCulled=true;m.castShadow=false;m.receiveShadow=true;m.matrixAutoUpdate=false;m.updateMatrix();scene.add(m);ch.m=m;grassLod(ch)}
+/* full thickness close by, thinning to about a fifth at the far edge */
+function grassLod(ch){if(!ch.m||!camera)return;const cp=camera.position,d=Math.max(0,Math.hypot(ch.cx-cp.x,ch.cz-cp.z)-5.7),f=d<10?1:Math.max(.2,1-(d-10)/(GR.far-10)*.8);ch.m.geometry.instanceCount=Math.max(1,Math.round(ch.n*f))}
 function updGrass(dt){if(!GR.chunks.length||!camera)return;const U=GR.mat.uniforms;GR.t+=dt;U.uT.value=GR.t;
  if(PL)U.uPl.value.set(PL.x,PL.y-(PL.vk?9:0),PL.z);const cp=camera.position;U.uCam.value.copy(cp);
  if(sunL){U.uSunDir.value.copy(sunL.position).sub(sunL.target.position).normalize();U.uSunCol.value.copy(sunL.color).multiplyScalar(sunL.intensity)}
  if(hemiL&&ambL){U.uSky.value.copy(hemiL.color).multiplyScalar(hemiL.intensity).add(tmpCol(ambL));U.uGnd.value.copy(hemiL.groundColor).multiplyScalar(hemiL.intensity).add(tmpCol(ambL))}
  U.uWind.value=S.settings.mode==='calm'?.15:.35;
  if((GR.tick-=dt)>0)return;GR.tick=.25;const lim=GR.far+7;
- const todo2=[];GR.chunks.forEach(ch=>{const d=Math.hypot(ch.cx-cp.x,ch.cz-cp.z);if(ch.m)ch.m.visible=d<lim;else if(!ch.built&&d<lim+10)todo2.push([d,ch])});
+ const todo2=[];GR.chunks.forEach(ch=>{const d=Math.hypot(ch.cx-cp.x,ch.cz-cp.z);if(ch.m){ch.m.visible=d<lim;if(ch.m.visible)grassLod(ch)}else if(!ch.built&&d<lim+10)todo2.push([d,ch])});
  todo2.sort((a,b)=>a[0]-b[0]).slice(0,3).forEach(x=>grassChunk(x[1]));
- /* the shade under the nearest trees darkens the grass too */
  if(W.blobs&&PL){const nb=W.blobs.map(b=>[b,Math.hypot(b[0]-PL.x,b[1]-PL.z)]).filter(x=>x[1]<GR.far).sort((a,b)=>a[1]-b[1]).slice(0,12);GR.bl.forEach((v,i)=>{const b=nb[i];if(b)v.set(b[0][0],b[0][1],b[0][2]*.9);else v.set(0,0,0)})}}
 function tmpCol(a){return (tmpCol.c||(tmpCol.c=new T.Color())).copy(a.color).multiplyScalar(a.intensity)}
 function wingBird(){const g=new T.Group(),m=basic('#3a3a48',{side:T.DoubleSide}),w=[1,-1].map(s=>{const p=new T.Group();const t=new T.Mesh(new T.BufferGeometry().setAttribute('position',new T.Float32BufferAttribute([0,0,-.2,0,0,.2,s*1,0,0],3)),m);p.add(t);g.add(p);return p});g.userData.w=w;return g}
@@ -2799,7 +2858,22 @@ function gaugeBuild(){const sv=$('#spdSvg');if(!sv||sv.dataset.ok)return;sv.data
  h+='<g id="spdN" filter="url(#spGl)"><path d="M97.6 62 L99.4 13 L100.6 13 L102.4 62 Z" fill="url(#spN)"/></g>';
  h+='<circle cx="100" cy="100" r="38" fill="#05070a"/><circle cx="100" cy="100" r="36" fill="url(#spC)" stroke="#4a5767" stroke-width="1.2"/>';
  h+='<path d="M22 78 A80 80 0 0 1 178 78 A120 70 0 0 0 22 78 Z" fill="url(#spG)"/>';sv.innerHTML=h}
+/* Keep the speedometer clear of everything else, whatever the play style, text size, screen size or open panel.
+   It measures what is on screen, slides the dial down below anything in its way, shrinks it if space runs out,
+   moves Teleport underneath it, and steps out of sight while a panel or menu is open over it. */
+function hudLayout(){const g=$('#gauge');if(!g||g.hidden){const t=$('#tele');if(t){t.style.removeProperty('top');t.style.removeProperty('left')}return}
+ const vw=innerWidth,vh=innerHeight,land=vh<=500&&vw>vh,base=vw<=600||land?.74:1,W0=176*base,x0=Math.max(12,parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sal'))||0);
+ const vis=e=>{if(!e||e.hidden||!e.getClientRects().length)return false;const cs=getComputedStyle(e);return cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>.05};
+ const pop=['#setp','#drawer','#shop','#panel'].some(q=>vis($(q)))||(typeof modalOpen==='function'&&modalOpen());
+ const R=[...document.querySelectorAll('.hud,#setp,#drawer,#toast,#say')].filter(e=>e!==g&&e.id!=='tele'&&e.id!=='top'&&!g.contains(e)&&vis(e)).map(e=>e.getBoundingClientRect()).filter(r=>r.width>0&&r.height>0&&r.width<vw*.9);
+ const top=$('#top');if(top)[...top.children].forEach(c=>{if(vis(c)){const r=c.getBoundingClientRect();if(r.width>0)R.push(r)}});
+ let sc=base,y=0,ok=false;
+ for(let tries=0;tries<4&&!ok;tries++){const W=176*sc;y=70;for(let k=0;k<10;k++){const hit=R.find(r=>r.left<x0+W+6&&r.right>x0-6&&r.top<y+W+6&&r.bottom>y-6);if(!hit){ok=true;break}y=hit.bottom+8;ok=false}
+  if(!ok||y+176*sc>vh-(land?20:150)){ok=false;sc*=.85}}
+ const pv=g._lay||{};if(pv.y!==Math.round(y)||pv.sc!==sc||pv.pop!==pop){g._lay={y:Math.round(y),sc,pop};g.style.setProperty('top',Math.round(y)+'px','important');g.style.setProperty('transform',`scale(${sc})`,'important');g.style.transformOrigin='top left';g.style.visibility=pop||!ok?'hidden':''}
+ const t=$('#tele');if(t){if(land){t.style.setProperty('top',Math.round(y+6)+'px','important');t.style.setProperty('left',Math.round(x0+176*sc+12)+'px','important')}else{t.style.removeProperty('left');t.style.setProperty('top',Math.round(y+176*sc+14)+'px','important')}}}
 function updHudExtra(){const P=PL;if(!P)return;
+ if((updHudExtra.lt=(updHudExtra.lt||0)+1)%6===0)try{hudLayout()}catch(e){}
  const rb=$('#roamb');if(rb){const show=!roamOK()&&!modalOpen()&&!CH;if(rb.hidden===show)rb.hidden=!show}
  const sp=$('#gauge');if(!sp)return;const on=P.vk==='car'&&P.veh&&!P.veh.userData.pony&&!CH;if(sp.hidden===on)sp.hidden=!on;if(document.body.classList.contains('drv')!==on)document.body.classList.toggle('drv',on);if(!on)return;
  gearStep(P);const gt=P.gearL||String(P.gear||1),ge=$('#spdGr');if(ge&&ge.textContent!==gt){ge.textContent=gt;ge.classList.toggle('r',gt==='R');ge.classList.toggle('n',gt==='N');ge.classList.remove('sh');void ge.offsetWidth;ge.classList.add('sh')}
@@ -3722,10 +3796,10 @@ function renderShop(){
 const GFX_N={auto:'Auto',low:'Fast',med:'Nice',high:'Best'};
 const modeKey=()=>MODES[S.settings.mode]?S.settings.mode:'adventure';
 function openSettings(){closeDrawer();const p=$('#setp');if(!p.hidden){p.hidden=true;return}const I=n=>ICON(n,28),row=(k,ic,l)=>`<button data-s="${k}">${I(ic)} ${l}<b>${S.settings[k]?'On':'Off'}</b></button>`,td=TODS.find(t=>t[0]===S.settings.tod)||TODS[0];
- p.innerHTML=`<button id="sMode">${I(MODE_ART[modeKey()][1])} Play style<b>${MODE().name}${Object.keys(S.settings.adj||{}).length?' *':''}</b></button><button id="sAdj">${I('sliders')} Change things<b>…</b></button><button id="sTod">${I(TOD_IC[td[0]])} Time of day<b>${td[1]}</b></button>`+row('sfx','speaker','Sounds')+row('voice','talk','Read aloud')+`<button id="sGfx">${I('picture')} Graphics<b>${GFX_N[S.settings.gfx]||'Auto'}</b></button><button id="sGrass">${I('leaf')} Grass<b>${modeKey()==='simple'?'Off':({full:'Full',light:'Light',off:'Off'})[S.settings.grass||'full']}</b></button><button id="sReset">${I('redo')} Start over<b>…</b></button>`;p.hidden=false;
+ p.innerHTML=`<button id="sMode">${I(MODE_ART[modeKey()][1])} Play style<b>${MODE().name}${Object.keys(S.settings.adj||{}).length?' *':''}</b></button><button id="sAdj">${I('sliders')} Change things<b>…</b></button><button id="sTod">${I(TOD_IC[td[0]])} Time of day<b>${td[1]}</b></button>`+row('music','note','Music')+row('sfx','speaker','Sounds')+row('voice','talk','Read aloud')+`<button id="sGfx">${I('picture')} Graphics<b>${GFX_N[S.settings.gfx]||'Auto'}</b></button><button id="sGrass">${I('leaf')} Grass<b>${modeKey()==='simple'?'Off':({full:'Full',light:'Light',off:'Off'})[S.settings.grass||'off']}</b></button><button id="sReset">${I('redo')} Start over<b>…</b></button>`;p.hidden=false;
  $$('#setp [data-s]').forEach(b=>b.onclick=()=>{const k=b.dataset.s;S.settings[k]=S.settings[k]?0:1;save();setVol();if(k==='voice'&&!S.settings.voice&&window.speechSynthesis)speechSynthesis.cancel();p.hidden=true;openSettings()});
  $('#sMode').onclick=()=>{p.hidden=true;enqueue(d=>pickMode(d))};$('#sAdj').onclick=()=>{p.hidden=true;enqueue(d=>openAdjust(d))};$('#sTod').onclick=()=>{cycleTod();p.hidden=true;openSettings()};
- $('#sGrass').onclick=()=>{const o=['full','light','off'],i=o.indexOf(S.settings.grass||'full');S.settings.grass=o[(i+1)%3];save();grassClear();if(grassOn())buildGrass();p.hidden=true;openSettings()};
+ $('#sGrass').onclick=()=>{const o=['full','light','off'],i=o.indexOf(S.settings.grass||'off');S.settings.grass=o[(i+1)%3];save();grassClear();if(grassOn())buildGrass();p.hidden=true;openSettings()};
  $('#sGfx').onclick=()=>{const o=['auto','low','med','high'],i=o.indexOf(S.settings.gfx);S.settings.gfx=o[(i+1)%4];save();grassClear();applyMagic();p.hidden=true;openSettings()};
  let arm=false;$('#sReset').onclick=e=>{if(!arm){arm=true;e.currentTarget.innerHTML='Tap again to erase progress<b>!</b>';return}lsSet(SAVE_KEY,'');S=freshState();lsSet(SAVE_KEY,JSON.stringify(S));location.reload()}}
 
@@ -3756,7 +3830,7 @@ const KNOBS=[
 function setKnob(k,v){S.settings.adj=S.settings.adj||{};const P=(MODES[S.settings.mode]||MODES.adventure).k;if(P[k]===v)delete S.settings.adj[k];else S.settings.adj[k]=v;MV++;save();applyMode()}
 function openAdjust(done){const m=MODE(),row=(key,ic,label,sub,opts,cur)=>`<div class="krow"${sub?` title="${esc(sub)}"`:''}><span class="kic">${ICON(ic,30)}</span><span class="kl">${label}</span><div class="seg" role="radiogroup" aria-label="${label}">${opts.map((o,v)=>`<button data-kn="${key}" data-v="${v}" class="${cur===v?'on':''}" role="radio" aria-checked="${cur===v}" aria-label="${label}: ${o[0]}">${ICON(o[1],28)}<span>${o[0]}</span></button>`).join('')}</div></div>`;
  showOv(`<div class="card adj" role="dialog" aria-modal="true" aria-label="Change things"><button class="x" aria-label="Close">${ICON('x',22)}</button><h2>${ICON('sliders',40)} Change things</h2><p class="kstyle">${ICON(MODE_ART[modeKey()][1],22)} ${esc(m.name)}</p>
-  <div class="kgrid">${KNOBS.map(k=>row(k[0],k[1],k[2],k[3],k[4],m.k[k[0]])).join('')}${row('voice','talk','Read aloud','',[['Off','x'],['On','check']],S.settings.voice?1:0)}</div>
+  <div class="kgrid">${KNOBS.map(k=>row(k[0],k[1],k[2],k[3],k[4],m.k[k[0]])).join('')}${row('music','note','Music','',[['Off','x'],['On','check']],S.settings.music?1:0)}${row('voice','talk','Read aloud','',[['Off','x'],['On','check']],S.settings.voice?1:0)}</div>
   <div class="rowc"><button class="btn go" data-focus id="adjOk">${ICON('check',26)} Done</button><button class="btn sm" id="adjReset">${ICON('redo',22)} Back to ${esc(m.name)}</button></div></div>`);
  speak('Change things. Tap a picture to choose.');
  $$('#ov [data-kn]').forEach(b=>b.onclick=()=>{const k=b.dataset.kn,v=+b.dataset.v;
